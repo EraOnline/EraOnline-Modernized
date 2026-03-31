@@ -1,0 +1,676 @@
+<html>
+
+<head>
+
+
+<script type="text/javascript" src="/static/js/analytics.js"></script>
+<script type="text/javascript">archive_analytics.values.server_name="wwwb-app10.us.archive.org";archive_analytics.values.server_ms=157;</script>
+<link type="text/css" rel="stylesheet" href="/static/css/banner-styles.css"/>
+
+
+<title>Fantasia Studios' Era Online</title>
+<style>
+A:link {color: #666699; text-decoration: underline; cursor: crosshair}
+A:visited {color: #666699; text-decoration: underline; cursor: crosshair}
+A:active {color: RED; text-decoration: none; cursor: crosshair}
+A:hover {color: RED; text-decoration: none; cursor: crosshair}
+</style>
+</head>
+
+<body text="#000000" topmargin="0" leftmargin="0" rightmargin="0" link="#666699" alink="#FF0000" vlink="#666699" bgcolor="#003369">
+
+
+<!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<script type="text/javascript" src="/static/js/disclaim-element.js" ></script>
+<script type="text/javascript" src="/static/js/graph-calc.js" ></script>
+<script type="text/javascript" src="/static/jflot/jquery.min.js" ></script>
+<script type="text/javascript">//<![CDATA[
+var __wm = (function(){
+var wbPrefix = "/web/";
+var wbCurrentUrl = "http://www.erlingellingsen.com/era/documents/fullstory.shtml";
+
+var firstYear = 1996;
+var imgWidth = 500,imgHeight = 27;
+var yearImgWidth = 25,monthImgWidth = 2;
+var displayDay = "13";
+var displayMonth = "Oct";
+var displayYear = "2007";
+var prettyMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var $D=document,$=function(n){return document.getElementById(n)};
+var trackerVal,curYear = -1,curMonth = -1;
+var yearTracker,monthTracker;
+function showTrackers(val) {
+  if (val===trackerVal) return;
+  var $ipp=$("wm-ipp");
+  var $y=$("displayYearEl"),$m=$("displayMonthEl"),$d=$("displayDayEl");
+  if (val) {
+    $ipp.className="hi";
+  } else {
+    $ipp.className="";
+    $y.innerHTML=displayYear;$m.innerHTML=displayMonth;$d.innerHTML=displayDay;
+  }
+  yearTracker.style.display=val?"inline":"none";
+  monthTracker.style.display=val?"inline":"none";
+  trackerVal = val;
+}
+function getElementX2(obj) {
+  var $e=jQuery(obj);
+  return (typeof $e=="undefined"||typeof $e.offset=="undefined")?
+    getElementX(obj):Math.round($e.offset().left);
+}
+function trackMouseMove(event,element) {
+  var eventX = getEventX(event);
+  var elementX = getElementX2(element);
+  var xOff = Math.min(Math.max(0, eventX - elementX),imgWidth);
+  var monthOff = xOff % yearImgWidth;
+
+  var year = Math.floor(xOff / yearImgWidth);
+  var monthOfYear = Math.min(11,Math.floor(monthOff / monthImgWidth));
+  // 1 extra border pixel at the left edge of the year:
+  var month = (year * 12) + monthOfYear;
+  var day = monthOff % 2==1?15:1;
+  var dateString = zeroPad(year + firstYear) + zeroPad(monthOfYear+1,2) +
+    zeroPad(day,2) + "000000";
+
+  $("displayYearEl").innerHTML=year+firstYear;
+  $("displayMonthEl").innerHTML=prettyMonths[monthOfYear];
+  // looks too jarring when it changes..
+  //$("displayDayEl").innerHTML=zeroPad(day,2);
+  var url = wbPrefix + dateString + '/' +  wbCurrentUrl;
+  $("wm-graph-anchor").href=url;
+
+  if(curYear != year) {
+    var yrOff = year * yearImgWidth;
+    yearTracker.style.left = yrOff + "px";
+    curYear = year;
+  }
+  if(curMonth != month) {
+    var mtOff = year + (month * monthImgWidth) + 1;
+    monthTracker.style.left = mtOff + "px";
+    curMonth = month;
+  }
+}
+function hideToolbar() {
+  $("wm-ipp").style.display="none";
+}
+function bootstrap() {
+  var $spk=$("wm-ipp-sparkline");
+  yearTracker=$D.createElement('div');
+  yearTracker.className='yt';
+  with(yearTracker.style){
+    display='none';width=yearImgWidth+"px";height=imgHeight+"px";
+  }
+  monthTracker=$D.createElement('div');
+  monthTracker.className='mt';
+  with(monthTracker.style){
+    display='none';width=monthImgWidth+"px";height=imgHeight+"px";
+  }
+  $spk.appendChild(yearTracker);
+  $spk.appendChild(monthTracker);
+
+  var $ipp=$("wm-ipp");
+  $ipp&&disclaimElement($ipp);
+}
+return{st:showTrackers,mv:trackMouseMove,h:hideToolbar,bt:bootstrap};
+})();//]]>
+</script>
+<style type="text/css">
+body {
+  margin-top:0 !important;
+  padding-top:0 !important;
+  min-width:800px !important;
+}
+</style>
+<div id="wm-ipp" lang="en" style="display:none;">
+
+<div style="position:fixed;left:0;top:0;width:100%!important">
+<div id="wm-ipp-inside">
+   <table style="width:100%;"><tbody><tr>
+   <td id="wm-logo">
+       <a href="/web/" title="Wayback Machine home page"><img src="/static/images/toolbar/wayback-toolbar-logo.png" alt="Wayback Machine" width="110" height="39" border="0" /></a>
+   </td>
+   <td class="c">
+       <table style="margin:0 auto;"><tbody><tr>
+       <td class="u" colspan="2">
+       <form target="_top" method="get" action="/web/form-submit.jsp" name="wmtb" id="wmtb"><input type="text" name="url" id="wmtbURL" value="http://www.erlingellingsen.com/era/documents/fullstory.shtml" style="width:400px;" onfocus="this.focus();this.select();" /><input type="hidden" name="type" value="replay" /><input type="hidden" name="date" value="20071013182401" /><input type="submit" value="Go" /><span id="wm_tb_options" style="display:block;"></span></form>
+       </td>
+       <td class="n" rowspan="2">
+           <table><tbody>
+           <!-- NEXT/PREV MONTH NAV AND MONTH INDICATOR -->
+           <tr class="m">
+           	<td class="b" nowrap="nowrap">
+		
+		    Sep
+		
+		</td>
+		<td class="c" id="displayMonthEl" title="You are here: 18:24:01 Oct 13, 2007">OCT</td>
+		<td class="f" nowrap="nowrap">
+		
+		    Nov
+		
+                </td>
+	    </tr>
+           <!-- NEXT/PREV CAPTURE NAV AND DAY OF MONTH INDICATOR -->
+           <tr class="d">
+               <td class="b" nowrap="nowrap">
+               
+                       <img src="/static/images/toolbar/wm_tb_prv_off.png" alt="Previous capture" width="14" height="16" border="0" />
+               
+               </td>
+               <td class="c" id="displayDayEl" style="width:34px;font-size:24px;" title="You are here: 18:24:01 Oct 13, 2007">13</td>
+	       <td class="f" nowrap="nowrap">
+               
+                   <img src="/static/images/toolbar/wm_tb_nxt_off.png" alt="Next capture" width="14" height="16" border="0"/>
+               
+	       </td>
+           </tr>
+           <!-- NEXT/PREV YEAR NAV AND YEAR INDICATOR -->
+           <tr class="y">
+	       <td class="b" nowrap="nowrap">
+               
+                   2006
+               
+               </td>
+               <td class="c" id="displayYearEl" title="You are here: 18:24:01 Oct 13, 2007">2007</td>
+	       <td class="f" nowrap="nowrap">
+               
+                   2008
+               
+	       </td>
+           </tr>
+           </tbody></table>
+       </td>
+       </tr>
+       <tr>
+       <td class="s">
+           <a class="t" href="/web/20071013182401*/http://www.erlingellingsen.com/era/documents/fullstory.shtml" title="See a list of every capture for this URL">1 captures</a>
+           <div class="r" title="Timespan for captures of this URL">13 Oct 07 - 13 Oct 07</div>
+       </td>
+       <td class="k">
+       <a href="" id="wm-graph-anchor">
+       <div id="wm-ipp-sparkline" title="Explore captures for this URL">
+	 <img id="sparklineImgId" alt="sparklines"
+		 onmouseover="__wm.st(1)" onmouseout="__wm.st(0)"
+		 onmousemove="__wm.mv(event,this)"
+		 width="500"
+		 height="27"
+		 border="0"
+		 src="/web/jsp/graph.jsp?graphdata=500_27_1996:-1:000000000000_1997:-1:000000000000_1998:-1:000000000000_1999:-1:000000000000_2000:-1:000000000000_2001:-1:000000000000_2002:-1:000000000000_2003:-1:000000000000_2004:-1:000000000000_2005:-1:000000000000_2006:-1:000000000000_2007:9:000000000100_2008:-1:000000000000_2009:-1:000000000000_2010:-1:000000000000_2011:-1:000000000000_2012:-1:000000000000_2013:-1:000000000000_2014:-1:000000000000_2015:-1:000000000000" />
+       </div>
+       </a>
+       </td>
+       </tr></tbody></table>
+   </td>
+   <td class="r">
+       <a href="#close" onclick="__wm.h();return false;" style="background-image:url(/static/images/toolbar/wm_tb_close.png);top:5px;" title="Close the toolbar">Close</a>
+       <a href="http://faq.web.archive.org/" style="background-image:url(/static/images/toolbar/wm_tb_help.png);bottom:5px;" title="Get some help using the Wayback Machine">Help</a>
+   </td>
+   </tr></tbody></table>
+</div>
+</div>
+</div>
+<script type="text/javascript">__wm.bt();</script>
+<!-- END WAYBACK TOOLBAR INSERT -->
+
+<div align="center">
+  <center>
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td>[an error occurred while processing this directive]
+      </td>
+    </tr>
+  </center>
+  <tr>
+    <td>
+
+
+    <p align="center">&nbsp;
+
+
+    <p align="center"><font size="1" face="Verdana" color="#FFFFFF"><b>ERA
+    ONLINE FULL VERSION </b>OFFICIAL STORY</font><p align="center"><font size="1" face="Verdana" color="#FFFFFF">By
+    Erling Ellingsen</font>
+    <p>&nbsp;</p>
+    <div align="center">
+      <center>
+      <table border="0" width="70%">
+        <tr>
+          <td width="100%">
+            <p align="center"><font size="1" face="Verdana" color="#FFFFFF"><b><i>CHAPTER
+            1</i>. AGE OF CREATION (Before recorded time)</b></font></p>
+          </center>
+          <p align="left"><font size="1" face="Verdana" color="#FFFFFF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          It is said, that before recorded time, there was no world. There was
+          only a nameless void, and the only thing in excistence, was the sky.
+          The stars was painted on the sky, and day and night, shifted year
+          after year. Then Zeberai, god of all, created our world. He created
+          mountains, shores, forests, snowy highlands, deserts, vast seas, and
+          deserted wastelands. He liked what he saw, and he named it Menath.
+          That very night, the stars were witnesses to a birth, a birth of a
+          world, unlike all other worlds. In the beginning, there were no life,
+          no joy, no sorrow, no childrends laughter. Zeberai was not yet
+          content, and thus he created a creature of great intellect, beuty and
+          he created it in his own image. He named the high elf female, Vici
+          Yana, and is the mother of all later high elves. He watched them grow,
+          expand their domain, enjoy the beuty of life, write their poetry,
+          learn about the world and research the fine arts of magic. The high
+          elves learned to co-exist with the creatures of the world, they hunted
+          them when neccesary, and defended themselves against them, when
+          attacked. Zeberai liked what he saw, and therefor he created yet
+          another race, the dark elves. Something went terribly wrong, and the
+          outcome was a creature with skin as dark as the night, eyes as red as
+          blood and hair as white as snow. These elves turned out mainly the
+          same as the high elves, with long sharp ears, but their intentions
+          were bad. They did not listen to their god, and they developed a hate
+          towards the high elves.After years of endless battles, hidden terror
+          and killings, the Dark Elves took over the High Elven island. Be aware
+          that the Dark Elves had lived there since the day they were created,
+          and had never been to any other island or continent. They took the
+          high elves as their slaves, and years went by, and the high elves were
+          ruled by the dark elves, under the bloodlusting Yan-Teigan, the dark
+          elf leader. They stole from the high elves, raped their wifes, and
+          hang their children. Those who could not work, were killed. After
+          years of grusome supression, Zeberai made it stop. He made a wind of
+          fire, sweep over the dark elven camps and drove them out into the sea.
+          Most of the dark elves died, but those who made it, were banished to a
+          continent, not far from the high elven island. The High Elves now
+          managed to stumble onto their feet and build up their country once
+          again. Years went by, and the High Elven race flourished, they began
+          building their city, stone by stone, day after day. Zeberai were still
+          not content with his creation. Thus he made the wood elves. A
+          peaceful, primitive people. A people that woudln't resort to violence,
+          but were one with the nature and the creatures around them. He put
+          them on the same continent as the dark elves, but on the northern
+          side, hoping they never would meet, and if they did, they would find
+          themselves brothers and friends with eachother. Not very longer after
+          that, he also created the dwarves and giants. He put these two races
+          on the main continent, the dwarves no taller than half an elf, and the
+          giants, about twice the size as an elf. Both of these were excellent
+          warriors of great strength, and the dwarves with abit more intellect
+          than the giants. The giants became more cultural people with great
+          superstition, and the dwarves became bar browling, angry warriors.
+          Zeberai saw how good these two races evolved, and he decided to make
+          one final race. He took all his time and energy into his works, and
+          the outcome as a human. They has small ears, not long and sharp ones,
+          they were the same size as and elf, they were handsome, they were
+          intellectual and they were good warriors. They were the masters of
+          diplomacy. Maybe not as skilled at certain things, but defenetly an
+          average skilled race. The Humans became the explorers of the world,
+          and also became the race with the highest crime rate. Zeberai, enjoyed
+          the world as it was now, and he lent back and marvelled about his
+          creation. His creation was complete, and the era's could start. What
+          the world didn't know, and neither Zeberai, was that out in the dark
+          universe, the nameless void, were a hidden threat, closing in. And
+          thus began the age of deamons.</font></p>
+          <p align="center"><font size="1" face="Verdana" color="#FFFFFF"><b><i>Chapter
+          2. </i>AGE OF DEAMONS (1st Era - 2nd Era)</b></font></p>
+          <p align="left"><font size="1" face="Verdana" color="#FFFFFF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          One thousand years after the creation, one cold winter day, in year
+          one of the first era, Elaia Hender of the giants, son of Genn and
+          Jenda Hender, was
+          walking trough the woods nearby their cottage. He were out to cut some
+          wood, because his father asked him to go get some wood for the
+          fireplace. Elaia and his parents, lived in White's Wolf Valley, in the
+          highlands, and the surrounding area, was mostly peaceful and kind to a
+          young lumbercjacker. After a day of chopping lumber, he began his
+          journey back the the cottage. As he closed in on the cottage, a
+          grusome sight struck him. The door was broken up, flames stood out of
+          the windows and the snow were blood red. He ran up the the cottage,
+          and ran trough the door. There he saw both his parents, brutally
+          slaugthered, lying on the floor. He broke down in tears, and cried for
+          hour after hour and finally he passed out. When he came back to
+          concionsness, he found himself lying in the snow, outside his cottage.
+          The heat was intense, and he decided to get into the nearest town. He
+          spent about a day and a night walking, and on the morningside he
+          reached the town. A even more grusome sight struck him. The town was
+          burnt to ashes, and dead people were lying everywhere. He stood there
+          looking at the sight infront of him and then suddenly a hand touched
+          his shoulder. He turned around and a huge man in black robe stood
+          before him. He could see two red eyes, under the hood, and he took a
+          step back. The man took off his hood, and Elaia screamed. A horrible
+          monster, with red skin, blood coming out of every pore and flaming red
+          eyes stood before him. It was a deamon. An angel of death. Elaia stood
+          there paralyzed, awaiting his certain death, when the deamon opened
+          his mouth and said; &quot;Fear not, my child. My name is Zeroot.&quot;&nbsp;Elaia didn't
+          take any comfort in those words, and the deamon continued; &quot;Do
+          not be afraid, I am here to help mankind. I have been sent by Zeberai,
+          to destroy all evil on Menath&quot;. Ofcourse, the deamon were lying
+          but Elaia, the naive young boy he was, belived him. Elaia became
+          caught in the web of this deamon, and he thought that this would lead
+          him to greatness, and that the deamons would protect him from all
+          evil. After several days, the seven deamons and Elaia reached the
+          freezone and passed over the border, by flying over it. Elaia sat on
+          Zeroot's back, and he enjoyed the winds flowing trough his hear, as
+          they passed over the blackwoods, and landed in a clearing. When they
+          had landed, they started moving again, and after many days of travel,
+          they finally reached the city of Freehaven. The seven deamons, and
+          ofcourse Elaia, camped by a cliff outside the city and layed their
+          plans on how to attack the city. When the darkness of night arrived,
+          the deamons disguised in black robes and covered their faces. Elaia
+          accompanied them towards the city gate. When they arrived they were
+          hailed by the gate guard. Elaia took off his hood and said; &quot;Hail
+          my friend. We are travelers from the Highlands, wanting to seek
+          shelter in your fair city, and tomorrow, passage on the ship to the
+          elven continent.&quot;. The guard, who looked abit sleepy, and he
+          opened the gates for them, without any questions. Once inside, they
+          quickly made their way to the docks, where they spent the rest of the
+          night, lying underneeth it. Once the morning arrived, and the sun
+          began to show, a voice could be heard shouting; &quot;Ship ohoy
+          !&quot;. The deamons covered their faces once again, gave a gold bag
+          to Elaia and went back onto the docks. Elaia bought eight tickets, and
+          they went onboard the ship. Soon they set sail for the elven
+          continent, but first they had to cross the Moonsea. Elaia stood there
+          looking across the sea, as Zeroot walked up to him, in his black robe
+          and black hood covering his face. &quot;It's beutiful isn't it
+          ?&quot;, asked Zeroot and Elaia answered enthustiatically; &quot;Its
+          the most beutiful image I have ever seen. Let me ask you something,
+          why are you bringing me with you?&quot;. Zeroot looked down, took a
+          deep breath and began explaining; &quot;The bold truth is simple. We
+          need you to get us trough the world. Seven deamons, aren't the types
+          you will sell tickets to, you understand ? We are on a mission, we
+          need to get to the Dark Elves, on the Elven continent.&quot;, and
+          quickly Elaia asked why they had to do that. You could see the smoke
+          coming out of Zeroot's noserills as he began, once again, explaining;
+          &quot;I can't begin to explain why, as its too secret. All I can say,
+          is that we have to get to the great pentagram, lying in the dark elven
+          lands.&quot;, and by those words Zeroot went back to the rest of the
+          deamons. Elaia was left with a hundred questions, he'd die for to ask.
+          After some hours, they reached the shores of the wood elven city,
+          Longmo. They quickly processed trough the wood elven city, not wanting
+          to be spotted. After days of travel they reached the wall called Azwus
+          Mentrex, known for non dark elves as the Dividing The Bloods wall.
+          Security here is top notch, and they didn't look forward to the
+          meeting with the dark elven guards. How would they greet deamons, and
+          a giant ? When they eventually reached the gate, ten stout dark elf
+          guards came up to them and shouted; &quot;HALT !&quot;. Everyone
+          stopped. It was time. The deamons took of their hoods. Silence struck
+          the area for a few seconds, and suddenly the guards bowed down and
+          cried something on dark elvish (in later years, there have
+          speculations about what they said, and it is said they cried out tales
+          of anicent prophecies). The deamons sighed a relif. The guards quickly
+          let them passed, and the deamons and Elaia could continue their
+          journey. They spent many days walking trough the woods, and they met
+          many foul creatures they had to battle. Eventually they reached the
+          giant pentagram. They say its made of blood, which have turned into
+          red stone over the years. The blood is said to come from Zeberai
+          himself. The day was turning dark, and night were approaching. The
+          deamons took off their robes, and their red skin became visible. Elaia
+          stood back and hide himself behind a tree. The deamons walked up into
+          the mid of the pentagram. A moaning wind started to flow all around
+          them, and the stars began to fall. Suddenly the ground began to shake,
+          and trough cracks came grusome, horrible monsters into freedom. The
+          deamons suddenly began showing their demonic side, which Elaia never
+          before had seen. All sorts of ghouls, wraiths, and other horrible
+          creatures were everywhere. Elaia began running as fast as he could
+          trough the woods, but it was too late, a wrath slit his throat. Elaia
+          were dead. In the following hundreds years, Menath were under the
+          demonic regime. Hundreds years of violence, wars, scavanging followed.
+          Not until the end of the first era, were the deamons destroyed by
+          Zeberai, and mankind were once again free. Menath were once again
+          free, but lying in dust. And thus began the age of ruins.&nbsp;</font></p>
+          <p align="center"><font size="1" face="Verdana" color="#FFFFFF"><b><i>Chapter
+          3. </i>AGE OF RUINS (2nd Era - 2nd Era, year 425)</b></font></p>
+          <p align="left"><font size="1" face="Verdana" color="#FFFFFF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After
+          the downfall of the deamons, the world was in total shock, and the
+          population was down to a minimum. People had lost their faith in god,
+          yet some maintained it, due to the fact that Zeberai saved them. The
+          people also had lost faith in themselves. The Dark Elves hadn't
+          suffered at all, and were planning to take over menath, after the
+          deamons downfall. Somewhere, in Castlefall, a human adventurer named
+          Grell Gideon had camped outside the city walls, after a days killing
+          of invading trolls. All over the naked fields of the Outskirts, were
+          dead trolls lying around, and young boys were searching the bodies, in
+          search of any loot the adventurers may have overseen. As the night
+          approached, the field became emptry, and only distant camp fires could
+          be spotted. Grell has just eaten a delicios piece of troll legs, when
+          he heard something rumbeling behind him. He grabed his sword and
+          jumped up. Before him stood a horde of trolls, and the leader, a big
+          green ugly troll, smiled cleverly. They grabbed Grell, and took him
+          into the night, were he was struck in the head and passed out. When he
+          became concious he saw that he was in a pass somewhere in the Shadow's
+          Spine Mountains. He pretended to still be unconcious and only looked
+          around slighty with his left eye. Then they arrived in a camp.
+          Defenetly a troll camp, Grell thought. And he was right, a Shaman came
+          over to Grell, looked him in the eyes and shouted something which was
+          not understandable. Grell was thrown into a wooden jail, and two troll
+          guards were positioned outside. He had a good night sleep, and next
+          day the jail door was opened, and a tall, handsome human came in.
+          &quot;What ?&quot;, mumbeled Grell. The man sat down and said;
+          &quot;My name is Elvadore Elburen. Im a man of the world, just as
+          you.&quot;. Grell quickly asked why Elvadore were here with the
+          trolls. &quot;I escaped Castlefall, when the deamons had it in their
+          pawn. I were captured by these trolls, but we quickly learned to
+          understand eachother, and in exchange for sparing my life, I teached
+          them mathematics, writing and reading. Im working on their language
+          now. Over the years, they have accepted me as one of their own, and we
+          are planning a revolution.&quot;, and by that Grell asked; &quot;A
+          revolution?&quot;. Elvadore made himself comfortable; &quot;Let me
+          begin from the top. As the years have passed, I have grown ignorant of
+          the world outside, but we recently learned that the deamons had been
+          defeted by our mighty god, Zeberai. Now, the world is a easy target
+          for a revolution, and we intend on doing this. Trolls from all over
+          the land has been informed, and everyone are in on this. Next year, we
+          will proceed trough the world, make mankind and trolls united, and
+          bring a new rulership to the world. I will be come the emperor of
+          every race in the world, and everything will be one empire, and
+          everyone will be happy.&quot;. Grell thought he was a maniac at first
+          but he quickly learned to understand Elvadore. By time, Grell became
+          adapted to the tribe, and he became Elvadore's loyal companion. And
+          thus began the age of revolution.</font></p>
+          <p align="center"><font size="1" face="Verdana" color="#FFFFFF"><b><i>Chapter
+          4. </i>AGE OF REVOLUTION (2nd Era 495 - 3rd Era)</b></font></p>
+          <p align="left"><font size="1" face="Verdana" color="#FFFFFF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          A quiet night in 495 of the 2nd era, when the sky was clear, and the
+          stars where shining bright, an army of trolls, lead by two human
+          adventurers, could be seen crossing the Outskirts, outside Castlefall.
+          Marching, thousands of trolls could be seen marching, with their two
+          human friends in the lead. Once they reached Castlefall, they marched
+          trough the gates, waking the whole city, or what was left of it
+          anyway. They marched up to the castle of the human leader, stormed the
+          doors, killed the leader and took over the castle. Hundreds of people
+          rushed into the streets and Elvadore walked onto the castle stars. A
+          sea of people stood before him shouting. He tried speaking, but no one
+          would listen to him. Then Grell walked up to Elvadore, and he shouted
+          to the public &quot;DO YOU WANT YOUR FREEDOM!?&quot;. There was
+          immidiate silence. Elvadore thanked Grell, as Grell took position in
+          the background. Elvadore took a deep breath and began; &quot;People of
+          Castlefall ! We have freed you from the horrible leadership of your
+          leader Gregon Woodly. He was a threat to young country, and had no
+          idea how to run it. We have taken over, and we promise to lead our
+          people into greatness ! The downfall of the deamons have shown that
+          the spirit of survival, is still in us humans. We have shown that we
+          will not go into our own death, and we will fight to the very end,
+          even if painful death is the result. Accept me as your leader, and I
+          will promise you great times for the rest of my reign, starting from
+          tomorrow ! And as you can see, we are friends with the trolls now, and
+          together we will follow the path to greatness ! United we can survive
+          !&quot; and by those words the people of Castlefall once again
+          regained their faith, and proclaimed Eladore Elburen to be the leader
+          of the humans. Later the same night, the trolls has taken their
+          positions on the city walls, patrolled the city, and thousands has
+          been sent to all corners of the human terretory, to uphold justice and
+          spread the message. Soon Elvadore, Grell and the trolls were planning
+          world domination. They wanted to make all of Menath, one empire, under
+          their leadership. Month after month went by, and they soon had taken
+          over and won the trust of the giants, the dwarves, the wood elves and
+          the high elves. Statues and monuments of Elvadore and Grell were raised
+          all over Menath to celebrate the glory of the new empire, and its main
+          leaders. Never before, nor after, has two people achived such level of
+          greatness and honor. Elvadore's and Grell's mission were of noble
+          nature, they wanted to end war and suffering, bringing the world
+          together as one happy people. The people of each race, joined together
+          in harmony with the trolls, and for almost 1000 years this reign held
+          water. However, at the end of the 2 ned era, when the turn came to the
+          dark elves, they met resistance. The current dark elven leader,
+          Kenorath Kadoxx, declared war immidiatly on the empire of Elburen. And
+          thus began the age of war.</font></p>
+          <p align="center"><font size="1" face="Verdana" color="#FFFFFF"><b><i>Chapter
+          5. </i>AGE OF WAR&nbsp; (3rd Era - 4th Era)</b></font></p>
+          <p align="left"><font size="1" face="Verdana" color="#FFFFFF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          The Dark Elves are smart. Painfully smart. And in addition to that,
+          they are vicious. Thats why they managed to war against a entire
+          world. And by those words, the tale about the age of war begins. The
+          empire had just dispatched foot troops to the freezone, when the sea
+          attack from the Dark Elves stuck Freehaven. The word had it, that they
+          had viciously slaughtered the wood elves, and the few who survived,
+          had escaped to the mainland, using canoes only. The rumor were true,
+          and in the woods, north of Freehaven, they had stranded, and were in
+          sore need of help. The Dark Elves had taken over Freehaven, and were
+          making their way trough the freezone, and were soon crossing over to
+          the human kingdom, in direction of Castlefall. Elvadore, and his
+          military advisor Grell, met the troops they had dispatched outside
+          Castlefall's walls. About 300 000 giants, dwarves, high elves, trolls
+          and a few wood elves were there. Now the strategy had to be set, and
+          meanwhile the troops rested outside the walls of Castlefall. Oh what a
+          sight it was, the sight of 300 000 men eagerly waiting to fight for
+          their freedom. Elvadore, Grell and the other leaders were spendng the
+          night strategizing their attack. They only knew that the dark elves,
+          had captivated Freehaven, but what they didn't know, was that the dark
+          elves soon reached Castlefall. The night after, a scream broke the
+          silence of the night; &quot;DARK ELVES! HORDES OF DARK ELVES !
+          EVERYONE TO THEIR POSTS !&quot;. People ran out into their homes,
+          locked the doors and tried to hide the best they could. The troops
+          within the city walls, were rushed out onto the fields, and the gates
+          were locked. &quot;Archers on the walls ! NOW !&quot;, commanded Grell.
+          Elavore and Grell, themselves made their position on the city walls,
+          and looked out on 300 000 empire warriors, looking into the night. But
+          nothing could be seen. Only cast darkness. Not even the stars could be
+          seen. It was dead dark, and the skies were black. It is said today,
+          that a evil spirit rested over the plains that night. &quot;Where are
+          they ?&quot;, said Elavodre suprisingly. Grell took down his raised
+          sword, and took a step back and said; &quot;Damn ! False alarm
+          !&quot;. The warriors on the fields began chatting amongst themselves,
+          and there were confusion. Suddenly, out from the darkness, marched
+          hordes of dark elves, slowly towards the city. They moved slowly, like
+          a silent hunter, approaching his prey. There must have been a million
+          dark elves that night. They halted suddenly and a man on a horse came
+          forward. Grell made down from the walls and took his horse and met
+          him. As Grell approached him, the dark elf on the black horse smiled
+          cleverly. His red eyes went as shock light trough the night, and the
+          white hair created a ghostly feeling. &quot;My name is Kenortah Kadoxx&quot;
+          the dark elf said. Grell presented himself too, but he had a hard time
+          speaking clearly, as he realized he were facing the leader of the dark
+          elves, Kadoxx himself. Grell managed to grab his courage, and said;
+          &quot;Kadoxx, we only wish peace for our people. We want the world to
+          be one happy empire, ruled by us, and yourself if you wish.&quot;
+          Kadoxx quickly replied; &quot;Never will the dark elves bow for
+          another race. Never will our traditions, our country and our freedom
+          be in the hands of someone else.&quot;. Grell looked deep into the
+          eyes of Kadoxx and said, &quot;If you do not surrender now, this night
+          will be your last.&quot; &quot;So be it !&quot;, Kadoxx replied,
+          turned his horse and rode back to the others, and Grell did the same.
+          They both informed their armies that tonight, a war which would go
+          down in history, would take place. Grell informed them to stay put,
+          stay silent and sit down. They all did. The Dark Elves didn't
+          understand this, and they charaged immidiatly, hoping they would catch
+          the empire troops in a weak moment. What they didn't know, was that on
+          the city walls, almost 10 000 archers were hiding, and when the dark
+          elves were near enough, they sent out hundreds of thousands of arrows,
+          hitting thousands of dark elves, leaving them in a blood bath. The
+          Dark Elven army had shrinked greatly on this clever move from Grell,
+          and now the two armies clashed together for real. People died like
+          flies on the fields, blood were seen everywhere, forming pools and
+          creaks of the red liquid. The war raged into the night, and on the
+          morning side, it were coming close to an end. The armies were both
+          down to a thousand men each. Then the unbelivable happened, Dark Elves
+          stormed the city, broke into the castle, captivated Elvadore Elburen
+          and took him as their prisoner. The Dark Elves quickly retreated,
+          escaping into the woods, with Elavore as their prisoners. The empire
+          failed to track them down, and the few left returned to the city. The
+          fields were covered in blood. Hundreds of thousands of men were
+          scattered around, some alone, and some in piles. The sun were coming
+          up in the horizon. Grell dropped down on his knees and broke out in
+          tears. &quot;Why, god ? Zeberai hear my words, why !?&quot;, he
+          shouted towards the sky, which were clearing up. His question were not
+          answered, and he stumbeled onto his feet, joined his men, and went
+          back into the city. Miles away, the Dark Elves were crossing the
+          border and headed to Freehaven. Once they were there, their glory were
+          celebrated and Elvadore were thrown in prison. An emissary from Grell
+          were sent to Freehaven, and were to meet Kadoxx. Kadoxx were given an
+          offer; give Elvadore back, and we will end our empire. Kadoxx
+          immidiatly went down to the dungeon where Elvadore were kept and told
+          him all about it. Next day, in the middle of the street, Elvadore were
+          pistioned on a gallows and people flocked to see the execution, or the
+          surrendering. Kadoxx gave Elvadore a ultimatum; &quot;Say you will
+          stop your revolution and surreder as your friend Grell has done, and
+          you shall live. If not, you shall die this very day.&quot; Elavore
+          slowly looked up at Kadoxx, with a rope rapped around his neck, and
+          said; &quot;I will rather die, than ever surrender for the likes of
+          you.&quot;. And so he did. Elavore were hanged infront of the whole
+          city of Freehaven. The humans that had been spared, returned to their
+          homes in sadness, and the Dark Elves celebrated. Once the word of this
+          reached Castlefall, the flute had another tone. The word about
+          Elavore's statment reached all four corners of the empire, and more
+          people regained their faith. Voluntary warriors of all races came to
+          Castlefall, to battle in the last war against the dark elves. There
+          were millions ! And not much later after, the Dark Elves had been
+          driven back to their mainland, and the Wood Elves were given their
+          rightful share of the land. Kadoxx's head were cut off his body, and
+          put in the palace in Castlefall, where it remains today. Now the world
+          was in shock after the war, even after its victory. The population
+          once again were down to a minimum, and people mysteriously became
+          unhappy with the empire. And thus began the age of kings.</font></p>
+          <p align="center"><font size="1" face="Verdana" color="#FFFFFF"><b><i>Chapter
+          6. </i>AGE OF KINGS&nbsp; (4th Era)</b></font></p>
+          <p align="left"><font size="1" face="Verdana" color="#FFFFFF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          This is the age, where you are born, were you live, and were you will
+          die. The races have now formed their own kingdoms, and the world is
+          therefor spilt into six of these kingdoms. The world is ruled by each
+          kingdoms monarch, and within each kingdom, clans are starting to form,
+          taking over areas and adding to their membership list. The economy is
+          starting to flow and get more steady, the wars have ended, and harmony
+          has once again, rapped its arms around Menath. People follow their own
+          paths, wether its within the art of trade or battle. Kingdoms are
+          building up their cities, towns and villages once again, creating
+          roads and more. Adventurers are sent out to explore the worlds, and
+          many choose to go to the last frontier, the wastelands. Blacksmiths
+          craft the finest of weapons to the warriors. Warriors protect the city
+          and traders from foul monsters. Tailors create clothes for the kings,
+          and the kings rule over the people. Have we finally reached the place
+          in history, were peace is the alone ruler of the world ? From this
+          era, we are starting a new age of dreams. A new age of hopes. Its the
+          beginning of an age, the dawn of a new era.&nbsp;</font></p>
+          <p align="left">&nbsp;</p>
+          <p align="left">&nbsp;</p>
+          <p align="left"><font size="1" face="Verdana" color="#FFFFFF">&nbsp;</font></p>
+          <p align="left"><font size="1" face="Verdana" color="#FFFFFF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </font></p>
+          <p align="left"><font size="1" face="Verdana" color="#FFFFFF">&nbsp;</font></p>
+          <p align="left">&nbsp;</p>
+          <center>
+          <p align="center">&nbsp;</p>
+          </center>
+          <p align="left">&nbsp;</p>
+          <center>
+          <p align="center">&nbsp;</td>
+        </tr>
+      </table>
+    </div>
+    <p align="left">&nbsp;
+
+
+    </td>
+  </tr>
+  <tr>
+    <td>
+      [an error occurred while processing this directive]
+
+    </td>
+  </tr>
+  </table>
+</div>
+
+</html>
+
+
+
+
+
+<!--
+     FILE ARCHIVED ON 18:24:01 Oct 13, 2007 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 18:36:08 Jun 14, 2015.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->

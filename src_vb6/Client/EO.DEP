@@ -1,0 +1,17 @@
+[Version]
+Version=1.5.0.0
+
+[EO.exe <0009>]
+Dest=$(AppPath)
+Date=09.04.00
+Time=12:54
+Version=1.5.0.0
+CABFilename=EO.CAB
+CABINFFile=EO.INF
+Uses1=MSVBVM60.DLL
+Uses2=OLEAUT32.DLL
+Uses3=OLEPRO32.DLL
+Uses4=ASYCFILT.DLL
+Uses5=STDOLE2.TLB
+Uses6=COMCAT.DLL
+Uses7=MSINET.OCX

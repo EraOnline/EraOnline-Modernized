@@ -1,0 +1,711 @@
+[Root]
+Most Recent Package=Dep File 1
+Most Recent Deploy=Folder Deployment 1
+
+[Package|Standard Setup Package 2|EO]
+Icon1=Era.exe
+Title1=EO
+StartIn1=$(AppPath)
+Key1=Icon1
+
+
+[Package|Standard Setup Package 2|Root]
+SubWizProgID=PDWizard.SetupPkgSubWiz
+BuildFolder=C:\Erling\Install
+
+[Package|Standard Setup Package 2|Configure DAO ISAMs]
+Applicable=No
+
+[Package|Standard Setup Package 2|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|Standard Setup Package 2|Files Found]
+
+[Package|Standard Setup Package 2|Files Released]
+
+[Package|Standard Setup Package 2|Missing Dependency Information]
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=
+C:\WINDOWS\SYSTEM\win32.tlb=
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=
+
+[Package|Standard Setup Package 2|Out-of-Date Dependency Information]
+
+[Package|Standard Setup Package 2|Files Added]
+
+[Package|Standard Setup Package 2|Files Removed]
+
+[Package|Standard Setup Package 2|Files In Project]
+C:\Erling\prosjekt\My Programs\Directx version\Era\Era.exe=Yes
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=Yes
+C:\WINDOWS\SYSTEM\OLEAUT32.DLL=Yes
+C:\WINDOWS\SYSTEM\OlePro32.dll=Yes
+C:\WINDOWS\SYSTEM\AsycFilt.dll=Yes
+C:\WINDOWS\SYSTEM\STDOLE2.TLB=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=Yes
+C:\WINDOWS\SYSTEM\win32.tlb=Yes
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=Yes
+C:\WINDOWS\SYSTEM\MCI32.OCX=Yes
+C:\WINDOWS\SYSTEM\RICHTX32.OCX=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=Yes
+C:\WINDOWS\SYSTEM\MSINET.OCX=Yes
+C:\WINDOWS\SYSTEM\MSSTDFMT.DLL=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP.EXE=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
+C:\WINDOWS\SYSTEM\VB6STKIT.DLL=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+
+[Package|Standard Setup Package 2|Configure Registry Files]
+Applicable=No
+
+[Package|Standard Setup Package 2|Configure Remote Servers]
+Applicable=No
+
+[Package|Standard Setup Package 2|Install Locations]
+C:\Erling\prosjekt\My Programs\Directx version\Era\Era.exe=$(AppPath)
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\OLEAUT32.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\OlePro32.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\AsycFilt.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\STDOLE2.TLB=$(WinSysPathSysFile)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=$(WinSysPath)
+C:\WINDOWS\SYSTEM\win32.tlb=$(WinSysPath)
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MCI32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\RICHTX32.OCX=$(WinSysPath)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\MSINET.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MSSTDFMT.DLL=$(WinSysPath)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+C:\WINDOWS\SYSTEM\VB6STKIT.DLL=$(WinSysPathSysFile)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+
+[Package|Standard Setup Package 2|Configure Shared Files]
+Applicable=Yes
+C:\Erling\prosjekt\My Programs\Directx version\Era\Era.exe=No
+
+[Package|Standard Setup Package 2|Distribution]
+Type=single
+Size=
+Title=Era Online
+
+[Package|Standard Setup Package 2|IconGroups]
+Group0=Era Online
+PrivateGroup0=True
+Parent0=$(Programs)
+
+[Package|Standard Setup Package 2|Era Online]
+Icon1=Era.exe
+Title1=Era Online
+StartIn1=$(AppPath)
+Key1=Icon1
+
+[Package|Standard Setup Package 2|Package]
+PackageFolder=C:\Erling\Install
+ProjectFolder=C:\Erling\prosjekt\My Programs\Directx version\Client
+ServerSideCab=
+File1=C:\Erling\Install\setup.exe
+File2=C:\Erling\Install\Setup.Lst
+File3=C:\Erling\Install\Era.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
+
+
+[Package|Standard Setup Package 3|Root]
+SubWizProgID=PDWizard.SetupPkgSubWiz
+BuildFolder=C:\Erling\Install
+
+[Package|Standard Setup Package 3|Configure DAO ISAMs]
+Applicable=No
+
+[Package|Standard Setup Package 3|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|Standard Setup Package 3|Files Found]
+
+[Package|Standard Setup Package 3|Files Released]
+
+[Package|Standard Setup Package 3|Missing Dependency Information]
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=
+C:\WINDOWS\SYSTEM\win32.tlb=
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=
+
+[Package|Standard Setup Package 3|Out-of-Date Dependency Information]
+
+[Package|Standard Setup Package 3|Files Added]
+
+[Package|Standard Setup Package 3|Files Removed]
+
+[Package|Standard Setup Package 3|Files In Project]
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=Yes
+C:\WINDOWS\SYSTEM\OLEAUT32.DLL=Yes
+C:\WINDOWS\SYSTEM\OlePro32.dll=Yes
+C:\WINDOWS\SYSTEM\AsycFilt.dll=Yes
+C:\WINDOWS\SYSTEM\STDOLE2.TLB=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=Yes
+C:\WINDOWS\SYSTEM\win32.tlb=Yes
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=Yes
+C:\WINDOWS\SYSTEM\MCI32.OCX=Yes
+C:\WINDOWS\SYSTEM\RICHTX32.OCX=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=Yes
+C:\WINDOWS\SYSTEM\MSINET.OCX=Yes
+C:\WINDOWS\SYSTEM\MSSTDFMT.DLL=Yes
+C:\Erling\prosjekt\My Programs\Directx version\Era\Era.exe=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP.EXE=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
+C:\WINDOWS\SYSTEM\VB6STKIT.DLL=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+
+[Package|Standard Setup Package 3|Configure Registry Files]
+Applicable=No
+
+[Package|Standard Setup Package 3|Configure Remote Servers]
+Applicable=No
+
+[Package|Standard Setup Package 3|Install Locations]
+C:\Erling\prosjekt\My Programs\Directx version\Client\Client.exe=$(AppPath)
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\OLEAUT32.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\OlePro32.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\AsycFilt.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\STDOLE2.TLB=$(WinSysPathSysFile)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=$(WinSysPath)
+C:\WINDOWS\SYSTEM\win32.tlb=$(WinSysPath)
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MCI32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\RICHTX32.OCX=$(WinSysPath)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=$(WinSysPathSysFile)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+C:\WINDOWS\SYSTEM\VB6STKIT.DLL=$(WinSysPathSysFile)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+C:\Erling\prosjekt\My Programs\Directx version\Era\Era=$(AppPath)
+C:\WINDOWS\SYSTEM\MSINET.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MSSTDFMT.DLL=$(WinSysPath)
+C:\ERA\ERA\Era.exe=$(AppPath)
+C:\Erling\prosjekt\My Programs\Directx version\Era\Era.exe=$(AppPath)
+
+[Package|Standard Setup Package 3|Configure Shared Files]
+Applicable=Yes
+C:\Erling\prosjekt\My Programs\Directx version\Client\Client.exe=Yes
+C:\Erling\prosjekt\My Programs\Directx version\Era\Era.exe=Yes
+
+[Package|Standard Setup Package 3|Distribution]
+Type=single
+Size=
+Title=EraOnline
+
+[Package|Standard Setup Package 3|DepFile]
+DepCabFile=Era.CAB
+DepCabRun=Era.INF
+
+[Package|Standard Setup Package 3|IconGroups]
+Group0=EraOnline
+PrivateGroup0=True
+Parent0=$(Programs)
+
+[Package|Standard Setup Package 3|EraOnline]
+Icon1=Client.exe
+Title1=EraOnline
+StartIn1=$(AppPath)
+Key1=Icon1
+
+[Package|Standard Setup Package 3|Package]
+PackageFolder=C:\Erling\Install
+ProjectFolder=C:\Erling\prosjekt\My Programs\Directx version\Client
+ServerSideCab=
+File1=C:\Erling\Install\setup.exe
+File2=C:\Erling\Install\Setup.Lst
+File3=C:\Erling\Install\Era.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
+
+[Deploy|Folder Deployment 1|Root]
+Package=Era Online Installation
+Handler=PDWizard.FolderDplySubWiz
+Folder=C:\Erling\install2
+
+
+[Package|Era Online Installation|Root]
+SubWizProgID=PDWizard.SetupPkgSubWiz
+BuildFolder=C:\Erling\install2
+
+[Package|Era Online Installation|Configure DAO ISAMs]
+Applicable=No
+
+[Package|Era Online Installation|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|Era Online Installation|Files Found]
+
+[Package|Era Online Installation|Files Released]
+
+[Package|Era Online Installation|Missing Dependency Information]
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=
+C:\WINDOWS\SYSTEM\win32.tlb=
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=
+
+[Package|Era Online Installation|Out-of-Date Dependency Information]
+
+[Package|Era Online Installation|Files Added]
+
+[Package|Era Online Installation|Files Removed]
+
+[Package|Era Online Installation|Files In Project]
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=Yes
+C:\WINDOWS\SYSTEM\OLEAUT32.DLL=Yes
+C:\WINDOWS\SYSTEM\OlePro32.dll=Yes
+C:\WINDOWS\SYSTEM\AsycFilt.dll=Yes
+C:\WINDOWS\SYSTEM\STDOLE2.TLB=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=Yes
+C:\WINDOWS\SYSTEM\win32.tlb=Yes
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=Yes
+C:\WINDOWS\SYSTEM\MCI32.OCX=Yes
+C:\WINDOWS\SYSTEM\RICHTX32.OCX=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP.EXE=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
+C:\WINDOWS\SYSTEM\VB6STKIT.DLL=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+C:\WINDOWS\SYSTEM\MSINET.OCX=Yes
+C:\WINDOWS\SYSTEM\MSSTDFMT.DLL=Yes
+C:\Erling\prosjekt\My Programs\Directx version\Era\EO.exe=Yes
+
+[Package|Era Online Installation|Configure Registry Files]
+Applicable=No
+
+[Package|Era Online Installation|Configure Remote Servers]
+Applicable=No
+
+[Package|Era Online Installation|Install Locations]
+C:\Erling\prosjekt\My Programs\Directx version\Client\Client.exe=$(AppPath)
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\OLEAUT32.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\OlePro32.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\AsycFilt.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\STDOLE2.TLB=$(WinSysPathSysFile)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=$(WinSysPath)
+C:\WINDOWS\SYSTEM\win32.tlb=$(WinSysPath)
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MCI32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\RICHTX32.OCX=$(WinSysPath)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=$(WinSysPathSysFile)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+C:\WINDOWS\SYSTEM\VB6STKIT.DLL=$(WinSysPathSysFile)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+C:\Erling\prosjekt\My Programs\Directx version\Era\Era.exe=$(AppPath)
+C:\WINDOWS\SYSTEM\MSINET.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MSSTDFMT.DLL=$(WinSysPath)
+C:\Erling\prosjekt\My Programs\Directx version\Era\EO.exe=$(AppPath)
+
+[Package|Era Online Installation|Configure Shared Files]
+Applicable=Yes
+C:\Erling\prosjekt\My Programs\Directx version\Client\Client.exe=Yes
+C:\Erling\prosjekt\My Programs\Directx version\Era\Era.exe=No
+C:\Erling\prosjekt\My Programs\Directx version\Era\EO.exe=Yes
+
+[Package|Era Online Installation|Distribution]
+Type=single
+Size=
+Title=Era Online
+
+[Package|Era Online Installation|IconGroups]
+Group0=EraOnline
+PrivateGroup0=True
+Parent0=$(Programs)
+
+[Package|Era Online Installation|EraOnline]
+Icon1=EO.EXE
+Title1=Era Online
+StartIn1=$(AppPath)
+Key1=Icon1
+
+[Package|Era Online Installation|Package]
+PackageFolder=C:\Erling\install2
+ProjectFolder=C:\Erling\prosjekt\My Programs\Directx version\Client
+ServerSideCab=
+File1=C:\Erling\install2\setup.exe
+File2=C:\Erling\install2\Setup.Lst
+File3=C:\Erling\install2\EO.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
+
+
+[Package|Standard Setup Package 1|Root]
+SubWizProgID=PDWizard.SetupPkgSubWiz
+BuildFolder=C:\EraInstall
+
+[Package|Standard Setup Package 1|Configure DAO ISAMs]
+Applicable=No
+
+[Package|Standard Setup Package 1|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|Standard Setup Package 1|Files Found]
+
+[Package|Standard Setup Package 1|Files Released]
+
+[Package|Standard Setup Package 1|Missing Dependency Information]
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=
+C:\WINDOWS\SYSTEM\win32.tlb=
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=
+C:\Erling\prosjekt\My Programs\Directx version\Server\CSWSK32.OCX=
+C:\WINDOWS\SYSTEM\ASCTRLS.OCX=
+C:\WINDOWS\DIRECTX6.TLB=
+C:\WINDOWS\SYSTEM\msdxm.ocx=
+
+[Package|Standard Setup Package 1|Out-of-Date Dependency Information]
+
+[Package|Standard Setup Package 1|Files Added]
+
+[Package|Standard Setup Package 1|Files Removed]
+
+[Package|Standard Setup Package 1|Files In Project]
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=Yes
+C:\WINDOWS\SYSTEM\OLEAUT32.DLL=Yes
+C:\WINDOWS\SYSTEM\OlePro32.dll=Yes
+C:\WINDOWS\SYSTEM\AsycFilt.dll=Yes
+C:\WINDOWS\SYSTEM\STDOLE2.TLB=Yes
+C:\WINDOWS\SYSTEM\win32.tlb=Yes
+C:\WINDOWS\SYSTEM\MCI32.OCX=Yes
+C:\WINDOWS\SYSTEM\RICHTX32.OCX=Yes
+C:\WINDOWS\SYSTEM\VB6STKIT.DLL=Yes
+C:\WINDOWS\SYSTEM\MSINET.OCX=Yes
+C:\WINDOWS\SYSTEM\MSSTDFMT.DLL=Yes
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINDOWS\SYSTEM\ASCTRLS.OCX=Yes
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=Yes
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+C:\Erling\prosjekt\My Programs\Directx version\Era Online\Eo.exe=Yes
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=Yes
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=Yes
+C:\WINDOWS\SYSTEM\msdxm.ocx=Yes
+
+[Package|Standard Setup Package 1|Configure Registry Files]
+Applicable=No
+
+[Package|Standard Setup Package 1|Configure Remote Servers]
+Applicable=No
+
+[Package|Standard Setup Package 1|Install Locations]
+C:\Erling\prosjekt\My Programs\Directx version\Client\Client.exe=$(AppPath)
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\OLEAUT32.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\OlePro32.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\AsycFilt.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\STDOLE2.TLB=$(WinSysPathSysFile)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=$(WinSysPath)
+C:\WINDOWS\SYSTEM\win32.tlb=$(WinSysPath)
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MCI32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\RICHTX32.OCX=$(WinSysPath)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=$(WinSysPathSysFile)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+C:\WINDOWS\SYSTEM\VB6STKIT.DLL=$(WinSysPathSysFile)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+C:\Erling\prosjekt\My Programs\Directx version\Era\Era.exe=$(AppPath)
+C:\WINDOWS\SYSTEM\MSINET.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MSSTDFMT.DLL=$(WinSysPath)
+C:\Erling\prosjekt\My Programs\Directx version\Era Release\Eo.exe=$(AppPath)
+C:\Era Online\Eo.exe=$(AppPath)
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\DIRECTX6.TLB=$(WinSysPath)
+C:\WINDOWS\SYSTEM\ASCTRLS.OCX=$(WinSysPath)
+C:\Erling\prosjekt\My Programs\Directx version\Server\CSWSK32.OCX=$(WinSysPath)
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=$(WinSysPathSysFile)
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+C:\Erling\prosjekt\My Programs\Directx version\Era Online\Eo.exe=$(AppPath)
+C:\WINDOWS\SYSTEM\msdxm.ocx=$(WinSysPath)
+
+[Package|Standard Setup Package 1|Configure Shared Files]
+Applicable=Yes
+C:\Erling\prosjekt\My Programs\Directx version\Client\Client.exe=Yes
+C:\Erling\prosjekt\My Programs\Directx version\Era\Era.exe=No
+C:\Erling\prosjekt\My Programs\Directx version\Era Release\Eo.exe=No
+C:\Era Online\Eo.exe=No
+C:\Erling\prosjekt\My Programs\Directx version\Era Online\Eo.exe=No
+
+[Package|Standard Setup Package 1|Distribution]
+Type=single
+Size=
+Title=Era Online
+
+[Package|Standard Setup Package 1|IconGroups]
+Group0=EraOnline
+PrivateGroup0=True
+Parent0=$(Programs)
+Group1=Spotlight Studios
+PrivateGroup1=False
+Parent1=$(Programs)
+
+[Package|Standard Setup Package 1|EraOnline]
+Icon1=Era.exe
+Title1=Era Online
+StartIn1=$(AppPath)
+Key1=Icon1
+
+[Package|Standard Setup Package 1|Spotlight Studios]
+Icon1=Eo.Exe
+Title1=ERA ONLINE
+StartIn1=$(AppPath)
+Key1=Icon3
+
+[Package|Standard Setup Package 1|Package]
+PackageFolder=C:\EraInstall
+ProjectFolder=C:\Erling\prosjekt\My Programs\Directx version\Client
+ServerSideCab=
+File1=C:\EraInstall\setup.exe
+File2=C:\EraInstall\Setup.Lst
+File3=C:\EraInstall\Eo.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
+
+
+[Package|Standard Setup Package 4|Root]
+SubWizProgID=PDWizard.SetupPkgSubWiz
+BuildFolder=C:\EraInstall
+
+[Package|Standard Setup Package 4|Configure DAO ISAMs]
+Applicable=No
+
+[Package|Standard Setup Package 4|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|Standard Setup Package 4|Files Found]
+
+[Package|Standard Setup Package 4|Files Released]
+
+[Package|Standard Setup Package 4|Missing Dependency Information]
+C:\WINDOWS\SYSTEM\msdxm.ocx=
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=
+C:\WINDOWS\SYSTEM\ASCTRLS.OCX=
+C:\WINDOWS\SYSTEM\win32.tlb=
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=
+
+[Package|Standard Setup Package 4|Out-of-Date Dependency Information]
+
+[Package|Standard Setup Package 4|Files Added]
+
+[Package|Standard Setup Package 4|Files Removed]
+
+[Package|Standard Setup Package 4|Files In Project]
+C:\Erling\prosjekt\My Programs\Directx version\Era Online\Eo.exe=Yes
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=Yes
+C:\WINDOWS\SYSTEM\OLEAUT32.DLL=Yes
+C:\WINDOWS\SYSTEM\Olepro32.dll=Yes
+C:\WINDOWS\SYSTEM\Asycfilt.dll=Yes
+C:\WINDOWS\SYSTEM\STDOLE2.TLB=Yes
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=Yes
+C:\WINDOWS\SYSTEM\win32.tlb=Yes
+C:\WINDOWS\SYSTEM\MSSTDFMT.DLL=Yes
+C:\WINDOWS\SYSTEM\ASCTRLS.OCX=Yes
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=Yes
+C:\WINDOWS\SYSTEM\RICHTX32.OCX=Yes
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=Yes
+C:\WINDOWS\SYSTEM\MSINET.OCX=Yes
+C:\WINDOWS\SYSTEM\MCI32.OCX=Yes
+C:\WINDOWS\SYSTEM\msdxm.ocx=Yes
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
+C:\WINDOWS\SYSTEM\VB6STKIT.DLL=Yes
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+
+[Package|Standard Setup Package 4|Configure Registry Files]
+Applicable=No
+
+[Package|Standard Setup Package 4|Configure Remote Servers]
+Applicable=No
+
+[Package|Standard Setup Package 4|Install Locations]
+C:\Erling\prosjekt\My Programs\Directx version\Era Online\Eo.exe=$(AppPath)
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\OLEAUT32.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\Olepro32.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\Asycfilt.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\STDOLE2.TLB=$(WinSysPathSysFile)
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=$(WinSysPath)
+C:\WINDOWS\SYSTEM\win32.tlb=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MSSTDFMT.DLL=$(WinSysPath)
+C:\WINDOWS\SYSTEM\ASCTRLS.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\RICHTX32.OCX=$(WinSysPath)
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\MSINET.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MCI32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\msdxm.ocx=$(WinSysPath)
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+C:\WINDOWS\SYSTEM\VB6STKIT.DLL=$(WinSysPathSysFile)
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+
+[Package|Standard Setup Package 4|Configure Shared Files]
+Applicable=Yes
+C:\Erling\prosjekt\My Programs\Directx version\Era Online\Eo.exe=No
+
+[Package|Standard Setup Package 4|Distribution]
+Type=single
+Size=
+Title=Era Online
+
+[Package|Standard Setup Package 4|IconGroups]
+Group0=Era Online
+PrivateGroup0=True
+Parent0=$(Programs)
+
+[Package|Standard Setup Package 4|Era Online]
+Icon1=Eo.exe
+Title1=Era Online
+StartIn1=$(AppPath)
+Key1=Icon1
+
+[Package|Standard Setup Package 4|Package]
+PackageFolder=C:\EraInstall
+ProjectFolder=C:\Erling\prosjekt\My Programs\Directx version\Client
+ServerSideCab=
+File1=C:\EraInstall\setup.exe
+File2=C:\EraInstall\Setup.Lst
+File3=C:\EraInstall\Eo.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
+
+
+[Package|Dep File 1|Root]
+SubWizProgID=PDWizard.DepPkgSubWiz
+BuildFolder=C:\Erling\prosjekt\My Programs\Directx version\Era Online
+
+[Package|Dep File 1|Configure DAO ISAMs]
+Applicable=No
+
+[Package|Dep File 1|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|Dep File 1|Files Found]
+
+[Package|Dep File 1|Files Released]
+
+[Package|Dep File 1|Missing Dependency Information]
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=
+C:\WINDOWS\SYSTEM\win32.tlb=
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=
+C:\WINDOWS\DIRECTX6.TLB=
+C:\WINDOWS\SYSTEM\dx7vb.dll=
+C:\WINDOWS\SYSTEM\msdxm.ocx=
+C:\WINDOWS\SYSTEM\ASCTRLS.OCX=
+C:\Erling\prosjekt\My Programs\Directx version\Client Source\DIRECTX6.TLB=
+
+[Package|Dep File 1|Out-of-Date Dependency Information]
+
+[Package|Dep File 1|Files Added]
+
+[Package|Dep File 1|Files Removed]
+
+[Package|Dep File 1|Files In Project]
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=Yes
+C:\WINDOWS\SYSTEM\OLEAUT32.DLL=Yes
+C:\WINDOWS\SYSTEM\OlePro32.dll=Yes
+C:\WINDOWS\SYSTEM\AsycFilt.dll=Yes
+C:\WINDOWS\SYSTEM\STDOLE2.TLB=Yes
+C:\WINDOWS\SYSTEM\win32.tlb=Yes
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=Yes
+C:\WINDOWS\SYSTEM\MCI32.OCX=Yes
+C:\WINDOWS\SYSTEM\RICHTX32.OCX=Yes
+C:\WINDOWS\SYSTEM\MSINET.OCX=Yes
+C:\WINDOWS\SYSTEM\MSSTDFMT.DLL=Yes
+C:\Erling\prosjekt\My Programs\Directx version\Era Online\DontRun.exe=Yes
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINDOWS\SYSTEM\ASCTRLS.OCX=Yes
+C:\WINDOWS\SYSTEM\msdxm.ocx=Yes
+C:\WINDOWS\SYSTEM\dx7vb.dll=Yes
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=Yes
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=Yes
+
+[Package|Dep File 1|Configure Registry Files]
+Applicable=No
+
+[Package|Dep File 1|Configure Remote Servers]
+Applicable=No
+
+[Package|Dep File 1|Install Locations]
+C:\Erling\prosjekt\My Programs\Directx version\Client\Client.exe=$(AppPath)
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\OLEAUT32.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\OlePro32.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\AsycFilt.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\STDOLE2.TLB=$(WinSysPathSysFile)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=$(WinSysPath)
+C:\WINDOWS\SYSTEM\win32.tlb=$(WinSysPath)
+C:\WINDOWS\SYSTEM\CSWSK32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MCI32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\RICHTX32.OCX=$(WinSysPath)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=$(WinSysPathSysFile)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+C:\WINDOWS\SYSTEM\VB6STKIT.DLL=$(WinSysPathSysFile)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+C:\Erling\prosjekt\My Programs\Directx version\Era\Era=$(AppPath)
+C:\WINDOWS\SYSTEM\MSINET.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\MSSTDFMT.DLL=$(WinSysPath)
+C:\ERA\ERA\Era.exe=$(AppPath)
+C:\Erling\prosjekt\My Programs\Directx version\Era Release\Eo.exe=$(AppPath)
+C:\WINDOWS\DIRECTX6.TLB=$(WinSysPath)
+C:\Erling\prosjekt\My Programs\Directx version\Era Online\DontRun.exe=$(AppPath)
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\Erling\prosjekt\My Programs\Directx version\Client Source\DIRECTX6.TLB=$(WinSysPath)
+C:\WINDOWS\SYSTEM\ASCTRLS.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM\msdxm.ocx=$(WinSysPath)
+C:\WINDOWS\SYSTEM\dx7vb.dll=$(WinSysPath)
+C:\Programfiler\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=$(WinSysPathSysFile)
+
+[Package|Dep File 1|Configure Shared Files]
+Applicable=Yes
+C:\Erling\prosjekt\My Programs\Directx version\Client\Client.exe=Yes
+
+[Package|Dep File 1|Distribution]
+Type=single
+Size=
+Title=EraOnline
+
+[Package|Dep File 1|IconGroups]
+Group0=EraOnline
+PrivateGroup0=True
+Parent0=$(Programs)
+
+[Package|Dep File 1|EraOnline]
+Icon1=Client.exe
+Title1=EraOnline
+StartIn1=$(AppPath)
+Key1=Icon1
+
+[Package|Dep File 1|DepFile]
+DepCabFile=Era.CAB
+DepCabRun=Era.INF
+
+[Package|Dep File 1|Package]
+PackageFolder=C:\Erling\prosjekt\My Programs\Directx version\Era Online
+ProjectFolder=C:\Erling\prosjekt\My Programs\Directx version\Client Source
+ServerSideCab=
+File1=C:\Erling\prosjekt\My Programs\Directx version\Era Online\DontRun.DEP
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz

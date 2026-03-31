@@ -1,0 +1,603 @@
+[INIT]
+NumHeads=84
+
+'/////////HUMAN HEADS///////
+
+'Man head 1
+[Head1]
+Head1=2903
+Head2=2901
+Head3=2900
+Head4=2902
+
+'Man head 2
+[Head6]
+Head1=2923
+Head2=2921
+Head3=2920
+Head4=2922
+
+'Man Head 3
+[Head7]
+Head1=2927
+Head2=2925
+Head3=2924
+Head4=2926
+
+'Man Head 4
+[Head8]
+Head1=2931
+Head2=2929
+Head3=2928
+Head4=2930
+
+'Man Head 5
+[Head9]
+Head1=2935
+Head2=2933
+Head3=2932
+Head4=2934
+
+'Man Head 6
+[Head10]
+Head1=2939
+Head2=2937
+Head3=2936
+Head4=2938
+
+'Man Head 7
+[Head11]
+Head1=2943
+Head2=2941
+Head3=2940
+Head4=2942
+
+'Man Head 8
+[Head12]
+Head1=2947
+Head2=2945
+Head3=2944
+Head4=2946
+
+'Man Head 9
+[Head13]
+Head1=2951
+Head2=2949
+Head3=2948
+Head4=2950
+
+'Man Head 10
+[Head14]
+Head1=2955
+Head2=2953
+Head3=2952
+Head4=2954
+
+'Man Head 11
+[Head15]
+Head1=2959
+Head2=2957
+Head3=2956
+Head4=2958
+
+'Woman Head 1
+[Head16]
+Head1=2963
+Head2=2961
+Head3=2960
+Head4=2962
+
+'Woman Head 2
+[Head17]
+Head1=2967
+Head2=2965
+Head3=2964
+Head4=2966
+
+'Woman Head 3
+[Head18]
+Head1=2971
+Head2=2969
+Head3=2968
+Head4=2970
+
+'Woman Head 4
+[Head19]
+Head1=2975
+Head2=2973
+Head3=2972
+Head4=2974
+
+'Woman Head 5
+[Head20]
+Head1=2979
+Head2=2977
+Head3=2976
+Head4=2978
+
+'Woman Head 6
+[Head21]
+Head1=2983
+Head2=2981
+Head3=2980
+Head4=2982
+
+'Woman Head 7
+[Head22]
+Head1=2987
+Head2=2985
+Head3=2984
+Head4=2986
+
+'Woman Head 8
+[Head23]
+Head1=2991
+Head2=2989
+Head3=2988
+Head4=2990
+
+'Woman Head 9
+[Head24]
+Head1=2995
+Head2=2993
+Head3=2992
+Head4=2994
+
+'Woman Head 10
+[Head25]
+Head1=2999
+Head2=2997
+Head3=2996
+Head4=2998
+
+'////////HAAKI HEADS//////
+'Man Head 1
+[Head26]
+Head1=4003
+Head2=4001
+Head3=4000
+Head4=4002
+
+'Man Head 2
+[Head27]
+Head1=4007
+Head2=4005
+Head3=4004
+Head4=4006
+
+'Man Head 3
+[Head28]
+Head1=4011
+Head2=4009
+Head3=4008
+Head4=4010
+
+'Man Head 4
+[Head29]
+Head1=4015
+Head2=4013
+Head3=4012
+Head4=4014
+
+'Man Head 5
+[Head30]
+Head1=4019
+Head2=4017
+Head3=4016
+Head4=4018
+
+'Man Head 6
+[Head31]
+Head1=4023
+Head2=4021
+Head3=4020
+Head4=4022
+
+'Man Head 7
+[Head32]
+Head1=4027
+Head2=4025
+Head3=4024
+Head4=4026
+
+'Man Head 8
+[Head33]
+Head1=4031
+Head2=4029
+Head3=4028
+Head4=4030
+
+'Man Head 9
+[Head34]
+Head1=4035
+Head2=4033
+Head3=4032
+Head4=4034
+
+'Man Head 10
+[Head35]
+Head1=4039
+Head2=4037
+Head3=4036
+Head4=4038
+
+'Woman Head 1
+[Head36]
+Head1=4043
+Head2=4041
+Head3=4040
+Head4=4042
+
+'Woman Head 2
+[Head37]
+Head1=4047
+Head2=4045
+Head3=4044
+Head4=4046
+
+'Woman Head 3
+[Head38]
+Head1=4051
+Head2=4049
+Head3=4048
+Head4=4050
+
+'Woman Head 4
+[Head39]
+Head1=4055
+Head2=4053
+Head3=4052
+Head4=4054
+
+'Woman Head 5
+[Head40]
+Head1=4059
+Head2=4057
+Head3=4056
+Head4=4058
+
+'Woman Head 6
+[Head41]
+Head1=4063
+Head2=4061
+Head3=4060
+Head4=4062
+
+'Woman Head 7
+[Head42]
+Head1=4067
+Head2=4065
+Head3=4064
+Head4=4066
+
+'Woman Head 8
+[Head43]
+Head1=4071
+Head2=4069
+Head3=4068
+Head4=4070
+
+'Woman Head 9
+[Head44]
+Head1=4075
+Head2=4073
+Head3=4072
+Head4=4074
+
+'Woman Head 10
+[Head45]
+Head1=4079
+Head2=4077
+Head3=4076
+Head4=4078
+
+'////////WOOD ELF HEADS//////
+
+'Man Head 1
+[Head46]
+Head1=4083
+Head2=4081
+Head3=4080
+Head4=4082
+
+'Man Head 2
+[Head47]
+Head1=4087
+Head2=4085
+Head3=4084
+Head4=4086
+
+'Man Head 3
+[Head48]
+Head1=4091
+Head2=4089
+Head3=4088
+Head4=4090
+
+'Man Head 4
+[Head49]
+Head1=4095
+Head2=4093
+Head3=4092
+Head4=4094
+
+'Man Head 5
+[Head50]
+Head1=4099
+Head2=4097
+Head3=4096
+Head4=4098
+
+'Man Head 6
+[Head51]
+Head1=4103
+Head2=4101
+Head3=4100
+Head4=4102
+
+'Man Head 7
+[Head52]
+Head1=4107
+Head2=4105
+Head3=4104
+Head4=4106
+
+'Man Head 8
+[Head53]
+Head1=4111
+Head2=4109
+Head3=4108
+Head4=4110
+
+'Man Head 9
+[Head54]
+Head1=4115
+Head2=4113
+Head3=4112
+Head4=4114
+
+'Man Head 10
+[Head55]
+Head1=4119
+Head2=4117
+Head3=4116
+Head4=4118
+
+'Woman Head 1
+[Head56]
+Head1=4123
+Head2=4121
+Head3=4120
+Head4=4122
+
+'Woman Head 2
+[Head57]
+Head1=4127
+Head2=4125
+Head3=4124
+Head4=4126
+
+'Woman Head 3
+[Head58]
+Head1=4131
+Head2=4129
+Head3=4128
+Head4=4130
+
+'Woman Head 4
+[Head59]
+Head1=4135
+Head2=4133
+Head3=4132
+Head4=4134
+
+'Woman Head 5
+[Head60]
+Head1=4139
+Head2=4137
+Head3=4136
+Head4=4138
+
+'Woman Head 6
+[Head61]
+Head1=4143
+Head2=4141
+Head3=4140
+Head4=4142
+
+'Woman Head 7
+[Head62]
+Head1=4147
+Head2=4145
+Head3=4144
+Head4=4146
+
+'Woman Head 8
+[Head63]
+Head1=4151
+Head2=4149
+Head3=4148
+Head4=4150
+
+'Woman Head 9
+[Head64]
+Head1=4155
+Head2=4153
+Head3=4152
+Head4=4154
+
+'Woman Head 10
+[Head65]
+Head1=4159
+Head2=4157
+Head3=4156
+Head4=4158
+
+'////DARK ELVES////
+
+'Man Head 1
+[Head66]
+Head1=4163
+Head2=4161
+Head3=4160
+Head4=4162
+
+'Man Head 2
+[Head67]
+Head1=4167
+Head2=4165
+Head3=4164
+Head4=4166
+
+'Man Head 3
+[Head68]
+Head1=4171
+Head2=4169
+Head3=4168
+Head4=4170
+
+'Man Head 4
+[Head69]
+Head1=4175
+Head2=4173
+Head3=4172
+Head4=4174
+
+'Man Head 5
+[Head70]
+Head1=4179
+Head2=4177
+Head3=4176
+Head4=4178
+
+'Man Head 6
+[Head71]
+Head1=4183
+Head2=4181
+Head3=4180
+Head4=4182
+
+'Man Head 7
+[Head72]
+Head1=4187
+Head2=4185
+Head3=4184
+Head4=4186
+
+'Man Head 8
+[Head73]
+Head1=4191
+Head2=4189
+Head3=4188
+Head4=4190
+
+'Man Head 9
+[Head74]
+Head1=4195
+Head2=4193
+Head3=4192
+Head4=4194
+
+'Woman Head 1
+[Head75]
+Head1=4199
+Head2=4197
+Head3=4196
+Head4=4198
+
+'Woman Head 2
+[Head76]
+Head1=4203
+Head2=4201
+Head3=4200
+Head4=4202
+
+'Woman Head 3
+[Head77]
+Head1=4207
+Head2=4205
+Head3=4204
+Head4=4206
+
+'Woman Head 4
+[Head78]
+Head1=4211
+Head2=4209
+Head3=4208
+Head4=4210
+
+'Woman Head 5
+[Head79]
+Head1=4215
+Head2=4213
+Head3=4212
+Head4=4214
+
+'Woman Head 6
+[Head80]
+Head1=4219
+Head2=4217
+Head3=4216
+Head4=4218
+
+'Woman Head 7
+[Head81]
+Head1=4223
+Head2=4221
+Head3=4220
+Head4=4222
+
+'Woman Head 8
+[Head82]
+Head1=4227
+Head2=4225
+Head3=4224
+Head4=4226
+
+'Woman Head 9
+[Head83]
+Head1=4231
+Head2=4229
+Head3=4228
+Head4=4230
+
+'Woman Head 10
+[Head84]
+Head1=4235
+Head2=4233
+Head3=4232
+Head4=4234
+
+'****************************
+'*******Diverse Heads********
+'****************************
+
+'Wolfhead
+[Head3]
+Head1=2908
+Head2=2909
+Head3=2910
+Head4=2911
+
+'Snakemanhead
+[Head4]
+Head1=2912
+Head2=2913
+Head3=2914
+Head4=2915
+
+'Ghost head
+[Head5]
+Head1=2919
+Head2=2917
+Head3=2916
+Head4=2918
+
+'NO HEAD
+[Head2]
+Head1=2907
+Head2=2905
+Head3=2904
+Head4=2906
+'END NO HEAD
+

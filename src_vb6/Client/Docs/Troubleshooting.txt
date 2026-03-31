@@ -1,0 +1,111 @@
+
+Troubleshooting Guide
+Written By Erling Ellingsen
+
+
+
+The staff at Fantasia Studios will at any time answer your questions. We will, as good 
+as we can, answer all mails and help you out of any gameplay or techical problems you
+may be in when running Era Online. This Troubleshooting Guide is written to help you if 
+you got any problems running the game. Please read this guide before mailing us and try
+finding your problem here. You may find the answer yo tour problem in this guide and it
+may not be neccesary to mail us. Please, spare our and your own time, by reading this guide.
+If you still have problems, then mail us and we will help you out.
+
+
+It sais ***.DLL (or OCX) isnt registered (or its missing) !
+-------------------------------------------------------------------
+
+Read the PROBLEMS.TXT that follows.
+
+
+The screen turns black when i run the game.
+-------------------------------------------------------------------
+Type /GFX and the graphics should be displayed. If you still get the
+problem then do this:
+
+Make sure you have your video mode at 800x600 and in 16 bit color.
+Another thing you got to make sure, is that you have directx 6.0 or higher installed.
+If you dont, please install it and run the game again. Make sure you have the 
+Directx6.TLB file in your windows\system directory.
+
+
+The game runs very slow.
+-------------------------------------------------------------------
+First of all make sure you run in 800x600 Resolution and 16-BIT color !
+This will make the game run much better. Make sure Direcx 6.0 or higher is 
+installed. Close all applications when running the game.
+Do not run a audio in your cd-rom drive or listen to any music on your computer.
+MP3 really slows it down !
+
+When logging in. I get "Subscipt Out Of Range".
+-------------------------------------------------------------------
+This is usually caused when you are not properly connected to the internet.
+Check your connection.
+
+The game lags.
+-------------------------------------------------------------------
+First of all make sure you run in 800x600 Resolution and 16-BIT color !
+Make sure you have directx 6.0 or higher installed and your video mode is 800x600 and
+16 bit color. Also, make sure you have a connection speed on over 20.000. 
+Connections under this may cause the game to lag for you. Make sure all applications
+is exited before running the game.
+
+I cant hear any sounds or music.
+-------------------------------------------------------------------
+Make sure directx 6.0 or higher is installed and that your sound card is working.
+If you have directx 6.0 or higher installed and you still hear any music or sound,
+then try playing a wav and midi file in windows without running the game. If you
+dont hear anything then either, make sure your sound card is working. 
+
+The game wont start ! When i double click the EXE file nothing happens.
+-------------------------------------------------------------------
+If you have a very slow machine, the game may load slow. Please wait and see
+what happens. If nothing happen within 2 minutes, please mail Spotlight Studios 
+Tech Support. Make sure your machine meets the requierments of Era Online.
+
+When double clicking the EXE file i get subscipt out of range error !
+-------------------------------------------------------------------
+Make sure all Era Online files are NOT write protected. Please re-install Era
+Online and then it should work. Make sure all of your Era Online files are installed.
+Also make sure you have Directx 6.0 or higher installed.
+
+When im logging into a character i have made before. It sais it not exist !
+-------------------------------------------------------------------
+Make sure your password and character name is correct. Remember, capital letters
+and normal letters count ! "be55HHjbO" will not be recogized if you type "be55hhjbo".
+This also goes to the character name. If everything is correct, make sure there hasnt
+been a character wipe. All players should recive a message about this if this happen.
+Also, Spotlight Studios will delete characters with invalid e-mail adresses. So when you 
+make your charater, make sure the E-Mail address you send along with it, is valid.
+If Spotlight Studios delete characters, the player(s) will be notified about it.
+
+I get the message "Server is down or unreachable"
+-------------------------------------------------------------------
+Sometimes we take our server down for updates or maintenance. Check our web site,
+and see when the downtimes are scheduled. If there is no downtime annouced there,
+then make sure you are connected to the internet properly. If everything is working
+and you are connected to the internet, make sure you have selected a valid Era Online
+server. If its still not possible to connect, please wait and try later.
+
+I get weird messages when starting the game.
+-------------------------------------------------------------------
+Try putting all OCX, TLB and DLL files which you find in your Era Online directory, into your
+Windows\System drectory. Now it should work. Also, make sure you have Directx 6.0 or higher 
+installed.
+
+-------------------------------------------------------------------------------------------------
+Still need help ?
+
+You can at any time mail the Fantasia Studios support. We will answer all our mails within 
+48 hours, most likely less. If you dont seem to get a reply, please check our website and 
+check if the Support is up. If it is and you dont get any reply, then mail
+us again. 
+
+Visit our site at WWW.ERAONLINE.NET and click the CONTACT US button.
+
+We will do everything in our powers to help you sort out the problems you are encountering. 
+Remember, your problems are our problems and we want it to work out !
+
+-------------------------------------------------------------------------------------------------
+

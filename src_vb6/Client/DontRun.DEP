@@ -1,0 +1,62 @@
+[Version]
+Version=1.2.0.0
+
+[DontRun.exe <0009>]
+Dest=$(AppPath)
+Date=09.04.00
+Time=12:52
+Version=1.2.0.0
+CABFilename=Era.CAB
+CABINFFile=Era.INF
+Uses1=MSVBVM60.DLL
+Uses2=OLEAUT32.DLL
+Uses3=OLEPRO32.DLL
+Uses4=ASYCFILT.DLL
+Uses5=STDOLE2.TLB
+Uses6=COMCAT.DLL
+Uses7=DIRECTX6.TLB
+Uses8=win32.tlb
+Uses9=MSSTDFMT.DLL
+Uses10=ASCTRLS.OCX
+Uses11=msdxm.ocx
+Uses12=dx7vb.dll
+Uses13=CSWSK32.OCX
+Uses14=RICHTX32.OCX
+Uses15=MSINET.OCX
+Uses16=Mci32.ocx
+
+[DIRECTX6.TLB <0009>]
+Dest=$(WinSysPath)
+Date=30.12.98
+Time=18:01
+Version=0.0.0.0
+
+[win32.tlb <0009>]
+Dest=$(WinSysPath)
+Date=12.09.98
+Time=10:32
+Version=0.0.0.0
+
+[ASCTRLS.OCX <0009>]
+Dest=$(WinSysPath)
+Date=30.09.99
+Time=07:14
+Version=5.0.2614.3500
+
+[msdxm.ocx <0009>]
+Dest=$(WinSysPath)
+Date=09.08.99
+Time=15:49
+Version=6.4.5.809
+
+[dx7vb.dll <0009>]
+Dest=$(WinSysPath)
+Date=09.09.99
+Time=07:00
+Version=4.7.0.700
+
+[CSWSK32.OCX <0009>]
+Dest=$(WinSysPath)
+Date=03.04.98
+Time=11:57
+Version=2.15.0.2158

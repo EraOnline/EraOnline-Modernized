@@ -1,0 +1,9 @@
+[Map80]
+Name=
+MusicNum=24-1
+StartPos=80-10-10
+NorthExit=79
+SouthExit=81
+WestExit=50
+EastExit=1
+PKFREEZONE=1

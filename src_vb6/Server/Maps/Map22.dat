@@ -1,0 +1,9 @@
+[Map22]
+Name=
+MusicNum=23-1
+Guarded=0
+StartPos=22-10-10
+NorthExit=21
+SouthExit=52
+WestExit=23
+EastExit=53

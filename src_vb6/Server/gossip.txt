@@ -1,0 +1,62 @@
+[INIT]
+NumGOSSIPs=20
+
+[GOSSIP1]
+Gossip=Psst...i hear there are alot of bandits up in the Golems Pass...
+
+[GOSSIP2]
+Gossip=I have heard stories of aqua cyclops creatures roaming on the Bridge Of Bondage. The bridge between the continents you know.
+
+[GOSSIP3]
+Gossip=The royal army is short of soliders ! I think they will offer much gold for those who signup ! I think you can signup in Castlefall. Probably around the palace somewhere.
+
+[GOSSIP4]
+Gossip=I try not to spread any rumors...
+
+[GOSSIP5]
+Gossip=Not anything special...
+
+[GOSSIP6]
+Gossip=The day of death is near ! Someday everyone on Menath will die due to the evil peoples evil deeds. They will make us all suffers. Just as they want us to !
+ 
+[GOSSIP7]
+Gossip=Stay clear from cyclopses if your not travelling with other people ! 
+
+[GOSSIP8]
+Gossip=The moonlight over the shallow waters, can be a death for many suprised adventurers.
+
+[GOSSIP9]
+Gossip=The city of Valenfall on the elven continent, is a funny one indeed. Its a mix of Dark Elves and Wood Elves ! Talk about salt and pepper !
+
+[GOSSIP10]
+Gossip=When you find yourself in the position that you have died, and you are a ghost, take some time to enjoy it, if you know what i mean. Thats my opinion atleast.
+
+[GOSSIP11]
+Gossip=The border guards on the Wood Elf side have had alot of trouble lately. The rumors sais that there is a little hole on the wall between the Wood and Dark Elven lands, making it possible for people of both races to get into eachother lands within passing the guard posts !
+
+[GOSSIP12]
+Gossip=Valenfall oh Valenfall, why did it had to fall ?
+
+[GOSSIP13]
+Gossip=Did you know that Valenfall was the Wood Elven capitol before the great war with the Dark ones ? The Wood Elves partially lost the city to the Dark Elves and moved north, making a new city called Valen. Thats Valen today. Valenfall was originally named Valen before the war. Now the inhabitants of Valenfall are a mix of Wood Elves and Dark Elves ! A curse some say. So whats the story behind Castlefall then ? I wish i knew !
+
+[GOSSIP14]
+Gossip=Ones heart is never complete, and by that is the path to the truth out of reach.
+
+[GOSSIP15]
+Gossip=Ever heard of Smaug ? Smaug is the most feared creature in Menath ! He is a tremendous dragon living some where hidden. Rumors have it that he lives in a cave somewhere in the Wastelands. One never knows for sure though. It is said that he is guarding extreme wealths, and will guard it to his death. I sure would like to get my hands on that fortune ! Be wary however, cause death awaits the unaware.
+
+[GOSSIP16]
+Gossip=Everyone knows that dark elf guards will now kill any humans and wood elves they see. So for humans and wood elves, be careful when entring the Wastelands, home of the dark elves !
+
+[GOSSIP17]
+Gossip=I sense something strange...something which will impact Menath`s nature. Something magical...
+
+[GOSSIP18]
+Gossip=I have heard rumors about a dragon roaming the streets of Castlefall ! Can this be true ? A friendly dragon in a city ? 
+
+[GOSSIP19]
+Gossip=I sense bad things ! BAD THINGS I TELL YA ! BAD THINGS ! WE WILL ALL DIE I KNOW IT !
+
+[GOSSIP20]
+Gossip=Our Emperor long live ! Long live our Emperor ! I have heard the government of Menath is hiering new people to join the royal army ! The army leader goes by the name of "General Krumins" i think...

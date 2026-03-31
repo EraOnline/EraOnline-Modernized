@@ -1,0 +1,40 @@
+ERA ONLINE WORLD DESIGNER 1.9 !
+LIST OF CHANGES AND ADDITIONS -By Erling Ellingsen
+
+- Wood Elves & Dark Elves added
+
+- BUNCH of new graphics
+
+- Random tip displayed at startup
+
+- Major interface change
+
+- Layer 3 has been removed. It is now used as a rain layer which the game 
+  uses when it rains. Rain is placed automatically on the map.
+
+- VIEW RAIN LAYER possobility. Click this to view rain.
+
+- Now possible to place a GRH randomly on map. Select what GRH to place, and then
+  how many of the GRH to place on map. Then click PLACE RANDOM GRH and the GRH`S
+  will be placed randomly around the map.
+
+- You can now place NPC`s around on the map randomly. Select what NPC to place randomly,
+  then click PLACE NPC RANDOMLY. For each time you click it, one more NPC of selected
+  kind will be placed somewhere on the map.
+
+- You can now block GRH`s on the map quite simple ! Just type in what GRH to block, and
+  then select to block all GRH`S of that kind on maps. Great for trees and other obstacles
+  which you forgot to place blocked on.
+
+- Two different brush sizes ! Small and big ! Small paints only one tile, big paints
+  a even bigger area !
+
+- 4 different scroll speeds ! Normal, Medium, Fast & Ultra Fast ! Please note that
+  your character may seem to be jumpy when switching to speeds over MEDIUM. You may
+  not notice the differece between Fast and Ultra Fast. That depends on your machine.
+  
+- More possibilities when clearing map ! You can now clear the different borders 
+  as you want in the OPTIONS menu. Just choose what GRH to clear with and then
+  clear whatever you want ! Great for coastlines and such.
+
+- Erasing layers now works fine.

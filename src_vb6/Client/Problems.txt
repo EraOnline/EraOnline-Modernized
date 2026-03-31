@@ -1,0 +1,22 @@
+SYSTEM FILES PROBLEMS
+
+If you ever get any errors which say a file isnt registered, a file
+is out of date or a file is missing, please do this:
+
+#1. Find the file in your WINDOWS\SYSTEM directory and delete it.
+    If the system sais that it cannot be deleted, go out in DOS
+    and delete it there. If the file was not there, skip #1.
+
+#2. Place the file with the same name FROM the Era Online directory 
+    into the WINDOWS\SYSTEM directory.
+
+#3. Select RUN on your windows START menu and type in:
+    REGSVR32 and then the name of the file. For example:
+    REGSVR32 Oleaut32.dll
+
+#4. Restart machine.
+
+The problem should now be fixed. If the system tells you another file
+isnt registered or is out of date, do the same with that file until 
+the problems goes away
+

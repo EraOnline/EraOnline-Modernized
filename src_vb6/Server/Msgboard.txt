@@ -1,0 +1,8 @@
+[INIT]
+NumPOSTs=1
+
+[POST1]
+Subject=Welcome to the messageboard ! Information enclosed.
+Post=Welcome to the messageboard feature in Era Online.  Post as you want but please remember do never use any commas when you type your posts cause that will cut the post right there. And also remember to stick to the code of conduct. Misbehaviour on the boards may cause to ban.
+Author=Era Online Development Team
+Date=0

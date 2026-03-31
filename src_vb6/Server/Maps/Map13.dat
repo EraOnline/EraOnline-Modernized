@@ -1,0 +1,9 @@
+[Map13]
+Name=
+MusicNum=3
+Guarded=1
+StartPos=13-10-10
+NorthExit=70
+SouthExit=120
+WestExit=12
+EastExit=14

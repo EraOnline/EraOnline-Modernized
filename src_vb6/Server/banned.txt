@@ -1,0 +1,6 @@
+[INIT]
+NumBANs=1
+
+[ID1]
+Password=0
+Date=12.01.00

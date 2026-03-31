@@ -1,0 +1,86 @@
+[INIT]
+NumWeaponAnims=12
+
+'Golden Sword
+[WeaponAnim1]
+WeaponWalk1=7001
+WeaponWalk2=7003
+WeaponWalk3=7000
+WeaponWalk4=7002
+
+'No Weapon
+[WeaponAnim2]
+WeaponWalk1=7009
+WeaponWalk2=7011
+WeaponWalk3=7008
+WeaponWalk4=7010
+
+'Normal Small Axe
+[WeaponAnim3]
+WeaponWalk1=7013
+WeaponWalk2=7015
+WeaponWalk3=7012
+WeaponWalk4=7014
+
+'Fishing Rod
+[WeaponAnim4]
+WeaponWalk1=7021
+WeaponWalk2=7023
+WeaponWalk3=7020
+WeaponWalk4=7022
+
+'Normal Iron Sword
+[WeaponAnim5]
+WeaponWalk1=7033
+WeaponWalk2=7035
+WeaponWalk3=7032
+WeaponWalk4=7034
+
+'Staff
+[WeaponAnim6]
+WeaponWalk1=7037
+WeaponWalk2=7039
+WeaponWalk3=7036
+WeaponWalk4=7038
+
+'Devil Sword
+[WeaponAnim7]
+WeaponWalk1=7041
+WeaponWalk2=7043
+WeaponWalk3=7040
+WeaponWalk4=7042
+
+'Ebony Sword
+[WeaponAnim8]
+WeaponWalk1=7045
+WeaponWalk2=7047
+WeaponWalk3=7044
+WeaponWalk4=7046
+
+'Fancy Paladin Sword
+[WeaponAnim9]
+WeaponWalk1=7053
+WeaponWalk2=7055
+WeaponWalk3=7052
+WeaponWalk4=7054
+
+'Fancy Staff
+[WeaponAnim10]
+WeaponWalk1=7057
+WeaponWalk2=7059
+WeaponWalk3=7056
+WeaponWalk4=7058
+
+'Warrior Sword 2
+[WeaponAnim11]
+WeaponWalk1=7061
+WeaponWalk2=7063
+WeaponWalk3=7060
+WeaponWalk4=7062
+
+'Saber/Knife
+[WeaponAnim12]
+WeaponWalk1=7065
+WeaponWalk2=7067
+WeaponWalk3=7064
+WeaponWalk4=7066

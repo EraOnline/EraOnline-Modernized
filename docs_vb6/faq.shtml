@@ -1,0 +1,1362 @@
+<html>
+
+<head>
+
+
+<script type="text/javascript" src="/static/js/analytics.js"></script>
+<script type="text/javascript">archive_analytics.values.server_name="wwwb-app14.us.archive.org";archive_analytics.values.server_ms=109;</script>
+<link type="text/css" rel="stylesheet" href="/static/css/banner-styles.css"/>
+
+
+<title>Fantasia Studios' Era Online</title>
+<style>
+A:link {color: #666699; text-decoration: underline; cursor: crosshair}
+A:visited {color: #666699; text-decoration: underline; cursor: crosshair}
+A:active {color: RED; text-decoration: none; cursor: crosshair}
+A:hover {color: RED; text-decoration: none; cursor: crosshair}
+</style>
+</head>
+
+<body text="#000000" topmargin="0" leftmargin="0" rightmargin="0" link="#666699" alink="#FF0000" vlink="#666699" bgcolor="#003369">
+
+
+<!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<script type="text/javascript" src="/static/js/disclaim-element.js" ></script>
+<script type="text/javascript" src="/static/js/graph-calc.js" ></script>
+<script type="text/javascript" src="/static/jflot/jquery.min.js" ></script>
+<script type="text/javascript">//<![CDATA[
+var __wm = (function(){
+var wbPrefix = "/web/";
+var wbCurrentUrl = "http://www.erlingellingsen.com/era/documents/faq.shtml";
+
+var firstYear = 1996;
+var imgWidth = 500,imgHeight = 27;
+var yearImgWidth = 25,monthImgWidth = 2;
+var displayDay = "13";
+var displayMonth = "Oct";
+var displayYear = "2007";
+var prettyMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var $D=document,$=function(n){return document.getElementById(n)};
+var trackerVal,curYear = -1,curMonth = -1;
+var yearTracker,monthTracker;
+function showTrackers(val) {
+  if (val===trackerVal) return;
+  var $ipp=$("wm-ipp");
+  var $y=$("displayYearEl"),$m=$("displayMonthEl"),$d=$("displayDayEl");
+  if (val) {
+    $ipp.className="hi";
+  } else {
+    $ipp.className="";
+    $y.innerHTML=displayYear;$m.innerHTML=displayMonth;$d.innerHTML=displayDay;
+  }
+  yearTracker.style.display=val?"inline":"none";
+  monthTracker.style.display=val?"inline":"none";
+  trackerVal = val;
+}
+function getElementX2(obj) {
+  var $e=jQuery(obj);
+  return (typeof $e=="undefined"||typeof $e.offset=="undefined")?
+    getElementX(obj):Math.round($e.offset().left);
+}
+function trackMouseMove(event,element) {
+  var eventX = getEventX(event);
+  var elementX = getElementX2(element);
+  var xOff = Math.min(Math.max(0, eventX - elementX),imgWidth);
+  var monthOff = xOff % yearImgWidth;
+
+  var year = Math.floor(xOff / yearImgWidth);
+  var monthOfYear = Math.min(11,Math.floor(monthOff / monthImgWidth));
+  // 1 extra border pixel at the left edge of the year:
+  var month = (year * 12) + monthOfYear;
+  var day = monthOff % 2==1?15:1;
+  var dateString = zeroPad(year + firstYear) + zeroPad(monthOfYear+1,2) +
+    zeroPad(day,2) + "000000";
+
+  $("displayYearEl").innerHTML=year+firstYear;
+  $("displayMonthEl").innerHTML=prettyMonths[monthOfYear];
+  // looks too jarring when it changes..
+  //$("displayDayEl").innerHTML=zeroPad(day,2);
+  var url = wbPrefix + dateString + '/' +  wbCurrentUrl;
+  $("wm-graph-anchor").href=url;
+
+  if(curYear != year) {
+    var yrOff = year * yearImgWidth;
+    yearTracker.style.left = yrOff + "px";
+    curYear = year;
+  }
+  if(curMonth != month) {
+    var mtOff = year + (month * monthImgWidth) + 1;
+    monthTracker.style.left = mtOff + "px";
+    curMonth = month;
+  }
+}
+function hideToolbar() {
+  $("wm-ipp").style.display="none";
+}
+function bootstrap() {
+  var $spk=$("wm-ipp-sparkline");
+  yearTracker=$D.createElement('div');
+  yearTracker.className='yt';
+  with(yearTracker.style){
+    display='none';width=yearImgWidth+"px";height=imgHeight+"px";
+  }
+  monthTracker=$D.createElement('div');
+  monthTracker.className='mt';
+  with(monthTracker.style){
+    display='none';width=monthImgWidth+"px";height=imgHeight+"px";
+  }
+  $spk.appendChild(yearTracker);
+  $spk.appendChild(monthTracker);
+
+  var $ipp=$("wm-ipp");
+  $ipp&&disclaimElement($ipp);
+}
+return{st:showTrackers,mv:trackMouseMove,h:hideToolbar,bt:bootstrap};
+})();//]]>
+</script>
+<style type="text/css">
+body {
+  margin-top:0 !important;
+  padding-top:0 !important;
+  min-width:800px !important;
+}
+</style>
+<div id="wm-ipp" lang="en" style="display:none;">
+
+<div style="position:fixed;left:0;top:0;width:100%!important">
+<div id="wm-ipp-inside">
+   <table style="width:100%;"><tbody><tr>
+   <td id="wm-logo">
+       <a href="/web/" title="Wayback Machine home page"><img src="/static/images/toolbar/wayback-toolbar-logo.png" alt="Wayback Machine" width="110" height="39" border="0" /></a>
+   </td>
+   <td class="c">
+       <table style="margin:0 auto;"><tbody><tr>
+       <td class="u" colspan="2">
+       <form target="_top" method="get" action="/web/form-submit.jsp" name="wmtb" id="wmtb"><input type="text" name="url" id="wmtbURL" value="http://www.erlingellingsen.com/era/documents/faq.shtml" style="width:400px;" onfocus="this.focus();this.select();" /><input type="hidden" name="type" value="replay" /><input type="hidden" name="date" value="20071013182610" /><input type="submit" value="Go" /><span id="wm_tb_options" style="display:block;"></span></form>
+       </td>
+       <td class="n" rowspan="2">
+           <table><tbody>
+           <!-- NEXT/PREV MONTH NAV AND MONTH INDICATOR -->
+           <tr class="m">
+           	<td class="b" nowrap="nowrap">
+		
+		    Sep
+		
+		</td>
+		<td class="c" id="displayMonthEl" title="You are here: 18:26:10 Oct 13, 2007">OCT</td>
+		<td class="f" nowrap="nowrap">
+		
+		    Nov
+		
+                </td>
+	    </tr>
+           <!-- NEXT/PREV CAPTURE NAV AND DAY OF MONTH INDICATOR -->
+           <tr class="d">
+               <td class="b" nowrap="nowrap">
+               
+                       <img src="/static/images/toolbar/wm_tb_prv_off.png" alt="Previous capture" width="14" height="16" border="0" />
+               
+               </td>
+               <td class="c" id="displayDayEl" style="width:34px;font-size:24px;" title="You are here: 18:26:10 Oct 13, 2007">13</td>
+	       <td class="f" nowrap="nowrap">
+               
+                   <img src="/static/images/toolbar/wm_tb_nxt_off.png" alt="Next capture" width="14" height="16" border="0"/>
+               
+	       </td>
+           </tr>
+           <!-- NEXT/PREV YEAR NAV AND YEAR INDICATOR -->
+           <tr class="y">
+	       <td class="b" nowrap="nowrap">
+               
+                   2006
+               
+               </td>
+               <td class="c" id="displayYearEl" title="You are here: 18:26:10 Oct 13, 2007">2007</td>
+	       <td class="f" nowrap="nowrap">
+               
+                   2008
+               
+	       </td>
+           </tr>
+           </tbody></table>
+       </td>
+       </tr>
+       <tr>
+       <td class="s">
+           <a class="t" href="/web/20071013182610*/http://www.erlingellingsen.com/era/documents/faq.shtml" title="See a list of every capture for this URL">1 captures</a>
+           <div class="r" title="Timespan for captures of this URL">13 Oct 07 - 13 Oct 07</div>
+       </td>
+       <td class="k">
+       <a href="" id="wm-graph-anchor">
+       <div id="wm-ipp-sparkline" title="Explore captures for this URL">
+	 <img id="sparklineImgId" alt="sparklines"
+		 onmouseover="__wm.st(1)" onmouseout="__wm.st(0)"
+		 onmousemove="__wm.mv(event,this)"
+		 width="500"
+		 height="27"
+		 border="0"
+		 src="/web/jsp/graph.jsp?graphdata=500_27_1996:-1:000000000000_1997:-1:000000000000_1998:-1:000000000000_1999:-1:000000000000_2000:-1:000000000000_2001:-1:000000000000_2002:-1:000000000000_2003:-1:000000000000_2004:-1:000000000000_2005:-1:000000000000_2006:-1:000000000000_2007:9:000000000100_2008:-1:000000000000_2009:-1:000000000000_2010:-1:000000000000_2011:-1:000000000000_2012:-1:000000000000_2013:-1:000000000000_2014:-1:000000000000_2015:-1:000000000000" />
+       </div>
+       </a>
+       </td>
+       </tr></tbody></table>
+   </td>
+   <td class="r">
+       <a href="#close" onclick="__wm.h();return false;" style="background-image:url(/static/images/toolbar/wm_tb_close.png);top:5px;" title="Close the toolbar">Close</a>
+       <a href="http://faq.web.archive.org/" style="background-image:url(/static/images/toolbar/wm_tb_help.png);bottom:5px;" title="Get some help using the Wayback Machine">Help</a>
+   </td>
+   </tr></tbody></table>
+</div>
+</div>
+</div>
+<script type="text/javascript">__wm.bt();</script>
+<!-- END WAYBACK TOOLBAR INSERT -->
+
+<div align="center">
+  <center>
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td>[an error occurred while processing this directive]
+      </td>
+    </tr>
+  </center>
+  <tr>
+    <td>
+
+
+    &nbsp;
+    <p align="center"><font size="1" face="Verdana" color="#FFFFFF"><b>Era
+    Online FAQ (Frequently Asked Questions)</b></font></p>
+    <p align="center"><i><font size="1" face="Verdana" color="#FFFFFF">By Erling
+    Ellingsen</font></i></p>
+    <p align="center">&nbsp;</p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: When is Era Online going
+    to be released as&nbsp; full version ?<br>
+    A: Sometime in August/September 2000.</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How much will EO cost?<br>
+    A: Nothing ! It will be free to both play and download!</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Why is Era Online free
+    to play?<br>
+    A: Era Online is free to play because the server we will be using if offered
+    to us for free, and also because all the members of the development team do
+    this out of interest and the joy of creating and seeing other people enjoy
+    their work. So Era Online will cost absolutely nothing to play or download!</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: What kind of game is Era
+    Online ?<br>
+    A: Era Online is a pure RPG that runs online. It has many of the traditional
+    RPG elements but also new ones. Era Online is as the name says, a online
+    game. Thousands of players can log into the same world and play with each
+    other in a huge fantastic world with beautiful graphics. The world is mainly
+    inhabitant by real people all over the world but you can also find NPC`s and
+    also many kinds of monsters and animals. Era Online is a medieval fantasy
+    game where almost everything can come true.</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How is the community in
+    Era Online?<br>
+    A: Era Online's community is great. The game world called Menath, is
+    inhabitant by REAL people. There is a emperor and a high council. The world
+    is driven by supply and demand and also has a great reputation system.
+    Players can chat with each other, fight with each other, explore with each
+    other and marry each other ! Players can visit concert places where player
+    bards can perform and they can participate in many of the quests,
+    competitions and festivals real players and Game Masters put together. Also
+    there is a real newspaper in the game and the whole world is so dynamic!
+    Everything can happen ! Everything WILL happen !</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can you tell me more
+    about the world in Era Online?<br>
+    A: The world in EO (Era Online) is called Menath. It has a very rich history
+    and background and the world is stunning graphically and atmospherically.
+    There are 10 villages, 10 dungeons and 7 huge cities. In between all this
+    you can find vast deserts, great dark forests, seas, mountains, snowy areas
+    and also jungle ! Also around the world there is monsters and animals of all
+    kinds scattered around. You can find castles, farms, temples, graveyards and
+    everything else which you would find in a medieval fantasy world. The world
+    itself is absolutely huge ! It covers thousands of screens. The world is
+    built up in zones. One zone can host a entire city ! And there is about 200
+    zones in Menath ! Also, the world is full of royalty and beggars, warriors
+    and tailors and everything else ! Its really a living breathing world !</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Does all places in
+    Menath look the same ?<br>
+    A: Absolutely no ! All towns and villages look different and each have their
+    own special form of architecture. Each city and part of the world has their
+    special house types. So traveling is very interesting since the world is
+    very very unique and never seem to look the same.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: What classes and races
+    can you find in EO ?<br>
+    A: There are totally 20 classes/occupations in EO at this time. This range
+    from baker to assassin and wizard to blacksmith. You can find a entire list
+    over all classes/occupations in the WHAT IS ERA ONLINE section on our site.
+    There is currently 5 races in EO. And of them there is 4 playable ones. The
+    playable ones is Dark Elves, Wood Elves, Humans and Haakis. The currently
+    unplayable one is the Dwarven race. However this may change. Also, we will
+    implement new classes/occupations and races after the release.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is there quests in Era
+    Online ?<br>
+    A: Absolutely ! You can find minor unimportant quests like bringing
+    something to one NPC to another and bigger quests alike slaying a dragon or
+    slaying a evil necromancer that has been a pain for years. Its the EO
+    community !</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can you interact with
+    NPCs ?<br>
+    A: Yes you can. You can ask them if they want to trade, you can give them
+    things, you can ask them about quests and gossip and also much more. You can
+    also fight them.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can you find all NPCs ?<br>
+    A: No you cant. Not all NPC`s is killable, but most of them are.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is there a plot ?<br>
+    A: No. The players is simply presented with a rich history and background
+    and from there anything can happen. Players can do whatever they want and
+    nothing will stop them. Its a ongoing world which will be online 24 hours a
+    day, 7 days a week.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: What is the minimum
+    requirements ?<br>
+    A: Those have changed a bit since the beginning. The current requirements
+    are something like these (may change):</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Pentium 233 32 RAM DirectX
+    6.0 50 MB hard drive space Sound Card (Optional) Keyboard Mouse Windows 95
+    or 98 or higher Internet Connection</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: 50 MB hard drive space ?
+    Must players download 50 MB ?<br>
+    A: Absolutely not ! You download a compressed version ala 17 MB.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will there be multiple
+    servers ?<br>
+    A: We will start with one server at the beginning but if we need more, we
+    will put up more !</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How many players can one
+    server support ?<br>
+    A: Probably up to 1000 players or more. This will be tested in the Alpha.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: What RPG elements is
+    found in EO ?<br>
+    A: Most of the traditional RPG elements is to be found. There are classic
+    races, classes, weapons, spells, magic system and the general atmosphere of
+    the game.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: What kind of monsters
+    can i encounter in EO ?<br>
+    A: You can encounter monsters like orcs, fanatic necromancers, evil angels,
+    giant snakes, skeleton warriors, zombies, ogres, spiders and a whole lot
+    more. And we will be adding new monsters very often.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How does combat system
+    work ?<br>
+    A: As in most RPG`s. Very simple. You walk up to your pray (if not your pray
+    hunt down) and you begin slashing away. You will use the weapon equipped in
+    your hand and you will start fighting. There are also combat skills like
+    tactics, parrying and swordmanship that comes into play when fighting.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How many NPC types is
+    there in EO ?<br>
+    A: There are at this time about 70 different NPC types of each race.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How does the guards in
+    EO work ?<br>
+    A: Very realistic ! They will patrol the streets and when someone does
+    something illegal, then they will start running at them and hunt them down.
+    There are no instant kill guards in EO. You may run away from them or even
+    manage to kill them. However, guards may team up on you just as monsters do.
+    However, friends can help you and stand in their way so the guards will have
+    to run around them and so on. Very realistic.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How is player-killing
+    handled in EO ?<br>
+    A: At first we was thinking of implementing a PK switch as in EverQuest but
+    we decided not to because many players was against it. However, we found
+    that players want free PK kill, so thats how it is. Kill anyone you want.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How will the leveling
+    system work ?<br>
+    A: When you have killed many monsters and gained experience or gained
+    experience in another way, you will eventually level up. However, there are
+    no track of levels in EO. You simply gain experience, and are boosted up.
+    There isnt any official leveling. This is to keep the RP feeling intact. I
+    hate it when people run around, &quot;Oh only 4k to next lvl!&quot;</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: What about skills ? What
+    skills are there ? How do i get better in them ?<br>
+    A: There are about 30 different skills at this time and you can find a
+    complete list at our website under the WHAT IS ERA ONLINE section. You get
+    better in them when you use them and also when you train in them. However,
+    you cannot pay a NPC and then they'll train you. No no. You gain Training
+    Points when leveling up. You gain about 5 points by each level. Then you can
+    go to a NPC trainer and use those Training Points in any of the skills.
+    There are at this time no training dolls either so players can hack and
+    slash on a doll forever and expect to be a super player by some hours.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Are there spells in EO ?<br>
+    A: Of course !</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How many spells exactly
+    ?<br>
+    A: Many !</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How does the spell
+    system work ? Mana ?<br>
+    A: If you play a character which is computable with spells you will begin
+    with a few spells and you may buy or learn new ones by time. Whenever you
+    cast a spell you will uses mana or magic as many calls it, and spells
+    require a certain amount of mana.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Are there any player
+    guilds and in game guilds ?<br>
+    A: Only player driven for now. Players can start their own clans, and the
+    monarch of the clan can declare war on other clans and alliances with other
+    clans. If your in a clan and you gain experience, some of the experience
+    goes to the clan, and regularily the experience is distributed to the clan
+    members. *Clan System Not In Until FULL VERSION*</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How will you support
+    them ?<br>
+    A: Well, if they want a guild hall they will have to buy a guild hall then
+    they may put it up. We will help them establish and introduce them to the
+    guild making system.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can you tell us more
+    about monster AI ?<br>
+    A: The monsters act differently. Some ignores other player while others
+    smell players from long distances and hunts them down. Also monsters may
+    team up on you.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: What about loot ? Can
+    everybody loot your monster ?<br>
+    A: If there is loot on the corpse, its placed around the corpse. So be quick
+    to pick.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can players create
+    parties ?<br>
+    A: There isnt a ingame system for this yet.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can player buy houses ?
+    How will this work ?<br>
+    A: Players can go to a architect and buy a house deed. When he has found a
+    good place to build the house he puts it there and then he may furnish the
+    house. Players can either make or buy furniture of all kinds.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can player create town ?<br>
+    A: In a way yes. If many players has made lots of houses in one area then
+    Fantasia Studios may declare it a new village or town.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: What will follow with
+    the downloadable game ? Graphics ?<br>
+    A: The player will download the client, graphics, music, sound and a part of
+    the game world. The part of the game world that is on the client cannot be
+    changed.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can i alter the graphics
+    to make my own style game ?<br>
+    A: Absolutely not. Though its possible to change the graphics, it would
+    screw up the game and non of the other players would be able to see the
+    graphics you changed. Also, we will not tolerate people hacking, cheating or
+    altering EO.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Are there game
+    supervisors ? And what do they do ?<br>
+    A: Yes, there are many GMs (Game Masters). They will supervise the game at
+    all times and report and strike down on people breaking the code of conduct.
+    Also, GMs will be there to help and guide players.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: What is Code Of Conduct
+    ?<br>
+    A: A set of rules we must make to control what is legal in the game (Out of
+    character). Code Of Conduct says for example that you may not harass any
+    player or talk sexually explicit language.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: What will happen to
+    people breaking the code of conduct ?<br>
+    A: Their character will most likely be deleted. We do this to protect the
+    real players and make the un-serious players behave. We make these rules
+    purely to help players. Its for the players own good.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How will GM`s be able to
+    spot people that breaks the code of conduct ?<br>
+    A: Other players can report it and many of the things happening in EO will
+    be logged. So GM`s will very easily catch the bad guys :)</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Does Code Of Conduct
+    have anything to do with in game stuff like player killing ?<br>
+    A: No absolutely not ! Just out of character things like harassment and
+    creation of anti-philosophic groups, racism and so on.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will players have to
+    role-play ?<br>
+    A: We encourage role-playing of course. However, that's up to the player.
+    But players may not stand in the middle of the street advertising for real
+    life stuff or try selling pirate cds or stuff like that. This is not
+    tolerated.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How can players interact
+    with the world ?<br>
+    A: They can do very much with the world. They can pick up things, build
+    things, make things, fish, chop down trees and much more.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How does player interact
+    with each other ?<br>
+    A: They can speak, shout, whisper, emote and so on. They can fight with each
+    other, trade with each other and much more.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: What transportation will
+    there be ?<br>
+    A: The traditional by foot method feet, water going ships, magic
+    teleportation spells and more.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is combat turn based ?<br>
+    A: No, its real time.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How is the economy in
+    the game ?<br>
+    A: The economy will shift due to demand and supply in full version.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is there any important
+    NPC`s like kings and such ?<br>
+    A: As said there are many NPC`s. The ordinary ones which knows or can
+    nothing special is always named something like &quot;a blacksmith&quot; or
+    &quot;a beggar&quot;. Important NPC`s which you can talk to or have a
+    important role in the world and which are unique is named real names like
+    &quot;Kain Benwick&quot;, &quot;Odin Woodfield&quot; and so on.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will there be night and
+    day in EO ?<br>
+    A: Not yet.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will you take damage to
+    the different elements ? Like snow and such.<br>
+    A: Yes. If you dont got warm clothing, and it rains or snow, get in house
+    immidiatly or you will eventually die of cold.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How can i control my
+    character ?<br>
+    A: Mouse and keyboard.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is there gods and
+    goddesses in Menath ?<br>
+    A: Yes there are currently 5 different deities. There will have a important
+    role in the game and they have temples and people can pray to them.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can players swim ?<br>
+    A: No.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is there a
+    notoriety/reputation system in EO ?<br>
+    A: Yes absolutely. Whenever a player has done bad deeds he may get a
+    notoriety such as &quot;Eric The Dreaded&quot; or &quot;Eric The
+    Hated&quot;. If he had done good deeds he may get a notoriety such as
+    &quot;Eric The Respected&quot; or &quot;Eric The Beloved&quot;. There are
+    several reputation ranks.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will Fantasia Studios
+    host any events in the game world ?<br>
+    A: Absolutely ! That is something we look most forward to ! All Fantasia
+    Studios staff will role-play in Era Online and we will very often host many
+    events like contests, festivals, talent competitions and much more !</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will Fantasia Studios
+    host any wars in Menath ?<br>
+    A: Yes absolutely ! Sometimes unexpected and sometimes with a warning. The
+    emperor will be role-played by a real Fantasia Studios staff member and he
+    will interact with the world and behave as a real emperor. The world will be
+    dynamic and evolving. Alignments will change. Groups and guilds will rage
+    wars, and Fantasia Studios will also host wars such as a army of orcs
+    attacking a city, and we will create a story around it.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will there be weather ?<br>
+    A: Yes there are rain and snow.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will there be a bounty
+    system ?<br>
+    A: Players will be able to put bounties on other players and people will be
+    able to kill those players and get payed for it.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Are there male and
+    female characters ?<br>
+    A: Yes both.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: What is the difference
+    between these ? Ability differences ?<br>
+    A: No. Just appearance.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will players be able to
+    put a description/biography on themselves which others people can see by
+    clicking on them ?<br>
+    A: Yes they can.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Do players have to eat
+    or drink ?<br>
+    A: Yes both. For now you can't starve to death, you just need food and drink
+    to heal but this may change.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can players drink
+    alcohol ? And what will happen ?<br>
+    A: Players can drink alcohol and the character will react to it in many
+    ways. Intelligence may drop and such.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Does different races
+    begin in different towns ?<br>
+    A: Yes they do.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Does a player start with
+    all skills ? Will any class and race be able to have all skills ?<br>
+    A: Yes they can have all skills and they start with all skills. However,
+    most will begin with 0 in most skills and just a few ones with a little
+    more. Like a mage will maybe start with 12 in magery and 0 in musicianship
+    and so on. Also, in FULL VERSION some skills may not be learned by some
+    classes.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: What kind of shops and
+    buildings are there in EO ?<br>
+    A: There are extremely many different shops and other buildings. Here is a
+    small list. There is many more than these:</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Armory<br>
+    Alchemist<br>
+    Blacksmith<br>
+    Butcher<br>
+    Provision Store<br>
+    Inn<br>
+    Tavern<br>
+    Tailor<br>
+    Bank<br>
+    Carpenter Shop<br>
+    Library<br>
+    Magician Shop<br>
+    Shipwright<br>
+    Real Estate<br>
+    Barber Shop<br>
+    Bakery<br>
+    Bowyer<br>
+    Healer<br>
+    Jeweler<br>
+    Stables<br>
+    Theatre<br>
+    Tinker<br>
+    Voodoo Shop<br>
+    Baric Shop</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Jails Counselors Halls
+    Court Halls Arenas Castles Forts Palace Farms Villas Ruins Cemeteries Tombs
+    Dungeons Native Camps Docks Barracks Guard Posts Training Locals Museums
+    Newspaper Temples Churches Trading Posts Teleporter Houses Bathhouses Parks</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Warriors Guild Mages Guild
+    Thieves Guild Assassins Guild Cleric Guild Baric Guild Merchants Guild
+    Fisherman Guild Hunters Guild Miners Guild Animal Guild Sailors Guild
+    Tailors Guild Knights Guild</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">More will come and right
+    now we are up in about 70 different buildings and shops.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can I tame animals ?<br>
+    A: Yes you can. And you can instruct them and name them etc.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will the player be able
+    to select the characters look in character creation ?<br>
+    A: No. You get a random head when entering the game. This is more realistic.
+    This may change in FULL VERSION.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can I open a shop ?<br>
+    A: Yes you can if you have enough money.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can my character age and
+    perhaps die of old age ?<br>
+    A: No. This does not belong in a online RPG. When players has spent many
+    hours online to build up they character, they don't need to lose the
+    character forever when he gets old.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: What happens when you
+    die ?<br>
+    A: You become a ghost and you will be wearing a ghost clothing and you will
+    have lots of holes in your body and you will nearly be visible to others.
+    You can not talk to other characters and you can neither use, pickup, trade
+    or give anything. When you try to speak, other people will just see
+    something like: &quot;ooOOoo ooOOOOoooOoooo ooooOooooOooo&quot;. </font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How do i become normal
+    again ? How do i wake up from the dead ?<br>
+    A: Visit a priest of life, target him and type /RESSURECT. Welcome to the
+    side of the living, for free :-)</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: To heal damage, do i
+    have to seek a healer ?<br>
+    A: You can heal my camp fires, and you will auto heal if you have food
+    and/or drink.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How many items can i
+    wear or have equipped ?<br>
+    A: There are 20 slots and each is possible to contain 99 of the item in each
+    slot. You can have equipped both of your hands.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How often will Fantasia
+    Studios throw in more patches and possibly more stuff ?<br>
+    A: We are looking very much forward to keep on patching, and throwing in
+    more lands even entire continents, more monsters, more NPC`s, more quests,
+    more items, more spells and more everything ! We have the power to do that
+    and we are going to use that power. Updates will be made very often. Almost
+    everyday.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is all player data saved
+    at the clients side ?<br>
+    A: No it is saved on the server for security reasons.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is there a way players
+    can become a monster via a spell or something ?<br>
+    A: Yes there are. They can also summon monsters and animals.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How many types of magic
+    are there ?<br>
+    A: There are many many spells of all kinds. There are also schools of magic:
+    Destruction, Nature, Enchanting.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Do i have all spells
+    available to my character when starting or do i need to find them ?<br>
+    A: You will have to find them and learn them.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can all
+    classes/occupations use magic ?<br>
+    A: No, not everyone.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can a level 1 magic user
+    have all the games possible spells ?<br>
+    A: Yes in theory. But i doubt that will ever happen. And even if he had, he
+    could only use very few of the most basic ones cause a level 1 magic users
+    mana rating is not very high. Different skills need different amount of mana.
+    Mana is also known as MAGICA.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can i make spells ?<br>
+    A: At this time no, however i think this may change because its a
+    possibility.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can I make items with a
+    spell ?<br>
+    A: Yes by using the very powerful ENCHANT SPELL.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How do i find or buy new
+    spells ?<br>
+    A: When you find a new spell you usually find a scroll lying on the ground
+    or somewhere. You pick it up and then you use it and you will have the spell
+    in your spell book. Spells can also be bought in many stores.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can I kill all NPC`s ?<br>
+    A: No. Not all can be killed.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will all NPC`s have
+    names ?<br>
+    A: No. The common non-important NPC`s will only have names such as &quot;a
+    blacksmith&quot;, &quot;a tailor&quot; and so on. However, important NPC`s
+    has real names such as &quot;Vledyr Nekam&quot; and so on.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will NPC`s use magic ?<br>
+    A: Some yes.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How many different kinds
+    of monsters will there be in EO ?<br>
+    A: Many many. Over 20 at this time. More will be added very often.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Does monsters and NPC`s
+    spawn regularly ?<br>
+    A: EO has the perfect spawning system. Everytime a monster dies, one gets
+    born :-)</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is there any special
+    artifacts in the game ?<br>
+    A: Yes there are some special items in the game which there are only a few
+    of, and there are some artifatcts which there are only one of a kind of.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Are items usable for all
+    races and classes ?<br>
+    A: Some are, some aren't.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Does players have bank
+    boxes and bank accounts ?<br>
+    A: Yes they have. They can deposit money there.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Does all cities and
+    villages in Menath have all shops ?<br>
+    A: No they don't. Larger cities has most shops, while some has not. You may
+    be near one city and you are seeking a Library but you may have to travel to
+    another city because the city you are near don't have a library.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will players be able to
+    destroy buildings and boats ?<br>
+    A: No.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How is the government in
+    Menath ?<br>
+    A: There is a emperor and he have the high council. There are a council hall
+    in the capitol city and also a palace. The council will very often have
+    meetings in the council hall with the emperor. As said, the emperor is
+    played by a real Fantasia Studios member and he will role play to the
+    fullest.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can players enter the
+    palace ?<br>
+    A: Depends. Sometimes yes and sometimes no.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can players meet the
+    emperor and make pleas to him ?<br>
+    A: Yes they can. Several players have done that already.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can players start their
+    own governments ?<br>
+    A: Yes theoretically. They can try to take over a specific area and hold
+    their own laws there and build houses there. Of course, the role-playing
+    government of Menath will be in contact with them and we will have a cool
+    story around it. Players may absolutely do this cause it adds very much to
+    the role-playing feeling.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can players be awarded
+    with special roles and such by Fantasia Studios ?<br>
+    A: Yes they can. We will take very very active role in the world of Menath.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How is sound and music
+    in EO ?<br>
+    A: The sound is very realistic and the music is great.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is there environmental
+    sounds like jungle noise and birds in the forest ?<br>
+    A: Yes absolutely. Each different part of the world has its own
+    environmental sounds.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Has each city its own
+    music as in Ultima Online ?<br>
+    A: Yes. And every region.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is there sounds like
+    opening backpack, swords, bows and maybe even monster sounds ?<br>
+    A: All of them. There are many many sounds and you hear sound when you
+    fight, open things, cast spells, and the monster also make noises.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is there many types of
+    clothing and armor ?<br>
+    A: A player can make their own clothing or buy it. However, its more like
+    avatars in the alpha. Well not exactly avatars, but lets say a player goes
+    into a tailor then he can buy &quot;suits&quot; like Blacksmiths clothing,
+    pirate clothing, woodworkers clothing and so on. Players can of course also
+    but many kinds of dresses and so on. There are many many different clothing
+    styles so the players look very different. Of course there are many types of
+    armor to buy and make. Players can also buy hats and helmets.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is there some kind of
+    public transport system such as ships ?<br>
+    A: Yes some places in Menath there are ferries.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How will players
+    interact with the deities (gods and goddesses) ?<br>
+    A: When a player prays to a god, he may get special favors or miracles if
+    the religion lore skill is high enough. However, for now, only clerics can
+    pray. Deities will have an active role in the game.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can players mix together
+    potions of their own ?<br>
+    A: Yes we would like to implement this possibility. But on a system like
+    this: Players can buy different herbs or ingredients which has different
+    abilities. Like a herb that heals mana and a herb that heals fatigue. And
+    they can throw this together into a bottle and it get mixed so it both heals
+    mana and fatigue !</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is there any training
+    dolls ?<br>
+    A: No. They may get misused as in many other RPGs. Training is only done
+    with training points.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: When i drop an item,
+    will it vanish after some time ?<br>
+    A: No it will stay there until someone else pick it up or if a GM removes
+    it.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will monsters raid
+    cities by themselves ?<br>
+    A: Not exactly. However, GM`s can tell them to.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can players find
+    vegetables or other food sources in nature and eat it ?<br>
+    A: Yes they can absolutely.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can players grow crop ?<br>
+    A: We are thinking of making the possibility of players planting seeds, and
+    the seeds will become real fruit or vegetables after some time. In fact we
+    are maybe planning to do this in many cases and create a real ecology.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can players milk cows ?<br>
+    A: Yes</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: What can the bard class
+    actually do in EO ?<br>
+    A: They can do things like fighting of course, play instruments, and many
+    other things. The bard class is for the real role-players and the bards
+    travel the world exploring all places and performing.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can players fish ?<br>
+    A: Yes with a fishing pole.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can they catch only one
+    type of fish ?<br>
+    A: For now only one type, but in many sizes. From 1kg to 20kg.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will there be any huge
+    monsters or animals like Giants ?<br>
+    A: Yes there are giants and they are many times as tall as player ! And
+    there are dragons and other huge animals too. To slay a giant, there must be
+    many players involved in the battle.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: You said our character
+    would have an occupation in the game. Will I be able to completely live off
+    of, lumberjacking or any other occupation that not involves combat or will i
+    HAVE to fight at one point or another ?<br>
+    A: No you don't need to fight. You can get a working occupation and
+    completely live off that and role-play that if you wish. You can for example
+    be a lumberjack, get a house in the forest, chop wood, learn the carpenter
+    tricks and make furniture and sell it in the city ! You can live in EO !
+    There are also many other occupations other than Lumberjacking that can be
+    lived off. And by the way, we are thinking of making Lumberjacking and
+    Carpeting into one occupation called WOODWORKER.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How will items work?
+    Will they break after some time? Can you repair them?<br>
+    A: For now items do not break after time so you don't need to repair them.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will all of the
+    occupations be able to fight?<br>
+    A: Yes all of them.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: In Era Online, will I be
+    able to be a merchant with a Thief fighting style? Ex. Pick locks, stealth,
+    quick attacks.<br>
+    A: Yes that is fully possible.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: If yes, will I be
+    attacked by guards for having that fighting style?<br>
+    A: No. You will only be attacked by guards if you have a criminal status.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Do pirates get ships ?<br>
+    A: Not yet.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will there be different
+    types of houses players can buy?<br>
+    A: Yes there is. They can buy any type of houses in the game. Currently
+    there are over 25 different houses but we expect this to raise far over that
+    when the final release is here. And we will add new ones all the time.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is it possible to change
+    or dye the colors of your &quot;costume&quot; or uniform thing?<br>
+    A: No it is not.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Do players need sleep?<br>
+    A: No they don't.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How many characters can
+    a person have on EO?<br>
+    A: Right now, infinite.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Once the final version
+    is released, and if you do updates, does the software automatically update
+    itself?<br>
+    A: Yes it does, trough the patcher.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Are there board games
+    like checkers in EO?<br>
+    A: Hehe, not currently but i think its a nice idea so we may implement it !
+    :)</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will the thief NPCs
+    steal from you?<br>
+    A: They don't do that currently.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: In our char, can we use
+    a switch to be attacked or not attacked by PKillers?<br>
+    A: No</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: In our char, are we able
+    to upload personal .BMP pictures and MIDIs?<br>
+    A: Well...then you will have to send it to us and we will have to update it.
+    It will then be required that all players must have those BMPs or MIDIs.
+    However, we will try to find a way.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: If we govern a city, are
+    we able to make tax revenues, fees, etc.?<br>
+    A: Well yes. But then you will have to hire people to collect the taxes from
+    the players. The game wont do it, you will have to.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: When we equip armor,
+    will it show up on our little character walking around?<br>
+    A: Yes it will.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: when we buy houses, can
+    we go grocery shopping to buy--- oh yeah, talking of food, can we cook
+    dinner in our houses with food we buy, like i said up there? (hee hee, sorry
+    for cutting it ^_^) maybe we can cook up some (slurp) good meat, bakery
+    (smack) for traveling. :D<br>
+    A: Hehe, that's fully possible. Buy some wares and make dinner out of it is
+    possible :)</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will players be able to
+    run, maybe to avoid a monster or a group of player killers? Can players hire
+    NPC mercenaries to help them fight ?<br>
+    A: Mercenaries are not added yet. Players can outrun player killers and
+    monsters yes.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Since players can not
+    customize their &quot;costume&quot; or &quot;uniform&quot; colors , will you
+    be making them in different colors?<br>
+    A: Yes there will be some different colors on some clothing.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can Bards choose what
+    kind of song they want to play or will there only be one sample played (if
+    successful) like in Ultima Online?<br>
+    A: We hope we can add a few melodies to each instrument yes.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will there be some sort
+    of lag meter similar to EverQuest?<br>
+    A: No sorry.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will players be allowed
+    to use timed macros, if not will the ones caught be punished?<br>
+    A: There are no special macros in EO.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will players get sick
+    (once implemented) from the type of climate they're in, such as if they are
+    in the desert can they get sick from heat or will they have hallucinations ?<br>
+    A: We think we will implement diseases yes.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will NPCs call the
+    guards if two (or more) players get in a bar brawl?<br>
+    A: Hehe ! No. Dueling is legal in Menath.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How many different types
+    of swords are there, could you name them for me?<br>
+    A: There are dozens and more being implemented everyday. Names ? Well we
+    have Dwarven Stone Sword, Paladin Sword, Golden Swords, Ebony Swords and A
+    LOT more.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will players be allowed
+    to have facial expressions, like if they press alt+s to make them smile, I
+    think would be more appropriate than using :) in your speech ?<br>
+    A: For now we have no plans on making that since we have created over 100
+    heads already and we had to make them over again if so.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: if we are a wizard that
+    has skills of blacksmith's, can we make MAGIC weapons? (ex. The Blade Of
+    Heavens: +10 Magic, Ice Attack, can ONLY be used by (PLAYER'S NAME) i think
+    it would be great for wizards like that to make personalized weapons to
+    their friends. TIP: it can be helpful for weak peoples above lvl 10 who gets
+    killed all the time by PKs who only wants to get money from peoples. i
+    mean... the PKiller will find their Magic Weapon but wont be able to use
+    them! pretty cool thing, no?<br>
+    A: We have no plans on adding this yet. However it may come.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: can we make special
+    effects on customized weapons? (ex. the weapon can glow with a shining light
+    or burned with blue fire or something) it will make a cool but unusual thing
+    on the weapon. it will be like.... ''tough''.<br>
+    A: You can just make weapons that are already in the game.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: can we hunt down wild
+    animals, (lets take a chicken then) bring them to home and make meat
+    drumsticks out of it? it will be like getting fruits in the wild like u said
+    somewhere in the site.<br>
+    A: Fully possible. You can kill the chicken, take the meat, go home and cook
+    it and eat it :)</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: can we buy Mansions and
+    Manors instead of single little houses?<br>
+    A: You can only buy the houses that are implemented in the game. But there
+    are many different sizes. From huts, to manisons.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will each house have a
+    postal box so we can write letters and put it in? (it might be helpful for
+    peoples who wants to leave msgs for their Logged Off friends.)<br>
+    A: Its a good idea but we haven't implemented that.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: can we buy servants and
+    butlers if we are rich?<br>
+    A: You can buy mercenaries. Also hire PC`s.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: When we are getting
+    married, can we raise children?<br>
+    A: Haha, no you cant. This isn't a domestic simulation :)</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will they have buyable,
+    handheld and public clocks in Menath?<br>
+    A: There is no clocks in Menath that goes. But there is a clock tower in one
+    of the cities at least.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will era online be proxy
+    friendly PLEASE SAY YES!<br>
+    A: Yes :)</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will it be possible for
+    players to build their own dungeons (of course you would have to inspect it
+    before you put it in the game.<br>
+    A: That's a question we cannot answer at this time.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: When eating will it say
+    if our character likes the taste of the food?<br>
+    A: All characters likes all kinds of food.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: When it is dark (once
+    implemented) will it be easier to steal from people, such as them noticing
+    it less?<br>
+    A: Hmm. Well that would be possible I guess. But night is not yet
+    implemented.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will players be able to
+    ask an NPC if they talked to another player? Like if Conan is looking for
+    Arthur can he ask the NPC if he saw Arthur?<br>
+    A: Not currently. But I guess its easy to implent.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Once the final release
+    is out, how many character will a player be allowed to have?<br>
+    A: For now, infinite.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Where is the EO server
+    located?<br>
+    A: USA</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can players bury corpses
+    or other items?<br>
+    A: Not currently.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will special items be
+    sold at the festivals?<br>
+    A: Yes absolutely.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: In combat can players or
+    NPCs lose limbs?<br>
+    A: Not currently.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Are game master requests
+    going to take years for them to answer like on Ultima Online?<br>
+    A: Depends on how many GM`S are on and how busy they are.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will there be NPC
+    pirates roaming the seas in boats?<br>
+    A: When the full release is out, yes probably.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will players be able to
+    conceal their identity like wearing a hooded cloak?<br>
+    A: No, they use the DISGUISE skill.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: in Menath, will the
+    Crossbows 'n' Bows have infinite ammo? or should we buy them at the stores?<br>
+    A: Nope. You need to buy arrows.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: in shops, can we buy
+    useful lifetime objects, hmm, l see.... like a Hookshot or a Torch? so we
+    can cross Gaps (if they got any Gaps) and go through Dark Dungeons with a
+    trusty Torch.<br>
+    A: Not all items are in yet. Currently there are over 300 items in EO but we
+    are adding more and more.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will our houses be
+    designed ourselves? or must we buy houses in the cities? oh yeah, talking of
+    houses, if we cant afford a good one, can we buy Apartments? (gee, I don't
+    really know if they got Apartments in those days.)<br>
+    A: You can buy houses and furnish them yourself yes. Apartments ? Hmm. No :)</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will the furniture be
+    useful? i mean... can we make useful things with it? lets take an example
+    with a Table. can we place flowers, food and Lamps? maybe you wouldn't spend
+    a 100 bucks for an useless Table!<br>
+    A: Well some yes. But its mostly for decorations.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will there be items that
+    for one day easy to get but the next it is impossible to get theme unless
+    someone has one?<br>
+    A: Yup</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can you custom design
+    furniture?<br>
+    A: You can make it, not design it :) That's our graphic artist's work.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will the races have
+    special abilities that the others don't have lets say a elf can see better
+    in the dark while a human can barely see in the dark.<br>
+    A: Yes there will be some differences.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can different races be
+    better at various things like a human is slower than a elf or a human can
+    chop wood better than a elf?<br>
+    A: As says, some races are better than others in certain things.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is it possible for a
+    player to rent out his house to another person?<br>
+    A: Yes it is.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can you own multiple
+    house like one is you're store and another is you're house?<br>
+    A: If you can afford it yes.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: is it possible to build
+    multiple houses and sell theme to people?<br>
+    A: You cannot build houses. You just buy the deeds and then make them. But
+    yes, you can sell them to people.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is it possible to have
+    you're own inn?<br>
+    A: Yes it is. You can buy a building, put in tables and chairs, maybe a
+    fireplace and so on and then operate it as a tavern.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Lets say you open a up a
+    business is it possible to hire npcs to run it for you?&nbsp; If so will it
+    cost you a cretin amount of the profit?<br>
+    A: We are working on that right now. We don't know how that will be sorted
+    out.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: If it is possible to
+    have npcs run you're business can you open up several around the world?<br>
+    A: See above.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will players text be
+    transmitted to the whole world or will it be just to the players near you,
+    or will it appear over your little character walking around?<br>
+    A: Depends. When you whisper to someone, just that person will hear you,
+    when you talk, people in your area (screen) will hear you, when you shout,
+    people in that zone will hear you.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Do you or will you
+    backup your server program and your work often? The Xenology Crisis had to
+    start over because someone hacked into the computer and deleted the server
+    program.<br>
+    A: Yes i heard about that. Well we will have a world save regularly. We will
+    have a server maintenance also regularly.</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How long is a game day
+    in real time?<br>
+    A: Hehe no ! Right now, we haven't got night and day. But when its there,
+    night and day is MUCH shorter than real life ! :)</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How high do the levels
+    go?<br>
+    A: 50</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can players teach each
+    other skills?<br>
+    A: No.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is the music in EO
+    digital or MIDI?<br>
+    A: Midi. It saves space. Download time :)</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is there/Will there be
+    any skill cap? (a limit to the number of points you can allot to any single
+    skill or cumulatively)<br>
+    A: You have 3 specialized skills, and only these may surpass 50 points.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: If so, do you have to
+    specialize in these magic classes or will you be able to learn spells from
+    all of them?<br>
+    A: Hmm....since we haven't implemented this we don't know :)</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will houses decay after
+    a certain time for lack-of-use? (yes a UO concept:)<br>
+    A: Nope. They will stay there until we find out its been abandoned. Than we
+    may remove it.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Could you put minotaurs
+    in the game? And if you can could you fix it so players can be minos instead
+    of humans or elfs?<br>
+    A: For now, there are only minotaur monsters, and they are not playable.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is there going to be a
+    depo kind of thing where players can deposit/withdraw items when their bag
+    gets too full?<br>
+    A: Yup, this is in the game. They can withdraw and deposit and they can
+    check their bank balance.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can players summon
+    creatures/monsters?<br>
+    A: Yes if they have the spells to it.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is a cleric the same
+    thing as a Druid?<br>
+    A: No, the cleric is more like a monk.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Do different occupations
+    learn different spells?<br>
+    A: No, all spells can be cast by people that can cast spells.</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will GMs do anything
+    about people who do not role-play (unlike UO)?<br>
+    A: No. But players must follow the code of conduct or else the GM will kick
+    them out. And the code of conduct does contain some role playing rules.</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will the little
+    character guy running around have a different height if they want?<br>
+    A: Not at this time.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Is it (or will it be)
+    possible to get struck by lightning?<br>
+    A: Not for now.</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will there be NPCs
+    paying you to escort them to different towns (like in UO)?<br>
+    A: Not at this time. We will work on this. We don't like NPC`s moving out of
+    cities and zones at this time. It unbalance the game.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will there be an option
+    to make macros such as in Ultima Online? Example: Set Ctrl-N to use a
+    selected item(s). or option<br>
+    A: No.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: what will the guards do
+    if we help them kill bad peoples when they need help? (pirates,
+    thieves...etc)<br>
+    A: Your reputation will raise.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: can we buy and drag a
+    Siege Weapon with us when we travel? like a Catapult, a Ballista?<br>
+    A: Not at this time.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will there be treasures
+    scattered around the world?<br>
+    A: Absolutely !</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: talking of treasures,
+    what will happen if we steal a treasure (if they got treasures) from a Bad
+    Emperor (the Benny Benwick guy? i forgot his name... ah well...) or a group
+    of pirates?<br>
+    A: A treasure is a treasure. The keeper keeps it.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: what will happen if
+    Menath is totally overwhelmed by the Pirates?<br>
+    A: There will never be over population of NPC pirates. However if you are
+    thinking of players, then we wont take that as a problem. Its great
+    roleplaying. Imagine the world going crazy, non-pirate players fight to gain
+    goodness to the land again and so on.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: in cemeteries, will it
+    be a holy place near the Church or will it be those (YOU KNOW WHAT I
+    MEAN!!!) same ideas by making Zombies and Skeletons?<br>
+    A: There are temples. But no holy places. Well some places maybe. Zombies
+    and skeletons may spawn in cemeteries yes.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will the females have
+    better skills at cooking than the males? (I'm sure your mother made all the
+    goodies)<br>
+    A: No. No ability differences between the genders. Only appearance.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: if you are playing as an
+    Good Emperor, will you take powerful group of good Assassins to make an
+    ''Tom Clancy's Rainbow Six'' mission against the Benny Benwick(?)'s powerful
+    elite soldiers? a good infiltration can end anything.<br>
+    A: Fully possible to role play something like that yes.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will a Benwick's
+    right-hand man come at a Emperor's castle and convince the emperor to turn
+    his back on the good and turn bad? (and don't forget to update them in the
+    news)<br>
+    A: Emperor will be role played, and how he is played is yet to be seen.
+    Realistic it will be !</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: can a player work as
+    Benwick's dark soldiers?<br>
+    A: Yes if he can get to Benwick or his soldiers.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will there be rumors
+    going on that some huge abandoned houses are haunted by zombies and ghosts?<br>
+    A: Yes.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: when a monster or player
+    dies, will his corpse do a *BLINK* then disappears or will we see them
+    disintegrate in the ground?<br>
+    A: Right now, when a monster or animal is killed, the corpse lie on the
+    ground. It will disappear eventually yes. For players, there is no corpse,
+    they just becomes a ghost.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: if that Benwick guy is
+    killed, will he revive? or will you invent another history saying he got
+    replaced by someone else that is bad?<br>
+    A: Resurrection is possible and always used.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will there be a delay
+    (charging up the spell) before we can fire one of our spells?<br>
+    A: No. You will just lose mana. That's penalty enough.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: if a thief player is not
+    allowed in a building will he be able to infiltrate the castle by sneaking
+    up the guards, finding a cave... etc?<br>
+    A: A building which isn't locked can be entered by everyone. However, guards
+    may guard the place and attack un-wanted people.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: instead of marrying a
+    woman player (I'm male!) will we be able to marry princesses and update them
+    in the news? (big publicity!)<br>
+    A: You cannot marry NPC`s.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will the fighting have
+    many different poses? (ex. when we swing the sword, will the player randomly
+    do horizontally slashes, diagonally slashes and stabbings etc.?) instead of
+    doing the same poses in every swings.<br>
+    A: Combat is much like EverQuest. The character does the fighting. And not
+    the player controls the slashes.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: can we buy a shovel (or
+    workers) to make underground lairs and build Shelters incase theres
+    earthquakes and other things?<br>
+    A: You can only enter caves at this time. Not dig yourself underground.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: how do we pick up an
+    item? do we need to stand on it or do we need to go near it?<br>
+    A: Right now you will have to walk upon it and then pick it up. This may
+    change.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will there be cinema
+    scenes when we enter somewhere? (take an example of Baldurs Gate)<br>
+    A: No. That wouldn't be right in a online game.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: uh... I think I sent a
+    mail saying that if we can ride a personalized horse...i never saw the
+    answer...... anyway! can we ride and buy a personalized horse in stables?
+    our attributes will be boosted a little and we can go faster around thee
+    world.<br>
+    A: When riding becomes possible, that may be possible.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: when we start a new
+    game, what do we have in our inventory?<br>
+    A: Right now, nothing but a note which you must deliver to a priest of life.
+    The priest of life will give you some starting gold and 5 training points.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: when an assassin player
+    enters a place that forbids every weapon, will he be able to wield an hidden
+    dagger that cannot be seen?<br>
+    A: Such places does not exist for now. However, we will make some places
+    illegal to bear weapons in. And guards will attack players wearing weapons
+    there.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can you write a short
+    book in the game?<br>
+    A: Yes we are probably going to make something like this.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: after parties, will the
+    guards gets defenseless because they've drank too much alcohol? it will make
+    thieves a better chance to grab their things.<br>
+    A: Guards don't go to parties :)</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: can we buy mirrors and
+    make them as shields to deflect spells that are made of Beams? ex: like an
+    Laser Shot spell (doesn't exist, but what the heck) can we make a Mirror
+    made shield to deflect it and make it hit the spell-caster?<br>
+    A: Good idea. We might do that.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: is there any spells that
+    do splash damage? (Im afraid of it. cause if you r a mage and you cast a
+    Bomb spell that hits your Knights fighting with other enemy Knights... eeeps!)<br>
+    A: No. You can only cast on ONE target.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: does enemies dies in
+    different ways when they get killed? ex. take (the same old) Bomb spell. if
+    you fire it at him, will he explodes violently with blood flying all over
+    the way (hehe, cool) or will he die like if we had killed him with a Sword?
+    (yeesh)<br>
+    A: In the start of the alpha, dying will seem a bit silly. Only one way to
+    die. When the monster is killed, it lie on the ground with blood everywhere.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: can we hide in the
+    shadows like Thief The Dark Project when we make assassin missions?<br>
+    A: You can use the HIDE skill yes. </font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: can we donate gold to
+    the King? and what will happen if we do?<br>
+    A: The emperor is controlled by a real human being, me (Erling Ellingsen)
+    and giving money would be ok :)</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will there be shroud and
+    fog like Strategy Games?<br>
+    A: No.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will the character we
+    use yells and complains if we leave him alone after some minutes?<br>
+    A: Hehe. Have you played to much Simon The Sorcerer ? :) No he wont :)</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: what kind of foods will
+    there be to eat?<br>
+    A: Bananas, bread, cake, melon, pumpkin, strawberries, soup, fish, meat and
+    much much more.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will players be able to
+    have pets?<br>
+    A: This will be added later in the alpha.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will there be a clock
+    and you can see what time it is in the game?<br>
+    A: The understanding of time is not present in Menath at this point.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will people be able to
+    hire other people to deliver things? like weapons, food, things like that<br>
+    A: Of course you can hire other players. Not NPC`s though.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: How many NPC will there
+    be in a town, on average?<br>
+    A: That varies from town to town. Large ones may have 100. Villages may have
+    10-20...</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: how will characters
+    talk? will there be a little talking bubble?<br>
+    A: For now only a chat window.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: what is the max amount
+    of mana a character can have?<br>
+    A: Infinite. Its up to the player how much he can have during the time he
+    plays.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: if we get injured badly
+    by a hit or a spell, will our character covers his wounds with his arms
+    after the battle?<br>
+    A: If he has food and/or drink, he will recover yes. You can also use
+    bandages.</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will some food be
+    different from others? (ex. if we drink milk rather than beer, will our
+    Defense grow up because of the Calcium?)<br>
+    A: Alcohol will eventually have alcohol effects.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: are we able to bring
+    tents and sleeping bags to sleep on the ground?<br>
+    A: Players do not need to sleep, and cannot sleep. There will probably be
+    tents yes.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: if we use wood
+    equipments (take a wood shield for an example) will it burn to ashes if
+    another player throws a Fire spell?<br>
+    A: No.</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: will there be
+    super-secret areas where you refuse to show to other peoples?<br>
+    A: Some areas are well hidden, but we don't refuse anyone to go there. We
+    encourage them to search for it.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: can we still hit the
+    corpse on the ground of a monster or player? (it'll b cool for peoples who
+    wants revenge on players that killed them! theyll hit continually, brutally)
+    :)<br>
+    A: Hehe no.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: are we able to imprison
+    and attach imprison other players in their guild hall? :)<br>
+    A: Oh no ! Players would get far to fed up if other players imprisoned them
+    !</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: are there critical hits
+    and weak blows?<br>
+    A: When a player fights with a weapon or hands, some hits are better than
+    others.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: are there any such as
+    bosses or guardians?<br>
+    A: No. This isn't a platform game :) However, there are some powerful
+    important NPC`s.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will there be an unarmed
+    hand-to-hand combat system such as martial arts?<br>
+    A: You can fight without weapons in your hands yes.</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Do the different races
+    have strong points and weak points?<br>
+    A: Yes they do.</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Do monsters always spawn
+    in the same place or can you make it randomized to add a more realism?<br>
+    A: They are placed at a random point in the same zone.</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: if you are not able to
+    be online 24/7 (due to phone bills and being British :P) will that effect
+    the character?<br>
+    A: No it wont. You can log in and log out anytime you want to.</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Can we, if have a
+    criminal status, disguise ourselves, fooling guards and such?<br>
+    A: Absolutely.</font></p>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will there be NPC
+    slavery?<br>
+    A: No.</font>
+    <p><font size="1" face="Verdana" color="#FFFFFF">Q: Will there be markets,
+    where for a small amount of money, a character can hire a stall, and sell
+    his products (weapons, food, clothes etc)?<br>
+    A: Oh yes oh yes ! Every big city has markets and players can buy
+    stalls/booths to sell their goods in.</font>
+    <p>&nbsp;
+
+
+    </td>
+  </tr>
+  <tr>
+    <td>
+      [an error occurred while processing this directive]
+
+    </td>
+  </tr>
+  </table>
+</div>
+
+</html>
+
+
+
+
+
+<!--
+     FILE ARCHIVED ON 18:26:10 Oct 13, 2007 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 18:36:05 Jun 14, 2015.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->

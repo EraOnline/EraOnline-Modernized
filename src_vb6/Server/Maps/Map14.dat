@@ -1,0 +1,9 @@
+[Map14]
+Name=
+MusicNum=3-1
+Guarded=1
+StartPos=14-10-10
+SouthExit=120
+NorthExit=70
+WestExit=6
+EastExit=15

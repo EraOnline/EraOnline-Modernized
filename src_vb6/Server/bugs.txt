@@ -1,0 +1,6 @@
+[INIT]
+NumBUGs=1
+
+[BUG1]
+Description=Test
+Reported By=Emperor

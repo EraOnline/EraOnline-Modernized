@@ -1,0 +1,16 @@
+[INIT]
+NumHELPs=2
+
+[HELP1]
+Helpmsg=
+Userindex=
+Time=
+Date=
+Name=
+
+[HELP2]
+Helpmsg=HELP!
+Userindex=1
+Time=00:49:06
+Date=08.07.2004
+Name=Emperor

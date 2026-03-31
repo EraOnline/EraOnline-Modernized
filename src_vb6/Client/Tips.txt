@@ -1,0 +1,98 @@
+[INIT]
+NumTIPs=32
+
+[TIP1]
+Tip=Go into battle mode by pressing CTRL !
+
+[TIP2]
+Tip=Attack (slash) your foe by pressing ALT !
+
+[TIP3]
+Tip=Inscribe a spell into your spell book by USING the spell scoll lying in your backpack !
+
+[TIP4]
+Tip=If you USE a food or drink- the food or drink will be stored so your character will drink/eat it when he/she feels like it. The character will not drink/eat food lying directly in the backpack. You must USE it first !
+
+[TIP5]
+Tip=Mana drained ? Type /MEDITATE to begin meditating ! You will now slowly regain mana !
+
+[TIP6]
+Tip=Just started a new character ? Remember to deliver the note in your backpack to a priest of life ! Target the priest of life and then GIVE the note to him !
+
+[TIP7]
+Tip=Target any NPC, PLAYER, MONSTER or ANIMAL by clicking on it until you see: "You Target A..." above your view.
+
+[TIP8]
+Tip=Trade with a NPC by targeting him/her and typing /TRADE !
+
+[TIP9]
+Tip=Pick up a item lying on the ground by moving over it and then click the HAND on the left side of your view.
+
+[TIP10]
+Tip=Remember that GM`S (Game Masters) are there to help ! Contact one by pressing ESC and then click on CONTACT A GM.
+
+[TIP11]
+Tip=Your not hearing any music or sound ? Check to see that your speakers are properly connected and that you have DirectX 6.0 or higher installed !
+
+[TIP12]
+Tip=Read posts and post your own posts on any of the messageboards found around Menath ! Their all connected so what you post on one board, appears on all the other boards in Menath !
+
+[TIP13]
+Tip=Report a bug ! If you find a bug in the game type /BUG 'bug description' ! We will then recive it here at Spotlight Studios and we will be able to fix it as soon as possible ! Be sure to include what the bug does- where you found the bug and when you found it !
+
+[TIP14]
+Tip=Type /HELP for beginners tips whenever you want ! It will tell you some basic commands which is very helpful to know !
+
+[TIP15]
+Tip=Read the manual ! If you want to enjoy all the features in Era Online- read our manual found on our web site (www.eraonline.net) ! We do update the manual frequently !
+
+[TIP16]
+Tip=You always start off with 5 water flasks, 5 breads, some clothing and one rusty dagger ! Think economic ! Dont spend the money you get from a prist of life right away ! USE the water and bread and go out and hunt with the rusty dagger. Fight smaller creatures and sell their loot.
+
+[TIP17]
+Tip=To manipulate a item in your backpack, RIGHT click it in the list in your backpack ! This will open up a menu where you can: give, drop, unequip, evaluate and discard.
+
+[TIP18]
+Tip=To make a item in blacksmithing, tailoring or carpenting, first USE the drawing of the object you want to make (drawings to objects can be bought in stores) and then USE the resource needed to make the object.
+
+[TIP19]
+Tip=Remember the golden rule ! Treating others with respect will earn respect for you ! Treat others badly, and you will find yourself getting a bad reputation !
+
+[TIP20]
+Tip=Deposit gold in a bank by targeting a banker and type /DEPOSIT. You can also use the /WITHDRAW and /BALANCE commands.
+
+[TIP21]
+Tip=You can pray in temples ! Target any priest or priestess and type /PRAY. If successful, the god or godess that prist or priestess worship, will grant you a miracle ! This depends on your reputation with the god or godess and your religion lore skill.
+
+[TIP22]
+Tip=Death is not permanent ! When you die you become a ghost. Try finding a healer or priest of life, target the healer or priest of life and then type /RESSURECT and you will be brought back to life !
+
+[TIP23]
+Tip=You can tame animals and even some monsters by targeting them and typing /TAME. If successful (depending on your taming skill and how difficult it is to tame the creature) the creature will be under your ownership ! You can now use the /FOLLOW, /STOP, /NAME 'new name of creature', /DISCARD and the /TRANSFER commands. Look in the manual for more info !
+
+[TIP24]
+Tip=Did you know that the main continent of Menath is inhabited by over 1000 NPC`s, animals and monsters ? 
+
+[TIP25]
+Tip=You can cast a spell by opening the spell book, RIGHT click on a spell in the list and then click CAST SPELL ! Be sure to target the player or NPC you want the spell to take effect on before casting !
+
+[TIP26]
+Tip=Get friends ! Team up with other players, chat with them, trade with them and adventure with them ! The try atmosphere come when you adventure with other players around Menath !
+
+[TIP27]
+Tip=Remember: You can not sell items that are equipped (have a EQP infront of them in your backpack) ! Unequip the before selling !
+
+[TIP28]
+Tip=Era Online is CONSTANTLY changed, added to, expanded and fixed ! We the creators CONSTANTLY add more features, land, spells, items, quests, monsters, animals, NPC`S and alot more ! ANd we very often host exciting events in the game world ! We made the game, so we will make it enjoyable !
+
+[TIP29]
+Tip=Always check in on www.eraonline.net for important news and information, downloads, events schedules and more ! The web site is essential for players !
+
+[TIP30]
+Tip=When you level up you get 5 training points ! Use these at a trainer. Find a trainer, target him and type /TRAIN. This will bring up a training menu. CLick on the skill you want to use a training point in. Remember: Dont click on the skill name, click on the number after the skill name !
+
+[TIP31]
+Tip=Sometimes when logging in, some people get a black view. They cant see any graphics, though they hear sounds and see text. This is a bug that unfortunently sometimes occur. If you get this problem, type /GFX and you should see graphics.
+
+[TIP32]
+Tip=Era Online has a very realistic enviorment model. For example, when it rains, your character will slowly loose stamina (and eventually loose health if no stamina left), if you are not in a house or have some warm clothing on you. How to know if your clothing is warm ? You`ll soon find out in the rain !
