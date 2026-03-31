@@ -479,8 +479,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "DRP"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -535,8 +540,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "EAT"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -549,8 +558,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "DRK"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -564,7 +577,10 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS",
+          "Me"
+        ]
       }
     },
     {
@@ -578,7 +594,10 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS",
+          "Me"
+        ]
       }
     },
     {
@@ -592,7 +611,10 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS",
+          "Me"
+        ]
       }
     },
     {
@@ -605,8 +627,14 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "UPS"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "Me",
+          "SendData"
+        ]
       }
     },
     {
@@ -620,7 +648,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS"
+        ]
       }
     },
     {
@@ -633,8 +663,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "USE"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -647,8 +682,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "UNQ"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -661,8 +701,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "DRP"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -676,7 +721,11 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS",
+          "InitGrh",
+          "DrawGrhtoHdc"
+        ]
       }
     },
     {
@@ -690,7 +739,11 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "ShowPic",
+          "InitGrh",
+          "DrawGrhtoHdc"
+        ]
       }
     },
     {
@@ -704,7 +757,10 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS",
+          "PopupMenu"
+        ]
       }
     },
     {
@@ -717,8 +773,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "USE"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -731,8 +792,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "GIV"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -745,8 +811,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "EVA"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -759,8 +830,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "DIS"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     }
   ]

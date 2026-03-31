@@ -156,8 +156,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "GMH"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     }
   ]

@@ -373,7 +373,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "StartSysInfo"
+        ]
       }
     },
     {
@@ -401,7 +403,11 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "Shell",
+          "SysInfoErr",
+          "MsgBox"
+        ]
       }
     },
     {
@@ -416,7 +422,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "GetKeyError"
+        ]
       }
     }
   ]

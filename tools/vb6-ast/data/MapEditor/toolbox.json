@@ -650,7 +650,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlaceBlockCmd_Click"
+        ]
       }
     },
     {
@@ -706,7 +708,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "MakeChar"
+        ]
       }
     },
     {
@@ -734,7 +738,10 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "InitGrh",
+          "MsgBox"
+        ]
       }
     },
     {
@@ -748,7 +755,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "InitGrh"
+        ]
       }
     },
     {
@@ -776,7 +785,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlaceGrhCmd_Click"
+        ]
       }
     },
     {
@@ -790,7 +801,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlaceGrhCmd_Click"
+        ]
       }
     },
     {
@@ -804,7 +817,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlaceExitCmd_Click"
+        ]
       }
     },
     {
@@ -818,7 +833,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlaceNPCCmd_Click"
+        ]
       }
     },
     {
@@ -832,7 +849,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlaceObjCmd_Click"
+        ]
       }
     },
     {
@@ -874,7 +893,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlaceGrhCmd_Click"
+        ]
       }
     },
     {
@@ -888,7 +909,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlaceExitCmd_Click"
+        ]
       }
     },
     {
@@ -902,7 +925,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlaceNPCCmd_Click"
+        ]
       }
     },
     {
@@ -930,7 +955,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlaceObjCmd_Click"
+        ]
       }
     },
     {
@@ -1028,7 +1055,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlaceExitCmd_Click"
+        ]
       }
     },
     {
@@ -1042,7 +1071,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlaceExitCmd_Click"
+        ]
       }
     }
   ]

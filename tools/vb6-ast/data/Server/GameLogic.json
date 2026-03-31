@@ -17,9 +17,7 @@
       "lineEnd": 47,
       "annotations": {
         "purpose": "Clear world of temporary objects (tombstones, meditation auras, corpses, campfires)",
-        "notes": [
-          "Iterates all tiles on all maps. Magic indices: 157=tombstone, 231=meditation aura, 155=campfire, type 40=corpse"
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": [
@@ -35,10 +33,8 @@
       "lineStart": 48,
       "lineEnd": 68,
       "annotations": {
-        "purpose": "Update a user's visual appearance and broadcast to all nearby clients",
-        "notes": [
-          "Handles morph (body override), death (body=16), hiding (body=53) states. CHC format: charindex,body,head,heading,weaponanim,shieldanim"
-        ],
+        "purpose": "Update a user\u0027s visual appearance and broadcast to all nearby clients",
+        "notes": [],
         "status": "not-started",
         "sends": [
           "CHC"
@@ -56,10 +52,8 @@
       "lineStart": 70,
       "lineEnd": 84,
       "annotations": {
-        "purpose": "Update an NPC's visual appearance and broadcast to nearby clients",
-        "notes": [
-          "Same CHC protocol message as ChangeUserChar"
-        ],
+        "purpose": "Update an NPC\u0027s visual appearance and broadcast to nearby clients",
+        "notes": [],
         "status": "not-started",
         "sends": [
           "CHC"
@@ -78,12 +72,11 @@
       "lineEnd": 132,
       "annotations": {
         "purpose": "Check if user has enough EXP to level up, apply stat bonuses and training points",
-        "notes": [
-          "ELU scaling: 2.0x at L1-4, decreasing to 1.4x at L30+. Grants +1 HP, +2 STA, +15 MAN, +1 HIT per level. Awards 5 training points. Plays SOUND_SPELLEFFECT1 on level up."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
-          "PLW"
+          "PLW",
+          "PL3"
         ],
         "calls": [
           "SendData",
@@ -100,16 +93,13 @@
       "lineEnd": 200,
       "annotations": {
         "purpose": "Handle zone transitions and campfire detection when a player moves to a tile",
-        "notes": [
-          "Checks N/S/E/W zone edge exits (Y<7=north, Y>94=south, X<9=west, X>92=east). Also checks tile-specific warps (TileExit). Detects adjacent campfires (obj 155) and sends TEN for healing."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
           "TEN"
         ],
         "calls": [
           "WarpUserChar",
-          "LegalPos",
           "SendData"
         ]
       }
@@ -124,9 +114,7 @@
       "lineEnd": 215,
       "annotations": {
         "purpose": "Check if tile position is within map boundaries",
-        "notes": [
-          "Simple bounds check against MinXBorder/MaxXBorder/MinYBorder/MaxYBorder"
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -141,17 +129,13 @@
       "lineEnd": 297,
       "annotations": {
         "purpose": "Kill an NPC: place corpse, drop loot, respawn at random position",
-        "notes": [
-          "Loot is random (1/LootChance). Places up to 4 loot items in cardinal directions around corpse. Resets NPC HP to max. Respawns on same map at random valid position (GoTo Looper pattern)."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": [
-          "MakeObj",
-          "LegalPos",
           "SendData",
-          "WarpNPCChar",
-          "RandomNumber"
+          "MakeObj",
+          "WarpNPCChar"
         ]
       }
     },
@@ -164,21 +148,18 @@
       "lineEnd": 378,
       "annotations": {
         "purpose": "Kill a user and turn them into a ghost",
-        "notes": [
-          "Sets status=1, body=16 (ghost), head=5 (ghost head). Drops random item, loses 1/6 EXP and 1/5 gold."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
-          "DEA",
-          "CHC"
+          "DEA"
         ],
         "calls": [
+          "SendData",
+          "MakeObj",
           "ChangeUserChar",
           "SendUserStatsBox",
           "CheckUserLevel",
-          "UpdateUserInv",
-          "MakeObj",
-          "SendData"
+          "UpdateUserInv"
         ]
       }
     },
@@ -190,26 +171,34 @@
       "lineStart": 380,
       "lineEnd": 895,
       "annotations": {
-        "purpose": "Master item usage handler - equip weapons/armor/shields/helmets, consume food/drink, use tools, read spells",
-        "notes": [
-          "Massive Select Case on obj.ObjType (~500 lines). Checks class restrictions (7 ClassForbid fields), health requirements, morph state, death state. Handles all 48+ item types."
-        ],
+        "purpose": "Master item usage handler - equip weapons/armor/shields, consume food/drink, use tools, read spells",
+        "notes": [],
         "status": "not-started",
         "sends": [
-          "CHC",
+          "PLW",
           "PC2",
           "PIC",
           "PC3",
           "PC4",
-          "PLW",
-          "UWP"
+          "DEE"
         ],
         "calls": [
+          "SendData",
+          "AddtoVar",
           "RemoveInvItem",
           "ChangeUserChar",
           "SendUserStatsBox",
-          "SendData",
-          "AddtoVar"
+          "CreatePlanks",
+          "MakeCarpentryObj",
+          "CreateFoldedCloth",
+          "MakeTailoringObj",
+          "CreateSteel",
+          "MakeBlacksmithingObj",
+          "InscribeSpell",
+          "Bandage",
+          "UpdateUserInv",
+          "UpdateUserSpell",
+          "CheckUserLevel"
         ]
       }
     },
@@ -222,9 +211,7 @@
       "lineEnd": 916,
       "annotations": {
         "purpose": "Add a value to a variable with a maximum cap",
-        "notes": [
-          "Simple utility: clamp at max. Used for stat modifications."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -239,16 +226,13 @@
       "lineEnd": 1037,
       "annotations": {
         "purpose": "Unequip an inventory item, reversing its stat effects",
-        "notes": [
-          "UWP=unequip weapon, UCL=unequip clothing, USH=unequip shield, UHE=unequip helmet. Reverses HIT/DEF stat bonuses. Resets weapon/shield anim to 2 (empty hand)."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
           "UWP",
           "UCL",
           "USH",
-          "UHE",
-          "CHC"
+          "UHE"
         ],
         "calls": [
           "ChangeUserChar",
@@ -269,9 +253,7 @@
       "lineEnd": 1055,
       "annotations": {
         "purpose": "Find the next available slot in the CharList array",
-        "notes": [
-          "CharList tracks visual character indices for rendering. Increments NumChars and LastChar."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -287,9 +269,7 @@
       "lineEnd": 1072,
       "annotations": {
         "purpose": "Find the next available slot in the UserList array",
-        "notes": [
-          "Scans for first UserLogged=False slot. Used when new player connects."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -305,9 +285,7 @@
       "lineEnd": 1089,
       "annotations": {
         "purpose": "Find the next available slot in the NPCList array",
-        "notes": [
-          "Scans for first NPCActive=0 slot. Used when spawning NPCs."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -322,14 +300,10 @@
       "lineEnd": 1133,
       "annotations": {
         "purpose": "Find the nearest walkable tile to a given position (spiral search)",
-        "notes": [
-          "Searches in expanding squares up to 10 tiles out. Returns 0,0 if nothing found within range."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": [
-          "LegalPos"
-        ]
+        "calls": []
       }
     },
     {
@@ -341,10 +315,8 @@
       "lineStart": 1135,
       "lineEnd": 1162,
       "annotations": {
-        "purpose": "Look up a player's UserList index by name (case-insensitive prefix match)",
-        "notes": [
-          "Uses Left$ prefix matching - searching for 'Er' would match 'Erling'. Returns 0 if not found."
-        ],
+        "purpose": "Look up a player\u0027s UserList index by name (case-insensitive prefix match)",
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -359,18 +331,14 @@
       "lineEnd": 1408,
       "annotations": {
         "purpose": "Main NPC AI tick - handles movement, hostile detection, guard behavior, and pursuit",
-        "notes": [
-          "Movement types: 1=stand, 2=random walk, 3=chase players within 10 tiles (hostile), 4=guard chase criminals within 10 tiles, 5=beggar follow non-givers, 6=tamed animal follow owner, 7=chase players within 3 tiles (short-range hostile), 8=chaotic guard chase humans/wood elves. Guard types: 1=normal (attack criminals), 2=chaotic (attack humans/wood elves + criminals). Hidden players (Hiding=1) are ignored by movement type 3."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": [
           "HeadtoPos",
-          "InMapBounds",
           "ChangeNPCChar",
           "NPCAttackUser",
-          "MoveNPCChar",
-          "FindDirection"
+          "MoveNPCChar"
         ]
       }
     },
@@ -384,16 +352,10 @@
       "lineEnd": 1503,
       "annotations": {
         "purpose": "Load an NPC from NPC.dat/NPC2.dat and place it in the world",
-        "notes": [
-          "NPCs numbered <499 loaded from NPC.dat, >499 from NPC2.dat. Sets default hail, loads all stats/inventory/flags from INI file. Returns NPC index."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": [
-          "NextOpenNPC",
-          "GetVar",
-          "MakeNPCChar"
-        ]
+        "calls": []
       }
     },
     {
@@ -405,9 +367,7 @@
       "lineEnd": 1519,
       "annotations": {
         "purpose": "Remove an object from a map tile and broadcast removal to clients",
-        "notes": [
-          "Decrements amount. If amount<=0, clears the tile object and sends EOB (Erase Object) message with x,y coords."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
           "EOB"
@@ -426,9 +386,7 @@
       "lineEnd": 1530,
       "annotations": {
         "purpose": "Place an object on a map tile and broadcast to clients",
-        "notes": [
-          "MOB (Make Object) format: grhindex,x,y. Simply sets MapData ObjInfo and broadcasts."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
           "MOB"
@@ -446,17 +404,15 @@
       "lineStart": 1531,
       "lineEnd": 1607,
       "annotations": {
-        "purpose": "Pick up an object from the ground into user's inventory",
-        "notes": [
-          "First checks for existing stack of same item, then finds empty slot. Handles inventory full case. Checks Pickable flag. Max 999999999 per stack."
-        ],
+        "purpose": "Pick up an object from the ground into user\u0027s inventory",
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": [
+          "SendData",
           "EraseObj",
           "UpdateUserInv",
-          "UpdateUserSpell",
-          "SendData"
+          "UpdateUserSpell"
         ]
       }
     },
@@ -468,15 +424,13 @@
       "lineStart": 1609,
       "lineEnd": 1640,
       "annotations": {
-        "purpose": "Add a spell scroll to the user's spell book",
-        "notes": [
-          "Finds first empty spell slot. Uses obj.SpellType to determine which spell to inscribe. Spell book max is 50 slots."
-        ],
+        "purpose": "Add a spell scroll to the user\u0027s spell book",
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": [
-          "UpdateUserSpell",
-          "SendData"
+          "SendData",
+          "UpdateUserSpell"
         ]
       }
     },
@@ -489,9 +443,7 @@
       "lineEnd": 1675,
       "annotations": {
         "purpose": "Sync one or all inventory slots to the client",
-        "notes": [
-          "If updateall=False, syncs single slot. If True, syncs all 20 slots."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": [
@@ -508,9 +460,7 @@
       "lineEnd": 1711,
       "annotations": {
         "purpose": "Sync one or all spell book slots to the client",
-        "notes": [
-          "If updateall=False, syncs single slot. If True, syncs all 50 slots."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": [
@@ -527,9 +477,7 @@
       "lineEnd": 1731,
       "annotations": {
         "purpose": "Send a single inventory slot update to the client",
-        "notes": [
-          "SIS format: slot,objindex,name,amount,equipped,grhindex,value. Sends (None) for empty slots."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
           "SIS"
@@ -548,9 +496,7 @@
       "lineEnd": 1753,
       "annotations": {
         "purpose": "Send a single NPC inventory slot update to the client (for trading)",
-        "notes": [
-          "NIS format: slot,objindex,name,amount,equipped,grhindex,value,level. Includes level requirement."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
           "NIS"
@@ -568,16 +514,13 @@
       "lineStart": 1754,
       "lineEnd": 1785,
       "annotations": {
-        "purpose": "Send the GM help queue to a GM's client",
-        "notes": [
-          "Reads from Gmque.txt. GMQ format: helpnum,helpmsg,userindex,time,date,name."
-        ],
+        "purpose": "Send the GM help queue to a GM\u0027s client",
+        "notes": [],
         "status": "not-started",
         "sends": [
           "GMQ"
         ],
         "calls": [
-          "GetVar",
           "SendData"
         ]
       }
@@ -591,9 +534,7 @@
       "lineEnd": 1808,
       "annotations": {
         "purpose": "Send a single spell book slot update to the client",
-        "notes": [
-          "SPL format: slot,spellindex,name,grhindex,desc,needsmana. Sends (Empty) for empty slots."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
           "SPL"
@@ -612,15 +553,12 @@
       "lineEnd": 1837,
       "annotations": {
         "purpose": "Send all message board posts to the client",
-        "notes": [
-          "Reads from msgboard.txt. OST format: postnum,subject,postcontent,author."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
           "OST"
         ],
         "calls": [
-          "GetVar",
           "SendData"
         ]
       }
@@ -634,14 +572,11 @@
       "lineEnd": 1856,
       "annotations": {
         "purpose": "Write a new message board post",
-        "notes": [
-          "Appends to msgboard.txt, increments NumPOSTs counter."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": [
-          "WriteVar",
-          "GetVar"
+          "WriteVar"
         ]
       }
     },
@@ -654,14 +589,11 @@
       "lineEnd": 1877,
       "annotations": {
         "purpose": "Submit a GM help request",
-        "notes": [
-          "Appends to Gmque.txt with timestamp, increments NumHELPs counter."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": [
-          "WriteVar",
-          "GetVar"
+          "WriteVar"
         ]
       }
     },
@@ -674,18 +606,12 @@
       "lineEnd": 1902,
       "annotations": {
         "purpose": "Ban a player and kick them from the game",
-        "notes": [
-          "Writes ban to banned.txt using player's theid. Sends disconnect message to banned player."
-        ],
+        "notes": [],
         "status": "not-started",
-        "sends": [
-          "!!"
-        ],
+        "sends": [],
         "calls": [
           "WriteVar",
-          "GetVar",
-          "SendData",
-          "CloseSocket"
+          "SendData"
         ]
       }
     },
@@ -698,17 +624,16 @@
       "lineEnd": 1967,
       "annotations": {
         "purpose": "Drop an item from inventory onto the ground",
-        "notes": [
-          "Can only drop if ground tile is empty. Special handling for signs (obj 289): creates sign entry in signs.txt with SignOwner set to player's YourID."
-        ],
+        "notes": [],
         "status": "not-started",
-        "sends": [
-          "MOB"
-        ],
+        "sends": [],
         "calls": [
+          "SendData",
           "MakeObj",
           "WriteVar",
-          "SendData"
+          "RemoveInvItem",
+          "UpdateUserInv",
+          "UpdateUserSpell"
         ]
       }
     },
@@ -721,14 +646,10 @@
       "lineEnd": 1990,
       "annotations": {
         "purpose": "Remove an NPC from the world completely",
-        "notes": [
-          "Sets NPCActive=0, decrements NumNPCs/LastNPC, clears all NPC data."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": [
-          "EraseNPCChar"
-        ]
+        "calls": []
       }
     },
     {
@@ -740,21 +661,18 @@
       "lineEnd": 2158,
       "annotations": {
         "purpose": "Player attacks NPC: hit calculation, damage, skill improvement, reputation, NPC death",
-        "notes": [
-          "Swordmanship (Skill16) determines hit chance: <=30=1/3, <=50=1/2, >50=always hit. Damage = random(MinHIT,MaxHIT) - NPC.DEF/2, min 1. Makes NPC hostile on attack. Attacking guards = instant criminal (+60 min). On kill: gives EXP+gold, reputation changes (killing guard: -5 noble, +2 bendarr, +3 underworld; killing monster: +1 noble/common). Skills may improve (1/40 chance each swing for tactics/swordmanship/parrying)."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
           "PLW",
-          "CHC"
+          "@"
         ],
         "calls": [
-          "RandomNumber",
           "SendData",
           "BackstabNPC",
+          "CheckRep",
           "NPCDie",
           "CheckUserLevel",
-          "CheckRep",
           "SendUserStatsBox"
         ]
       }
@@ -768,15 +686,14 @@
       "lineEnd": 2251,
       "annotations": {
         "purpose": "NPC attacks player: hit calculation, damage, death check",
-        "notes": [
-          "Normal guards skip non-criminals. Chaotic guards (Guard=2) skip Dark Elves and Haakis. Tactics (Skill6) determines dodge: <=20=never dodge, <=50=1/2-1/3, >50=1/2. Damage = random(NPC.MinHIT,NPC.MaxHIT) - user.DEF/2. Plays gender-specific hurt sound. NPC.CanAttack flag prevents double-hits (reset by client AT4 message)."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
-          "PLW"
+          "@",
+          "PLW",
+          "@The"
         ],
         "calls": [
-          "RandomNumber",
           "SendData",
           "SendUserStatsBox",
           "UserDie"
@@ -792,18 +709,18 @@
       "lineEnd": 2410,
       "annotations": {
         "purpose": "PvP combat: hit calculation, damage, criminal flagging, death",
-        "notes": [
-          "Checks: both players must be >level 5, can't attack self, target can't be dead. Criminal flag if target not criminal and not in duel mode (+45 min). PK free zones block PvP. Damage same formula as UserAttackNPC. On kill: attacker gets EXP from victim, heavy reputation penalty (-20 noble, -5 overall, +5 bendarr)."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
+          "@",
           "PLW"
         ],
         "calls": [
-          "RandomNumber",
           "SendData",
-          "SendUserStatsBox",
+          "BackstabPC",
           "UserDie",
+          "CheckUserLevel",
+          "SendUserStatsBox",
           "CheckRep"
         ]
       }
@@ -816,16 +733,17 @@
       "lineStart": 2412,
       "lineEnd": 2454,
       "annotations": {
-        "purpose": "Route an attack to the correct handler based on what's adjacent",
-        "notes": [
-          "Checks adjacent tile in player's facing direction. If NPC found, calls UserAttackNPC. If player found, calls UserAttackUser. Otherwise 'nothing there to attack'."
-        ],
+        "purpose": "Route an attack to the correct handler based on what\u0027s adjacent",
+        "notes": [],
         "status": "not-started",
-        "sends": [],
+        "sends": [
+          "PLW"
+        ],
         "calls": [
+          "HeadtoPos",
+          "SendData",
           "UserAttackUser",
-          "UserAttackNPC",
-          "SendData"
+          "UserAttackNPC"
         ]
       }
     },
@@ -839,9 +757,7 @@
       "lineEnd": 2477,
       "annotations": {
         "purpose": "Look up a user index by connection ID",
-        "notes": [
-          "Function name collision with common variable name. Searches UserList for matching ConnID."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -857,9 +773,7 @@
       "lineEnd": 2499,
       "annotations": {
         "purpose": "Check if another user is already connected from the same IP",
-        "notes": [
-          "Returns True if duplicate IP found. Used to enforce AllowMultiLogins setting."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -875,9 +789,7 @@
       "lineEnd": 2520,
       "annotations": {
         "purpose": "Check if another user with the same name is already logged in",
-        "notes": [
-          "Returns True if duplicate name found. Prevents double-login."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -892,9 +804,7 @@
       "lineEnd": 2560,
       "annotations": {
         "purpose": "Offset a WorldPos by one tile in a given heading direction",
-        "notes": [
-          "N=Y-1, E=X+1, S=Y+1, W=X-1. Modifies the passed position in-place."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -909,13 +819,9 @@
       "lineEnd": 2573,
       "annotations": {
         "purpose": "Send a text summary of user stats via chat",
-        "notes": [
-          "Shows map, x, y, HP, STA, MAN, HIT, DEF, EXP, ELV. Used by /STATS command."
-        ],
+        "notes": [],
         "status": "not-started",
-        "sends": [
-          "@"
-        ],
+        "sends": [],
         "calls": [
           "SendData"
         ]
@@ -930,17 +836,13 @@
       "lineEnd": 2605,
       "annotations": {
         "purpose": "Send all NPCs and objects on a map to a newly arrived user",
-        "notes": [
-          "Iterates all NPCs on the map and calls MakeNPCChar. Iterates all tiles with objects and sends MOB. Called after zone transition."
-        ],
+        "notes": [],
         "status": "not-started",
-        "sends": [
-          "CHC",
-          "MOB"
-        ],
+        "sends": [],
         "calls": [
-          "SendData",
-          "MakeNPCChar"
+          "MakeUserChar",
+          "MakeNPCChar",
+          "MakeObj"
         ]
       }
     },
@@ -953,17 +855,16 @@
       "lineEnd": 2650,
       "annotations": {
         "purpose": "Move a user one tile in a direction, broadcast to map",
-        "notes": [
-          "Validates position with LegalPos. Updates MapData userindex on old and new tiles. Sends 'MP' (Move Player) with charindex and heading. Calls DoTileEvents for zone transitions and campfire detection."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
-          "MP"
+          "SUP",
+          "MOC"
         ],
         "calls": [
-          "LegalPos",
-          "DoTileEvents",
-          "SendData"
+          "HeadtoPos",
+          "SendData",
+          "DoTileEvents"
         ]
       }
     },
@@ -976,15 +877,13 @@
       "lineEnd": 2673,
       "annotations": {
         "purpose": "Move an NPC one tile in a direction, broadcast to map",
-        "notes": [
-          "Validates position. Updates MapData npcindex. Sends 'MN' (Move NPC) with charindex and heading."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
-          "MN"
+          "MOC"
         ],
         "calls": [
-          "LegalPos",
+          "HeadtoPos",
           "SendData"
         ]
       }
@@ -997,16 +896,13 @@
       "lineStart": 2675,
       "lineEnd": 2695,
       "annotations": {
-        "purpose": "Create and broadcast a user's character to all users on the map",
-        "notes": [
-          "Assigns CharIndex from CharList. CC format: charindex,body,head,heading,x,y,weaponanim,shieldanim,name. Broadcasts to all users on the map."
-        ],
+        "purpose": "Create and broadcast a user\u0027s character to all users on the map",
+        "notes": [],
         "status": "not-started",
         "sends": [
-          "CC"
+          "MAC"
         ],
         "calls": [
-          "NextOpenCharIndex",
           "SendData"
         ]
       }
@@ -1020,15 +916,12 @@
       "lineEnd": 2717,
       "annotations": {
         "purpose": "Create and broadcast an NPC character to the map",
-        "notes": [
-          "Same CC protocol as MakeUserChar. NPC gets a CharIndex just like players for rendering."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
-          "CC"
+          "MAC"
         ],
         "calls": [
-          "NextOpenCharIndex",
           "SendData"
         ]
       }
@@ -1043,14 +936,10 @@
       "lineEnd": 2758,
       "annotations": {
         "purpose": "Check if a tile position is walkable (not blocked, not occupied, in bounds)",
-        "notes": [
-          "Checks: in map bounds, not blocked, no other user on tile, no NPC on tile, not locked by another player (checks Locked vs player's YourID)."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": [
-          "InMapBounds"
-        ]
+        "calls": []
       }
     },
     {
@@ -1062,15 +951,12 @@
       "lineEnd": 2774,
       "annotations": {
         "purpose": "Send help text to a player",
-        "notes": [
-          "Reads from Help.dat file and sends as chat messages."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
           "@"
         ],
         "calls": [
-          "GetVar",
           "SendData"
         ]
       }
@@ -1083,13 +969,11 @@
       "lineStart": 2775,
       "lineEnd": 2808,
       "annotations": {
-        "purpose": "Remove a user's character from the world and broadcast",
-        "notes": [
-          "Clears MapData userindex. Frees CharList slot (decrements NumChars/LastChar). BC (Bye Character) sent with charindex."
-        ],
+        "purpose": "Remove a user\u0027s character from the world and broadcast",
+        "notes": [],
         "status": "not-started",
         "sends": [
-          "BC"
+          "ERC"
         ],
         "calls": [
           "SendData"
@@ -1104,13 +988,11 @@
       "lineStart": 2810,
       "lineEnd": 2839,
       "annotations": {
-        "purpose": "Remove an NPC's character from the world and broadcast",
-        "notes": [
-          "Same BC protocol as EraseUserChar. Clears MapData npcindex."
-        ],
+        "purpose": "Remove an NPC\u0027s character from the world and broadcast",
+        "notes": [],
         "status": "not-started",
         "sends": [
-          "BC"
+          "ERC"
         ],
         "calls": [
           "SendData"
@@ -1126,17 +1008,20 @@
       "lineEnd": 2980,
       "annotations": {
         "purpose": "Handle left-click inspection of a tile: show info about players, NPCs, objects, signs",
-        "notes": [
-          "Shows player info: name+desc+class+reputation rank, criminal status (red name). Shows NPC info: name+desc. Shows object info: name+evaluate. Reads sign content from signs.txt. Plays SOUND_CLICK."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
-          "@",
-          "PLW"
+          "SII",
+          "SGN",
+          "TGT"
         ],
         "calls": [
           "SendData",
-          "GetVar"
+          "UpdateUserMap",
+          "SetCamp",
+          "SendPostings",
+          "RoastMeat",
+          "Pickpocket"
         ]
       }
     },
@@ -1149,20 +1034,20 @@
       "lineEnd": 3100,
       "annotations": {
         "purpose": "Teleport a user to a new map position, handling zone transitions",
-        "notes": [
-          "Complete zone transition: erase from old map, update user position, create on new map, send all NPCs/objects on new map, update position, play zone music. Saves user data on zone change."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
-          "SUP"
+          "SCM",
+          "SUC",
+          "PLM"
         ],
         "calls": [
           "EraseUserChar",
+          "SendData",
           "MakeUserChar",
           "UpdateUserMap",
-          "SaveUser",
-          "SendData",
-          "SendUserStatsBox"
+          "WarpNPCChar",
+          "WriteVar"
         ]
       }
     },
@@ -1175,9 +1060,7 @@
       "lineEnd": 3126,
       "annotations": {
         "purpose": "Teleport an NPC to a new position (used for respawn)",
-        "notes": [
-          "Erase from old position, update NPC position, create at new position."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": [
@@ -1194,13 +1077,11 @@
       "lineStart": 3127,
       "lineEnd": 3137,
       "annotations": {
-        "purpose": "Send current HP/STA/MAN/HIT/DEF/EXP/ELU/GLD/Food/Drink/PracticePoints to client",
-        "notes": [
-          "ASS format: HP,MaxHP,MAN,MaxMAN,STA,MaxSTA,GLD,EXP,ELU,Food,Drink,MinHIT,MaxHIT,DEF,PracticePoints. Main stat update message."
-        ],
+        "purpose": "Send current stats (HP/STA/MAN/HIT/DEF/EXP/GLD/etc.) to client",
+        "notes": [],
         "status": "not-started",
         "sends": [
-          "ASS"
+          "SST"
         ],
         "calls": [
           "SendData"
@@ -1216,14 +1097,11 @@
       "lineEnd": 3192,
       "annotations": {
         "purpose": "Handle NPC trading: send NPC inventory to client for buy/sell",
-        "notes": [
-          "Sends all 40 NPC inventory slots to client. Client displays trading UI."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": [
-          "ChangeNPCInv",
-          "SendData"
+          "ChangeNPCInv"
         ]
       }
     },
@@ -1236,9 +1114,7 @@
       "lineEnd": 3198,
       "annotations": {
         "purpose": "Give an item to an NPC",
-        "notes": [
-          "Stub function - minimal implementation."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []

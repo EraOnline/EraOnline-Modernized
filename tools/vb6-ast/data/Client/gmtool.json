@@ -591,7 +591,10 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS",
+          "Gmcommandlist"
+        ]
       }
     },
     {
@@ -605,7 +608,10 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "AddtoRichTextBox",
+          "PlayWaveDS"
+        ]
       }
     },
     {
@@ -618,8 +624,14 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "BOE"
+        ],
+        "calls": [
+          "AddtoRichTextBox",
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -632,8 +644,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "QUE"
+        ],
+        "calls": [
+          "SendData",
+          "PlayWaveDS"
+        ]
       }
     },
     {
@@ -646,8 +663,14 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "IMM",
+          "MMM"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -660,8 +683,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "BAN"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -674,8 +701,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "HAI"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -688,8 +719,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "NAA"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -702,8 +737,14 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "GIL"
+        ],
+        "calls": [
+          "AddtoRichTextBox",
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -716,8 +757,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "TGM"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -731,7 +777,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS"
+        ]
       }
     },
     {
@@ -745,7 +793,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS"
+        ]
       }
     },
     {
@@ -758,8 +808,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "TEL"
+        ],
+        "calls": [
+          "MsgBox",
+          "SendData"
+        ]
       }
     },
     {
@@ -772,8 +827,14 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "CRE"
+        ],
+        "calls": [
+          "AddtoRichTextBox",
+          "MsgBox",
+          "SendData"
+        ]
       }
     },
     {
@@ -786,8 +847,14 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "RET"
+        ],
+        "calls": [
+          "AddtoRichTextBox",
+          "SendData",
+          "PlayWaveDS"
+        ]
       }
     },
     {
@@ -800,8 +867,14 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "GVG"
+        ],
+        "calls": [
+          "AddtoRichTextBox",
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -814,8 +887,17 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "CH1",
+          "CH2",
+          "CH3",
+          "CH4"
+        ],
+        "calls": [
+          "MsgBox",
+          "SendData",
+          "PlayWaveDS"
+        ]
       }
     },
     {

@@ -682,8 +682,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "DRP"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -738,8 +742,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "CMP"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -766,8 +774,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "STP"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -794,8 +806,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "STA"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -822,8 +838,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "CRM"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -836,8 +856,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "XBX"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -850,8 +874,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "DRN",
+          "EAT"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -864,8 +893,14 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "BTL",
+          "COO"
+        ],
+        "calls": [
+          "MP3Player",
+          "SendData"
+        ]
       }
     },
     {
@@ -879,7 +914,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "SendTxt"
+        ]
       }
     },
     {
@@ -892,8 +929,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "ATT"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -920,8 +961,18 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "LC",
+          "RC",
+          "BOO",
+          "FSH",
+          "MIN",
+          "CHP"
+        ],
+        "calls": [
+          "ConvertCPtoTP",
+          "SendData"
+        ]
       }
     },
     {
@@ -976,8 +1027,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "GET"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -1032,8 +1087,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "GET"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -1060,8 +1120,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "UPS"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -1075,7 +1140,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS"
+        ]
       }
     },
     {
@@ -1088,8 +1155,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "UCS"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -1102,8 +1174,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "GET"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -1130,8 +1207,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "REG"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -1145,7 +1226,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayMidi"
+        ]
       }
     },
     {
@@ -1158,8 +1241,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "AT4"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -1228,8 +1315,16 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "\u0027",
+          "-",
+          "\\",
+          ":",
+          ";"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -1243,7 +1338,10 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "Login",
+          "SetConnected"
+        ]
       }
     },
     {
@@ -1271,7 +1369,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "MsgBox"
+        ]
       }
     },
     {
@@ -1285,7 +1385,10 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "Socket1",
+          "HandleData"
+        ]
       }
     },
     {
@@ -1298,8 +1401,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "USE"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -1313,7 +1420,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS"
+        ]
       }
     }
   ]

@@ -300,7 +300,14 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "Me",
+          "Line",
+          "AddText",
+          "Kill",
+          "Put",
+          "AnalyzeData"
+        ]
       }
     },
     {
@@ -384,7 +391,11 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "AddText",
+          "UpdateInfo",
+          "SaveVersion"
+        ]
       }
     },
     {
@@ -398,7 +409,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "GetFile"
+        ]
       }
     },
     {
@@ -412,7 +425,10 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "AddText",
+          "Put"
+        ]
       }
     },
     {
@@ -426,7 +442,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "Write"
+        ]
       }
     },
     {

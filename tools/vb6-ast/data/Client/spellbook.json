@@ -130,7 +130,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS"
+        ]
       }
     },
     {
@@ -157,8 +159,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "CST"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -186,7 +192,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PopupMenu"
+        ]
       }
     }
   ]

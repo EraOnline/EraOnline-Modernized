@@ -16,16 +16,11 @@
       "lineStart": 3,
       "lineEnd": 32,
       "annotations": {
-        "purpose": "Validate user\u0027s theid against ban list",
-        "notes": [
-          "Reads banned.txt, compares theid. Disconnects with ban message if found."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": [
-          "GetVar",
-          "SendData",
-          "CloseSocket"
+          "SendData"
         ]
       }
     },
@@ -37,10 +32,8 @@
       "lineStart": 34,
       "lineEnd": 49,
       "annotations": {
-        "purpose": "Check if a hostile NPC should attack a specific player",
-        "notes": [
-          "Checks player level vs NPC level - prevents high-level NPCs from chasing low-level players (the \u0027spiderlings chasing warriors\u0027 fix)."
-        ],
+        "purpose": "Check if a hostile NPC should attack a specific player (level gating)",
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -55,10 +48,7 @@
       "lineStart": 52,
       "lineEnd": 72,
       "annotations": {
-        "purpose": "Check if another user is already connected from the same IP",
-        "notes": [
-          "Returns True if duplicate IP found. Used to enforce AllowMultiLogins setting."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -73,10 +63,7 @@
       "lineStart": 73,
       "lineEnd": 93,
       "annotations": {
-        "purpose": "Check if another user with the same name is already logged in",
-        "notes": [
-          "Returns True if duplicate name found. Prevents double-login."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -91,12 +78,12 @@
       "lineEnd": 155,
       "annotations": {
         "purpose": "Evaluate reputation and assign rank title based on OverallRep",
-        "notes": [
-          "Rank thresholds: \u003C100=The Dreaded, \u003C200=The Hated, \u003C300=The Scum, \u003C400=The Suspicious, \u003C600=The Respected, \u003C700=The Admired, \u003C800=The Distinguished, \u003C900=The Beloved, \u003E=900=The Noble. Writes RepRank to user community data."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "SendUserStatsBox"
+        ]
       }
     },
     {
@@ -110,7 +97,10 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "SendData",
+          "SendUserStatsBox"
+        ]
       }
     },
     {
@@ -121,13 +111,11 @@
       "lineStart": 309,
       "lineEnd": 355,
       "annotations": {
-        "purpose": "Check if user has enough EXP to level up, apply stat bonuses and training points",
-        "notes": [
-          "ELU scaling: 2.0x at L1-4, decreasing to 1.4x at L30\u002B. Grants \u002B1 HP, \u002B2 STA, \u002B15 MAN, \u002B1 HIT per level. Awards 5 training points. Plays SOUND_SPELLEFFECT1 on level up."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [
-          "PLW"
+          "PLW",
+          "PL3"
         ],
         "calls": [
           "SendData",

@@ -299,8 +299,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "!!"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -328,7 +332,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "SaveWorld"
+        ]
       }
     },
     {
@@ -370,7 +376,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "Restart"
+        ]
       }
     },
     {
@@ -383,8 +391,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "!"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -397,8 +409,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "!"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {

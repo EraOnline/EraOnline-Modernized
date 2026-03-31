@@ -377,7 +377,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "Restart"
+        ]
       }
     },
     {
@@ -404,8 +406,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "RAI",
+          "PLW"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -419,7 +426,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "LoadSpellData"
+        ]
       }
     },
     {
@@ -433,7 +442,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "LoadOBJData"
+        ]
       }
     },
     {
@@ -446,8 +457,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "PLW",
+          "SAI"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -475,7 +491,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "WriteVar"
+        ]
       }
     },
     {
@@ -489,7 +507,12 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "LoadSini",
+          "LoadSpellData",
+          "LoadOBJData",
+          "LoadMapData"
+        ]
       }
     },
     {
@@ -503,7 +526,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "Socket1"
+        ]
       }
     },
     {
@@ -517,7 +542,12 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "SendData",
+          "CloseSocket",
+          "DoTileEvents",
+          "NPCAI"
+        ]
       }
     },
     {
@@ -544,8 +574,14 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "RAI",
+          "PLW",
+          "SAI"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -573,7 +609,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "CloseSocket"
+        ]
       }
     },
     {
@@ -601,7 +639,11 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "Socket2",
+          "HandleData",
+          "Errorhandler"
+        ]
       }
     },
     {

@@ -148,7 +148,10 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS",
+          "MsgBox"
+        ]
       }
     },
     {
@@ -162,7 +165,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS"
+        ]
       }
     },
     {

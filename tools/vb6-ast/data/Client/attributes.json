@@ -390,8 +390,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "EAT"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {
@@ -418,8 +422,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "DRK"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     },
     {

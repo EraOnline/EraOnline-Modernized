@@ -282,7 +282,12 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "EnumDisplaySettings",
+          "ChangeDisplaySettings",
+          "ERROR_HANDLER",
+          "MsgBox"
+        ]
       }
     },
     {
@@ -296,7 +301,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "ChangeRes"
+        ]
       }
     },
     {
@@ -310,7 +317,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "ChangeRes"
+        ]
       }
     }
   ]

@@ -1289,24 +1289,16 @@
       "lineStart": 136,
       "lineEnd": 310,
       "annotations": {
-        "purpose": "Create a new character: assign random head, set starting stats/inventory, save to .chr file, connect",
-        "notes": [
-          "Duplicate of TCP.bas - use TCP as canonical",
-          "Validates char name doesn\u0027t exist. Race-specific random heads: Human M:6-15 F:16-25, Haaki M:26-35 F:36-45, Wood Elf M:46-55 F:56-65, Dark Elf M:66-74 F:75-84. Starting stats: 30HP, 5STA, 4MaxHIT/2MinHIT, ELU=300, Level 1. Starting items: rusty dagger(33), 5 water flasks(22), 5 breads(95), starting suit(145). Sets 3 specialized skills. YourID = random 100-99999."
-        ],
-        "status": "skipped",
-        "sends": [
-          "!!",
-          "PL3"
-        ],
+        "purpose": "Create a new character: assign random head, set starting stats/inventory, save, connect",
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
         "calls": [
           "SendData",
-          "CloseSocket",
+          "GiveSkills",
           "SaveUser",
           "ConnectUser",
-          "CheckID",
-          "GiveSkills",
-          "RandomNumber"
+          "CheckID"
         ]
       }
     },
@@ -1319,11 +1311,8 @@
       "lineEnd": 334,
       "annotations": {
         "purpose": "Disconnect a user: save data, clean up socket, remove from world",
-        "notes": [
-          "Duplicate of TCP.bas - use TCP as canonical",
-          "Calls CloseUser if logged in, disconnects SocketWrench control, unloads control array element."
-        ],
-        "status": "skipped",
+        "notes": [],
+        "status": "not-started",
         "sends": [],
         "calls": [
           "CloseUser"
@@ -1338,12 +1327,9 @@
       "lineStart": 335,
       "lineEnd": 445,
       "annotations": {
-        "purpose": "Route a message to recipients based on sndRoute constant",
-        "notes": [
-          "Duplicate of TCP.bas - use TCP as canonical",
-          "Core networking function. Routes: ToIndex(0)=single user, ToAll(1)=everyone, ToMap(2)=all on map, ToPCArea(3)=nearby users, ToNone(4)=nobody, ToAllButIndex(5)=all except one, ToMapButIndex(6)=all on map except one, ToGM(7)=all online GMs. Appends ENDC delimiter. ToPCArea checks 13-tile X radius."
-        ],
-        "status": "skipped",
+        "purpose": "Route a message to recipients based on sndRoute constant (ToIndex/ToAll/ToMap/ToPCArea/etc.)",
+        "notes": [],
+        "status": "not-started",
         "sends": [],
         "calls": []
       }
@@ -1356,31 +1342,35 @@
       "lineStart": 446,
       "lineEnd": 639,
       "annotations": {
-        "purpose": "Log in an existing character: load data, validate password, place in world",
-        "notes": [
-          "Duplicate of TCP.bas - use TCP as canonical",
-          "Validates password and client version. Checks for ban by theid. Loads full character state from .chr file. Places character at starting position for their town. Broadcasts arrival to other players. Sends full inventory and spell book."
-        ],
-        "status": "skipped",
+        "notes": [],
+        "status": "not-started",
         "sends": [
-          "!!",
-          "OK",
-          "CC",
-          "SUP",
-          "ASS",
-          "SIS",
-          "SPL"
+          "WR2",
+          "WR1",
+          "SUI",
+          "SCM",
+          "SMN",
+          "PLM",
+          "SUC",
+          "RAI",
+          "TIP"
         ],
         "calls": [
+          "SendData",
+          "WriteVar",
+          "LoadUserInit",
           "LoadUserStats",
-          "SaveUser",
-          "MakeUserChar",
+          "ClosestLegalPos",
+          "UpdateUserMap",
+          "SendUserStatsBox",
           "UpdateUserInv",
           "UpdateUserSpell",
-          "SendUserStatsBox",
-          "SendData",
-          "CloseSocket",
-          "WarpUserChar"
+          "CheckUserLevel",
+          "CheckRep",
+          "MakeUserChar",
+          "RefreshUserListBox",
+          "WarpNPCChar",
+          "CheckID"
         ]
       }
     },
@@ -1392,12 +1382,17 @@
       "lineStart": 640,
       "lineEnd": 676,
       "annotations": {
-        "notes": [
-          "Duplicate of TCP.bas - use TCP as canonical"
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "WR2",
+          "WR1"
         ],
-        "status": "skipped",
-        "sends": [],
-        "calls": []
+        "calls": [
+          "SendData",
+          "WriteVar",
+          "Kill"
+        ]
       }
     },
     {
@@ -1408,17 +1403,13 @@
       "lineStart": 677,
       "lineEnd": 766,
       "annotations": {
-        "purpose": "Remove a user from the world on disconnect",
-        "notes": [
-          "Duplicate of TCP.bas - use TCP as canonical",
-          "Saves character, removes from map, broadcasts departure. Handles tamed animal cleanup. Clears meditation aura if meditating."
-        ],
-        "status": "skipped",
+        "notes": [],
+        "status": "not-started",
         "sends": [],
         "calls": [
-          "EraseUserChar",
           "SaveUser",
-          "SendData"
+          "EraseUserChar",
+          "RefreshUserListBox"
         ]
       }
     },
@@ -1430,25 +1421,90 @@
       "lineStart": 768,
       "lineEnd": 3227,
       "annotations": {
-        "purpose": "Main command router: parse all client messages and dispatch to handlers",
-        "notes": [
-          "Duplicate of TCP.bas - use TCP as canonical",
-          "~900 lines. Parses message prefix and routes to appropriate handler. Key prefixes: LOGIN/NLOGIN/ERASE (auth), M (move), LC/RC (clicks), ; (say), - (shout), : (emote), BTL (battle), QIT (quit), /commands (slash commands). Ghost state (status=1) converts speech to \u0027oooOO\u0027. All /commands are UCase compared. Handles GM commands separately (checks WizCheck)."
-        ],
-        "status": "skipped",
+        "purpose": "Main command router: parse all client messages and dispatch to handlers (~900 lines)",
+        "notes": [],
+        "status": "not-started",
         "sends": [
-          "@",
-          "!!",
+          "PL3",
           "SUP",
-          "DEA",
+          "@",
           "PLW",
-          "CHC",
-          "SIS",
-          "NIS",
-          "SPL",
-          "ASS"
+          "AT1",
+          "DOT",
+          "GTO",
+          "SAI",
+          "RAI",
+          "!"
         ],
-        "calls": []
+        "calls": [
+          "SendData",
+          "EraseChar",
+          "ConnectUser",
+          "ConnectNewUser",
+          "SendUserStatsBox",
+          "SaveUser",
+          "ChangeUserChar",
+          "LookatTile",
+          "MoveUserChar",
+          "PostHelp",
+          "GetObj",
+          "RegainMana",
+          "DropObj",
+          "UpdateUserInv",
+          "UseInvItem",
+          "CastSpellAtNPC",
+          "UpdateUserSpell",
+          "CastSpellAtPC",
+          "RemoveInvItem",
+          "NpcGive",
+          "Evaluate",
+          "DropGold",
+          "NPCSellItem",
+          "NPCBuyItem",
+          "SendUserStatsTxt",
+          "UserAttack",
+          "CloseSocket",
+          "ReportBug",
+          "Meditate",
+          "SendHelp",
+          "SendPostings",
+          "Mine",
+          "Fish",
+          "Chop",
+          "NpcTrade",
+          "NpcTrain",
+          "Pray",
+          "Duel",
+          "NpcHeal",
+          "CampHeal",
+          "Consider",
+          "NpcRessurect",
+          "Disguise",
+          "WriteVar",
+          "Hide",
+          "Unhide",
+          "OpenBattlemode",
+          "EndBattlemode",
+          "PostMessage",
+          "BankDeposit",
+          "BankBalance",
+          "BankWithdraw",
+          "Donate",
+          "Gossip",
+          "TameAnimal",
+          "Transfer",
+          "DiscardAnimal",
+          "MakeClan",
+          "Kill",
+          "WarpUserChar",
+          "SendGmQue",
+          "KickBan",
+          "CheckUserLevel",
+          "MakeObj",
+          "Restart",
+          "WarpNPCChar",
+          "WipeJunk"
+        ]
       }
     }
   ]

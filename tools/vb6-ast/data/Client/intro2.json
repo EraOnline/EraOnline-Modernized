@@ -124,7 +124,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayMidi"
+        ]
       }
     },
     {
@@ -166,7 +168,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "MP3Player"
+        ]
       }
     }
   ]

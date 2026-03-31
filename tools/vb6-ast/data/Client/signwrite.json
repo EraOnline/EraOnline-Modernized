@@ -86,8 +86,12 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "WRI"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     }
   ]

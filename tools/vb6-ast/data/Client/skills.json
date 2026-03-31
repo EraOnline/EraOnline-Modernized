@@ -908,8 +908,14 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "PI1",
+          "PI2"
+        ],
+        "calls": [
+          "AddtoRichTextBox",
+          "SendData"
+        ]
       }
     },
     {
@@ -922,8 +928,14 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "HHH",
+          "UHD"
+        ],
+        "calls": [
+          "AddtoRichTextBox",
+          "SendData"
+        ]
       }
     },
     {
@@ -936,8 +948,14 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "DGU",
+          "UGU"
+        ],
+        "calls": [
+          "AddtoRichTextBox",
+          "SendData"
+        ]
       }
     },
     {
@@ -951,7 +969,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS"
+        ]
       }
     }
   ]

@@ -16,25 +16,22 @@
       "lineStart": 5,
       "lineEnd": 861,
       "annotations": {
-        "purpose": "Main command router: parse all client messages and dispatch to handlers",
-        "notes": [
-          "Duplicate of TCP.bas - use TCP as canonical",
-          "~900 lines. Parses message prefix and routes to appropriate handler. Key prefixes: LOGIN/NLOGIN/ERASE (auth), M (move), LC/RC (clicks), ; (say), - (shout), : (emote), BTL (battle), QIT (quit), /commands (slash commands). Ghost state (status=1) converts speech to \u0027oooOO\u0027. All /commands are UCase compared. Handles GM commands separately (checks WizCheck)."
-        ],
-        "status": "skipped",
-        "sends": [
-          "@",
-          "!!",
-          "SUP",
-          "DEA",
-          "PLW",
-          "CHC",
-          "SIS",
-          "NIS",
-          "SPL",
-          "ASS"
-        ],
-        "calls": []
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": [
+          "AddtoRichTextBox",
+          "MsgBox",
+          "SwitchMap",
+          "MakeChar",
+          "EraseChar",
+          "MoveCharbyPos",
+          "InitGrh",
+          "DrawGrhtoHdc",
+          "PlayMidi",
+          "PlayWaveDS",
+          "BookForm"
+        ]
       }
     },
     {
@@ -45,12 +42,8 @@
       "lineStart": 863,
       "lineEnd": 879,
       "annotations": {
-        "purpose": "Route a message to recipients based on sndRoute constant",
-        "notes": [
-          "Duplicate of TCP.bas - use TCP as canonical",
-          "Core networking function. Routes: ToIndex(0)=single user, ToAll(1)=everyone, ToMap(2)=all on map, ToPCArea(3)=nearby users, ToNone(4)=nobody, ToAllButIndex(5)=all except one, ToMapButIndex(6)=all on map except one, ToGM(7)=all online GMs. Appends ENDC delimiter. ToPCArea checks 13-tile X radius."
-        ],
-        "status": "skipped",
+        "notes": [],
+        "status": "not-started",
         "sends": [],
         "calls": []
       }
@@ -65,8 +58,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "ERASE",
+          "LOGIN"
+        ],
+        "calls": [
+          "SendData"
+        ]
       }
     }
   ]

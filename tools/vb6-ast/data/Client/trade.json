@@ -241,8 +241,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "BUY"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -270,7 +275,10 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS",
+          "Me"
+        ]
       }
     },
     {
@@ -283,8 +291,13 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "SLL"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "SendData"
+        ]
       }
     },
     {
@@ -298,7 +311,11 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "InitGrh",
+          "DrawGrhtoHdc",
+          "Randomize"
+        ]
       }
     },
     {
@@ -312,7 +329,11 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "InitGrh",
+          "DrawGrhtoHdc",
+          "Randomize"
+        ]
       }
     }
   ]

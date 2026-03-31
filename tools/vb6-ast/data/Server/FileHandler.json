@@ -16,16 +16,10 @@
       "lineStart": 4,
       "lineEnd": 59,
       "annotations": {
-        "purpose": "Load all item definitions from Obj.dat into ObjData array",
-        "notes": [
-          "Reads NumOBJs count, then loads all properties for each object: name, type, graphics, stats, class restrictions, crafting requirements, etc.",
-          "Duplicate of FileIO.bas - use FileIO as canonical"
-        ],
-        "status": "skipped",
+        "notes": [],
+        "status": "not-started",
         "sends": [],
-        "calls": [
-          "GetVar"
-        ]
+        "calls": []
       }
     },
     {
@@ -36,16 +30,10 @@
       "lineStart": 61,
       "lineEnd": 109,
       "annotations": {
-        "purpose": "Load all spell definitions from Spells.dat into SpellData array",
-        "notes": [
-          "Reads NumSpells, loads: name, desc, schools (1-3), graphic effects, sound, mana cost, stat effects (give/heal/damage HP/MAN/STA), special effects (invisibility, teleport, summon, paralyze, resurrect).",
-          "Duplicate of FileIO.bas - use FileIO as canonical"
-        ],
-        "status": "skipped",
+        "notes": [],
+        "status": "not-started",
         "sends": [],
-        "calls": [
-          "GetVar"
-        ]
+        "calls": []
       }
     },
     {
@@ -56,16 +44,10 @@
       "lineStart": 110,
       "lineEnd": 200,
       "annotations": {
-        "purpose": "Load a character\u0027s stats/skills/flags/community from .chr file",
-        "notes": [
-          "Reads [STATS], [FLAGS], [Community], [SKILLS] sections from INI-format char file. All 28 skills loaded individually (Skill1-Skill28). Loads SpecSkill selections, criminal status, reputation, etc.",
-          "Duplicate of FileIO.bas - use FileIO as canonical"
-        ],
-        "status": "skipped",
+        "notes": [],
+        "status": "not-started",
         "sends": [],
-        "calls": [
-          "GetVar"
-        ]
+        "calls": []
       }
     },
     {
@@ -76,16 +58,10 @@
       "lineStart": 202,
       "lineEnd": 287,
       "annotations": {
-        "purpose": "Load character identity data (name, password, race, class, gender, etc.) from .chr file",
-        "notes": [
-          "Reads [INIT] section: Name, Password, Class, Race, Gender, Email, theid, Head, Body, etc. Also loads [INVENTORY] and [SPELLS] sections.",
-          "Duplicate of FileIO.bas - use FileIO as canonical"
-        ],
-        "status": "skipped",
+        "notes": [],
+        "status": "not-started",
         "sends": [],
-        "calls": [
-          "GetVar"
-        ]
+        "calls": []
       }
     },
     {
@@ -97,12 +73,8 @@
       "lineStart": 291,
       "lineEnd": 311,
       "annotations": {
-        "purpose": "Read a value from an INI-format file using Windows API",
-        "notes": [
-          "Wrapper around GetPrivateProfileString API. Core data access function used everywhere.",
-          "Duplicate of FileIO.bas - use FileIO as canonical"
-        ],
-        "status": "skipped",
+        "notes": [],
+        "status": "not-started",
         "sends": [],
         "calls": []
       }
@@ -115,14 +87,14 @@
       "lineStart": 313,
       "lineEnd": 417,
       "annotations": {
-        "purpose": "Load all map tiles from binary .map files",
-        "notes": [
-          "Reads map files from Maps/ directory. Each map is 100x100 tiles with blocked flag, tile exits, and graphic layers. Binary format.",
-          "Duplicate of FileIO.bas - use FileIO as canonical"
-        ],
-        "status": "skipped",
+        "notes": [],
+        "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "Seek",
+          "Get",
+          "MakeNPCChar"
+        ]
       }
     },
     {
@@ -133,16 +105,10 @@
       "lineStart": 419,
       "lineEnd": 536,
       "annotations": {
-        "purpose": "Load server configuration from Server.ini",
-        "notes": [
-          "Loads: port, max users, client version, starting city positions (Castlefall, Bernvillage, etc.), wizard list, season, era, weather settings, idle limits.",
-          "Duplicate of FileIO.bas - use FileIO as canonical"
-        ],
-        "status": "skipped",
+        "notes": [],
+        "status": "not-started",
         "sends": [],
-        "calls": [
-          "GetVar"
-        ]
+        "calls": []
       }
     },
     {
@@ -153,12 +119,8 @@
       "lineStart": 538,
       "lineEnd": 547,
       "annotations": {
-        "purpose": "Write a value to an INI-format file using Windows API",
-        "notes": [
-          "Wrapper around WritePrivateProfileString API. Used for saving characters, posting messages, etc.",
-          "Duplicate of FileIO.bas - use FileIO as canonical"
-        ],
-        "status": "skipped",
+        "notes": [],
+        "status": "not-started",
         "sends": [],
         "calls": []
       }
@@ -171,12 +133,8 @@
       "lineStart": 549,
       "lineEnd": 688,
       "annotations": {
-        "purpose": "Save a character\u0027s complete state to .chr file",
-        "notes": [
-          "Writes all sections: [INIT] (name/password/class/race/gender/email/etc), [STATS], [FLAGS], [SKILLS], [Community], [INVENTORY] (20 slots), [SPELLS] (50 slots). Called on /SAVE, zone change, and disconnect.",
-          "Duplicate of FileIO.bas - use FileIO as canonical"
-        ],
-        "status": "skipped",
+        "notes": [],
+        "status": "not-started",
         "sends": [],
         "calls": [
           "WriteVar"
@@ -191,14 +149,14 @@
       "lineStart": 689,
       "lineEnd": 744,
       "annotations": {
-        "purpose": "Save current world state (signs, locks) to map files",
-        "notes": [
-          "Persists runtime changes to map data like sign content and locked tiles.",
-          "Duplicate of FileIO.bas - use FileIO as canonical"
-        ],
-        "status": "skipped",
+        "notes": [],
+        "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "Kill",
+          "Seek",
+          "Put"
+        ]
       }
     },
     {
@@ -210,10 +168,7 @@
       "lineStart": 747,
       "lineEnd": 759,
       "annotations": {
-        "purpose": "Check if a file exists on disk",
-        "notes": [
-          "Uses Dir() function to check file existence."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -229,9 +184,7 @@
       "lineEnd": 793,
       "annotations": {
         "purpose": "Parse a delimited string and return the Nth field",
-        "notes": [
-          "Used to parse comma-separated protocol messages. Splits string by delimiter character (usually char 44 = comma) and returns the field at the specified position. Core protocol parsing utility."
-        ],
+        "notes": [],
         "status": "not-started",
         "sends": [],
         "calls": []

@@ -186,8 +186,14 @@
       "annotations": {
         "notes": [],
         "status": "not-started",
-        "sends": [],
-        "calls": []
+        "sends": [
+          "^"
+        ],
+        "calls": [
+          "PlayWaveDS",
+          "MsgBox",
+          "SendData"
+        ]
       }
     },
     {
@@ -201,7 +207,9 @@
         "notes": [],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "PlayWaveDS"
+        ]
       }
     }
   ]
