@@ -14,7 +14,10 @@
       "lineStart": 4,
       "lineEnd": 46,
       "annotations": {
-        "notes": [],
+        "purpose": "Convert a click pixel position to a tile position",
+        "notes": [
+          "Translates screen coordinates (relative to the game viewport) to world tile coordinates based on current scroll position."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -28,7 +31,10 @@
       "lineStart": 48,
       "lineEnd": 247,
       "annotations": {
-        "notes": [],
+        "purpose": "Client startup: init DirectDraw, load all data, show login screen",
+        "notes": [
+          "Complete initialization sequence: set resolution, init vars, borders, create DirectDraw primary surface \u002B back buffer \u002B clipper, load Grh data, load body/head/weapon/shield animations, download server address from erlingellingsen.com, show login form. Back buffer size = (XWindow \u002B 2*screenbuffer) * TileSizeX pixels."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -42,10 +48,16 @@
       "lineStart": 250,
       "lineEnd": 290,
       "annotations": {
-        "notes": [],
+        "purpose": "Create a character representation on the client from server CC message",
+        "notes": [
+          "Parses CC message: charindex,body,head,heading,x,y,weaponanim,shieldanim,name. Creates Char struct with body/head/weapon/shield data for rendering. Called for both players and NPCs."
+        ],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "NextOpenChar",
+          "InitGrh"
+        ]
       }
     },
     {
@@ -70,8 +82,10 @@
       "lineStart": 352,
       "lineEnd": 368,
       "annotations": {
-        "notes": [],
-        "status": "not-started",
+        "notes": [
+          "Duplicate of TCP.bas - use TCP as canonical"
+        ],
+        "status": "skipped",
         "sends": [],
         "calls": []
       }
@@ -84,7 +98,10 @@
       "lineStart": 370,
       "lineEnd": 390,
       "annotations": {
-        "notes": [],
+        "purpose": "Initialize a Grh (graphic) struct with animation data from GrhData",
+        "notes": [
+          "Sets up frame counter, speed counter, started flag for sprite animation."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -98,7 +115,10 @@
       "lineStart": 392,
       "lineEnd": 437,
       "annotations": {
-        "notes": [],
+        "purpose": "Start a character\u0027s movement animation in a heading direction",
+        "notes": [
+          "Sets up the pixel offset and walk animation for smooth tile-to-tile movement. Called when server broadcasts a move."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -112,7 +132,10 @@
       "lineStart": 439,
       "lineEnd": 482,
       "annotations": {
-        "notes": [],
+        "purpose": "Smoothly animate a character\u0027s movement between tiles",
+        "notes": [
+          "Handles pixel-level movement offset for smooth walking animation between tiles. Updates MoveOffset, triggers walk animation frames."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -126,7 +149,10 @@
       "lineStart": 484,
       "lineEnd": 526,
       "annotations": {
-        "notes": [],
+        "purpose": "Scroll the viewport to follow the player character",
+        "notes": [
+          "Centers the view on the player. Handles edge-of-map clamping so viewport doesn\u0027t scroll past map bounds."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -141,7 +167,10 @@
       "lineStart": 529,
       "lineEnd": 542,
       "annotations": {
-        "notes": [],
+        "purpose": "Find next available slot in client\u0027s character array",
+        "notes": [
+          "Client-side equivalent of server\u0027s NextOpenCharIndex."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -169,7 +198,10 @@
       "lineStart": 750,
       "lineEnd": 872,
       "annotations": {
-        "notes": [],
+        "purpose": "Handle loading a new map zone on the client",
+        "notes": [
+          "Clears all current characters, loads new map data, starts zone music. Called when server sends zone transition."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -183,7 +215,10 @@
       "lineStart": 874,
       "lineEnd": 972,
       "annotations": {
-        "notes": [],
+        "purpose": "Load the Grh sprite definition data from Grh.dat/Grh.ini",
+        "notes": [
+          "CRITICAL: This is the core sprite system. Each Grh entry defines: source file number, source rect (sX,sY,width,height), tile dimensions, animation frames (up to 16), speed. Grh.ini maps file numbers to BMP filenames. This must be faithfully replicated in the Canvas renderer."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -197,7 +232,10 @@
       "lineStart": 975,
       "lineEnd": 992,
       "annotations": {
-        "notes": [],
+        "purpose": "Load all map tiles from binary .map files",
+        "notes": [
+          "Reads map files from Maps/ directory. Each map is 100x100 tiles with blocked flag, tile exits, and graphic layers. Binary format."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -211,10 +249,16 @@
       "lineStart": 994,
       "lineEnd": 1016,
       "annotations": {
-        "notes": [],
+        "purpose": "Load NPC definitions and spawn them into the world",
+        "notes": [
+          "Reads NPC spawn data from map files, then loads NPC details from NPC.dat/NPC2.dat. Places NPCs at their spawn positions."
+        ],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "OpenNPC",
+          "GetVar"
+        ]
       }
     },
     {
@@ -225,10 +269,15 @@
       "lineStart": 1018,
       "lineEnd": 1033,
       "annotations": {
-        "notes": [],
+        "purpose": "Load all item definitions from Obj.dat into ObjData array",
+        "notes": [
+          "Reads NumOBJs count, then loads all properties for each object: name, type, graphics, stats, class restrictions, crafting requirements, etc."
+        ],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "GetVar"
+        ]
       }
     },
     {
@@ -240,7 +289,10 @@
       "lineStart": 1035,
       "lineEnd": 1067,
       "annotations": {
-        "notes": [],
+        "purpose": "Parse a delimited string and return the Nth field",
+        "notes": [
+          "Used to parse comma-separated protocol messages. Splits string by delimiter character (usually char 44 = comma) and returns the field at the specified position. Core protocol parsing utility."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -255,7 +307,10 @@
       "lineStart": 1069,
       "lineEnd": 1080,
       "annotations": {
-        "notes": [],
+        "purpose": "Check if a file exists on disk",
+        "notes": [
+          "Uses Dir() function to check file existence."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -269,7 +324,10 @@
       "lineStart": 1082,
       "lineEnd": 1177,
       "annotations": {
-        "notes": [],
+        "purpose": "Save map data to a binary .map file (used by map editor)",
+        "notes": [
+          "Writes the map tile data in binary format. Used in map editor mode."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -297,7 +355,10 @@
       "lineStart": 1207,
       "lineEnd": 1214,
       "annotations": {
-        "notes": [],
+        "purpose": "Write a value to an INI-format file using Windows API",
+        "notes": [
+          "Wrapper around WritePrivateProfileString API. Used for saving characters, posting messages, etc."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -312,7 +373,10 @@
       "lineStart": 1216,
       "lineEnd": 1235,
       "annotations": {
-        "notes": [],
+        "purpose": "Read a value from an INI-format file using Windows API",
+        "notes": [
+          "Wrapper around GetPrivateProfileString API. Core data access function used everywhere."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -327,10 +391,16 @@
       "lineStart": 1237,
       "lineEnd": 1262,
       "annotations": {
-        "notes": [],
-        "status": "not-started",
+        "purpose": "Check if a tile position is walkable (not blocked, not occupied, in bounds)",
+        "notes": [
+          "Duplicate of GameLogic.bas - use GameLogic as canonical",
+          "Checks: in map bounds, not blocked, no other user on tile, no NPC on tile, not locked by another player (checks Locked vs player\u0027s YourID)."
+        ],
+        "status": "skipped",
         "sends": [],
-        "calls": []
+        "calls": [
+          "InMapBounds"
+        ]
       }
     },
     {
@@ -341,7 +411,10 @@
       "lineStart": 1264,
       "lineEnd": 1288,
       "annotations": {
-        "notes": [],
+        "purpose": "Load body sprite data from Body.dat",
+        "notes": [
+          "4 directional walk animations per body type, plus head offset position."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -355,7 +428,10 @@
       "lineStart": 1290,
       "lineEnd": 1310,
       "annotations": {
-        "notes": [],
+        "purpose": "Load head sprite data from Head.dat",
+        "notes": [
+          "4 directional head sprites per head type. Heads 6-84 used for player characters."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -370,7 +446,10 @@
       "lineStart": 1312,
       "lineEnd": 1325,
       "annotations": {
-        "notes": [],
+        "purpose": "Check if position is within the walkable map area (accounting for viewport borders)",
+        "notes": [
+          "Stricter than InMapBounds - accounts for viewport scrolling margins."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -385,8 +464,12 @@
       "lineStart": 1327,
       "lineEnd": 1339,
       "annotations": {
-        "notes": [],
-        "status": "not-started",
+        "purpose": "Check if tile position is within map boundaries",
+        "notes": [
+          "Duplicate of GameLogic.bas - use GameLogic as canonical",
+          "Simple bounds check against MinXBorder/MaxXBorder/MinYBorder/MaxYBorder"
+        ],
+        "status": "skipped",
         "sends": [],
         "calls": []
       }
@@ -400,7 +483,10 @@
       "lineStart": 1341,
       "lineEnd": 1349,
       "annotations": {
-        "notes": [],
+        "purpose": "Generate a random integer between Lo and Hi inclusive",
+        "notes": [
+          "Uses VB6 Rnd function: Int((Hi - Lo \u002B 1) * Rnd \u002B Lo)."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []

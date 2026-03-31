@@ -15,7 +15,10 @@
       "lineStart": 3,
       "lineEnd": 16,
       "annotations": {
-        "notes": [],
+        "purpose": "Check if a file exists on disk",
+        "notes": [
+          "Uses Dir() function to check file existence."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []

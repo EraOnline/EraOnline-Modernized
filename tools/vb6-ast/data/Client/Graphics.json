@@ -14,7 +14,10 @@
       "lineStart": 5,
       "lineEnd": 22,
       "annotations": {
-        "notes": [],
+        "purpose": "Fill a DirectDraw surface with a solid color",
+        "notes": [
+          "Uses DDBLTFX with DDBLT_COLORFILL. Takes RGB bytes."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -29,7 +32,10 @@
       "lineStart": 25,
       "lineEnd": 74,
       "annotations": {
-        "notes": [],
+        "purpose": "Load a BMP file into a DirectDraw offscreen surface",
+        "notes": [
+          "Creates a surface in system memory, loads image via StdPicture, blits to surface via DC. Used for loading sprite sheets."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -43,7 +49,10 @@
       "lineStart": 76,
       "lineEnd": 149,
       "annotations": {
-        "notes": [],
+        "purpose": "Draw a Grh sprite to a DirectDraw surface (opaque blit)",
+        "notes": [
+          "Calculates source rect from GrhData, handles animation frame advancement. Opaque blit (no transparency). Used for ground layer tiles."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -57,7 +66,10 @@
       "lineStart": 151,
       "lineEnd": 226,
       "annotations": {
-        "notes": [],
+        "purpose": "Draw a Grh sprite to a DirectDraw surface with transparency (color key)",
+        "notes": [
+          "Same as DDrawGrhtoSurface but uses DDBLT_KEYSRC for transparent blitting. Color key is black (RGB 0,0,0). Used for characters, objects, upper tile layers."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -71,7 +83,10 @@
       "lineStart": 228,
       "lineEnd": 249,
       "annotations": {
-        "notes": [],
+        "purpose": "Blit the back buffer to the primary surface (flip)",
+        "notes": [
+          "Copies the rendered back buffer to the visible screen via the primary surface. Handles the main view offset (80px from window edge)."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -85,7 +100,10 @@
       "lineStart": 251,
       "lineEnd": 267,
       "annotations": {
-        "notes": [],
+        "purpose": "Read width and height from a BMP file header",
+        "notes": [
+          "Reads BITMAPFILEHEADER and BITMAPINFOHEADER structs. Used during surface creation."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -99,7 +117,10 @@
       "lineStart": 269,
       "lineEnd": 279,
       "annotations": {
-        "notes": [],
+        "purpose": "Get the desktop window handle for screen resolution detection",
+        "notes": [
+          "Calls GetDesktopWindow API."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -113,7 +134,10 @@
       "lineStart": 281,
       "lineEnd": 334,
       "annotations": {
-        "notes": [],
+        "purpose": "Draw a Grh sprite to a device context (HDC) for UI elements",
+        "notes": [
+          "Used for rendering sprites in forms/dialogs (inventory icons, spell icons, etc.) rather than to the game viewport DirectDraw surface."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -127,7 +151,10 @@
       "lineStart": 336,
       "lineEnd": 499,
       "annotations": {
-        "notes": [],
+        "purpose": "Main render loop: draw all visible tiles, objects, and characters to the back buffer",
+        "notes": [
+          "CRITICAL RENDERER. Three-pass rendering: 1) Ground layer (opaque blit of graphic(1) for all visible tiles). 2) Transparent layers: graphic(2) fringe tiles, objects on ground (ObjGrh), graphic(3) weather/top layer (only when raining). 3) Characters: composited as head\u002Bbody\u002Bshield\u002Bweapon with walk animation offsets. Movement animation: MoveOffset decreases by 8px per frame toward 0. Viewport = (TileX-XWindow/2-screenbuffer) to (TileX\u002BXWindow/2\u002Bscreenbuffer). Each character\u0027s head is drawn at body position \u002B HeadOffset."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -142,7 +169,10 @@
       "lineStart": 501,
       "lineEnd": 510,
       "annotations": {
-        "notes": [],
+        "purpose": "Convert a tile-relative screen position to pixel position",
+        "notes": [
+          "Returns x * TileSizeX (32). Simple multiplication helper."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -156,7 +186,10 @@
       "lineStart": 512,
       "lineEnd": 538,
       "annotations": {
-        "notes": [],
+        "purpose": "Load all sprite sheet BMP files into DirectDraw surfaces",
+        "notes": [
+          "Reads Grh.ini for file number to filename mapping, loads each BMP as a DirectDraw surface. These surfaces are then referenced by GrhData entries for sprite rendering."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []

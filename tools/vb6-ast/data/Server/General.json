@@ -15,7 +15,10 @@
       "lineStart": 4,
       "lineEnd": 12,
       "annotations": {
-        "notes": [],
+        "purpose": "Calculate Manhattan distance between two positions",
+        "notes": [
+          "Returns Abs(X1-X2) \u002B Abs(Y1-Y2)."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -30,7 +33,10 @@
       "lineStart": 14,
       "lineEnd": 24,
       "annotations": {
-        "notes": [],
+        "purpose": "Generate a random integer between Lo and Hi inclusive",
+        "notes": [
+          "Uses VB6 Rnd function: Int((Hi - Lo \u002B 1) * Rnd \u002B Lo)."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -45,7 +51,10 @@
       "lineStart": 26,
       "lineEnd": 38,
       "annotations": {
-        "notes": [],
+        "purpose": "Check if a file exists on disk",
+        "notes": [
+          "Uses Dir() function to check file existence."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -60,7 +69,10 @@
       "lineStart": 39,
       "lineEnd": 72,
       "annotations": {
-        "notes": [],
+        "purpose": "Parse a delimited string and return the Nth field",
+        "notes": [
+          "Used to parse comma-separated protocol messages. Splits string by delimiter character (usually char 44 = comma) and returns the field at the specified position. Core protocol parsing utility."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -116,10 +128,17 @@
       "lineStart": 163,
       "lineEnd": 192,
       "annotations": {
-        "notes": [],
+        "purpose": "Validate user\u0027s theid against ban list",
+        "notes": [
+          "Reads banned.txt, compares theid. Disconnects with ban message if found."
+        ],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "GetVar",
+          "SendData",
+          "CloseSocket"
+        ]
       }
     },
     {
@@ -130,7 +149,10 @@
       "lineStart": 194,
       "lineEnd": 209,
       "annotations": {
-        "notes": [],
+        "purpose": "Check if a hostile NPC should attack a specific player",
+        "notes": [
+          "Checks player level vs NPC level - prevents high-level NPCs from chasing low-level players (the \u0027spiderlings chasing warriors\u0027 fix)."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -144,7 +166,10 @@
       "lineStart": 210,
       "lineEnd": 234,
       "annotations": {
-        "notes": [],
+        "purpose": "Check if a skill name matches one of the player\u0027s 3 specialized skills",
+        "notes": [
+          "Returns True if the given skill is one of the player\u0027s chosen specializations. Used to determine if skill can exceed 50."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []

@@ -15,7 +15,10 @@
       "lineStart": 5,
       "lineEnd": 20,
       "annotations": {
-        "notes": [],
+        "purpose": "Check if position is within the walkable map area (accounting for viewport borders)",
+        "notes": [
+          "Stricter than InMapBounds - accounts for viewport scrolling margins."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -30,8 +33,12 @@
       "lineStart": 22,
       "lineEnd": 36,
       "annotations": {
-        "notes": [],
-        "status": "not-started",
+        "purpose": "Check if tile position is within map boundaries",
+        "notes": [
+          "Duplicate of GameLogic.bas - use GameLogic as canonical",
+          "Simple bounds check against MinXBorder/MaxXBorder/MinYBorder/MaxYBorder"
+        ],
+        "status": "skipped",
         "sends": [],
         "calls": []
       }
@@ -44,7 +51,10 @@
       "lineStart": 37,
       "lineEnd": 66,
       "annotations": {
-        "notes": [],
+        "purpose": "Append colored text to the chat window RichTextBox",
+        "notes": [
+          "Parses font type string (~R~G~B~Bold~Italic) to set colors. Scrolls to bottom. Limits to 2000 lines."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -58,7 +68,10 @@
       "lineStart": 67,
       "lineEnd": 111,
       "annotations": {
-        "notes": [],
+        "purpose": "Convert a click pixel position to a tile position",
+        "notes": [
+          "Translates screen coordinates (relative to the game viewport) to world tile coordinates based on current scroll position."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -72,7 +85,10 @@
       "lineStart": 113,
       "lineEnd": 127,
       "annotations": {
-        "notes": [],
+        "purpose": "Append text to a regular TextBox control",
+        "notes": [
+          "Simple append with newline."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -86,7 +102,10 @@
       "lineStart": 128,
       "lineEnd": 174,
       "annotations": {
-        "notes": [],
+        "purpose": "Smoothly animate a character\u0027s movement between tiles",
+        "notes": [
+          "Handles pixel-level movement offset for smooth walking animation between tiles. Updates MoveOffset, triggers walk animation frames."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -100,7 +119,10 @@
       "lineStart": 176,
       "lineEnd": 192,
       "annotations": {
-        "notes": [],
+        "purpose": "Redraw all character sprites at their current positions",
+        "notes": [
+          "Called when the map needs full redraw. Iterates all active chars and positions them."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -114,7 +136,10 @@
       "lineStart": 194,
       "lineEnd": 206,
       "annotations": {
-        "notes": [],
+        "purpose": "Save client settings to Game.ini",
+        "notes": [
+          "Saves server IP, port, username, password."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -129,7 +154,10 @@
       "lineStart": 208,
       "lineEnd": 264,
       "annotations": {
-        "notes": [],
+        "purpose": "Validate character creation input fields",
+        "notes": [
+          "Checks name length, valid characters, password match, etc. Returns True if all valid."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -143,7 +171,10 @@
       "lineStart": 266,
       "lineEnd": 278,
       "annotations": {
-        "notes": [],
+        "purpose": "Unload all VB6 forms on game exit",
+        "notes": [
+          "Iterates Forms collection and unloads each."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -158,7 +189,10 @@
       "lineStart": 280,
       "lineEnd": 313,
       "annotations": {
-        "notes": [],
+        "purpose": "Check if a character (letter) is allowed in usernames",
+        "notes": [
+          "Whitelist of allowed ASCII characters for names."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -172,7 +206,10 @@
       "lineStart": 315,
       "lineEnd": 339,
       "annotations": {
-        "notes": [],
+        "purpose": "Transition client to connected state after successful login",
+        "notes": [
+          "Shows main game form, hides login forms, starts game loop timers."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -186,10 +223,16 @@
       "lineStart": 341,
       "lineEnd": 394,
       "annotations": {
-        "notes": [],
+        "purpose": "Create a character representation on the client from server CC message",
+        "notes": [
+          "Parses CC message: charindex,body,head,heading,x,y,weaponanim,shieldanim,name. Creates Char struct with body/head/weapon/shield data for rendering. Called for both players and NPCs."
+        ],
         "status": "not-started",
         "sends": [],
-        "calls": []
+        "calls": [
+          "NextOpenChar",
+          "InitGrh"
+        ]
       }
     },
     {
@@ -200,7 +243,10 @@
       "lineStart": 395,
       "lineEnd": 588,
       "annotations": {
-        "notes": [],
+        "purpose": "Handle keyboard input for movement and special keys",
+        "notes": [
+          "Arrow keys send M1-M4 (move N/E/S/W). CTRL toggles battle mode (BTL). ALT triggers attack. Also handles shift\u002Barrow for turning without moving. Checks for adjacent tiles and sends appropriate interaction messages."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -214,8 +260,10 @@
       "lineStart": 590,
       "lineEnd": 612,
       "annotations": {
-        "notes": [],
-        "status": "not-started",
+        "notes": [
+          "Duplicate of TCP.bas - use TCP as canonical"
+        ],
+        "status": "skipped",
         "sends": [],
         "calls": []
       }
@@ -228,7 +276,10 @@
       "lineStart": 614,
       "lineEnd": 636,
       "annotations": {
-        "notes": [],
+        "purpose": "Initialize a Grh (graphic) struct with animation data from GrhData",
+        "notes": [
+          "Sets up frame counter, speed counter, started flag for sprite animation."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -242,7 +293,10 @@
       "lineStart": 638,
       "lineEnd": 699,
       "annotations": {
-        "notes": [],
+        "purpose": "Start a character\u0027s movement animation in a heading direction",
+        "notes": [
+          "Sets up the pixel offset and walk animation for smooth tile-to-tile movement. Called when server broadcasts a move."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -256,7 +310,10 @@
       "lineStart": 701,
       "lineEnd": 746,
       "annotations": {
-        "notes": [],
+        "purpose": "Scroll the viewport to follow the player character",
+        "notes": [
+          "Centers the view on the player. Handles edge-of-map clamping so viewport doesn\u0027t scroll past map bounds."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -270,7 +327,10 @@
       "lineStart": 749,
       "lineEnd": 765,
       "annotations": {
-        "notes": [],
+        "purpose": "Find next available slot in client\u0027s character array",
+        "notes": [
+          "Client-side equivalent of server\u0027s NextOpenCharIndex."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -284,7 +344,10 @@
       "lineStart": 767,
       "lineEnd": 816,
       "annotations": {
-        "notes": [],
+        "purpose": "Handle loading a new map zone on the client",
+        "notes": [
+          "Clears all current characters, loads new map data, starts zone music. Called when server sends zone transition."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -298,7 +361,10 @@
       "lineStart": 818,
       "lineEnd": 912,
       "annotations": {
-        "notes": [],
+        "purpose": "Load the Grh sprite definition data from Grh.dat/Grh.ini",
+        "notes": [
+          "CRITICAL: This is the core sprite system. Each Grh entry defines: source file number, source rect (sX,sY,width,height), tile dimensions, animation frames (up to 16), speed. Grh.ini maps file numbers to BMP filenames. This must be faithfully replicated in the Canvas renderer."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -313,7 +379,10 @@
       "lineStart": 914,
       "lineEnd": 947,
       "annotations": {
-        "notes": [],
+        "purpose": "Parse a delimited string and return the Nth field",
+        "notes": [
+          "Used to parse comma-separated protocol messages. Splits string by delimiter character (usually char 44 = comma) and returns the field at the specified position. Core protocol parsing utility."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -328,7 +397,10 @@
       "lineStart": 949,
       "lineEnd": 962,
       "annotations": {
-        "notes": [],
+        "purpose": "Check if a file exists on disk",
+        "notes": [
+          "Uses Dir() function to check file existence."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -342,7 +414,10 @@
       "lineStart": 964,
       "lineEnd": 1225,
       "annotations": {
-        "notes": [],
+        "purpose": "Client startup: init DirectDraw, load all data, show login screen",
+        "notes": [
+          "Complete initialization sequence: set resolution, init vars, borders, create DirectDraw primary surface \u002B back buffer \u002B clipper, load Grh data, load body/head/weapon/shield animations, download server address from erlingellingsen.com, show login form. Back buffer size = (XWindow \u002B 2*screenbuffer) * TileSizeX pixels."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -356,7 +431,10 @@
       "lineStart": 1227,
       "lineEnd": 1262,
       "annotations": {
-        "notes": [],
+        "purpose": "Save map data to a binary .map file (used by map editor)",
+        "notes": [
+          "Writes the map tile data in binary format. Used in map editor mode."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -370,7 +448,10 @@
       "lineStart": 1264,
       "lineEnd": 1273,
       "annotations": {
-        "notes": [],
+        "purpose": "Write a value to an INI-format file using Windows API",
+        "notes": [
+          "Wrapper around WritePrivateProfileString API. Used for saving characters, posting messages, etc."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -385,7 +466,10 @@
       "lineStart": 1275,
       "lineEnd": 1297,
       "annotations": {
-        "notes": [],
+        "purpose": "Read a value from an INI-format file using Windows API",
+        "notes": [
+          "Wrapper around GetPrivateProfileString API. Core data access function used everywhere."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -400,10 +484,16 @@
       "lineStart": 1299,
       "lineEnd": 1326,
       "annotations": {
-        "notes": [],
-        "status": "not-started",
+        "purpose": "Check if a tile position is walkable (not blocked, not occupied, in bounds)",
+        "notes": [
+          "Duplicate of GameLogic.bas - use GameLogic as canonical",
+          "Checks: in map bounds, not blocked, no other user on tile, no NPC on tile, not locked by another player (checks Locked vs player\u0027s YourID)."
+        ],
+        "status": "skipped",
         "sends": [],
-        "calls": []
+        "calls": [
+          "InMapBounds"
+        ]
       }
     },
     {
@@ -414,7 +504,10 @@
       "lineStart": 1328,
       "lineEnd": 1357,
       "annotations": {
-        "notes": [],
+        "purpose": "Load body sprite data from Body.dat",
+        "notes": [
+          "4 directional walk animations per body type, plus head offset position."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -428,7 +521,10 @@
       "lineStart": 1358,
       "lineEnd": 1382,
       "annotations": {
-        "notes": [],
+        "purpose": "Load weapon animation data from wpanim.dat",
+        "notes": [
+          "4 directional walk animations per weapon type."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -442,7 +538,10 @@
       "lineStart": 1383,
       "lineEnd": 1407,
       "annotations": {
-        "notes": [],
+        "purpose": "Load shield animation data from shanim.dat",
+        "notes": [
+          "4 directional walk animations per shield type."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -456,7 +555,10 @@
       "lineStart": 1411,
       "lineEnd": 1435,
       "annotations": {
-        "notes": [],
+        "purpose": "Load head sprite data from Head.dat",
+        "notes": [
+          "4 directional head sprites per head type. Heads 6-84 used for player characters."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -471,7 +573,10 @@
       "lineStart": 1437,
       "lineEnd": 1447,
       "annotations": {
-        "notes": [],
+        "purpose": "Generate a random integer between Lo and Hi inclusive",
+        "notes": [
+          "Uses VB6 Rnd function: Int((Hi - Lo \u002B 1) * Rnd \u002B Lo)."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
@@ -485,7 +590,10 @@
       "lineStart": 1449,
       "lineEnd": 1469,
       "annotations": {
-        "notes": [],
+        "purpose": "Check if a skill name matches one of the player\u0027s 3 specialized skills",
+        "notes": [
+          "Returns True if the given skill is one of the player\u0027s chosen specializations. Used to determine if skill can exceed 50."
+        ],
         "status": "not-started",
         "sends": [],
         "calls": []
