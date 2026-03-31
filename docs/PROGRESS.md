@@ -1,0 +1,147 @@
+# Progress
+
+## Current State
+
+**Pre-Phase 1.** Project planning complete. Architecture decided. Documentation established. No code written yet.
+
+Most recent log: [2026-03-31](logs/2026-03-31.md)
+
+---
+
+## Phase 1: Skeleton + Data Model
+
+Set up the solution structure, port all VB6 data types to C#, write parsers for original data files, and verify the server can load all original game data.
+
+- [ ] Create solution and project structure (EraOnline.sln, Shared, Server, Client.Web, Client.CLI)
+- [ ] Port VB6 type definitions to C# (User, NPC, MapBlock, ObjData, SpellData, Char, etc.)
+- [ ] Port game constants (directions, object types, sound IDs, stat caps, font types, etc.)
+- [ ] Define SignalR protocol message types in Shared
+- [ ] Write parsers for original INI-format data files (OBJ.dat, NPC.dat, NPC2.dat, Spells.dat)
+- [ ] Write parser for original map file format
+- [ ] Write parsers for sprite definition files (Grh.dat, Grh.ini, Head.dat, Body.dat, shanim.dat, wpanim.dat)
+- [ ] Server startup: load all original game data, log summary of what was loaded
+- [ ] Server: SignalR hub stub (accepts connections, no game logic yet)
+- [ ] Server: BackgroundService game loop stub (ticks but does nothing yet)
+
+**Milestone:** Server starts, loads all original game data (objects, NPCs, spells, maps, sprite defs), and logs stats. SignalR hub accepts connections.
+
+## Phase 2: Rendering Engine
+
+Get the original game's visuals rendering in a browser via Canvas. No server connection needed yet - load data directly.
+
+- [ ] Blazor WASM project setup, hosted by Server
+- [ ] Asset pipeline: convert/prepare Grh sprite sheets for web (original BMPs to PNGs or similar)
+- [ ] TypeScript rendering module: Grh system (parse sprite definitions, load sheets, handle animation frames)
+- [ ] Canvas rendering pipeline via Blazor JS interop
+- [ ] Map tile renderer (3 layers: ground, fringe, top)
+- [ ] Character renderer (composite body + head + weapon + shield, directional walk animations)
+- [ ] Object renderer (items on ground)
+- [ ] Scrolling viewport (20x11 tiles, follows a position)
+- [ ] Render a hard-coded map scene with NPCs and objects (no server, just loaded data)
+
+**Milestone:** Open browser, see an original Era Online map rendered faithfully - tiles, objects, characters with correct sprites. Hard-coded position, no networking.
+
+## Phase 3: Client-Server Connection
+
+Connect the client and server. Login, movement, seeing other players, chat.
+
+- [ ] Login / character creation UI (port original forms)
+- [ ] SignalR connection lifecycle (connect, authenticate, disconnect, reconnect)
+- [ ] Server: handle LOGIN and NLOGIN (load/create character, place in world)
+- [ ] Server: send map data, character positions, NPC positions on zone entry
+- [ ] Client: receive and render other characters and NPCs from server data
+- [ ] Movement: client sends direction -> server validates -> broadcast to all clients -> animate
+- [ ] Map transitions: walking off zone edge loads adjacent zone (N/S/E/W exits)
+- [ ] Map transitions: tile-based warps (doors, stairs, etc.)
+- [ ] Chat: say, shout, emote, whisper
+- [ ] Chat: ghost speech (dead players produce "oooOO OOoo" etc.)
+- [ ] Commands: /WHO, /SAVE, /STATS, /REFRESH, /QUIT, /HELP, /DESC
+
+**Milestone:** Two browser tabs connect, create characters, appear in Castlefall, walk around, cross zone boundaries, chat. Ghost speech works.
+
+## Phase 4: Core Gameplay
+
+Combat, items, NPCs, death. The game becomes playable.
+
+- [ ] Inventory: pickup, drop, use, equip/unequip, give
+- [ ] Equipment affects character appearance (body/weapon/shield sprites change)
+- [ ] Stat bars in UI (HP, Mana, Stamina, Food, Drink, Gold, EXP progress)
+- [ ] Character sheet UI (slots for head, body, weapon, shield + backpack)
+- [ ] Food and drink consumption (use from inventory, affects stats)
+- [ ] NPC AI: movement patterns (roaming, stationary)
+- [ ] NPC AI: hostile detection, chasing, attacking players
+- [ ] Combat: CTRL toggles battle mode, ALT attacks
+- [ ] Combat: hit/miss calculation (swordmanship vs tactics), damage (weapon HIT vs DEF + parrying)
+- [ ] Combat: sound effects (sword swing, hit, male/female hurt)
+- [ ] NPC death: corpse + loot placement, respawn at random position on same map
+- [ ] Player death: become ghost, drop random item, lose EXP/gold
+- [ ] Ghost state: ghost body/head, can't interact, speech is garbled
+- [ ] Resurrection: /RESSURECT at Priest of Life NPCs
+- [ ] Consider (TAB): view target's HP/hit
+- [ ] Left-click: inspect tile contents (items, NPCs, players - name, class, description, reputation)
+
+**Milestone:** Can fight a troll outside Castlefall, die, become a ghost, find a Priest of Life, resurrect, go back and kill the troll, pick up loot, equip dropped weapon.
+
+## Phase 5: Economy & Progression
+
+Trading, leveling, skills, crafting.
+
+- [ ] NPC trading: /TRADE, buy/sell interface, merchant skill affects prices
+- [ ] Experience from kills and skill use
+- [ ] Level-up system (hidden levels, ELU scaling, +5 training points, stat bumps)
+- [ ] Training: /TRAIN at trainers, spend practice points on skills
+- [ ] Skill use-based improvement (skills >= 10 auto-raise, < 10 require training points)
+- [ ] Specialized skills (3 per character, can exceed 50)
+- [ ] Class changes based on highest skill
+- [ ] Equipment class restrictions (ClassForbid system)
+- [ ] Crafting: woodworking (chop tree -> saw logs -> make item from drawing)
+- [ ] Crafting: tailoring (sewing kit + cloth -> folded cloth -> make clothing from drawing)
+- [ ] Crafting: blacksmithing (hammer + ore -> steel -> make weapon from drawing)
+- [ ] Crafting: progress bars based on skill level
+- [ ] Banking: /DEPOSIT, /WITHDRAW at banks
+- [ ] NPC healing: /HEAL at healers (gold cost based on level)
+- [ ] Campfire healing: drop log, click to light, sit nearby to regen
+
+**Milestone:** Full economic loop. Chop trees, craft items, sell to NPCs, buy better equipment, fight monsters, level up, train skills.
+
+## Phase 6: World Systems
+
+The systems that make Menath feel alive.
+
+- [ ] Criminal system: timer-based flagging, red names, /DUEL for consensual PvP
+- [ ] Guard AI: chase and attack criminals, Dark Elf guards attack humans/wood elves
+- [ ] Reputation system: noble/under/common rep, deity rep, overall rank titles
+- [ ] Weather: rain and snow (visual effects, stamina/health drain without warm clothing)
+- [ ] Spell system: spell scrolls -> inscribe to spell book, cast on target, mana cost
+- [ ] Magic schools: Nature, Destruction, Enchanting (class-restricted)
+- [ ] /MEDITATE for mana regeneration (skill-based speed)
+- [ ] Animal taming: /TAME, skill-gated by animal type, animals persist across sessions
+- [ ] NPC hailing: /HAIL for dialogue, quest hints
+- [ ] NPC gossip system (randomized gossip from gossip.txt)
+- [ ] Housing: house deeds, /LOCK and /UNLOCK tiles
+- [ ] Signs: drop sign, write text, readable by all players
+- [ ] Fishing: equip pole, click water, skill-based progress
+- [ ] Mining: equip pickaxe, click stone/cliff, skill-based progress
+- [ ] Map-specific music (MIDI/audio per zone)
+- [ ] Ambient sound effects (forest loops, shore, birds, etc.)
+
+**Milestone:** A living world. Weather changes, guards patrol, criminals are hunted, players pray at temples, tame animals, craft and trade, explore dungeons.
+
+## Phase 7: Meta & Polish
+
+Map editor, GM tools, CLI client, remaining systems.
+
+- [ ] Map editor mode in Client.Web (tile painting, object/NPC placement, exit config)
+- [ ] GM tools: morph, teleport, spawn NPCs, ban, moderate maps, modify NPC hails
+- [ ] CLI client for LLM interaction (text in/out, optional screenshots)
+- [ ] Message board system (in-game posting)
+- [ ] Pickpocketing skill
+- [ ] Disguise skill (change name to "a peasant")
+- [ ] Hiding/stealth (invisible to monsters, harder for players to detect)
+- [ ] Backstabbing (first-hit bonus damage)
+- [ ] Etiquette and Streetwise skills (affect NPC interactions)
+- [ ] Praying at priests/priestesses (/PRAY, religion skill, deity miracles)
+- [ ] Clan/guild system (basic framework)
+- [ ] /BUG reporting
+- [ ] Poison system
+- [ ] Bounty system

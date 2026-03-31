@@ -34,6 +34,10 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+# Override: keep project documentation logs and journal
+!docs/logs/
+!docs/logs/**
+
 # Build results on 'Bin' directories
 **/[Bb]in/*
 # Uncomment if you have tasks that rely on *.refresh files to move binaries
