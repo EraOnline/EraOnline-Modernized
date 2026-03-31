@@ -1,0 +1,25 @@
+{
+  "module": "Info",
+  "sourcePath": "Client/Info.bas",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "function",
+      "name": "FileExist",
+      "visibility": "Public",
+      "params": "(File  As  String,  FileType  As  VbFileAttribute)",
+      "returnType": "Boolean",
+      "lineStart": 3,
+      "lineEnd": 16,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

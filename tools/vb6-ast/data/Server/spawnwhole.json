@@ -1,0 +1,24 @@
+{
+  "module": "spawnwhole",
+  "sourcePath": "Server/spawnwhole.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "spawnspecefic_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 6,
+      "lineEnd": 9,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

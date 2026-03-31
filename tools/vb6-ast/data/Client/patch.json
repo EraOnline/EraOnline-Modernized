@@ -1,0 +1,231 @@
+{
+  "module": "patch",
+  "sourcePath": "Client/patch.frm",
+  "types": [
+    {
+      "name": "FileType",
+      "fields": [
+        {
+          "name": "Name",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "version",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "Size",
+          "type": "Long",
+          "isArray": false
+        },
+        {
+          "name": "URL",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "Update",
+          "type": "Boolean",
+          "isArray": false
+        }
+      ],
+      "lineStart": 11,
+      "lineEnd": 17,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "Command3_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 31,
+      "lineEnd": 33,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_Load",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 35,
+      "lineEnd": 136,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_MouseDown",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
+      "lineStart": 138,
+      "lineEnd": 141,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_MouseMove",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
+      "lineStart": 143,
+      "lineEnd": 148,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "playnow_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 150,
+      "lineEnd": 159,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "txtStatus_Change",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 161,
+      "lineEnd": 163,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "AddText",
+      "visibility": "Private",
+      "params": "(Text  As  String)",
+      "lineStart": 165,
+      "lineEnd": 167,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "AnalyzeData",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 169,
+      "lineEnd": 218,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "UpdateInfo",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 220,
+      "lineEnd": 230,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "GetFile",
+      "visibility": "Private",
+      "params": "(FileNum  As  Integer)",
+      "lineStart": 232,
+      "lineEnd": 258,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SaveVersion",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 260,
+      "lineEnd": 278,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Command1_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 280,
+      "lineEnd": 283,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Command2_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 285,
+      "lineEnd": 287,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "module": "Form6",
+  "sourcePath": "Client/Form6.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "Form_KeyUp",
+      "visibility": "Private",
+      "params": "(KeyCode  As  Integer,  Shift  As  Integer)",
+      "lineStart": 7,
+      "lineEnd": 25,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_Load",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 30,
+      "lineEnd": 35,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label4_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 37,
+      "lineEnd": 68,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

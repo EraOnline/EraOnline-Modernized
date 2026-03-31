@@ -1,0 +1,94 @@
+{
+  "module": "spellbook",
+  "sourcePath": "Client/spellbook.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "Form_Load",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 7,
+      "lineEnd": 10,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label1_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 12,
+      "lineEnd": 17,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Spell4_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 19,
+      "lineEnd": 20,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "mnufile2_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 22,
+      "lineEnd": 29,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SpellLst_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 31,
+      "lineEnd": 44,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SpellLst_MouseDown",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
+      "lineStart": 46,
+      "lineEnd": 51,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

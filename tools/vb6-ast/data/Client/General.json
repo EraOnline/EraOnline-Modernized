@@ -1,0 +1,495 @@
+{
+  "module": "General",
+  "sourcePath": "Client/General.bas",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "function",
+      "name": "InMapLegalBounds",
+      "visibility": "Public",
+      "params": "(x  As  Integer,  y  As  Integer)",
+      "returnType": "Boolean",
+      "lineStart": 5,
+      "lineEnd": 20,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "InMapBounds",
+      "visibility": "Public",
+      "params": "(x  As  Integer,  y  As  Integer)",
+      "returnType": "Boolean",
+      "lineStart": 22,
+      "lineEnd": 36,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "AddtoRichTextBox",
+      "visibility": "Public",
+      "params": "(RichTextBox  As  RichTextBox,  Text  As  String,  RED  As  Byte,  GREEN  As  Byte,  BLUE  As  Byte,  Bold  As  Byte,  Italic  As  Byte)",
+      "lineStart": 37,
+      "lineEnd": 66,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ConvertCPtoTP",
+      "visibility": "Public",
+      "params": "(ByVal  CX  As  Single,  ByVal  CY  As  Single,  tX  As  Integer,  tY  As  Integer)",
+      "lineStart": 67,
+      "lineEnd": 111,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "AddtoTextBox",
+      "visibility": "Public",
+      "params": "(TextBox  As  TextBox,  Text  As  String)",
+      "lineStart": 113,
+      "lineEnd": 127,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MoveCharbyPos",
+      "visibility": "Public",
+      "params": "(CharIndex  As  Integer,  nX  As  Integer,  nY  As  Integer)",
+      "lineStart": 128,
+      "lineEnd": 174,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "RefreshAllChars",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 176,
+      "lineEnd": 192,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SaveGameini",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 194,
+      "lineEnd": 206,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "CheckUserData",
+      "visibility": "Public",
+      "params": "()",
+      "returnType": "Boolean",
+      "lineStart": 208,
+      "lineEnd": 264,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "UnloadAllForms",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 266,
+      "lineEnd": 278,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "LegalCharacter",
+      "visibility": "Public",
+      "params": "(Key As cii  As  Integer)",
+      "returnType": "Boolean",
+      "lineStart": 280,
+      "lineEnd": 313,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SetConnected",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 315,
+      "lineEnd": 339,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MakeChar",
+      "visibility": "Public",
+      "params": "(CharIndex  As  Integer,  body  As  Integer,  head  As  Integer,  Heading  As  Byte,  x  As  Integer,  y  As  Integer,  weaponanim  As  Integer,  shieldanim  As  Integer)",
+      "lineStart": 341,
+      "lineEnd": 394,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CheckMoveKeys",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 395,
+      "lineEnd": 588,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "EraseChar",
+      "visibility": "Public",
+      "params": "(CharIndex  As  Integer)",
+      "lineStart": 590,
+      "lineEnd": 612,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "InitGrh",
+      "visibility": "Public",
+      "params": "(ByRef  Grh  As  Grh,  ByVal  GrhIndex  As  Integer,  Optional Started  As  Byte = 2)",
+      "lineStart": 614,
+      "lineEnd": 636,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MoveCharbyHead",
+      "visibility": "Public",
+      "params": "(CharIndex  As  Integer,  nHeading  As  Byte)",
+      "lineStart": 638,
+      "lineEnd": 699,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MoveScreen",
+      "visibility": "Public",
+      "params": "(Heading  As  Byte)",
+      "lineStart": 701,
+      "lineEnd": 746,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "NextOpenChar",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 749,
+      "lineEnd": 765,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SwitchMap",
+      "visibility": "Public",
+      "params": "(map  As  Integer)",
+      "lineStart": 767,
+      "lineEnd": 816,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadGrhData",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 818,
+      "lineEnd": 912,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "ReadField",
+      "visibility": "Public",
+      "params": "(Pos  As  Integer,  Text  As  String,  SepASCII  As  Integer)",
+      "returnType": "String",
+      "lineStart": 914,
+      "lineEnd": 947,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "FileExist",
+      "visibility": "Public",
+      "params": "(File  As  String,  FileType  As  VbFileAttribute)",
+      "returnType": "Boolean",
+      "lineStart": 949,
+      "lineEnd": 962,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Main",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 964,
+      "lineEnd": 1225,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SaveMapData",
+      "visibility": "Public",
+      "params": "(Save As   As  Integer)",
+      "lineStart": 1227,
+      "lineEnd": 1262,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "WriteVar",
+      "visibility": "Public",
+      "params": "(File  As  String,  Main  As  String,  Var  As  String,  value  As  String)",
+      "lineStart": 1264,
+      "lineEnd": 1273,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "GetVar",
+      "visibility": "Public",
+      "params": "(File  As  String,  Main  As  String,  Var  As  String)",
+      "returnType": "String",
+      "lineStart": 1275,
+      "lineEnd": 1297,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "LegalPos",
+      "visibility": "Public",
+      "params": "(x  As  Integer,  y  As  Integer)",
+      "returnType": "Boolean",
+      "lineStart": 1299,
+      "lineEnd": 1326,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadBodyData",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 1328,
+      "lineEnd": 1357,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadWeaponAnimData",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 1358,
+      "lineEnd": 1382,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadShieldAnimData",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 1383,
+      "lineEnd": 1407,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadHeadData",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 1411,
+      "lineEnd": 1435,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "RandomNumber",
+      "visibility": "Public",
+      "params": "(ByVal  LowerBound  As  Variant,  ByVal  UpperBound  As  Variant)",
+      "returnType": "Single",
+      "lineStart": 1437,
+      "lineEnd": 1447,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "SpecializedSkill",
+      "visibility": "Public",
+      "params": "(skill  As  String)",
+      "lineStart": 1449,
+      "lineEnd": 1469,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

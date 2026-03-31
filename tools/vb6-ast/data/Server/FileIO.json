@@ -1,0 +1,166 @@
+{
+  "module": "FileIO",
+  "sourcePath": "Server/FileIO.bas",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "LoadOBJData",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 4,
+      "lineEnd": 59,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadSpellData",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 61,
+      "lineEnd": 109,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadUserStats",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  UserFile  As  String)",
+      "lineStart": 110,
+      "lineEnd": 200,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadUserInit",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  UserFile  As  String)",
+      "lineStart": 202,
+      "lineEnd": 287,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "WizCheck",
+      "visibility": "Public",
+      "params": "(Name  As  String)",
+      "returnType": "Boolean",
+      "lineStart": 289,
+      "lineEnd": 311,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "GetVar",
+      "visibility": "Public",
+      "params": "(File  As  String,  Main  As  String,  Var  As  String)",
+      "returnType": "String",
+      "lineStart": 313,
+      "lineEnd": 333,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadMapData",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 335,
+      "lineEnd": 439,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadSini",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 441,
+      "lineEnd": 558,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "WriteVar",
+      "visibility": "Public",
+      "params": "(File  As  String,  Main  As  String,  Var  As  String,  Value  As  String)",
+      "lineStart": 560,
+      "lineEnd": 569,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SaveUser",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  UserFile  As  String)",
+      "lineStart": 571,
+      "lineEnd": 710,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SaveWorld",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 711,
+      "lineEnd": 766,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

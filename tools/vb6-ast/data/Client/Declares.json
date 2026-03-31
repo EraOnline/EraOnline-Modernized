@@ -1,0 +1,3063 @@
+{
+  "module": "Declares",
+  "sourcePath": "Client/Declares.bas",
+  "types": [
+    {
+      "name": "Position",
+      "fields": [
+        {
+          "name": "x",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "y",
+          "type": "Integer",
+          "isArray": false
+        }
+      ],
+      "lineStart": 62,
+      "lineEnd": 65,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WorldPos",
+      "fields": [
+        {
+          "name": "map",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "x",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "y",
+          "type": "Integer",
+          "isArray": false
+        }
+      ],
+      "lineStart": 68,
+      "lineEnd": 72,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "GrhData",
+      "fields": [
+        {
+          "name": "sX",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "sY",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "FileNum",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "pixelWidth",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "pixelHeight",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "TileWidth",
+          "type": "Single",
+          "isArray": false
+        },
+        {
+          "name": "TileHeight",
+          "type": "Single",
+          "isArray": false
+        },
+        {
+          "name": "NumFrames",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "Frames",
+          "type": "Integer",
+          "isArray": true,
+          "arrayBounds": "1 To 16"
+        },
+        {
+          "name": "Speed",
+          "type": "Integer",
+          "isArray": false
+        }
+      ],
+      "lineStart": 76,
+      "lineEnd": 88,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Grh",
+      "fields": [
+        {
+          "name": "GrhIndex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "FrameCounter",
+          "type": "Byte",
+          "isArray": false
+        },
+        {
+          "name": "SpeedCounter",
+          "type": "Byte",
+          "isArray": false
+        },
+        {
+          "name": "Started",
+          "type": "Byte",
+          "isArray": false
+        }
+      ],
+      "lineStart": 91,
+      "lineEnd": 96,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "BodyData",
+      "fields": [
+        {
+          "name": "Walk",
+          "type": "Grh",
+          "isArray": true,
+          "arrayBounds": "1 To 4"
+        },
+        {
+          "name": "HeadOffset",
+          "type": "Position",
+          "isArray": false
+        }
+      ],
+      "lineStart": 99,
+      "lineEnd": 102,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WeaponAnimData",
+      "fields": [
+        {
+          "name": "WeaponWalk",
+          "type": "Grh",
+          "isArray": true,
+          "arrayBounds": "1 To 4"
+        }
+      ],
+      "lineStart": 105,
+      "lineEnd": 107,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ShieldAnimData",
+      "fields": [
+        {
+          "name": "ShieldWalk",
+          "type": "Grh",
+          "isArray": true,
+          "arrayBounds": "1 To 4"
+        }
+      ],
+      "lineStart": 110,
+      "lineEnd": 112,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "HeadData",
+      "fields": [
+        {
+          "name": "head",
+          "type": "Grh",
+          "isArray": true,
+          "arrayBounds": "1 To 4"
+        }
+      ],
+      "lineStart": 115,
+      "lineEnd": 117,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Char",
+      "fields": [
+        {
+          "name": "Active",
+          "type": "Byte",
+          "isArray": false
+        },
+        {
+          "name": "Heading",
+          "type": "Byte",
+          "isArray": false
+        },
+        {
+          "name": "Pos",
+          "type": "Position",
+          "isArray": false
+        },
+        {
+          "name": "body",
+          "type": "BodyData",
+          "isArray": false
+        },
+        {
+          "name": "weaponanim",
+          "type": "WeaponAnimData",
+          "isArray": false
+        },
+        {
+          "name": "shieldanim",
+          "type": "ShieldAnimData",
+          "isArray": false
+        },
+        {
+          "name": "head",
+          "type": "HeadData",
+          "isArray": false
+        },
+        {
+          "name": "Moving",
+          "type": "Byte",
+          "isArray": false
+        },
+        {
+          "name": "MoveOffset",
+          "type": "Position",
+          "isArray": false
+        }
+      ],
+      "lineStart": 120,
+      "lineEnd": 132,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "inventory",
+      "fields": [
+        {
+          "name": "ObjIndex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "Name",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "GrhIndex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "Amount",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "equipped",
+          "type": "Byte",
+          "isArray": false
+        },
+        {
+          "name": "value",
+          "type": "Long",
+          "isArray": false
+        }
+      ],
+      "lineStart": 135,
+      "lineEnd": 142,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "NPCinventory",
+      "fields": [
+        {
+          "name": "ObjIndex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "Name",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "GrhIndex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "Amount",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "equipped",
+          "type": "Byte",
+          "isArray": false
+        },
+        {
+          "name": "value",
+          "type": "Long",
+          "isArray": false
+        },
+        {
+          "name": "level",
+          "type": "Long",
+          "isArray": false
+        }
+      ],
+      "lineStart": 145,
+      "lineEnd": 153,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "spellbook",
+      "fields": [
+        {
+          "name": "SpellIndex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "Name",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "GrhIndex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "desc",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "NeedsMana",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "Amount",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "equipped",
+          "type": "Byte",
+          "isArray": false
+        }
+      ],
+      "lineStart": 156,
+      "lineEnd": 165,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "GmQueSlots",
+      "fields": [
+        {
+          "name": "userindex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "helpmsg",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "Time",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "Date",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "Name",
+          "type": "String",
+          "isArray": false
+        }
+      ],
+      "lineStart": 167,
+      "lineEnd": 173,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Postings",
+      "fields": [
+        {
+          "name": "Subject",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "Post",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "Author",
+          "type": "String",
+          "isArray": false
+        }
+      ],
+      "lineStart": 176,
+      "lineEnd": 180,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Tailorlist",
+      "fields": [
+        {
+          "name": "Tailorindex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "Name",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "GrhIndex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "NeedFoldedCloth",
+          "type": "Integer",
+          "isArray": false
+        }
+      ],
+      "lineStart": 183,
+      "lineEnd": 188,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Carpentry",
+      "fields": [
+        {
+          "name": "CarpentryObjIndex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "Name",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "GrhIndex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "desc",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "Needplanks",
+          "type": "Integer",
+          "isArray": false
+        }
+      ],
+      "lineStart": 191,
+      "lineEnd": 197,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MapBlock",
+      "fields": [
+        {
+          "name": "graphic",
+          "type": "Grh",
+          "isArray": true,
+          "arrayBounds": "1 To 3"
+        },
+        {
+          "name": "CharIndex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "ObjGrh",
+          "type": "Grh",
+          "isArray": false
+        },
+        {
+          "name": "Blocked",
+          "type": "Byte",
+          "isArray": false
+        }
+      ],
+      "lineStart": 201,
+      "lineEnd": 206,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MapInfo",
+      "fields": [
+        {
+          "name": "Music",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "Name",
+          "type": "String",
+          "isArray": false
+        }
+      ],
+      "lineStart": 209,
+      "lineEnd": 212,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "BITMAPFILEHEADER",
+      "fields": [
+        {
+          "name": "bfType",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "bfSize",
+          "type": "Long",
+          "isArray": false
+        },
+        {
+          "name": "bfReserved1",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "bfReserved2",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "bfOffBits",
+          "type": "Long",
+          "isArray": false
+        }
+      ],
+      "lineStart": 215,
+      "lineEnd": 221,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "BITMAPINFOHEADER",
+      "fields": [
+        {
+          "name": "biSize",
+          "type": "Long",
+          "isArray": false
+        },
+        {
+          "name": "biWidth",
+          "type": "Long",
+          "isArray": false
+        },
+        {
+          "name": "biHeight",
+          "type": "Long",
+          "isArray": false
+        },
+        {
+          "name": "biPlanes",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "biBitCount",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "biCompression",
+          "type": "Long",
+          "isArray": false
+        },
+        {
+          "name": "biSizeImage",
+          "type": "Long",
+          "isArray": false
+        },
+        {
+          "name": "biXPelsPerMeter",
+          "type": "Long",
+          "isArray": false
+        },
+        {
+          "name": "biYPelsPerMeter",
+          "type": "Long",
+          "isArray": false
+        },
+        {
+          "name": "biClrUsed",
+          "type": "Long",
+          "isArray": false
+        },
+        {
+          "name": "biClrImportant",
+          "type": "Long",
+          "isArray": false
+        }
+      ],
+      "lineStart": 224,
+      "lineEnd": 236,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ],
+  "constants": [
+    {
+      "name": "NORTH",
+      "value": "1",
+      "visibility": "Global",
+      "line": 7,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "EAST",
+      "value": "2",
+      "visibility": "Global",
+      "line": 8,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOUTH",
+      "value": "3",
+      "visibility": "Global",
+      "line": 9,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WEST",
+      "value": "4",
+      "visibility": "Global",
+      "line": 10,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "XMaxMapSize",
+      "value": "100",
+      "visibility": "Global",
+      "line": 13,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "XMinMapSize",
+      "value": "1",
+      "visibility": "Global",
+      "line": 14,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "YMaxMapSize",
+      "value": "100",
+      "visibility": "Global",
+      "line": 15,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "YMinMapSize",
+      "value": "1",
+      "visibility": "Global",
+      "line": 16,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "screenbuffer",
+      "value": "10",
+      "visibility": "Global",
+      "line": 21,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "TileSizeX",
+      "value": "32",
+      "visibility": "Global",
+      "line": 24,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "TileSizeY",
+      "value": "32",
+      "visibility": "Global",
+      "line": 25,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "XWindow",
+      "value": "20",
+      "visibility": "Global",
+      "line": 29,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "YWindow",
+      "value": "11",
+      "visibility": "Global",
+      "line": 30,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MainViewOffsetX",
+      "value": "80",
+      "visibility": "Public",
+      "line": 34,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MainViewOffsetY",
+      "value": "80",
+      "visibility": "Public",
+      "line": 35,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MAX_INVENTORY_OBJS",
+      "value": "999999999",
+      "visibility": "Public",
+      "line": 38,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MAX_INVENTORY_SLOTS",
+      "value": "20",
+      "visibility": "Public",
+      "line": 39,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MAX_NPCINVENTORY_OBJS",
+      "value": "99",
+      "visibility": "Public",
+      "line": 42,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MAX_NPCINVENTORY_SLOTS",
+      "value": "40",
+      "visibility": "Public",
+      "line": 43,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MAX_SPELL_SPELLS",
+      "value": "99",
+      "visibility": "Public",
+      "line": 46,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MAX_SPELL_SLOTS",
+      "value": "50",
+      "visibility": "Public",
+      "line": 47,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MAX_TAILOR_OBJS",
+      "value": "100",
+      "visibility": "Public",
+      "line": 50,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MAX_TAILOR_SLOTS",
+      "value": "100",
+      "visibility": "Public",
+      "line": 51,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MAX_POSTS_POSTS",
+      "value": "999",
+      "visibility": "Public",
+      "line": 54,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MAX_HELPS_HELPS",
+      "value": "99999",
+      "visibility": "Public",
+      "line": 57,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "gintMAX_SIZE",
+      "value": "255",
+      "visibility": "Global",
+      "line": 435,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "gintMAX_PATH_LEN",
+      "value": "260",
+      "visibility": "Global",
+      "line": 436,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "gstrNULL",
+      "value": "\u0022\u0022",
+      "visibility": "Global",
+      "line": 438,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ],
+  "globals": [
+    {
+      "name": "GrhPath",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 242,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "IniPath",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 243,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CreateRace",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 246,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CreateGender",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 247,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CreateSpecSkill1",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 248,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CreateSpecSkill2",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 249,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CreateSpecSkill3",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 250,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CreateClass",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 251,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CreateHome",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 252,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CreateVersion",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 253,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Dead",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 256,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MinXBorder",
+      "type": "Byte",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 260,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MaxXBorder",
+      "type": "Byte",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 261,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MinYBorder",
+      "type": "Byte",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 262,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MaxYBorder",
+      "type": "Byte",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 263,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MainViewRect",
+      "type": "RECT",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 266,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MainViewWidth",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 267,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MainViewHeight",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 268,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "BackBufferRect",
+      "type": "RECT",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 269,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CurMap",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 272,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "userindex",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 273,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserCharIndex",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 274,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserInventory",
+      "type": "inventory",
+      "visibility": "Global",
+      "isArray": true,
+      "arrayBounds": "1 To MAX_INVENTORY_SLOTS",
+      "line": 275,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "NPCinventory",
+      "type": "NPCinventory",
+      "visibility": "Global",
+      "isArray": true,
+      "arrayBounds": "1 To MAX_NPCINVENTORY_SLOTS",
+      "line": 276,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSpellBook",
+      "type": "spellbook",
+      "visibility": "Global",
+      "isArray": true,
+      "arrayBounds": "1 To MAX_SPELL_SLOTS",
+      "line": 277,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Messageboard",
+      "type": "Postings",
+      "visibility": "Global",
+      "isArray": true,
+      "arrayBounds": "1 To MAX_POSTS_POSTS",
+      "line": 278,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "GmHelps",
+      "type": "GmQueSlots",
+      "visibility": "Global",
+      "isArray": true,
+      "arrayBounds": "1 To MAX_HELPS_HELPS",
+      "line": 279,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserTailorList",
+      "type": "Tailorlist",
+      "visibility": "Global",
+      "isArray": true,
+      "arrayBounds": "1 To MAX_TAILOR_SLOTS",
+      "line": 280,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserMoving",
+      "type": "Byte",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 281,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserPos",
+      "type": "Position",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 282,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "AddtoUserPos",
+      "type": "Position",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 283,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserName",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 284,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserPassword",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 285,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserBody",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 286,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserWeaponAnim",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 287,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserShieldAnim",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 288,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserRace",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 289,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserHead",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 290,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserTown",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 291,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserClass",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 292,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserMaxHP",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 293,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserMinHP",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 294,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserMaxMAN",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 295,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserMinMAN",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 296,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserMaxSTA",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 297,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserMinSTA",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 298,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserGLD",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 299,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserBankGld",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 300,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserFood",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 301,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserPracticePoints",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 302,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserDrink",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 303,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserHiding",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 304,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserPickPocketing",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 305,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserDisguising",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 306,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserMeditating",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 307,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserGender",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 308,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserMail",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 309,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserVersion",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 310,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserCriminal",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 311,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CriminalCount",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 312,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CriminalCount2",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 313,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill1",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 316,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill2",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 317,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill3",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 318,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill4",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 319,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill5",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 320,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill6",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 321,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill7",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 322,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill8",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 323,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill9",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 324,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill10",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 325,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill11",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 326,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill12",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 327,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill13",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 328,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill14",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 329,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill15",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 330,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill16",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 331,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill17",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 332,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill18",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 333,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill19",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 334,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill20",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 335,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill21",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 336,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill22",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 337,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill23",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 338,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill24",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 339,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill25",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 340,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill26",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 341,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill27",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 342,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserSkill28",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 343,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SpecSkill1",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 345,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SpecSkill2",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 346,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SpecSkill3",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 347,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserCanAttack",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 349,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserBetaPass",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 351,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Userid",
+      "type": "Long",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 352,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserLvl",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 354,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserPort",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 355,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserServerIP",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 356,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "tutorial",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 359,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SkillTime",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 362,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WhatJob",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 363,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Working",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 364,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "musicon",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 367,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MusicOnOff",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 368,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "AllowClick",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 371,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "RequestPosTimer",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 375,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "stxtbuffer",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 376,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SendNewChar",
+      "type": "Boolean",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 377,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Connected",
+      "type": "Boolean",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 378,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ErasingChar",
+      "type": "Boolean",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 379,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ENDC",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 382,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ENDL",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 383,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "prgRun",
+      "type": "Boolean",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 386,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "EngineRun",
+      "type": "Boolean",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 387,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "DisplayBits",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 390,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "DisplayHeight",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 391,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "DisplayWidth",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 392,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "hdccaps",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 393,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "hdesktopwnd",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 394,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CurMidi",
+      "type": "String",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 397,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "LoopMidi",
+      "type": "Byte",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 398,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "FramesPerSec",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 401,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "FramesPerSecCounter",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 402,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Address",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 405,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CurrentGrh",
+      "type": "Grh",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 408,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Voices",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 409,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "NumMaps",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 412,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "NumBodies",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 413,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "NumWeaponAnims",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 414,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "NumShieldAnims",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 415,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "NumHeads",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 416,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "NumGrhFiles",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 417,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "NumGrhs",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 418,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "NumChars",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 419,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "LastChar",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 420,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Raining",
+      "type": "Integer",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 423,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "DirectDraw",
+      "type": "IDirectDraw4",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 426,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "PrimarySurface",
+      "type": "IDirectDrawSurface4",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 428,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "PrimaryClipper",
+      "type": "IDirectDrawClipper",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 429,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "BackBufferSurface",
+      "type": "IDirectDrawSurface4",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 430,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SurfaceDB",
+      "type": "IDirectDrawSurface4",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 431,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "gstrWinSysDir",
+      "type": "String",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 437,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "GrhData",
+      "type": "GrhData",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 442,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "BodyData",
+      "type": "BodyData",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 444,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WeaponAnimData",
+      "type": "WeaponAnimData",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 445,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ShieldAnimData",
+      "type": "ShieldAnimData",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 446,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "HeadData",
+      "type": "HeadData",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 447,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MapData",
+      "type": "MapBlock",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 449,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MapInfo",
+      "type": "MapInfo",
+      "visibility": "Global",
+      "isArray": false,
+      "line": 450,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CharList",
+      "type": "Char",
+      "visibility": "Public",
+      "isArray": true,
+      "arrayBounds": "1 To 10000",
+      "line": 452,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ],
+  "declares": [
+    {
+      "name": "writeprivateprofilestring",
+      "lib": "kernel32",
+      "alias": "WritePrivateProfileStringA",
+      "params": "(ByVal  lpApplicationname  As  String,  ByVal  lpKeyname  As  Any,  ByVal  lpString  As  String,  ByVal  lpfilename  As  String)",
+      "returnType": "Long",
+      "line": 457
+    },
+    {
+      "name": "getprivateprofilestring",
+      "lib": "kernel32",
+      "alias": "GetPrivateProfileStringA",
+      "params": "(ByVal  lpApplicationname  As  String,  ByVal  lpKeyname  As  Any,  ByVal  lpdefault  As  String,  ByVal  lpreturnedstring  As  String,  ByVal  nSize  As  Long,  ByVal  lpfilename  As  String)",
+      "returnType": "Long",
+      "line": 458
+    },
+    {
+      "name": "GetKeyState",
+      "lib": "user32",
+      "params": "(ByVal  nVirtKey  As  Long)",
+      "returnType": "Integer",
+      "line": 459
+    },
+    {
+      "name": "GetSystemDirectory",
+      "lib": "kernel32",
+      "alias": "GetSystemDirectoryA",
+      "params": "(ByVal  lpBuffer  As  String,  ByVal  nSize  As  Long)",
+      "returnType": "Long",
+      "line": 460
+    }
+  ],
+  "members": []
+}

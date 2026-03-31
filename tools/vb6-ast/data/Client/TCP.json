@@ -1,0 +1,52 @@
+{
+  "module": "TCP",
+  "sourcePath": "Client/TCP.bas",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "HandleData",
+      "visibility": "Public",
+      "params": "(rData  As  String)",
+      "lineStart": 5,
+      "lineEnd": 861,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SendData",
+      "visibility": "Public",
+      "params": "(sdData  As  String)",
+      "lineStart": 863,
+      "lineEnd": 879,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Login",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 881,
+      "lineEnd": 905,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

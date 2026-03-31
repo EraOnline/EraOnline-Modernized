@@ -1,0 +1,24 @@
+{
+  "module": "info",
+  "sourcePath": "Client/info.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "Label1_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 6,
+      "lineEnd": 9,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

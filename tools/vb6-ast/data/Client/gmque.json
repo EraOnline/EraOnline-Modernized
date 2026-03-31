@@ -1,0 +1,66 @@
+{
+  "module": "gmque",
+  "sourcePath": "Client/gmque.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "Command2_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 7,
+      "lineEnd": 11,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_Load",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 13,
+      "lineEnd": 17,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "que_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 19,
+      "lineEnd": 27,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "que_DblClick",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 29,
+      "lineEnd": 37,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

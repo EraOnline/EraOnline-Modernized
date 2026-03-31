@@ -1,0 +1,24 @@
+{
+  "module": "spawnspes",
+  "sourcePath": "Server/spawnspes.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "spawnspecefic_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 6,
+      "lineEnd": 14,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

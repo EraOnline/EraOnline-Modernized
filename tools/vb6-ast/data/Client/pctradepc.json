@@ -1,0 +1,24 @@
+{
+  "module": "pctradepc",
+  "sourcePath": "Client/pctradepc.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "Image3_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 6,
+      "lineEnd": 9,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

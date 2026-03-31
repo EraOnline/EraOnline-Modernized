@@ -1,0 +1,94 @@
+{
+  "module": "trade",
+  "sourcePath": "Client/trade.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "buy_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 7,
+      "lineEnd": 13,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_Load",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 15,
+      "lineEnd": 19,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Image2_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 21,
+      "lineEnd": 25,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "sell_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 27,
+      "lineEnd": 39,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "shopinv_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 41,
+      "lineEnd": 107,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "yourinv_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 109,
+      "lineEnd": 169,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

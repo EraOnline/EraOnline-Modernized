@@ -1,0 +1,315 @@
+{
+  "module": "modRes",
+  "sourcePath": "Client/modRes.bas",
+  "types": [
+    {
+      "name": "DEVMODE",
+      "fields": [
+        {
+          "name": "dmDeviceName",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "dmSpecVersion",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmDriverVersion",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmSize",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmDriverExtra",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmFields",
+          "type": "Long",
+          "isArray": false
+        },
+        {
+          "name": "dmOrientation",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmPaperSize",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmPaperLength",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmPaperWidth",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmScale",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmCopies",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmDefaultSource",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmPrintQuality",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmColor",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmDuplex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmYResolution",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmTTOption",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmCollate",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmFormName",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "dmUnusedPadding",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmBitsPerPel",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "dmPelsWidth",
+          "type": "Long",
+          "isArray": false
+        },
+        {
+          "name": "dmPelsHeight",
+          "type": "Long",
+          "isArray": false
+        },
+        {
+          "name": "dmDisplayFlags",
+          "type": "Long",
+          "isArray": false
+        },
+        {
+          "name": "dmDisplayFrequency",
+          "type": "Long",
+          "isArray": false
+        }
+      ],
+      "lineStart": 15,
+      "lineEnd": 42,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ],
+  "constants": [
+    {
+      "name": "CCDEVICENAME",
+      "value": "32",
+      "visibility": "Private",
+      "line": 9,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CCFORMNAME",
+      "value": "32",
+      "visibility": "Private",
+      "line": 10,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "DM_BITSPERPEL",
+      "value": "\u0026H60000",
+      "visibility": "Private",
+      "line": 11,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "DM_PELSWIDTH",
+      "value": "\u0026H80000",
+      "visibility": "Private",
+      "line": 12,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "DM_PELSHEIGHT",
+      "value": "\u0026H100000",
+      "visibility": "Private",
+      "line": 13,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ],
+  "globals": [
+    {
+      "name": "OldWidth",
+      "type": "Single",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 2,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "OldHeight",
+      "type": "Single",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 3,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "OldBPP",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 4,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ],
+  "declares": [
+    {
+      "name": "EnumDisplaySettings",
+      "lib": "user32",
+      "alias": "EnumDisplaySettingsA",
+      "params": "(ByVal  lpszDeviceName  As  Long,  ByVal  iModeNum  As  Long,  lpDevMode  As  Any)",
+      "returnType": "Boolean",
+      "line": 6
+    },
+    {
+      "name": "ChangeDisplaySettings",
+      "lib": "user32",
+      "alias": "ChangeDisplaySettingsA",
+      "params": "(lpDevMode  As  Any,  ByVal  dwflags  As  Long)",
+      "returnType": "Long",
+      "line": 7
+    }
+  ],
+  "members": [
+    {
+      "kind": "function",
+      "name": "ChangeRes",
+      "visibility": "Public",
+      "params": "(Width  As  Single,  Height  As  Single,  bpp  As  Integer)",
+      "returnType": "Integer",
+      "lineStart": 44,
+      "lineEnd": 81,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SetRes",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 83,
+      "lineEnd": 86,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "RestoreRes",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 88,
+      "lineEnd": 90,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

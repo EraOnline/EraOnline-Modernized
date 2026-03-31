@@ -1,0 +1,430 @@
+{
+  "module": "training",
+  "sourcePath": "Client/training.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "archery_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 7,
+      "lineEnd": 23,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "backstabbing_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 25,
+      "lineEnd": 41,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "disguise_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 43,
+      "lineEnd": 59,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "blacksmithing_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 61,
+      "lineEnd": 77,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "carpenting_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 79,
+      "lineEnd": 95,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "cooking_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 97,
+      "lineEnd": 117,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "etiquette_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 119,
+      "lineEnd": 135,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "fishing_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 137,
+      "lineEnd": 154,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_Load",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 156,
+      "lineEnd": 277,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "healing_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 279,
+      "lineEnd": 299,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "hiding_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 301,
+      "lineEnd": 318,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "AnimalTaming_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 320,
+      "lineEnd": 337,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label7_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 339,
+      "lineEnd": 343,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "lockpicking_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 345,
+      "lineEnd": 361,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "lumberjacking_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 363,
+      "lineEnd": 380,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "magery_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 382,
+      "lineEnd": 398,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "meditating_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 400,
+      "lineEnd": 417,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "merchant_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 419,
+      "lineEnd": 435,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "mining_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 437,
+      "lineEnd": 454,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "musicanship_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 456,
+      "lineEnd": 473,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "parrying_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 475,
+      "lineEnd": 492,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "pickpocket_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 494,
+      "lineEnd": 510,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "poisoning_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 512,
+      "lineEnd": 528,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "religionlore_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 530,
+      "lineEnd": 547,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "stealth_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 549,
+      "lineEnd": 566,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "streetwise_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 568,
+      "lineEnd": 585,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "surviving_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 587,
+      "lineEnd": 604,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "swordmanship_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 606,
+      "lineEnd": 623,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "tactics_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 625,
+      "lineEnd": 643,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "tailoring_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 645,
+      "lineEnd": 662,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "module": "General",
+  "sourcePath": "Server/General.bas",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "function",
+      "name": "Distance",
+      "visibility": "Public",
+      "params": "(X1  As  Variant,  Y1  As  Variant,  X2  As  Variant,  Y2  As  Variant)",
+      "returnType": "Double",
+      "lineStart": 4,
+      "lineEnd": 12,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "RandomNumber",
+      "visibility": "Public",
+      "params": "(ByVal  LowerBound  As  Variant,  ByVal  UpperBound  As  Variant)",
+      "returnType": "Single",
+      "lineStart": 14,
+      "lineEnd": 24,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "FileExist",
+      "visibility": "Public",
+      "params": "(File  As  String,  FileType  As  VbFileAttribute)",
+      "returnType": "Boolean",
+      "lineStart": 26,
+      "lineEnd": 38,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "ReadField",
+      "visibility": "Public",
+      "params": "(ByVal  Pos  As  Integer,  ByVal  Text  As  String,  ByVal  SepASCII  As  Integer)",
+      "returnType": "String",
+      "lineStart": 39,
+      "lineEnd": 72,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Delay",
+      "visibility": "Public",
+      "params": "(Cycles  As  Integer)",
+      "lineStart": 74,
+      "lineEnd": 84,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "RefreshUserListBox",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 86,
+      "lineEnd": 92,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Restart",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 94,
+      "lineEnd": 161,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "CheckID",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  theid  As  Long)",
+      "lineStart": 163,
+      "lineEnd": 192,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "CheckIfAttack",
+      "visibility": "Public",
+      "params": "(Npcindex  As  Integer,  userindex  As  Integer)",
+      "lineStart": 194,
+      "lineEnd": 209,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "SpecializedSkill",
+      "visibility": "Public",
+      "params": "(skill  As  String)",
+      "lineStart": 210,
+      "lineEnd": 234,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "SameTitle",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  title  As  String)",
+      "lineStart": 235,
+      "lineEnd": 246,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

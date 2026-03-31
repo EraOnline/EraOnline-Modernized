@@ -1,0 +1,801 @@
+{
+  "module": "ServerLogic",
+  "sourcePath": "Server/ServerLogic.bas",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "WipeJunk",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 3,
+      "lineEnd": 47,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ChangeUserChar",
+      "visibility": "Public",
+      "params": "(sndRoute  As  Byte,  sndIndex  As  Integer,  sndMap  As  Integer,  userindex  As  Integer,  Body  As  Integer,  Head  As  Integer,  Heading  As  Byte,  WeaponAnim  As  Integer,  ShieldAnim  As  Integer)",
+      "lineStart": 48,
+      "lineEnd": 68,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ChangeNPCChar",
+      "visibility": "Public",
+      "params": "(sndRoute  As  Byte,  sndIndex  As  Integer,  sndMap  As  Integer,  Npcindex  As  Integer,  Body  As  Integer,  Head  As  Integer,  Heading  As  Byte,  WeaponAnim  As  Integer,  ShieldAnim  As  Integer)",
+      "lineStart": 70,
+      "lineEnd": 84,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "DoTileEvents",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  map  As  Integer,  X  As  Integer,  Y  As  Integer)",
+      "lineStart": 87,
+      "lineEnd": 153,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "InMapBounds",
+      "visibility": "Public",
+      "params": "(map  As  Integer,  X  As  Integer,  Y  As  Integer)",
+      "returnType": "Boolean",
+      "lineStart": 155,
+      "lineEnd": 168,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "NPCDie",
+      "visibility": "Public",
+      "params": "(Npcindex,  userindex  As  Integer)",
+      "lineStart": 170,
+      "lineEnd": 250,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "UserDie",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer)",
+      "lineStart": 252,
+      "lineEnd": 331,
+      "annotations": {
+        "purpose": "Kill a user and turn them into a ghost",
+        "notes": [
+          "Sets status=1, body=16 (ghost), head=5 (ghost head). Drops random item, loses 1/6 EXP and 1/5 gold."
+        ],
+        "status": "not-started",
+        "sends": [
+          "DEA",
+          "CHC"
+        ],
+        "calls": [
+          "ChangeUserChar",
+          "SendUserStatsBox",
+          "CheckUserLevel",
+          "UpdateUserInv",
+          "MakeObj",
+          "SendData"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "UseInvItem",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  slot  As  Byte)",
+      "lineStart": 333,
+      "lineEnd": 848,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "AddtoVar",
+      "visibility": "Public",
+      "params": "(Var  As  Variant,  Addon  As  Variant,  Max  As  Variant)",
+      "lineStart": 852,
+      "lineEnd": 869,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "RemoveInvItem",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  slot  As  Byte)",
+      "lineStart": 871,
+      "lineEnd": 990,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "NextOpenCharIndex",
+      "visibility": "Public",
+      "params": "()",
+      "returnType": "Integer",
+      "lineStart": 992,
+      "lineEnd": 1008,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "NextOpenUser",
+      "visibility": "Public",
+      "params": "()",
+      "returnType": "Integer",
+      "lineStart": 1010,
+      "lineEnd": 1025,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "NextOpenNPC",
+      "visibility": "Public",
+      "params": "()",
+      "returnType": "Integer",
+      "lineStart": 1027,
+      "lineEnd": 1042,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ClosestLegalPos",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  Pos  As  WorldPos,  nPos  As  WorldPos)",
+      "lineStart": 1044,
+      "lineEnd": 1086,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "NameIndex",
+      "visibility": "Public",
+      "params": "(Name  As  String)",
+      "returnType": "Integer",
+      "lineStart": 1088,
+      "lineEnd": 1115,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "NPCAI",
+      "visibility": "Public",
+      "params": "(Npcindex  As  Integer)",
+      "lineStart": 1117,
+      "lineEnd": 1361,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "OpenNPC",
+      "visibility": "Public",
+      "params": "(NpcNumber  As  Integer)",
+      "returnType": "Integer",
+      "lineStart": 1363,
+      "lineEnd": 1456,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "EraseObj",
+      "visibility": "Public",
+      "params": "(ByVal  sndRoute  As  Byte,  ByVal  sndIndex  As  Integer,  ByVal  sndMap  As  Integer,  ByVal  Num  As  Integer,  ByVal  map  As  Byte,  ByVal  X  As  Integer,  ByVal  Y  As  Integer)",
+      "lineStart": 1458,
+      "lineEnd": 1472,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MakeObj",
+      "visibility": "Public",
+      "params": "(ByVal  sndRoute  As  Byte,  ByVal  sndIndex  As  Integer,  ByVal  sndMap  As  Integer,  obj  As  obj,  map  As  Integer,  ByVal  X  As  Integer,  ByVal  Y  As  Integer)",
+      "lineStart": 1474,
+      "lineEnd": 1483,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "GetObj",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer)",
+      "lineStart": 1484,
+      "lineEnd": 1560,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "InscribeSpell",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  slot  As  Byte)",
+      "lineStart": 1562,
+      "lineEnd": 1593,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "UpdateUserInv",
+      "visibility": "Public",
+      "params": "(updateall  As  Boolean,  userindex  As  Integer,  slot  As  Byte)",
+      "lineStart": 1594,
+      "lineEnd": 1628,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "UpdateUserSpell",
+      "visibility": "Public",
+      "params": "(updateall  As  Boolean,  userindex  As  Integer,  slot  As  Byte)",
+      "lineStart": 1630,
+      "lineEnd": 1664,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ChangeUserInv",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  slot  As  Byte,  Object  As  UserOBJ)",
+      "lineStart": 1665,
+      "lineEnd": 1684,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ChangeNPCInv",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  Npcindex  As  Integer,  Object  As  NPCOBJ,  slot  As  Byte)",
+      "lineStart": 1685,
+      "lineEnd": 1706,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SendGmQue",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer)",
+      "lineStart": 1707,
+      "lineEnd": 1738,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ChangeUserSpells",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  slot  As  Byte,  Spell  As  UserSpell)",
+      "lineStart": 1740,
+      "lineEnd": 1761,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SendPostings",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer)",
+      "lineStart": 1762,
+      "lineEnd": 1790,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "PostMessage",
+      "visibility": "Public",
+      "params": "(subject  As  String,  Content  As  String,  userindex  As  Integer)",
+      "lineStart": 1791,
+      "lineEnd": 1809,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "PostHelp",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  Helpmsg  As  String)",
+      "lineStart": 1810,
+      "lineEnd": 1830,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "KickBan",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  Target  As  Integer)",
+      "lineStart": 1832,
+      "lineEnd": 1855,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "DropObj",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  slot  As  Byte,  Num  As  Integer,  map  As  Integer,  X  As  Integer,  Y  As  Integer)",
+      "lineStart": 1856,
+      "lineEnd": 1920,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CloseNPC",
+      "visibility": "Public",
+      "params": "(Npcindex  As  Integer)",
+      "lineStart": 1922,
+      "lineEnd": 1943,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "UserAttackNPC",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  Npcindex  As  Integer)",
+      "lineStart": 1945,
+      "lineEnd": 2111,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "NPCAttackUser",
+      "visibility": "Public",
+      "params": "(Npcindex  As  Integer,  userindex  As  Integer)",
+      "lineStart": 2113,
+      "lineEnd": 2204,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "UserAttackUser",
+      "visibility": "Public",
+      "params": "(attackerindex  As  Integer,  victimindex  As  Integer)",
+      "lineStart": 2205,
+      "lineEnd": 2363,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "UserAttack",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer)",
+      "lineStart": 2365,
+      "lineEnd": 2407,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "userindex",
+      "visibility": "Public",
+      "params": "(SocketId  As  Integer)",
+      "returnType": "Integer",
+      "lineStart": 2408,
+      "lineEnd": 2430,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "HeadtoPos",
+      "visibility": "Public",
+      "params": "(Head  As  Byte,  ByRef  Pos  As  WorldPos)",
+      "lineStart": 2433,
+      "lineEnd": 2471,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SendUserStatsTxt",
+      "visibility": "Public",
+      "params": "(sendIndex  As  Integer,  userindex  As  Integer)",
+      "lineStart": 2473,
+      "lineEnd": 2484,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "UpdateUserMap",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer)",
+      "lineStart": 2486,
+      "lineEnd": 2516,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MoveUserChar",
+      "visibility": "Public",
+      "params": "(ByVal  userindex  As  Integer,  ByVal  nHeading  As  Byte)",
+      "lineStart": 2518,
+      "lineEnd": 2558,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MoveNPCChar",
+      "visibility": "Public",
+      "params": "(ByVal  Npcindex  As  Integer,  ByVal  nHeading  As  Byte)",
+      "lineStart": 2559,
+      "lineEnd": 2581,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MakeUserChar",
+      "visibility": "Public",
+      "params": "(sndRoute  As  Byte,  sndIndex  As  Integer,  sndMap  As  Integer,  userindex  As  Integer,  ByVal  map  As  Integer,  ByVal  X  As  Integer,  ByVal  Y  As  Integer)",
+      "lineStart": 2583,
+      "lineEnd": 2603,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MakeNPCChar",
+      "visibility": "Public",
+      "params": "(sndRoute  As  Byte,  sndIndex  As  Integer,  sndMap  As  Integer,  Npcindex  As  Integer,  ByVal  map  As  Integer,  ByVal  X  As  Integer,  ByVal  Y  As  Integer)",
+      "lineStart": 2605,
+      "lineEnd": 2625,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "LegalPos",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  ByVal  map  As  Integer,  ByVal  X  As  Integer,  ByVal  Y  As  Integer)",
+      "returnType": "Boolean",
+      "lineStart": 2627,
+      "lineEnd": 2666,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SendHelp",
+      "visibility": "Public",
+      "params": "(Index  As  Integer)",
+      "lineStart": 2668,
+      "lineEnd": 2682,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "EraseUserChar",
+      "visibility": "Public",
+      "params": "(sndRoute  As  Byte,  sndIndex  As  Integer,  sndMap  As  Integer,  userindex  As  Integer)",
+      "lineStart": 2683,
+      "lineEnd": 2716,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "EraseNPCChar",
+      "visibility": "Public",
+      "params": "(sndRoute  As  Byte,  sndIndex  As  Integer,  sndMap  As  Integer,  Npcindex  As  Integer)",
+      "lineStart": 2718,
+      "lineEnd": 2747,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LookatTile",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  map  As  Integer,  X  As  Integer,  Y  As  Integer)",
+      "lineStart": 2749,
+      "lineEnd": 2888,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "WarpUserChar",
+      "visibility": "Public",
+      "params": "(ByVal  userindex  As  Integer,  ByVal  map  As  Integer,  ByVal  X  As  Integer,  ByVal  Y  As  Integer)",
+      "lineStart": 2890,
+      "lineEnd": 3008,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "WarpNPCChar",
+      "visibility": "Public",
+      "params": "(ByVal  Npcindex  As  Integer,  ByVal  map  As  Integer,  ByVal  X  As  Integer,  ByVal  Y  As  Integer)",
+      "lineStart": 3009,
+      "lineEnd": 3034,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SendUserStatsBox",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer)",
+      "lineStart": 3035,
+      "lineEnd": 3045,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "NpcTrade",
+      "visibility": "Public",
+      "params": "(updateall  As  Boolean,  Npcindex  As  Integer,  userindex  As  Integer,  slot  As  Byte)",
+      "lineStart": 3046,
+      "lineEnd": 3100,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "NpcGive",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  slot  As  Byte)",
+      "lineStart": 3101,
+      "lineEnd": 3106,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

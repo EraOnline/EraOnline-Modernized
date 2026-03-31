@@ -1,0 +1,181 @@
+{
+  "module": "FileHandler",
+  "sourcePath": "Server/FileHandler.bas",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "LoadOBJData",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 4,
+      "lineEnd": 59,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadSpellData",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 61,
+      "lineEnd": 109,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadUserStats",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  UserFile  As  String)",
+      "lineStart": 110,
+      "lineEnd": 200,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadUserInit",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  UserFile  As  String)",
+      "lineStart": 202,
+      "lineEnd": 287,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "GetVar",
+      "visibility": "Public",
+      "params": "(File  As  String,  Main  As  String,  Var  As  String)",
+      "returnType": "String",
+      "lineStart": 291,
+      "lineEnd": 311,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadMapData",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 313,
+      "lineEnd": 417,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadSini",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 419,
+      "lineEnd": 536,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "WriteVar",
+      "visibility": "Public",
+      "params": "(File  As  String,  Main  As  String,  Var  As  String,  Value  As  String)",
+      "lineStart": 538,
+      "lineEnd": 547,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SaveUser",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  UserFile  As  String)",
+      "lineStart": 549,
+      "lineEnd": 688,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SaveWorld",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 689,
+      "lineEnd": 744,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "FileExist",
+      "visibility": "Public",
+      "params": "(File  As  String,  FileType  As  VbFileAttribute)",
+      "returnType": "Boolean",
+      "lineStart": 747,
+      "lineEnd": 759,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "ReadField",
+      "visibility": "Public",
+      "params": "(ByVal  Pos  As  Integer,  ByVal  Text  As  String,  ByVal  SepASCII  As  Integer)",
+      "returnType": "String",
+      "lineStart": 760,
+      "lineEnd": 793,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

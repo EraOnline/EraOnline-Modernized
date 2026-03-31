@@ -1,0 +1,94 @@
+{
+  "module": "Form5",
+  "sourcePath": "Client/Form5.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "Combo1_Change",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 7,
+      "lineEnd": 60,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Command1_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 62,
+      "lineEnd": 81,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Command2_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 83,
+      "lineEnd": 89,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_Load",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 91,
+      "lineEnd": 101,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label4_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 103,
+      "lineEnd": 106,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label5_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 108,
+      "lineEnd": 111,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

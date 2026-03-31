@@ -1,0 +1,80 @@
+{
+  "module": "skills",
+  "sourcePath": "Client/skills.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "Form_Load",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 7,
+      "lineEnd": 127,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Image1_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 129,
+      "lineEnd": 146,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Image2_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 148,
+      "lineEnd": 165,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Image3_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 167,
+      "lineEnd": 184,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label3_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 186,
+      "lineEnd": 190,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "module": "SetupScreen",
+  "sourcePath": "Client/SetupScreen.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "Form_Load",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 7,
+      "lineEnd": 11,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label4_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 13,
+      "lineEnd": 17,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label7_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 19,
+      "lineEnd": 32,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

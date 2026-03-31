@@ -1,0 +1,654 @@
+{
+  "module": "frmMain",
+  "sourcePath": "Client/frmMain.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "DropCmd_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 8,
+      "lineEnd": 16,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "DrpAmountTxt_Change",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 18,
+      "lineEnd": 30,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Attack_Timer",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 33,
+      "lineEnd": 35,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Birds_Timer",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 37,
+      "lineEnd": 54,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Campfire_Timer",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 56,
+      "lineEnd": 59,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ClearScreen_Timer",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 61,
+      "lineEnd": 64,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "cancelaction_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 66,
+      "lineEnd": 81,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CheckClick_Timer",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 83,
+      "lineEnd": 86,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CheckRain_Timer",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 88,
+      "lineEnd": 112,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Command1_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 114,
+      "lineEnd": 116,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Criminal_Timer",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 118,
+      "lineEnd": 130,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "DoSkill_Timer",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 132,
+      "lineEnd": 183,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "EatDrink_Timer",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 185,
+      "lineEnd": 196,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_KeyDown",
+      "visibility": "Private",
+      "params": "(KeyCode  As  Integer,  Shift  As  Integer)",
+      "lineStart": 198,
+      "lineEnd": 222,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_KeyPress",
+      "visibility": "Private",
+      "params": "(Key As cii  As  Integer)",
+      "lineStart": 224,
+      "lineEnd": 233,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_KeyUp",
+      "visibility": "Private",
+      "params": "(KeyCode  As  Integer,  Shift  As  Integer)",
+      "lineStart": 235,
+      "lineEnd": 246,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_Load",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 247,
+      "lineEnd": 264,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_MouseUp",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
+      "lineStart": 266,
+      "lineEnd": 433,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_QueryUnload",
+      "visibility": "Private",
+      "params": "(Cancel  As  Integer,  UnloadMode  As  Integer)",
+      "lineStart": 435,
+      "lineEnd": 444,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "FPSTimer_Timer",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 446,
+      "lineEnd": 453,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MainPic_MouseUp",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
+      "lineStart": 463,
+      "lineEnd": 465,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "GetCmd_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 470,
+      "lineEnd": 476,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Image7_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 478,
+      "lineEnd": 481,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Image8_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 483,
+      "lineEnd": 485,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Image9_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 487,
+      "lineEnd": 489,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Image2_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 491,
+      "lineEnd": 496,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Image5_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 498,
+      "lineEnd": 502,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label4_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 504,
+      "lineEnd": 510,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label5_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 512,
+      "lineEnd": 517,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label6_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 519,
+      "lineEnd": 524,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label7_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 526,
+      "lineEnd": 531,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label8_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 533,
+      "lineEnd": 536,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Meditate_Timer",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 538,
+      "lineEnd": 543,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MidiPlayer_StatusUpdate",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 545,
+      "lineEnd": 558,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "NPCattack_Timer",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 561,
+      "lineEnd": 564,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Rectxt_KeyDown",
+      "visibility": "Private",
+      "params": "(KeyCode  As  Integer,  Shift  As  Integer)",
+      "lineStart": 566,
+      "lineEnd": 573,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SendTxt_Change",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 575,
+      "lineEnd": 578,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SendTxt_KeyDown",
+      "visibility": "Private",
+      "params": "(KeyCode  As  Integer,  Shift  As  Integer)",
+      "lineStart": 580,
+      "lineEnd": 586,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SendTxt_KeyPress",
+      "visibility": "Private",
+      "params": "(Key As cii  As  Integer)",
+      "lineStart": 588,
+      "lineEnd": 603,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SendTxt_KeyUp",
+      "visibility": "Private",
+      "params": "(KeyCode  As  Integer,  Shift  As  Integer)",
+      "lineStart": 606,
+      "lineEnd": 651,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Socket1_Connect",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 653,
+      "lineEnd": 660,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Socket1_Disconnect",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 663,
+      "lineEnd": 669,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Socket1_LastError",
+      "visibility": "Private",
+      "params": "(ErrorCode  As  Integer,  ErrorString  As  String,  Response  As  Integer)",
+      "lineStart": 671,
+      "lineEnd": 700,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Socket1_Read",
+      "visibility": "Private",
+      "params": "(DataLength  As  Integer,  IsUrgent  As  Integer)",
+      "lineStart": 702,
+      "lineEnd": 752,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "UseCmd_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 755,
+      "lineEnd": 763,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Thunder_Timer",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 766,
+      "lineEnd": 774,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

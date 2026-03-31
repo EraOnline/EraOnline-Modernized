@@ -1,0 +1,388 @@
+{
+  "module": "attributes",
+  "sourcePath": "Client/attributes.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "drink_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 6,
+      "lineEnd": 9,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "fatigue_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 11,
+      "lineEnd": 14,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "food_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 16,
+      "lineEnd": 19,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_Load",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 21,
+      "lineEnd": 32,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Image3_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 34,
+      "lineEnd": 40,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Image3_MouseMove",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
+      "lineStart": 42,
+      "lineEnd": 44,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Image4_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 46,
+      "lineEnd": 51,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Image4_MouseMove",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
+      "lineStart": 53,
+      "lineEnd": 55,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label2_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 57,
+      "lineEnd": 59,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label3_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 61,
+      "lineEnd": 63,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label4_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 65,
+      "lineEnd": 68,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label5_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 70,
+      "lineEnd": 72,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label6_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 74,
+      "lineEnd": 77,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label7_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 79,
+      "lineEnd": 81,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label8_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 83,
+      "lineEnd": 85,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label1_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 87,
+      "lineEnd": 89,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label1_MouseMove",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
+      "lineStart": 91,
+      "lineEnd": 93,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label2_MouseMove",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
+      "lineStart": 95,
+      "lineEnd": 98,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label3_MouseMove",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
+      "lineStart": 100,
+      "lineEnd": 102,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label4_MouseMove",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
+      "lineStart": 104,
+      "lineEnd": 106,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label5_MouseMove",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
+      "lineStart": 108,
+      "lineEnd": 110,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label6_MouseMove",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
+      "lineStart": 112,
+      "lineEnd": 114,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label7_MouseMove",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
+      "lineStart": 116,
+      "lineEnd": 118,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label8_MouseMove",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
+      "lineStart": 120,
+      "lineEnd": 122,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "mana_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 124,
+      "lineEnd": 127,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "practice_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 129,
+      "lineEnd": 132,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "strenght_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 134,
+      "lineEnd": 136,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "module": "tip",
+  "sourcePath": "MapEditor/tip.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "Form_Load",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 6,
+      "lineEnd": 21,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label1_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 23,
+      "lineEnd": 37,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label2_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 39,
+      "lineEnd": 42,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

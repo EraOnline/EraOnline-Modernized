@@ -1,0 +1,696 @@
+{
+  "module": "frmMain",
+  "sourcePath": "MapEditor/frmMain.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "Blockedchk_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 9,
+      "lineEnd": 13,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Check1_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 15,
+      "lineEnd": 23,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "bigcmd_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 25,
+      "lineEnd": 29,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "clreast_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 31,
+      "lineEnd": 54,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ClrNorth_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 56,
+      "lineEnd": 79,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ClrSouth_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 81,
+      "lineEnd": 103,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "clrwest_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 105,
+      "lineEnd": 127,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ClsBordMnu_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 129,
+      "lineEnd": 177,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ClsRoomMnu_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 179,
+      "lineEnd": 232,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Command1_MouseUp",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
+      "lineStart": 235,
+      "lineEnd": 239,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Command2_MouseUp",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
+      "lineStart": 242,
+      "lineEnd": 246,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Command5_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 248,
+      "lineEnd": 261,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Command6_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 263,
+      "lineEnd": 266,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "DrawGridChk_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 268,
+      "lineEnd": 276,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "EraseAllchk_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 278,
+      "lineEnd": 286,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Erasechk_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 288,
+      "lineEnd": 295,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "EraseExitChk_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 297,
+      "lineEnd": 301,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "EraseNPCChk_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 303,
+      "lineEnd": 307,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "EraseObjChk_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 309,
+      "lineEnd": 313,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Command3_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 315,
+      "lineEnd": 318,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Command4_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 320,
+      "lineEnd": 323,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 325,
+      "lineEnd": 327,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_Load",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 329,
+      "lineEnd": 332,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_MouseDown",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
+      "lineStart": 334,
+      "lineEnd": 351,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_MouseMove",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
+      "lineStart": 354,
+      "lineEnd": 371,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_QueryUnload",
+      "visibility": "Private",
+      "params": "(Cancel  As  Integer,  UnloadMode  As  Integer)",
+      "lineStart": 374,
+      "lineEnd": 382,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "FPSTimer_Timer",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 384,
+      "lineEnd": 390,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Grhtxt_Change",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 395,
+      "lineEnd": 413,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "help2_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 416,
+      "lineEnd": 418,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "help3_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 420,
+      "lineEnd": 422,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Layertxt_Change",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 424,
+      "lineEnd": 436,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MainPic_MouseUp",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
+      "lineStart": 439,
+      "lineEnd": 440,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MapExitTxt_Change",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 444,
+      "lineEnd": 456,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MapLst_DblClick",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 458,
+      "lineEnd": 481,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "NPCLst_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 485,
+      "lineEnd": 489,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "OBJAmountTxt_Change",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 491,
+      "lineEnd": 501,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ObjLst_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 503,
+      "lineEnd": 507,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "PlaceBlockCmd_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 509,
+      "lineEnd": 517,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "PlaceExitCmd_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 519,
+      "lineEnd": 527,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "PlaceGrhCmd_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 529,
+      "lineEnd": 537,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "PlaceNPCCmd_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 540,
+      "lineEnd": 548,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "PlaceObjCmd_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 551,
+      "lineEnd": 559,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "quitter_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 561,
+      "lineEnd": 563,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SaveMnu_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 565,
+      "lineEnd": 577,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SaveNewMnu_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 580,
+      "lineEnd": 591,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "WalkModeChk_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 594,
+      "lineEnd": 598,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "XExitTxt_Change",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 601,
+      "lineEnd": 613,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "YExitTxt_Change",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 618,
+      "lineEnd": 630,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "smalcmd_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 633,
+      "lineEnd": 635,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

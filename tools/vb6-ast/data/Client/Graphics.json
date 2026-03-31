@@ -1,0 +1,166 @@
+{
+  "module": "Graphics",
+  "sourcePath": "Client/Graphics.bas",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "ClearSurface",
+      "visibility": "Public",
+      "params": "(Surface  As  IDirectDrawSurface4,  RED  As  Byte,  GREEN  As  Byte,  BLUE  As  Byte)",
+      "lineStart": 5,
+      "lineEnd": 22,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "CreateSurfaceFromFile",
+      "visibility": "Public",
+      "params": "(ByVal  Width  As  Long,  ByVal  Height  As  Long,  ByVal  strFile  As  String)",
+      "returnType": "IDirectDrawSurface4",
+      "lineStart": 25,
+      "lineEnd": 74,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "DDrawGrhtoSurface",
+      "visibility": "Public",
+      "params": "(Surface  As  IDirectDrawSurface4,  Grh  As  Grh,  x  As  Integer,  y  As  Integer,  Center  As  Byte,  Animate  As  Byte)",
+      "lineStart": 76,
+      "lineEnd": 149,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "DDrawTransGrhtoSurface",
+      "visibility": "Public",
+      "params": "(Surface  As  IDirectDrawSurface4,  Grh  As  Grh,  x  As  Integer,  y  As  Integer,  Center  As  Byte,  Animate  As  Byte)",
+      "lineStart": 151,
+      "lineEnd": 226,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "DrawBackBufferSurface",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 228,
+      "lineEnd": 249,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "GetBitmapDimensions",
+      "visibility": "Public",
+      "params": "(BmpFile  As  String,  ByRef  bmWidth  As  Long,  ByRef  bmHeight  As  Long)",
+      "lineStart": 251,
+      "lineEnd": 267,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "DesktopHandle",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 269,
+      "lineEnd": 279,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "DrawGrhtoHdc",
+      "visibility": "Public",
+      "params": "(DestHdc  As  Long,  Grh  As  Grh,  x  As  Integer,  y  As  Integer,  Center  As  Byte,  Animate  As  Byte,  ROP  As  Long)",
+      "lineStart": 281,
+      "lineEnd": 334,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "RenderScreen",
+      "visibility": "Public",
+      "params": "(TileX  As  Integer,  TileY  As  Integer,  PixelOffsetX  As  Integer,  PixelOffsetY  As  Integer)",
+      "lineStart": 336,
+      "lineEnd": 499,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "PixelPos",
+      "visibility": "Public",
+      "params": "(x  As  Integer)",
+      "returnType": "Integer",
+      "lineStart": 501,
+      "lineEnd": 510,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "LoadGraphics",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 512,
+      "lineEnd": 538,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

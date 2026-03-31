@@ -1,0 +1,1171 @@
+{
+  "module": "Declares",
+  "sourcePath": "MapEditor/Declares.bas",
+  "types": [
+    {
+      "name": "Position",
+      "fields": [
+        {
+          "name": "x",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "y",
+          "type": "Integer",
+          "isArray": false
+        }
+      ],
+      "lineStart": 38,
+      "lineEnd": 41,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WorldPos",
+      "fields": [
+        {
+          "name": "map",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "x",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "y",
+          "type": "Integer",
+          "isArray": false
+        }
+      ],
+      "lineStart": 44,
+      "lineEnd": 48,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "GrhData",
+      "fields": [
+        {
+          "name": "sX",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "sY",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "FileNum",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "pixelWidth",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "pixelHeight",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "TileWidth",
+          "type": "Single",
+          "isArray": false
+        },
+        {
+          "name": "TileHeight",
+          "type": "Single",
+          "isArray": false
+        },
+        {
+          "name": "NumFrames",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "Frames",
+          "type": "Integer",
+          "isArray": true,
+          "arrayBounds": "1 To 16"
+        },
+        {
+          "name": "Speed",
+          "type": "Integer",
+          "isArray": false
+        }
+      ],
+      "lineStart": 52,
+      "lineEnd": 64,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Grh",
+      "fields": [
+        {
+          "name": "GrhIndex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "FrameCounter",
+          "type": "Byte",
+          "isArray": false
+        },
+        {
+          "name": "SpeedCounter",
+          "type": "Byte",
+          "isArray": false
+        },
+        {
+          "name": "Started",
+          "type": "Byte",
+          "isArray": false
+        }
+      ],
+      "lineStart": 67,
+      "lineEnd": 72,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "BodyData",
+      "fields": [
+        {
+          "name": "Walk",
+          "type": "Grh",
+          "isArray": true,
+          "arrayBounds": "1 To 4"
+        },
+        {
+          "name": "HeadOffset",
+          "type": "Position",
+          "isArray": false
+        }
+      ],
+      "lineStart": 75,
+      "lineEnd": 78,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "HeadData",
+      "fields": [
+        {
+          "name": "Head",
+          "type": "Grh",
+          "isArray": true,
+          "arrayBounds": "1 To 4"
+        }
+      ],
+      "lineStart": 81,
+      "lineEnd": 83,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Char",
+      "fields": [
+        {
+          "name": "Active",
+          "type": "Byte",
+          "isArray": false
+        },
+        {
+          "name": "Heading",
+          "type": "Byte",
+          "isArray": false
+        },
+        {
+          "name": "Pos",
+          "type": "Position",
+          "isArray": false
+        },
+        {
+          "name": "Body",
+          "type": "BodyData",
+          "isArray": false
+        },
+        {
+          "name": "Head",
+          "type": "HeadData",
+          "isArray": false
+        },
+        {
+          "name": "Moving",
+          "type": "Byte",
+          "isArray": false
+        },
+        {
+          "name": "MoveOffset",
+          "type": "Position",
+          "isArray": false
+        }
+      ],
+      "lineStart": 86,
+      "lineEnd": 96,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "Obj",
+      "fields": [
+        {
+          "name": "OBJIndex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "Amount",
+          "type": "Integer",
+          "isArray": false
+        }
+      ],
+      "lineStart": 99,
+      "lineEnd": 102,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MapBlock",
+      "fields": [
+        {
+          "name": "Graphic",
+          "type": "Grh",
+          "isArray": true,
+          "arrayBounds": "1 To 3"
+        },
+        {
+          "name": "CharIndex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "ObjGrh",
+          "type": "Grh",
+          "isArray": false
+        },
+        {
+          "name": "NPCIndex",
+          "type": "Integer",
+          "isArray": false
+        },
+        {
+          "name": "OBJInfo",
+          "type": "Obj",
+          "isArray": false
+        },
+        {
+          "name": "TileExit",
+          "type": "WorldPos",
+          "isArray": false
+        },
+        {
+          "name": "Blocked",
+          "type": "Byte",
+          "isArray": false
+        }
+      ],
+      "lineStart": 105,
+      "lineEnd": 115,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MapInfo",
+      "fields": [
+        {
+          "name": "Music",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "Name",
+          "type": "String",
+          "isArray": false
+        },
+        {
+          "name": "StartPos",
+          "type": "WorldPos",
+          "isArray": false
+        },
+        {
+          "name": "Changed",
+          "type": "Byte",
+          "isArray": false
+        }
+      ],
+      "lineStart": 118,
+      "lineEnd": 125,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ],
+  "constants": [
+    {
+      "name": "NORTH",
+      "value": "1",
+      "visibility": "Public",
+      "line": 6,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "EAST",
+      "value": "2",
+      "visibility": "Public",
+      "line": 7,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOUTH",
+      "value": "3",
+      "visibility": "Public",
+      "line": 8,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WEST",
+      "value": "4",
+      "visibility": "Public",
+      "line": 9,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "XMaxMapSize",
+      "value": "100",
+      "visibility": "Public",
+      "line": 12,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "XMinMapSize",
+      "value": "1",
+      "visibility": "Public",
+      "line": 13,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "YMaxMapSize",
+      "value": "100",
+      "visibility": "Public",
+      "line": 14,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "YMinMapSize",
+      "value": "1",
+      "visibility": "Public",
+      "line": 15,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ScreenBuffer",
+      "value": "8",
+      "visibility": "Public",
+      "line": 19,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "TileSizeX",
+      "value": "50",
+      "visibility": "Public",
+      "line": 22,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "TileSizeY",
+      "value": "50",
+      "visibility": "Public",
+      "line": 23,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "XWindow",
+      "value": "15",
+      "visibility": "Public",
+      "line": 26,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "YWindow",
+      "value": "11",
+      "visibility": "Public",
+      "line": 27,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MainViewOffsetX",
+      "value": "40",
+      "visibility": "Public",
+      "line": 29,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MainViewOffsetY",
+      "value": "172",
+      "visibility": "Public",
+      "line": 30,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MAX_INVENORY_OBJS",
+      "value": "99",
+      "visibility": "Public",
+      "line": 33,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ],
+  "globals": [
+    {
+      "name": "GrhPath",
+      "type": "String",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 129,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "IniPath",
+      "type": "String",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 130,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MinXBorder",
+      "type": "Byte",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 133,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MaxXBorder",
+      "type": "Byte",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 134,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MinYBorder",
+      "type": "Byte",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 135,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MaxYBorder",
+      "type": "Byte",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 136,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CurMap",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 139,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserIndex",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 140,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserMoving",
+      "type": "Byte",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 141,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserPos",
+      "type": "Position",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 142,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "AddtoUserPos",
+      "type": "Position",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 143,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "UserCharIndex",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 144,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CurrentGrh",
+      "type": "Grh",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 146,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ENDL",
+      "type": "String",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 147,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "prgRun",
+      "type": "Boolean",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 148,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "EngineRun",
+      "type": "Boolean",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 149,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "DisplayBits",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 152,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "DisplayHeight",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 153,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "DisplayWidth",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 154,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "hdccaps",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 155,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "hdesktopwnd",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 156,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WalkMode",
+      "type": "Boolean",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 159,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "FramesPerSec",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 160,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "DrawGrid",
+      "type": "Boolean",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 161,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "DrawBlock",
+      "type": "Boolean",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 162,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "NumMaps",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 165,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "NumBodies",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 166,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "NumHeads",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 167,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "NumGrhFiles",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 168,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "NumGrhs",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 169,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ScrollSpeed",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 173,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MainViewRect",
+      "type": "RECT",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 177,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MainViewWidth",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 178,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MainViewHeight",
+      "type": "Integer",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 179,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "BackBufferRect",
+      "type": "RECT",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 180,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "DirectDraw",
+      "type": "IDirectDraw4",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 182,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "PrimarySurface",
+      "type": "IDirectDrawSurface4",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 184,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "PrimaryClipper",
+      "type": "IDirectDrawClipper",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 185,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "BackBufferSurface",
+      "type": "IDirectDrawSurface4",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 186,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SurfaceDB",
+      "type": "IDirectDrawSurface4",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 187,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "GrhData",
+      "type": "GrhData",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 191,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "BodyData",
+      "type": "BodyData",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 193,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "HeadData",
+      "type": "HeadData",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 194,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MapData",
+      "type": "MapBlock",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 196,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "MapInfo",
+      "type": "MapInfo",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 197,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CharList",
+      "type": "Char",
+      "visibility": "Public",
+      "isArray": true,
+      "arrayBounds": "1 To 10000",
+      "line": 198,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ],
+  "declares": [
+    {
+      "name": "writeprivateprofilestring",
+      "lib": "Kernel32",
+      "alias": "WritePrivateProfileStringA",
+      "params": "(ByVal  lpApplicationname  As  String,  ByVal  lpKeyname  As  Any,  ByVal  lpString  As  String,  ByVal  lpfilename  As  String)",
+      "returnType": "Long",
+      "line": 203
+    },
+    {
+      "name": "getprivateprofilestring",
+      "lib": "Kernel32",
+      "alias": "GetPrivateProfileStringA",
+      "params": "(ByVal  lpApplicationname  As  String,  ByVal  lpKeyname  As  Any,  ByVal  lpdefault  As  String,  ByVal  lpreturnedstring  As  String,  ByVal  nsize  As  Long,  ByVal  lpfilename  As  String)",
+      "returnType": "Long",
+      "line": 204
+    },
+    {
+      "name": "GetKeyState",
+      "lib": "user32",
+      "params": "(ByVal  nVirtKey  As  Long)",
+      "returnType": "Integer",
+      "line": 206
+    }
+  ],
+  "members": []
+}

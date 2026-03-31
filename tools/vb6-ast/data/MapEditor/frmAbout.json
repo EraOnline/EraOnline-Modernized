@@ -1,0 +1,284 @@
+{
+  "module": "frmAbout",
+  "sourcePath": "MapEditor/frmAbout.frm",
+  "types": [],
+  "constants": [
+    {
+      "name": "READ_CONTROL",
+      "value": "\u0026H20000",
+      "visibility": "Public",
+      "line": 9,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "KEY_QUERY_VALUE",
+      "value": "\u0026H1",
+      "visibility": "Public",
+      "line": 10,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "KEY_SET_VALUE",
+      "value": "\u0026H2",
+      "visibility": "Public",
+      "line": 11,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "KEY_CREATE_SUB_KEY",
+      "value": "\u0026H4",
+      "visibility": "Public",
+      "line": 12,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "KEY_ENUMERATE_SUB_KEYS",
+      "value": "\u0026H8",
+      "visibility": "Public",
+      "line": 13,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "KEY_NOTIFY",
+      "value": "\u0026H10",
+      "visibility": "Public",
+      "line": 14,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "KEY_CREATE_LINK",
+      "value": "\u0026H20",
+      "visibility": "Public",
+      "line": 15,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "KEY_ALL_ACCESS",
+      "value": "KEY_QUERY_VALUE \u002B KEY_SET_VALUE \u002B                       KEY_CREATE_SUB_KEY \u002B KEY_ENUMERATE_SUB_KEYS \u002B                       KEY_NOTIFY \u002B KEY_CREATE_LINK \u002B READ_CONTROL",
+      "visibility": "Public",
+      "line": 16,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "HKEY_LOCAL_MACHINE",
+      "value": "\u0026H80000002",
+      "visibility": "Public",
+      "line": 21,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ERROR_SUCCESS",
+      "value": "0",
+      "visibility": "Public",
+      "line": 22,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "REG_SZ",
+      "value": "1",
+      "visibility": "Public",
+      "line": 23,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "REG_DWORD",
+      "value": "4",
+      "visibility": "Public",
+      "line": 24,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "gREGKEYSYSINFOLOC",
+      "value": "\u0022SOFTWARE\\Microsoft\\Shared Tools Location\u0022",
+      "visibility": "Public",
+      "line": 26,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "gREGVALSYSINFOLOC",
+      "value": "\u0022MSINFO\u0022",
+      "visibility": "Public",
+      "line": 27,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "gREGKEYSYSINFO",
+      "value": "\u0022SOFTWARE\\Microsoft\\Shared Tools\\MSINFO\u0022",
+      "visibility": "Public",
+      "line": 28,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "gREGVALSYSINFO",
+      "value": "\u0022PATH\u0022",
+      "visibility": "Public",
+      "line": 29,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ],
+  "globals": [],
+  "declares": [
+    {
+      "name": "RegOpenKeyEx",
+      "lib": "advapi32",
+      "alias": "RegOpenKeyExA",
+      "params": "(ByVal  hKey  As  Long,  ByVal  lpSubKey  As  String,  ByVal  ulOptions  As  Long,  ByVal  samDesired  As  Long,  ByRef  phkResult  As  Long)",
+      "returnType": "Long",
+      "line": 31
+    },
+    {
+      "name": "RegQueryValueEx",
+      "lib": "advapi32",
+      "alias": "RegQueryValueExA",
+      "params": "(ByVal  hKey  As  Long,  ByVal  lpValueName  As  String,  ByVal  lpReserved  As  Long,  ByRef  lpType  As  Long,  ByVal  lpData  As  String,  ByRef  lpcbData  As  Long)",
+      "returnType": "Long",
+      "line": 32
+    },
+    {
+      "name": "RegCloseKey",
+      "lib": "advapi32",
+      "params": "(ByVal  hKey  As  Long)",
+      "returnType": "Long",
+      "line": 33
+    }
+  ],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "cmdSysInfo_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 36,
+      "lineEnd": 38,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "cmdOK_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 40,
+      "lineEnd": 42,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "StartSysInfo",
+      "visibility": "Public",
+      "params": "()",
+      "lineStart": 44,
+      "lineEnd": 72,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "GetKeyValue",
+      "visibility": "Public",
+      "params": "(KeyRoot  As  Long,  KeyName  As  String,  SubKeyRef  As  String,  ByRef  KeyVal  As  String)",
+      "returnType": "Boolean",
+      "lineStart": 74,
+      "lineEnd": 126,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

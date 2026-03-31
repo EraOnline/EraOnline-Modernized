@@ -1,0 +1,1381 @@
+{
+  "module": "Networking",
+  "sourcePath": "Server/Networking.bas",
+  "types": [],
+  "constants": [
+    {
+      "name": "ToIndex",
+      "value": "0",
+      "visibility": "Public",
+      "line": 6,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ToAll",
+      "value": "1",
+      "visibility": "Public",
+      "line": 7,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ToMap",
+      "value": "2",
+      "visibility": "Public",
+      "line": 8,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ToPCArea",
+      "value": "3",
+      "visibility": "Public",
+      "line": 9,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ToNone",
+      "value": "4",
+      "visibility": "Public",
+      "line": 10,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ToAllButIndex",
+      "value": "5",
+      "visibility": "Public",
+      "line": 11,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ToMapButIndex",
+      "value": "6",
+      "visibility": "Public",
+      "line": 12,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "ToGM",
+      "value": "7",
+      "visibility": "Public",
+      "line": 13,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "INVALID_HANDLE",
+      "value": "-1",
+      "visibility": "Public",
+      "line": 17,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CONTROL_ERRIGNORE",
+      "value": "0",
+      "visibility": "Public",
+      "line": 18,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "CONTROL_ERRDISPLAY",
+      "value": "1",
+      "visibility": "Public",
+      "line": 19,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_OPEN",
+      "value": "1",
+      "visibility": "Public",
+      "line": 23,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_CONNECT",
+      "value": "2",
+      "visibility": "Public",
+      "line": 24,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_LISTEN",
+      "value": "3",
+      "visibility": "Public",
+      "line": 25,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_ACCEPT",
+      "value": "4",
+      "visibility": "Public",
+      "line": 26,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_CANCEL",
+      "value": "5",
+      "visibility": "Public",
+      "line": 27,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_FLUSH",
+      "value": "6",
+      "visibility": "Public",
+      "line": 28,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_CLOSE",
+      "value": "7",
+      "visibility": "Public",
+      "line": 29,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_DISCONNECT",
+      "value": "7",
+      "visibility": "Public",
+      "line": 30,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_ABORT",
+      "value": "8",
+      "visibility": "Public",
+      "line": 31,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_NONE",
+      "value": "0",
+      "visibility": "Public",
+      "line": 34,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_IDLE",
+      "value": "1",
+      "visibility": "Public",
+      "line": 35,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_LISTENING",
+      "value": "2",
+      "visibility": "Public",
+      "line": 36,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_CONNECTING",
+      "value": "3",
+      "visibility": "Public",
+      "line": 37,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_ACCEPTING",
+      "value": "4",
+      "visibility": "Public",
+      "line": 38,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_RECEIVING",
+      "value": "5",
+      "visibility": "Public",
+      "line": 39,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_SENDING",
+      "value": "6",
+      "visibility": "Public",
+      "line": 40,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_CLOSING",
+      "value": "7",
+      "visibility": "Public",
+      "line": 41,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "AF_UNSPEC",
+      "value": "0",
+      "visibility": "Public",
+      "line": 44,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "AF_UNIX",
+      "value": "1",
+      "visibility": "Public",
+      "line": 45,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "AF_INET",
+      "value": "2",
+      "visibility": "Public",
+      "line": 46,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCK_STREAM",
+      "value": "1",
+      "visibility": "Public",
+      "line": 49,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCK_DGRAM",
+      "value": "2",
+      "visibility": "Public",
+      "line": 50,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCK_RAW",
+      "value": "3",
+      "visibility": "Public",
+      "line": 51,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCK_RDM",
+      "value": "4",
+      "visibility": "Public",
+      "line": 52,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCK_SEQPACKET",
+      "value": "5",
+      "visibility": "Public",
+      "line": 53,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "IPPROTO_IP",
+      "value": "0",
+      "visibility": "Public",
+      "line": 56,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "IPPROTO_ICMP",
+      "value": "1",
+      "visibility": "Public",
+      "line": 57,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "IPPROTO_GGP",
+      "value": "2",
+      "visibility": "Public",
+      "line": 58,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "IPPROTO_TCP",
+      "value": "6",
+      "visibility": "Public",
+      "line": 59,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "IPPROTO_PUP",
+      "value": "12",
+      "visibility": "Public",
+      "line": 60,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "IPPROTO_UDP",
+      "value": "17",
+      "visibility": "Public",
+      "line": 61,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "IPPROTO_IDP",
+      "value": "22",
+      "visibility": "Public",
+      "line": 62,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "IPPROTO_ND",
+      "value": "77",
+      "visibility": "Public",
+      "line": 63,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "IPPROTO_RAW",
+      "value": "255",
+      "visibility": "Public",
+      "line": 64,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "IPPROTO_MAX",
+      "value": "256",
+      "visibility": "Public",
+      "line": 65,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "INADDR_ANY",
+      "value": "\u00220.0.0.0\u0022",
+      "visibility": "Public",
+      "line": 69,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "INADDR_LOOPBACK",
+      "value": "\u0022127.0.0.1\u0022",
+      "visibility": "Public",
+      "line": 70,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "INADDR_NONE",
+      "value": "\u0022255.255.255.255\u0022",
+      "visibility": "Public",
+      "line": 71,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_READ",
+      "value": "0",
+      "visibility": "Public",
+      "line": 74,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_WRITE",
+      "value": "1",
+      "visibility": "Public",
+      "line": 75,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_READWRITE",
+      "value": "2",
+      "visibility": "Public",
+      "line": 76,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_ERRIGNORE",
+      "value": "0",
+      "visibility": "Public",
+      "line": 79,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SOCKET_ERRDISPLAY",
+      "value": "1",
+      "visibility": "Public",
+      "line": 80,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSABASEERR",
+      "value": "24000",
+      "visibility": "Public",
+      "line": 83,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEINTR",
+      "value": "24004",
+      "visibility": "Public",
+      "line": 84,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEBADF",
+      "value": "24009",
+      "visibility": "Public",
+      "line": 85,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEACCES",
+      "value": "24013",
+      "visibility": "Public",
+      "line": 86,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEFAULT",
+      "value": "24014",
+      "visibility": "Public",
+      "line": 87,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEINVAL",
+      "value": "24022",
+      "visibility": "Public",
+      "line": 88,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEMFILE",
+      "value": "24024",
+      "visibility": "Public",
+      "line": 89,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEWOULDBLOCK",
+      "value": "24035",
+      "visibility": "Public",
+      "line": 90,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEINPROGRESS",
+      "value": "24036",
+      "visibility": "Public",
+      "line": 91,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEALREADY",
+      "value": "24037",
+      "visibility": "Public",
+      "line": 92,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAENOTSOCK",
+      "value": "24038",
+      "visibility": "Public",
+      "line": 93,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEDESTADDRREQ",
+      "value": "24039",
+      "visibility": "Public",
+      "line": 94,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEMSGSIZE",
+      "value": "24040",
+      "visibility": "Public",
+      "line": 95,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEPROTOTYPE",
+      "value": "24041",
+      "visibility": "Public",
+      "line": 96,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAENOPROTOOPT",
+      "value": "24042",
+      "visibility": "Public",
+      "line": 97,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEPROTONOSUPPORT",
+      "value": "24043",
+      "visibility": "Public",
+      "line": 98,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAESOCKTNOSUPPORT",
+      "value": "24044",
+      "visibility": "Public",
+      "line": 99,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEOPNOTSUPP",
+      "value": "24045",
+      "visibility": "Public",
+      "line": 100,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEPFNOSUPPORT",
+      "value": "24046",
+      "visibility": "Public",
+      "line": 101,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEAFNOSUPPORT",
+      "value": "24047",
+      "visibility": "Public",
+      "line": 102,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEADDRINUSE",
+      "value": "24048",
+      "visibility": "Public",
+      "line": 103,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEADDRNOTAVAIL",
+      "value": "24049",
+      "visibility": "Public",
+      "line": 104,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAENETDOWN",
+      "value": "24050",
+      "visibility": "Public",
+      "line": 105,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAENETUNREACH",
+      "value": "24051",
+      "visibility": "Public",
+      "line": 106,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAENETRESET",
+      "value": "24052",
+      "visibility": "Public",
+      "line": 107,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAECONNABORTED",
+      "value": "24053",
+      "visibility": "Public",
+      "line": 108,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAECONNRESET",
+      "value": "24054",
+      "visibility": "Public",
+      "line": 109,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAENOBUFS",
+      "value": "24055",
+      "visibility": "Public",
+      "line": 110,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEISCONN",
+      "value": "24056",
+      "visibility": "Public",
+      "line": 111,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAENOTCONN",
+      "value": "24057",
+      "visibility": "Public",
+      "line": 112,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAESHUTDOWN",
+      "value": "24058",
+      "visibility": "Public",
+      "line": 113,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAETOOMANYREFS",
+      "value": "24059",
+      "visibility": "Public",
+      "line": 114,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAETIMEDOUT",
+      "value": "24060",
+      "visibility": "Public",
+      "line": 115,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAECONNREFUSED",
+      "value": "24061",
+      "visibility": "Public",
+      "line": 116,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAELOOP",
+      "value": "24062",
+      "visibility": "Public",
+      "line": 117,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAENAMETOOLONG",
+      "value": "24063",
+      "visibility": "Public",
+      "line": 118,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEHOSTDOWN",
+      "value": "24064",
+      "visibility": "Public",
+      "line": 119,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEHOSTUNREACH",
+      "value": "24065",
+      "visibility": "Public",
+      "line": 120,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAENOTEMPTY",
+      "value": "24066",
+      "visibility": "Public",
+      "line": 121,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEPROCLIM",
+      "value": "24067",
+      "visibility": "Public",
+      "line": 122,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEUSERS",
+      "value": "24068",
+      "visibility": "Public",
+      "line": 123,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEDQUOT",
+      "value": "24069",
+      "visibility": "Public",
+      "line": 124,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAESTALE",
+      "value": "24070",
+      "visibility": "Public",
+      "line": 125,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAEREMOTE",
+      "value": "24071",
+      "visibility": "Public",
+      "line": 126,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSASYSNOTREADY",
+      "value": "24091",
+      "visibility": "Public",
+      "line": 127,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAVERNOTSUPPORTED",
+      "value": "24092",
+      "visibility": "Public",
+      "line": 128,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSANOTINITIALISED",
+      "value": "24093",
+      "visibility": "Public",
+      "line": 129,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSAHOST_NOT_FOUND",
+      "value": "25001",
+      "visibility": "Public",
+      "line": 130,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSATRY_AGAIN",
+      "value": "25002",
+      "visibility": "Public",
+      "line": 131,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSANO_RECOVERY",
+      "value": "25003",
+      "visibility": "Public",
+      "line": 132,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSANO_DATA",
+      "value": "25004",
+      "visibility": "Public",
+      "line": 133,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "WSANO_ADDRESS",
+      "value": "2500",
+      "visibility": "Public",
+      "line": 134,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "ConnectNewUser",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  Name  As  String,  Password  As  String,  Body  As  Integer,  Head  As  Integer,  Town  As  String,  WeaponAnim  As  Integer,  Race  As  String,  class  As  String,  ShieldAnim  As  Integer,  Gender  As  String,  Email  As  String,  betapass  As  String,  SpecSkill1  As  String,  SpecSkill2  As  String,  SpecSkill3  As  String,  theid  As  Long)",
+      "lineStart": 136,
+      "lineEnd": 310,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CloseSocket",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer)",
+      "lineStart": 312,
+      "lineEnd": 334,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SendData",
+      "visibility": "Public",
+      "params": "(sndRoute  As  Byte,  sndIndex  As  Integer,  sndMap  As  Integer,  sndData  As  String)",
+      "lineStart": 335,
+      "lineEnd": 445,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ConnectUser",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  Name  As  String,  Password  As  String,  Town  As  String,  theid  As  Long)",
+      "lineStart": 446,
+      "lineEnd": 639,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "EraseChar",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  Name  As  String,  Password  As  String,  Town  As  String,  theid  As  Long)",
+      "lineStart": 640,
+      "lineEnd": 676,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CloseUser",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer)",
+      "lineStart": 677,
+      "lineEnd": 766,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "HandleData",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  rdata  As  String)",
+      "lineStart": 768,
+      "lineEnd": 3227,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

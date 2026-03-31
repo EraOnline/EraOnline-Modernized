@@ -1,0 +1,304 @@
+{
+  "module": "inventory",
+  "sourcePath": "Client/inventory.frm",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "DropCmd_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 7,
+      "lineEnd": 18,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "DrpAmountTxt_Change",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 20,
+      "lineEnd": 31,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Form_Load",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 33,
+      "lineEnd": 44,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "GetCmd_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 46,
+      "lineEnd": 49,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Image3_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 51,
+      "lineEnd": 57,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Image4_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 59,
+      "lineEnd": 65,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label1_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 67,
+      "lineEnd": 72,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label2_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 74,
+      "lineEnd": 80,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label3_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 82,
+      "lineEnd": 87,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label4_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 89,
+      "lineEnd": 95,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Label5_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 97,
+      "lineEnd": 105,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "mnufile2_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 107,
+      "lineEnd": 119,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "mnufile6_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 120,
+      "lineEnd": 132,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "mnufile3_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 134,
+      "lineEnd": 145,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ObjLst_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 147,
+      "lineEnd": 183,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ObjLst_ItemCheck",
+      "visibility": "Private",
+      "params": "(Item  As  Integer)",
+      "lineStart": 185,
+      "lineEnd": 210,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ObjLst_MouseDown",
+      "visibility": "Private",
+      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
+      "lineStart": 212,
+      "lineEnd": 220,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "UseCmd_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 222,
+      "lineEnd": 232,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "mnufile4_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 234,
+      "lineEnd": 244,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "mnufile5_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 246,
+      "lineEnd": 257,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "mnufile7_Click",
+      "visibility": "Private",
+      "params": "()",
+      "lineStart": 259,
+      "lineEnd": 268,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

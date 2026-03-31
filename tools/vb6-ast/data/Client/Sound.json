@@ -1,0 +1,184 @@
+{
+  "module": "Sound",
+  "sourcePath": "Client/Sound.bas",
+  "types": [],
+  "constants": [
+    {
+      "name": "NumSoundChannels",
+      "value": "7",
+      "visibility": "Public",
+      "line": 6,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SND_SYNC",
+      "value": "\u0026H0",
+      "visibility": "Public",
+      "line": 12,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SND_ASYNC",
+      "value": "\u0026H1",
+      "visibility": "Public",
+      "line": 13,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SND_NODEFAULT",
+      "value": "\u0026H2",
+      "visibility": "Public",
+      "line": 15,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SND_LOOP",
+      "value": "\u0026H8",
+      "visibility": "Public",
+      "line": 17,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "SND_NOSTOP",
+      "value": "\u0026H10",
+      "visibility": "Public",
+      "line": 18,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ],
+  "globals": [
+    {
+      "name": "DirectSound",
+      "type": "IDirectSound",
+      "visibility": "Public",
+      "isArray": false,
+      "line": 8,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "name": "DSBuffer",
+      "type": "IDirectSoundBuffer",
+      "visibility": "Public",
+      "isArray": true,
+      "arrayBounds": "0 To NumSoundChannels",
+      "line": 9,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ],
+  "declares": [
+    {
+      "name": "mciSendString",
+      "lib": "winmm.dll",
+      "alias": "mciSendStringA",
+      "params": "(ByVal  lpstrCommand  As  String,  ByVal  lpstrReturnString  As  String,  ByVal  uRetrunLength  As  Long,  ByVal  hwndCallback  As  Long)",
+      "returnType": "Long",
+      "line": 20
+    },
+    {
+      "name": "sndPlaySound",
+      "lib": "winmm.dll",
+      "alias": "sndPlaySoundA",
+      "params": "(ByVal  lpszSoundName  As  String,  ByVal  uFlags  As  Long)",
+      "returnType": "Long",
+      "line": 21
+    }
+  ],
+  "members": [
+    {
+      "kind": "sub",
+      "name": "CreateDSBFromWaveFile",
+      "visibility": "Public",
+      "params": "(ds  As  IDirectSound,  ByVal  File  As  String,  dsb  As  IDirectSoundBuffer)",
+      "lineStart": 22,
+      "lineEnd": 71,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "PlayWaveDS",
+      "visibility": "Public",
+      "params": "(File  As  String)",
+      "lineStart": 72,
+      "lineEnd": 101,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "PlayMidi",
+      "visibility": "Public",
+      "params": "(File  As  String)",
+      "lineStart": 102,
+      "lineEnd": 118,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "PlayWaveAPI",
+      "visibility": "Public",
+      "params": "(File  As  String)",
+      "lineStart": 120,
+      "lineEnd": 130,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}

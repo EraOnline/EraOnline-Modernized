@@ -1,0 +1,110 @@
+{
+  "module": "Checks",
+  "sourcePath": "Server/Checks.bas",
+  "types": [],
+  "constants": [],
+  "globals": [],
+  "declares": [],
+  "members": [
+    {
+      "kind": "function",
+      "name": "CheckID",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  theid  As  Long)",
+      "lineStart": 3,
+      "lineEnd": 32,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "CheckIfAttack",
+      "visibility": "Public",
+      "params": "(Npcindex  As  Integer,  userindex  As  Integer)",
+      "lineStart": 34,
+      "lineEnd": 49,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "CheckForSameIP",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer,  UserIP  As  String)",
+      "returnType": "Boolean",
+      "lineStart": 52,
+      "lineEnd": 72,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "function",
+      "name": "CheckForSameName",
+      "visibility": "Public",
+      "params": "(ByVal  userindex  As  Integer,  ByVal  Name  As  String)",
+      "returnType": "Boolean",
+      "lineStart": 73,
+      "lineEnd": 93,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CheckRep",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer)",
+      "lineStart": 95,
+      "lineEnd": 155,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CheckTitle",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer)",
+      "lineStart": 157,
+      "lineEnd": 307,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CheckUserLevel",
+      "visibility": "Public",
+      "params": "(userindex  As  Integer)",
+      "lineStart": 309,
+      "lineEnd": 355,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": []
+      }
+    }
+  ]
+}
