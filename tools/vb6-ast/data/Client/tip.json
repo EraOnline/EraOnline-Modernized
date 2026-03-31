@@ -1,6 +1,53 @@
 {
   "module": "tip",
   "sourcePath": "Client/tip.frm",
+  "address": "Client/tip",
+  "controls": [
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Height": "495",
+        "Left": "4560",
+        "TabIndex": "2",
+        "Top": "3600",
+        "Width": "1215"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Height": "495",
+        "Left": "3240",
+        "TabIndex": "1",
+        "Top": "3600",
+        "Width": "1215"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "thetip",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "2775",
+        "Left": "360",
+        "TabIndex": "0",
+        "Top": "720",
+        "Width": "5415"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +58,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 23,
+      "lineStart": 56,
+      "lineEnd": 72,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +72,8 @@
       "name": "Label1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 25,
-      "lineEnd": 40,
+      "lineStart": 74,
+      "lineEnd": 89,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +86,8 @@
       "name": "Label2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 42,
-      "lineEnd": 48,
+      "lineStart": 91,
+      "lineEnd": 97,
       "annotations": {
         "notes": [],
         "status": "not-started",

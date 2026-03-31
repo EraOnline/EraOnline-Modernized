@@ -1,6 +1,83 @@
 {
   "module": "deposit",
   "sourcePath": "Client/deposit.frm",
+  "address": "Client/deposit",
+  "controls": [
+    {
+      "type": "VB.TextBox",
+      "name": "Text1",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "Appearance": "0  \u0027Flat",
+        "BackColor": "\u0026H80000003\u0026",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "285",
+        "Left": "840",
+        "TabIndex": "1",
+        "Top": "1440",
+        "Width": "3135"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022How much ?\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "1200",
+        "TabIndex": "2",
+        "Top": "1200",
+        "Width": "2415"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image4",
+      "properties": {
+        "Height": "480",
+        "Left": "1800",
+        "Picture": "\u0022deposit.frx\u0022:0000",
+        "Stretch": "-1  \u0027True",
+        "Top": "2400",
+        "Width": "1185"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Deposit Gold To Bank\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "495",
+        "Left": "1200",
+        "TabIndex": "0",
+        "Top": "240",
+        "Width": "3015"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "3255",
+        "Left": "0",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "4695"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +88,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 10,
+      "lineStart": 78,
+      "lineEnd": 81,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +102,8 @@
       "name": "Image2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 12,
-      "lineEnd": 19,
+      "lineStart": 83,
+      "lineEnd": 90,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +116,8 @@
       "name": "Image3_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 21,
-      "lineEnd": 27,
+      "lineStart": 92,
+      "lineEnd": 98,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +130,8 @@
       "name": "Image4_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 29,
-      "lineEnd": 43,
+      "lineStart": 100,
+      "lineEnd": 114,
       "annotations": {
         "notes": [],
         "status": "not-started",

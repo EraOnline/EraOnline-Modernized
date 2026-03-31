@@ -1,6 +1,231 @@
 {
   "module": "trade",
   "sourcePath": "Client/trade.frm",
+  "address": "Client/trade",
+  "controls": [
+    {
+      "type": "VB.PictureBox",
+      "name": "ShowPic",
+      "properties": {
+        "Appearance": "0  \u0027Flat",
+        "AutoRedraw": "-1  \u0027True",
+        "AutoSize": "-1  \u0027True",
+        "BackColor": "\u0026H00000000\u0026",
+        "ForeColor": "\u0026H00FFFFFF\u0026",
+        "Height": "675",
+        "Left": "4680",
+        "ScaleHeight": "43",
+        "ScaleMode": "3  \u0027Pixel",
+        "ScaleWidth": "46",
+        "TabIndex": "6",
+        "TabStop": "0   \u0027False",
+        "Top": "1680",
+        "Width": "720"
+      }
+    },
+    {
+      "type": "VB.ListBox",
+      "name": "yourinv",
+      "properties": {
+        "BackColor": "\u0026H00808080\u0026",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "3765",
+        "Left": "6600",
+        "TabIndex": "1",
+        "Top": "600",
+        "Width": "3015"
+      }
+    },
+    {
+      "type": "VB.ListBox",
+      "name": "shopinv",
+      "properties": {
+        "BackColor": "\u0026H00808080\u0026",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "3765",
+        "Left": "600",
+        "TabIndex": "0",
+        "Top": "600",
+        "Width": "3015"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "levellabel",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "9.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "4200",
+        "TabIndex": "8",
+        "Top": "3240",
+        "Width": "1695"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label3",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Health requiered to use this item:\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "9.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "3720",
+        "TabIndex": "7",
+        "Top": "3000",
+        "Width": "2775"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image2",
+      "properties": {
+        "Height": "495",
+        "Left": "4320",
+        "Picture": "\u0022trade.frx\u0022:0000",
+        "Stretch": "-1  \u0027True",
+        "Top": "4680",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "keepername",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Npc:\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "375",
+        "Left": "1800",
+        "TabIndex": "5",
+        "Top": "240",
+        "Width": "1215"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "price",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "9.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "4200",
+        "TabIndex": "4",
+        "Top": "2640",
+        "Width": "1695"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "9.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "3960",
+        "TabIndex": "3",
+        "Top": "2400",
+        "Width": "2175"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "buy",
+      "properties": {
+        "Height": "495",
+        "Left": "1320",
+        "Picture": "\u0022trade.frx\u0022:041A",
+        "Stretch": "-1  \u0027True",
+        "Top": "4680",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "sell",
+      "properties": {
+        "Height": "495",
+        "Left": "7320",
+        "Picture": "\u0022trade.frx\u0022:0D97",
+        "Stretch": "-1  \u0027True",
+        "Top": "4680",
+        "Width": "1530"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Your Inventory:\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Index": "0",
+        "Left": "7320",
+        "TabIndex": "2",
+        "Top": "240",
+        "Width": "2055"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "5415",
+        "Left": "0",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "10215"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +236,8 @@
       "name": "buy_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 13,
+      "lineStart": 203,
+      "lineEnd": 209,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +250,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 15,
-      "lineEnd": 19,
+      "lineStart": 211,
+      "lineEnd": 215,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +264,8 @@
       "name": "Image2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 21,
-      "lineEnd": 25,
+      "lineStart": 217,
+      "lineEnd": 221,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +278,8 @@
       "name": "sell_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 27,
-      "lineEnd": 39,
+      "lineStart": 223,
+      "lineEnd": 235,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -67,8 +292,8 @@
       "name": "shopinv_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 41,
-      "lineEnd": 107,
+      "lineStart": 237,
+      "lineEnd": 303,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -81,8 +306,8 @@
       "name": "yourinv_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 109,
-      "lineEnd": 169,
+      "lineStart": 305,
+      "lineEnd": 365,
       "annotations": {
         "notes": [],
         "status": "not-started",

@@ -1,6 +1,8 @@
 {
   "module": "TCP",
   "sourcePath": "Server/TCP.bas",
+  "address": "Server/TCP",
+  "controls": [],
   "types": [],
   "constants": [
     {
@@ -1283,7 +1285,7 @@
       "kind": "sub",
       "name": "ConnectNewUser",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  Name  As  String,  Password  As  String,  Body  As  Integer,  Head  As  Integer,  Town  As  String,  WeaponAnim  As  Integer,  Race  As  String,  class  As  String,  ShieldAnim  As  Integer,  Gender  As  String,  Email  As  String,  betapass  As  String,  SpecSkill1  As  String,  SpecSkill2  As  String,  SpecSkill3  As  String,  theid  As  Long)",
+      "params": "(userindex As Integer, Name As String, Password As String, Body As Integer, Head As Integer, Town As String, WeaponAnim As Integer, Race As String, class As String, ShieldAnim As Integer, Gender As String, Email As String, betapass As String, SpecSkill1 As String, SpecSkill2 As String, SpecSkill3 As String, theid As Long)",
       "lineStart": 136,
       "lineEnd": 310,
       "annotations": {
@@ -1312,7 +1314,7 @@
       "kind": "sub",
       "name": "CloseSocket",
       "visibility": "Public",
-      "params": "(userindex  As  Integer)",
+      "params": "(userindex As Integer)",
       "lineStart": 312,
       "lineEnd": 334,
       "annotations": {
@@ -1332,7 +1334,7 @@
       "kind": "sub",
       "name": "SendData",
       "visibility": "Public",
-      "params": "(sndRoute  As  Byte,  sndIndex  As  Integer,  sndMap  As  Integer,  sndData  As  String)",
+      "params": "(sndRoute As Byte, sndIndex As Integer, sndMap As Integer, sndData As String)",
       "lineStart": 335,
       "lineEnd": 445,
       "annotations": {
@@ -1350,7 +1352,7 @@
       "kind": "sub",
       "name": "ConnectUser",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  Name  As  String,  Password  As  String,  Town  As  String,  theid  As  Long)",
+      "params": "(userindex As Integer, Name As String, Password As String, Town As String, theid As Long)",
       "lineStart": 446,
       "lineEnd": 639,
       "annotations": {
@@ -1386,7 +1388,7 @@
       "kind": "sub",
       "name": "EraseChar",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  Name  As  String,  Password  As  String,  Town  As  String,  theid  As  Long)",
+      "params": "(userindex As Integer, Name As String, Password As String, Town As String, theid As Long)",
       "lineStart": 640,
       "lineEnd": 676,
       "annotations": {
@@ -1402,7 +1404,7 @@
       "kind": "sub",
       "name": "CloseUser",
       "visibility": "Public",
-      "params": "(userindex  As  Integer)",
+      "params": "(userindex As Integer)",
       "lineStart": 677,
       "lineEnd": 766,
       "annotations": {
@@ -1424,7 +1426,7 @@
       "kind": "sub",
       "name": "HandleData",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  rdata  As  String)",
+      "params": "(userindex As Integer, rdata As String)",
       "lineStart": 768,
       "lineEnd": 3227,
       "annotations": {

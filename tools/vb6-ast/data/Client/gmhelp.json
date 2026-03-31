@@ -1,6 +1,121 @@
 {
   "module": "gmhelp",
   "sourcePath": "Client/gmhelp.frm",
+  "address": "Client/gmhelp",
+  "controls": [
+    {
+      "type": "VB.CommandButton",
+      "name": "Command1",
+      "properties": {
+        "Caption": "\u0022OK\u0022",
+        "Height": "375",
+        "Left": "2160",
+        "TabIndex": "4",
+        "Top": "6840",
+        "Width": "2175"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label6",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022gmhelp.frx\u0022:0000",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "975",
+        "Left": "240",
+        "TabIndex": "5",
+        "Top": "4560",
+        "Width": "6015"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label4",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022gmhelp.frx\u0022:0095",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "975",
+        "Left": "240",
+        "TabIndex": "3",
+        "Top": "3240",
+        "Width": "5655"
+      }
+    },
+    {
+      "type": "VB.Line",
+      "name": "Line1",
+      "properties": {
+        "BorderColor": "\u0026H80000009\u0026",
+        "X1": "240",
+        "X2": "6240",
+        "Y1": "2040",
+        "Y2": "2040"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label3",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022gmhelp.frx\u0022:020C",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "855",
+        "Left": "240",
+        "TabIndex": "2",
+        "Top": "2280",
+        "Width": "6135"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022gmhelp.frx\u0022:0376",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "1215",
+        "Left": "240",
+        "TabIndex": "1",
+        "Top": "720",
+        "Width": "6135"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Some Help With This GM Tool:\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "375",
+        "Left": "240",
+        "TabIndex": "0",
+        "Top": "240",
+        "Width": "6135"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image6",
+      "properties": {
+        "Height": "8775",
+        "Left": "0",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "6615"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +126,8 @@
       "name": "Command1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 12,
+      "lineStart": 104,
+      "lineEnd": 109,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +140,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 14,
-      "lineEnd": 18,
+      "lineStart": 111,
+      "lineEnd": 115,
       "annotations": {
         "notes": [],
         "status": "not-started",

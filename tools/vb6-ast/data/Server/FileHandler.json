@@ -1,6 +1,8 @@
 {
   "module": "FileHandler",
   "sourcePath": "Server/FileHandler.bas",
+  "address": "Server/FileHandler",
+  "controls": [],
   "types": [],
   "constants": [],
   "globals": [],
@@ -50,11 +52,11 @@
       "kind": "sub",
       "name": "LoadUserStats",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  UserFile  As  String)",
+      "params": "(userindex As Integer, UserFile As String)",
       "lineStart": 110,
       "lineEnd": 200,
       "annotations": {
-        "purpose": "Load a character's stats/skills/flags/community from .chr file",
+        "purpose": "Load a character\u0027s stats/skills/flags/community from .chr file",
         "notes": [
           "Reads [STATS], [FLAGS], [Community], [SKILLS] sections from INI-format char file. All 28 skills loaded individually (Skill1-Skill28). Loads SpecSkill selections, criminal status, reputation, etc.",
           "Duplicate of FileIO.bas - use FileIO as canonical"
@@ -70,7 +72,7 @@
       "kind": "sub",
       "name": "LoadUserInit",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  UserFile  As  String)",
+      "params": "(userindex As Integer, UserFile As String)",
       "lineStart": 202,
       "lineEnd": 287,
       "annotations": {
@@ -90,7 +92,7 @@
       "kind": "function",
       "name": "GetVar",
       "visibility": "Public",
-      "params": "(File  As  String,  Main  As  String,  Var  As  String)",
+      "params": "(File As String, Main As String, Var As String)",
       "returnType": "String",
       "lineStart": 291,
       "lineEnd": 311,
@@ -147,7 +149,7 @@
       "kind": "sub",
       "name": "WriteVar",
       "visibility": "Public",
-      "params": "(File  As  String,  Main  As  String,  Var  As  String,  Value  As  String)",
+      "params": "(File As String, Main As String, Var As String, Value As String)",
       "lineStart": 538,
       "lineEnd": 547,
       "annotations": {
@@ -165,11 +167,11 @@
       "kind": "sub",
       "name": "SaveUser",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  UserFile  As  String)",
+      "params": "(userindex As Integer, UserFile As String)",
       "lineStart": 549,
       "lineEnd": 688,
       "annotations": {
-        "purpose": "Save a character's complete state to .chr file",
+        "purpose": "Save a character\u0027s complete state to .chr file",
         "notes": [
           "Writes all sections: [INIT] (name/password/class/race/gender/email/etc), [STATS], [FLAGS], [SKILLS], [Community], [INVENTORY] (20 slots), [SPELLS] (50 slots). Called on /SAVE, zone change, and disconnect.",
           "Duplicate of FileIO.bas - use FileIO as canonical"
@@ -203,7 +205,7 @@
       "kind": "function",
       "name": "FileExist",
       "visibility": "Public",
-      "params": "(File  As  String,  FileType  As  VbFileAttribute)",
+      "params": "(File As String, FileType As VbFileAttribute)",
       "returnType": "Boolean",
       "lineStart": 747,
       "lineEnd": 759,
@@ -221,7 +223,7 @@
       "kind": "function",
       "name": "ReadField",
       "visibility": "Public",
-      "params": "(ByVal  Pos  As  Integer,  ByVal  Text  As  String,  ByVal  SepASCII  As  Integer)",
+      "params": "(ByVal Pos As Integer, ByVal Text As String, ByVal SepASCII As Integer)",
       "returnType": "String",
       "lineStart": 760,
       "lineEnd": 793,

@@ -1,6 +1,50 @@
 {
   "module": "noteform",
   "sourcePath": "Client/noteform.frm",
+  "address": "Client/noteform",
+  "controls": [
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Close\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "11.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "5160",
+        "TabIndex": "1",
+        "Top": "5640",
+        "Width": "855"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "message",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Message\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "11.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "3975",
+        "Left": "120",
+        "TabIndex": "0",
+        "Top": "840",
+        "Width": "5775"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +55,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 10,
+      "lineStart": 61,
+      "lineEnd": 64,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +69,8 @@
       "name": "Label1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 12,
-      "lineEnd": 17,
+      "lineStart": 66,
+      "lineEnd": 71,
       "annotations": {
         "notes": [],
         "status": "not-started",

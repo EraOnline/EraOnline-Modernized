@@ -1,6 +1,30 @@
 {
   "module": "Tut",
   "sourcePath": "Client/Tut1.frm",
+  "address": "Client/Tut1",
+  "controls": [
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022Tut1.frx\u0022:0000",
+        "Name": "\u0022Jester\u0022",
+        "Size": "11.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "3255",
+        "Left": "120",
+        "TabIndex": "0",
+        "Top": "360",
+        "Width": "6495"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +35,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 6,
-      "lineEnd": 8,
+      "lineStart": 40,
+      "lineEnd": 42,
       "annotations": {
         "notes": [],
         "status": "not-started",

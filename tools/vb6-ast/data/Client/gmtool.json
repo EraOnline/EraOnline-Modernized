@@ -1,6 +1,580 @@
 {
   "module": "gmtool",
   "sourcePath": "Client/gmtool.frm",
+  "address": "Client/gmtool",
+  "controls": [
+    {
+      "type": "VB.CommandButton",
+      "name": "Command17",
+      "properties": {
+        "Caption": "\u0022Give yourself one more lock\u0022",
+        "Height": "255",
+        "Left": "840",
+        "TabIndex": "37",
+        "Top": "4800",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command16",
+      "properties": {
+        "Caption": "\u0022OK\u0022",
+        "Height": "195",
+        "Left": "4320",
+        "TabIndex": "36",
+        "Top": "6240",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "npcnavn",
+      "properties": {
+        "Height": "285",
+        "Left": "4320",
+        "TabIndex": "35",
+        "Top": "5880",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command15",
+      "properties": {
+        "Caption": "\u0022OK\u0022",
+        "Height": "195",
+        "Left": "840",
+        "TabIndex": "33",
+        "Top": "6240",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "hail",
+      "properties": {
+        "Height": "285",
+        "Left": "840",
+        "TabIndex": "32",
+        "Top": "5880",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command14",
+      "properties": {
+        "Caption": "\u0022BAN AND KICK PLAYER\u0022",
+        "Height": "255",
+        "Left": "840",
+        "TabIndex": "30",
+        "Top": "5280",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command13",
+      "properties": {
+        "Caption": "\u0022Turn Your Immortality From Players On\u0022",
+        "Height": "255",
+        "Left": "840",
+        "TabIndex": "29",
+        "Tag": "\u00220\u0022",
+        "Top": "4320",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command12",
+      "properties": {
+        "Caption": "\u0022HELP QUE\u0022",
+        "Height": "255",
+        "Left": "840",
+        "TabIndex": "28",
+        "Top": "4560",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "stamina",
+      "properties": {
+        "Type": "1",
+        "Format": "\u00220\u0022",
+        "HaveTrueFalseNull": "0",
+        "FirstDayOfWeek": "0",
+        "FirstWeekOfYear": "0",
+        "LCID": "1044",
+        "SubFormatType": "1",
+        "Height": "285",
+        "Left": "2280",
+        "TabIndex": "26",
+        "Top": "2520",
+        "Width": "1815"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "mana",
+      "properties": {
+        "Type": "1",
+        "Format": "\u00220\u0022",
+        "HaveTrueFalseNull": "0",
+        "FirstDayOfWeek": "0",
+        "FirstWeekOfYear": "0",
+        "LCID": "1044",
+        "SubFormatType": "1",
+        "Height": "285",
+        "Left": "2280",
+        "TabIndex": "25",
+        "Top": "2160",
+        "Width": "1815"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "hit",
+      "properties": {
+        "Type": "1",
+        "Format": "\u00220\u0022",
+        "HaveTrueFalseNull": "0",
+        "FirstDayOfWeek": "0",
+        "FirstWeekOfYear": "0",
+        "LCID": "1044",
+        "SubFormatType": "1",
+        "Height": "285",
+        "Left": "2280",
+        "TabIndex": "24",
+        "Top": "1800",
+        "Width": "1815"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "health",
+      "properties": {
+        "Type": "1",
+        "Format": "\u00220\u0022",
+        "HaveTrueFalseNull": "0",
+        "FirstDayOfWeek": "0",
+        "FirstWeekOfYear": "0",
+        "LCID": "1044",
+        "SubFormatType": "1",
+        "Height": "285",
+        "Left": "2280",
+        "TabIndex": "23",
+        "Top": "1440",
+        "Width": "1815"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command9",
+      "properties": {
+        "Caption": "\u0022Apply Changes\u0022",
+        "Height": "195",
+        "Left": "2280",
+        "TabIndex": "22",
+        "Top": "2880",
+        "Width": "1815"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command11",
+      "properties": {
+        "Caption": "\u0022Give 100 experience to yourself\u0022",
+        "Height": "255",
+        "Left": "840",
+        "TabIndex": "17",
+        "Top": "3120",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command7",
+      "properties": {
+        "Caption": "\u0022Ressurect Target\u0022",
+        "Height": "255",
+        "Left": "840",
+        "TabIndex": "16",
+        "Top": "3360",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command10",
+      "properties": {
+        "Caption": "\u0022Polymorph Yourself\u0022",
+        "Height": "255",
+        "Left": "840",
+        "TabIndex": "15",
+        "Top": "3600",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command8",
+      "properties": {
+        "Caption": "\u0022Give Yourself 1000 gold\u0022",
+        "Height": "255",
+        "Left": "840",
+        "TabIndex": "14",
+        "Top": "3840",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command2",
+      "properties": {
+        "Caption": "\u0022TELEPORT TO GM MEETING PLACE\u0022",
+        "Height": "255",
+        "Left": "840",
+        "TabIndex": "13",
+        "Top": "4080",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "obj",
+      "properties": {
+        "Height": "285",
+        "Left": "1680",
+        "TabIndex": "12",
+        "Top": "6840",
+        "Width": "1095"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "y",
+      "properties": {
+        "Height": "285",
+        "Left": "3000",
+        "TabIndex": "9",
+        "Top": "8160",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "x",
+      "properties": {
+        "Height": "285",
+        "Left": "1800",
+        "TabIndex": "8",
+        "Top": "8160",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "map",
+      "properties": {
+        "Height": "285",
+        "Left": "600",
+        "TabIndex": "7",
+        "Top": "8160",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command5",
+      "properties": {
+        "Caption": "\u0022TELEPORT TARGET\u0022",
+        "Height": "255",
+        "Left": "1080",
+        "TabIndex": "5",
+        "Top": "8520",
+        "Width": "2295"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command3",
+      "properties": {
+        "Caption": "\u0022Close GM Tool\u0022",
+        "Height": "255",
+        "Left": "6120",
+        "TabIndex": "4",
+        "Top": "360",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command6",
+      "properties": {
+        "Caption": "\u0022CREATE OBJECT\u0022",
+        "Height": "255",
+        "Left": "960",
+        "TabIndex": "3",
+        "Top": "7200",
+        "Width": "2535"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command4",
+      "properties": {
+        "Caption": "\u0022Do you need help with this tool ?\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "2",
+        "Top": "720",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command1",
+      "properties": {
+        "Caption": "\u0022Get List Of GM Commands\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "1",
+        "Top": "360",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.Line",
+      "name": "Line1",
+      "properties": {
+        "BorderColor": "\u0026H80000009\u0026",
+        "X1": "4200",
+        "X2": "8760",
+        "Y1": "6480",
+        "Y2": "6480"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label11",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Change  targeted NPC\u0027s name:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "4320",
+        "TabIndex": "34",
+        "Top": "5640",
+        "Width": "4215"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "Shape4",
+      "properties": {
+        "BorderColor": "\u0026H80000005\u0026",
+        "Height": "3255",
+        "Left": "4200",
+        "Top": "5640",
+        "Width": "4575"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "Shape3",
+      "properties": {
+        "BorderColor": "\u0026H80000005\u0026",
+        "Height": "855",
+        "Left": "360",
+        "Top": "5640",
+        "Width": "3735"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "Shape2",
+      "properties": {
+        "BorderColor": "\u0026H80000005\u0026",
+        "Height": "1095",
+        "Left": "360",
+        "Top": "6480",
+        "Width": "3735"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "Shape1",
+      "properties": {
+        "BorderColor": "\u0026H80000005\u0026",
+        "Height": "1335",
+        "Left": "360",
+        "Top": "7560",
+        "Width": "3735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label10",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Change targeted NPC\u0060s hailing message:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "840",
+        "TabIndex": "31",
+        "Top": "5640",
+        "Width": "3255"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label9",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Change Target Stats:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "1440",
+        "TabIndex": "27",
+        "Top": "1080",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label8",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Change Max Stamina to:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "240",
+        "TabIndex": "21",
+        "Top": "2520",
+        "Width": "1815"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label7",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Change Max Mana to:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "240",
+        "TabIndex": "20",
+        "Top": "2160",
+        "Width": "1815"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label6",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Change Max Hit to:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "240",
+        "TabIndex": "19",
+        "Top": "1800",
+        "Width": "1815"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label5",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Change Max Health to:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "240",
+        "TabIndex": "18",
+        "Top": "1440",
+        "Width": "2535"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label4",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Object Number:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "1680",
+        "TabIndex": "11",
+        "Top": "6600",
+        "Width": "2535"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label3",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Teleport Coordinates:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "1440",
+        "TabIndex": "10",
+        "Top": "7680",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022MAP:                     X:                       Y:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "720",
+        "TabIndex": "6",
+        "Top": "7920",
+        "Width": "3255"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022GameMaster Tool\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "375",
+        "Left": "120",
+        "TabIndex": "0",
+        "Top": "0",
+        "Width": "4095"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image6",
+      "properties": {
+        "Height": "9015",
+        "Left": "0",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "8895"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +585,8 @@
       "name": "Command1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 12,
+      "lineStart": 428,
+      "lineEnd": 433,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +599,8 @@
       "name": "Command10_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 14,
-      "lineEnd": 25,
+      "lineStart": 435,
+      "lineEnd": 446,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +613,8 @@
       "name": "Command11_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 27,
-      "lineEnd": 39,
+      "lineStart": 448,
+      "lineEnd": 460,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +627,8 @@
       "name": "Command12_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 41,
-      "lineEnd": 50,
+      "lineStart": 462,
+      "lineEnd": 471,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -67,8 +641,8 @@
       "name": "Command13_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 52,
-      "lineEnd": 65,
+      "lineStart": 473,
+      "lineEnd": 486,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -81,8 +655,8 @@
       "name": "Command14_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 67,
-      "lineEnd": 73,
+      "lineStart": 488,
+      "lineEnd": 494,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -95,8 +669,8 @@
       "name": "Command15_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 75,
-      "lineEnd": 78,
+      "lineStart": 496,
+      "lineEnd": 499,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -109,8 +683,8 @@
       "name": "Command16_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 80,
-      "lineEnd": 83,
+      "lineStart": 501,
+      "lineEnd": 504,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -123,8 +697,8 @@
       "name": "Command17_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 85,
-      "lineEnd": 97,
+      "lineStart": 506,
+      "lineEnd": 518,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -137,8 +711,8 @@
       "name": "Command2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 99,
-      "lineEnd": 103,
+      "lineStart": 520,
+      "lineEnd": 524,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -151,8 +725,8 @@
       "name": "Command3_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 105,
-      "lineEnd": 109,
+      "lineStart": 526,
+      "lineEnd": 530,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -165,8 +739,8 @@
       "name": "Command4_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 111,
-      "lineEnd": 116,
+      "lineStart": 532,
+      "lineEnd": 537,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -179,8 +753,8 @@
       "name": "Command5_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 118,
-      "lineEnd": 126,
+      "lineStart": 539,
+      "lineEnd": 547,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -193,8 +767,8 @@
       "name": "Command6_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 128,
-      "lineEnd": 142,
+      "lineStart": 549,
+      "lineEnd": 563,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -207,8 +781,8 @@
       "name": "Command7_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 144,
-      "lineEnd": 155,
+      "lineStart": 565,
+      "lineEnd": 576,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -221,8 +795,8 @@
       "name": "Command8_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 157,
-      "lineEnd": 168,
+      "lineStart": 578,
+      "lineEnd": 589,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -235,8 +809,8 @@
       "name": "Command9_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 170,
-      "lineEnd": 183,
+      "lineStart": 591,
+      "lineEnd": 604,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -249,8 +823,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 185,
-      "lineEnd": 189,
+      "lineStart": 606,
+      "lineEnd": 610,
       "annotations": {
         "notes": [],
         "status": "not-started",

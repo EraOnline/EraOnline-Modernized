@@ -1,6 +1,8 @@
 {
   "module": "FileIO",
   "sourcePath": "Server/FileIO.bas",
+  "address": "Server/FileIO",
+  "controls": [],
   "types": [],
   "constants": [],
   "globals": [],
@@ -48,7 +50,7 @@
       "kind": "sub",
       "name": "LoadUserStats",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  UserFile  As  String)",
+      "params": "(userindex As Integer, UserFile As String)",
       "lineStart": 110,
       "lineEnd": 200,
       "annotations": {
@@ -67,7 +69,7 @@
       "kind": "sub",
       "name": "LoadUserInit",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  UserFile  As  String)",
+      "params": "(userindex As Integer, UserFile As String)",
       "lineStart": 202,
       "lineEnd": 287,
       "annotations": {
@@ -86,7 +88,7 @@
       "kind": "function",
       "name": "WizCheck",
       "visibility": "Public",
-      "params": "(Name  As  String)",
+      "params": "(Name As String)",
       "returnType": "Boolean",
       "lineStart": 289,
       "lineEnd": 311,
@@ -106,7 +108,7 @@
       "kind": "function",
       "name": "GetVar",
       "visibility": "Public",
-      "params": "(File  As  String,  Main  As  String,  Var  As  String)",
+      "params": "(File As String, Main As String, Var As String)",
       "returnType": "String",
       "lineStart": 313,
       "lineEnd": 333,
@@ -160,7 +162,7 @@
       "kind": "sub",
       "name": "WriteVar",
       "visibility": "Public",
-      "params": "(File  As  String,  Main  As  String,  Var  As  String,  Value  As  String)",
+      "params": "(File As String, Main As String, Var As String, Value As String)",
       "lineStart": 560,
       "lineEnd": 569,
       "annotations": {
@@ -177,7 +179,7 @@
       "kind": "sub",
       "name": "SaveUser",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  UserFile  As  String)",
+      "params": "(userindex As Integer, UserFile As String)",
       "lineStart": 571,
       "lineEnd": 710,
       "annotations": {

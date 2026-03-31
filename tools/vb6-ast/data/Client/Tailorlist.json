@@ -1,6 +1,89 @@
 {
   "module": "Tailorlist",
   "sourcePath": "Client/Tailorlist.frm",
+  "address": "Client/Tailorlist",
+  "controls": [
+    {
+      "type": "VB.ListBox",
+      "name": "TailorList",
+      "properties": {
+        "BackColor": "\u0026H80000006\u0026",
+        "Height": "1035",
+        "Left": "480",
+        "TabIndex": "0",
+        "Top": "3480",
+        "Width": "6375"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label3",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Cancel\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "375",
+        "Left": "5880",
+        "TabIndex": "3",
+        "Top": "5280",
+        "Width": "975"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Tailoring\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "36",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "975",
+        "Left": "840",
+        "TabIndex": "2",
+        "Top": "360",
+        "Width": "5775"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackColor": "\u0026H80000007\u0026",
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Caption": "\u0022Label1\u0022",
+        "Height": "1695",
+        "Left": "2640",
+        "TabIndex": "1",
+        "Top": "1560",
+        "Width": "2055"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "5895",
+        "Left": "0",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "7305"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +94,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 6,
-      "lineEnd": 8,
+      "lineStart": 85,
+      "lineEnd": 87,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +108,8 @@
       "name": "Label3_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 10,
-      "lineEnd": 13,
+      "lineStart": 89,
+      "lineEnd": 92,
       "annotations": {
         "notes": [],
         "status": "not-started",

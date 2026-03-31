@@ -1,6 +1,120 @@
 {
   "module": "SetupScreen",
   "sourcePath": "Client/SetupScreen.frm",
+  "address": "Client/SetupScreen",
+  "controls": [
+    {
+      "type": "VB.Label",
+      "name": "Label7",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022TURN VOICES ON\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "2040",
+        "TabIndex": "5",
+        "Tag": "\u00221\u0022",
+        "Top": "2400",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Current",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "720",
+        "TabIndex": "4",
+        "Top": "3240",
+        "Width": "1695"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label4",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022OK\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "11.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "375",
+        "Left": "4680",
+        "TabIndex": "3",
+        "Top": "3480",
+        "Width": "1095"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label3",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022SetupScreen.frx\u0022:0000",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "855",
+        "Left": "120",
+        "TabIndex": "2",
+        "Top": "1200",
+        "Width": "5295"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022VOICES\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "735",
+        "Left": "120",
+        "TabIndex": "1",
+        "Top": "960",
+        "Width": "5415"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Setup\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "20.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "615",
+        "Left": "240",
+        "TabIndex": "0",
+        "Top": "240",
+        "Width": "5295"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image6",
+      "properties": {
+        "Height": "4215",
+        "Left": "0",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "5760"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +125,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 11,
+      "lineStart": 110,
+      "lineEnd": 114,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +139,8 @@
       "name": "Label4_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 13,
-      "lineEnd": 17,
+      "lineStart": 116,
+      "lineEnd": 120,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +153,8 @@
       "name": "Label7_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 19,
-      "lineEnd": 32,
+      "lineStart": 122,
+      "lineEnd": 135,
       "annotations": {
         "notes": [],
         "status": "not-started",

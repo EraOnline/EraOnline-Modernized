@@ -1,6 +1,109 @@
 {
   "module": "Form3",
   "sourcePath": "Client/Form3.frm",
+  "address": "Client/Form3",
+  "controls": [
+    {
+      "type": "VB.CommandButton",
+      "name": "Command2",
+      "properties": {
+        "Caption": "\u0022Back\u0022",
+        "Height": "255",
+        "Left": "8160",
+        "TabIndex": "5",
+        "Top": "5760",
+        "Width": "1095"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command1",
+      "properties": {
+        "Caption": "\u0022Continue\u0022",
+        "Height": "255",
+        "Left": "9360",
+        "TabIndex": "4",
+        "Top": "5760",
+        "Width": "1095"
+      }
+    },
+    {
+      "type": "VB.ComboBox",
+      "name": "Combo1",
+      "properties": {
+        "BackColor": "\u0026H00808080\u0026",
+        "ForeColor": "\u0026H80000009\u0026",
+        "Height": "315",
+        "ItemData": "\u0022Form3.frx\u0022:0000",
+        "Left": "4080",
+        "List": "\u0022Form3.frx\u0022:0010",
+        "Style": "2  \u0027Dropdown List",
+        "TabIndex": "2",
+        "Top": "3960",
+        "Width": "3495"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label3",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022Form3.frx\u0022:0036",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "855",
+        "Left": "1920",
+        "TabIndex": "3",
+        "Top": "4680",
+        "Width": "8415"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022Form3.frx\u0022:0161",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "1095",
+        "Left": "1920",
+        "TabIndex": "1",
+        "Top": "3000",
+        "Width": "8295"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022-Character Creation\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "15.75",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "495",
+        "Left": "1920",
+        "TabIndex": "0",
+        "Top": "2520",
+        "Width": "4095"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "9120",
+        "Left": "0",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "12120"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +114,8 @@
       "name": "Combo1_Change",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 9,
-      "lineEnd": 16,
+      "lineStart": 99,
+      "lineEnd": 106,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +128,8 @@
       "name": "Combo1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 18,
-      "lineEnd": 24,
+      "lineStart": 108,
+      "lineEnd": 114,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +142,8 @@
       "name": "Command1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 26,
-      "lineEnd": 39,
+      "lineStart": 116,
+      "lineEnd": 129,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +156,8 @@
       "name": "Command2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 41,
-      "lineEnd": 46,
+      "lineStart": 131,
+      "lineEnd": 136,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -67,8 +170,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 48,
-      "lineEnd": 51,
+      "lineStart": 138,
+      "lineEnd": 141,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -81,8 +184,8 @@
       "name": "Label4_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 53,
-      "lineEnd": 55,
+      "lineStart": 143,
+      "lineEnd": 145,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -95,8 +198,8 @@
       "name": "Label6_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 57,
-      "lineEnd": 59,
+      "lineStart": 147,
+      "lineEnd": 149,
       "annotations": {
         "notes": [],
         "status": "not-started",

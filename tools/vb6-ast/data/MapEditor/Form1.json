@@ -1,6 +1,21 @@
 {
   "module": "Form1",
   "sourcePath": "MapEditor/Form1.frm",
+  "address": "MapEditor/Form1",
+  "controls": [
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "Caption": "\u0022Label1\u0022",
+        "Height": "255",
+        "Left": "120",
+        "TabIndex": "0",
+        "Top": "120",
+        "Width": "4095"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],

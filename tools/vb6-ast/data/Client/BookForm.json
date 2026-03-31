@@ -1,6 +1,74 @@
 {
   "module": "BookForm",
   "sourcePath": "Client/BookForm.frm",
+  "address": "Client/BookForm",
+  "controls": [
+    {
+      "type": "VB.TextBox",
+      "name": "news",
+      "properties": {
+        "BackColor": "\u0026H00004080\u0026",
+        "Type": "5",
+        "Format": "\u0022\u0022",
+        "HaveTrueFalseNull": "1",
+        "TrueValue": "\u0022True\u0022",
+        "FalseValue": "\u0022False\u0022",
+        "NullValue": "\u0022\u0022",
+        "FirstDayOfWeek": "0",
+        "FirstWeekOfYear": "0",
+        "LCID": "1044",
+        "SubFormatType": "7",
+        "Name": "\u0022Arial\u0022",
+        "Size": "8.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "6375",
+        "Left": "240",
+        "Locked": "-1  \u0027True",
+        "MultiLine": "-1  \u0027True",
+        "ScrollBars": "2  \u0027Vertical",
+        "TabIndex": "0",
+        "Top": "360",
+        "Width": "7215"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Close\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "20.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000014\u0026",
+        "Height": "495",
+        "Left": "6480",
+        "TabIndex": "1",
+        "Top": "6720",
+        "Width": "975"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "7320",
+        "Left": "0",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "7680"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +79,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 11,
+      "lineStart": 80,
+      "lineEnd": 84,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +93,8 @@
       "name": "Image1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 13,
-      "lineEnd": 16,
+      "lineStart": 86,
+      "lineEnd": 89,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +107,8 @@
       "name": "Label1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 18,
-      "lineEnd": 23,
+      "lineStart": 91,
+      "lineEnd": 96,
       "annotations": {
         "notes": [],
         "status": "not-started",

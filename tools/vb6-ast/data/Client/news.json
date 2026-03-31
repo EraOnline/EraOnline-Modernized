@@ -1,6 +1,82 @@
 {
   "module": "news",
   "sourcePath": "Client/news.frm",
+  "address": "Client/news",
+  "controls": [
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Venture Forth\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "11.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "255",
+        "Left": "6840",
+        "TabIndex": "2",
+        "Top": "6360",
+        "Width": "1695"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "news",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022news.frx\u0022:0000",
+        "Name": "\u0022Bart\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "5175",
+        "Left": "1200",
+        "TabIndex": "1",
+        "Top": "960",
+        "Width": "7095"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "headline",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Todays News:\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "20.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "615",
+        "Left": "0",
+        "TabIndex": "0",
+        "Top": "120",
+        "Width": "8655"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "6735",
+        "Left": "0",
+        "Picture": "\u0022news.frx\u0022:0257",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "8655"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +87,8 @@
       "name": "Label1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 6,
-      "lineEnd": 8,
+      "lineStart": 83,
+      "lineEnd": 85,
       "annotations": {
         "notes": [],
         "status": "not-started",

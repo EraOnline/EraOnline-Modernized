@@ -1,6 +1,8 @@
 {
   "module": "pctradepc",
   "sourcePath": "Client/pctradepc.frm",
+  "address": "Client/pctradepc",
+  "controls": [],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +13,8 @@
       "name": "Image3_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 6,
-      "lineEnd": 9,
+      "lineStart": 21,
+      "lineEnd": 24,
       "annotations": {
         "notes": [],
         "status": "not-started",

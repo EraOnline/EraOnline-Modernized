@@ -1,6 +1,260 @@
 {
   "module": "Form7",
   "sourcePath": "Client/Form7.frm",
+  "address": "Client/Form7",
+  "controls": [
+    {
+      "type": "VB.CommandButton",
+      "name": "Command2",
+      "properties": {
+        "Caption": "\u0022Back\u0022",
+        "Height": "255",
+        "Left": "8040",
+        "TabIndex": "12",
+        "Top": "5760",
+        "Width": "1095"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command1",
+      "properties": {
+        "Caption": "\u0022Continue\u0022",
+        "Height": "255",
+        "Left": "9240",
+        "TabIndex": "11",
+        "Top": "5760",
+        "Width": "1095"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "email",
+      "properties": {
+        "Height": "285",
+        "Left": "3480",
+        "TabIndex": "8",
+        "Top": "5040",
+        "Width": "2415"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "SERVERIP",
+      "properties": {
+        "Height": "285",
+        "Left": "12000",
+        "TabIndex": "7",
+        "Top": "7560",
+        "Visible": "0   \u0027False",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "NameTxt",
+      "properties": {
+        "Height": "285",
+        "Left": "3480",
+        "TabIndex": "2",
+        "Top": "4080",
+        "Width": "2415"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "PasswordTxt",
+      "properties": {
+        "Height": "285",
+        "IMEMode": "3  \u0027DISABLE",
+        "Left": "3480",
+        "PasswordChar": "\u0022*\u0022",
+        "TabIndex": "1",
+        "Top": "4560",
+        "Width": "2415"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "Porttxt",
+      "properties": {
+        "Height": "285",
+        "Left": "12000",
+        "TabIndex": "0",
+        "Text": "\u00227777\u0022",
+        "Top": "8880",
+        "Visible": "0   \u0027False",
+        "Width": "1695"
+      }
+    },
+    {
+      "type": "InetCtlsObjects.Inet",
+      "name": "Inet",
+      "properties": {
+        "Left": "0",
+        "Top": "0",
+        "Protocol": "4"
+      }
+    },
+    {
+      "type": "MediaPlayerCtl.MediaPlayer",
+      "name": "MP3Player",
+      "properties": {
+        "Height": "375",
+        "Left": "0",
+        "TabIndex": "10",
+        "Top": "0",
+        "Visible": "0   \u0027False",
+        "Width": "495",
+        "AudioStream": "-1",
+        "AutoSize": "0   \u0027False",
+        "AutoStart": "-1  \u0027True",
+        "AnimationAtStart": "-1  \u0027True",
+        "AllowScan": "-1  \u0027True",
+        "AllowChangeDisplaySize": "-1  \u0027True",
+        "AutoRewind": "0   \u0027False",
+        "Balance": "0",
+        "BaseURL": "\u0022\u0022",
+        "BufferingTime": "5",
+        "CaptioningID": "\u0022\u0022",
+        "ClickToPlay": "-1  \u0027True",
+        "CursorType": "0",
+        "CurrentPosition": "-1",
+        "CurrentMarker": "0",
+        "DefaultFrame": "\u0022\u0022",
+        "DisplayBackColor": "0",
+        "DisplayForeColor": "16777215",
+        "DisplayMode": "0",
+        "DisplaySize": "4",
+        "Enabled": "-1  \u0027True",
+        "EnableContextMenu": "-1  \u0027True",
+        "EnablePositionControls": "-1  \u0027True",
+        "EnableFullScreenControls": "0   \u0027False",
+        "EnableTracker": "-1  \u0027True",
+        "Filename": "\u0022\u0022",
+        "InvokeURLs": "-1  \u0027True",
+        "Language": "-1",
+        "Mute": "0   \u0027False",
+        "PlayCount": "1",
+        "PreviewMode": "0   \u0027False",
+        "Rate": "1",
+        "SAMILang": "\u0022\u0022",
+        "SAMIStyle": "\u0022\u0022",
+        "SAMIFileName": "\u0022\u0022",
+        "SelectionStart": "-1",
+        "SelectionEnd": "-1",
+        "SendOpenStateChangeEvents": "-1  \u0027True",
+        "SendWarningEvents": "-1  \u0027True",
+        "SendErrorEvents": "-1  \u0027True",
+        "SendKeyboardEvents": "0   \u0027False",
+        "SendMouseClickEvents": "0   \u0027False",
+        "SendMouseMoveEvents": "0   \u0027False",
+        "SendPlayStateChangeEvents": "-1  \u0027True",
+        "ShowCaptioning": "0   \u0027False",
+        "ShowControls": "-1  \u0027True",
+        "ShowAudioControls": "-1  \u0027True",
+        "ShowDisplay": "0   \u0027False",
+        "ShowGotoBar": "0   \u0027False",
+        "ShowPositionControls": "-1  \u0027True",
+        "ShowStatusBar": "0   \u0027False",
+        "ShowTracker": "-1  \u0027True",
+        "TransparentAtStart": "0   \u0027False",
+        "VideoBorderWidth": "0",
+        "VideoBorderColor": "0",
+        "VideoBorder3D": "0   \u0027False",
+        "Volume": "0",
+        "WindowlessVideo": "0   \u0027False"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label7",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Your E-Mail Address:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "1800",
+        "TabIndex": "9",
+        "Top": "5160",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label3",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Character Name:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "1800",
+        "TabIndex": "6",
+        "Top": "4200",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label5",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Character Password:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "1800",
+        "TabIndex": "5",
+        "Top": "4680",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022-Enter Character\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "15.75",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "495",
+        "Left": "1800",
+        "TabIndex": "4",
+        "Top": "2520",
+        "Width": "4095"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022Form7.frx\u0022:0000",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "1095",
+        "Left": "1800",
+        "TabIndex": "3",
+        "Top": "3000",
+        "Width": "8295"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "9120",
+        "Left": "0",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "12120"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +265,8 @@
       "name": "Command1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 48,
+      "lineStart": 221,
+      "lineEnd": 262,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +279,8 @@
       "name": "Command2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 50,
-      "lineEnd": 55,
+      "lineStart": 264,
+      "lineEnd": 269,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -38,9 +292,9 @@
       "kind": "sub",
       "name": "Form_KeyUp",
       "visibility": "Private",
-      "params": "(KeyCode  As  Integer,  Shift  As  Integer)",
-      "lineStart": 57,
-      "lineEnd": 77,
+      "params": "(KeyCode As Integer, Shift As Integer)",
+      "lineStart": 271,
+      "lineEnd": 291,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +307,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 79,
-      "lineEnd": 83,
+      "lineStart": 293,
+      "lineEnd": 297,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -67,8 +321,8 @@
       "name": "Label4_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 85,
-      "lineEnd": 91,
+      "lineStart": 299,
+      "lineEnd": 305,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -81,8 +335,8 @@
       "name": "Label6_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 93,
-      "lineEnd": 96,
+      "lineStart": 307,
+      "lineEnd": 310,
       "annotations": {
         "notes": [],
         "status": "not-started",

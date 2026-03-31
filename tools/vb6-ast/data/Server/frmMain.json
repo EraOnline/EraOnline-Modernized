@@ -1,6 +1,366 @@
 {
   "module": "frmMain",
   "sourcePath": "Server/frmMain.frm",
+  "address": "Server/frmMain",
+  "controls": [
+    {
+      "type": "SocketWrenchCtrl.Socket",
+      "name": "Socket2",
+      "properties": {
+        "Index": "0",
+        "Left": "600",
+        "Top": "-120",
+        "AutoResolve": "-1  \u0027True",
+        "Backlog": "1",
+        "Binary": "0   \u0027False",
+        "Blocking": "0   \u0027False",
+        "Broadcast": "0   \u0027False",
+        "BufferSize": "0",
+        "HostAddress": "\u0022\u0022",
+        "HostFile": "\u0022\u0022",
+        "HostName": "\u0022\u0022",
+        "InLine": "0   \u0027False",
+        "Interval": "0",
+        "KeepAlive": "0   \u0027False",
+        "Library": "\u0022\u0022",
+        "Linger": "0",
+        "LocalPort": "0",
+        "LocalService": "\u0022\u0022",
+        "Protocol": "0",
+        "RemotePort": "0",
+        "RemoteService": "\u0022\u0022",
+        "ReuseAddress": "0   \u0027False",
+        "Route": "-1  \u0027True",
+        "Timeout": "0",
+        "Type": "1",
+        "Urgent": "0   \u0027False"
+      }
+    },
+    {
+      "type": "SocketWrenchCtrl.Socket",
+      "name": "Socket1",
+      "properties": {
+        "Left": "120",
+        "Top": "-120",
+        "AutoResolve": "-1  \u0027True",
+        "Backlog": "1",
+        "Binary": "0   \u0027False",
+        "Blocking": "0   \u0027False",
+        "Broadcast": "0   \u0027False",
+        "BufferSize": "2048",
+        "HostAddress": "\u0022\u0022",
+        "HostFile": "\u0022\u0022",
+        "HostName": "\u0022\u0022",
+        "InLine": "0   \u0027False",
+        "Interval": "0",
+        "KeepAlive": "0   \u0027False",
+        "Library": "\u0022\u0022",
+        "Linger": "0",
+        "LocalPort": "0",
+        "LocalService": "\u0022\u0022",
+        "Protocol": "0",
+        "RemotePort": "0",
+        "RemoteService": "\u0022\u0022",
+        "ReuseAddress": "0   \u0027False",
+        "Route": "-1  \u0027True",
+        "Timeout": "0",
+        "Type": "1",
+        "Urgent": "0   \u0027False"
+      }
+    },
+    {
+      "type": "VB.Timer",
+      "name": "NpcAttack",
+      "properties": {
+        "Interval": "4000",
+        "Left": "5160",
+        "Top": "1080"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command8",
+      "properties": {
+        "Caption": "\u0022Account Creator\u0022",
+        "Height": "495",
+        "Left": "4320",
+        "TabIndex": "15",
+        "Top": "1560",
+        "Visible": "0   \u0027False",
+        "Width": "1695"
+      }
+    },
+    {
+      "type": "VB.Timer",
+      "name": "rain",
+      "properties": {
+        "Left": "6120",
+        "Top": "1560"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command7",
+      "properties": {
+        "Caption": "\u0022Make It Sunny\u0022",
+        "Height": "255",
+        "Left": "5040",
+        "TabIndex": "14",
+        "Top": "480",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command3",
+      "properties": {
+        "Caption": "\u0022Start Raining\u0022",
+        "Height": "255",
+        "Left": "5040",
+        "TabIndex": "13",
+        "Top": "240",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "weather",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "Caption": "\u0022Sunny\u0022",
+        "Height": "255",
+        "Left": "240",
+        "TabIndex": "12",
+        "Top": "480",
+        "Width": "1455"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label4",
+      "properties": {
+        "Caption": "\u0022Current Weather:\u0022",
+        "Height": "255",
+        "Left": "240",
+        "TabIndex": "11",
+        "Top": "240",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.Frame",
+      "name": "Frame1",
+      "properties": {
+        "Caption": "\u0022Weather/Time Of Day In The Game World:\u0022",
+        "Height": "855",
+        "Left": "120",
+        "TabIndex": "10",
+        "Top": "2160",
+        "Width": "6495"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command5",
+      "properties": {
+        "Caption": "\u0022Reload Objects\u0022",
+        "Height": "495",
+        "Left": "2520",
+        "TabIndex": "9",
+        "Top": "1560",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command4",
+      "properties": {
+        "Caption": "\u0022Reload Spells\u0022",
+        "Height": "495",
+        "Left": "2520",
+        "TabIndex": "8",
+        "Top": "960",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command1",
+      "properties": {
+        "Caption": "\u0022Reset Server\u0022",
+        "Height": "495",
+        "Left": "720",
+        "TabIndex": "5",
+        "Top": "960",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command2",
+      "properties": {
+        "Caption": "\u0022World Control\u0022",
+        "Height": "495",
+        "Left": "720",
+        "TabIndex": "7",
+        "Top": "1560",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "LocalAdd",
+      "properties": {
+        "BackColor": "\u0026H00FFFFFF\u0026",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "8.25",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "285",
+        "Left": "1320",
+        "Locked": "-1  \u0027True",
+        "TabIndex": "3",
+        "Top": "240",
+        "Width": "5295"
+      }
+    },
+    {
+      "type": "VB.Timer",
+      "name": "GameTimer",
+      "properties": {
+        "Interval": "50",
+        "Left": "1080",
+        "Top": "-120"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "txPortNumber",
+      "properties": {
+        "BackColor": "\u0026H00FFFFFF\u0026",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "8.25",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "285",
+        "Left": "1320",
+        "Locked": "-1  \u0027True",
+        "TabIndex": "2",
+        "Top": "600",
+        "Width": "5295"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "txStatus",
+      "properties": {
+        "BackColor": "\u0026H00FFFFFF\u0026",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "8.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "330",
+        "Left": "120",
+        "Locked": "-1  \u0027True",
+        "TabIndex": "0",
+        "Top": "3360",
+        "Width": "6495"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Doing",
+      "properties": {
+        "Height": "255",
+        "Left": "4320",
+        "TabIndex": "16",
+        "Top": "1080",
+        "Width": "1215"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label3",
+      "properties": {
+        "Appearance": "0  \u0027Flat",
+        "AutoSize": "-1  \u0027True",
+        "BackColor": "\u0026H00C0C0C0\u0026",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Status\u0022",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "8.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000008\u0026",
+        "Height": "195",
+        "Left": "3120",
+        "TabIndex": "6",
+        "Top": "3120",
+        "Width": "450"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "Appearance": "0  \u0027Flat",
+        "AutoSize": "-1  \u0027True",
+        "BackColor": "\u0026H00C0C0C0\u0026",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Server IP:\u0022",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "8.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000008\u0026",
+        "Height": "195",
+        "Left": "60",
+        "TabIndex": "4",
+        "Top": "300",
+        "Width": "705"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label5",
+      "properties": {
+        "Alignment": "1  \u0027Right Justify",
+        "Appearance": "0  \u0027Flat",
+        "AutoSize": "-1  \u0027True",
+        "BackColor": "\u0026H00C0C0C0\u0026",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Running on Port:\u0022",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "8.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000008\u0026",
+        "Height": "195",
+        "Left": "15",
+        "TabIndex": "1",
+        "Top": "600",
+        "Width": "1200"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +371,8 @@
       "name": "Command1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 11,
+      "lineStart": 324,
+      "lineEnd": 328,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +385,8 @@
       "name": "Command2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 14,
-      "lineEnd": 17,
+      "lineStart": 331,
+      "lineEnd": 334,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +399,8 @@
       "name": "Command3_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 19,
-      "lineEnd": 25,
+      "lineStart": 336,
+      "lineEnd": 342,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +413,8 @@
       "name": "Command4_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 27,
-      "lineEnd": 30,
+      "lineStart": 344,
+      "lineEnd": 347,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -67,8 +427,8 @@
       "name": "Command5_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 32,
-      "lineEnd": 35,
+      "lineStart": 349,
+      "lineEnd": 352,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -81,8 +441,8 @@
       "name": "Command7_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 37,
-      "lineEnd": 44,
+      "lineStart": 354,
+      "lineEnd": 361,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -95,8 +455,8 @@
       "name": "Command8_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 46,
-      "lineEnd": 48,
+      "lineStart": 363,
+      "lineEnd": 365,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -109,8 +469,8 @@
       "name": "Command9_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 50,
-      "lineEnd": 62,
+      "lineStart": 367,
+      "lineEnd": 379,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -123,8 +483,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 65,
-      "lineEnd": 161,
+      "lineStart": 382,
+      "lineEnd": 478,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -136,9 +496,9 @@
       "kind": "sub",
       "name": "Form_Unload",
       "visibility": "Private",
-      "params": "(Cancel  As  Integer)",
-      "lineStart": 163,
-      "lineEnd": 183,
+      "params": "(Cancel As Integer)",
+      "lineStart": 480,
+      "lineEnd": 500,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -151,8 +511,8 @@
       "name": "GameTimer_Timer",
       "visibility": "Public",
       "params": "()",
-      "lineStart": 185,
-      "lineEnd": 274,
+      "lineStart": 502,
+      "lineEnd": 591,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -165,8 +525,8 @@
       "name": "NpcAttack_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 276,
-      "lineEnd": 284,
+      "lineStart": 593,
+      "lineEnd": 601,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -179,8 +539,8 @@
       "name": "rain_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 286,
-      "lineEnd": 332,
+      "lineStart": 603,
+      "lineEnd": 649,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -193,8 +553,8 @@
       "name": "Snow_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 334,
-      "lineEnd": 337,
+      "lineStart": 651,
+      "lineEnd": 654,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -206,9 +566,9 @@
       "kind": "sub",
       "name": "Socket1_Accept",
       "visibility": "Public",
-      "params": "(SocketId  As  Integer)",
-      "lineStart": 339,
-      "lineEnd": 364,
+      "params": "(SocketId As Integer)",
+      "lineStart": 656,
+      "lineEnd": 681,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -220,9 +580,9 @@
       "kind": "sub",
       "name": "Socket2_Disconnect",
       "visibility": "Public",
-      "params": "(Index  As  Integer)",
-      "lineStart": 366,
-      "lineEnd": 373,
+      "params": "(Index As Integer)",
+      "lineStart": 683,
+      "lineEnd": 690,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -234,9 +594,9 @@
       "kind": "sub",
       "name": "Socket2_Read",
       "visibility": "Public",
-      "params": "(Index  As  Integer,  DataLength  As  Integer,  IsUrgent  As  Integer)",
-      "lineStart": 376,
-      "lineEnd": 428,
+      "params": "(Index As Integer, DataLength As Integer, IsUrgent As Integer)",
+      "lineStart": 693,
+      "lineEnd": 745,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -249,8 +609,8 @@
       "name": "Timer1_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 430,
-      "lineEnd": 432,
+      "lineStart": 747,
+      "lineEnd": 749,
       "annotations": {
         "notes": [],
         "status": "not-started",

@@ -1,6 +1,324 @@
 {
   "module": "attributes",
   "sourcePath": "Client/attributes.frm",
+  "address": "Client/attributes",
+  "controls": [
+    {
+      "type": "VB.Image",
+      "name": "Image4",
+      "properties": {
+        "Height": "375",
+        "Left": "3480",
+        "Picture": "\u0022attributes.frx\u0022:0000",
+        "Stretch": "-1  \u0027True",
+        "Top": "1920",
+        "Width": "1095"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image3",
+      "properties": {
+        "Height": "375",
+        "Left": "3480",
+        "Picture": "\u0022attributes.frx\u0022:0441",
+        "Stretch": "-1  \u0027True",
+        "Top": "1320",
+        "Width": "1095"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "gold",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "375",
+        "Left": "2760",
+        "TabIndex": "8",
+        "Top": "3720",
+        "Width": "1935"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image2",
+      "properties": {
+        "Height": "615",
+        "Left": "0",
+        "Picture": "\u0022attributes.frx\u0022:0854",
+        "Stretch": "-1  \u0027True",
+        "Top": "3600",
+        "Width": "4935"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Close\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "375",
+        "Left": "120",
+        "TabIndex": "7",
+        "Top": "4320",
+        "Width": "4455"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "615",
+        "Index": "6",
+        "Left": "0",
+        "Picture": "\u0022attributes.frx\u0022:11D4",
+        "Stretch": "-1  \u0027True",
+        "Top": "4200",
+        "Width": "4890"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "desc",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Name": "\u0022Bart\u0022",
+        "Size": "9.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "4815",
+        "Left": "5280",
+        "TabIndex": "6",
+        "Top": "1320",
+        "Width": "3495"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "practice",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "375",
+        "Left": "2760",
+        "TabIndex": "5",
+        "Top": "3120",
+        "Width": "1815"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "food",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "375",
+        "Left": "2760",
+        "TabIndex": "4",
+        "Top": "1320",
+        "Width": "2055"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "drink",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "375",
+        "Left": "2760",
+        "TabIndex": "3",
+        "Top": "1920",
+        "Width": "2055"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "fatigue",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "375",
+        "Left": "2760",
+        "TabIndex": "2",
+        "Top": "2520",
+        "Width": "2055"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "mana",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "375",
+        "Left": "2760",
+        "TabIndex": "1",
+        "Top": "720",
+        "Width": "1935"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "strenght",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "495",
+        "Left": "2760",
+        "TabIndex": "0",
+        "Top": "120",
+        "Width": "1935"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "615",
+        "Index": "0",
+        "Left": "0",
+        "Picture": "\u0022attributes.frx\u0022:19DC",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "4890"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "615",
+        "Index": "1",
+        "Left": "0",
+        "Picture": "\u0022attributes.frx\u0022:7266",
+        "Stretch": "-1  \u0027True",
+        "Top": "600",
+        "Width": "4890"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "615",
+        "Index": "2",
+        "Left": "0",
+        "Picture": "\u0022attributes.frx\u0022:7AE4",
+        "Stretch": "-1  \u0027True",
+        "Top": "1200",
+        "Width": "4890"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "615",
+        "Index": "3",
+        "Left": "0",
+        "Picture": "\u0022attributes.frx\u0022:83D9",
+        "Stretch": "-1  \u0027True",
+        "Top": "2400",
+        "Width": "4890"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "615",
+        "Index": "4",
+        "Left": "0",
+        "Picture": "\u0022attributes.frx\u0022:8C5F",
+        "Stretch": "-1  \u0027True",
+        "Top": "1800",
+        "Width": "4890"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "615",
+        "Index": "5",
+        "Left": "0",
+        "Picture": "\u0022attributes.frx\u0022:94D7",
+        "Stretch": "-1  \u0027True",
+        "Top": "3000",
+        "Width": "4890"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +329,8 @@
       "name": "drink_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 6,
-      "lineEnd": 9,
+      "lineStart": 277,
+      "lineEnd": 280,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +343,8 @@
       "name": "fatigue_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 11,
-      "lineEnd": 14,
+      "lineStart": 282,
+      "lineEnd": 285,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +357,8 @@
       "name": "food_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 16,
-      "lineEnd": 19,
+      "lineStart": 287,
+      "lineEnd": 290,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +371,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 21,
-      "lineEnd": 32,
+      "lineStart": 292,
+      "lineEnd": 303,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -67,8 +385,8 @@
       "name": "Image3_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 34,
-      "lineEnd": 40,
+      "lineStart": 305,
+      "lineEnd": 311,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -80,9 +398,9 @@
       "kind": "sub",
       "name": "Image3_MouseMove",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
-      "lineStart": 42,
-      "lineEnd": 44,
+      "params": "(Button As Integer, Shift As Integer, X As Single, Y As Single)",
+      "lineStart": 313,
+      "lineEnd": 315,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -95,8 +413,8 @@
       "name": "Image4_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 46,
-      "lineEnd": 51,
+      "lineStart": 317,
+      "lineEnd": 322,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -108,9 +426,9 @@
       "kind": "sub",
       "name": "Image4_MouseMove",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
-      "lineStart": 53,
-      "lineEnd": 55,
+      "params": "(Button As Integer, Shift As Integer, X As Single, Y As Single)",
+      "lineStart": 324,
+      "lineEnd": 326,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -123,8 +441,8 @@
       "name": "Label2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 57,
-      "lineEnd": 59,
+      "lineStart": 328,
+      "lineEnd": 330,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -137,8 +455,8 @@
       "name": "Label3_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 61,
-      "lineEnd": 63,
+      "lineStart": 332,
+      "lineEnd": 334,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -151,8 +469,8 @@
       "name": "Label4_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 65,
-      "lineEnd": 68,
+      "lineStart": 336,
+      "lineEnd": 339,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -165,8 +483,8 @@
       "name": "Label5_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 70,
-      "lineEnd": 72,
+      "lineStart": 341,
+      "lineEnd": 343,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -179,8 +497,8 @@
       "name": "Label6_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 74,
-      "lineEnd": 77,
+      "lineStart": 345,
+      "lineEnd": 348,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -193,8 +511,8 @@
       "name": "Label7_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 79,
-      "lineEnd": 81,
+      "lineStart": 350,
+      "lineEnd": 352,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -207,8 +525,8 @@
       "name": "Label8_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 83,
-      "lineEnd": 85,
+      "lineStart": 354,
+      "lineEnd": 356,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -221,8 +539,8 @@
       "name": "Label1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 87,
-      "lineEnd": 89,
+      "lineStart": 358,
+      "lineEnd": 360,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -234,9 +552,9 @@
       "kind": "sub",
       "name": "Label1_MouseMove",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
-      "lineStart": 91,
-      "lineEnd": 93,
+      "params": "(Button As Integer, Shift As Integer, X As Single, Y As Single)",
+      "lineStart": 362,
+      "lineEnd": 364,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -248,9 +566,9 @@
       "kind": "sub",
       "name": "Label2_MouseMove",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
-      "lineStart": 95,
-      "lineEnd": 98,
+      "params": "(Button As Integer, Shift As Integer, X As Single, Y As Single)",
+      "lineStart": 366,
+      "lineEnd": 369,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -262,9 +580,9 @@
       "kind": "sub",
       "name": "Label3_MouseMove",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
-      "lineStart": 100,
-      "lineEnd": 102,
+      "params": "(Button As Integer, Shift As Integer, X As Single, Y As Single)",
+      "lineStart": 371,
+      "lineEnd": 373,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -276,9 +594,9 @@
       "kind": "sub",
       "name": "Label4_MouseMove",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
-      "lineStart": 104,
-      "lineEnd": 106,
+      "params": "(Button As Integer, Shift As Integer, X As Single, Y As Single)",
+      "lineStart": 375,
+      "lineEnd": 377,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -290,9 +608,9 @@
       "kind": "sub",
       "name": "Label5_MouseMove",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
-      "lineStart": 108,
-      "lineEnd": 110,
+      "params": "(Button As Integer, Shift As Integer, X As Single, Y As Single)",
+      "lineStart": 379,
+      "lineEnd": 381,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -304,9 +622,9 @@
       "kind": "sub",
       "name": "Label6_MouseMove",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
-      "lineStart": 112,
-      "lineEnd": 114,
+      "params": "(Button As Integer, Shift As Integer, X As Single, Y As Single)",
+      "lineStart": 383,
+      "lineEnd": 385,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -318,9 +636,9 @@
       "kind": "sub",
       "name": "Label7_MouseMove",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
-      "lineStart": 116,
-      "lineEnd": 118,
+      "params": "(Button As Integer, Shift As Integer, X As Single, Y As Single)",
+      "lineStart": 387,
+      "lineEnd": 389,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -332,9 +650,9 @@
       "kind": "sub",
       "name": "Label8_MouseMove",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  X  As  Single,  Y  As  Single)",
-      "lineStart": 120,
-      "lineEnd": 122,
+      "params": "(Button As Integer, Shift As Integer, X As Single, Y As Single)",
+      "lineStart": 391,
+      "lineEnd": 393,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -347,8 +665,8 @@
       "name": "mana_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 124,
-      "lineEnd": 127,
+      "lineStart": 395,
+      "lineEnd": 398,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -361,8 +679,8 @@
       "name": "practice_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 129,
-      "lineEnd": 132,
+      "lineStart": 400,
+      "lineEnd": 403,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -375,8 +693,8 @@
       "name": "strenght_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 134,
-      "lineEnd": 136,
+      "lineStart": 405,
+      "lineEnd": 407,
       "annotations": {
         "notes": [],
         "status": "not-started",

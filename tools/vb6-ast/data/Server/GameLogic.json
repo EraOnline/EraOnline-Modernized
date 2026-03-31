@@ -1,6 +1,8 @@
 {
   "module": "GameLogic",
   "sourcePath": "Server/GameLogic.bas",
+  "address": "Server/GameLogic",
+  "controls": [],
   "types": [],
   "constants": [],
   "globals": [],
@@ -29,7 +31,7 @@
       "kind": "sub",
       "name": "ChangeUserChar",
       "visibility": "Public",
-      "params": "(sndRoute  As  Byte,  sndIndex  As  Integer,  sndMap  As  Integer,  userindex  As  Integer,  Body  As  Integer,  Head  As  Integer,  Heading  As  Byte,  WeaponAnim  As  Integer,  ShieldAnim  As  Integer)",
+      "params": "(sndRoute As Byte, sndIndex As Integer, sndMap As Integer, userindex As Integer, Body As Integer, Head As Integer, Heading As Byte, WeaponAnim As Integer, ShieldAnim As Integer)",
       "lineStart": 48,
       "lineEnd": 68,
       "annotations": {
@@ -50,7 +52,7 @@
       "kind": "sub",
       "name": "ChangeNPCChar",
       "visibility": "Public",
-      "params": "(sndRoute  As  Byte,  sndIndex  As  Integer,  sndMap  As  Integer,  Npcindex  As  Integer,  Body  As  Integer,  Head  As  Integer,  Heading  As  Byte,  WeaponAnim  As  Integer,  ShieldAnim  As  Integer)",
+      "params": "(sndRoute As Byte, sndIndex As Integer, sndMap As Integer, Npcindex As Integer, Body As Integer, Head As Integer, Heading As Byte, WeaponAnim As Integer, ShieldAnim As Integer)",
       "lineStart": 70,
       "lineEnd": 84,
       "annotations": {
@@ -71,7 +73,7 @@
       "kind": "sub",
       "name": "CheckUserLevel",
       "visibility": "Public",
-      "params": "(userindex  As  Integer)",
+      "params": "(userindex As Integer)",
       "lineStart": 86,
       "lineEnd": 132,
       "annotations": {
@@ -93,7 +95,7 @@
       "kind": "sub",
       "name": "DoTileEvents",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  map  As  Integer,  X  As  Integer,  Y  As  Integer)",
+      "params": "(userindex As Integer, map As Integer, X As Integer, Y As Integer)",
       "lineStart": 134,
       "lineEnd": 200,
       "annotations": {
@@ -116,7 +118,7 @@
       "kind": "function",
       "name": "InMapBounds",
       "visibility": "Public",
-      "params": "(map  As  Integer,  X  As  Integer,  Y  As  Integer)",
+      "params": "(map As Integer, X As Integer, Y As Integer)",
       "returnType": "Boolean",
       "lineStart": 202,
       "lineEnd": 215,
@@ -134,7 +136,7 @@
       "kind": "sub",
       "name": "NPCDie",
       "visibility": "Public",
-      "params": "(Npcindex,  userindex  As  Integer)",
+      "params": "(Npcindex, userindex As Integer)",
       "lineStart": 217,
       "lineEnd": 297,
       "annotations": {
@@ -157,7 +159,7 @@
       "kind": "sub",
       "name": "UserDie",
       "visibility": "Public",
-      "params": "(userindex  As  Integer)",
+      "params": "(userindex As Integer)",
       "lineStart": 299,
       "lineEnd": 378,
       "annotations": {
@@ -184,7 +186,7 @@
       "kind": "sub",
       "name": "UseInvItem",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  slot  As  Byte)",
+      "params": "(userindex As Integer, slot As Byte)",
       "lineStart": 380,
       "lineEnd": 895,
       "annotations": {
@@ -215,7 +217,7 @@
       "kind": "sub",
       "name": "AddtoVar",
       "visibility": "Public",
-      "params": "(Var  As  Variant,  Addon  As  Variant,  Max  As  Variant)",
+      "params": "(Var As Variant, Addon As Variant, Max As Variant)",
       "lineStart": 899,
       "lineEnd": 916,
       "annotations": {
@@ -232,7 +234,7 @@
       "kind": "sub",
       "name": "RemoveInvItem",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  slot  As  Byte)",
+      "params": "(userindex As Integer, slot As Byte)",
       "lineStart": 918,
       "lineEnd": 1037,
       "annotations": {
@@ -315,7 +317,7 @@
       "kind": "sub",
       "name": "ClosestLegalPos",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  Pos  As  WorldPos,  nPos  As  WorldPos)",
+      "params": "(userindex As Integer, Pos As WorldPos, nPos As WorldPos)",
       "lineStart": 1091,
       "lineEnd": 1133,
       "annotations": {
@@ -334,7 +336,7 @@
       "kind": "function",
       "name": "NameIndex",
       "visibility": "Public",
-      "params": "(Name  As  String)",
+      "params": "(Name As String)",
       "returnType": "Integer",
       "lineStart": 1135,
       "lineEnd": 1162,
@@ -352,7 +354,7 @@
       "kind": "sub",
       "name": "NPCAI",
       "visibility": "Public",
-      "params": "(Npcindex  As  Integer)",
+      "params": "(Npcindex As Integer)",
       "lineStart": 1164,
       "lineEnd": 1408,
       "annotations": {
@@ -376,7 +378,7 @@
       "kind": "function",
       "name": "OpenNPC",
       "visibility": "Public",
-      "params": "(NpcNumber  As  Integer)",
+      "params": "(NpcNumber As Integer)",
       "returnType": "Integer",
       "lineStart": 1410,
       "lineEnd": 1503,
@@ -398,7 +400,7 @@
       "kind": "sub",
       "name": "EraseObj",
       "visibility": "Public",
-      "params": "(ByVal  sndRoute  As  Byte,  ByVal  sndIndex  As  Integer,  ByVal  sndMap  As  Integer,  ByVal  Num  As  Integer,  ByVal  map  As  Byte,  ByVal  X  As  Integer,  ByVal  Y  As  Integer)",
+      "params": "(ByVal sndRoute As Byte, ByVal sndIndex As Integer, ByVal sndMap As Integer, ByVal Num As Integer, ByVal map As Byte, ByVal X As Integer, ByVal Y As Integer)",
       "lineStart": 1505,
       "lineEnd": 1519,
       "annotations": {
@@ -419,7 +421,7 @@
       "kind": "sub",
       "name": "MakeObj",
       "visibility": "Public",
-      "params": "(ByVal  sndRoute  As  Byte,  ByVal  sndIndex  As  Integer,  ByVal  sndMap  As  Integer,  obj  As  obj,  map  As  Integer,  ByVal  X  As  Integer,  ByVal  Y  As  Integer)",
+      "params": "(ByVal sndRoute As Byte, ByVal sndIndex As Integer, ByVal sndMap As Integer, obj As obj, map As Integer, ByVal X As Integer, ByVal Y As Integer)",
       "lineStart": 1521,
       "lineEnd": 1530,
       "annotations": {
@@ -440,7 +442,7 @@
       "kind": "sub",
       "name": "GetObj",
       "visibility": "Public",
-      "params": "(userindex  As  Integer)",
+      "params": "(userindex As Integer)",
       "lineStart": 1531,
       "lineEnd": 1607,
       "annotations": {
@@ -462,7 +464,7 @@
       "kind": "sub",
       "name": "InscribeSpell",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  slot  As  Byte)",
+      "params": "(userindex As Integer, slot As Byte)",
       "lineStart": 1609,
       "lineEnd": 1640,
       "annotations": {
@@ -482,7 +484,7 @@
       "kind": "sub",
       "name": "UpdateUserInv",
       "visibility": "Public",
-      "params": "(updateall  As  Boolean,  userindex  As  Integer,  slot  As  Byte)",
+      "params": "(updateall As Boolean, userindex As Integer, slot As Byte)",
       "lineStart": 1641,
       "lineEnd": 1675,
       "annotations": {
@@ -501,7 +503,7 @@
       "kind": "sub",
       "name": "UpdateUserSpell",
       "visibility": "Public",
-      "params": "(updateall  As  Boolean,  userindex  As  Integer,  slot  As  Byte)",
+      "params": "(updateall As Boolean, userindex As Integer, slot As Byte)",
       "lineStart": 1677,
       "lineEnd": 1711,
       "annotations": {
@@ -520,7 +522,7 @@
       "kind": "sub",
       "name": "ChangeUserInv",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  slot  As  Byte,  Object  As  UserOBJ)",
+      "params": "(userindex As Integer, slot As Byte, Object As UserOBJ)",
       "lineStart": 1712,
       "lineEnd": 1731,
       "annotations": {
@@ -541,7 +543,7 @@
       "kind": "sub",
       "name": "ChangeNPCInv",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  Npcindex  As  Integer,  Object  As  NPCOBJ,  slot  As  Byte)",
+      "params": "(userindex As Integer, Npcindex As Integer, Object As NPCOBJ, slot As Byte)",
       "lineStart": 1732,
       "lineEnd": 1753,
       "annotations": {
@@ -562,7 +564,7 @@
       "kind": "sub",
       "name": "SendGmQue",
       "visibility": "Public",
-      "params": "(userindex  As  Integer)",
+      "params": "(userindex As Integer)",
       "lineStart": 1754,
       "lineEnd": 1785,
       "annotations": {
@@ -584,7 +586,7 @@
       "kind": "sub",
       "name": "ChangeUserSpells",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  slot  As  Byte,  Spell  As  UserSpell)",
+      "params": "(userindex As Integer, slot As Byte, Spell As UserSpell)",
       "lineStart": 1787,
       "lineEnd": 1808,
       "annotations": {
@@ -605,7 +607,7 @@
       "kind": "sub",
       "name": "SendPostings",
       "visibility": "Public",
-      "params": "(userindex  As  Integer)",
+      "params": "(userindex As Integer)",
       "lineStart": 1809,
       "lineEnd": 1837,
       "annotations": {
@@ -627,7 +629,7 @@
       "kind": "sub",
       "name": "PostMessage",
       "visibility": "Public",
-      "params": "(subject  As  String,  Content  As  String,  userindex  As  Integer)",
+      "params": "(subject As String, Content As String, userindex As Integer)",
       "lineStart": 1838,
       "lineEnd": 1856,
       "annotations": {
@@ -647,7 +649,7 @@
       "kind": "sub",
       "name": "PostHelp",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  Helpmsg  As  String)",
+      "params": "(userindex As Integer, Helpmsg As String)",
       "lineStart": 1857,
       "lineEnd": 1877,
       "annotations": {
@@ -667,7 +669,7 @@
       "kind": "sub",
       "name": "KickBan",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  Target  As  Integer)",
+      "params": "(userindex As Integer, Target As Integer)",
       "lineStart": 1879,
       "lineEnd": 1902,
       "annotations": {
@@ -691,7 +693,7 @@
       "kind": "sub",
       "name": "DropObj",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  slot  As  Byte,  Num  As  Integer,  map  As  Integer,  X  As  Integer,  Y  As  Integer)",
+      "params": "(userindex As Integer, slot As Byte, Num As Integer, map As Integer, X As Integer, Y As Integer)",
       "lineStart": 1903,
       "lineEnd": 1967,
       "annotations": {
@@ -714,7 +716,7 @@
       "kind": "sub",
       "name": "CloseNPC",
       "visibility": "Public",
-      "params": "(Npcindex  As  Integer)",
+      "params": "(Npcindex As Integer)",
       "lineStart": 1969,
       "lineEnd": 1990,
       "annotations": {
@@ -733,7 +735,7 @@
       "kind": "sub",
       "name": "UserAttackNPC",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  Npcindex  As  Integer)",
+      "params": "(userindex As Integer, Npcindex As Integer)",
       "lineStart": 1992,
       "lineEnd": 2158,
       "annotations": {
@@ -761,7 +763,7 @@
       "kind": "sub",
       "name": "NPCAttackUser",
       "visibility": "Public",
-      "params": "(Npcindex  As  Integer,  userindex  As  Integer)",
+      "params": "(Npcindex As Integer, userindex As Integer)",
       "lineStart": 2160,
       "lineEnd": 2251,
       "annotations": {
@@ -785,7 +787,7 @@
       "kind": "sub",
       "name": "UserAttackUser",
       "visibility": "Public",
-      "params": "(attackerindex  As  Integer,  victimindex  As  Integer)",
+      "params": "(attackerindex As Integer, victimindex As Integer)",
       "lineStart": 2252,
       "lineEnd": 2410,
       "annotations": {
@@ -810,7 +812,7 @@
       "kind": "sub",
       "name": "UserAttack",
       "visibility": "Public",
-      "params": "(userindex  As  Integer)",
+      "params": "(userindex As Integer)",
       "lineStart": 2412,
       "lineEnd": 2454,
       "annotations": {
@@ -831,7 +833,7 @@
       "kind": "function",
       "name": "userindex",
       "visibility": "Public",
-      "params": "(SocketId  As  Integer)",
+      "params": "(SocketId As Integer)",
       "returnType": "Integer",
       "lineStart": 2455,
       "lineEnd": 2477,
@@ -849,7 +851,7 @@
       "kind": "function",
       "name": "CheckForSameIP",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  UserIP  As  String)",
+      "params": "(userindex As Integer, UserIP As String)",
       "returnType": "Boolean",
       "lineStart": 2479,
       "lineEnd": 2499,
@@ -867,7 +869,7 @@
       "kind": "function",
       "name": "CheckForSameName",
       "visibility": "Public",
-      "params": "(ByVal  userindex  As  Integer,  ByVal  Name  As  String)",
+      "params": "(ByVal userindex As Integer, ByVal Name As String)",
       "returnType": "Boolean",
       "lineStart": 2500,
       "lineEnd": 2520,
@@ -885,7 +887,7 @@
       "kind": "sub",
       "name": "HeadtoPos",
       "visibility": "Public",
-      "params": "(Head  As  Byte,  ByRef  Pos  As  WorldPos)",
+      "params": "(Head As Byte, ByRef Pos As WorldPos)",
       "lineStart": 2522,
       "lineEnd": 2560,
       "annotations": {
@@ -902,7 +904,7 @@
       "kind": "sub",
       "name": "SendUserStatsTxt",
       "visibility": "Public",
-      "params": "(sendIndex  As  Integer,  userindex  As  Integer)",
+      "params": "(sendIndex As Integer, userindex As Integer)",
       "lineStart": 2562,
       "lineEnd": 2573,
       "annotations": {
@@ -923,7 +925,7 @@
       "kind": "sub",
       "name": "UpdateUserMap",
       "visibility": "Public",
-      "params": "(userindex  As  Integer)",
+      "params": "(userindex As Integer)",
       "lineStart": 2575,
       "lineEnd": 2605,
       "annotations": {
@@ -946,7 +948,7 @@
       "kind": "sub",
       "name": "MoveUserChar",
       "visibility": "Public",
-      "params": "(ByVal  userindex  As  Integer,  ByVal  nHeading  As  Byte)",
+      "params": "(ByVal userindex As Integer, ByVal nHeading As Byte)",
       "lineStart": 2607,
       "lineEnd": 2650,
       "annotations": {
@@ -969,7 +971,7 @@
       "kind": "sub",
       "name": "MoveNPCChar",
       "visibility": "Public",
-      "params": "(ByVal  Npcindex  As  Integer,  ByVal  nHeading  As  Byte)",
+      "params": "(ByVal Npcindex As Integer, ByVal nHeading As Byte)",
       "lineStart": 2651,
       "lineEnd": 2673,
       "annotations": {
@@ -991,7 +993,7 @@
       "kind": "sub",
       "name": "MakeUserChar",
       "visibility": "Public",
-      "params": "(sndRoute  As  Byte,  sndIndex  As  Integer,  sndMap  As  Integer,  userindex  As  Integer,  ByVal  map  As  Integer,  ByVal  X  As  Integer,  ByVal  Y  As  Integer)",
+      "params": "(sndRoute As Byte, sndIndex As Integer, sndMap As Integer, userindex As Integer, ByVal map As Integer, ByVal X As Integer, ByVal Y As Integer)",
       "lineStart": 2675,
       "lineEnd": 2695,
       "annotations": {
@@ -1013,7 +1015,7 @@
       "kind": "sub",
       "name": "MakeNPCChar",
       "visibility": "Public",
-      "params": "(sndRoute  As  Byte,  sndIndex  As  Integer,  sndMap  As  Integer,  Npcindex  As  Integer,  ByVal  map  As  Integer,  ByVal  X  As  Integer,  ByVal  Y  As  Integer)",
+      "params": "(sndRoute As Byte, sndIndex As Integer, sndMap As Integer, Npcindex As Integer, ByVal map As Integer, ByVal X As Integer, ByVal Y As Integer)",
       "lineStart": 2697,
       "lineEnd": 2717,
       "annotations": {
@@ -1035,7 +1037,7 @@
       "kind": "function",
       "name": "LegalPos",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  ByVal  map  As  Integer,  ByVal  X  As  Integer,  ByVal  Y  As  Integer)",
+      "params": "(userindex As Integer, ByVal map As Integer, ByVal X As Integer, ByVal Y As Integer)",
       "returnType": "Boolean",
       "lineStart": 2719,
       "lineEnd": 2758,
@@ -1055,7 +1057,7 @@
       "kind": "sub",
       "name": "SendHelp",
       "visibility": "Public",
-      "params": "(Index  As  Integer)",
+      "params": "(Index As Integer)",
       "lineStart": 2760,
       "lineEnd": 2774,
       "annotations": {
@@ -1077,7 +1079,7 @@
       "kind": "sub",
       "name": "EraseUserChar",
       "visibility": "Public",
-      "params": "(sndRoute  As  Byte,  sndIndex  As  Integer,  sndMap  As  Integer,  userindex  As  Integer)",
+      "params": "(sndRoute As Byte, sndIndex As Integer, sndMap As Integer, userindex As Integer)",
       "lineStart": 2775,
       "lineEnd": 2808,
       "annotations": {
@@ -1098,7 +1100,7 @@
       "kind": "sub",
       "name": "EraseNPCChar",
       "visibility": "Public",
-      "params": "(sndRoute  As  Byte,  sndIndex  As  Integer,  sndMap  As  Integer,  Npcindex  As  Integer)",
+      "params": "(sndRoute As Byte, sndIndex As Integer, sndMap As Integer, Npcindex As Integer)",
       "lineStart": 2810,
       "lineEnd": 2839,
       "annotations": {
@@ -1119,7 +1121,7 @@
       "kind": "sub",
       "name": "LookatTile",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  map  As  Integer,  X  As  Integer,  Y  As  Integer)",
+      "params": "(userindex As Integer, map As Integer, X As Integer, Y As Integer)",
       "lineStart": 2841,
       "lineEnd": 2980,
       "annotations": {
@@ -1142,7 +1144,7 @@
       "kind": "sub",
       "name": "WarpUserChar",
       "visibility": "Public",
-      "params": "(ByVal  userindex  As  Integer,  ByVal  map  As  Integer,  ByVal  X  As  Integer,  ByVal  Y  As  Integer)",
+      "params": "(ByVal userindex As Integer, ByVal map As Integer, ByVal X As Integer, ByVal Y As Integer)",
       "lineStart": 2982,
       "lineEnd": 3100,
       "annotations": {
@@ -1168,7 +1170,7 @@
       "kind": "sub",
       "name": "WarpNPCChar",
       "visibility": "Public",
-      "params": "(ByVal  Npcindex  As  Integer,  ByVal  map  As  Integer,  ByVal  X  As  Integer,  ByVal  Y  As  Integer)",
+      "params": "(ByVal Npcindex As Integer, ByVal map As Integer, ByVal X As Integer, ByVal Y As Integer)",
       "lineStart": 3101,
       "lineEnd": 3126,
       "annotations": {
@@ -1188,7 +1190,7 @@
       "kind": "sub",
       "name": "SendUserStatsBox",
       "visibility": "Public",
-      "params": "(userindex  As  Integer)",
+      "params": "(userindex As Integer)",
       "lineStart": 3127,
       "lineEnd": 3137,
       "annotations": {
@@ -1209,7 +1211,7 @@
       "kind": "sub",
       "name": "NpcTrade",
       "visibility": "Public",
-      "params": "(updateall  As  Boolean,  Npcindex  As  Integer,  userindex  As  Integer,  slot  As  Byte)",
+      "params": "(updateall As Boolean, Npcindex As Integer, userindex As Integer, slot As Byte)",
       "lineStart": 3138,
       "lineEnd": 3192,
       "annotations": {
@@ -1229,7 +1231,7 @@
       "kind": "sub",
       "name": "NpcGive",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  slot  As  Byte)",
+      "params": "(userindex As Integer, slot As Byte)",
       "lineStart": 3193,
       "lineEnd": 3198,
       "annotations": {

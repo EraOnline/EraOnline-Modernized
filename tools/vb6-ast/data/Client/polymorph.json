@@ -1,6 +1,401 @@
 {
   "module": "polymorph",
   "sourcePath": "Client/polymorph.frm",
+  "address": "Client/polymorph",
+  "controls": [
+    {
+      "type": "VB.CommandButton",
+      "name": "Command30",
+      "properties": {
+        "Caption": "\u0022A Dragon\u0022",
+        "Height": "375",
+        "Left": "3480",
+        "TabIndex": "30",
+        "Top": "6480",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command29",
+      "properties": {
+        "Caption": "\u0022A cyclop (grown up)\u0022",
+        "Height": "375",
+        "Left": "3480",
+        "TabIndex": "29",
+        "Top": "6120",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command28",
+      "properties": {
+        "Caption": "\u0022A cyclop whelp\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "28",
+        "Top": "6480",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command27",
+      "properties": {
+        "Caption": "\u0022OK\u0022",
+        "Height": "375",
+        "Left": "5520",
+        "TabIndex": "27",
+        "Top": "7560",
+        "Width": "1455"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command26",
+      "properties": {
+        "Caption": "\u0022A Mumy\u0022",
+        "Height": "375",
+        "Left": "3480",
+        "TabIndex": "26",
+        "Top": "5760",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command25",
+      "properties": {
+        "Caption": "\u0022A Gnoll\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "25",
+        "Top": "6120",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command24",
+      "properties": {
+        "Caption": "\u0022A wraith\u0022",
+        "Height": "375",
+        "Left": "3480",
+        "TabIndex": "24",
+        "Top": "5400",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command23",
+      "properties": {
+        "Caption": "\u0022A deamon\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "23",
+        "Top": "5760",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command22",
+      "properties": {
+        "Caption": "\u0022A Troll\u0022",
+        "Height": "375",
+        "Left": "3480",
+        "TabIndex": "22",
+        "Top": "5040",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command21",
+      "properties": {
+        "Caption": "\u0022A snow yeti\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "21",
+        "Top": "5400",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command20",
+      "properties": {
+        "Caption": "\u0022An Orc Warrior\u0022",
+        "Height": "375",
+        "Left": "3480",
+        "TabIndex": "20",
+        "Top": "4680",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command19",
+      "properties": {
+        "Caption": "\u0022A Follower\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "19",
+        "Top": "5040",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command18",
+      "properties": {
+        "Caption": "\u0022An Orc Shaman\u0022",
+        "Height": "375",
+        "Left": "3480",
+        "TabIndex": "18",
+        "Top": "4320",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command17",
+      "properties": {
+        "Caption": "\u0022A gnome\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "17",
+        "Top": "4680",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command16",
+      "properties": {
+        "Caption": "\u0022A Spiderling\u0022",
+        "Height": "375",
+        "Left": "3480",
+        "TabIndex": "16",
+        "Top": "2280",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command15",
+      "properties": {
+        "Caption": "\u0022A giant snake\u0022",
+        "Height": "375",
+        "Left": "3480",
+        "TabIndex": "15",
+        "Top": "3960",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command14",
+      "properties": {
+        "Caption": "\u0022A giant bat\u0022",
+        "Height": "375",
+        "Left": "3480",
+        "TabIndex": "14",
+        "Top": "3600",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command13",
+      "properties": {
+        "Caption": "\u0022A devil angel\u0022",
+        "Height": "375",
+        "Left": "3480",
+        "TabIndex": "13",
+        "Top": "3240",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command12",
+      "properties": {
+        "Caption": "\u0022A desert troll\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "12",
+        "Top": "4320",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command11",
+      "properties": {
+        "Caption": "\u0022A beholder\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "11",
+        "Top": "3960",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command10",
+      "properties": {
+        "Caption": "\u0022An air elemental\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "10",
+        "Top": "3600",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command9",
+      "properties": {
+        "Caption": "\u0022A skeleton\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "9",
+        "Top": "3240",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command8",
+      "properties": {
+        "Caption": "\u0022A Chicken\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "8",
+        "Top": "2280",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command7",
+      "properties": {
+        "Caption": "\u0022A cow\u0022",
+        "Height": "375",
+        "Left": "3480",
+        "TabIndex": "7",
+        "Top": "1920",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command6",
+      "properties": {
+        "Caption": "\u0022Back to normal\u0022",
+        "Height": "375",
+        "Left": "2280",
+        "TabIndex": "6",
+        "Top": "480",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command5",
+      "properties": {
+        "Caption": "\u0022A sheep\u0022",
+        "Height": "375",
+        "Left": "3480",
+        "TabIndex": "5",
+        "Top": "1560",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command4",
+      "properties": {
+        "Caption": "\u0022A Camel\u0022",
+        "Height": "375",
+        "Left": "3480",
+        "TabIndex": "4",
+        "Top": "1200",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command3",
+      "properties": {
+        "Caption": "\u0022A Deer\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "3",
+        "Top": "1920",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command2",
+      "properties": {
+        "Caption": "\u0022A Horse\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "2",
+        "Top": "1560",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command1",
+      "properties": {
+        "Caption": "\u0022A Pig\u0022",
+        "Height": "375",
+        "Left": "840",
+        "TabIndex": "1",
+        "Top": "1200",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022What do you want to become ?\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "11.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "375",
+        "Left": "2280",
+        "TabIndex": "0",
+        "Top": "120",
+        "Width": "4215"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image6",
+      "properties": {
+        "Height": "9120",
+        "Left": "0",
+        "Stretch": "-1  \u0027True",
+        "Top": "-1080",
+        "Width": "7095"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +406,8 @@
       "name": "Command1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 10,
+      "lineStart": 288,
+      "lineEnd": 291,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +420,8 @@
       "name": "Command10_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 12,
-      "lineEnd": 15,
+      "lineStart": 293,
+      "lineEnd": 296,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +434,8 @@
       "name": "Command11_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 17,
-      "lineEnd": 19,
+      "lineStart": 298,
+      "lineEnd": 300,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +448,8 @@
       "name": "Command12_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 21,
-      "lineEnd": 23,
+      "lineStart": 302,
+      "lineEnd": 304,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -67,8 +462,8 @@
       "name": "Command13_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 25,
-      "lineEnd": 27,
+      "lineStart": 306,
+      "lineEnd": 308,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -81,8 +476,8 @@
       "name": "Command14_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 29,
-      "lineEnd": 31,
+      "lineStart": 310,
+      "lineEnd": 312,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -95,8 +490,8 @@
       "name": "Command15_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 33,
-      "lineEnd": 35,
+      "lineStart": 314,
+      "lineEnd": 316,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -109,8 +504,8 @@
       "name": "Command16_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 37,
-      "lineEnd": 39,
+      "lineStart": 318,
+      "lineEnd": 320,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -123,8 +518,8 @@
       "name": "Command17_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 41,
-      "lineEnd": 43,
+      "lineStart": 322,
+      "lineEnd": 324,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -137,8 +532,8 @@
       "name": "Command18_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 45,
-      "lineEnd": 47,
+      "lineStart": 326,
+      "lineEnd": 328,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -151,8 +546,8 @@
       "name": "Command19_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 49,
-      "lineEnd": 51,
+      "lineStart": 330,
+      "lineEnd": 332,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -165,8 +560,8 @@
       "name": "Command2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 53,
-      "lineEnd": 56,
+      "lineStart": 334,
+      "lineEnd": 337,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -179,8 +574,8 @@
       "name": "Command20_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 58,
-      "lineEnd": 60,
+      "lineStart": 339,
+      "lineEnd": 341,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -193,8 +588,8 @@
       "name": "Command21_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 62,
-      "lineEnd": 64,
+      "lineStart": 343,
+      "lineEnd": 345,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -207,8 +602,8 @@
       "name": "Command22_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 66,
-      "lineEnd": 68,
+      "lineStart": 347,
+      "lineEnd": 349,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -221,8 +616,8 @@
       "name": "Command23_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 70,
-      "lineEnd": 72,
+      "lineStart": 351,
+      "lineEnd": 353,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -235,8 +630,8 @@
       "name": "Command24_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 74,
-      "lineEnd": 76,
+      "lineStart": 355,
+      "lineEnd": 357,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -249,8 +644,8 @@
       "name": "Command25_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 78,
-      "lineEnd": 80,
+      "lineStart": 359,
+      "lineEnd": 361,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -263,8 +658,8 @@
       "name": "Command26_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 82,
-      "lineEnd": 84,
+      "lineStart": 363,
+      "lineEnd": 365,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -277,8 +672,8 @@
       "name": "Command27_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 86,
-      "lineEnd": 89,
+      "lineStart": 367,
+      "lineEnd": 370,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -291,8 +686,8 @@
       "name": "Command28_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 91,
-      "lineEnd": 94,
+      "lineStart": 372,
+      "lineEnd": 375,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -305,8 +700,8 @@
       "name": "Command29_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 96,
-      "lineEnd": 98,
+      "lineStart": 377,
+      "lineEnd": 379,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -319,8 +714,8 @@
       "name": "Command3_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 100,
-      "lineEnd": 103,
+      "lineStart": 381,
+      "lineEnd": 384,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -333,8 +728,8 @@
       "name": "Command30_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 105,
-      "lineEnd": 108,
+      "lineStart": 386,
+      "lineEnd": 389,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -347,8 +742,8 @@
       "name": "Command4_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 110,
-      "lineEnd": 113,
+      "lineStart": 391,
+      "lineEnd": 394,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -361,8 +756,8 @@
       "name": "Command5_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 115,
-      "lineEnd": 118,
+      "lineStart": 396,
+      "lineEnd": 399,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -375,8 +770,8 @@
       "name": "Command6_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 120,
-      "lineEnd": 123,
+      "lineStart": 401,
+      "lineEnd": 404,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -389,8 +784,8 @@
       "name": "Command7_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 125,
-      "lineEnd": 128,
+      "lineStart": 406,
+      "lineEnd": 409,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -403,8 +798,8 @@
       "name": "Command8_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 130,
-      "lineEnd": 133,
+      "lineStart": 411,
+      "lineEnd": 414,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -417,8 +812,8 @@
       "name": "Command9_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 135,
-      "lineEnd": 138,
+      "lineStart": 416,
+      "lineEnd": 419,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -431,8 +826,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 140,
-      "lineEnd": 143,
+      "lineStart": 421,
+      "lineEnd": 424,
       "annotations": {
         "notes": [],
         "status": "not-started",

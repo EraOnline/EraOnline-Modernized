@@ -1,6 +1,386 @@
 {
   "module": "Form7",
   "sourcePath": "Client/Form8.frm",
+  "address": "Client/Form8",
+  "controls": [
+    {
+      "type": "VB.Image",
+      "name": "Slot30",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "2760",
+        "Top": "2040",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot29",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "2280",
+        "Top": "2040",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot28",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "1800",
+        "Top": "2040",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot27",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "1320",
+        "Top": "2040",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot26",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "840",
+        "Top": "2040",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot25",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "360",
+        "Top": "2040",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot24",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "3720",
+        "Top": "1560",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot23",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "3240",
+        "Top": "1560",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot22",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "2760",
+        "Top": "1560",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot21",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "2280",
+        "Top": "1560",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot20",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "1800",
+        "Top": "1560",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot19",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "1320",
+        "Top": "1560",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot18",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "840",
+        "Top": "1560",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot17",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "360",
+        "Top": "1560",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot16",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "3720",
+        "Top": "1080",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot15",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "3240",
+        "Top": "1080",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot14",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "2760",
+        "Top": "1080",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot13",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "2280",
+        "Top": "1080",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot12",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "1800",
+        "Top": "1080",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot11",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "1320",
+        "Top": "1080",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot10",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "840",
+        "Top": "1080",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot9",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "360",
+        "Top": "1080",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot8",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "3720",
+        "Top": "600",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot7",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "3240",
+        "Top": "600",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot6",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "2760",
+        "Top": "600",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot5",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "2280",
+        "Top": "600",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot4",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "1800",
+        "Top": "600",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot3",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "1320",
+        "Top": "600",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot2",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "840",
+        "Top": "600",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Slot1",
+      "properties": {
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Height": "495",
+        "Left": "360",
+        "Top": "600",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Close\u0022",
+        "ForeColor": "\u0026H80000007\u0026",
+        "Height": "255",
+        "Left": "4080",
+        "TabIndex": "1",
+        "Top": "2880",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Inventory\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "-1  \u0027True",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "375",
+        "Left": "120",
+        "TabIndex": "0",
+        "Top": "0",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "3255",
+        "Left": "-480",
+        "Picture": "\u0022Form8.frx\u0022:0000",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "5175"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +391,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 6,
-      "lineEnd": 40,
+      "lineStart": 268,
+      "lineEnd": 302,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +405,8 @@
       "name": "Label2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 42,
-      "lineEnd": 44,
+      "lineStart": 304,
+      "lineEnd": 306,
       "annotations": {
         "notes": [],
         "status": "not-started",

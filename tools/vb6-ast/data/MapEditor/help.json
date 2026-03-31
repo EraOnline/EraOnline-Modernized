@@ -1,6 +1,56 @@
 {
   "module": "helpform",
   "sourcePath": "MapEditor/help.frm",
+  "address": "MapEditor/help",
+  "controls": [
+    {
+      "type": "VB.CommandButton",
+      "name": "Command1",
+      "properties": {
+        "Caption": "\u0022OK\u0022",
+        "Height": "255",
+        "Left": "4800",
+        "TabIndex": "2",
+        "Top": "7320",
+        "Width": "1215"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022help.frx\u0022:0000",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "6495",
+        "Left": "240",
+        "TabIndex": "1",
+        "Top": "840",
+        "Width": "5655"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022How Does It Work ?\u0022",
+        "Name": "\u0022Jester\u0022",
+        "Size": "21.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "615",
+        "Left": "1200",
+        "TabIndex": "0",
+        "Top": "120",
+        "Width": "6135"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +61,8 @@
       "name": "Command1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 6,
-      "lineEnd": 9,
+      "lineStart": 59,
+      "lineEnd": 62,
       "annotations": {
         "notes": [],
         "status": "not-started",

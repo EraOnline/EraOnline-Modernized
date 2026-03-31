@@ -1,6 +1,105 @@
 {
   "module": "spellbook",
   "sourcePath": "Client/spellbook.frm",
+  "address": "Client/spellbook",
+  "controls": [
+    {
+      "type": "VB.ListBox",
+      "name": "SpellLst",
+      "properties": {
+        "Appearance": "0  \u0027Flat",
+        "BackColor": "\u0026H00000000\u0026",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "5160",
+        "ItemData": "\u0022spellbook.frx\u0022:0000",
+        "Left": "840",
+        "List": "\u0022spellbook.frx\u0022:0002",
+        "TabIndex": "3",
+        "Top": "840",
+        "Width": "3495"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "spelldesc",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "15.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "4335",
+        "Left": "5280",
+        "TabIndex": "2",
+        "Top": "1800",
+        "Width": "4095"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "spellname",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "20.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "615",
+        "Left": "5280",
+        "TabIndex": "1",
+        "Top": "960",
+        "Width": "4095"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Close\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "9.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "375",
+        "Left": "8280",
+        "TabIndex": "0",
+        "Top": "6600",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Menu",
+      "name": "mnufile2",
+      "properties": {
+        "Caption": "\u0022Cast Spell\u0022"
+      }
+    },
+    {
+      "type": "VB.Menu",
+      "name": "mnufile",
+      "properties": {
+        "Caption": "\u0022mnufile\u0022",
+        "Visible": "0   \u0027False"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +110,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 10,
+      "lineStart": 103,
+      "lineEnd": 106,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +124,8 @@
       "name": "Label1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 12,
-      "lineEnd": 17,
+      "lineStart": 108,
+      "lineEnd": 113,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +138,8 @@
       "name": "Spell4_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 19,
-      "lineEnd": 20,
+      "lineStart": 115,
+      "lineEnd": 116,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +152,8 @@
       "name": "mnufile2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 22,
-      "lineEnd": 29,
+      "lineStart": 118,
+      "lineEnd": 125,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -67,8 +166,8 @@
       "name": "SpellLst_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 31,
-      "lineEnd": 44,
+      "lineStart": 127,
+      "lineEnd": 140,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -80,9 +179,9 @@
       "kind": "sub",
       "name": "SpellLst_MouseDown",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
-      "lineStart": 46,
-      "lineEnd": 51,
+      "params": "(Button As Integer, Shift As Integer, x As Single, y As Single)",
+      "lineStart": 142,
+      "lineEnd": 147,
       "annotations": {
         "notes": [],
         "status": "not-started",

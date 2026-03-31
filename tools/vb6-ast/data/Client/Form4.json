@@ -1,6 +1,128 @@
 {
   "module": "Form4",
   "sourcePath": "Client/Form4.frm",
+  "address": "Client/Form4",
+  "controls": [
+    {
+      "type": "VB.CommandButton",
+      "name": "Command2",
+      "properties": {
+        "Caption": "\u0022Back\u0022",
+        "Height": "255",
+        "Left": "7920",
+        "TabIndex": "4",
+        "Top": "5760",
+        "Width": "1095"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command1",
+      "properties": {
+        "Caption": "\u0022Continue\u0022",
+        "Height": "255",
+        "Left": "9120",
+        "TabIndex": "3",
+        "Top": "5760",
+        "Width": "1095"
+      }
+    },
+    {
+      "type": "VB.ComboBox",
+      "name": "Combo1",
+      "properties": {
+        "BackColor": "\u0026H80000003\u0026",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "315",
+        "ItemData": "\u0022Form4.frx\u0022:0000",
+        "Left": "4560",
+        "List": "\u0022Form4.frx\u0022:000A",
+        "Style": "2  \u0027Dropdown List",
+        "TabIndex": "1",
+        "Top": "3840",
+        "Width": "2175"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Select You Characters Gender:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "1215",
+        "Left": "4560",
+        "TabIndex": "6",
+        "Top": "3480",
+        "Width": "4095"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label3",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022And now the final touch for your character...\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "495",
+        "Left": "1680",
+        "TabIndex": "5",
+        "Top": "2880",
+        "Width": "3855"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Num",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Type": "0",
+        "Format": "\u00220\u0022",
+        "HaveTrueFalseNull": "0",
+        "FirstDayOfWeek": "0",
+        "FirstWeekOfYear": "0",
+        "LCID": "1044",
+        "SubFormatType": "0",
+        "Height": "255",
+        "Left": "12000",
+        "TabIndex": "2",
+        "Top": "0",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022-Character Creation\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "15.75",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "495",
+        "Left": "1680",
+        "TabIndex": "0",
+        "Top": "2520",
+        "Width": "4095"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "9120",
+        "Left": "0",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "12120"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +133,8 @@
       "name": "Command1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 8,
-      "lineEnd": 18,
+      "lineStart": 115,
+      "lineEnd": 125,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +147,8 @@
       "name": "Command2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 20,
-      "lineEnd": 26,
+      "lineStart": 127,
+      "lineEnd": 133,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +161,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 30,
-      "lineEnd": 36,
+      "lineStart": 137,
+      "lineEnd": 143,
       "annotations": {
         "notes": [],
         "status": "not-started",

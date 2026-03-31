@@ -1,6 +1,180 @@
 {
   "module": "Form6",
   "sourcePath": "Client/Form6.frm",
+  "address": "Client/Form6",
+  "controls": [
+    {
+      "type": "VB.TextBox",
+      "name": "IPtxt",
+      "properties": {
+        "Height": "285",
+        "Left": "7200",
+        "TabIndex": "10",
+        "Text": "\u0022(TYPE IN SERVER IP HERE)\u0022",
+        "Top": "4800",
+        "Width": "3015"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "Porttxt",
+      "properties": {
+        "Height": "285",
+        "Left": "7200",
+        "TabIndex": "8",
+        "Text": "\u00227777\u0022",
+        "Top": "4320",
+        "Width": "3015"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "PasswordTxt",
+      "properties": {
+        "Height": "285",
+        "IMEMode": "3  \u0027DISABLE",
+        "Left": "3360",
+        "PasswordChar": "\u0022*\u0022",
+        "TabIndex": "6",
+        "Top": "4800",
+        "Width": "2415"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "NameTxt",
+      "properties": {
+        "Height": "285",
+        "Left": "3360",
+        "TabIndex": "4",
+        "Top": "4320",
+        "Width": "2415"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label7",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Server IP:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "6120",
+        "TabIndex": "9",
+        "Top": "4800",
+        "Width": "975"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label6",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Server Port:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "6120",
+        "TabIndex": "7",
+        "Top": "4320",
+        "Width": "1095"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label5",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Character Password:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "1800",
+        "TabIndex": "5",
+        "Top": "4800",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label3",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Character Name:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "1800",
+        "TabIndex": "3",
+        "Top": "4320",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label4",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Continue\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "495",
+        "Left": "9120",
+        "TabIndex": "2",
+        "Top": "5640",
+        "Width": "1095"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022Form6.frx\u0022:0000",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "1095",
+        "Left": "1680",
+        "TabIndex": "1",
+        "Top": "3000",
+        "Width": "8295"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022-Creating A Character Account\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "15.75",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "495",
+        "Left": "1680",
+        "TabIndex": "0",
+        "Top": "2520",
+        "Width": "4095"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "9120",
+        "Left": "0",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "12120"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -10,9 +184,9 @@
       "kind": "sub",
       "name": "Form_KeyUp",
       "visibility": "Private",
-      "params": "(KeyCode  As  Integer,  Shift  As  Integer)",
-      "lineStart": 7,
-      "lineEnd": 25,
+      "params": "(KeyCode As Integer, Shift As Integer)",
+      "lineStart": 151,
+      "lineEnd": 169,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +199,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 30,
-      "lineEnd": 35,
+      "lineStart": 174,
+      "lineEnd": 179,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +213,8 @@
       "name": "Label4_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 37,
-      "lineEnd": 68,
+      "lineStart": 181,
+      "lineEnd": 212,
       "annotations": {
         "notes": [],
         "status": "not-started",

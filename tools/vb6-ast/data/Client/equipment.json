@@ -1,6 +1,129 @@
 {
   "module": "equipment",
   "sourcePath": "Client/equipment.frm",
+  "address": "Client/equipment",
+  "controls": [
+    {
+      "type": "VB.Image",
+      "name": "feets",
+      "properties": {
+        "Height": "615",
+        "Left": "3360",
+        "Stretch": "-1  \u0027True",
+        "Top": "4200",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "rhand",
+      "properties": {
+        "Height": "615",
+        "Left": "5040",
+        "Stretch": "-1  \u0027True",
+        "Top": "3120",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "arms",
+      "properties": {
+        "Height": "615",
+        "Left": "5040",
+        "Stretch": "-1  \u0027True",
+        "Top": "1440",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "neck",
+      "properties": {
+        "Height": "495",
+        "Left": "5040",
+        "Stretch": "-1  \u0027True",
+        "Top": "360",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "legs",
+      "properties": {
+        "Height": "495",
+        "Left": "1560",
+        "Stretch": "-1  \u0027True",
+        "Top": "3240",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "lhand",
+      "properties": {
+        "Height": "495",
+        "Left": "1560",
+        "Stretch": "-1  \u0027True",
+        "Top": "2040",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "body",
+      "properties": {
+        "Height": "495",
+        "Left": "1560",
+        "Stretch": "-1  \u0027True",
+        "Top": "960",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "head",
+      "properties": {
+        "Height": "615",
+        "Left": "3360",
+        "Stretch": "-1  \u0027True",
+        "Top": "240",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "Shape1",
+      "properties": {
+        "BorderColor": "\u0026H000040C0\u0026",
+        "BorderWidth": "4",
+        "Height": "5175",
+        "Left": "0",
+        "Top": "0",
+        "Width": "6495"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Close\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "255",
+        "Left": "5760",
+        "TabIndex": "0",
+        "Top": "4800",
+        "Width": "495"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +134,8 @@
       "name": "Label1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 6,
-      "lineEnd": 9,
+      "lineStart": 104,
+      "lineEnd": 107,
       "annotations": {
         "notes": [],
         "status": "not-started",

@@ -1,6 +1,48 @@
 {
   "module": "signwrite",
   "sourcePath": "Client/signwrite.frm",
+  "address": "Client/signwrite",
+  "controls": [
+    {
+      "type": "VB.TextBox",
+      "name": "Text1",
+      "properties": {
+        "BackColor": "\u0026H00004080\u0026",
+        "BorderStyle": "0  \u0027None",
+        "ForeColor": "\u0026H80000009\u0026",
+        "Height": "285",
+        "Left": "360",
+        "TabIndex": "0",
+        "Top": "480",
+        "Width": "5295"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022DONE\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "5160",
+        "TabIndex": "1",
+        "Top": "1200",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image6",
+      "properties": {
+        "Height": "7335",
+        "Left": "0",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "6120"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +53,8 @@
       "name": "Image1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 9,
+      "lineStart": 47,
+      "lineEnd": 49,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +67,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 11,
-      "lineEnd": 15,
+      "lineStart": 51,
+      "lineEnd": 55,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +81,8 @@
       "name": "Label2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 17,
-      "lineEnd": 21,
+      "lineStart": 57,
+      "lineEnd": 61,
       "annotations": {
         "notes": [],
         "status": "not-started",

@@ -1,6 +1,639 @@
 {
   "module": "toolbox",
   "sourcePath": "MapEditor/toolbox.frm",
+  "address": "MapEditor/toolbox",
+  "controls": [
+    {
+      "type": "VB.CommandButton",
+      "name": "Command5",
+      "properties": {
+        "Caption": "\u0022Place Grh Random\u0022",
+        "Height": "255",
+        "Left": "2040",
+        "TabIndex": "33",
+        "Top": "3360",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "grhrandom",
+      "properties": {
+        "BackColor": "\u0026H00004080\u0026",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "285",
+        "Left": "2040",
+        "TabIndex": "32",
+        "Top": "2880",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command4",
+      "properties": {
+        "Caption": "\u0022Proceed\u0022",
+        "Height": "255",
+        "Left": "840",
+        "TabIndex": "31",
+        "Top": "7920",
+        "Width": "1935"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "blockgrh",
+      "properties": {
+        "BackColor": "\u0026H00004080\u0026",
+        "ForeColor": "\u0026H80000009\u0026",
+        "Height": "285",
+        "Left": "1440",
+        "TabIndex": "30",
+        "Top": "7560",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command3",
+      "properties": {
+        "Caption": "\u0022Place It Randomly\u0022",
+        "Height": "255",
+        "Left": "1920",
+        "TabIndex": "28",
+        "Top": "6840",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.CheckBox",
+      "name": "Erasechk",
+      "properties": {
+        "BackColor": "\u0026H00004080\u0026",
+        "Caption": "\u0022Erase Layer\u0022",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "255",
+        "Left": "2400",
+        "TabIndex": "20",
+        "TabStop": "0   \u0027False",
+        "Top": "1080",
+        "Width": "1215"
+      }
+    },
+    {
+      "type": "VB.CheckBox",
+      "name": "EraseAllchk",
+      "properties": {
+        "BackColor": "\u0026H00004080\u0026",
+        "Caption": "\u0022Erase All\u0022",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "255",
+        "Left": "2400",
+        "TabIndex": "19",
+        "TabStop": "0   \u0027False",
+        "Top": "840",
+        "Width": "975"
+      }
+    },
+    {
+      "type": "VB.CheckBox",
+      "name": "Blockedchk",
+      "properties": {
+        "BackColor": "\u0026H00004080\u0026",
+        "Caption": "\u0022Blocked\u0022",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "195",
+        "Left": "2040",
+        "TabIndex": "18",
+        "TabStop": "0   \u0027False",
+        "Top": "3840",
+        "Width": "915"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "Layertxt",
+      "properties": {
+        "Appearance": "0  \u0027Flat",
+        "BackColor": "\u0026H00004080\u0026",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "13.5",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "405",
+        "Left": "1920",
+        "TabIndex": "17",
+        "Text": "\u00221\u0022",
+        "Top": "840",
+        "Width": "435"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command2",
+      "properties": {
+        "Caption": "\u0022Down\u0022",
+        "Height": "255",
+        "Left": "1080",
+        "TabIndex": "16",
+        "TabStop": "0   \u0027False",
+        "Top": "960",
+        "Width": "615"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command1",
+      "properties": {
+        "Caption": "\u0022Up\u0022",
+        "Height": "255",
+        "Left": "1080",
+        "TabIndex": "15",
+        "TabStop": "0   \u0027False",
+        "Top": "720",
+        "Width": "615"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "Grhtxt",
+      "properties": {
+        "Appearance": "0  \u0027Flat",
+        "BackColor": "\u0026H00004080\u0026",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "13.5",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "390",
+        "Left": "240",
+        "TabIndex": "14",
+        "Text": "\u00221\u0022",
+        "Top": "840",
+        "Width": "795"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "PlaceBlockCmd",
+      "properties": {
+        "Caption": "\u0022Change Blocked\u0022",
+        "Height": "255",
+        "Left": "2040",
+        "TabIndex": "13",
+        "Top": "4200",
+        "Width": "1515"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "PlaceGrhCmd",
+      "properties": {
+        "Caption": "\u0022Place Grh\u0022",
+        "Enabled": "0   \u0027False",
+        "Height": "255",
+        "Left": "240",
+        "TabIndex": "12",
+        "Top": "1440",
+        "Width": "1515"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "PlaceExitCmd",
+      "properties": {
+        "Caption": "\u0022Place Exit\u0022",
+        "Height": "255",
+        "Left": "180",
+        "TabIndex": "11",
+        "Top": "4200",
+        "Width": "1515"
+      }
+    },
+    {
+      "type": "VB.CheckBox",
+      "name": "EraseExitChk",
+      "properties": {
+        "BackColor": "\u0026H00004080\u0026",
+        "Caption": "\u0022Erase Exit\u0022",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "315",
+        "Left": "180",
+        "TabIndex": "10",
+        "TabStop": "0   \u0027False",
+        "Top": "3840",
+        "Width": "1215"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "MapExitTxt",
+      "properties": {
+        "Appearance": "0  \u0027Flat",
+        "BackColor": "\u0026H00004080\u0026",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "13.5",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "405",
+        "Left": "900",
+        "TabIndex": "9",
+        "Text": "\u00221\u0022",
+        "Top": "2460",
+        "Width": "795"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "XExitTxt",
+      "properties": {
+        "Appearance": "0  \u0027Flat",
+        "BackColor": "\u0026H00004080\u0026",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "13.5",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "405",
+        "Left": "900",
+        "TabIndex": "8",
+        "Text": "\u00221\u0022",
+        "Top": "2880",
+        "Width": "795"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "YExitTxt",
+      "properties": {
+        "Appearance": "0  \u0027Flat",
+        "BackColor": "\u0026H00004080\u0026",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "13.5",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "405",
+        "Left": "900",
+        "TabIndex": "7",
+        "Text": "\u00221\u0022",
+        "Top": "3360",
+        "Width": "795"
+      }
+    },
+    {
+      "type": "VB.ListBox",
+      "name": "NPCLst",
+      "properties": {
+        "BackColor": "\u0026H00004080\u0026",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "1230",
+        "Left": "1920",
+        "TabIndex": "6",
+        "Top": "4680",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "PlaceNPCCmd",
+      "properties": {
+        "Caption": "\u0022Place NPC\u0022",
+        "Height": "255",
+        "Left": "1920",
+        "TabIndex": "5",
+        "Top": "6480",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.CheckBox",
+      "name": "EraseNPCChk",
+      "properties": {
+        "BackColor": "\u0026H00004080\u0026",
+        "Caption": "\u0022Erase NPC\u0022",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "195",
+        "Left": "1950",
+        "TabIndex": "4",
+        "TabStop": "0   \u0027False",
+        "Top": "6120",
+        "Width": "1215"
+      }
+    },
+    {
+      "type": "VB.ListBox",
+      "name": "ObjLst",
+      "properties": {
+        "BackColor": "\u0026H00004080\u0026",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "1230",
+        "Left": "180",
+        "TabIndex": "3",
+        "Top": "4740",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "PlaceObjCmd",
+      "properties": {
+        "Caption": "\u0022Place OBJ\u0022",
+        "Height": "255",
+        "Left": "180",
+        "TabIndex": "2",
+        "Top": "6600",
+        "Width": "1515"
+      }
+    },
+    {
+      "type": "VB.CheckBox",
+      "name": "EraseObjChk",
+      "properties": {
+        "BackColor": "\u0026H00004080\u0026",
+        "Caption": "\u0022Erase OBJ\u0022",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "195",
+        "Left": "180",
+        "TabIndex": "1",
+        "TabStop": "0   \u0027False",
+        "Top": "6300",
+        "Width": "1215"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "OBJAmountTxt",
+      "properties": {
+        "BackColor": "\u0026H00004080\u0026",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "285",
+        "Left": "1080",
+        "TabIndex": "0",
+        "Text": "\u00221\u0022",
+        "Top": "6000",
+        "Width": "555"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label4",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022How Many:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "2400",
+        "TabIndex": "34",
+        "Top": "2520",
+        "Width": "855"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Block ALL Tiles with this GRH on map:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "480",
+        "TabIndex": "29",
+        "Top": "7320",
+        "Width": "2775"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "Shape6",
+      "properties": {
+        "BorderWidth": "2",
+        "Height": "1095",
+        "Left": "120",
+        "Top": "7200",
+        "Width": "3615"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "RoomLbl",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "Appearance": "0  \u0027Flat",
+        "BackColor": "\u0026H00004080\u0026",
+        "BorderStyle": "1  \u0027Fixed Single",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "15.75",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "360",
+        "Left": "240",
+        "TabIndex": "27",
+        "Top": "120",
+        "Width": "3285"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label3",
+      "properties": {
+        "AutoSize": "-1  \u0027True",
+        "BackColor": "\u0026H00000040\u0026",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Grh\u0022",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "195",
+        "Left": "240",
+        "TabIndex": "26",
+        "Top": "600",
+        "Width": "255"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "AutoSize": "-1  \u0027True",
+        "BackColor": "\u0026H00000040\u0026",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Layer\u0022",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "195",
+        "Left": "1920",
+        "TabIndex": "25",
+        "Top": "600",
+        "Width": "390"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label6",
+      "properties": {
+        "AutoSize": "-1  \u0027True",
+        "BackColor": "\u0026H00000040\u0026",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022X:\u0022",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "300",
+        "Left": "210",
+        "TabIndex": "24",
+        "Top": "2880",
+        "Width": "225"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label7",
+      "properties": {
+        "AutoSize": "-1  \u0027True",
+        "BackColor": "\u0026H00000040\u0026",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Y:\u0022",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "300",
+        "Left": "210",
+        "TabIndex": "23",
+        "Top": "3360",
+        "Width": "225"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label8",
+      "properties": {
+        "AutoSize": "-1  \u0027True",
+        "BackColor": "\u0026H00000040\u0026",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022MAP:\u0022",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "300",
+        "Left": "180",
+        "TabIndex": "22",
+        "Top": "2520",
+        "Width": "570"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "Shape2",
+      "properties": {
+        "BorderWidth": "2",
+        "Height": "2175",
+        "Left": "120",
+        "Top": "0",
+        "Width": "3615"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "Shape3",
+      "properties": {
+        "BorderWidth": "2",
+        "Height": "2295",
+        "Left": "120",
+        "Top": "2280",
+        "Width": "1695"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "Shape4",
+      "properties": {
+        "BorderWidth": "2",
+        "Height": "2655",
+        "Left": "1800",
+        "Top": "4560",
+        "Width": "1935"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "Shape5",
+      "properties": {
+        "BorderWidth": "2",
+        "Height": "2655",
+        "Left": "120",
+        "Top": "4560",
+        "Width": "1695"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label9",
+      "properties": {
+        "AutoSize": "-1  \u0027True",
+        "BackColor": "\u0026H00000040\u0026",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Amount\u0022",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "9.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000005\u0026",
+        "Height": "240",
+        "Left": "240",
+        "TabIndex": "21",
+        "Top": "6000",
+        "Width": "675"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "Shape1",
+      "properties": {
+        "BorderWidth": "2",
+        "Height": "2295",
+        "Left": "1800",
+        "Top": "2280",
+        "Width": "1935"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +644,8 @@
       "name": "Blockedchk_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 9,
+      "lineStart": 510,
+      "lineEnd": 512,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +658,8 @@
       "name": "Check1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 11,
-      "lineEnd": 19,
+      "lineStart": 514,
+      "lineEnd": 522,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +672,8 @@
       "name": "Command1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 21,
-      "lineEnd": 25,
+      "lineStart": 524,
+      "lineEnd": 528,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +686,8 @@
       "name": "Command2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 27,
-      "lineEnd": 31,
+      "lineStart": 530,
+      "lineEnd": 534,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -67,8 +700,8 @@
       "name": "Command3_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 33,
-      "lineEnd": 60,
+      "lineStart": 536,
+      "lineEnd": 563,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -81,8 +714,8 @@
       "name": "Command4_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 62,
-      "lineEnd": 90,
+      "lineStart": 565,
+      "lineEnd": 593,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -95,8 +728,8 @@
       "name": "Command5_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 92,
-      "lineEnd": 117,
+      "lineStart": 595,
+      "lineEnd": 620,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -109,8 +742,8 @@
       "name": "Command6_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 119,
-      "lineEnd": 151,
+      "lineStart": 622,
+      "lineEnd": 654,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -123,8 +756,8 @@
       "name": "DrawGridChk_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 153,
-      "lineEnd": 160,
+      "lineStart": 656,
+      "lineEnd": 663,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -137,8 +770,8 @@
       "name": "EraseAllchk_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 162,
-      "lineEnd": 168,
+      "lineStart": 665,
+      "lineEnd": 671,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -151,8 +784,8 @@
       "name": "Erasechk_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 170,
-      "lineEnd": 175,
+      "lineStart": 673,
+      "lineEnd": 678,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -165,8 +798,8 @@
       "name": "EraseExitChk_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 177,
-      "lineEnd": 179,
+      "lineStart": 680,
+      "lineEnd": 682,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -179,8 +812,8 @@
       "name": "EraseNPCChk_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 181,
-      "lineEnd": 184,
+      "lineStart": 684,
+      "lineEnd": 687,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -193,8 +826,8 @@
       "name": "EraseObjChk_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 186,
-      "lineEnd": 188,
+      "lineStart": 689,
+      "lineEnd": 691,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -207,8 +840,8 @@
       "name": "fishzonechk_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 190,
-      "lineEnd": 192,
+      "lineStart": 693,
+      "lineEnd": 695,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -221,8 +854,8 @@
       "name": "Grhtxt_Change",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 194,
-      "lineEnd": 211,
+      "lineStart": 697,
+      "lineEnd": 714,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -235,8 +868,8 @@
       "name": "Layertxt_Change",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 213,
-      "lineEnd": 224,
+      "lineStart": 716,
+      "lineEnd": 727,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -249,8 +882,8 @@
       "name": "MapExitTxt_Change",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 226,
-      "lineEnd": 238,
+      "lineStart": 729,
+      "lineEnd": 741,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -263,8 +896,8 @@
       "name": "NPCLst_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 240,
-      "lineEnd": 242,
+      "lineStart": 743,
+      "lineEnd": 745,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -277,8 +910,8 @@
       "name": "OBJAmountTxt_Change",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 244,
-      "lineEnd": 252,
+      "lineStart": 747,
+      "lineEnd": 755,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -291,8 +924,8 @@
       "name": "ObjLst_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 254,
-      "lineEnd": 256,
+      "lineStart": 757,
+      "lineEnd": 759,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -305,8 +938,8 @@
       "name": "PlaceBlockCmd_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 258,
-      "lineEnd": 267,
+      "lineStart": 761,
+      "lineEnd": 770,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -319,8 +952,8 @@
       "name": "PlaceExitCmd_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 269,
-      "lineEnd": 278,
+      "lineStart": 772,
+      "lineEnd": 781,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -333,8 +966,8 @@
       "name": "PlaceFishZoneCMD_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 280,
-      "lineEnd": 284,
+      "lineStart": 783,
+      "lineEnd": 787,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -347,8 +980,8 @@
       "name": "PlaceGrhCmd_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 286,
-      "lineEnd": 294,
+      "lineStart": 789,
+      "lineEnd": 797,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -361,8 +994,8 @@
       "name": "PlaceNPCCmd_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 296,
-      "lineEnd": 304,
+      "lineStart": 799,
+      "lineEnd": 807,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -375,8 +1008,8 @@
       "name": "PlaceObjCmd_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 306,
-      "lineEnd": 315,
+      "lineStart": 809,
+      "lineEnd": 818,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -389,8 +1022,8 @@
       "name": "XExitTxt_Change",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 318,
-      "lineEnd": 328,
+      "lineStart": 821,
+      "lineEnd": 831,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -403,8 +1036,8 @@
       "name": "YExitTxt_Change",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 330,
-      "lineEnd": 341,
+      "lineStart": 833,
+      "lineEnd": 844,
       "annotations": {
         "notes": [],
         "status": "not-started",

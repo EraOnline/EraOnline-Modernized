@@ -1,6 +1,8 @@
 {
   "module": "modRes",
   "sourcePath": "Client/modRes.bas",
+  "address": "Client/modRes",
+  "controls": [],
   "types": [
     {
       "name": "DEVMODE",
@@ -254,7 +256,7 @@
       "name": "EnumDisplaySettings",
       "lib": "user32",
       "alias": "EnumDisplaySettingsA",
-      "params": "(ByVal  lpszDeviceName  As  Long,  ByVal  iModeNum  As  Long,  lpDevMode  As  Any)",
+      "params": "(ByVal lpszDeviceName As Long, ByVal iModeNum As Long, lpDevMode As Any)",
       "returnType": "Boolean",
       "line": 6
     },
@@ -262,7 +264,7 @@
       "name": "ChangeDisplaySettings",
       "lib": "user32",
       "alias": "ChangeDisplaySettingsA",
-      "params": "(lpDevMode  As  Any,  ByVal  dwflags  As  Long)",
+      "params": "(lpDevMode As Any, ByVal dwflags As Long)",
       "returnType": "Long",
       "line": 7
     }
@@ -272,7 +274,7 @@
       "kind": "function",
       "name": "ChangeRes",
       "visibility": "Public",
-      "params": "(Width  As  Single,  Height  As  Single,  bpp  As  Integer)",
+      "params": "(Width As Single, Height As Single, bpp As Integer)",
       "returnType": "Integer",
       "lineStart": 44,
       "lineEnd": 81,

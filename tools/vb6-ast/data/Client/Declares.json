@@ -1,6 +1,8 @@
 {
   "module": "Declares",
   "sourcePath": "Client/Declares.bas",
+  "address": "Client/Declares",
+  "controls": [],
   "types": [
     {
       "name": "Position",
@@ -3031,7 +3033,7 @@
       "name": "writeprivateprofilestring",
       "lib": "kernel32",
       "alias": "WritePrivateProfileStringA",
-      "params": "(ByVal  lpApplicationname  As  String,  ByVal  lpKeyname  As  Any,  ByVal  lpString  As  String,  ByVal  lpfilename  As  String)",
+      "params": "(ByVal lpApplicationname As String, ByVal lpKeyname As Any, ByVal lpString As String, ByVal lpfilename As String)",
       "returnType": "Long",
       "line": 457
     },
@@ -3039,14 +3041,14 @@
       "name": "getprivateprofilestring",
       "lib": "kernel32",
       "alias": "GetPrivateProfileStringA",
-      "params": "(ByVal  lpApplicationname  As  String,  ByVal  lpKeyname  As  Any,  ByVal  lpdefault  As  String,  ByVal  lpreturnedstring  As  String,  ByVal  nSize  As  Long,  ByVal  lpfilename  As  String)",
+      "params": "(ByVal lpApplicationname As String, ByVal lpKeyname As Any, ByVal lpdefault As String, ByVal lpreturnedstring As String, ByVal nSize As Long, ByVal lpfilename As String)",
       "returnType": "Long",
       "line": 458
     },
     {
       "name": "GetKeyState",
       "lib": "user32",
-      "params": "(ByVal  nVirtKey  As  Long)",
+      "params": "(ByVal nVirtKey As Long)",
       "returnType": "Integer",
       "line": 459
     },
@@ -3054,7 +3056,7 @@
       "name": "GetSystemDirectory",
       "lib": "kernel32",
       "alias": "GetSystemDirectoryA",
-      "params": "(ByVal  lpBuffer  As  String,  ByVal  nSize  As  Long)",
+      "params": "(ByVal lpBuffer As String, ByVal nSize As Long)",
       "returnType": "Long",
       "line": 460
     }

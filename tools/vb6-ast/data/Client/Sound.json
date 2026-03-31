@@ -1,6 +1,8 @@
 {
   "module": "Sound",
   "sourcePath": "Client/Sound.bas",
+  "address": "Client/Sound",
+  "controls": [],
   "types": [],
   "constants": [
     {
@@ -110,7 +112,7 @@
       "name": "mciSendString",
       "lib": "winmm.dll",
       "alias": "mciSendStringA",
-      "params": "(ByVal  lpstrCommand  As  String,  ByVal  lpstrReturnString  As  String,  ByVal  uRetrunLength  As  Long,  ByVal  hwndCallback  As  Long)",
+      "params": "(ByVal lpstrCommand As String, ByVal lpstrReturnString As String, ByVal uRetrunLength As Long, ByVal hwndCallback As Long)",
       "returnType": "Long",
       "line": 20
     },
@@ -118,7 +120,7 @@
       "name": "sndPlaySound",
       "lib": "winmm.dll",
       "alias": "sndPlaySoundA",
-      "params": "(ByVal  lpszSoundName  As  String,  ByVal  uFlags  As  Long)",
+      "params": "(ByVal lpszSoundName As String, ByVal uFlags As Long)",
       "returnType": "Long",
       "line": 21
     }
@@ -128,7 +130,7 @@
       "kind": "sub",
       "name": "CreateDSBFromWaveFile",
       "visibility": "Public",
-      "params": "(ds  As  IDirectSound,  ByVal  File  As  String,  dsb  As  IDirectSoundBuffer)",
+      "params": "(ds As IDirectSound, ByVal File As String, dsb As IDirectSoundBuffer)",
       "lineStart": 22,
       "lineEnd": 71,
       "annotations": {
@@ -142,7 +144,7 @@
       "kind": "sub",
       "name": "PlayWaveDS",
       "visibility": "Public",
-      "params": "(File  As  String)",
+      "params": "(File As String)",
       "lineStart": 72,
       "lineEnd": 101,
       "annotations": {
@@ -156,7 +158,7 @@
       "kind": "sub",
       "name": "PlayMidi",
       "visibility": "Public",
-      "params": "(File  As  String)",
+      "params": "(File As String)",
       "lineStart": 102,
       "lineEnd": 118,
       "annotations": {
@@ -170,7 +172,7 @@
       "kind": "sub",
       "name": "PlayWaveAPI",
       "visibility": "Public",
-      "params": "(File  As  String)",
+      "params": "(File As String)",
       "lineStart": 120,
       "lineEnd": 130,
       "annotations": {

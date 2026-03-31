@@ -1,6 +1,672 @@
 {
   "module": "frmMain",
   "sourcePath": "Client/frmMain.frm",
+  "address": "Client/frmMain",
+  "controls": [
+    {
+      "type": "SocketWrenchCtrl.Socket",
+      "name": "Socket1",
+      "properties": {
+        "Left": "13110",
+        "Top": "3450",
+        "AutoResolve": "0   \u0027False",
+        "Backlog": "1",
+        "Binary": "0   \u0027False",
+        "Blocking": "0   \u0027False",
+        "Broadcast": "0   \u0027False",
+        "BufferSize": "2048",
+        "HostAddress": "\u0022\u0022",
+        "HostFile": "\u0022\u0022",
+        "HostName": "\u0022\u0022",
+        "InLine": "0   \u0027False",
+        "Interval": "0",
+        "KeepAlive": "0   \u0027False",
+        "Library": "\u0022\u0022",
+        "Linger": "0",
+        "LocalPort": "0",
+        "LocalService": "\u0022\u0022",
+        "Protocol": "0",
+        "RemotePort": "0",
+        "RemoteService": "\u0022\u0022",
+        "ReuseAddress": "0   \u0027False",
+        "Route": "-1  \u0027True",
+        "Timeout": "0",
+        "Type": "1",
+        "Urgent": "0   \u0027False"
+      }
+    },
+    {
+      "type": "VB.Timer",
+      "name": "DoSkill",
+      "properties": {
+        "Enabled": "0   \u0027False",
+        "Interval": "5000",
+        "Left": "10920",
+        "Top": "1200"
+      }
+    },
+    {
+      "type": "VB.Timer",
+      "name": "Birds",
+      "properties": {
+        "Enabled": "0   \u0027False",
+        "Interval": "10000",
+        "Left": "10440",
+        "Top": "1200"
+      }
+    },
+    {
+      "type": "VB.Timer",
+      "name": "Criminal",
+      "properties": {
+        "Interval": "60000",
+        "Left": "9960",
+        "Top": "1200"
+      }
+    },
+    {
+      "type": "VB.Timer",
+      "name": "CheckClick",
+      "properties": {
+        "Interval": "900",
+        "Left": "9480",
+        "Top": "1200"
+      }
+    },
+    {
+      "type": "VB.Timer",
+      "name": "CheckRain",
+      "properties": {
+        "Interval": "30000",
+        "Left": "9000",
+        "Top": "1200"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "SendTxt",
+      "properties": {
+        "Appearance": "0  \u0027Flat",
+        "BackColor": "\u0026H00004080\u0026",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "8.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H00FFFFFF\u0026",
+        "Height": "285",
+        "Left": "120",
+        "MultiLine": "-1  \u0027True",
+        "ScrollBars": "2  \u0027Vertical",
+        "TabIndex": "3",
+        "TabStop": "0   \u0027False",
+        "Top": "6720",
+        "Width": "11775"
+      }
+    },
+    {
+      "type": "RichTextLib.RichTextBox",
+      "name": "RecTxt",
+      "properties": {
+        "Height": "1755",
+        "Left": "120",
+        "TabIndex": "4",
+        "TabStop": "0   \u0027False",
+        "Top": "7080",
+        "Width": "11775",
+        "BackColor": "16512",
+        "Enabled": "-1  \u0027True",
+        "ReadOnly": "-1  \u0027True",
+        "DisableNoScroll": "-1  \u0027True",
+        "TextRTF": "$\u0022frmMain.frx\u0022:0BC2",
+        "Name": "\u0022MS Sans Serif\u0022",
+        "Size": "9.75",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False"
+      }
+    },
+    {
+      "type": "VB.Timer",
+      "name": "Thunder",
+      "properties": {
+        "Interval": "20000",
+        "Left": "10920",
+        "Top": "720"
+      }
+    },
+    {
+      "type": "VB.Timer",
+      "name": "Meditate",
+      "properties": {
+        "Enabled": "0   \u0027False",
+        "Interval": "10000",
+        "Left": "10440",
+        "Top": "720"
+      }
+    },
+    {
+      "type": "VB.Timer",
+      "name": "EatDrink",
+      "properties": {
+        "Interval": "15000",
+        "Left": "9960",
+        "Top": "720"
+      }
+    },
+    {
+      "type": "VB.Timer",
+      "name": "NPCattack",
+      "properties": {
+        "Enabled": "0   \u0027False",
+        "Interval": "4000",
+        "Left": "9480",
+        "Top": "720"
+      }
+    },
+    {
+      "type": "VB.Timer",
+      "name": "Attack",
+      "properties": {
+        "Interval": "4000",
+        "Left": "9000",
+        "Top": "720"
+      }
+    },
+    {
+      "type": "VB.Timer",
+      "name": "Campfire",
+      "properties": {
+        "Enabled": "0   \u0027False",
+        "Interval": "10000",
+        "Left": "11400",
+        "Top": "720"
+      }
+    },
+    {
+      "type": "VB.Timer",
+      "name": "FPSTimer",
+      "properties": {
+        "Interval": "1000",
+        "Left": "12120",
+        "Top": "3480"
+      }
+    },
+    {
+      "type": "MCI.MMControl",
+      "name": "MidiPlayer",
+      "properties": {
+        "Height": "420",
+        "Left": "0",
+        "TabIndex": "11",
+        "Top": "0",
+        "Visible": "0   \u0027False",
+        "Width": "420",
+        "PrevVisible": "0   \u0027False",
+        "NextVisible": "0   \u0027False",
+        "PauseVisible": "0   \u0027False",
+        "BackVisible": "0   \u0027False",
+        "StepVisible": "0   \u0027False",
+        "StopVisible": "0   \u0027False",
+        "RecordVisible": "0   \u0027False",
+        "EjectVisible": "0   \u0027False",
+        "DeviceType": "\u0022Sequencer\u0022",
+        "FileName": "\u0022\u0022"
+      }
+    },
+    {
+      "type": "MediaPlayerCtl.MediaPlayer",
+      "name": "MP3Player",
+      "properties": {
+        "Height": "375",
+        "Left": "480",
+        "TabIndex": "15",
+        "Top": "0",
+        "Visible": "0   \u0027False",
+        "Width": "495",
+        "AudioStream": "-1",
+        "AutoSize": "0   \u0027False",
+        "AutoStart": "-1  \u0027True",
+        "AnimationAtStart": "-1  \u0027True",
+        "AllowScan": "-1  \u0027True",
+        "AllowChangeDisplaySize": "-1  \u0027True",
+        "AutoRewind": "0   \u0027False",
+        "Balance": "0",
+        "BaseURL": "\u0022\u0022",
+        "BufferingTime": "5",
+        "CaptioningID": "\u0022\u0022",
+        "ClickToPlay": "-1  \u0027True",
+        "CursorType": "0",
+        "CurrentPosition": "-1",
+        "CurrentMarker": "0",
+        "DefaultFrame": "\u0022\u0022",
+        "DisplayBackColor": "0",
+        "DisplayForeColor": "16777215",
+        "DisplayMode": "0",
+        "DisplaySize": "4",
+        "Enabled": "-1  \u0027True",
+        "EnableContextMenu": "-1  \u0027True",
+        "EnablePositionControls": "-1  \u0027True",
+        "EnableFullScreenControls": "0   \u0027False",
+        "EnableTracker": "-1  \u0027True",
+        "Filename": "\u0022\u0022",
+        "InvokeURLs": "-1  \u0027True",
+        "Language": "-1",
+        "Mute": "0   \u0027False",
+        "PlayCount": "1",
+        "PreviewMode": "0   \u0027False",
+        "Rate": "1",
+        "SAMILang": "\u0022\u0022",
+        "SAMIStyle": "\u0022\u0022",
+        "SAMIFileName": "\u0022\u0022",
+        "SelectionStart": "-1",
+        "SelectionEnd": "-1",
+        "SendOpenStateChangeEvents": "-1  \u0027True",
+        "SendWarningEvents": "-1  \u0027True",
+        "SendErrorEvents": "-1  \u0027True",
+        "SendKeyboardEvents": "0   \u0027False",
+        "SendMouseClickEvents": "0   \u0027False",
+        "SendMouseMoveEvents": "0   \u0027False",
+        "SendPlayStateChangeEvents": "-1  \u0027True",
+        "ShowCaptioning": "0   \u0027False",
+        "ShowControls": "-1  \u0027True",
+        "ShowAudioControls": "-1  \u0027True",
+        "ShowDisplay": "0   \u0027False",
+        "ShowGotoBar": "0   \u0027False",
+        "ShowPositionControls": "-1  \u0027True",
+        "ShowStatusBar": "0   \u0027False",
+        "ShowTracker": "-1  \u0027True",
+        "TransparentAtStart": "0   \u0027False",
+        "VideoBorderWidth": "0",
+        "VideoBorderColor": "0",
+        "VideoBorder3D": "0   \u0027False",
+        "Volume": "0",
+        "WindowlessVideo": "0   \u0027False"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "cancelaction",
+      "properties": {
+        "Height": "300",
+        "Left": "180",
+        "Picture": "\u0022frmMain.frx\u0022:0C3E",
+        "Stretch": "-1  \u0027True",
+        "Top": "5160",
+        "Visible": "0   \u0027False",
+        "Width": "750"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "experience",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "AutoSize": "-1  \u0027True",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00221\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "11.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H00FFFFFF\u0026",
+        "Height": "285",
+        "Left": "120",
+        "TabIndex": "14",
+        "ToolTipText": "\u0022This shows how much experience before you are upgraded (raise stats, give more training points etc.)\u0022",
+        "Top": "4800",
+        "Width": "855"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Experience:\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "9.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "120",
+        "TabIndex": "13",
+        "ToolTipText": "\u0022This shows how much experience before you are upgraded (raise stats, give more training points etc.)\u0022",
+        "Top": "4560",
+        "Width": "1215"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "percentage",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00221\u0022",
+        "Name": "\u0022Arial\u0022",
+        "Size": "9",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "4560",
+        "TabIndex": "12",
+        "Top": "480",
+        "Visible": "0   \u0027False",
+        "Width": "3015"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "percentbox",
+      "properties": {
+        "BorderWidth": "5",
+        "Height": "255",
+        "Left": "4560",
+        "Top": "480",
+        "Visible": "0   \u0027False",
+        "Width": "3000"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "ActionComplete",
+      "properties": {
+        "BackColor": "\u0026H00FF0000\u0026",
+        "BackStyle": "1  \u0027Opaque",
+        "Height": "210",
+        "Left": "4560",
+        "Top": "480",
+        "Visible": "0   \u0027False",
+        "Width": "15"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label7",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Get\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "360",
+        "TabIndex": "10",
+        "Top": "5880",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image2",
+      "properties": {
+        "Height": "480",
+        "Left": "240",
+        "Picture": "\u0022frmMain.frx\u0022:170E",
+        "ToolTipText": "\u0022Pick Up Object Your Standing On\u0022",
+        "Top": "5520",
+        "Width": "480"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label6",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Height": "975",
+        "Left": "11040",
+        "TabIndex": "9",
+        "Top": "1440",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label5",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Height": "1095",
+        "Left": "11160",
+        "TabIndex": "8",
+        "Top": "3480",
+        "Width": "615"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label4",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Height": "735",
+        "Left": "11160",
+        "TabIndex": "7",
+        "Top": "2520",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "MainViewShp",
+      "properties": {
+        "Height": "5280",
+        "Left": "1200",
+        "Top": "1200",
+        "Width": "9600"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022H S M\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "240",
+        "TabIndex": "6",
+        "ToolTipText": "\u0022Health, Stamina, Mana\u0022",
+        "Top": "3600",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "TargetMessage",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "9.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H00FFFFFF\u0026",
+        "Height": "255",
+        "Left": "120",
+        "TabIndex": "5",
+        "Top": "6480",
+        "Width": "11775"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "HPShp",
+      "properties": {
+        "BackColor": "\u0026H000000FF\u0026",
+        "BackStyle": "1  \u0027Opaque",
+        "BorderStyle": "0  \u0027Transparent",
+        "Height": "2250",
+        "Left": "240",
+        "Top": "1320",
+        "Width": "165"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "GldLbl",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "AutoSize": "-1  \u0027True",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00221\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "11.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H00FFFFFF\u0026",
+        "Height": "285",
+        "Left": "120",
+        "TabIndex": "2",
+        "ToolTipText": "\u0022How much gold you possess\u0022",
+        "Top": "4200",
+        "Width": "855"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "MANShp",
+      "properties": {
+        "BackColor": "\u0026H00FFFF00\u0026",
+        "BackStyle": "1  \u0027Opaque",
+        "BorderStyle": "0  \u0027Transparent",
+        "Height": "2250",
+        "Left": "720",
+        "Top": "1320",
+        "Width": "165"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "STAShp",
+      "properties": {
+        "BackColor": "\u0026H00FF0000\u0026",
+        "BackStyle": "1  \u0027Opaque",
+        "BorderStyle": "0  \u0027Transparent",
+        "Height": "2250",
+        "Left": "480",
+        "Top": "1320",
+        "Width": "165"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label3",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Gold:\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "9.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "360",
+        "TabIndex": "1",
+        "ToolTipText": "\u0022How much gold you possess\u0022",
+        "Top": "3960",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "495",
+        "Left": "-3480",
+        "Picture": "\u0022frmMain.frx\u0022:1A18",
+        "Stretch": "-1  \u0027True",
+        "Top": "4800",
+        "Width": "1890"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image3",
+      "properties": {
+        "Height": "615",
+        "Left": "-3480",
+        "Picture": "\u0022frmMain.frx\u0022:24CE",
+        "Stretch": "-1  \u0027True",
+        "Top": "4200",
+        "Width": "1890"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image4",
+      "properties": {
+        "Height": "495",
+        "Left": "-3480",
+        "Picture": "\u0022frmMain.frx\u0022:2FB5",
+        "Stretch": "-1  \u0027True",
+        "Top": "5400",
+        "Width": "1890"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "MapNameLbl",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "Appearance": "0  \u0027Flat",
+        "BackColor": "\u0026H00FFFFFF\u0026",
+        "BorderStyle": "1  \u0027Fixed Single",
+        "ForeColor": "\u0026H00000000\u0026",
+        "Height": "345",
+        "Left": "12120",
+        "TabIndex": "0",
+        "Top": "3060",
+        "Width": "3285"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image6",
+      "properties": {
+        "Height": "2535",
+        "Left": "-120",
+        "Picture": "\u0022frmMain.frx\u0022:883F",
+        "Stretch": "-1  \u0027True",
+        "Top": "6480",
+        "Width": "12120"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +677,8 @@
       "name": "DropCmd_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 8,
-      "lineEnd": 16,
+      "lineStart": 569,
+      "lineEnd": 577,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +691,8 @@
       "name": "DrpAmountTxt_Change",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 18,
-      "lineEnd": 30,
+      "lineStart": 579,
+      "lineEnd": 591,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +705,8 @@
       "name": "Attack_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 33,
-      "lineEnd": 35,
+      "lineStart": 594,
+      "lineEnd": 596,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +719,8 @@
       "name": "Birds_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 37,
-      "lineEnd": 54,
+      "lineStart": 598,
+      "lineEnd": 615,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -67,8 +733,8 @@
       "name": "Campfire_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 56,
-      "lineEnd": 59,
+      "lineStart": 617,
+      "lineEnd": 620,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -81,8 +747,8 @@
       "name": "ClearScreen_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 61,
-      "lineEnd": 64,
+      "lineStart": 622,
+      "lineEnd": 625,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -95,8 +761,8 @@
       "name": "cancelaction_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 66,
-      "lineEnd": 81,
+      "lineStart": 627,
+      "lineEnd": 642,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -109,8 +775,8 @@
       "name": "CheckClick_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 83,
-      "lineEnd": 86,
+      "lineStart": 644,
+      "lineEnd": 647,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -123,8 +789,8 @@
       "name": "CheckRain_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 88,
-      "lineEnd": 112,
+      "lineStart": 649,
+      "lineEnd": 673,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -137,8 +803,8 @@
       "name": "Command1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 114,
-      "lineEnd": 116,
+      "lineStart": 675,
+      "lineEnd": 677,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -151,8 +817,8 @@
       "name": "Criminal_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 118,
-      "lineEnd": 130,
+      "lineStart": 679,
+      "lineEnd": 691,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -165,8 +831,8 @@
       "name": "DoSkill_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 132,
-      "lineEnd": 183,
+      "lineStart": 693,
+      "lineEnd": 744,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -179,8 +845,8 @@
       "name": "EatDrink_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 185,
-      "lineEnd": 196,
+      "lineStart": 746,
+      "lineEnd": 757,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -192,9 +858,9 @@
       "kind": "sub",
       "name": "Form_KeyDown",
       "visibility": "Private",
-      "params": "(KeyCode  As  Integer,  Shift  As  Integer)",
-      "lineStart": 198,
-      "lineEnd": 222,
+      "params": "(KeyCode As Integer, Shift As Integer)",
+      "lineStart": 759,
+      "lineEnd": 783,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -206,9 +872,9 @@
       "kind": "sub",
       "name": "Form_KeyPress",
       "visibility": "Private",
-      "params": "(Key As cii  As  Integer)",
-      "lineStart": 224,
-      "lineEnd": 233,
+      "params": "(KeyAscii As Integer)",
+      "lineStart": 785,
+      "lineEnd": 794,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -220,9 +886,9 @@
       "kind": "sub",
       "name": "Form_KeyUp",
       "visibility": "Private",
-      "params": "(KeyCode  As  Integer,  Shift  As  Integer)",
-      "lineStart": 235,
-      "lineEnd": 246,
+      "params": "(KeyCode As Integer, Shift As Integer)",
+      "lineStart": 796,
+      "lineEnd": 807,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -235,8 +901,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 247,
-      "lineEnd": 264,
+      "lineStart": 808,
+      "lineEnd": 825,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -248,9 +914,9 @@
       "kind": "sub",
       "name": "Form_MouseUp",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
-      "lineStart": 266,
-      "lineEnd": 433,
+      "params": "(Button As Integer, Shift As Integer, x As Single, y As Single)",
+      "lineStart": 827,
+      "lineEnd": 994,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -262,9 +928,9 @@
       "kind": "sub",
       "name": "Form_QueryUnload",
       "visibility": "Private",
-      "params": "(Cancel  As  Integer,  UnloadMode  As  Integer)",
-      "lineStart": 435,
-      "lineEnd": 444,
+      "params": "(Cancel As Integer, UnloadMode As Integer)",
+      "lineStart": 996,
+      "lineEnd": 1005,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -277,8 +943,8 @@
       "name": "FPSTimer_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 446,
-      "lineEnd": 453,
+      "lineStart": 1007,
+      "lineEnd": 1014,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -290,9 +956,9 @@
       "kind": "sub",
       "name": "MainPic_MouseUp",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
-      "lineStart": 463,
-      "lineEnd": 465,
+      "params": "(Button As Integer, Shift As Integer, x As Single, y As Single)",
+      "lineStart": 1024,
+      "lineEnd": 1026,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -305,8 +971,8 @@
       "name": "GetCmd_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 470,
-      "lineEnd": 476,
+      "lineStart": 1031,
+      "lineEnd": 1037,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -319,8 +985,8 @@
       "name": "Image7_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 478,
-      "lineEnd": 481,
+      "lineStart": 1039,
+      "lineEnd": 1042,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -333,8 +999,8 @@
       "name": "Image8_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 483,
-      "lineEnd": 485,
+      "lineStart": 1044,
+      "lineEnd": 1046,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -347,8 +1013,8 @@
       "name": "Image9_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 487,
-      "lineEnd": 489,
+      "lineStart": 1048,
+      "lineEnd": 1050,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -361,8 +1027,8 @@
       "name": "Image2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 491,
-      "lineEnd": 496,
+      "lineStart": 1052,
+      "lineEnd": 1057,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -375,8 +1041,8 @@
       "name": "Image5_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 498,
-      "lineEnd": 502,
+      "lineStart": 1059,
+      "lineEnd": 1063,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -389,8 +1055,8 @@
       "name": "Label4_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 504,
-      "lineEnd": 510,
+      "lineStart": 1065,
+      "lineEnd": 1071,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -403,8 +1069,8 @@
       "name": "Label5_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 512,
-      "lineEnd": 517,
+      "lineStart": 1073,
+      "lineEnd": 1078,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -417,8 +1083,8 @@
       "name": "Label6_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 519,
-      "lineEnd": 524,
+      "lineStart": 1080,
+      "lineEnd": 1085,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -431,8 +1097,8 @@
       "name": "Label7_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 526,
-      "lineEnd": 531,
+      "lineStart": 1087,
+      "lineEnd": 1092,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -445,8 +1111,8 @@
       "name": "Label8_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 533,
-      "lineEnd": 536,
+      "lineStart": 1094,
+      "lineEnd": 1097,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -459,8 +1125,8 @@
       "name": "Meditate_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 538,
-      "lineEnd": 543,
+      "lineStart": 1099,
+      "lineEnd": 1104,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -473,8 +1139,8 @@
       "name": "MidiPlayer_StatusUpdate",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 545,
-      "lineEnd": 558,
+      "lineStart": 1106,
+      "lineEnd": 1119,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -487,8 +1153,8 @@
       "name": "NPCattack_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 561,
-      "lineEnd": 564,
+      "lineStart": 1122,
+      "lineEnd": 1125,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -500,9 +1166,9 @@
       "kind": "sub",
       "name": "Rectxt_KeyDown",
       "visibility": "Private",
-      "params": "(KeyCode  As  Integer,  Shift  As  Integer)",
-      "lineStart": 566,
-      "lineEnd": 573,
+      "params": "(KeyCode As Integer, Shift As Integer)",
+      "lineStart": 1127,
+      "lineEnd": 1134,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -515,8 +1181,8 @@
       "name": "SendTxt_Change",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 575,
-      "lineEnd": 578,
+      "lineStart": 1136,
+      "lineEnd": 1139,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -528,9 +1194,9 @@
       "kind": "sub",
       "name": "SendTxt_KeyDown",
       "visibility": "Private",
-      "params": "(KeyCode  As  Integer,  Shift  As  Integer)",
-      "lineStart": 580,
-      "lineEnd": 586,
+      "params": "(KeyCode As Integer, Shift As Integer)",
+      "lineStart": 1141,
+      "lineEnd": 1147,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -542,9 +1208,9 @@
       "kind": "sub",
       "name": "SendTxt_KeyPress",
       "visibility": "Private",
-      "params": "(Key As cii  As  Integer)",
-      "lineStart": 588,
-      "lineEnd": 603,
+      "params": "(KeyAscii As Integer)",
+      "lineStart": 1149,
+      "lineEnd": 1164,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -556,9 +1222,9 @@
       "kind": "sub",
       "name": "SendTxt_KeyUp",
       "visibility": "Private",
-      "params": "(KeyCode  As  Integer,  Shift  As  Integer)",
-      "lineStart": 606,
-      "lineEnd": 651,
+      "params": "(KeyCode As Integer, Shift As Integer)",
+      "lineStart": 1167,
+      "lineEnd": 1212,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -571,8 +1237,8 @@
       "name": "Socket1_Connect",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 653,
-      "lineEnd": 660,
+      "lineStart": 1214,
+      "lineEnd": 1221,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -585,8 +1251,8 @@
       "name": "Socket1_Disconnect",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 663,
-      "lineEnd": 669,
+      "lineStart": 1224,
+      "lineEnd": 1230,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -598,9 +1264,9 @@
       "kind": "sub",
       "name": "Socket1_LastError",
       "visibility": "Private",
-      "params": "(ErrorCode  As  Integer,  ErrorString  As  String,  Response  As  Integer)",
-      "lineStart": 671,
-      "lineEnd": 700,
+      "params": "(ErrorCode As Integer, ErrorString As String, Response As Integer)",
+      "lineStart": 1232,
+      "lineEnd": 1261,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -612,9 +1278,9 @@
       "kind": "sub",
       "name": "Socket1_Read",
       "visibility": "Private",
-      "params": "(DataLength  As  Integer,  IsUrgent  As  Integer)",
-      "lineStart": 702,
-      "lineEnd": 752,
+      "params": "(DataLength As Integer, IsUrgent As Integer)",
+      "lineStart": 1263,
+      "lineEnd": 1313,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -627,8 +1293,8 @@
       "name": "UseCmd_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 755,
-      "lineEnd": 763,
+      "lineStart": 1316,
+      "lineEnd": 1324,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -641,8 +1307,8 @@
       "name": "Thunder_Timer",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 766,
-      "lineEnd": 774,
+      "lineStart": 1327,
+      "lineEnd": 1335,
       "annotations": {
         "notes": [],
         "status": "not-started",

@@ -1,6 +1,67 @@
 {
   "module": "spawnwhole",
   "sourcePath": "Server/spawnwhole.frm",
+  "address": "Server/spawnwhole",
+  "controls": [
+    {
+      "type": "VB.TextBox",
+      "name": "creature",
+      "properties": {
+        "Height": "285",
+        "Left": "1560",
+        "TabIndex": "4",
+        "Top": "600",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "spawnspecefic",
+      "properties": {
+        "Caption": "\u0022SPAWN NOW\u0022",
+        "Height": "375",
+        "Left": "0",
+        "TabIndex": "2",
+        "Top": "1080",
+        "Width": "4575"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "zone",
+      "properties": {
+        "Height": "285",
+        "Left": "1680",
+        "TabIndex": "1",
+        "Top": "120",
+        "Width": "2775"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label4",
+      "properties": {
+        "Caption": "\u0022Creature Number:\u0022",
+        "Height": "255",
+        "Left": "120",
+        "TabIndex": "3",
+        "Top": "600",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "Caption": "\u0022ZONE NUMBER:\u0022",
+        "Height": "255",
+        "Left": "120",
+        "TabIndex": "0",
+        "Top": "120",
+        "Width": "1455"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +72,8 @@
       "name": "spawnspecefic_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 6,
-      "lineEnd": 9,
+      "lineStart": 55,
+      "lineEnd": 58,
       "annotations": {
         "notes": [],
         "status": "not-started",

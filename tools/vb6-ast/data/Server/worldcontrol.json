@@ -1,6 +1,289 @@
 {
   "module": "worldcontrol",
   "sourcePath": "Server/worldcontrol.frm",
+  "address": "Server/worldcontrol",
+  "controls": [
+    {
+      "type": "VB.CommandButton",
+      "name": "Command12",
+      "properties": {
+        "Caption": "\u0022Update\u0022",
+        "Height": "255",
+        "Left": "120",
+        "TabIndex": "21",
+        "Top": "4440",
+        "Width": "2775"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "goldcirc",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "120",
+        "TabIndex": "20",
+        "Top": "1200",
+        "Width": "2775"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label12",
+      "properties": {
+        "Caption": "\u0022PLAYER GOLD IN CIRCULATION:\u0022",
+        "Height": "255",
+        "Left": "240",
+        "TabIndex": "19",
+        "Top": "960",
+        "Width": "2535"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label11",
+      "properties": {
+        "Caption": "\u0022PLAYERS PLAYING:\u0022",
+        "Height": "255",
+        "Left": "720",
+        "TabIndex": "18",
+        "Top": "360",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label4",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "120",
+        "TabIndex": "17",
+        "Top": "600",
+        "Width": "2775"
+      }
+    },
+    {
+      "type": "VB.Frame",
+      "name": "Frame5",
+      "properties": {
+        "Caption": "\u0022General Information\u0022",
+        "Height": "4815",
+        "Left": "0",
+        "TabIndex": "16",
+        "Top": "1440",
+        "Width": "3015"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "status",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "Height": "1215",
+        "Left": "240",
+        "TabIndex": "15",
+        "Top": "360",
+        "Width": "6855"
+      }
+    },
+    {
+      "type": "VB.Frame",
+      "name": "Frame4",
+      "properties": {
+        "Caption": "\u0022Important Information:\u0022",
+        "Height": "1695",
+        "Left": "0",
+        "TabIndex": "14",
+        "Top": "6360",
+        "Width": "7215"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command2",
+      "properties": {
+        "Caption": "\u0022Send System Message\u0022",
+        "Height": "255",
+        "Left": "120",
+        "TabIndex": "13",
+        "Top": "1920",
+        "Width": "3855"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command1",
+      "properties": {
+        "Caption": "\u0022Send Emergency Message\u0022",
+        "Height": "255",
+        "Left": "120",
+        "TabIndex": "12",
+        "Top": "960",
+        "Width": "3855"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "smsg",
+      "properties": {
+        "Height": "285",
+        "Left": "120",
+        "TabIndex": "9",
+        "Top": "1560",
+        "Width": "3855"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "emsg",
+      "properties": {
+        "Height": "285",
+        "Left": "120",
+        "TabIndex": "7",
+        "Top": "600",
+        "Width": "3855"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Send out SYSTEM message to all:\u0022",
+        "Height": "255",
+        "Left": "120",
+        "TabIndex": "8",
+        "Top": "1320",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Send out EMERGENCY message to all:\u0022",
+        "Height": "255",
+        "Left": "120",
+        "TabIndex": "6",
+        "Top": "360",
+        "Width": "3375"
+      }
+    },
+    {
+      "type": "VB.Frame",
+      "name": "Frame3",
+      "properties": {
+        "Caption": "\u0022Broadcasting\u0022",
+        "Height": "2295",
+        "Left": "3120",
+        "TabIndex": "5",
+        "Top": "3960",
+        "Width": "4095"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command16",
+      "properties": {
+        "Caption": "\u0022Restart Server\u0022",
+        "Height": "375",
+        "Left": "120",
+        "TabIndex": "4",
+        "Top": "1200",
+        "Width": "3855"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command15",
+      "properties": {
+        "Caption": "\u0022Shutdown Server\u0022",
+        "Height": "375",
+        "Left": "120",
+        "TabIndex": "3",
+        "Top": "720",
+        "Width": "3855"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command11",
+      "properties": {
+        "Caption": "\u0022Save World\u0022",
+        "Height": "375",
+        "Left": "120",
+        "TabIndex": "2",
+        "Top": "240",
+        "Width": "3855"
+      }
+    },
+    {
+      "type": "VB.Frame",
+      "name": "Frame2",
+      "properties": {
+        "Caption": "\u0022General\u0022",
+        "Height": "2415",
+        "Left": "3120",
+        "TabIndex": "1",
+        "Top": "1440",
+        "Width": "4095"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "Command10",
+      "properties": {
+        "Caption": "\u0022Leave World Control Tools\u0022",
+        "Height": "315",
+        "Left": "0",
+        "TabIndex": "0",
+        "Top": "8160",
+        "Width": "2055"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "Shape2",
+      "properties": {
+        "Height": "1095",
+        "Left": "0",
+        "Top": "120",
+        "Width": "7215"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label8",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022worldcontrol.frx\u0022:0000",
+        "ForeColor": "\u0026H000000FF\u0026",
+        "Height": "1095",
+        "Left": "960",
+        "TabIndex": "11",
+        "Top": "120",
+        "Width": "6135"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label7",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022WARNING:\u0022",
+        "ForeColor": "\u0026H00FF0000\u0026",
+        "Height": "255",
+        "Left": "120",
+        "TabIndex": "10",
+        "Top": "120",
+        "Width": "975"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +294,8 @@
       "name": "Command1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 9,
+      "lineStart": 207,
+      "lineEnd": 209,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +308,8 @@
       "name": "Command10_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 11,
-      "lineEnd": 14,
+      "lineStart": 211,
+      "lineEnd": 214,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +322,8 @@
       "name": "Command11_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 16,
-      "lineEnd": 21,
+      "lineStart": 216,
+      "lineEnd": 221,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +336,8 @@
       "name": "Command12_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 23,
-      "lineEnd": 37,
+      "lineStart": 223,
+      "lineEnd": 237,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -67,8 +350,8 @@
       "name": "Command15_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 39,
-      "lineEnd": 43,
+      "lineStart": 239,
+      "lineEnd": 243,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -81,8 +364,8 @@
       "name": "Command16_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 45,
-      "lineEnd": 49,
+      "lineStart": 245,
+      "lineEnd": 249,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -95,8 +378,8 @@
       "name": "Command2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 51,
-      "lineEnd": 53,
+      "lineStart": 251,
+      "lineEnd": 253,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -109,8 +392,8 @@
       "name": "Command3_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 55,
-      "lineEnd": 57,
+      "lineStart": 255,
+      "lineEnd": 257,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -123,8 +406,8 @@
       "name": "Command8_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 59,
-      "lineEnd": 61,
+      "lineStart": 259,
+      "lineEnd": 261,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -137,8 +420,8 @@
       "name": "Command9_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 63,
-      "lineEnd": 65,
+      "lineStart": 263,
+      "lineEnd": 265,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -151,8 +434,8 @@
       "name": "Command4_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 67,
-      "lineEnd": 69,
+      "lineStart": 267,
+      "lineEnd": 269,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -165,8 +448,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 71,
-      "lineEnd": 73,
+      "lineStart": 271,
+      "lineEnd": 273,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -178,9 +461,9 @@
       "kind": "sub",
       "name": "rpmsg_KeyDown",
       "visibility": "Private",
-      "params": "(KeyCode  As  Integer,  Shift  As  Integer)",
-      "lineStart": 75,
-      "lineEnd": 77,
+      "params": "(KeyCode As Integer, Shift As Integer)",
+      "lineStart": 275,
+      "lineEnd": 277,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -193,8 +476,8 @@
       "name": "gmmsg_Change",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 79,
-      "lineEnd": 81,
+      "lineStart": 279,
+      "lineEnd": 281,
       "annotations": {
         "notes": [],
         "status": "not-started",

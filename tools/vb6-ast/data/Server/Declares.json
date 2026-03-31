@@ -1,6 +1,8 @@
 {
   "module": "Declares",
   "sourcePath": "Server/Declares.bas",
+  "address": "Server/Declares",
+  "controls": [],
   "types": [
     {
       "name": "Position",
@@ -4131,7 +4133,7 @@
       "name": "writeprivateprofilestring",
       "lib": "Kernel32",
       "alias": "WritePrivateProfileStringA",
-      "params": "(ByVal  lpApplicationname  As  String,  ByVal  lpKeyname  As  Any,  ByVal  lpString  As  String,  ByVal  lpfilename  As  String)",
+      "params": "(ByVal lpApplicationname As String, ByVal lpKeyname As Any, ByVal lpString As String, ByVal lpfilename As String)",
       "returnType": "Long",
       "line": 672
     },
@@ -4139,7 +4141,7 @@
       "name": "getprivateprofilestring",
       "lib": "Kernel32",
       "alias": "GetPrivateProfileStringA",
-      "params": "(ByVal  lpApplicationname  As  String,  ByVal  lpKeyname  As  Any,  ByVal  lpdefault  As  String,  ByVal  lpreturnedstring  As  String,  ByVal  nsize  As  Long,  ByVal  lpfilename  As  String)",
+      "params": "(ByVal lpApplicationname As String, ByVal lpKeyname As Any, ByVal lpdefault As String, ByVal lpreturnedstring As String, ByVal nsize As Long, ByVal lpfilename As String)",
       "returnType": "Long",
       "line": 673
     }

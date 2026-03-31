@@ -1,6 +1,81 @@
 {
   "module": "HeediRaa",
   "sourcePath": "Client/HeediRaa.frm",
+  "address": "Client/HeediRaa",
+  "controls": [
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022PROCEED\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "375",
+        "Left": "10200",
+        "TabIndex": "3",
+        "Top": "8400",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "StartupTown",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Name": "\u0022Bart\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "375",
+        "Left": "9360",
+        "TabIndex": "2",
+        "Top": "480",
+        "Width": "2535"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Current Startup Location:\u0022",
+        "Name": "\u0022Bart\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "375",
+        "Left": "9360",
+        "TabIndex": "1",
+        "Top": "120",
+        "Width": "2655"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Bern",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Height": "855",
+        "Left": "840",
+        "TabIndex": "0",
+        "Top": "3960",
+        "Width": "975"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +86,8 @@
       "name": "Angelmoor_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 6,
-      "lineEnd": 9,
+      "lineStart": 83,
+      "lineEnd": 86,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +100,8 @@
       "name": "Bern_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 11,
-      "lineEnd": 14,
+      "lineStart": 88,
+      "lineEnd": 91,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +114,8 @@
       "name": "castleFall_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 16,
-      "lineEnd": 19,
+      "lineStart": 93,
+      "lineEnd": 96,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +128,8 @@
       "name": "Denc_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 21,
-      "lineEnd": 24,
+      "lineStart": 98,
+      "lineEnd": 101,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -67,8 +142,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 26,
-      "lineEnd": 30,
+      "lineStart": 103,
+      "lineEnd": 107,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -81,8 +156,8 @@
       "name": "Gorth_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 32,
-      "lineEnd": 35,
+      "lineStart": 109,
+      "lineEnd": 112,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -95,8 +170,8 @@
       "name": "Hilloc_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 37,
-      "lineEnd": 40,
+      "lineStart": 114,
+      "lineEnd": 117,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -109,8 +184,8 @@
       "name": "Jemhoo_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 42,
-      "lineEnd": 45,
+      "lineStart": 119,
+      "lineEnd": 122,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -123,8 +198,8 @@
       "name": "Label2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 47,
-      "lineEnd": 53,
+      "lineStart": 124,
+      "lineEnd": 130,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -137,8 +212,8 @@
       "name": "Watergone_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 55,
-      "lineEnd": 59,
+      "lineStart": 132,
+      "lineEnd": 136,
       "annotations": {
         "notes": [],
         "status": "not-started",

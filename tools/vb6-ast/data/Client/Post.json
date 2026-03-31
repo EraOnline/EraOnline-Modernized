@@ -1,6 +1,72 @@
 {
   "module": "Post",
   "sourcePath": "Client/Post.frm",
+  "address": "Client/Post",
+  "controls": [
+    {
+      "type": "VB.Label",
+      "name": "postedby",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Posted By \u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "15.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "495",
+        "Left": "1440",
+        "TabIndex": "2",
+        "Top": "240",
+        "Width": "5895"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "PostContent",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000007\u0026",
+        "Height": "5775",
+        "Left": "1560",
+        "TabIndex": "1",
+        "Top": "960",
+        "Width": "5535"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Close\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "20.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "495",
+        "Left": "6960",
+        "TabIndex": "0",
+        "Top": "7560",
+        "Width": "1335"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +77,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 10,
+      "lineStart": 79,
+      "lineEnd": 82,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +91,8 @@
       "name": "Label1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 12,
-      "lineEnd": 16,
+      "lineStart": 84,
+      "lineEnd": 88,
       "annotations": {
         "notes": [],
         "status": "not-started",

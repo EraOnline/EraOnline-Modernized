@@ -1,6 +1,22 @@
 {
   "module": "info",
   "sourcePath": "Client/info.frm",
+  "address": "Client/info",
+  "controls": [
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Close\u0022",
+        "Height": "255",
+        "Left": "8040",
+        "TabIndex": "0",
+        "Top": "7560",
+        "Width": "495"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +27,8 @@
       "name": "Label1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 6,
-      "lineEnd": 9,
+      "lineStart": 30,
+      "lineEnd": 33,
       "annotations": {
         "notes": [],
         "status": "not-started",

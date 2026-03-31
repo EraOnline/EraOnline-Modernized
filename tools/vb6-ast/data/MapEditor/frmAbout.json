@@ -1,13 +1,152 @@
 {
   "module": "frmAbout",
   "sourcePath": "MapEditor/frmAbout.frm",
+  "address": "MapEditor/frmAbout",
+  "controls": [
+    {
+      "type": "VB.CommandButton",
+      "name": "cmdOK",
+      "properties": {
+        "Cancel": "-1  \u0027True",
+        "Caption": "\u0022OK\u0022",
+        "Default": "-1  \u0027True",
+        "Height": "345",
+        "Left": "4245",
+        "TabIndex": "0",
+        "Top": "2625",
+        "Width": "1260"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "cmdSysInfo",
+      "properties": {
+        "Caption": "\u0022\u0026System Info...\u0022",
+        "Height": "345",
+        "Left": "4260",
+        "TabIndex": "1",
+        "Top": "3075",
+        "Width": "1245"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022frmAbout.frx\u0022:0000",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "855",
+        "Left": "240",
+        "TabIndex": "7",
+        "Top": "1200",
+        "Width": "5175"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Copyright (c) 1999 Spotlight Studios. All rights reserved.\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "240",
+        "TabIndex": "6",
+        "Top": "2160",
+        "Width": "5175"
+      }
+    },
+    {
+      "type": "VB.Line",
+      "name": "Line1",
+      "properties": {
+        "BorderColor": "\u0026H00808080\u0026",
+        "BorderStyle": "6  \u0027Inside Solid",
+        "Index": "1",
+        "X1": "84.515",
+        "X2": "5309.398",
+        "Y1": "1687.583",
+        "Y2": "1687.583"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "lblDescription",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022frmAbout.frx\u0022:00F1",
+        "ForeColor": "\u0026H00FFFFFF\u0026",
+        "Height": "810",
+        "Left": "240",
+        "TabIndex": "2",
+        "Top": "480",
+        "Width": "3885"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "lblTitle",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Era Online World Designer\u0022",
+        "ForeColor": "\u0026H00FFFFFF\u0026",
+        "Height": "480",
+        "Left": "240",
+        "TabIndex": "4",
+        "Top": "0",
+        "Width": "3885"
+      }
+    },
+    {
+      "type": "VB.Line",
+      "name": "Line1",
+      "properties": {
+        "BorderColor": "\u0026H00FFFFFF\u0026",
+        "BorderWidth": "2",
+        "Index": "0",
+        "X1": "98.6",
+        "X2": "5309.398",
+        "Y1": "1697.936",
+        "Y2": "1697.936"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "lblVersion",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Version 1.9\u0022",
+        "ForeColor": "\u0026H00FFFFFF\u0026",
+        "Height": "225",
+        "Left": "240",
+        "TabIndex": "5",
+        "Top": "240",
+        "Width": "3885"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "lblDisclaimer",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022frmAbout.frx\u0022:0183",
+        "ForeColor": "\u0026H00FFFFFF\u0026",
+        "Height": "825",
+        "Left": "255",
+        "TabIndex": "3",
+        "Top": "2625",
+        "Width": "3870"
+      }
+    }
+  ],
   "types": [],
   "constants": [
     {
       "name": "READ_CONTROL",
       "value": "\u0026H20000",
       "visibility": "Public",
-      "line": 9,
+      "line": 122,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -19,7 +158,7 @@
       "name": "KEY_QUERY_VALUE",
       "value": "\u0026H1",
       "visibility": "Public",
-      "line": 10,
+      "line": 123,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -31,7 +170,7 @@
       "name": "KEY_SET_VALUE",
       "value": "\u0026H2",
       "visibility": "Public",
-      "line": 11,
+      "line": 124,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -43,7 +182,7 @@
       "name": "KEY_CREATE_SUB_KEY",
       "value": "\u0026H4",
       "visibility": "Public",
-      "line": 12,
+      "line": 125,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -55,7 +194,7 @@
       "name": "KEY_ENUMERATE_SUB_KEYS",
       "value": "\u0026H8",
       "visibility": "Public",
-      "line": 13,
+      "line": 126,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -67,7 +206,7 @@
       "name": "KEY_NOTIFY",
       "value": "\u0026H10",
       "visibility": "Public",
-      "line": 14,
+      "line": 127,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -79,7 +218,7 @@
       "name": "KEY_CREATE_LINK",
       "value": "\u0026H20",
       "visibility": "Public",
-      "line": 15,
+      "line": 128,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -91,7 +230,7 @@
       "name": "KEY_ALL_ACCESS",
       "value": "KEY_QUERY_VALUE \u002B KEY_SET_VALUE \u002B                       KEY_CREATE_SUB_KEY \u002B KEY_ENUMERATE_SUB_KEYS \u002B                       KEY_NOTIFY \u002B KEY_CREATE_LINK \u002B READ_CONTROL",
       "visibility": "Public",
-      "line": 16,
+      "line": 129,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -103,7 +242,7 @@
       "name": "HKEY_LOCAL_MACHINE",
       "value": "\u0026H80000002",
       "visibility": "Public",
-      "line": 21,
+      "line": 134,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -115,7 +254,7 @@
       "name": "ERROR_SUCCESS",
       "value": "0",
       "visibility": "Public",
-      "line": 22,
+      "line": 135,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -127,7 +266,7 @@
       "name": "REG_SZ",
       "value": "1",
       "visibility": "Public",
-      "line": 23,
+      "line": 136,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -139,7 +278,7 @@
       "name": "REG_DWORD",
       "value": "4",
       "visibility": "Public",
-      "line": 24,
+      "line": 137,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -151,7 +290,7 @@
       "name": "gREGKEYSYSINFOLOC",
       "value": "\u0022SOFTWARE\\Microsoft\\Shared Tools Location\u0022",
       "visibility": "Public",
-      "line": 26,
+      "line": 139,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -163,7 +302,7 @@
       "name": "gREGVALSYSINFOLOC",
       "value": "\u0022MSINFO\u0022",
       "visibility": "Public",
-      "line": 27,
+      "line": 140,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -175,7 +314,7 @@
       "name": "gREGKEYSYSINFO",
       "value": "\u0022SOFTWARE\\Microsoft\\Shared Tools\\MSINFO\u0022",
       "visibility": "Public",
-      "line": 28,
+      "line": 141,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -187,7 +326,7 @@
       "name": "gREGVALSYSINFO",
       "value": "\u0022PATH\u0022",
       "visibility": "Public",
-      "line": 29,
+      "line": 142,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -202,24 +341,24 @@
       "name": "RegOpenKeyEx",
       "lib": "advapi32",
       "alias": "RegOpenKeyExA",
-      "params": "(ByVal  hKey  As  Long,  ByVal  lpSubKey  As  String,  ByVal  ulOptions  As  Long,  ByVal  samDesired  As  Long,  ByRef  phkResult  As  Long)",
+      "params": "(ByVal hKey As Long, ByVal lpSubKey As String, ByVal ulOptions As Long, ByVal samDesired As Long, ByRef phkResult As Long)",
       "returnType": "Long",
-      "line": 31
+      "line": 144
     },
     {
       "name": "RegQueryValueEx",
       "lib": "advapi32",
       "alias": "RegQueryValueExA",
-      "params": "(ByVal  hKey  As  Long,  ByVal  lpValueName  As  String,  ByVal  lpReserved  As  Long,  ByRef  lpType  As  Long,  ByVal  lpData  As  String,  ByRef  lpcbData  As  Long)",
+      "params": "(ByVal hKey As Long, ByVal lpValueName As String, ByVal lpReserved As Long, ByRef lpType As Long, ByVal lpData As String, ByRef lpcbData As Long)",
       "returnType": "Long",
-      "line": 32
+      "line": 145
     },
     {
       "name": "RegCloseKey",
       "lib": "advapi32",
-      "params": "(ByVal  hKey  As  Long)",
+      "params": "(ByVal hKey As Long)",
       "returnType": "Long",
-      "line": 33
+      "line": 146
     }
   ],
   "members": [
@@ -228,8 +367,8 @@
       "name": "cmdSysInfo_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 36,
-      "lineEnd": 38,
+      "lineStart": 149,
+      "lineEnd": 151,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -242,8 +381,8 @@
       "name": "cmdOK_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 40,
-      "lineEnd": 42,
+      "lineStart": 153,
+      "lineEnd": 155,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -256,8 +395,8 @@
       "name": "StartSysInfo",
       "visibility": "Public",
       "params": "()",
-      "lineStart": 44,
-      "lineEnd": 72,
+      "lineStart": 157,
+      "lineEnd": 185,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -269,10 +408,10 @@
       "kind": "function",
       "name": "GetKeyValue",
       "visibility": "Public",
-      "params": "(KeyRoot  As  Long,  KeyName  As  String,  SubKeyRef  As  String,  ByRef  KeyVal  As  String)",
+      "params": "(KeyRoot As Long, KeyName As String, SubKeyRef As String, ByRef KeyVal As String)",
       "returnType": "Boolean",
-      "lineStart": 74,
-      "lineEnd": 126,
+      "lineStart": 187,
+      "lineEnd": 239,
       "annotations": {
         "notes": [],
         "status": "not-started",

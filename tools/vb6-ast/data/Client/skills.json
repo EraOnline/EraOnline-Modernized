@@ -1,6 +1,884 @@
 {
   "module": "skills",
   "sourcePath": "Client/skills.frm",
+  "address": "Client/skills",
+  "controls": [
+    {
+      "type": "VB.Image",
+      "name": "Image3",
+      "properties": {
+        "Height": "240",
+        "Left": "840",
+        "Picture": "\u0022skills.frx\u0022:0000",
+        "Tag": "\u00220\u0022",
+        "Top": "3000",
+        "Width": "180"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image2",
+      "properties": {
+        "Height": "240",
+        "Left": "840",
+        "Picture": "\u0022skills.frx\u0022:0282",
+        "Tag": "\u00220\u0022",
+        "Top": "4080",
+        "Width": "180"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "240",
+        "Left": "840",
+        "Picture": "\u0022skills.frx\u0022:0504",
+        "Tag": "\u00220\u0022",
+        "Top": "5160",
+        "Width": "180"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label6",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Archery:\u0022",
+        "Height": "255",
+        "Left": "3000",
+        "TabIndex": "58",
+        "Top": "4680",
+        "Width": "975"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label5",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Meditating:\u0022",
+        "Height": "255",
+        "Left": "3000",
+        "TabIndex": "57",
+        "Top": "4320",
+        "Width": "975"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label4",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Streetwise:\u0022",
+        "Height": "255",
+        "Left": "3000",
+        "TabIndex": "56",
+        "Top": "3960",
+        "Width": "855"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Cooking:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "25",
+        "Left": "1080",
+        "TabIndex": "55",
+        "Top": "720",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Disguise:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "1",
+        "Left": "1080",
+        "TabIndex": "54",
+        "Top": "3000",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Surviving:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "2",
+        "Left": "3000",
+        "TabIndex": "53",
+        "Top": "3240",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Mining:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "3",
+        "Left": "3000",
+        "TabIndex": "52",
+        "Top": "2160",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Musicanship:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "4",
+        "Left": "1080",
+        "TabIndex": "51",
+        "Top": "1080",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Mechant:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "5",
+        "Left": "1080",
+        "TabIndex": "50",
+        "Top": "3360",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Animal Taming:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "6",
+        "Left": "3000",
+        "TabIndex": "49",
+        "Top": "1080",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Fishing:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "7",
+        "Left": "3000",
+        "TabIndex": "48",
+        "Top": "1800",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Tailoring:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "8",
+        "Left": "1080",
+        "TabIndex": "47",
+        "Top": "1560",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022BlackSmithing:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "9",
+        "Left": "1080",
+        "TabIndex": "46",
+        "Top": "3720",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Poisoning:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "10",
+        "Left": "1080",
+        "TabIndex": "45",
+        "Top": "5880",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Lumberjacking:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "11",
+        "Left": "1080",
+        "TabIndex": "44",
+        "Top": "2280",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Carpetning:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "12",
+        "Left": "1080",
+        "TabIndex": "43",
+        "Top": "1920",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Hiding:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "13",
+        "Left": "1080",
+        "TabIndex": "42",
+        "Top": "4080",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Stealth:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "14",
+        "Left": "1080",
+        "TabIndex": "41",
+        "Top": "5520",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Swordmanship:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "15",
+        "Left": "1080",
+        "TabIndex": "40",
+        "Top": "6240",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Tactics:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "16",
+        "Left": "1080",
+        "TabIndex": "39",
+        "Top": "2640",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Parrying:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "17",
+        "Left": "3000",
+        "TabIndex": "38",
+        "Top": "720",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Healing:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "18",
+        "Left": "3000",
+        "TabIndex": "37",
+        "Top": "2880",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Magery:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "19",
+        "Left": "1080",
+        "TabIndex": "36",
+        "Top": "4440",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Religion Lore:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "20",
+        "Left": "3000",
+        "TabIndex": "35",
+        "Top": "1440",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Etiquette:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "21",
+        "Left": "3000",
+        "TabIndex": "34",
+        "Top": "3600",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Backstabbing:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "22",
+        "Left": "3000",
+        "TabIndex": "33",
+        "Top": "2520",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Lockpicking:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "23",
+        "Left": "1080",
+        "TabIndex": "32",
+        "Top": "4800",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Pickpocket:\u0022",
+        "ForeColor": "\u0026H80000006\u0026",
+        "Height": "255",
+        "Index": "24",
+        "Left": "1080",
+        "TabIndex": "31",
+        "Top": "5160",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "archery",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "4080",
+        "TabIndex": "30",
+        "Top": "4680",
+        "Width": "855"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "meditating",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "4080",
+        "TabIndex": "29",
+        "Top": "4320",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "streetwise",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "4080",
+        "TabIndex": "28",
+        "Top": "3960",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "etiquette",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "4080",
+        "TabIndex": "27",
+        "Top": "3600",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "surviving",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "4080",
+        "TabIndex": "26",
+        "Top": "3240",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "healing",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "4080",
+        "TabIndex": "25",
+        "Top": "2880",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "backstabbing",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "4080",
+        "TabIndex": "24",
+        "Top": "2520",
+        "Width": "615"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "mining",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "4080",
+        "TabIndex": "23",
+        "Top": "2160",
+        "Width": "615"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "fishing",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "4080",
+        "TabIndex": "22",
+        "Top": "1800",
+        "Width": "615"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "religionlore",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "4080",
+        "TabIndex": "21",
+        "Top": "1440",
+        "Width": "615"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "AnimalTaming",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "4080",
+        "TabIndex": "20",
+        "Top": "1080",
+        "Width": "495"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "parrying",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "4080",
+        "TabIndex": "19",
+        "Top": "720",
+        "Width": "855"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "swordmanship",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "18",
+        "Top": "6240",
+        "Width": "1095"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "poisoning",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "17",
+        "Top": "5880",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "stealth",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "16",
+        "Top": "5520",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "pickpocket",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "15",
+        "Top": "5160",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "lockpicking",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "14",
+        "Top": "4800",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "magery",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "13",
+        "Top": "4440",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "hiding",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "12",
+        "Top": "4080",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "blacksmithing",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "11",
+        "Top": "3720",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "merchant",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "10",
+        "Top": "3360",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "disguise",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "9",
+        "Top": "3000",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "tactics",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "ForeColor": "\u0026H00000000\u0026",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "8",
+        "Top": "2640",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "lumberjacking",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "7",
+        "Top": "2280",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "carpenting",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "6",
+        "Top": "1920",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "tailoring",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "5",
+        "Top": "1560",
+        "Width": "615"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "musicanship",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "4",
+        "Top": "1080",
+        "Width": "615"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "cooking",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u00220\u0022",
+        "Height": "255",
+        "Left": "2160",
+        "TabIndex": "3",
+        "Top": "720",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label3",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Close\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "9.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "255",
+        "Left": "8040",
+        "TabIndex": "2",
+        "Top": "6600",
+        "Width": "735"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "skillname",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Skills\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "15.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "735",
+        "Left": "5400",
+        "TabIndex": "1",
+        "Top": "720",
+        "Width": "3375"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "skilldesc",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "$\u0022skills.frx\u0022:0786",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "11.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "4455",
+        "Left": "5280",
+        "TabIndex": "0",
+        "Top": "1680",
+        "Width": "3375"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +889,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 127,
+      "lineStart": 657,
+      "lineEnd": 777,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +903,8 @@
       "name": "Image1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 129,
-      "lineEnd": 146,
+      "lineStart": 779,
+      "lineEnd": 796,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +917,8 @@
       "name": "Image2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 148,
-      "lineEnd": 165,
+      "lineStart": 798,
+      "lineEnd": 815,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +931,8 @@
       "name": "Image3_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 167,
-      "lineEnd": 184,
+      "lineStart": 817,
+      "lineEnd": 834,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -67,8 +945,8 @@
       "name": "Label3_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 186,
-      "lineEnd": 190,
+      "lineStart": 836,
+      "lineEnd": 840,
       "annotations": {
         "notes": [],
         "status": "not-started",

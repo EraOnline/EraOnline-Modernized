@@ -1,6 +1,8 @@
 {
   "module": "TCP",
   "sourcePath": "Client/TCP.bas",
+  "address": "Client/TCP",
+  "controls": [],
   "types": [],
   "constants": [],
   "globals": [],
@@ -10,7 +12,7 @@
       "kind": "sub",
       "name": "HandleData",
       "visibility": "Public",
-      "params": "(rData  As  String)",
+      "params": "(rData As String)",
       "lineStart": 5,
       "lineEnd": 861,
       "annotations": {
@@ -39,7 +41,7 @@
       "kind": "sub",
       "name": "SendData",
       "visibility": "Public",
-      "params": "(sdData  As  String)",
+      "params": "(sdData As String)",
       "lineStart": 863,
       "lineEnd": 879,
       "annotations": {

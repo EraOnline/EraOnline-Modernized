@@ -1,6 +1,195 @@
 {
   "module": "erasecharacter",
   "sourcePath": "Client/erasechar.frm",
+  "address": "Client/erasechar",
+  "controls": [
+    {
+      "type": "VB.TextBox",
+      "name": "NameTxt",
+      "properties": {
+        "Appearance": "0  \u0027Flat",
+        "BackColor": "\u0026H00004080\u0026",
+        "BorderStyle": "0  \u0027None",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H00FFFFFF\u0026",
+        "Height": "345",
+        "Left": "1500",
+        "TabIndex": "1",
+        "Top": "2040",
+        "Width": "2475"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "PasswordTxt",
+      "properties": {
+        "Appearance": "0  \u0027Flat",
+        "BackColor": "\u0026H00004080\u0026",
+        "BorderStyle": "0  \u0027None",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H00FFFFFF\u0026",
+        "Height": "345",
+        "IMEMode": "3  \u0027DISABLE",
+        "Left": "1500",
+        "PasswordChar": "\u0022*\u0022",
+        "TabIndex": "0",
+        "Top": "2520",
+        "Width": "2475"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label3",
+      "properties": {
+        "AutoSize": "-1  \u0027True",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022By erasing a character, the character is removed from the game server and you can never use that character ever again.\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H00FFFFFF\u0026",
+        "Height": "855",
+        "Left": "240",
+        "TabIndex": "6",
+        "Top": "840",
+        "Width": "3735",
+        "WordWrap": "-1  \u0027True"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image2",
+      "properties": {
+        "Height": "615",
+        "Left": "2400",
+        "Picture": "\u0022erasechar.frx\u0022:0000",
+        "Stretch": "-1  \u0027True",
+        "Top": "3240",
+        "Width": "1650"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "AutoSize": "-1  \u0027True",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Name\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H00FFFFFF\u0026",
+        "Height": "300",
+        "Left": "240",
+        "TabIndex": "5",
+        "Top": "2040",
+        "Width": "600"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "AutoSize": "-1  \u0027True",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Password\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "12",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H00FFFFFF\u0026",
+        "Height": "300",
+        "Left": "240",
+        "TabIndex": "4",
+        "Top": "2520",
+        "Width": "945"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label6",
+      "properties": {
+        "AutoSize": "-1  \u0027True",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Erase A Character\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "15.75",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H00FFFFFF\u0026",
+        "Height": "360",
+        "Left": "960",
+        "TabIndex": "3",
+        "Top": "360",
+        "Width": "2505"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label7",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Fantasia Studios\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Index": "0",
+        "Left": "120",
+        "TabIndex": "2",
+        "Top": "120",
+        "Width": "3975"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "615",
+        "Left": "240",
+        "Picture": "\u0022erasechar.frx\u0022:23A9",
+        "Stretch": "-1  \u0027True",
+        "Top": "3240",
+        "Width": "1650"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image6",
+      "properties": {
+        "Height": "4215",
+        "Left": "0",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "4455"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +200,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 6,
-      "lineEnd": 9,
+      "lineStart": 179,
+      "lineEnd": 182,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +214,8 @@
       "name": "Image1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 11,
-      "lineEnd": 14,
+      "lineStart": 184,
+      "lineEnd": 187,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +228,8 @@
       "name": "Image2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 16,
-      "lineEnd": 48,
+      "lineStart": 189,
+      "lineEnd": 221,
       "annotations": {
         "notes": [],
         "status": "not-started",

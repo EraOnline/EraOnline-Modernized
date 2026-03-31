@@ -1,6 +1,8 @@
 {
   "module": "Info",
   "sourcePath": "Client/Info.bas",
+  "address": "Client/Info",
+  "controls": [],
   "types": [],
   "constants": [],
   "globals": [],
@@ -10,7 +12,7 @@
       "kind": "function",
       "name": "FileExist",
       "visibility": "Public",
-      "params": "(File  As  String,  FileType  As  VbFileAttribute)",
+      "params": "(File As String, FileType As VbFileAttribute)",
       "returnType": "Boolean",
       "lineStart": 3,
       "lineEnd": 16,

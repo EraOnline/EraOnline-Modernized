@@ -1,6 +1,91 @@
 {
   "module": "msgboard",
   "sourcePath": "Client/msgboard.frm",
+  "address": "Client/msgboard",
+  "controls": [
+    {
+      "type": "VB.ListBox",
+      "name": "Posts",
+      "properties": {
+        "BackColor": "\u0026H00000000\u0026",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "11.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H80000009\u0026",
+        "Height": "6435",
+        "Left": "1320",
+        "TabIndex": "2",
+        "Top": "600",
+        "Width": "6315"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Post A Message\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "20.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "495",
+        "Left": "1440",
+        "TabIndex": "3",
+        "Top": "7560",
+        "Width": "2775"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Close\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "20.25",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "495",
+        "Left": "6840",
+        "TabIndex": "1",
+        "Top": "7560",
+        "Width": "1575"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "message",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "15.75",
+        "Charset": "0",
+        "Weight": "400",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "Height": "5715",
+        "Left": "1680",
+        "TabIndex": "0",
+        "Top": "960",
+        "Width": "5610",
+        "WordWrap": "-1  \u0027True"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +96,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 10,
+      "lineStart": 97,
+      "lineEnd": 100,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +110,8 @@
       "name": "Label1_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 12,
-      "lineEnd": 16,
+      "lineStart": 102,
+      "lineEnd": 106,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +124,8 @@
       "name": "Label2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 18,
-      "lineEnd": 23,
+      "lineStart": 108,
+      "lineEnd": 113,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +138,8 @@
       "name": "Posts_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 25,
-      "lineEnd": 38,
+      "lineStart": 115,
+      "lineEnd": 128,
       "annotations": {
         "notes": [],
         "status": "not-started",

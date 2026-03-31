@@ -10,6 +10,15 @@ public class Vb6Module
     [JsonPropertyName("sourcePath")]
     public string SourcePath { get; set; } = "";
 
+    /// <summary>
+    /// Qualified address: e.g. "Server/GameLogic" - used as the unique identifier for this module.
+    /// </summary>
+    [JsonPropertyName("address")]
+    public string Address { get; set; } = "";
+
+    [JsonPropertyName("controls")]
+    public List<Vb6Control> Controls { get; set; } = [];
+
     [JsonPropertyName("types")]
     public List<Vb6TypeDef> Types { get; set; } = [];
 
@@ -24,6 +33,21 @@ public class Vb6Module
 
     [JsonPropertyName("members")]
     public List<Vb6Member> Members { get; set; } = [];
+}
+
+/// <summary>
+/// A VB6 form control (Timer, Socket, CommandButton, etc.) parsed from the form designer section.
+/// </summary>
+public class Vb6Control
+{
+    [JsonPropertyName("type")]
+    public string ControlType { get; set; } = ""; // e.g. "VB.Timer", "SocketWrenchCtrl.Socket"
+
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = "";
+
+    [JsonPropertyName("properties")]
+    public Dictionary<string, string> Properties { get; set; } = [];
 }
 
 public class Vb6TypeDef

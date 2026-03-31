@@ -13,12 +13,14 @@ public class Vb6FileParser
     public Vb6Module Parse(string filePath, string relativePath)
     {
         var content = File.ReadAllText(filePath);
+        var controls = new List<Vb6Control>();
+        int lineOffset = 0;
 
-        // For .frm files, strip the form definition header (everything before the first
-        // Attribute or Option statement in the code section)
+        // For .frm files, parse form controls from header, then extract code section
         if (filePath.EndsWith(".frm", StringComparison.OrdinalIgnoreCase))
         {
-            content = ExtractFrmCodeSection(content);
+            controls = ParseFormControls(content);
+            (content, lineOffset) = ExtractFrmCodeSection(content);
         }
 
         var stream = new AntlrInputStream(content);
@@ -26,31 +28,121 @@ public class Vb6FileParser
         var tokens = new CommonTokenStream(lexer);
         var parser = new VisualBasic6Parser(tokens);
 
-        // Suppress error output - VB6 files may have constructs the grammar doesn't handle perfectly
+        // Suppress error output
         parser.RemoveErrorListeners();
         lexer.RemoveErrorListeners();
 
         var tree = parser.startRule();
 
-        var visitor = new DeclarationVisitor();
-        visitor.Module.SourcePath = relativePath;
-        visitor.Visit(tree);
+        // Pass 1: Extract declarations
+        var declVisitor = new DeclarationVisitor(lineOffset);
+        declVisitor.Module.SourcePath = relativePath;
+        declVisitor.Module.Address = Path.ChangeExtension(relativePath, null);
+        declVisitor.Module.Controls = controls;
+        declVisitor.Visit(tree);
 
-        // If no module name was found from Attribute VB_Name, derive from filename
-        if (string.IsNullOrEmpty(visitor.Module.Name))
+        // Pass 2: Extract SendData calls and function calls
+        var callVisitor = new CallGraphVisitor(lineOffset);
+        callVisitor.Visit(tree);
+
+        // Merge auto-detected calls/sends into members (without overwriting manual annotations)
+        foreach (var (memberName, sends) in callVisitor.MemberSends)
         {
-            visitor.Module.Name = Path.GetFileNameWithoutExtension(filePath);
+            var member = declVisitor.Module.Members.FirstOrDefault(m => m.Name == memberName);
+            if (member != null && member.Annotations.Sends.Count == 0)
+            {
+                member.Annotations.Sends = sends.Distinct().ToList();
+            }
+        }
+        foreach (var (memberName, calls) in callVisitor.MemberCalls)
+        {
+            var member = declVisitor.Module.Members.FirstOrDefault(m => m.Name == memberName);
+            if (member != null && member.Annotations.Calls.Count == 0)
+            {
+                member.Annotations.Calls = calls.Distinct().ToList();
+            }
         }
 
-        return visitor.Module;
+        // If no module name found from Attribute VB_Name, derive from filename
+        if (string.IsNullOrEmpty(declVisitor.Module.Name))
+        {
+            declVisitor.Module.Name = Path.GetFileNameWithoutExtension(filePath);
+        }
+
+        return declVisitor.Module;
+    }
+
+    /// <summary>
+    /// Parse form controls from the .frm designer section (before the code).
+    /// Extracts Begin VB.Timer, Begin VB.CommandButton, etc. with their properties.
+    /// </summary>
+    private static List<Vb6Control> ParseFormControls(string content)
+    {
+        var controls = new List<Vb6Control>();
+        var lines = content.Split('\n');
+        var controlStack = new Stack<Vb6Control>();
+
+        for (int i = 0; i < lines.Length; i++)
+        {
+            var trimmed = lines[i].Trim();
+
+            // Stop when we hit the code section
+            if (trimmed.StartsWith("Attribute ", StringComparison.OrdinalIgnoreCase))
+                break;
+
+            // Begin ControlType.Name ControlName
+            if (trimmed.StartsWith("Begin ", StringComparison.OrdinalIgnoreCase))
+            {
+                var parts = trimmed["Begin ".Length..].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length >= 2)
+                {
+                    var control = new Vb6Control
+                    {
+                        ControlType = parts[0],
+                        Name = parts[1],
+                    };
+                    controlStack.Push(control);
+                }
+                else if (parts.Length == 1 && parts[0] == "BeginProperty")
+                {
+                    // Skip BeginProperty blocks
+                }
+            }
+            else if (trimmed == "End" && controlStack.Count > 0)
+            {
+                var control = controlStack.Pop();
+                // Only capture interesting controls (timers, sockets, etc.), skip the form itself
+                if (control.ControlType != "VB.Form")
+                {
+                    controls.Add(control);
+                }
+            }
+            else if (controlStack.Count > 0 && trimmed.Contains('='))
+            {
+                // Property = Value
+                var eqIdx = trimmed.IndexOf('=');
+                if (eqIdx > 0)
+                {
+                    var key = trimmed[..eqIdx].Trim();
+                    var value = trimmed[(eqIdx + 1)..].Trim();
+                    // Skip internal properties starting with _
+                    if (!key.StartsWith('_') && !key.StartsWith("Begin"))
+                    {
+                        var control = controlStack.Peek();
+                        control.Properties.TryAdd(key, value);
+                    }
+                }
+            }
+        }
+
+        return controls;
     }
 
     /// <summary>
     /// Extract just the code section from a .frm file.
-    /// VB6 .frm files start with form metadata (VERSION, BEGIN, object definitions)
-    /// followed by the actual VB code starting with Attribute statements.
+    /// Returns the code content and the line offset (number of lines removed from the top).
     /// </summary>
-    private static string ExtractFrmCodeSection(string content)
+    private static (string Content, int LineOffset) ExtractFrmCodeSection(string content)
     {
         var lines = content.Split('\n');
         var codeStart = -1;
@@ -58,8 +150,6 @@ public class Vb6FileParser
         for (int i = 0; i < lines.Length; i++)
         {
             var trimmed = lines[i].TrimStart();
-            // The code section starts with Attribute VB_Name or VERSION
-            // but we need to skip the form designer section (BEGIN...END)
             if (trimmed.StartsWith("Attribute ", StringComparison.OrdinalIgnoreCase))
             {
                 codeStart = i;
@@ -69,7 +159,7 @@ public class Vb6FileParser
 
         if (codeStart < 0)
         {
-            // No Attribute found, try to find Option Explicit or first Sub/Function
+            // No Attribute found, try Option Explicit or first Sub/Function
             for (int i = 0; i < lines.Length; i++)
             {
                 var trimmed = lines[i].TrimStart();
@@ -86,8 +176,8 @@ public class Vb6FileParser
         }
 
         if (codeStart < 0)
-            return content; // Give up, try to parse everything
+            return (content, 0);
 
-        return string.Join('\n', lines[codeStart..]);
+        return (string.Join('\n', lines[codeStart..]), codeStart);
     }
 }

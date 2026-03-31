@@ -1,6 +1,113 @@
 {
   "module": "spawnspes",
   "sourcePath": "Server/spawnspes.frm",
+  "address": "Server/spawnspes",
+  "controls": [
+    {
+      "type": "VB.TextBox",
+      "name": "creature",
+      "properties": {
+        "Height": "285",
+        "Left": "1680",
+        "TabIndex": "8",
+        "Top": "1080",
+        "Width": "2895"
+      }
+    },
+    {
+      "type": "VB.CommandButton",
+      "name": "spawnspecefic",
+      "properties": {
+        "Caption": "\u0022SPAWN NOW\u0022",
+        "Height": "375",
+        "Left": "120",
+        "TabIndex": "6",
+        "Top": "1560",
+        "Width": "4575"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "ypos",
+      "properties": {
+        "Height": "285",
+        "Left": "3240",
+        "TabIndex": "5",
+        "Top": "600",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "xpos",
+      "properties": {
+        "Height": "285",
+        "Left": "1680",
+        "TabIndex": "4",
+        "Top": "600",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.TextBox",
+      "name": "zone",
+      "properties": {
+        "Height": "285",
+        "Left": "240",
+        "TabIndex": "1",
+        "Top": "600",
+        "Width": "1215"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label4",
+      "properties": {
+        "Caption": "\u0022Creature Number:\u0022",
+        "Height": "255",
+        "Left": "240",
+        "TabIndex": "7",
+        "Top": "1080",
+        "Width": "1335"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label3",
+      "properties": {
+        "Caption": "\u0022Y POS\u0022",
+        "Height": "255",
+        "Left": "3600",
+        "TabIndex": "3",
+        "Top": "240",
+        "Width": "1095"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "Caption": "\u0022X POS\u0022",
+        "Height": "375",
+        "Left": "2040",
+        "TabIndex": "2",
+        "Top": "240",
+        "Width": "1215"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "Caption": "\u0022ZONE NUMBER:\u0022",
+        "Height": "255",
+        "Left": "240",
+        "TabIndex": "0",
+        "Top": "240",
+        "Width": "1455"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +118,8 @@
       "name": "spawnspecefic_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 6,
-      "lineEnd": 14,
+      "lineStart": 85,
+      "lineEnd": 93,
       "annotations": {
         "notes": [],
         "status": "not-started",

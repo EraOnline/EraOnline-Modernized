@@ -1,6 +1,8 @@
 {
   "module": "Checks",
   "sourcePath": "Server/Checks.bas",
+  "address": "Server/Checks",
+  "controls": [],
   "types": [],
   "constants": [],
   "globals": [],
@@ -10,7 +12,7 @@
       "kind": "function",
       "name": "CheckID",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  theid  As  Long)",
+      "params": "(userindex As Integer, theid As Long)",
       "lineStart": 3,
       "lineEnd": 32,
       "annotations": {
@@ -31,7 +33,7 @@
       "kind": "function",
       "name": "CheckIfAttack",
       "visibility": "Public",
-      "params": "(Npcindex  As  Integer,  userindex  As  Integer)",
+      "params": "(Npcindex As Integer, userindex As Integer)",
       "lineStart": 34,
       "lineEnd": 49,
       "annotations": {
@@ -48,7 +50,7 @@
       "kind": "function",
       "name": "CheckForSameIP",
       "visibility": "Public",
-      "params": "(userindex  As  Integer,  UserIP  As  String)",
+      "params": "(userindex As Integer, UserIP As String)",
       "returnType": "Boolean",
       "lineStart": 52,
       "lineEnd": 72,
@@ -66,7 +68,7 @@
       "kind": "function",
       "name": "CheckForSameName",
       "visibility": "Public",
-      "params": "(ByVal  userindex  As  Integer,  ByVal  Name  As  String)",
+      "params": "(ByVal userindex As Integer, ByVal Name As String)",
       "returnType": "Boolean",
       "lineStart": 73,
       "lineEnd": 93,
@@ -84,7 +86,7 @@
       "kind": "sub",
       "name": "CheckRep",
       "visibility": "Public",
-      "params": "(userindex  As  Integer)",
+      "params": "(userindex As Integer)",
       "lineStart": 95,
       "lineEnd": 155,
       "annotations": {
@@ -101,7 +103,7 @@
       "kind": "sub",
       "name": "CheckTitle",
       "visibility": "Public",
-      "params": "(userindex  As  Integer)",
+      "params": "(userindex As Integer)",
       "lineStart": 157,
       "lineEnd": 307,
       "annotations": {
@@ -115,7 +117,7 @@
       "kind": "sub",
       "name": "CheckUserLevel",
       "visibility": "Public",
-      "params": "(userindex  As  Integer)",
+      "params": "(userindex As Integer)",
       "lineStart": 309,
       "lineEnd": 355,
       "annotations": {

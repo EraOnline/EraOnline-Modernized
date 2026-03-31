@@ -1,6 +1,42 @@
 {
   "module": "frmSelect",
   "sourcePath": "Client/select.frm",
+  "address": "Client/select",
+  "controls": [
+    {
+      "type": "VB.Image",
+      "name": "Image3",
+      "properties": {
+        "Height": "930",
+        "Left": "0",
+        "Picture": "\u0022select.frx\u0022:0000",
+        "Top": "1860",
+        "Width": "3015"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image2",
+      "properties": {
+        "Height": "930",
+        "Left": "0",
+        "Picture": "\u0022select.frx\u0022:0DAA",
+        "Top": "930",
+        "Width": "3015"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image1",
+      "properties": {
+        "Height": "930",
+        "Left": "0",
+        "Picture": "\u0022select.frx\u0022:1B6F",
+        "Top": "0",
+        "Width": "3015"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -10,9 +46,9 @@
       "kind": "sub",
       "name": "Image1_MouseMove",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
-      "lineStart": 6,
-      "lineEnd": 10,
+      "params": "(Button As Integer, Shift As Integer, x As Single, y As Single)",
+      "lineStart": 42,
+      "lineEnd": 46,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +61,8 @@
       "name": "Image2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 12,
-      "lineEnd": 17,
+      "lineStart": 48,
+      "lineEnd": 53,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -38,9 +74,9 @@
       "kind": "sub",
       "name": "Image2_MouseMove",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
-      "lineStart": 19,
-      "lineEnd": 23,
+      "params": "(Button As Integer, Shift As Integer, x As Single, y As Single)",
+      "lineStart": 55,
+      "lineEnd": 59,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +89,8 @@
       "name": "Image3_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 25,
-      "lineEnd": 30,
+      "lineStart": 61,
+      "lineEnd": 66,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -66,9 +102,9 @@
       "kind": "sub",
       "name": "Image3_MouseMove",
       "visibility": "Private",
-      "params": "(Button  As  Integer,  Shift  As  Integer,  x  As  Single,  y  As  Single)",
-      "lineStart": 32,
-      "lineEnd": 36,
+      "params": "(Button As Integer, Shift As Integer, x As Single, y As Single)",
+      "lineStart": 68,
+      "lineEnd": 72,
       "annotations": {
         "notes": [],
         "status": "not-started",

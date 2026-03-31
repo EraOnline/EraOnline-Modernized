@@ -1,6 +1,38 @@
 {
   "module": "loading",
   "sourcePath": "Server/loading.frm",
+  "address": "Server/loading",
+  "controls": [
+    {
+      "type": "VB.Label",
+      "name": "percent",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "0",
+        "TabIndex": "1",
+        "Top": "720",
+        "Width": "5895"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "Alignment": "2  \u0027Center",
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022Loading up Era Online Server Program. Please wait this may take a while...\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "0",
+        "TabIndex": "0",
+        "Top": "360",
+        "Width": "5895"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],

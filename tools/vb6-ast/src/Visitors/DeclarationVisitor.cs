@@ -10,9 +10,17 @@ namespace Vb6Ast.Visitors;
 /// </summary>
 public class DeclarationVisitor : VisualBasic6BaseVisitor<int>
 {
+    private readonly int _lineOffset;
+
     public Vb6Module Module { get; } = new();
 
-    // Track the module name from Attribute VB_Name
+    public DeclarationVisitor(int lineOffset = 0)
+    {
+        _lineOffset = lineOffset;
+    }
+
+    private int AdjustLine(int parsedLine) => parsedLine + _lineOffset;
+
     public override int VisitAttributeStmt(VisualBasic6Parser.AttributeStmtContext context)
     {
         var text = context.GetText();
@@ -27,14 +35,13 @@ public class DeclarationVisitor : VisualBasic6BaseVisitor<int>
         return base.VisitAttributeStmt(context);
     }
 
-    // Type definitions
     public override int VisitTypeStmt(VisualBasic6Parser.TypeStmtContext context)
     {
         var typeDef = new Vb6TypeDef
         {
             Name = context.ambiguousIdentifier()?.GetText() ?? "Unknown",
-            LineStart = context.Start.Line,
-            LineEnd = context.Stop.Line,
+            LineStart = AdjustLine(context.Start.Line),
+            LineEnd = AdjustLine(context.Stop.Line),
         };
 
         var elements = context.typeStmt_Element();
@@ -65,7 +72,6 @@ public class DeclarationVisitor : VisualBasic6BaseVisitor<int>
         return 0;
     }
 
-    // Constants
     public override int VisitConstStmt(VisualBasic6Parser.ConstStmtContext context)
     {
         var visibility = context.publicPrivateGlobalVisibility()?.GetText() ?? "Public";
@@ -77,7 +83,7 @@ public class DeclarationVisitor : VisualBasic6BaseVisitor<int>
                 Name = sub.ambiguousIdentifier()?.GetText() ?? "Unknown",
                 Value = sub.valueStmt()?.GetText() ?? "",
                 Visibility = visibility,
-                Line = context.Start.Line,
+                Line = AdjustLine(context.Start.Line),
             };
             Module.Constants.Add(constant);
         }
@@ -85,16 +91,13 @@ public class DeclarationVisitor : VisualBasic6BaseVisitor<int>
         return 0;
     }
 
-    // Global/Public variable declarations
     public override int VisitVariableStmt(VisualBasic6Parser.VariableStmtContext context)
     {
         var visibility = context.visibility()?.GetText() ?? "";
 
-        // Check for DIM (local) - skip those, we only want module-level
         if (context.DIM() != null && string.IsNullOrEmpty(visibility))
             return 0;
 
-        // Only capture Public/Global variables
         if (!visibility.Equals("Public", StringComparison.OrdinalIgnoreCase) &&
             !visibility.Equals("Global", StringComparison.OrdinalIgnoreCase))
             return 0;
@@ -108,7 +111,7 @@ public class DeclarationVisitor : VisualBasic6BaseVisitor<int>
             {
                 Name = sub.ambiguousIdentifier()?.GetText() ?? "Unknown",
                 Visibility = visibility,
-                Line = context.Start.Line,
+                Line = AdjustLine(context.Start.Line),
             };
 
             var asType = sub.asTypeClause();
@@ -130,7 +133,6 @@ public class DeclarationVisitor : VisualBasic6BaseVisitor<int>
         return 0;
     }
 
-    // Sub declarations
     public override int VisitSubStmt(VisualBasic6Parser.SubStmtContext context)
     {
         var member = new Vb6Member
@@ -138,17 +140,16 @@ public class DeclarationVisitor : VisualBasic6BaseVisitor<int>
             Kind = "sub",
             Name = context.ambiguousIdentifier()?.GetText() ?? "Unknown",
             Visibility = context.visibility()?.GetText() ?? "Public",
-            Params = CleanParams(context.argList()?.GetText()),
+            Params = FormatParams(context.argList()),
             ReturnType = null,
-            LineStart = context.Start.Line,
-            LineEnd = context.Stop.Line,
+            LineStart = AdjustLine(context.Start.Line),
+            LineEnd = AdjustLine(context.Stop.Line),
         };
 
         Module.Members.Add(member);
-        return 0; // Don't descend into the body
+        return 0;
     }
 
-    // Function declarations
     public override int VisitFunctionStmt(VisualBasic6Parser.FunctionStmtContext context)
     {
         var member = new Vb6Member
@@ -156,29 +157,27 @@ public class DeclarationVisitor : VisualBasic6BaseVisitor<int>
             Kind = "function",
             Name = context.ambiguousIdentifier()?.GetText() ?? "Unknown",
             Visibility = context.visibility()?.GetText() ?? "Public",
-            Params = CleanParams(context.argList()?.GetText()),
+            Params = FormatParams(context.argList()),
             ReturnType = context.asTypeClause()?.type()?.GetText(),
-            LineStart = context.Start.Line,
-            LineEnd = context.Stop.Line,
+            LineStart = AdjustLine(context.Start.Line),
+            LineEnd = AdjustLine(context.Stop.Line),
         };
 
         Module.Members.Add(member);
         return 0;
     }
 
-    // API Declare statements
     public override int VisitDeclareStmt(VisualBasic6Parser.DeclareStmtContext context)
     {
         var declare = new Vb6Declare
         {
             Name = context.ambiguousIdentifier()?.GetText() ?? "Unknown",
             Lib = context.STRINGLITERAL(0)?.GetText()?.Trim('"') ?? "",
-            Params = CleanParams(context.argList()?.GetText()),
+            Params = FormatParams(context.argList()),
             ReturnType = context.asTypeClause()?.type()?.GetText(),
-            Line = context.Start.Line,
+            Line = AdjustLine(context.Start.Line),
         };
 
-        // Alias is the second STRINGLITERAL if present
         var alias = context.STRINGLITERAL(1);
         if (alias != null)
         {
@@ -189,14 +188,34 @@ public class DeclarationVisitor : VisualBasic6BaseVisitor<int>
         return 0;
     }
 
-    private static string CleanParams(string? raw)
+    /// <summary>
+    /// Format parameter list from ANTLR ArgListContext into clean readable text.
+    /// </summary>
+    private static string FormatParams(VisualBasic6Parser.ArgListContext? argList)
     {
-        if (string.IsNullOrEmpty(raw)) return "()";
-        // The ANTLR GetText() strips whitespace, add it back for readability
-        return raw
-            .Replace(",", ", ")
-            .Replace("ByVal", "ByVal ")
-            .Replace("ByRef", "ByRef ")
-            .Replace("As", " As ");
+        if (argList == null) return "()";
+
+        var args = argList.arg();
+        if (args == null || args.Length == 0) return "()";
+
+        var parts = new List<string>();
+        foreach (var arg in args)
+        {
+            var prefix = "";
+            if (arg.GetText().StartsWith("ByVal", StringComparison.OrdinalIgnoreCase))
+                prefix = "ByVal ";
+            else if (arg.GetText().StartsWith("ByRef", StringComparison.OrdinalIgnoreCase))
+                prefix = "ByRef ";
+            else if (arg.GetText().StartsWith("Optional", StringComparison.OrdinalIgnoreCase))
+                prefix = "Optional ";
+
+            var name = arg.ambiguousIdentifier()?.GetText() ?? "?";
+            var asType = arg.asTypeClause()?.type()?.GetText();
+            var typeStr = asType != null ? $" As {asType}" : "";
+
+            parts.Add($"{prefix}{name}{typeStr}");
+        }
+
+        return $"({string.Join(", ", parts)})";
     }
 }

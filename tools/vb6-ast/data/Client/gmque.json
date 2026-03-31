@@ -1,6 +1,104 @@
 {
   "module": "gmque",
   "sourcePath": "Client/gmque.frm",
+  "address": "Client/gmque",
+  "controls": [
+    {
+      "type": "VB.CommandButton",
+      "name": "Command2",
+      "properties": {
+        "Caption": "\u0022Close\u0022",
+        "Height": "255",
+        "Left": "3720",
+        "TabIndex": "3",
+        "Top": "3600",
+        "Width": "1815"
+      }
+    },
+    {
+      "type": "VB.ListBox",
+      "name": "que",
+      "properties": {
+        "BackColor": "\u0026H00000000\u0026",
+        "ForeColor": "\u0026H80000009\u0026",
+        "Height": "1425",
+        "Left": "240",
+        "TabIndex": "1",
+        "Top": "600",
+        "Width": "5295"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "helpmsg",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "975",
+        "Left": "360",
+        "TabIndex": "4",
+        "Top": "2400",
+        "Width": "5055"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label2",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022What this person wrote:\u0022",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "255",
+        "Left": "240",
+        "TabIndex": "2",
+        "Top": "2040",
+        "Width": "4455"
+      }
+    },
+    {
+      "type": "VB.Shape",
+      "name": "Shape1",
+      "properties": {
+        "BorderColor": "\u0026H80000009\u0026",
+        "Height": "1215",
+        "Left": "240",
+        "Top": "2280",
+        "Width": "5295"
+      }
+    },
+    {
+      "type": "VB.Label",
+      "name": "Label1",
+      "properties": {
+        "BackStyle": "0  \u0027Transparent",
+        "Caption": "\u0022GameMaster HELP QUE\u0022",
+        "Name": "\u0022Times New Roman\u0022",
+        "Size": "14.25",
+        "Charset": "0",
+        "Weight": "700",
+        "Underline": "0   \u0027False",
+        "Italic": "0   \u0027False",
+        "Strikethrough": "0   \u0027False",
+        "ForeColor": "\u0026H8000000E\u0026",
+        "Height": "735",
+        "Left": "120",
+        "TabIndex": "0",
+        "Top": "120",
+        "Width": "5295"
+      }
+    },
+    {
+      "type": "VB.Image",
+      "name": "Image6",
+      "properties": {
+        "Height": "4215",
+        "Left": "0",
+        "Stretch": "-1  \u0027True",
+        "Top": "0",
+        "Width": "5760"
+      }
+    }
+  ],
   "types": [],
   "constants": [],
   "globals": [],
@@ -11,8 +109,8 @@
       "name": "Command2_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 7,
-      "lineEnd": 11,
+      "lineStart": 90,
+      "lineEnd": 94,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -25,8 +123,8 @@
       "name": "Form_Load",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 13,
-      "lineEnd": 17,
+      "lineStart": 96,
+      "lineEnd": 100,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -39,8 +137,8 @@
       "name": "que_Click",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 19,
-      "lineEnd": 27,
+      "lineStart": 102,
+      "lineEnd": 110,
       "annotations": {
         "notes": [],
         "status": "not-started",
@@ -53,8 +151,8 @@
       "name": "que_DblClick",
       "visibility": "Private",
       "params": "()",
-      "lineStart": 29,
-      "lineEnd": 37,
+      "lineStart": 112,
+      "lineEnd": 120,
       "annotations": {
         "notes": [],
         "status": "not-started",
