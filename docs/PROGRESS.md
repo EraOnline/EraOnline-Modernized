@@ -2,7 +2,7 @@
 
 ## Current State
 
-**Pre-Phase 1.** Project planning complete. Architecture decided. Documentation established. No code written yet.
+**Pre-Phase 1.** Architecture decided. Documentation established. VB6 codebase fully indexed and annotated via vb6-ast tool (771 members, 82 types, 555 constants, 305 globals, 778 form controls, auto-detected call graph and protocol map). No C# game code written yet. Ready to begin Phase 1.
 
 Most recent log: [2026-03-31](logs/2026-03-31.md)
 
@@ -68,11 +68,14 @@ Combat, items, NPCs, death. The game becomes playable.
 - [ ] Stat bars in UI (HP, Mana, Stamina, Food, Drink, Gold, EXP progress)
 - [ ] Character sheet UI (slots for head, body, weapon, shield + backpack)
 - [ ] Food and drink consumption (use from inventory, affects stats)
-- [ ] NPC AI: movement patterns (roaming, stationary)
-- [ ] NPC AI: hostile detection, chasing, attacking players
-- [ ] Combat: CTRL toggles battle mode, ALT attacks
-- [ ] Combat: hit/miss calculation (swordmanship vs tactics), damage (weapon HIT vs DEF + parrying)
-- [ ] Combat: sound effects (sword swing, hit, male/female hurt)
+- [ ] NPC AI: 8 movement patterns (1=stand, 2=random walk, 3=hostile chase 10 tiles, 4=guard chase criminals 10 tiles, 5=beggar follow non-givers, 6=tamed animal follow owner, 7=short-range hostile 3 tiles, 8=chaotic guard chase humans/wood elves)
+- [ ] NPC AI: 2 guard types (1=normal attack criminals, 2=chaotic attack humans+wood elves+criminals)
+- [ ] NPC AI: hostile detection range, level-gating (high-level NPCs don't chase low-level players)
+- [ ] Combat: CTRL toggles battle mode, ALT attacks, 4000ms attack cooldown timer
+- [ ] Combat: hit chance (swordmanship: <=30=1/3, <=50=1/2, >50=always), dodge chance (tactics: <=20=never, <=50=1/2-1/3), damage = random(MinHIT,MaxHIT) - DEF/2 min 1
+- [ ] Combat: skill improvement on swing (1/40 chance each for tactics, swordmanship, parrying)
+- [ ] Combat: sound effects (sword swing, hit, male/female hurt per gender)
+- [ ] Combat: reputation changes (killing guard: -5 noble, +2 bendarr, +3 underworld; killing monster: +1 noble/common)
 - [ ] NPC death: corpse + loot placement, respawn at random position on same map
 - [ ] Player death: become ghost, drop random item, lose EXP/gold
 - [ ] Ghost state: ghost body/head, can't interact, speech is garbled

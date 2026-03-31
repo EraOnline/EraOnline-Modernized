@@ -18,6 +18,20 @@ Also explore the original VB6 source in `src_vb6/` and the original website/manu
 
 If the user hasn't told you today's date, ask for it - you'll need it for work logs and journal entries.
 
+## Tools
+
+**vb6-ast** - VB6 source code analyzer at `tools/vb6-ast/`. Parses all 89 VB6 source files using ANTLR4, extracts declarations, auto-detects call graph and protocol messages. Use it to look up any VB6 function, type, constant, form control, or protocol message.
+
+```bash
+bash tools/vb6-ast/publish.sh                            # Build (first time)
+tools/vb6-ast/bin/vb6-ast stats                          # Porting progress
+tools/vb6-ast/bin/vb6-ast show Server/GameLogic:UserDie  # Look up a function
+tools/vb6-ast/bin/vb6-ast list controls --module Client/frmMain  # Timer controls
+tools/vb6-ast/bin/vb6-ast query --protocol               # Full protocol map
+tools/vb6-ast/bin/vb6-ast query --calls UserDie           # Who calls this?
+tools/vb6-ast/bin/vb6-ast annotate Server/GameLogic:Foo --status ported --csharp "Server/Combat.cs:Foo"
+```
+
 ## Build & Run
 
 *Not yet implemented. Will be updated when the solution is created.*

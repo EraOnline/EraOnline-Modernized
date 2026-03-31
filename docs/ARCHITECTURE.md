@@ -6,7 +6,8 @@ Settled technical decisions for the Era Online C# rewrite. Each decision include
 
 **Server: ASP.NET Core**
 - Hosts the game server, SignalR hub, and serves the Blazor WASM client
-- `BackgroundService` runs the game loop on a fixed tick rate
+- `BackgroundService` runs the game loop at **50ms tick rate** (matching the original's `GameTimer.Interval = 50`). Each tick processes: NPC AI, idle detection, world state updates.
+- Separate timer-driven systems at their original intervals: NPC attack processing (4000ms), weather (dynamic)
 - All game state lives in memory, just like the original VB6 server
 - Single process, single instance - deployed to one Azure App Service node
 
@@ -63,11 +64,31 @@ src/
 
 The Server project hosts the Client.Web Blazor WASM app. Single deployment artifact. Runs on a single Azure App Service instance.
 
+## Client Timer Architecture
+
+The original client uses 12 VB6 Timer controls on frmMain to drive game subsystems. In the C# rewrite, these become either server-driven tick events (pushed via SignalR) or client-side JS timers, depending on whether they need server authority.
+
+**Server-authoritative timers** (move to server game loop):
+- Attack cooldown (4000ms) - server controls swing rate
+- NPC attack enable (4000ms) - server controls NPC combat cadence
+- Criminal countdown (60000ms) - server tracks criminal timer
+- Campfire healing (10000ms) - server applies HP regen
+- Meditation (10000ms) - server applies mana regen
+- Eat/Drink auto-consumption (15000ms) - server applies food/drink healing
+- Skill progress (5000ms) - server advances crafting progress bars
+
+**Client-side timers** (stay on client):
+- FPS counter (1000ms) - display only
+- Ambient bird sounds (10000ms) - client audio
+- Thunder sounds (20000ms) - client audio during rain
+- Rain damage check (30000ms) - client sends STA message, server validates
+- Input polling (900ms) - client UI responsiveness
+
 ## Protocol Design
 
-The original VB6 game uses a text-based TCP protocol with single-character or short-string command prefixes (e.g., "M" for move, ";" for say, "CHC" for character change). Messages are delimited by an end character (ENDC).
+The original VB6 game uses a text-based TCP protocol with 120+ unique message prefixes (auto-detected by `vb6-ast query --protocol`). Messages are delimited by Chr(1) (ENDC).
 
-For the C# rewrite, we use SignalR hub methods. The protocol is defined as C# message types in the Shared library so both server and client reference the same types. We preserve the semantics of the original protocol (what information is sent when) but use proper typed messages instead of string parsing.
+For the C# rewrite, we use SignalR hub methods. The protocol is defined as C# message types in the Shared library so both server and client reference the same types. We preserve the semantics of the original protocol (what information is sent when) but use proper typed messages instead of string parsing. The full original protocol map is available via the vb6-ast tool.
 
 ## Rendering Architecture
 
@@ -78,10 +99,18 @@ The original uses DirectDraw 4 with a custom "Grh" (Graphic) system:
 - Map tiles have 3 layers: ground, fringe, top
 - Viewport is 20x11 tiles at 32x32 pixels each, with an 80px offset from the window edge
 
+The original renderer (`RenderScreen` in Graphics.bas) uses a **3-pass approach**:
+1. Ground layer - opaque blit of `graphic(1)` for all visible tiles
+2. Transparent layers - fringe `graphic(2)`, objects, weather `graphic(3)` with color-key transparency (black = transparent)
+3. Characters - composited as Head + Body + Shield + Weapon, each with 4-directional walk animations
+
+Character movement is interpolated at **8 pixels per frame** toward the target tile position, giving smooth walking between the 32px tiles.
+
 The C# client replicates this with:
 - A TypeScript rendering module that drives an HTML5 Canvas
 - The same Grh data format, parsed and loaded into Canvas-compatible image sources
-- Sprite compositing and animation matching the original's approach
+- The same 3-pass rendering with the same compositing order
+- 8px/frame movement interpolation matching the original
 - Blazor calls into the TS module via JS interop for game state updates
 
 ## Deployment

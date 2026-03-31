@@ -2,9 +2,44 @@
 
 Distilled reference of how Era Online (VB6, ~1999-2000) works, derived from source code analysis. Organized by system for easy lookup during implementation. When in doubt, consult the original VB6 source in `src_vb6/`.
 
-Key server files: `ServerLogic.bas` / `GameLogic.bas` (~7K lines each), `TCP.bas` / `Networking.bas` (~3.2K lines each, largely duplicated), `Declarations.bas` (data types), `FileIO.bas` (data loading), `Checks.bas`, `General.bas`.
+Key server files: `GameLogic.bas` (58 functions, 3198 lines - the core engine), `TCP.bas` (7 functions but HandleData alone is 2459 lines - the command router), `FileIO.bas` (data loading), `Checks.bas` (reputation/class/AI), `General.bas` (utilities), `Declarations.bas` (25 types, 136 constants, 52 globals), `frmMain.frm` (timers + socket events).
 
-Key client files: `frmMain.frm` (main game form), `TCP.bas` (networking + client HandleData), `Declares.bas` (client data types), `Graphics.bas` (DirectDraw rendering), `General.bas` (game loop, map loading), `Sound.bas`.
+Key client files: `General.bas` (34 functions - game loop, data loading, movement), `Graphics.bas` (11 functions - DirectDraw rendering), `TCP.bas` (HandleData 857 lines - message parsing), `frmMain.frm` (46 functions, 41 controls including 12 timers), `Declares.bas` (20 types, 150 globals), `Sound.bas` (DirectSound + MIDI).
+
+Duplicate files (skip during port): `ServerLogic.bas` (copy of `GameLogic.bas`), `Networking.bas` (copy of `TCP.bas`), `FileHandler.bas` (variant of `FileIO.bas`).
+
+Use `tools/vb6-ast/bin/vb6-ast` to look up any function, type, constant, protocol message, or form control. Run `vb6-ast show Server/GameLogic:FunctionName` for details including auto-detected call graph and protocol messages.
+
+---
+
+## Game Tick System
+
+The game runs on timer-driven events, not a unified game loop. Understanding the timing is critical for faithful reimplementation.
+
+### Server Timers (frmMain.frm)
+| Timer | Interval | Purpose |
+|-------|----------|---------|
+| GameTimer | **50ms** (20 ticks/sec) | Main game loop: NPC AI ticks, user idle detection, state processing |
+| NpcAttack | **4000ms** | NPC combat: enables NPC attack flag (CanAttack) each cycle |
+| rain | dynamic | Weather: rain start/stop logic, snow transitions |
+
+### Client Timers (frmMain.frm)
+| Timer | Interval | Purpose |
+|-------|----------|---------|
+| FPSTimer | 1000ms | Frame counter display |
+| CheckClick | 900ms | Input polling / click validation |
+| Attack | **4000ms** | Player attack cooldown - sends ATT to server on each tick when in battle mode |
+| NPCattack | **4000ms** | Sends AT4 to server, enabling NPC to attack back |
+| DoSkill | 5000ms | Crafting progress tick - sends XBX with skill progress |
+| Birds | 10000ms | Ambient bird/nature sounds |
+| Campfire | 10000ms | Sends CMP to server for campfire healing |
+| Meditate | 10000ms | Sends REG to server for mana regen |
+| EatDrink | 15000ms | Auto food/drink consumption - sends EAT/DRN |
+| Thunder | 20000ms | Thunder sound during rain |
+| CheckRain | 30000ms | Rain/cold damage check - sends STA |
+| Criminal | 60000ms | Criminal timer countdown - sends CRM when expired |
+
+Note: The **attack cadence** is client-driven. The client's Attack timer fires every 4s and sends ATT. The server's NpcAttack timer fires every 4s and sets `CanAttack=1` on all NPCs. The client's NPCattack timer sends AT4 to acknowledge NPC attacks. This means combat is paced at roughly 1 swing per 4 seconds for both players and NPCs.
 
 ---
 
@@ -172,22 +207,46 @@ Skills improve through use (if >= 10 points) and via training points at NPC trai
 4. Hit/miss calculated per swing
 5. Press **CTRL** again to exit battle mode
 
-### Hit Calculation
-- Attacker's **swordmanship** skill determines chance to hit
-- Defender's **tactics** skill determines chance to dodge
-- If hit lands: damage = random(MinHIT, MaxHIT) from weapon + base stats, reduced by defender's DEF (from armor/shields + parrying skill)
+### Hit Calculation (UserAttackNPC)
+Attacker's **Swordmanship** (Skill16) determines hit chance:
+- Skill 0-30: 1 in 3 chance to hit (random 1-3, hit on 1)
+- Skill 31-50: 1 in 2 chance to hit (random 1-2, hit on 1)
+- Skill 51+: always hits
+
+Damage formula: `Hit = random(MinHIT, MaxHIT) - (target.DEF / 2)`, minimum 1.
+
+**Backstabbing**: First swing only. If `Strike == 0`, calls `BackstabNPC` which may deal bonus damage based on backstabbing skill (Skill21). Sets `Strike = 1` to prevent repeated backstab.
+
+**Skill improvement per swing**: 1/40 chance each for Tactics (Skill6), Swordmanship (Skill16), and Parrying (Skill17, only if shield equipped) to improve by 1 point. Skill must be >= 10 and below the level-based cap (`LevelSkill(ELV).LevelValue`).
+
+### NPC Dodge (NPCAttackUser)
+Defender's **Tactics** (Skill6) determines dodge chance:
+- Skill 0-20: never dodges (random 1-1, always "hit")
+- Skill 21-30: 1 in 3 chance to dodge
+- Skill 31-50: 1 in 2 to 1 in 3 chance to dodge
+- Skill 51+: 1 in 2 chance to dodge
+
+NPC damage: `Hit = random(NPC.MinHIT, NPC.MaxHIT) - (user.DEF / 2)`, minimum 1.
+
+Guards (Guard=1) skip non-criminals. Chaotic guards (Guard=2) skip Dark Elves and Haakis. NPCs only attack when `CanAttack=1` (reset by server NpcAttack timer, re-enabled by client AT4 message).
+
+### Reputation Effects of Combat
+- **Killing a guard**: Criminal flag + 60 count, -5 Noble rep, +2 Bendarr rep, +3 Underworld rep, -3 Common rep, -5 Overall rep
+- **Killing a monster**: +1 Noble rep, +1 Common rep, +1 Overall rep
+- **Killing a player**: Heavy penalty - -20 Noble rep, -5 Overall rep, +5 Bendarr rep, criminal flag +45 count
 
 ### PvP Rules
 - Players under level 5 cannot attack or be attacked by players over level 5
-- Attacking a non-criminal, non-dueling player makes you a criminal
+- Attacking a non-criminal, non-dueling player makes you a criminal (+45 to CriminalCount)
 - /DUEL for consensual PvP (no criminal flag)
 - PKFREEZONE maps disable all PvP
+- Attacker gains EXP from victim on PvP kill
 
-### NPC Combat
-- Hostile NPCs detect nearby players and chase/attack
-- NPCs won't attack players who are "too experienced" for them (prevents high-level players being chased by spiderlings)
-- When attacked, NPCs fight back
-- Guards specifically chase criminals
+### NPC Combat AI
+- Hostile NPCs detect nearby players and chase/attack (see NPC AI section below)
+- NPCs won't attack players who are "too experienced" for them (`CheckIfAttack` level comparison)
+- When attacked, stationary/random NPCs switch to hostile chase (Movement changes to 3)
+- Guards specifically chase criminals (Movement type 4)
 
 ---
 
@@ -289,6 +348,31 @@ All crafting uses a progress-bar system. Higher skill = faster completion. Succe
 
 ---
 
+## NPC AI (NPCAI function)
+
+NPC behavior is driven by two properties: `Movement` (how they move) and `Guard` (special combat rules). The `NPCAI` function runs on the 50ms server tick for each active NPC.
+
+### Attack Phase (before movement)
+1. **Hostile check**: If `Hostile=1`, scan all 4 adjacent tiles. If a player is found, face them and call `NPCAttackUser`. Exit (don't move while fighting).
+2. **Guard=1 check**: Scan adjacent tiles. If a criminal player is found, attack them.
+3. **Guard=2 (chaotic) check**: Scan adjacent tiles. If a Human, Wood Elf, or criminal is found, attack them.
+
+### Movement Patterns
+| Type | Name | Behavior |
+|------|------|----------|
+| 1 | Stand | Do nothing. Stationary NPCs (shopkeepers, priests). |
+| 2 | Random walk | Move in a random direction (1-7). Wandering creatures. |
+| 3 | Hostile chase | Scan 10 tiles in each direction for players. If found (and player is alive, not hiding, and `CheckIfAttack` passes), move toward them using `FindDirection`. |
+| 4 | Guard patrol | Scan 10 tiles for criminal players. Move toward them. Normal guards. |
+| 5 | Beggar follow | Scan 10 tiles for players who haven't been giving (`.Giving=0`) and are alive. Follow them. |
+| 6 | Tamed follow | Scan 10 tiles for the specific owner (`NPCList.Owner` matches `MapData.userindex`). Follow them. |
+| 7 | Short-range hostile | Same as type 3 but only scans 3 tiles. Less aggressive creatures. |
+| 8 | Chaotic guard patrol | Scan 10 tiles for Humans, Wood Elves, or criminals. Move toward them. Dark Elf guards. |
+
+Note: When a stationary (1) or random (2) NPC is attacked, its Movement is switched to 3 (hostile chase), then restored after it dies. Hidden players (`Hiding=1`) are invisible to movement type 3.
+
+---
+
 ## NPC Trading
 
 1. Target an NPC, type **/TRADE**
@@ -331,12 +415,26 @@ All crafting uses a progress-bar system. Higher skill = faster completion. Succe
 - **Per-deity Rep** - Bendarr, Veega, Zeendic, Griigo, Hyliios
 - **Overall Rep** - starts at 500, changes based on actions
 
-### Rank Titles
-Based on overall rep, players get titles like "The Dreaded", "The Hated", "The Respected", "The Beloved", etc. These appear in the player's name when clicked.
+### Rank Titles (CheckRep thresholds on OverallRep)
+| OverallRep | Title |
+|------------|-------|
+| < 100 | The Dreaded |
+| 100-199 | The Hated |
+| 200-299 | The Scum |
+| 300-399 | The Suspicious |
+| 400-599 | (none - neutral) |
+| 600-699 | The Respected |
+| 700-799 | The Admired |
+| 800-899 | The Distinguished |
+| 900+ | The Noble |
+
+Starting OverallRep is 500 (neutral). Title appears when clicking on a player.
 
 ### Effects
 - NPCs may refuse to trade if reputation is too low
-- Killing players has "harder reputation punishment"
+- Killing players has severe penalty (-20 Noble, -5 Overall, +5 Bendarr)
+- Killing guards: -5 Noble, +2 Bendarr, +3 Underworld, -3 Common, -5 Overall
+- Killing monsters: +1 Noble, +1 Common, +1 Overall
 
 ---
 
@@ -431,55 +529,127 @@ All chat is logged to zone-specific log files with timestamps.
 | ToMapButIndex | 6 | Send to all on map except one user |
 | ToGM | 7 | Send to online GMs |
 
-### Key Server->Client Messages
-| Prefix | Meaning |
-|--------|---------|
-| `@` | Chat/info message (followed by text + font type) |
-| `!!` | Error/disconnect message |
-| `CHC` | Character change (charindex, body, head, heading, weapon, shield) |
-| `SUP` | Set user position (x, y) |
-| `DEA` | Player died |
-| `TEN` | Near campfire (trigger healing) |
-| `PLW` | Play sound (sound constant) |
-| `PL3` | Play sound effect (variant) |
-| `PC2` | Update weapon equipment slot |
-| `PIC` | Update clothing equipment slot |
-| `PC3` | Update shield equipment slot |
-| `PC4` | Update head equipment slot |
-| `AT1` | Start action timer (progress bar) |
+### Server->Client Messages
+| Prefix | Meaning | Sent by |
+|--------|---------|---------|
+| `@` | Chat/info message (text + font type) | Many (combat log, system messages) |
+| `!!` | Error/disconnect message | ConnectUser, HandleData, KickBan |
+| `OK` | Login successful | ConnectUser |
+| `MAC` | Make character (charindex,body,head,heading,x,y,weapon,shield,name) | MakeUserChar, MakeNPCChar |
+| `ERC` | Erase character (charindex) | EraseUserChar, EraseNPCChar |
+| `CHC` | Change character (charindex,body,head,heading,weapon,shield) | ChangeUserChar, ChangeNPCChar |
+| `MOC` | Move character (charindex,heading) | MoveUserChar, MoveNPCChar |
+| `SUP` | Set user position (x,y) | MoveUserChar, WarpUserChar |
+| `SUC` | Set user character index | WarpUserChar, ConnectUser |
+| `SCM` | Set current map | WarpUserChar, ConnectUser |
+| `SMN` | Set map name | ConnectUser |
+| `SUI` | Set user index | ConnectUser |
+| `SST` | Full stats (HP,MaxHP,MAN,MaxMAN,STA,MaxSTA,GLD,EXP,ELU,Food,Drink,MinHIT,MaxHIT,DEF,PracticePoints) | SendUserStatsBox |
+| `SIS` | Inventory slot update (slot,objindex,name,amount,equipped,grhindex,value) | ChangeUserInv |
+| `NIS` | NPC inventory slot (slot,objindex,name,amount,equipped,grhindex,value,level) | ChangeNPCInv |
+| `SPL` | Spell slot update (slot,spellindex,name,grhindex,desc,needsmana) | ChangeUserSpells |
+| `MOB` | Make object on ground (grhindex,x,y) | MakeObj |
+| `EOB` | Erase object from ground (x,y) | EraseObj |
+| `DEA` | Player died | UserDie |
+| `TEN` | Near campfire (trigger healing) | DoTileEvents |
+| `PLW` | Play WAV sound (sound constant) | Combat, spells, weather, etc. |
+| `PL3` | Play sound effect variant | CheckUserLevel |
+| `PLM` | Play music (midi filename) | WarpUserChar, ConnectUser |
+| `RAI` | Start raining | rain_Timer, ConnectUser |
+| `SAI` | Stop raining | rain_Timer |
+| `TIP` | Tip of the day | ConnectUser |
+| `PC2` | Update weapon equipment slot | UseInvItem |
+| `PIC` | Update clothing equipment slot | UseInvItem |
+| `PC3` | Update shield equipment slot | UseInvItem |
+| `PC4` | Update head equipment slot | UseInvItem |
+| `UWP` | Unequip weapon | RemoveInvItem |
+| `UCL` | Unequip clothing | RemoveInvItem |
+| `USH` | Unequip shield | RemoveInvItem |
+| `UHE` | Unequip helmet | RemoveInvItem |
+| `AT1` | Start action timer (progress bar) | HandleData (crafting) |
+| `DEE` | ? (UseInvItem) | UseInvItem |
+| `DOT` | ? (HandleData) | HandleData |
+| `GTO` | ? (HandleData) | HandleData |
+| `SGN` | Sign content | LookatTile |
+| `SII` | ? (LookatTile) | LookatTile |
+| `TGT` | Target info | LookatTile |
+| `GMQ` | GM queue entry | SendGmQue |
+| `OST` | Message board post | SendPostings |
+| `WR1`/`WR2` | Map data wrapper | ConnectUser, EraseChar |
 
-### Key Client->Server Messages
-| Prefix | Meaning |
-|--------|---------|
-| `LOGIN` | Log in existing character (fields separated by comma/char 44) |
-| `NLOGIN` | Create new character |
-| `ERASE` | Delete character |
-| `QIT` | Quit |
-| `M` | Move (followed by direction: 1=N, 2=E, 3=S, 4=W) |
-| `LC` | Left click (x, y coordinates) |
-| `BTL` | Toggle battle mode |
-| `AT4` | Flag NPC as attackable |
-| `COO` | Consider target (TAB key) |
-| `UPS` | Update spell book request |
-| `UCS` | Update character sheet request |
-| `CHP` | Chop tree |
-| `FSH` | Fish |
-| `MIN` | Mine |
-| `CMP` | Camp fire heal |
-| `BOO` | Message board request |
-| `YUP` | Post message |
-| `HHH` | Hide |
-| `UHD` | Unhide |
-| `DGU` | Disguise |
-| `UGU` | Undisguise |
-| `WRI` | Write sign |
-| `RPU` | Request position update |
-| `;` | Say (followed by text) |
-| `-` | Shout (followed by text) |
-| `:` | Emote (followed by text) |
-| `\` | Whisper (followed by text) |
-| `^` | GM help request |
-| `/` commands | Slash commands sent as raw text |
+### Client->Server Messages
+| Prefix | Meaning | Sent by |
+|--------|---------|---------|
+| `LOGIN` | Login (name,password,version,id) | TCP:Login |
+| `NLOGIN` | Create character (17 fields) | TCP:Login |
+| `ERASE` | Delete character | TCP:Login |
+| `QIT` | Quit game | Form1 |
+| `M` | Move (1=N, 2=E, 3=S, 4=W) | CheckMoveKeys |
+| `LC` | Left click (x,y) | Form_MouseUp |
+| `RC` | Right click | Form_MouseUp |
+| `BTL` | Toggle battle mode | Form_KeyDown (CTRL) |
+| `ATT` | Attack swing | Form_KeyUp (ALT) |
+| `AT4` | Enable NPC attack | NPCattack_Timer |
+| `COO` | Consider target (TAB) | Form_KeyDown |
+| `GET` | Pick up item | GetCmd_Click |
+| `USE` | Use/equip item (slot) | UseCmd_Click |
+| `DRP` | Drop item (slot,amount) | DropCmd_Click |
+| `DRG` | Drop gold (amount) | dropgold form |
+| `GIV` | Give item to player | inventory menu |
+| `EVA` | Evaluate item | inventory menu |
+| `BUY` | Buy from NPC | trade form |
+| `SLL` | Sell to NPC | trade form |
+| `CST` | Cast spell | spellbook menu |
+| `EAT` | Eat food | EatDrink_Timer, inventory |
+| `DRN` | Drink | EatDrink_Timer |
+| `DPT` | Deposit gold | deposit form |
+| `WTH` | Withdraw gold | withdraw form |
+| `DON` | Donate gold | donate form |
+| `XBX` | Skill progress tick | DoSkill_Timer |
+| `STP` | Stop/cancel action | cancelaction_Click |
+| `CHP` | Chop tree | Form_MouseUp |
+| `FSH` | Fish | Form_MouseUp |
+| `MIN` | Mine | Form_MouseUp |
+| `CMP` | Campfire heal | Campfire_Timer |
+| `REG` | Meditate/regen mana | Meditate_Timer |
+| `CRM` | Criminal timer expired | Criminal_Timer |
+| `STA` | Stamina check (rain) | CheckRain_Timer |
+| `BOO` | Open message board | Form_MouseUp |
+| `YUP` | Post message | YourPost form |
+| `HHH` | Hide | skills form |
+| `UHD` | Unhide | skills form, MoveCharbyHead |
+| `DGU` | Disguise | skills form |
+| `UGU` | Undisguise | skills form |
+| `WRI` | Write sign | signwrite form |
+| `UPS` | Update spell book | Label4_Click |
+| `UCS` | Update character sheet | Label6_Click |
+| `UMS` | Update movement state | MoveCharbyHead |
+| `RPU` | Request position update | Main (startup) |
+| `PI1`/`PI2` | Pickpocket | skills form |
+| `DIS` | Discard item | inventory menu |
+| `UNQ` | Unequip item | inventory menu |
+| `T01`-`T28` | Train skill N | training form (one per skill) |
+| `TRO` | Transform/morph | polymorph form (GM) |
+| `TEL` | Teleport (GM) | gmtool |
+| `TGM` | Toggle GM mode | gmtool |
+| `BAN` | Ban player (GM) | gmtool |
+| `CRE` | Create NPC (GM) | gmtool |
+| `GVG` | Give gold (GM) | gmtool |
+| `HAI` | Set NPC hail (GM) | gmtool |
+| `IMM`/`MMM` | Immortal toggle (GM) | gmtool |
+| `NAA` | Set NPC name (GM) | gmtool |
+| `RET` | Return/recall (GM) | gmtool |
+| `QUE` | Open GM queue | gmtool |
+| `GIL` | Give item to player (GM) | gmtool |
+| `BOE` | Broadcast message (GM) | gmtool |
+| `CH1`-`CH4` | Change char properties (GM) | gmtool |
+| `;` | Say (text) | SendTxt_KeyUp |
+| `-` | Shout (text) | SendTxt_KeyUp |
+| `:` | Emote (text) | SendTxt_KeyUp |
+| `\` | Whisper (text) | SendTxt_KeyUp |
+| `'` | Clan chat (text) | SendTxt_KeyUp |
+| `^` | GM help request | gmcall form |
+| `/` commands | Slash commands (raw text) | SendTxt_KeyUp |
 
 ### Font Type Constants
 | Constant | Value | Use |
