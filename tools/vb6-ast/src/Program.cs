@@ -2,6 +2,25 @@ using Vb6Ast.Commands;
 using Vb6Ast.Models;
 using Vb6Ast.Parsing;
 
+// Module matching: supports "GameLogic" (name only) or "Server/GameLogic" (project-qualified)
+static bool ModuleMatches(Vb6Module module, string filter)
+{
+    // Exact name match
+    if (module.Name.Equals(filter, StringComparison.OrdinalIgnoreCase))
+        return true;
+
+    // Path-qualified match: "Server/GameLogic" matches sourcePath "Server/GameLogic.bas"
+    var sourceWithoutExt = Path.ChangeExtension(module.SourcePath, null);
+    if (sourceWithoutExt.Equals(filter, StringComparison.OrdinalIgnoreCase))
+        return true;
+
+    // Partial path match: "Server/General" matches "Server/General"
+    if (sourceWithoutExt.Contains(filter, StringComparison.OrdinalIgnoreCase))
+        return true;
+
+    return false;
+}
+
 if (args.Length == 0)
 {
     PrintUsage();
@@ -111,20 +130,22 @@ int RunList(string[] args)
     }
 
     var modules = JsonStore.LoadAllModules(dataDir)
-        .Where(m => moduleFilter == null || m.Name.Equals(moduleFilter, StringComparison.OrdinalIgnoreCase))
+        .Where(m => moduleFilter == null || ModuleMatches(m, moduleFilter))
         .OrderBy(m => m.SourcePath)
         .ToList();
 
     switch (what)
     {
         case "modules":
-            Console.WriteLine($"{"Module",-30} {"Path",-45} {"Members",8} {"Types",6} {"Consts",7} {"Vars",5}");
+            Console.WriteLine($"{"Module",-30} {"Source Path",-45} {"Members",8} {"Types",6} {"Consts",7} {"Vars",5}");
             Console.WriteLine(new string('-', 105));
             foreach (var m in modules)
             {
-                Console.WriteLine($"{m.Name,-30} {m.SourcePath,-45} {m.Members.Count,8} {m.Types.Count,6} {m.Constants.Count,7} {m.Variables.Count,5}");
+                var qualifiedName = Path.ChangeExtension(m.SourcePath, null);
+                Console.WriteLine($"{qualifiedName,-30} {m.SourcePath,-45} {m.Members.Count,8} {m.Types.Count,6} {m.Constants.Count,7} {m.Variables.Count,5}");
             }
             Console.WriteLine($"\nTotal: {modules.Count} modules");
+            Console.WriteLine("Tip: Use --module Server/General to disambiguate modules with the same name across projects.");
             break;
 
         case "members":
@@ -383,7 +404,7 @@ int RunQuery(string[] args)
     }
 
     var modules = JsonStore.LoadAllModules(dataDir)
-        .Where(m => moduleFilter == null || m.Name.Equals(moduleFilter, StringComparison.OrdinalIgnoreCase))
+        .Where(m => moduleFilter == null || ModuleMatches(m, moduleFilter))
         .OrderBy(m => m.SourcePath)
         .ToList();
 
@@ -432,7 +453,8 @@ int RunQuery(string[] args)
             "in-progress" => "[~]",
             _ => "[ ]"
         };
-        Console.WriteLine($"  {statusTag} {module.Name,-25} {member.Kind,-8} {member.Name,-35} L{member.LineStart}-{member.LineEnd}");
+        var qualifiedName = Path.ChangeExtension(module.SourcePath, null);
+        Console.WriteLine($"  {statusTag} {qualifiedName,-25} {member.Kind,-8} {member.Name,-35} L{member.LineStart}-{member.LineEnd}");
     }
 
     Console.WriteLine($"\n{list.Count} results.");
@@ -453,7 +475,7 @@ int RunStats(string[] args)
     }
 
     var modules = JsonStore.LoadAllModules(dataDir)
-        .Where(m => moduleFilter == null || m.Name.Equals(moduleFilter, StringComparison.OrdinalIgnoreCase))
+        .Where(m => moduleFilter == null || ModuleMatches(m, moduleFilter))
         .OrderBy(m => m.SourcePath)
         .ToList();
 
@@ -476,7 +498,8 @@ int RunStats(string[] args)
 
         if (mTotal > 0)
         {
-            Console.WriteLine($"{m.Name,-30} {mTotal,6} {mPorted,7} {mSkipped,5} {mInProgress,4} {mNotStarted,5} {annPct,5}");
+            var qualifiedName = Path.ChangeExtension(m.SourcePath, null);
+            Console.WriteLine($"{qualifiedName,-30} {mTotal,6} {mPorted,7} {mSkipped,5} {mInProgress,4} {mNotStarted,5} {annPct,5}");
         }
 
         totalMembers += mTotal;
