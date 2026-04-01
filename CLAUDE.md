@@ -32,6 +32,14 @@ tools/vb6-ast/bin/vb6-ast query --calls UserDie           # Who calls this?
 tools/vb6-ast/bin/vb6-ast annotate Server/GameLogic:Foo --status ported --csharp "Server/Combat.cs:Foo"
 ```
 
+**eo-data-converter** - Converts all original VB6 game data files to JSON at `tools/eo-data-converter/`. Parses both INI-format files (OBJ.dat, NPC.dat, Spells.dat, Head.dat, Body.dat, etc.) and binary files (Grh.dat, map .map/.inf files). Output in `tools/eo-data-converter/data/`.
+
+```bash
+bash tools/eo-data-converter/publish.sh                   # Build (first time)
+tools/eo-data-converter/bin/eo-data-converter              # Run (converts all data)
+# Output: data/objects.json, npcs.json, spells.json, config.json, grh.json, maps/map-NNN.json, etc.
+```
+
 ## Build & Run
 
 *Not yet implemented. Will be updated when the solution is created.*
