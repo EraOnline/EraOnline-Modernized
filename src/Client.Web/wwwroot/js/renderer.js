@@ -69,10 +69,28 @@ const EraRenderer = (() => {
         await preloadVisibleSheets();
 
         dataLoaded = true;
-        setStatus('Rendering...');
+        setStatus(`Map ${mapData.id} | Camera: (${cameraX}, ${cameraY}) | Arrow keys to pan`);
+
+        // Keyboard input for panning
+        document.addEventListener('keydown', onKeyDown);
 
         // Start render loop
         requestAnimationFrame(renderLoop);
+    }
+
+    function onKeyDown(e) {
+        if (!mapData) return;
+        let moved = false;
+        switch (e.key) {
+            case 'ArrowUp':    cameraY = Math.max(1, cameraY - 1); moved = true; break;
+            case 'ArrowDown':  cameraY = Math.min(100, cameraY + 1); moved = true; break;
+            case 'ArrowLeft':  cameraX = Math.max(1, cameraX - 1); moved = true; break;
+            case 'ArrowRight': cameraX = Math.min(100, cameraX + 1); moved = true; break;
+        }
+        if (moved) {
+            e.preventDefault();
+            setStatus(`Map ${mapData.id} | Camera: (${cameraX}, ${cameraY}) | Arrow keys to pan`);
+        }
     }
 
     // --- Data Loading ---
