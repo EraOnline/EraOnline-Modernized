@@ -89,6 +89,13 @@ var grh = GrhConverter.Convert(Path.Combine(clientPath, "Grh.dat"), Path.Combine
 WriteJson("grh.json", grh);
 Console.WriteLine($"  grh.json: {grh.Entries.Count} sprite defs, {grh.NumFiles} sprite sheets");
 
+// --- Sprite sheet conversion (BMP -> PNG with transparency) ---
+Console.WriteLine();
+var grhDir = Path.Combine(clientPath, "Grh");
+var spriteOutputDir = Path.Combine(outputPath, "grh");
+int spritesConverted = SpriteConverter.Convert(grhDir, spriteOutputDir);
+Console.WriteLine($"  grh/: {spritesConverted} sprite sheets converted (BMP -> PNG)");
+
 // --- Map files ---
 Console.WriteLine();
 var mapIndex = IniParser.Load(Path.Combine(mapsPath, "Map.dat"));
