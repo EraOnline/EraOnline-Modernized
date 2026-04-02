@@ -17,8 +17,28 @@ var app = builder.Build();
 var gameData = app.Services.GetRequiredService<GameDataService>();
 await gameData.LoadAllAsync();
 
-// Serve Client.Web's wwwroot (index.html, js/renderer.js, etc.)
+// Resolve paths
 var clientWebWwwroot = Path.GetFullPath(Path.Combine(app.Environment.ContentRootPath, "..", "Client.Web", "wwwroot"));
+var dataPath = app.Configuration.GetValue<string>("GameDataPath")
+    ?? Path.Combine(app.Environment.ContentRootPath, "..", "..", "tools", "eo-data-converter", "data");
+var fullDataPath = Path.GetFullPath(dataPath);
+
+app.Logger.LogInformation("Client.Web wwwroot: {Path} (exists: {Exists})", clientWebWwwroot, Directory.Exists(clientWebWwwroot));
+app.Logger.LogInformation("Game data path: {Path} (exists: {Exists})", fullDataPath, Directory.Exists(fullDataPath));
+app.Logger.LogInformation("Grh directory: {Path} (exists: {Exists})", Path.Combine(fullDataPath, "grh"), Directory.Exists(Path.Combine(fullDataPath, "grh")));
+
+// Serve game data files at /data FIRST (before the catch-all client files)
+if (Directory.Exists(fullDataPath))
+{
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(fullDataPath),
+        RequestPath = "/data",
+        ServeUnknownFileTypes = false
+    });
+}
+
+// Serve Client.Web's wwwroot (index.html, js/renderer.js, etc.)
 if (Directory.Exists(clientWebWwwroot))
 {
     app.UseDefaultFiles(new DefaultFilesOptions
@@ -28,19 +48,6 @@ if (Directory.Exists(clientWebWwwroot))
     app.UseStaticFiles(new StaticFileOptions
     {
         FileProvider = new PhysicalFileProvider(clientWebWwwroot)
-    });
-}
-
-// Serve game data files (JSON + sprite PNGs) from eo-data-converter/data
-var dataPath = app.Configuration.GetValue<string>("GameDataPath")
-    ?? Path.Combine(app.Environment.ContentRootPath, "..", "..", "tools", "eo-data-converter", "data");
-var fullDataPath = Path.GetFullPath(dataPath);
-if (Directory.Exists(fullDataPath))
-{
-    app.UseStaticFiles(new StaticFileOptions
-    {
-        FileProvider = new PhysicalFileProvider(fullDataPath),
-        RequestPath = "/data"
     });
 }
 
