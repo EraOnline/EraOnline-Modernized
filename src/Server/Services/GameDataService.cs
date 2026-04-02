@@ -25,10 +25,11 @@ public class GameDataService
     public IReadOnlyList<GossipEntry> Gossip { get; private set; } = [];
     public IReadOnlyList<QuestDef> Quests { get; private set; } = [];
 
-    public GameDataService(IConfiguration configuration, ILogger<GameDataService> logger)
+    public GameDataService(IConfiguration configuration, IWebHostEnvironment env, ILogger<GameDataService> logger)
     {
+        // Read from Client.Web/wwwroot/data/ (same directory the browser fetches from)
         _dataPath = configuration.GetValue<string>("GameDataPath")
-            ?? Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "tools", "eo-data-converter", "data");
+            ?? Path.Combine(env.WebRootPath ?? "", "data");
         _logger = logger;
     }
 
