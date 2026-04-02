@@ -2,9 +2,9 @@
 
 ## Current State
 
-**Phase 2 in progress.** Renderer infrastructure complete: 810 BMP sprite sheets converted to PNG, JS rendering module with 3-pass map rendering and character compositing, served by ASP.NET Core. Needs visual verification in browser and remaining items (scrolling, animation).
+**Phase 2 in progress.** Castlefall renders faithfully in the browser - ground tiles, fringe layer, buildings, trees, NPC characters. Visually verified against original screenshots. Arrow key panning works. Remaining: walk animation playback, scrolling viewport (smooth pixel interpolation).
 
-Most recent log: [2026-04-01](logs/2026-04-01.md)
+Most recent log: [2026-04-02](logs/2026-04-02.md)
 
 ---
 
