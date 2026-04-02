@@ -42,12 +42,12 @@ tools/eo-data-converter/bin/eo-data-converter              # Run (converts all d
 
 ## Build & Run
 
-*Not yet implemented. Will be updated when the solution is created.*
+```bash
+dotnet build EraOnline.sln                   # Build all projects
+dotnet run --project src/Server              # Run server (loads game data, starts game loop, listens on port 5000)
+```
 
-```
-dotnet build EraOnline.sln
-dotnet run --project src/Server
-```
+The server loads game data from `tools/eo-data-converter/data/` on startup. If the JSON data files don't exist, run `bash tools/eo-data-converter/publish.sh && tools/eo-data-converter/bin/eo-data-converter` first. The Blazor WASM client requires the `wasm-tools` workload: `dotnet workload install wasm-tools`.
 
 ## Project Structure
 

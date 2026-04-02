@@ -2,9 +2,9 @@
 
 ## Current State
 
-**Pre-Phase 1.** Architecture decided. Documentation established. VB6 codebase fully indexed and annotated via vb6-ast tool (771 members, 82 types, 555 constants, 305 globals, 778 form controls, auto-detected call graph and protocol map). No C# game code written yet. Ready to begin Phase 1.
+**Phase 1 complete.** Server starts, loads all original game data (305 objects, 278 NPCs, 16 spells, 211 maps, 4,050 sprite definitions), and accepts SignalR connections. Game loop ticks at 50ms. Ready to begin Phase 2.
 
-Most recent log: [2026-03-31](logs/2026-03-31.md)
+Most recent log: [2026-04-01](logs/2026-04-01.md)
 
 ---
 
@@ -12,16 +12,14 @@ Most recent log: [2026-03-31](logs/2026-03-31.md)
 
 Set up the solution structure, port all VB6 data types to C#, write parsers for original data files, and verify the server can load all original game data.
 
-- [ ] Create solution and project structure (EraOnline.sln, Shared, Server, Client.Web, Client.CLI)
-- [ ] Port VB6 type definitions to C# (User, NPC, MapBlock, ObjData, SpellData, Char, etc.)
-- [ ] Port game constants (directions, object types, sound IDs, stat caps, font types, etc.)
-- [ ] Define SignalR protocol message types in Shared
-- [ ] Write parsers for original INI-format data files (OBJ.dat, NPC.dat, NPC2.dat, Spells.dat)
-- [ ] Write parser for original map file format
-- [ ] Write parsers for sprite definition files (Grh.dat, Grh.ini, Head.dat, Body.dat, shanim.dat, wpanim.dat)
-- [ ] Server startup: load all original game data, log summary of what was loaded
-- [ ] Server: SignalR hub stub (accepts connections, no game logic yet)
-- [ ] Server: BackgroundService game loop stub (ticks but does nothing yet)
+- [x] Create solution and project structure (EraOnline.sln, Shared, Server, Client.Web, Client.CLI)
+- [x] Port VB6 type definitions to C# (ObjectDef, NpcDef, SpellDef, MapDef, GrhEntry, HeadDef, BodyDef, AnimDef, ServerConfig)
+- [x] Port game constants (Direction, ObjectType, SkillType, SoundId, FontType, NpcMovement, GuardType, GameConstants)
+- [x] Define SignalR protocol message types in Shared (LoginRequest, LoginResponse, CreateCharacterRequest, ServerInfo)
+- [x] Data loading from pre-converted JSON (eo-data-converter output) instead of parsing original formats directly
+- [x] Server startup: loads all game data (305 objects, 278 NPCs, 16 spells, 211 maps, 4050 sprites), logs summary
+- [x] Server: SignalR hub stub (GameHub - accepts connections, Ping, GetServerInfo)
+- [x] Server: BackgroundService game loop stub (GameLoopService - 50ms tick rate)
 
 **Milestone:** Server starts, loads all original game data (objects, NPCs, spells, maps, sprite defs), and logs stats. SignalR hub accepts connections.
 

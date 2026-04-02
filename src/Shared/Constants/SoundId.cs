@@ -1,0 +1,66 @@
+namespace EraOnline.Shared.Constants;
+
+/// <summary>VB6: SOUND_* constants in Declarations.bas (60 sounds)</summary>
+public static class SoundId
+{
+    public const int Bump = 1;
+    public const int Swing = 2;
+    public const int Warp = 3;
+    public const int Paper = 4;
+    public const int DragFish = 5;
+    public const int FishingPole = 6;
+    public const int Burn = 7;
+    public const int Coins = 8;
+    public const int NightLoop = 9;
+    public const int Fireball = 10;
+    public const int Fireball2 = 11;
+    public const int FoldClothing = 12;
+    public const int ForestLoop = 13;
+    public const int ForestLoop2 = 14;
+    public const int FemaleScream = 15;
+    public const int SpellEffect1 = 16;
+    public const int Hammering = 17;
+    public const int Lightning = 18;
+    public const int Lockpicking = 19;
+    public const int MaleHurt = 20;
+    public const int MaleHurt2 = 21;
+    public const int MeadowLoop = 22;
+    public const int MetalHit = 23;
+    public const int SpellEffect2 = 24;
+    public const int Sailing = 25;
+    public const int Saw = 26;
+    public const int Shore = 27;
+    public const int Smithing = 28;
+    public const int SpellEffect3 = 29;
+    public const int SpellEffect4 = 30;
+    public const int SpellEffect5 = 31;
+    public const int Stream = 32;
+    public const int SwampLoop = 33;
+    public const int SwordSwing = 34;
+    public const int SwordHit = 35;
+    public const int SwordHit2 = 36;
+    public const int WindLoop = 37;
+    public const int StormLoop = 38;
+    public const int SpellEffect6 = 39;
+    public const int Chopping = 40;
+    public const int Medieval = 41;
+    public const int Chorus = 42;
+    public const int Thunder = 43;
+    public const int Birds = 44;
+    public const int Snake = 45;
+    public const int Sheep = 46;
+    public const int Monster1 = 47;
+    public const int Monster2 = 48;
+    public const int Cow = 49;
+    public const int Cow2 = 50;
+    public const int Gremlin = 51;
+    public const int Horse = 52;
+    public const int Wolf = 53;
+    public const int Chicken = 54;
+    public const int Roar = 55;
+    public const int LaughEvil = 56;
+    public const int Heart = 57;
+    public const int Click = 58;
+    public const int Birds2 = 59;
+    public const int Bee = 60;
+}
