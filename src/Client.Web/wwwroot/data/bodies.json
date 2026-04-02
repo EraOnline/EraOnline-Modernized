@@ -1,0 +1,728 @@
+[
+  {
+    "id": 1,
+    "walk": [
+      3001,
+      3003,
+      3000,
+      3002
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 2,
+    "walk": [
+      3004,
+      3004,
+      3004,
+      3004
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 3,
+    "walk": [
+      3006,
+      3008,
+      3005,
+      3007
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 4,
+    "walk": [
+      3010,
+      3012,
+      3009,
+      3011
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 5,
+    "walk": [
+      3014,
+      3016,
+      3013,
+      3015
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 6,
+    "walk": [
+      3018,
+      3020,
+      3017,
+      3019
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 7,
+    "walk": [
+      3022,
+      3024,
+      3021,
+      3023
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 8,
+    "walk": [
+      3026,
+      3028,
+      3025,
+      3027
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 9,
+    "walk": [
+      3030,
+      3032,
+      3029,
+      3031
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 10,
+    "walk": [
+      3034,
+      3036,
+      3033,
+      3035
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 11,
+    "walk": [
+      3038,
+      3040,
+      3037,
+      3039
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 12,
+    "walk": [
+      3042,
+      3044,
+      3041,
+      3043
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 13,
+    "walk": [
+      3046,
+      3048,
+      3045,
+      3047
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 14,
+    "walk": [
+      3050,
+      3052,
+      3049,
+      3051
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 15,
+    "walk": [
+      3054,
+      3056,
+      3053,
+      3055
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 16,
+    "walk": [
+      3058,
+      3060,
+      3057,
+      3059
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 17,
+    "walk": [
+      3062,
+      3064,
+      3061,
+      3063
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 18,
+    "walk": [
+      3066,
+      3068,
+      3065,
+      3067
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 19,
+    "walk": [
+      3070,
+      3072,
+      3069,
+      3071
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 20,
+    "walk": [
+      3074,
+      3076,
+      3073,
+      3075
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 21,
+    "walk": [
+      3078,
+      3080,
+      3077,
+      3079
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 22,
+    "walk": [
+      3082,
+      3084,
+      3081,
+      3083
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 23,
+    "walk": [
+      3086,
+      3088,
+      3085,
+      3087
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 24,
+    "walk": [
+      3090,
+      3092,
+      3089,
+      3091
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 25,
+    "walk": [
+      3094,
+      3096,
+      3093,
+      3095
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 26,
+    "walk": [
+      14001,
+      14003,
+      14000,
+      14002
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 27,
+    "walk": [
+      14005,
+      14007,
+      14004,
+      14006
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 28,
+    "walk": [
+      14009,
+      14011,
+      14008,
+      14010
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 29,
+    "walk": [
+      14013,
+      14015,
+      14012,
+      14014
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 30,
+    "walk": [
+      14017,
+      14019,
+      14016,
+      14018
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 31,
+    "walk": [
+      14021,
+      14023,
+      14020,
+      14022
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 32,
+    "walk": [
+      14025,
+      14027,
+      14024,
+      14026
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 33,
+    "walk": [
+      14029,
+      14031,
+      14028,
+      14030
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 34,
+    "walk": [
+      14033,
+      14035,
+      14032,
+      14034
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": 0
+  },
+  {
+    "id": 35,
+    "walk": [
+      14037,
+      14039,
+      14036,
+      14038
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 36,
+    "walk": [
+      3098,
+      3100,
+      3097,
+      3099
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 37,
+    "walk": [
+      3102,
+      3104,
+      3101,
+      3103
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 38,
+    "walk": [
+      3106,
+      3108,
+      3105,
+      3107
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 39,
+    "walk": [
+      3110,
+      3112,
+      3109,
+      3111
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 40,
+    "walk": [
+      13001,
+      13003,
+      13000,
+      13002
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 41,
+    "walk": [
+      13005,
+      13007,
+      13004,
+      13006
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 42,
+    "walk": [
+      13009,
+      13011,
+      13008,
+      13010
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 43,
+    "walk": [
+      13013,
+      13015,
+      13012,
+      13014
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 44,
+    "walk": [
+      13017,
+      13019,
+      13016,
+      13018
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 45,
+    "walk": [
+      13021,
+      13023,
+      13020,
+      13022
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 46,
+    "walk": [
+      13025,
+      13027,
+      13024,
+      13026
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 47,
+    "walk": [
+      14041,
+      14043,
+      14040,
+      14042
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 48,
+    "walk": [
+      14045,
+      14047,
+      14044,
+      14046
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 49,
+    "walk": [
+      14049,
+      14051,
+      14048,
+      14050
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 50,
+    "walk": [
+      14053,
+      14055,
+      14052,
+      14054
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 51,
+    "walk": [
+      14057,
+      14059,
+      14056,
+      14058
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 52,
+    "walk": [
+      14061,
+      14063,
+      14060,
+      14062
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 53,
+    "walk": [
+      14065,
+      14067,
+      14064,
+      14066
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 54,
+    "walk": [
+      14069,
+      14071,
+      14068,
+      14070
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 55,
+    "walk": [
+      14073,
+      14075,
+      14072,
+      14074
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 56,
+    "walk": [
+      14077,
+      14079,
+      14076,
+      14078
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 57,
+    "walk": [
+      14081,
+      14083,
+      14080,
+      14082
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 58,
+    "walk": [
+      13029,
+      13031,
+      13028,
+      13030
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 59,
+    "walk": [
+      13033,
+      13035,
+      13032,
+      13034
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 60,
+    "walk": [
+      14085,
+      14087,
+      14084,
+      14086
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 61,
+    "walk": [
+      14089,
+      14091,
+      14088,
+      14090
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 62,
+    "walk": [
+      3114,
+      3116,
+      3113,
+      3115
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 63,
+    "walk": [
+      3118,
+      3120,
+      3117,
+      3119
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 64,
+    "walk": [
+      3122,
+      3124,
+      3121,
+      3123
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 65,
+    "walk": [
+      3126,
+      3128,
+      3125,
+      3127
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  },
+  {
+    "id": 66,
+    "walk": [
+      3130,
+      3132,
+      3129,
+      3131
+    ],
+    "headOffsetX": 0,
+    "headOffsetY": -27
+  }
+]
