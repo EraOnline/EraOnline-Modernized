@@ -2,7 +2,7 @@
 
 ## Current State
 
-**Phase 1 complete.** Server starts, loads all original game data (305 objects, 278 NPCs, 16 spells, 211 maps, 4,050 sprite definitions), and accepts SignalR connections. Game loop ticks at 50ms. Ready to begin Phase 2.
+**Phase 2 in progress.** Renderer infrastructure complete: 810 BMP sprite sheets converted to PNG, JS rendering module with 3-pass map rendering and character compositing, served by ASP.NET Core. Needs visual verification in browser and remaining items (scrolling, animation).
 
 Most recent log: [2026-04-01](logs/2026-04-01.md)
 
@@ -27,15 +27,16 @@ Set up the solution structure, port all VB6 data types to C#, write parsers for 
 
 Get the original game's visuals rendering in a browser via Canvas. No server connection needed yet - load data directly.
 
-- [ ] Blazor WASM project setup, hosted by Server
-- [ ] Asset pipeline: convert/prepare Grh sprite sheets for web (original BMPs to PNGs or similar)
-- [ ] TypeScript rendering module: Grh system (parse sprite definitions, load sheets, handle animation frames)
-- [ ] Canvas rendering pipeline via Blazor JS interop
-- [ ] Map tile renderer (3 layers: ground, fringe, top)
-- [ ] Character renderer (composite body + head + weapon + shield, directional walk animations)
-- [ ] Object renderer (items on ground)
-- [ ] Scrolling viewport (20x11 tiles, follows a position)
-- [ ] Render a hard-coded map scene with NPCs and objects (no server, just loaded data)
+- [x] Asset pipeline: BMP-to-PNG sprite sheet conversion in eo-data-converter (810 sheets, black->alpha transparency)
+- [x] Server hosts Client.Web static files + serves eo-data-converter/data at /data
+- [x] JavaScript rendering module (renderer.js): Grh system, sprite sheet loading, 3-pass map renderer
+- [x] Canvas rendering: ground tiles (pass 1), fringe layer with transparency (pass 2), characters (pass 3)
+- [x] Character renderer: composite head + body + weapon + shield, directional sprites, HeadOffset
+- [x] Viewport: 20x11 tiles centered on camera position
+- [x] Render Map 81 (Castlefall) with 33 NPCs at spawn positions
+- [ ] Scrolling viewport (keyboard-driven camera movement for testing)
+- [ ] Walk animation playback for animated tiles and characters
+- [ ] Object renderer (items on ground - deferred, needs server state)
 
 **Milestone:** Open browser, see an original Era Online map rendered faithfully - tiles, objects, characters with correct sprites. Hard-coded position, no networking.
 

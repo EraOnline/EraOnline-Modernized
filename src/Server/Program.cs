@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using EraOnline.Server.Hubs;
 using EraOnline.Server.Services;
 
@@ -16,10 +17,34 @@ var app = builder.Build();
 var gameData = app.Services.GetRequiredService<GameDataService>();
 await gameData.LoadAllAsync();
 
+// Serve Client.Web's wwwroot (index.html, js/renderer.js, etc.)
+var clientWebWwwroot = Path.GetFullPath(Path.Combine(app.Environment.ContentRootPath, "..", "Client.Web", "wwwroot"));
+if (Directory.Exists(clientWebWwwroot))
+{
+    app.UseDefaultFiles(new DefaultFilesOptions
+    {
+        FileProvider = new PhysicalFileProvider(clientWebWwwroot)
+    });
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(clientWebWwwroot)
+    });
+}
+
+// Serve game data files (JSON + sprite PNGs) from eo-data-converter/data
+var dataPath = app.Configuration.GetValue<string>("GameDataPath")
+    ?? Path.Combine(app.Environment.ContentRootPath, "..", "..", "tools", "eo-data-converter", "data");
+var fullDataPath = Path.GetFullPath(dataPath);
+if (Directory.Exists(fullDataPath))
+{
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(fullDataPath),
+        RequestPath = "/data"
+    });
+}
+
 // Endpoints
 app.MapHub<GameHub>("/gamehub");
-app.MapGet("/", () => Results.Content(
-    "<h1>Era Online Server</h1><p>It's the dawn of a new era.</p>",
-    "text/html"));
 
 app.Run();
