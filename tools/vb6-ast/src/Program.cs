@@ -581,7 +581,7 @@ int RunStats(string[] args)
 
         totalMembers += mMembers; membersPorted += m.Members.Count(x => x.Annotations.Status == "ported"); membersSkipped += m.Members.Count(x => x.Annotations.Status == "skipped");
         totalTypes += mTypes; typesPorted += m.Types.Count(x => x.Annotations.Status == "ported"); typesSkipped += m.Types.Count(x => x.Annotations.Status == "skipped");
-        totalConsts += mConsts; constsPorted += m.Constants.Count(x => x.Annotations.Status == "ported"); constsSkipped += m.Constants.Count(x => x.Annotations.Status == "ported");
+        totalConsts += mConsts; constsPorted += m.Constants.Count(x => x.Annotations.Status == "ported"); constsSkipped += m.Constants.Count(x => x.Annotations.Status == "skipped");
         totalGlobals += mGlobals; globalsPorted += m.Variables.Count(x => x.Annotations.Status == "ported"); globalsSkipped += m.Variables.Count(x => x.Annotations.Status == "skipped");
         totalControls += m.Controls.Count;
     }

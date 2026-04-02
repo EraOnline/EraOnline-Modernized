@@ -334,7 +334,8 @@
       "annotations": {
         "purpose": "Load the Grh sprite definition data from Grh.dat/Grh.ini",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Server/Services/GameDataService.cs:LoadAllAsync",
         "sends": [],
         "calls": [
           "Seek",
@@ -481,7 +482,8 @@
       "annotations": {
         "purpose": "Load body sprite data from Body.dat",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Server/Services/GameDataService.cs:LoadAllAsync",
         "sends": [],
         "calls": [
           "InitGrh"
@@ -532,7 +534,8 @@
       "annotations": {
         "purpose": "Load head sprite data from Head.dat",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Server/Services/GameDataService.cs:LoadAllAsync",
         "sends": [],
         "calls": [
           "InitGrh"

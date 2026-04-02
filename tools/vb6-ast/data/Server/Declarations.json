@@ -22,7 +22,8 @@
       "lineEnd": 176,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - inline coordinates",
         "sends": [],
         "calls": []
       }
@@ -50,7 +51,8 @@
       "lineEnd": 182,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - inline coordinates",
         "sends": [],
         "calls": []
       }
@@ -93,7 +95,8 @@
       "lineEnd": 192,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - part of runtime state, deferred",
         "sends": [],
         "calls": []
       }
@@ -131,7 +134,8 @@
       "lineEnd": 200,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - deferred to Phase 7",
         "sends": [],
         "calls": []
       }
@@ -159,7 +163,8 @@
       "lineEnd": 207,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - deferred to Phase 7",
         "sends": [],
         "calls": []
       }
@@ -351,7 +356,8 @@
       "lineEnd": 250,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/NpcDef.cs:NpcInvSlot",
         "sends": [],
         "calls": []
       }
@@ -369,7 +375,8 @@
       "lineEnd": 254,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - inline in spell book",
         "sends": [],
         "calls": []
       }
@@ -542,7 +549,8 @@
       "lineEnd": 292,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/SpellDef.cs:SpellDef",
         "sends": [],
         "calls": []
       }
@@ -825,7 +833,8 @@
       "lineEnd": 358,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - runtime model, deferred to Phase 4",
         "sends": [],
         "calls": []
       }
@@ -978,7 +987,8 @@
       "lineEnd": 394,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - runtime model, deferred to Phase 4",
         "sends": [],
         "calls": []
       }
@@ -1021,7 +1031,8 @@
       "lineEnd": 407,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - runtime model, deferred to Phase 4",
         "sends": [],
         "calls": []
       }
@@ -1084,7 +1095,8 @@
       "lineEnd": 423,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - runtime model, deferred to Phase 4",
         "sends": [],
         "calls": []
       }
@@ -1102,7 +1114,8 @@
       "lineEnd": 427,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - runtime model, deferred to Phase 4",
         "sends": [],
         "calls": []
       }
@@ -1120,7 +1133,8 @@
       "lineEnd": 431,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - inline in spell book",
         "sends": [],
         "calls": []
       }
@@ -1148,7 +1162,8 @@
       "lineEnd": 437,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - inline in inventory",
         "sends": [],
         "calls": []
       }
@@ -1176,7 +1191,8 @@
       "lineEnd": 443,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/NpcDef.cs:NpcInvSlot",
         "sends": [],
         "calls": []
       }
@@ -1401,7 +1417,8 @@
       "lineEnd": 495,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - runtime model, deferred to Phase 4",
         "sends": [],
         "calls": []
       }
@@ -1439,7 +1456,8 @@
       "lineEnd": 504,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/NpcDef.cs:NpcDef",
         "sends": [],
         "calls": []
       }
@@ -1502,7 +1520,8 @@
       "lineEnd": 517,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/NpcDef.cs:NpcDef",
         "sends": [],
         "calls": []
       }
@@ -1520,7 +1539,8 @@
       "lineEnd": 523,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - computed from level, deferred",
         "sends": [],
         "calls": []
       }
@@ -1669,7 +1689,8 @@
       "lineEnd": 562,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/NpcDef.cs:NpcDef",
         "sends": [],
         "calls": []
       }
@@ -1687,7 +1708,8 @@
       "lineEnd": 570,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - runtime state",
         "sends": [],
         "calls": []
       }
@@ -1740,7 +1762,8 @@
       "lineEnd": 582,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/MapDef.cs:MapTileLayers",
         "sends": [],
         "calls": []
       }
@@ -1808,7 +1831,8 @@
       "lineEnd": 597,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/MapDef.cs:MapDef",
         "sends": [],
         "calls": []
       }
@@ -1823,7 +1847,7 @@
       "annotations": {
         "notes": [],
         "status": "ported",
-        "csharpLocation": "Shared/Constants/Direction.cs:Direction.North",
+        "csharpLocation": "Shared/Constants/Direction.cs:Direction",
         "sends": [],
         "calls": []
       }
@@ -1835,7 +1859,8 @@
       "line": 10,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/Direction.cs:Direction",
         "sends": [],
         "calls": []
       }
@@ -1847,7 +1872,8 @@
       "line": 11,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/Direction.cs:Direction",
         "sends": [],
         "calls": []
       }
@@ -1859,7 +1885,8 @@
       "line": 12,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/Direction.cs:Direction",
         "sends": [],
         "calls": []
       }
@@ -1871,7 +1898,8 @@
       "line": 15,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -1883,7 +1911,8 @@
       "line": 16,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -1895,7 +1924,8 @@
       "line": 17,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -1907,7 +1937,8 @@
       "line": 18,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -1919,7 +1950,8 @@
       "line": 21,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -1931,7 +1963,8 @@
       "line": 22,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -1943,7 +1976,8 @@
       "line": 25,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -1955,7 +1989,8 @@
       "line": 26,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -1967,7 +2002,8 @@
       "line": 29,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -1979,7 +2015,8 @@
       "line": 30,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -1991,7 +2028,8 @@
       "line": 31,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2003,7 +2041,8 @@
       "line": 32,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2015,7 +2054,8 @@
       "line": 33,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2027,7 +2067,8 @@
       "line": 34,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2039,7 +2080,8 @@
       "line": 35,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2051,7 +2093,8 @@
       "line": 36,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2063,7 +2106,8 @@
       "line": 37,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2075,7 +2119,8 @@
       "line": 38,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2087,7 +2132,8 @@
       "line": 39,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2099,7 +2145,8 @@
       "line": 40,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2111,7 +2158,8 @@
       "line": 41,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2123,7 +2171,8 @@
       "line": 42,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2135,7 +2184,8 @@
       "line": 43,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2147,7 +2197,8 @@
       "line": 44,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2159,7 +2210,8 @@
       "line": 45,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2171,7 +2223,8 @@
       "line": 46,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2183,7 +2236,8 @@
       "line": 47,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2195,7 +2249,8 @@
       "line": 48,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2207,7 +2262,8 @@
       "line": 49,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2219,7 +2275,8 @@
       "line": 50,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2231,7 +2288,8 @@
       "line": 51,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2243,7 +2301,8 @@
       "line": 52,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2255,7 +2314,8 @@
       "line": 53,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2267,7 +2327,8 @@
       "line": 54,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2279,7 +2340,8 @@
       "line": 55,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2291,7 +2353,8 @@
       "line": 56,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2303,7 +2366,8 @@
       "line": 57,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2315,7 +2379,8 @@
       "line": 58,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2327,7 +2392,8 @@
       "line": 59,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2339,7 +2405,8 @@
       "line": 60,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2351,7 +2418,8 @@
       "line": 61,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2363,7 +2431,8 @@
       "line": 62,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2375,7 +2444,8 @@
       "line": 63,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2387,7 +2457,8 @@
       "line": 64,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2399,7 +2470,8 @@
       "line": 65,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2411,7 +2483,8 @@
       "line": 66,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2423,7 +2496,8 @@
       "line": 67,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2435,7 +2509,8 @@
       "line": 68,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2447,7 +2522,8 @@
       "line": 69,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2459,7 +2535,8 @@
       "line": 70,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2471,7 +2548,8 @@
       "line": 71,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2483,7 +2561,8 @@
       "line": 72,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2495,7 +2574,8 @@
       "line": 75,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2507,7 +2587,8 @@
       "line": 76,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2519,7 +2600,8 @@
       "line": 77,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2531,7 +2613,8 @@
       "line": 78,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2543,7 +2626,8 @@
       "line": 79,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2555,7 +2639,8 @@
       "line": 80,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2567,7 +2652,8 @@
       "line": 81,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2579,7 +2665,8 @@
       "line": 82,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2591,7 +2678,8 @@
       "line": 83,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2603,7 +2691,8 @@
       "line": 84,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2615,7 +2704,8 @@
       "line": 85,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2627,7 +2717,8 @@
       "line": 86,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2639,7 +2730,8 @@
       "line": 87,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2651,7 +2743,8 @@
       "line": 88,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2663,7 +2756,8 @@
       "line": 89,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2675,7 +2769,8 @@
       "line": 90,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/SoundId.cs:SoundId",
         "sends": [],
         "calls": []
       }
@@ -2687,7 +2782,8 @@
       "line": 94,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -2699,7 +2795,8 @@
       "line": 95,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -2711,7 +2808,8 @@
       "line": 98,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -2723,7 +2821,8 @@
       "line": 99,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -2735,7 +2834,8 @@
       "line": 102,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -2747,7 +2847,8 @@
       "line": 103,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -2759,7 +2860,8 @@
       "line": 106,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2771,7 +2873,8 @@
       "line": 107,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2783,7 +2886,8 @@
       "line": 108,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2795,7 +2899,8 @@
       "line": 109,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2807,7 +2912,8 @@
       "line": 110,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2819,7 +2925,8 @@
       "line": 111,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2831,7 +2938,8 @@
       "line": 112,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2843,7 +2951,8 @@
       "line": 113,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2855,7 +2964,8 @@
       "line": 114,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2867,7 +2977,8 @@
       "line": 115,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2879,7 +2990,8 @@
       "line": 116,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2891,7 +3003,8 @@
       "line": 117,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2903,7 +3016,8 @@
       "line": 118,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2915,7 +3029,8 @@
       "line": 119,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2927,7 +3042,8 @@
       "line": 120,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2939,7 +3055,8 @@
       "line": 121,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2951,7 +3068,8 @@
       "line": 122,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2963,7 +3081,8 @@
       "line": 123,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2975,7 +3094,8 @@
       "line": 124,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2987,7 +3107,8 @@
       "line": 125,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -2999,7 +3120,8 @@
       "line": 126,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3011,7 +3133,8 @@
       "line": 127,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3023,7 +3146,8 @@
       "line": 129,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3035,7 +3159,8 @@
       "line": 131,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3047,7 +3172,8 @@
       "line": 132,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3059,7 +3185,8 @@
       "line": 133,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3071,7 +3198,8 @@
       "line": 134,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3083,7 +3211,8 @@
       "line": 135,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3095,7 +3224,8 @@
       "line": 136,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3107,7 +3237,8 @@
       "line": 137,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3119,7 +3250,8 @@
       "line": 138,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3131,7 +3263,8 @@
       "line": 139,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3143,7 +3276,8 @@
       "line": 140,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3155,7 +3289,8 @@
       "line": 141,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3167,7 +3302,8 @@
       "line": 142,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3179,7 +3315,8 @@
       "line": 143,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3191,7 +3328,8 @@
       "line": 144,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3203,7 +3341,8 @@
       "line": 145,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3215,7 +3354,8 @@
       "line": 146,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3227,7 +3367,8 @@
       "line": 147,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3239,7 +3380,8 @@
       "line": 148,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3251,7 +3393,8 @@
       "line": 149,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3263,7 +3406,8 @@
       "line": 150,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3275,7 +3419,8 @@
       "line": 151,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3287,7 +3432,8 @@
       "line": 152,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3299,7 +3445,8 @@
       "line": 153,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3311,7 +3458,8 @@
       "line": 154,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/ObjectType.cs:ObjectType",
         "sends": [],
         "calls": []
       }
@@ -3323,7 +3471,8 @@
       "line": 157,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:FontType",
         "sends": [],
         "calls": []
       }
@@ -3335,7 +3484,8 @@
       "line": 158,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:FontType",
         "sends": [],
         "calls": []
       }
@@ -3347,7 +3497,8 @@
       "line": 159,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:FontType",
         "sends": [],
         "calls": []
       }
@@ -3359,7 +3510,8 @@
       "line": 160,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:FontType",
         "sends": [],
         "calls": []
       }
@@ -3371,7 +3523,8 @@
       "line": 161,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:FontType",
         "sends": [],
         "calls": []
       }
@@ -3383,7 +3536,8 @@
       "line": 164,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -3395,7 +3549,8 @@
       "line": 165,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -3407,7 +3562,8 @@
       "line": 166,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -3419,7 +3575,8 @@
       "line": 167,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -3431,7 +3588,8 @@
       "line": 168,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }
@@ -3443,7 +3601,8 @@
       "line": 169,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs:GameConstants",
         "sends": [],
         "calls": []
       }

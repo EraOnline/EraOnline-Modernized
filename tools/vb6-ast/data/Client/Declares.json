@@ -22,7 +22,8 @@
       "lineEnd": 65,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - inline coordinates",
         "sends": [],
         "calls": []
       }
@@ -50,7 +51,8 @@
       "lineEnd": 72,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - inline coordinates",
         "sends": [],
         "calls": []
       }
@@ -114,7 +116,8 @@
       "lineEnd": 88,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/SpriteDefs.cs:GrhEntry",
         "sends": [],
         "calls": []
       }
@@ -147,7 +150,8 @@
       "lineEnd": 96,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - runtime animation state",
         "sends": [],
         "calls": []
       }
@@ -171,7 +175,8 @@
       "lineEnd": 102,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/SpriteDefs.cs:BodyDef",
         "sends": [],
         "calls": []
       }
@@ -190,7 +195,8 @@
       "lineEnd": 107,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/SpriteDefs.cs:AnimDef",
         "sends": [],
         "calls": []
       }
@@ -209,7 +215,8 @@
       "lineEnd": 112,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/SpriteDefs.cs:AnimDef",
         "sends": [],
         "calls": []
       }
@@ -228,7 +235,8 @@
       "lineEnd": 117,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/SpriteDefs.cs:HeadDef",
         "sends": [],
         "calls": []
       }
@@ -286,7 +294,8 @@
       "lineEnd": 132,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - runtime character state",
         "sends": [],
         "calls": []
       }
@@ -329,7 +338,8 @@
       "lineEnd": 142,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - runtime inventory UI",
         "sends": [],
         "calls": []
       }
@@ -377,7 +387,8 @@
       "lineEnd": 153,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - runtime NPC trade UI",
         "sends": [],
         "calls": []
       }
@@ -425,7 +436,8 @@
       "lineEnd": 165,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - runtime spell book UI",
         "sends": [],
         "calls": []
       }
@@ -463,7 +475,8 @@
       "lineEnd": 173,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - deferred to Phase 7",
         "sends": [],
         "calls": []
       }
@@ -491,7 +504,8 @@
       "lineEnd": 180,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - deferred to Phase 7",
         "sends": [],
         "calls": []
       }
@@ -524,7 +538,8 @@
       "lineEnd": 188,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - deferred to Phase 5",
         "sends": [],
         "calls": []
       }
@@ -562,7 +577,8 @@
       "lineEnd": 197,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - deferred to Phase 5",
         "sends": [],
         "calls": []
       }
@@ -596,7 +612,8 @@
       "lineEnd": 206,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/MapDef.cs:MapTileLayers",
         "sends": [],
         "calls": []
       }
@@ -619,7 +636,8 @@
       "lineEnd": 212,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/MapDef.cs:MapDef",
         "sends": [],
         "calls": []
       }
@@ -657,7 +675,8 @@
       "lineEnd": 221,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - not needed, using PNG",
         "sends": [],
         "calls": []
       }
@@ -725,7 +744,8 @@
       "lineEnd": 236,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - not needed, using PNG",
         "sends": [],
         "calls": []
       }
@@ -739,7 +759,8 @@
       "line": 7,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -751,7 +772,8 @@
       "line": 8,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -763,7 +785,8 @@
       "line": 9,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -775,7 +798,8 @@
       "line": 10,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -787,7 +811,8 @@
       "line": 13,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -799,7 +824,8 @@
       "line": 14,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -811,7 +837,8 @@
       "line": 15,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -823,7 +850,8 @@
       "line": 16,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -835,7 +863,8 @@
       "line": 21,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -847,7 +876,8 @@
       "line": 24,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -859,7 +889,8 @@
       "line": 25,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -871,7 +902,8 @@
       "line": 29,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -883,7 +915,8 @@
       "line": 30,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -895,7 +928,8 @@
       "line": 34,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -907,7 +941,8 @@
       "line": 35,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -919,7 +954,8 @@
       "line": 38,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -931,7 +967,8 @@
       "line": 39,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -943,7 +980,8 @@
       "line": 42,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -955,7 +993,8 @@
       "line": 43,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -967,7 +1006,8 @@
       "line": 46,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -979,7 +1019,8 @@
       "line": 47,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/GameConstants.cs",
         "sends": [],
         "calls": []
       }
@@ -991,7 +1032,8 @@
       "line": 50,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - deferred",
         "sends": [],
         "calls": []
       }
@@ -1003,7 +1045,8 @@
       "line": 51,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - deferred",
         "sends": [],
         "calls": []
       }
@@ -1015,7 +1058,8 @@
       "line": 54,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - deferred",
         "sends": [],
         "calls": []
       }
@@ -1027,7 +1071,8 @@
       "line": 57,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - deferred",
         "sends": [],
         "calls": []
       }
@@ -1039,7 +1084,8 @@
       "line": 435,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - deferred",
         "sends": [],
         "calls": []
       }
@@ -1051,7 +1097,8 @@
       "line": 436,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - deferred",
         "sends": [],
         "calls": []
       }
@@ -1063,7 +1110,8 @@
       "line": 438,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "skipped",
+        "csharpLocation": "N/A - deferred",
         "sends": [],
         "calls": []
       }

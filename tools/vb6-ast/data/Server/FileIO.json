@@ -18,7 +18,8 @@
       "annotations": {
         "purpose": "Load all item definitions from Obj.dat into ObjData array",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Server/Services/GameDataService.cs:LoadAllAsync",
         "sends": [],
         "calls": []
       }
@@ -33,7 +34,8 @@
       "annotations": {
         "purpose": "Load all spell definitions from Spells.dat into SpellData array",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Server/Services/GameDataService.cs:LoadAllAsync",
         "sends": [],
         "calls": []
       }
@@ -110,7 +112,8 @@
       "annotations": {
         "purpose": "Load all map tiles from binary .map files",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Server/Services/GameDataService.cs:LoadAllAsync",
         "sends": [],
         "calls": [
           "Seek",
@@ -129,7 +132,8 @@
       "annotations": {
         "purpose": "Load server configuration from Server.ini",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Server/Services/GameDataService.cs:LoadAllAsync",
         "sends": [],
         "calls": []
       }
