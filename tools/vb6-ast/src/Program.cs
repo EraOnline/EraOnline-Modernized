@@ -199,7 +199,9 @@ int RunList(string[] args)
                 Console.WriteLine($"\n=== {m.Address} ===");
                 foreach (var t in m.Types)
                 {
-                    Console.WriteLine($"  Type {t.Name} ({t.Fields.Count} fields) L{t.LineStart}-{t.LineEnd}");
+                    var statusTag = t.Annotations.Status switch { "ported" => "[x]", "skipped" => "[-]", "in-progress" => "[~]", _ => "[ ]" };
+                    var csharpInfo = t.Annotations.CsharpLocation != null ? $"  -> {t.Annotations.CsharpLocation}" : "";
+                    Console.WriteLine($"  {statusTag} Type {t.Name} ({t.Fields.Count} fields) L{t.LineStart}-{t.LineEnd}{csharpInfo}");
                     foreach (var f in t.Fields)
                     {
                         var arrayInfo = f.IsArray ? $"({f.ArrayBounds})" : "";
@@ -215,7 +217,11 @@ int RunList(string[] args)
                 if (m.Constants.Count == 0) continue;
                 Console.WriteLine($"\n=== {m.Address} ===");
                 foreach (var c in m.Constants)
-                    Console.WriteLine($"  {c.Visibility,-7} Const {c.Name,-35} = {c.Value}");
+                {
+                    var statusTag = c.Annotations.Status switch { "ported" => "[x]", "skipped" => "[-]", "in-progress" => "[~]", _ => "[ ]" };
+                    var csharpInfo = c.Annotations.CsharpLocation != null ? $"  -> {c.Annotations.CsharpLocation}" : "";
+                    Console.WriteLine($"  {statusTag} {c.Visibility,-7} Const {c.Name,-35} = {c.Value}{csharpInfo}");
+                }
             }
             break;
 
@@ -226,8 +232,10 @@ int RunList(string[] args)
                 Console.WriteLine($"\n=== {m.Address} ===");
                 foreach (var v in m.Variables)
                 {
+                    var statusTag = v.Annotations.Status switch { "ported" => "[x]", "skipped" => "[-]", "in-progress" => "[~]", _ => "[ ]" };
+                    var csharpInfo = v.Annotations.CsharpLocation != null ? $"  -> {v.Annotations.CsharpLocation}" : "";
                     var arrayInfo = v.IsArray ? $"({v.ArrayBounds})" : "";
-                    Console.WriteLine($"  {v.Visibility,-7} {v.Name,-35} As {v.VariableType}{arrayInfo}");
+                    Console.WriteLine($"  {statusTag} {v.Visibility,-7} {v.Name,-35} As {v.VariableType}{arrayInfo}{csharpInfo}");
                 }
             }
             break;
@@ -363,6 +371,8 @@ int RunAnnotate(string[] args)
         Address format (required, must be unambiguous):
           Server/GameLogic:UserDie      A specific member in a specific module
           Server/Declarations:User      A specific type (with --type)
+          Server/Declarations:NORTH     A constant (with --constant)
+          Server/Declarations:UserList  A global variable (with --global)
 
         Options:
           --purpose TEXT    Set purpose description
@@ -372,6 +382,8 @@ int RunAnnotate(string[] args)
           --sends MSG,MSG   Set protocol messages sent
           --calls FN,FN     Set functions called
           --type            Target a type definition instead of a member
+          --constant        Target a constant instead of a member
+          --global          Target a global variable instead of a member
         """);
         return 1;
     }
@@ -397,6 +409,8 @@ int RunAnnotate(string[] args)
     }
 
     bool isType = HasFlag(args, "--type");
+    bool isConstant = HasFlag(args, "--constant");
+    bool isGlobal = HasFlag(args, "--global");
     var purpose = GetFlag(args, "--purpose");
     var note = GetFlag(args, "--note");
     var status = GetFlag(args, "--status");
@@ -412,6 +426,22 @@ int RunAnnotate(string[] args)
         if (type == null) { Console.Error.WriteLine($"Type '{memberName}' not found in {module.Address}"); return 1; }
         ApplyAnnotation(type.Annotations, purpose, note, status, csharp, sends, calls);
         Console.WriteLine($"Updated type {memberName} in {module.Address}");
+        changed = true;
+    }
+    else if (isConstant)
+    {
+        var constant = module.Constants.FirstOrDefault(c => c.Name.Equals(memberName, StringComparison.OrdinalIgnoreCase));
+        if (constant == null) { Console.Error.WriteLine($"Constant '{memberName}' not found in {module.Address}"); return 1; }
+        ApplyAnnotation(constant.Annotations, purpose, note, status, csharp, sends, calls);
+        Console.WriteLine($"Updated constant {memberName} in {module.Address}");
+        changed = true;
+    }
+    else if (isGlobal)
+    {
+        var variable = module.Variables.FirstOrDefault(v => v.Name.Equals(memberName, StringComparison.OrdinalIgnoreCase));
+        if (variable == null) { Console.Error.WriteLine($"Global '{memberName}' not found in {module.Address}"); return 1; }
+        ApplyAnnotation(variable.Annotations, purpose, note, status, csharp, sends, calls);
+        Console.WriteLine($"Updated global {memberName} in {module.Address}");
         changed = true;
     }
     else
@@ -475,22 +505,34 @@ int RunQuery(string[] args)
         return 0;
     }
 
-    var results = modules.SelectMany(m => m.Members.Select(member => (Module: m, Member: member)));
+    // Build unified list of all annotatable items: members, types, constants, globals
+    var items = new List<(Vb6Module Module, string Kind, string Name, Annotations Ann)>();
 
-    if (statusFilter != "") results = results.Where(x => x.Member.Annotations.Status.Equals(statusFilter, StringComparison.OrdinalIgnoreCase));
-    if (unannotated) results = results.Where(x => string.IsNullOrEmpty(x.Member.Annotations.Purpose));
-    if (sendsFilter != "") results = results.Where(x => x.Member.Annotations.Sends.Any(s => s.Equals(sendsFilter, StringComparison.OrdinalIgnoreCase)));
-    if (callsFilter != "") results = results.Where(x => x.Member.Annotations.Calls.Any(c => c.Contains(callsFilter, StringComparison.OrdinalIgnoreCase)));
-
-    var list = results.ToList();
-
-    foreach (var (module, member) in list)
+    foreach (var m in modules)
     {
-        var statusTag = member.Annotations.Status switch { "ported" => "[x]", "skipped" => "[-]", "in-progress" => "[~]", _ => "[ ]" };
-        Console.WriteLine($"  {statusTag} {module.Address}:{member.Name,-35} {member.Kind,-8} L{member.LineStart}-{member.LineEnd}");
+        foreach (var member in m.Members)
+            items.Add((m, member.Kind, member.Name, member.Annotations));
+        foreach (var t in m.Types)
+            items.Add((m, "type", t.Name, t.Annotations));
+        foreach (var c in m.Constants)
+            items.Add((m, "const", c.Name, c.Annotations));
+        foreach (var v in m.Variables)
+            items.Add((m, "global", v.Name, v.Annotations));
     }
 
-    Console.WriteLine($"\n{list.Count} results.");
+    if (statusFilter != "") items = items.Where(x => x.Ann.Status.Equals(statusFilter, StringComparison.OrdinalIgnoreCase)).ToList();
+    if (unannotated) items = items.Where(x => string.IsNullOrEmpty(x.Ann.Purpose)).ToList();
+    if (sendsFilter != "") items = items.Where(x => x.Ann.Sends.Any(s => s.Equals(sendsFilter, StringComparison.OrdinalIgnoreCase))).ToList();
+    if (callsFilter != "") items = items.Where(x => x.Ann.Calls.Any(c => c.Contains(callsFilter, StringComparison.OrdinalIgnoreCase))).ToList();
+
+    foreach (var (module, kind, name, ann) in items)
+    {
+        var statusTag = ann.Status switch { "ported" => "[x]", "skipped" => "[-]", "in-progress" => "[~]", _ => "[ ]" };
+        var csharpInfo = ann.CsharpLocation != null ? $"  -> {ann.CsharpLocation}" : "";
+        Console.WriteLine($"  {statusTag} {module.Address}:{name,-35} {kind,-8}{csharpInfo}");
+    }
+
+    Console.WriteLine($"\n{items.Count} results.");
     return 0;
 }
 
@@ -507,36 +549,59 @@ int RunStats(string[] args)
         .OrderBy(m => m.SourcePath)
         .ToList();
 
-    int totalMembers = 0, ported = 0, skipped = 0, inProgress = 0, notStarted = 0, totalAnnotated = 0;
-    int totalTypes = 0, totalConsts = 0, totalVars = 0, totalControls = 0;
+    // Collect all annotatable items across all modules
+    int totalMembers = 0, membersPorted = 0, membersSkipped = 0;
+    int totalTypes = 0, typesPorted = 0, typesSkipped = 0;
+    int totalConsts = 0, constsPorted = 0, constsSkipped = 0;
+    int totalGlobals = 0, globalsPorted = 0, globalsSkipped = 0;
+    int totalControls = 0;
 
-    Console.WriteLine($"{"Address",-35} {"Total",6} {"Done",5} {"Skip",5} {"WIP",4} {"TODO",5} {"Ann%",5}");
-    Console.WriteLine(new string('-', 68));
+    Console.WriteLine($"{"Address",-35} {"Func",5} {"Type",5} {"Const",6} {"Glob",5} {"Ported",7} {"Skip",5}");
+    Console.WriteLine(new string('-', 75));
 
     foreach (var m in modules)
     {
-        int mTotal = m.Members.Count;
+        int mMembers = m.Members.Count;
+        int mTypes = m.Types.Count;
+        int mConsts = m.Constants.Count;
+        int mGlobals = m.Variables.Count;
+        int mTotal = mMembers + mTypes + mConsts + mGlobals;
         if (mTotal == 0 && !showAll) continue;
 
-        int mPorted = m.Members.Count(x => x.Annotations.Status == "ported");
-        int mSkipped = m.Members.Count(x => x.Annotations.Status == "skipped");
-        int mInProgress = m.Members.Count(x => x.Annotations.Status == "in-progress");
-        int mNotStarted = m.Members.Count(x => x.Annotations.Status == "not-started");
-        int mAnnotated = m.Members.Count(x => !string.IsNullOrEmpty(x.Annotations.Purpose));
-        var annPct = mTotal > 0 ? (mAnnotated * 100 / mTotal).ToString() + "%" : "-";
+        int mPorted = m.Members.Count(x => x.Annotations.Status == "ported")
+            + m.Types.Count(x => x.Annotations.Status == "ported")
+            + m.Constants.Count(x => x.Annotations.Status == "ported")
+            + m.Variables.Count(x => x.Annotations.Status == "ported");
+        int mSkipped = m.Members.Count(x => x.Annotations.Status == "skipped")
+            + m.Types.Count(x => x.Annotations.Status == "skipped")
+            + m.Constants.Count(x => x.Annotations.Status == "skipped")
+            + m.Variables.Count(x => x.Annotations.Status == "skipped");
 
-        Console.WriteLine($"{m.Address,-35} {mTotal,6} {mPorted,5} {mSkipped,5} {mInProgress,4} {mNotStarted,5} {annPct,5}");
+        Console.WriteLine($"{m.Address,-35} {mMembers,5} {mTypes,5} {mConsts,6} {mGlobals,5} {mPorted,7} {mSkipped,5}");
 
-        totalMembers += mTotal; ported += mPorted; skipped += mSkipped;
-        inProgress += mInProgress; notStarted += mNotStarted; totalAnnotated += mAnnotated;
-        totalTypes += m.Types.Count; totalConsts += m.Constants.Count;
-        totalVars += m.Variables.Count; totalControls += m.Controls.Count;
+        totalMembers += mMembers; membersPorted += m.Members.Count(x => x.Annotations.Status == "ported"); membersSkipped += m.Members.Count(x => x.Annotations.Status == "skipped");
+        totalTypes += mTypes; typesPorted += m.Types.Count(x => x.Annotations.Status == "ported"); typesSkipped += m.Types.Count(x => x.Annotations.Status == "skipped");
+        totalConsts += mConsts; constsPorted += m.Constants.Count(x => x.Annotations.Status == "ported"); constsSkipped += m.Constants.Count(x => x.Annotations.Status == "ported");
+        totalGlobals += mGlobals; globalsPorted += m.Variables.Count(x => x.Annotations.Status == "ported"); globalsSkipped += m.Variables.Count(x => x.Annotations.Status == "skipped");
+        totalControls += m.Controls.Count;
     }
 
-    Console.WriteLine(new string('-', 68));
-    var totalAnnPct = totalMembers > 0 ? (totalAnnotated * 100 / totalMembers).ToString() + "%" : "-";
-    Console.WriteLine($"{"TOTAL",-35} {totalMembers,6} {ported,5} {skipped,5} {inProgress,4} {notStarted,5} {totalAnnPct,5}");
-    Console.WriteLine($"\nTypes: {totalTypes}  Constants: {totalConsts}  Globals: {totalVars}  Controls: {totalControls}  Modules: {modules.Count}");
+    int grandTotal = totalMembers + totalTypes + totalConsts + totalGlobals;
+    int grandPorted = membersPorted + typesPorted + constsPorted + globalsPorted;
+    int grandSkipped = membersSkipped + typesSkipped + constsSkipped + globalsSkipped;
+
+    Console.WriteLine(new string('-', 75));
+    Console.WriteLine($"{"TOTAL",-35} {totalMembers,5} {totalTypes,5} {totalConsts,6} {totalGlobals,5} {grandPorted,7} {grandSkipped,5}");
+
+    Console.WriteLine();
+    Console.WriteLine($"Porting progress:");
+    Console.WriteLine($"  Functions/Subs: {membersPorted}/{totalMembers} ported, {membersSkipped} skipped");
+    Console.WriteLine($"  Types:          {typesPorted}/{totalTypes} ported, {typesSkipped} skipped");
+    Console.WriteLine($"  Constants:      {constsPorted}/{totalConsts} ported, {constsSkipped} skipped");
+    Console.WriteLine($"  Globals:        {globalsPorted}/{totalGlobals} ported, {globalsSkipped} skipped");
+    Console.WriteLine($"  ---");
+    Console.WriteLine($"  Overall:        {grandPorted}/{grandTotal} ported ({(grandTotal > 0 ? grandPorted * 100 / grandTotal : 0)}%), {grandSkipped} skipped");
+    Console.WriteLine($"\n  Controls: {totalControls}  Modules: {modules.Count}");
 
     return 0;
 }
@@ -555,14 +620,16 @@ int PrintUsage()
       vb6-ast parse [--file PATTERN]              Parse VB6 files, extract declarations + call graph
       vb6-ast list <what> [--module ADDR]          List modules|members|types|constants|globals|controls
       vb6-ast show <address|name> [--type]         Show details of a member or type
-      vb6-ast annotate <addr:name> [OPTIONS]       Annotate a specific member or type (must be fully qualified)
+      vb6-ast annotate <addr:name> [OPTIONS]       Annotate a member, type, constant, or global
         --purpose TEXT    Set purpose description
         --note TEXT       Add a note (appends)
         --status STATUS   Set status: not-started|in-progress|ported|skipped
         --csharp LOC      Set C# implementation location
         --sends MSG,MSG   Set protocol messages sent
         --calls FN,FN     Set functions called
-        --type            Target a type definition instead of a member
+        --type            Target a type definition
+        --constant        Target a constant
+        --global          Target a global variable
       vb6-ast query [OPTIONS]                      Search across all modules
         --status STATUS   Filter by porting status
         --module ADDR     Filter by module address

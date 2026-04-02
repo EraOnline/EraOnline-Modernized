@@ -327,7 +327,8 @@
       "lineEnd": 245,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Models/ObjectDef.cs:ObjectDef",
         "sends": [],
         "calls": []
       }
@@ -1821,7 +1822,8 @@
       "line": 9,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "csharpLocation": "Shared/Constants/Direction.cs:Direction.North",
         "sends": [],
         "calls": []
       }
