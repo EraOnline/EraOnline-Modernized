@@ -2,9 +2,9 @@
 
 ## Current State
 
-**Phase 2 in progress.** Castlefall renders faithfully in the browser - ground tiles, fringe layer, buildings, trees, NPC characters. Visually verified against original screenshots. Arrow key panning works. Remaining: walk animation playback, scrolling viewport (smooth pixel interpolation).
+**Phase 2 nearly complete.** Rendering engine is faithful to the original: tile animations (water), walk animations, smooth 8px/frame scrolling viewport with screen buffer overdraw, 30fps frame limiter, FPS counter. A test player walks around Castlefall with arrow keys. Remaining: object renderer (deferred to Phase 4, needs server state).
 
-Most recent log: [2026-04-02](logs/2026-04-02.md)
+Most recent log: [2026-04-04](logs/2026-04-04.md)
 
 ---
 
@@ -34,9 +34,11 @@ Get the original game's visuals rendering in a browser via Canvas. No server con
 - [x] Character renderer: composite head + body + weapon + shield, directional sprites, HeadOffset
 - [x] Viewport: 20x11 tiles centered on camera position
 - [x] Render Map 81 (Castlefall) with 33 NPCs at spawn positions
-- [ ] Scrolling viewport (keyboard-driven camera movement for testing)
-- [ ] Walk animation playback for animated tiles and characters
-- [ ] Object renderer (items on ground - deferred, needs server state)
+- [x] Scrolling viewport: smooth 8px/frame pixel interpolation matching VB6, screen buffer overdraw
+- [x] Walk animation playback for animated tiles (water) and characters (walk cycles)
+- [x] 30fps frame limiter matching original VB6 cap, FPS counter display
+- [x] Test player character with collision detection (blocked tiles, NPC positions)
+- [ ] Object renderer (items on ground - deferred to Phase 4, needs server state)
 
 **Milestone:** Open browser, see an original Era Online map rendered faithfully - tiles, objects, characters with correct sprites. Hard-coded position, no networking.
 
