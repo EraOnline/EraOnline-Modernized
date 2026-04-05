@@ -57,6 +57,13 @@ const EraClient = (() => {
             document.getElementById('loading').textContent = 'Reconnected!';
         });
 
+        // Initialize renderer first (loads sprite definitions, GRH data, etc.)
+        // This must happen BEFORE connecting, because the server sends MapLoad
+        // and MakeChar messages during Login, and the renderer needs its sprite
+        // data loaded to handle them.
+        await EraRenderer.init('game-viewport', '/data');
+        EraRenderer.setMoveCallback(onPlayerMove);
+
         // Connect
         try {
             await connection.start();
@@ -108,15 +115,9 @@ const EraClient = (() => {
         }
     }
 
-    async function enterGame() {
+    function enterGame() {
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('game-screen').style.display = '';
-
-        // Initialize the renderer (loads sprite data, etc.)
-        await EraRenderer.init('game-viewport', '/data');
-
-        // Tell the renderer to send movement through us
-        EraRenderer.setMoveCallback(onPlayerMove);
     }
 
     // --- Server -> Client handlers ---
