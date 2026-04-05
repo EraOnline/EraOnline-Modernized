@@ -2,7 +2,7 @@
 
 ## Current State
 
-**Phase 3 in progress.** Multiplayer works: login, character creation, server-authoritative movement. Two browser tabs can walk around Castlefall seeing each other. Next: client UI chrome (parchment border, stat bars, chat), chat system, map transitions.
+**Phase 3 in progress.** Multiplayer works with original UI chrome: login, character creation, server-authoritative movement, parchment/wood frame, stat bars, chat panel. Next: wire up chat, character/spells/skills panels, map transitions.
 
 Most recent log: [2026-04-05](logs/2026-04-05.md)
 
@@ -52,7 +52,8 @@ Connect the client and server. Login, movement, seeing other players, chat.
 - [x] Server: send map data, character positions, NPC positions on zone entry
 - [x] Client: receive and render other characters and NPCs from server data
 - [x] Movement: client sends direction -> server validates -> broadcast to all clients -> animate
-- [ ] Client UI chrome: parchment border, stat bars, chat panel, character/spells/skills buttons
+- [x] Client UI chrome: parchment/wood frame (interface.JPG), bottom panel (bottomface.JPG), stat bars, chat input/log, login overlay (menu.jpg)
+- [ ] Chat: say, shout, emote, whisper (server hub methods + broadcast)
 - [ ] Map transitions: walking off zone edge loads adjacent zone (N/S/E/W exits)
 - [ ] Map transitions: tile-based warps (doors, stairs, etc.)
 - [ ] Chat: say, shout, emote, whisper
