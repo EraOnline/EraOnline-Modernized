@@ -107,7 +107,6 @@ const EraRenderer = (() => {
         const resp = await fetch(`${dataBasePath}/maps/map-${padded}.json`);
         mapData = await resp.json();
         tileAnimState = {};
-        characters = {}; // clear - server will send MakeChar for everyone
         await preloadVisibleSheets();
         setStatus(`Map ${mapId} loaded`);
     }
