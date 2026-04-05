@@ -2,9 +2,9 @@
 
 ## Current State
 
-**Phase 2 nearly complete.** Rendering engine is faithful to the original: tile animations (water), walk animations, smooth 8px/frame scrolling viewport with screen buffer overdraw, 30fps frame limiter, FPS counter. A test player walks around Castlefall with arrow keys. Remaining: object renderer (deferred to Phase 4, needs server state).
+**Phase 3 in progress.** Multiplayer works: login, character creation, server-authoritative movement. Two browser tabs can walk around Castlefall seeing each other. Next: client UI chrome (parchment border, stat bars, chat), chat system, map transitions.
 
-Most recent log: [2026-04-04](logs/2026-04-04.md)
+Most recent log: [2026-04-05](logs/2026-04-05.md)
 
 ---
 
@@ -46,12 +46,13 @@ Get the original game's visuals rendering in a browser via Canvas. No server con
 
 Connect the client and server. Login, movement, seeing other players, chat.
 
-- [ ] Login / character creation UI (port original forms)
-- [ ] SignalR connection lifecycle (connect, authenticate, disconnect, reconnect)
-- [ ] Server: handle LOGIN and NLOGIN (load/create character, place in world)
-- [ ] Server: send map data, character positions, NPC positions on zone entry
-- [ ] Client: receive and render other characters and NPCs from server data
-- [ ] Movement: client sends direction -> server validates -> broadcast to all clients -> animate
+- [x] Login / character creation (basic form, SHA-256 password, JSON char files)
+- [x] SignalR connection lifecycle (connect, authenticate, disconnect, reconnect)
+- [x] Server: handle LOGIN and NLOGIN (load/create character, place in world)
+- [x] Server: send map data, character positions, NPC positions on zone entry
+- [x] Client: receive and render other characters and NPCs from server data
+- [x] Movement: client sends direction -> server validates -> broadcast to all clients -> animate
+- [ ] Client UI chrome: parchment border, stat bars, chat panel, character/spells/skills buttons
 - [ ] Map transitions: walking off zone edge loads adjacent zone (N/S/E/W exits)
 - [ ] Map transitions: tile-based warps (doors, stairs, etc.)
 - [ ] Chat: say, shout, emote, whisper
