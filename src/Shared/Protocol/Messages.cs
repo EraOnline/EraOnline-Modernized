@@ -1,26 +1,48 @@
+using EraOnline.Shared.Constants;
+
 namespace EraOnline.Shared.Protocol;
 
 /// <summary>
-/// SignalR protocol message types. These replace the VB6 text-based protocol.
-/// Phase 1 defines just the connection messages. More will be added in Phase 3+.
+/// SignalR protocol message types. Replace the VB6 text-based TCP protocol.
+/// Naming follows VB6 message prefixes where applicable.
 /// </summary>
 
 // --- Client -> Server ---
 
-public record LoginRequest(string Name, string Password, string ClientVersion);
+public record LoginRequest(string Name, string Password);
 
-public record CreateCharacterRequest(
-    string Name,
-    string Password,
-    string Race,
-    string Gender,
-    string HomeTown,
-    string SpecSkill1,
-    string SpecSkill2,
-    string SpecSkill3);
+public record CreateCharacterRequest(string Name, string Password, string Race, string Gender);
 
 // --- Server -> Client ---
 
 public record LoginResponse(bool Success, string? ErrorMessage = null);
 
-public record ServerInfo(string Message);
+/// <summary>VB6: MAC - Make a character on the client (body,head,heading,charIndex,x,y,weapon,shield,name)</summary>
+public record MakeCharMessage(
+    int CharIndex,
+    string Name,
+    int Body,
+    int Head,
+    int Heading,
+    int X,
+    int Y,
+    int WeaponAnim,
+    int ShieldAnim);
+
+/// <summary>VB6: ERC - Erase a character from the client</summary>
+public record EraseCharMessage(int CharIndex);
+
+/// <summary>VB6: MOC - Move a character (charIndex, newX, newY, heading)</summary>
+public record MoveCharMessage(int CharIndex, int X, int Y, int Heading);
+
+/// <summary>VB6: SUP - Set the local player's authoritative position</summary>
+public record SetPositionMessage(int X, int Y);
+
+/// <summary>VB6: SCM + map data sent on zone entry</summary>
+public record MapLoadMessage(int MapId);
+
+/// <summary>VB6: SUC - Tell the client which char index is theirs</summary>
+public record SetCharIndexMessage(int CharIndex);
+
+/// <summary>VB6: @ - Chat/info message with font type</summary>
+public record ChatMessage(string Text, FontType Font);
