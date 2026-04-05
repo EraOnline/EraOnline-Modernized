@@ -98,6 +98,9 @@ const EraRenderer = (() => {
         // Create the test player at Castlefall spawn
         createTestPlayer();
 
+        // Create a patrolling NPC for movement animation testing
+        createPatrolNpc();
+
         dataLoaded = true;
         updateStatus();
 
@@ -130,6 +133,52 @@ const EraRenderer = (() => {
         characters.push(player);
 
         setStatus(`Test player created at (${spawnX}, ${spawnY})`);
+    }
+
+    // --- Patrol NPC (test) ---
+
+    let patrolNpc = null;
+    let patrolPath = []; // array of { dx, dy, heading, steps }
+    let patrolLegIndex = 0;
+    let patrolStepsRemaining = 0;
+
+    function createPatrolNpc() {
+        // Place at (61, 31) - 10 up, 2 right of player spawn (59, 41)
+        // Use a different body/head so it's visually distinct
+        // Body 3 or 5 for variety, head 26 (Haaki male) for contrast
+        patrolNpc = makeCharacter(61, 31, 3, 26, SOUTH, 2, 2);
+        characters.push(patrolNpc);
+
+        // Rectangular patrol: south 6, west 5, north 6, east 5
+        patrolPath = [
+            { dx:  0, dy:  1, heading: SOUTH, steps: 6 },
+            { dx: -1, dy:  0, heading: WEST,  steps: 5 },
+            { dx:  0, dy: -1, heading: NORTH, steps: 6 },
+            { dx:  1, dy:  0, heading: EAST,  steps: 5 },
+        ];
+        patrolLegIndex = 0;
+        patrolStepsRemaining = patrolPath[0].steps;
+    }
+
+    function updatePatrolNpc() {
+        if (!patrolNpc || patrolNpc.moving) return;
+
+        const leg = patrolPath[patrolLegIndex];
+        if (patrolStepsRemaining <= 0) {
+            // Advance to next leg
+            patrolLegIndex = (patrolLegIndex + 1) % patrolPath.length;
+            patrolStepsRemaining = patrolPath[patrolLegIndex].steps;
+            return; // pause one frame at the corner (natural feel)
+        }
+
+        // Start next step
+        patrolNpc.heading = leg.heading;
+        patrolNpc.x += leg.dx;
+        patrolNpc.y += leg.dy;
+        patrolNpc.moveOffsetX = -leg.dx * TILE_SIZE;
+        patrolNpc.moveOffsetY = -leg.dy * TILE_SIZE;
+        patrolNpc.moving = true;
+        patrolStepsRemaining--;
     }
 
     function makeCharacter(x, y, bodyId, headId, heading, weaponAnim, shieldAnim) {
@@ -714,6 +763,9 @@ const EraRenderer = (() => {
 
         // Process input
         processPlayerInput();
+
+        // Update patrol NPC AI
+        updatePatrolNpc();
 
         // Update movement interpolation for all characters
         for (const ch of characters) {
