@@ -22,6 +22,8 @@ const EraRenderer = (() => {
     const VIEWPORT_W = 20; // tiles
     const VIEWPORT_H = 11; // tiles
     const MOVE_SPEED = 8;  // pixels per frame for movement interpolation
+    const TARGET_FPS = 30; // VB6 original capped at 30fps (General.bas:1136)
+    const FRAME_TIME = 1000 / TARGET_FPS; // ~33.3ms per frame
 
     // Direction constants matching VB6: NORTH=1, EAST=2, SOUTH=3, WEST=4
     const NORTH = 1, EAST = 2, SOUTH = 3, WEST = 4;
@@ -41,6 +43,15 @@ const EraRenderer = (() => {
     let configData = null; // server config (starting cities etc.)
     let dataLoaded = false;
     let statusEl = null;
+    let fpsEl = null;
+
+    // --- Frame Timing ---
+    // VB6: FPSTimer (1000ms interval) counts frames per second.
+    // VB6: Main loop caps at 30fps (If FramesPerSec <= 30 Then).
+    let lastFrameTime = 0;  // timestamp of last game tick
+    let frameCount = 0;     // frames rendered since last FPS update
+    let lastFpsUpdate = 0;  // timestamp of last FPS display update
+    let currentFps = 0;     // displayed FPS value
 
     // --- Animation State ---
     // Per-tile animation instances: key = grhIndex, value = { frameCounter, speedCounter }
@@ -70,6 +81,7 @@ const EraRenderer = (() => {
         canvas.width = VIEWPORT_W * TILE_SIZE;
         canvas.height = VIEWPORT_H * TILE_SIZE;
         ctx.imageSmoothingEnabled = false;
+        fpsEl = document.getElementById('fps');
 
         setStatus('Loading sprite definitions...');
         await loadGrhData();
@@ -687,8 +699,19 @@ const EraRenderer = (() => {
     /**
      * Main loop: process input, update state, render.
      * VB6: Main game loop (General.bas:1121-1193)
+     *
+     * Frame-limited to TARGET_FPS. The VB6 original caps at 30fps:
+     *   If FramesPerSec <= 30 Then  (General.bas:1136)
+     * All animation counters and movement speeds are calibrated for this rate.
      */
-    function renderLoop() {
+    function renderLoop(timestamp) {
+        requestAnimationFrame(renderLoop);
+
+        // Frame limiter: skip if not enough time has elapsed
+        const elapsed = timestamp - lastFrameTime;
+        if (elapsed < FRAME_TIME) return;
+        lastFrameTime = timestamp - (elapsed % FRAME_TIME); // preserve remainder for accuracy
+
         // Process input
         processPlayerInput();
 
@@ -701,7 +724,15 @@ const EraRenderer = (() => {
         // Render
         render();
 
-        requestAnimationFrame(renderLoop);
+        // FPS counter - update once per second
+        // VB6: FPSTimer with Interval=1000
+        frameCount++;
+        if (timestamp - lastFpsUpdate >= 1000) {
+            currentFps = frameCount;
+            frameCount = 0;
+            lastFpsUpdate = timestamp;
+            if (fpsEl) fpsEl.textContent = `${currentFps} FPS`;
+        }
     }
 
     // Public API
