@@ -6,24 +6,30 @@
  * Sprite system based on the Grh (Graphic) atlas from Grh.dat.
  *
  * VB6 reference functions:
- *   RenderScreen (Graphics.bas:336)      - main 3-pass render
- *   DDrawGrhtoSurface (Graphics.bas:76)  - opaque sprite blit with animation
+ *   RenderScreen (Graphics.bas:336)           - main 3-pass render with screenbuffer overdraw
+ *   DrawBackBufferSurface (Graphics.bas:228)  - crop overdraw to viewport
+ *   DDrawGrhtoSurface (Graphics.bas:76)       - opaque sprite blit with animation
  *   DDrawTransGrhtoSurface (Graphics.bas:151) - transparent blit with animation
- *   InitGrh (General.bas:614)            - animation setup
- *   MakeChar (General.bas:341)           - character compositing setup
- *   CheckMoveKeys (General.bas:395)      - keyboard movement input
- *   MoveScreen (General.bas:701)         - start screen scrolling
- *   MoveCharbyHead (General.bas:649)     - start character move interpolation
- *   Main game loop (General.bas:1121)    - 8px/frame offset interpolation
+ *   InitGrh (General.bas:614)                 - animation setup
+ *   MakeChar (General.bas:341)                - character compositing setup
+ *   CheckMoveKeys (General.bas:395)           - keyboard movement input
+ *   MoveScreen (General.bas:701)              - start screen scrolling
+ *   MoveCharbyHead (General.bas:649)          - start character move interpolation
+ *   Main game loop (General.bas:1121)         - 8px/frame offset interpolation
  */
 const EraRenderer = (() => {
     // Constants matching VB6 Declarations.bas
     const TILE_SIZE = 32;
-    const VIEWPORT_W = 20; // tiles
-    const VIEWPORT_H = 11; // tiles
+    const VIEWPORT_W = 20; // tiles (XWindow)
+    const VIEWPORT_H = 11; // tiles (YWindow)
     const MOVE_SPEED = 8;  // pixels per frame for movement interpolation
     const TARGET_FPS = 30; // VB6 original capped at 30fps (General.bas:1136)
     const FRAME_TIME = 1000 / TARGET_FPS; // ~33.3ms per frame
+
+    // Screen buffer: extra tiles drawn beyond viewport to prevent black edges during scrolling.
+    // VB6 uses screenbuffer=10 with a large back buffer and a crop blit (DrawBackBufferSurface).
+    // We use 2 tiles (enough to cover the max 32px offset) and clip via canvas.
+    const SCREEN_BUFFER = 2;
 
     // Direction constants matching VB6: NORTH=1, EAST=2, SOUTH=3, WEST=4
     const NORTH = 1, EAST = 2, SOUTH = 3, WEST = 4;
@@ -48,24 +54,33 @@ const EraRenderer = (() => {
     // --- Frame Timing ---
     // VB6: FPSTimer (1000ms interval) counts frames per second.
     // VB6: Main loop caps at 30fps (If FramesPerSec <= 30 Then).
-    let lastFrameTime = 0;  // timestamp of last game tick
-    let frameCount = 0;     // frames rendered since last FPS update
-    let lastFpsUpdate = 0;  // timestamp of last FPS display update
-    let currentFps = 0;     // displayed FPS value
+    let lastFrameTime = 0;
+    let frameCount = 0;
+    let lastFpsUpdate = 0;
+    let currentFps = 0;
+
+    // --- Camera State ---
+    // VB6 model: camera tile stays at the OLD position during movement.
+    // OffsetCounter accumulates from 0 toward ±32 (8px per frame).
+    // On the final frame, camera tile snaps to the new position and offset resets.
+    // VB6: AddtoUserPos, OffsetCounterX/Y, UserPos (General.bas:1139-1179)
+    let camTileX = 50;        // camera center tile (the tile RenderScreen receives)
+    let camTileY = 50;
+    let screenOffsetX = 0;    // pixel offset accumulating during movement (VB6: OffsetCounterX)
+    let screenOffsetY = 0;    // pixel offset accumulating during movement (VB6: OffsetCounterY)
+    let addToUserPosX = 0;    // movement direction: -1, 0, or 1 (VB6: AddtoUserPos.x)
+    let addToUserPosY = 0;    // movement direction: -1, 0, or 1 (VB6: AddtoUserPos.y)
+    let userMoving = false;   // true while the screen is scrolling (VB6: UserMoving)
 
     // --- Animation State ---
-    // Per-tile animation instances: key = grhIndex, value = { frameCounter, speedCounter }
-    // VB6 stores these per-tile in MapData(x,y).graphic(n) as Grh structs.
-    // We share animation state per unique grhIndex since all tiles with the same
-    // animation should tick in sync (matching VB6 behavior where they all tick each frame).
     let tileAnimState = {};
 
     // --- Characters ---
-    let characters = []; // { x, y, bodyId, headId, heading, weaponAnim, shieldAnim, moveOffsetX, moveOffsetY, moving, walkAnims }
+    let characters = [];
 
     // --- Player ---
-    let player = null;  // The local test player character
-    let keysDown = {};  // Currently held keys
+    let player = null;
+    let keysDown = {};
 
     function setStatus(msg) {
         if (statusEl) statusEl.textContent = msg;
@@ -115,7 +130,6 @@ const EraRenderer = (() => {
     // --- Test Player ---
 
     function createTestPlayer() {
-        // Castlefall spawn from config: (59, 41)
         let spawnX = 59, spawnY = 41;
         if (configData && configData.startingCities) {
             const castlefall = configData.startingCities.find(c => c.map === 81);
@@ -125,12 +139,13 @@ const EraRenderer = (() => {
             }
         }
 
-        // Human male: body 1, random head 6-15, facing south
         const headId = 6 + Math.floor(Math.random() * 10);
         player = makeCharacter(spawnX, spawnY, 1, headId, SOUTH, 2, 2);
-
-        // Add to characters list so they render
         characters.push(player);
+
+        // Initialize camera on player
+        camTileX = spawnX;
+        camTileY = spawnY;
 
         setStatus(`Test player created at (${spawnX}, ${spawnY})`);
     }
@@ -138,18 +153,14 @@ const EraRenderer = (() => {
     // --- Patrol NPC (test) ---
 
     let patrolNpc = null;
-    let patrolPath = []; // array of { dx, dy, heading, steps }
+    let patrolPath = [];
     let patrolLegIndex = 0;
     let patrolStepsRemaining = 0;
 
     function createPatrolNpc() {
-        // Place at (61, 31) - 10 up, 2 right of player spawn (59, 41)
-        // Use a different body/head so it's visually distinct
-        // Body 3 or 5 for variety, head 26 (Haaki male) for contrast
         patrolNpc = makeCharacter(61, 31, 3, 26, SOUTH, 2, 2);
         characters.push(patrolNpc);
 
-        // Rectangular patrol: south 6, west 5, north 6, east 5
         patrolPath = [
             { dx:  0, dy:  1, heading: SOUTH, steps: 6 },
             { dx: -1, dy:  0, heading: WEST,  steps: 5 },
@@ -165,13 +176,11 @@ const EraRenderer = (() => {
 
         const leg = patrolPath[patrolLegIndex];
         if (patrolStepsRemaining <= 0) {
-            // Advance to next leg
             patrolLegIndex = (patrolLegIndex + 1) % patrolPath.length;
             patrolStepsRemaining = patrolPath[patrolLegIndex].steps;
-            return; // pause one frame at the corner (natural feel)
+            return;
         }
 
-        // Start next step
         patrolNpc.heading = leg.heading;
         patrolNpc.x += leg.dx;
         patrolNpc.y += leg.dy;
@@ -182,7 +191,6 @@ const EraRenderer = (() => {
     }
 
     function makeCharacter(x, y, bodyId, headId, heading, weaponAnim, shieldAnim) {
-        // VB6: MakeChar (General.bas:341) + InitGrh for each walk animation
         const ch = {
             x, y,
             bodyId, headId, heading,
@@ -190,8 +198,6 @@ const EraRenderer = (() => {
             moveOffsetX: 0,
             moveOffsetY: 0,
             moving: false,
-            // Per-character walk animation state for body/weapon/shield
-            // Each direction has { frameCounter, speedCounter, started }
             walkAnims: {}
         };
         initCharAnims(ch);
@@ -199,8 +205,6 @@ const EraRenderer = (() => {
     }
 
     function initCharAnims(ch) {
-        // Initialize walk animation state for each direction
-        // VB6: InitGrh sets FrameCounter=1, SpeedCounter=Speed, Started based on NumFrames
         ch.walkAnims = {};
         const body = bodyDefs[ch.bodyId];
         if (body && body.walk) {
@@ -220,8 +224,6 @@ const EraRenderer = (() => {
 
     function onKeyDown(e) {
         keysDown[e.key] = true;
-
-        // Prevent scrolling
         if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
             e.preventDefault();
         }
@@ -234,10 +236,15 @@ const EraRenderer = (() => {
     /**
      * Process player movement input.
      * VB6: CheckMoveKeys (General.bas:395)
-     * Only allow new movement when not already moving (interpolation complete).
+     *
+     * Matches the VB6 model:
+     * 1. CheckMoveKeys checks LegalPos and calls MoveCharbyHead + MoveScreen
+     * 2. MoveScreen sets AddtoUserPos and updates UserPos immediately
+     * 3. The main loop interpolates OffsetCounter from 0 toward ±32
+     * 4. RenderScreen receives (UserPos - AddtoUserPos) = OLD tile position
      */
     function processPlayerInput() {
-        if (!player || player.moving) return;
+        if (!player || userMoving) return;
 
         let heading = 0;
         let dx = 0, dy = 0;
@@ -249,62 +256,94 @@ const EraRenderer = (() => {
 
         if (heading === 0) return;
 
-        // Always update facing direction
         player.heading = heading;
 
-        // Check if target tile is legal
         const newX = player.x + dx;
         const newY = player.y + dy;
 
         if (!isLegalPos(newX, newY)) return;
 
-        // VB6: MoveCharbyHead - update position immediately, set MoveOffset to interpolate FROM
-        // The character is logically at the new tile, but visually slides from the old one
+        // VB6 MoveCharbyHead: update character position, set MoveOffset for walk interpolation
         player.x = newX;
         player.y = newY;
-        player.moveOffsetX = -dx * TILE_SIZE; // negative because we interpolate toward 0
+        player.moveOffsetX = -dx * TILE_SIZE;
         player.moveOffsetY = -dy * TILE_SIZE;
         player.moving = true;
+
+        // VB6 MoveScreen: set AddtoUserPos and update UserPos (already done above via player.x/y)
+        // Camera tile stays where it is - AddtoUserPos tells the main loop which direction to scroll
+        addToUserPosX = dx;
+        addToUserPosY = dy;
+        screenOffsetX = 0;
+        screenOffsetY = 0;
+        userMoving = true;
 
         updateStatus();
     }
 
     /**
-     * Check if a tile position is walkable.
-     * VB6: LegalPos (General.bas:1299)
+     * Update screen scrolling (camera movement).
+     * VB6: Main game loop (General.bas:1139-1164)
+     *
+     * Each frame, accumulate 8px of offset in the movement direction.
+     * When offset reaches a full tile (32px), snap camera to new position and reset.
      */
+    function updateScreenScroll() {
+        if (!userMoving) return;
+
+        let done = true;
+
+        if (addToUserPosX !== 0) {
+            // VB6: OffsetCounterX = OffsetCounterX - (8 * Sgn(AddtoUserPos.x))
+            screenOffsetX -= MOVE_SPEED * Math.sign(addToUserPosX);
+            if (Math.abs(screenOffsetX) >= TILE_SIZE) {
+                // Snap: camera tile moves to new position, offset resets
+                camTileX += addToUserPosX;
+                screenOffsetX = 0;
+                addToUserPosX = 0;
+            } else {
+                done = false;
+            }
+        }
+
+        if (addToUserPosY !== 0) {
+            screenOffsetY -= MOVE_SPEED * Math.sign(addToUserPosY);
+            if (Math.abs(screenOffsetY) >= TILE_SIZE) {
+                camTileY += addToUserPosY;
+                screenOffsetY = 0;
+                addToUserPosY = 0;
+            } else {
+                done = false;
+            }
+        }
+
+        if (done) {
+            userMoving = false;
+        }
+    }
+
     function isLegalPos(x, y) {
         if (x < 1 || x > 100 || y < 1 || y > 100) return false;
-
-        // Check blocked
         if (mapData) {
             const idx = (y - 1) * 100 + (x - 1);
             if (mapData.tiles.blocked[idx] === 1) return false;
         }
-
-        // Check for NPC/character on tile (skip player's own tile)
         for (const ch of characters) {
             if (ch === player) continue;
             if (ch.x === x && ch.y === y) return false;
         }
-
         return true;
     }
 
     /**
-     * Update character movement interpolation.
-     * VB6: Main game loop (General.bas:1139-1164) for player,
-     *      RenderScreen (Graphics.bas:441-471) for all characters.
-     *
-     * Each frame, move 8px toward the target (offset -> 0).
-     * When offset reaches 0, movement is complete.
+     * Update character movement interpolation (for NPCs and the player's walk animation).
+     * VB6: RenderScreen (Graphics.bas:441-471)
      */
     function updateMovement(ch) {
         if (!ch.moving) return;
 
         let stillMoving = false;
 
-        // Interpolate X: reduce offset toward 0 by MOVE_SPEED per frame
         if (ch.moveOffsetX !== 0) {
             if (Math.abs(ch.moveOffsetX) <= MOVE_SPEED) {
                 ch.moveOffsetX = 0;
@@ -314,7 +353,6 @@ const EraRenderer = (() => {
             if (ch.moveOffsetX !== 0) stillMoving = true;
         }
 
-        // Interpolate Y
         if (ch.moveOffsetY !== 0) {
             if (Math.abs(ch.moveOffsetY) <= MOVE_SPEED) {
                 ch.moveOffsetY = 0;
@@ -325,19 +363,15 @@ const EraRenderer = (() => {
         }
 
         if (!stillMoving) {
-            // Movement complete
             ch.moving = false;
             ch.moveOffsetX = 0;
             ch.moveOffsetY = 0;
-
-            // VB6: Reset walk animation to frame 1, stop it
             const hi = (ch.heading || SOUTH) - 1;
             if (ch.walkAnims[hi]) {
                 ch.walkAnims[hi].frameCounter = 0;
                 ch.walkAnims[hi].started = false;
             }
         } else {
-            // Still moving - enable walk animation
             const hi = (ch.heading || SOUTH) - 1;
             if (ch.walkAnims[hi]) {
                 ch.walkAnims[hi].started = true;
@@ -386,10 +420,8 @@ const EraRenderer = (() => {
         const resp = await fetch(`${dataBasePath}/maps/map-${padded}.json`);
         mapData = await resp.json();
 
-        // Reset tile animation state for new map
         tileAnimState = {};
 
-        // Place NPCs from spawn data
         characters = [];
         for (const spawn of mapData.npcSpawns) {
             const [x, y, npcTemplate] = spawn;
@@ -400,12 +432,11 @@ const EraRenderer = (() => {
                     npc.body || 1,
                     npc.head || 1,
                     npc.heading || SOUTH,
-                    2, 2 // no weapon/shield
+                    2, 2
                 ));
             }
         }
 
-        // Re-add player if they exist
         if (player) {
             characters.push(player);
         }
@@ -488,28 +519,17 @@ const EraRenderer = (() => {
 
     // --- Animation ---
 
-    /**
-     * Get or create tile animation state for a given GRH index.
-     * VB6: Each MapData(x,y).graphic(n) is a Grh struct with its own counters.
-     * We share state per GRH index so all tiles of the same type animate in sync.
-     */
     function getTileAnimState(grhIndex) {
         if (!tileAnimState[grhIndex]) {
             const entry = grhEntries[grhIndex];
             tileAnimState[grhIndex] = {
-                frameCounter: 0, // 0-based (VB6 is 1-based, we adjust)
+                frameCounter: 0,
                 speedCounter: entry ? (entry.speed || 1) : 1
             };
         }
         return tileAnimState[grhIndex];
     }
 
-    /**
-     * Advance tile animation by one tick.
-     * VB6: DDrawGrhtoSurface lines 96-108
-     * SpeedCounter counts down each render frame. When it hits 0,
-     * advance to next frame and reset counter.
-     */
     function tickTileAnim(grhIndex) {
         const entry = grhEntries[grhIndex];
         if (!entry || !entry.frames || entry.frames.length <= 1) return;
@@ -522,10 +542,6 @@ const EraRenderer = (() => {
         }
     }
 
-    /**
-     * Advance character walk animation by one tick.
-     * Same counter logic as tile animations.
-     */
     function tickCharAnim(ch) {
         const hi = (ch.heading || SOUTH) - 1;
         const animState = ch.walkAnims[hi];
@@ -546,25 +562,15 @@ const EraRenderer = (() => {
 
     // --- Rendering ---
 
-    /**
-     * Resolve a GRH index to the concrete sprite to draw.
-     * For static sprites, returns the entry directly.
-     * For animations, returns the current frame based on animation state.
-     *
-     * @param grhIndex - The GRH index to resolve
-     * @param animState - Animation state object { frameCounter }, or null for tile lookup
-     */
     function resolveGrh(grhIndex, animState) {
         const entry = grhEntries[grhIndex];
         if (!entry) return null;
 
         if (entry.frames && entry.frames.length > 0) {
-            // Animated - pick current frame
             let frameIdx;
             if (animState) {
                 frameIdx = animState.frameCounter % entry.frames.length;
             } else {
-                // Use shared tile animation state
                 const tState = getTileAnimState(grhIndex);
                 frameIdx = tState.frameCounter % entry.frames.length;
             }
@@ -573,10 +579,6 @@ const EraRenderer = (() => {
         return entry;
     }
 
-    /**
-     * Draw a sprite at pixel position (px, py).
-     * VB6: DDrawGrhtoSurface / DDrawTransGrhtoSurface
-     */
     function drawGrh(grhIndex, px, py, center, animState) {
         const sprite = resolveGrh(grhIndex, animState || null);
         if (!sprite || !sprite.file) return;
@@ -590,8 +592,6 @@ const EraRenderer = (() => {
         let dx = px;
         let dy = py;
 
-        // Center multi-tile sprites over their tile position
-        // VB6: x = x - Int(TileWidth * 16) + 16, y = y - Int(TileHeight * 32) + 32
         if (center) {
             const tw = sprite.w / TILE_SIZE;
             const th = sprite.h / TILE_SIZE;
@@ -610,52 +610,72 @@ const EraRenderer = (() => {
      * Main render function - 3-pass rendering matching VB6 RenderScreen.
      * VB6: Graphics.bas:336
      *
-     * Camera follows the player with pixel-level interpolation.
-     * VB6: RenderScreen(UserPos.x - AddtoUserPos.x, UserPos.y - AddtoUserPos.y, OffsetCounterX, OffsetCounterY)
+     * Renders (VIEWPORT + 2*SCREEN_BUFFER) tiles in each dimension into the canvas,
+     * offset by the screen buffer amount so the viewport region is centered.
+     * Canvas clipping restricts visible output to the viewport rectangle,
+     * matching VB6's DrawBackBufferSurface crop blit (Graphics.bas:228).
+     *
+     * Camera model (VB6):
+     *   TileX/Y = UserPos - AddtoUserPos = OLD tile position during movement
+     *   PixelOffsetX/Y = OffsetCounter = accumulates from 0 toward ±32
+     *   All tiles rendered at PixelPos(ScreenX) + PixelOffsetX
+     *   The screen buffer overdraw ensures no black edges during scrolling
      */
     function render() {
         if (!mapData || !dataLoaded) return;
 
+        // Clip to viewport - everything outside is overdraw buffer
+        // VB6: DrawBackBufferSurface crops the back buffer to the viewport rect
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(0, 0, VIEWPORT_W * TILE_SIZE, VIEWPORT_H * TILE_SIZE);
+        ctx.clip();
+
         ctx.fillStyle = '#000';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Camera centers on player position
-        let camTileX, camTileY, pixelOffsetX, pixelOffsetY;
-        if (player) {
-            camTileX = player.x;
-            camTileY = player.y;
-            pixelOffsetX = player.moveOffsetX;
-            pixelOffsetY = player.moveOffsetY;
-        } else {
-            camTileX = 50;
-            camTileY = 50;
-            pixelOffsetX = 0;
-            pixelOffsetY = 0;
-        }
+        // Camera tile and pixel offset
+        // VB6: RenderScreen(UserPos.x - AddtoUserPos.x, UserPos.y - AddtoUserPos.y, OffsetCounterX, OffsetCounterY)
+        const tileX = camTileX;
+        const tileY = camTileY;
+        const pixOffX = screenOffsetX;
+        const pixOffY = screenOffsetY;
 
+        // Tile range with screen buffer overdraw
+        // VB6: minX = (TileX - (XWindow \ 2)) - screenbuffer
         const halfW = Math.floor(VIEWPORT_W / 2);
         const halfH = Math.floor(VIEWPORT_H / 2);
-        const minX = camTileX - halfW;
-        const minY = camTileY - halfH;
-        const maxX = camTileX + halfW;
-        const maxY = camTileY + halfH;
+        const minX = tileX - halfW - SCREEN_BUFFER;
+        const maxX = tileX + halfW + SCREEN_BUFFER;
+        const minY = tileY - halfH - SCREEN_BUFFER;
+        const maxY = tileY + halfH + SCREEN_BUFFER;
 
-        // Track which tile animations we've ticked this frame (tick once per frame, not per tile instance)
+        // ScreenX/Y: counter from 0..(range). PixelPos(s) = s * TILE_SIZE - TILE_SIZE
+        // Offset so that the screen buffer region draws at negative coords (off-viewport).
+        // VB6: PixelPos(ScreenX) = TileSizeX * ScreenX - TileSizeX
+        // VB6: DrawBackBufferSurface source rect starts at (screenbuffer * TileSize - TileSize)
+        // Net effect: tile at ScreenX=SCREEN_BUFFER draws at pixel 0 minus one tile width,
+        // and the crop starts one tile before the buffer edge.
+        //
+        // We replicate this by computing screen position as:
+        //   px = (screenX - SCREEN_BUFFER) * TILE_SIZE + pixOffX
+        // where screenX=SCREEN_BUFFER corresponds to the left edge of the viewport (pixel 0).
+
         const tickedAnims = new Set();
 
         // Pass 1: Ground layer (opaque)
-        // VB6: DDrawGrhtoSurface with Animate=1
         for (let y = minY; y <= maxY; y++) {
             for (let x = minX; x <= maxX; x++) {
                 if (x < 1 || x > 100 || y < 1 || y > 100) continue;
                 const idx = (y - 1) * 100 + (x - 1);
                 const grhIndex = mapData.tiles.layer1[idx];
                 if (grhIndex > 0) {
-                    const screenX = (x - minX) * TILE_SIZE + pixelOffsetX;
-                    const screenY = (y - minY) * TILE_SIZE + pixelOffsetY;
-                    drawGrh(grhIndex, screenX, screenY, false, null);
+                    const sx = x - (tileX - halfW);
+                    const sy = y - (tileY - halfH);
+                    const px = sx * TILE_SIZE + pixOffX;
+                    const py = sy * TILE_SIZE + pixOffY;
+                    drawGrh(grhIndex, px, py, false, null);
 
-                    // Tick animation once per unique grhIndex per frame
                     if (!tickedAnims.has(grhIndex)) {
                         tickTileAnim(grhIndex);
                         tickedAnims.add(grhIndex);
@@ -669,13 +689,16 @@ const EraRenderer = (() => {
             for (let x = minX; x <= maxX; x++) {
                 if (x < 1 || x > 100 || y < 1 || y > 100) continue;
                 const idx = (y - 1) * 100 + (x - 1);
-                const screenX = (x - minX) * TILE_SIZE + pixelOffsetX;
-                const screenY = (y - minY) * TILE_SIZE + pixelOffsetY;
 
-                // Layer 2 (fringe - trees, buildings, walls)
+                const sx = x - (tileX - halfW);
+                const sy = y - (tileY - halfH);
+                const px = sx * TILE_SIZE + pixOffX;
+                const py = sy * TILE_SIZE + pixOffY;
+
+                // Layer 2 (fringe)
                 const grh2 = mapData.tiles.layer2[idx];
                 if (grh2 > 0) {
-                    drawGrh(grh2, screenX, screenY, true, null);
+                    drawGrh(grh2, px, py, true, null);
 
                     if (!tickedAnims.has(grh2)) {
                         tickTileAnim(grh2);
@@ -686,28 +709,26 @@ const EraRenderer = (() => {
                 // Characters at this tile position
                 for (const ch of characters) {
                     if (ch.x === x && ch.y === y) {
-                        // Character screen position includes their own move offset
-                        // but NOT the camera offset (that's already in screenX/Y via pixelOffsetX/Y)
-                        // However, the player's own move offset IS the camera offset,
-                        // so for the player we don't add it again.
-                        let chOffX = 0, chOffY = 0;
-                        if (ch !== player) {
-                            chOffX = ch.moveOffsetX;
-                            chOffY = ch.moveOffsetY;
-                        }
-                        drawCharacter(ch, screenX + chOffX, screenY + chOffY);
+                        // Character pixel offset from their own movement interpolation
+                        // VB6: PixelOffsetXTemp = PixelOffsetX + TempChar.MoveOffset.x
+                        // The camera pixel offset (pixOffX/Y) is already baked into px/py.
+                        // For the player, MoveOffset mirrors the camera scroll, so they cancel
+                        // and the player stays centered. For NPCs, MoveOffset slides them
+                        // independently of the camera.
+                        const chPx = px + ch.moveOffsetX;
+                        const chPy = py + ch.moveOffsetY;
+                        drawCharacter(ch, chPx, chPy);
                     }
                 }
             }
         }
+
+        ctx.restore(); // remove clipping
     }
 
     /**
      * Draw a character composited from head + body + shield + weapon.
      * VB6: RenderScreen character layer (Graphics.bas:432-484)
-     *
-     * Head: drawn with Animate=0 (heads don't animate)
-     * Body/Shield/Weapon: drawn with Animate=1 (walk cycles)
      */
     function drawCharacter(ch, screenX, screenY) {
         const body = bodyDefs[ch.bodyId];
@@ -715,17 +736,13 @@ const EraRenderer = (() => {
         const weapon = weaponAnimDefs[ch.weaponAnim];
         const shield = shieldAnimDefs[ch.shieldAnim];
 
-        // heading index: VB6 uses 1-4 (N,E,S,W), our arrays are 0-3
         const hi = (ch.heading || SOUTH) - 1;
-
-        // Get walk animation state for current heading
         const walkAnim = ch.walkAnims ? ch.walkAnims[hi] : null;
 
-        // Draw head (not animated - VB6 passes Animate=0 for heads)
+        // Draw head (not animated)
         if (head && head.grh && head.grh[hi]) {
             const headOffX = body ? body.headOffsetX : 0;
             const headOffY = body ? body.headOffsetY : 0;
-            // Pass null animState for head (static, always first frame)
             drawGrh(head.grh[hi], screenX + headOffX, screenY + headOffY, true, null);
         }
 
@@ -749,17 +766,15 @@ const EraRenderer = (() => {
      * Main loop: process input, update state, render.
      * VB6: Main game loop (General.bas:1121-1193)
      *
-     * Frame-limited to TARGET_FPS. The VB6 original caps at 30fps:
-     *   If FramesPerSec <= 30 Then  (General.bas:1136)
-     * All animation counters and movement speeds are calibrated for this rate.
+     * Frame-limited to TARGET_FPS (30fps).
      */
     function renderLoop(timestamp) {
         requestAnimationFrame(renderLoop);
 
-        // Frame limiter: skip if not enough time has elapsed
+        // Frame limiter
         const elapsed = timestamp - lastFrameTime;
         if (elapsed < FRAME_TIME) return;
-        lastFrameTime = timestamp - (elapsed % FRAME_TIME); // preserve remainder for accuracy
+        lastFrameTime = timestamp - (elapsed % FRAME_TIME);
 
         // Process input
         processPlayerInput();
@@ -767,7 +782,11 @@ const EraRenderer = (() => {
         // Update patrol NPC AI
         updatePatrolNpc();
 
-        // Update movement interpolation for all characters
+        // Update screen scrolling (camera)
+        // VB6: main loop OffsetCounter interpolation (General.bas:1139-1164)
+        updateScreenScroll();
+
+        // Update character movement interpolation
         for (const ch of characters) {
             updateMovement(ch);
             tickCharAnim(ch);
@@ -776,8 +795,7 @@ const EraRenderer = (() => {
         // Render
         render();
 
-        // FPS counter - update once per second
-        // VB6: FPSTimer with Interval=1000
+        // FPS counter
         frameCount++;
         if (timestamp - lastFpsUpdate >= 1000) {
             currentFps = frameCount;
