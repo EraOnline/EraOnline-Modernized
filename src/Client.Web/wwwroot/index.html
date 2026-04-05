@@ -7,66 +7,260 @@
     <base href="/" />
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #003369; color: #fff; font-family: Verdana, Arial, sans-serif; }
-        #app { display: flex; flex-direction: column; align-items: center; padding-top: 20px; }
-        h1 { font-size: 18px; margin-bottom: 10px; color: #ccc; letter-spacing: 2px; }
-        #game-viewport { border: 2px solid #444; image-rendering: pixelated; background: #000; }
-        #loading { color: #0f0; font-size: 11px; margin-top: 8px; font-family: monospace; }
-        #fps { color: #ff0; font-size: 11px; font-family: monospace; position: absolute; top: 4px; right: 6px; text-shadow: 1px 1px 0 #000; pointer-events: none; }
+        body { background: #1a1a2e; color: #fff; font-family: Verdana, Arial, sans-serif; display: flex; justify-content: center; padding-top: 10px; }
 
-        /* Login form */
-        #login-screen { text-align: center; }
-        #login-screen input, #login-screen select {
-            display: block; margin: 4px auto; padding: 6px 10px; width: 200px;
+        /* Game frame: 800x600 matching the original VB6 form */
+        #game-frame {
+            width: 800px; height: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* --- Interface chrome (interface.JPG) --- */
+        #interface-bg {
+            position: absolute; top: 0; left: 0;
+            width: 800px; height: 449px;
+            background: url('/ui/interface.jpg') no-repeat;
+            background-size: 800px 449px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* --- Game viewport canvas --- */
+        /* VB6: MainViewShp at 80,80 - 640x352 (20x11 tiles at 32px) */
+        #game-viewport {
+            position: absolute;
+            left: 80px; top: 80px;
+            width: 640px; height: 352px;
+            image-rendering: pixelated;
+            z-index: 5;
+        }
+
+        /* --- FPS counter --- */
+        #fps {
+            position: absolute;
+            top: 84px; right: 86px;
+            color: #ff0; font-size: 11px; font-family: monospace;
+            text-shadow: 1px 1px 0 #000;
+            z-index: 15;
+            pointer-events: none;
+        }
+
+        /* --- Stat bars (left of viewport) --- */
+        /* VB6: HPShp red at 16,88 11x150, STAShp blue at 32,88, MANShp yellow at 48,88 */
+        .stat-bar {
+            position: absolute;
+            width: 11px;
+            bottom: 0;
+            z-index: 15;
+        }
+        #hp-bar-container, #sta-bar-container, #man-bar-container {
+            position: absolute;
+            width: 11px; height: 150px;
+            top: 88px;
+            z-index: 14;
+        }
+        #hp-bar-container { left: 16px; }
+        #sta-bar-container { left: 32px; }
+        #man-bar-container { left: 48px; }
+        #hp-bar { background: #ff0000; }
+        #sta-bar { background: #0000ff; }
+        #man-bar { background: #00ffff; }
+
+        #stat-labels {
+            position: absolute; left: 16px; top: 240px;
+            font-family: 'Times New Roman', serif; font-size: 11px;
+            color: #c0c0c0; z-index: 15; pointer-events: none;
+        }
+        #gold-label {
+            position: absolute; left: 16px; top: 264px;
+            font-family: 'Times New Roman', serif; font-size: 12px;
+            color: #fff; z-index: 15; pointer-events: none;
+        }
+        #gold-value {
+            position: absolute; left: 8px; top: 280px; width: 57px;
+            font-family: 'Times New Roman', serif; font-size: 13px;
+            color: #fff; z-index: 15; pointer-events: none; text-align: center;
+        }
+
+        /* --- Bottom panel (bottomface.JPG) --- */
+        /* VB6: Image6 at -8,432 stretched to 808x169 */
+        #bottom-panel {
+            position: absolute;
+            left: -8px; top: 432px;
+            width: 808px; height: 169px;
+            background: url('/ui/bottomface.jpg') no-repeat;
+            background-size: 808px 169px;
+            z-index: 10;
+        }
+
+        /* --- Target/info message --- */
+        #target-message {
+            position: absolute;
+            left: 8px; top: 432px; width: 785px; height: 17px;
+            font-family: 'Times New Roman', serif; font-size: 12px;
+            color: #fff; text-align: center;
+            z-index: 15; pointer-events: none;
+            overflow: hidden; white-space: nowrap;
+        }
+
+        /* --- Chat input --- */
+        /* VB6: SendTxt at 8,448 - 785x19, dark blue bg, white text */
+        #chat-input {
+            position: absolute;
+            left: 8px; top: 449px;
+            width: 785px; height: 19px;
+            background: #004080; color: #fff; border: none;
+            font-family: 'MS Sans Serif', 'Segoe UI', sans-serif; font-size: 11px;
+            padding: 1px 4px;
+            z-index: 15;
+            outline: none;
+        }
+
+        /* --- Chat log --- */
+        /* VB6: RecTxt at 8,472 - 785x117, dark green bg */
+        #chat-log {
+            position: absolute;
+            left: 8px; top: 472px;
+            width: 785px; height: 117px;
+            background: #004000; color: #fff;
+            font-family: 'MS Sans Serif', 'Segoe UI', sans-serif; font-size: 11px;
+            padding: 2px 4px;
+            overflow-y: scroll; overflow-x: hidden;
+            z-index: 15;
+        }
+        #chat-log::-webkit-scrollbar { width: 12px; }
+        #chat-log::-webkit-scrollbar-track { background: #002000; }
+        #chat-log::-webkit-scrollbar-thumb { background: #006000; }
+        .chat-talk { color: #ffffff; }
+        .chat-fight { color: #ff0000; font-weight: bold; }
+        .chat-warning { color: #ff0000; font-weight: bold; font-style: italic; }
+        .chat-info { color: #00ff00; }
+        .chat-skill { color: #0088ff; }
+
+        /* --- Map name label --- */
+        #map-name {
+            position: absolute;
+            right: 7px; top: 204px;
+            width: 70px; height: 23px;
+            font-family: 'Times New Roman', serif; font-size: 10px;
+            color: #000; background: #fff; border: 1px solid #888;
+            text-align: center; line-height: 23px;
+            overflow: hidden; white-space: nowrap;
+            z-index: 15;
+        }
+
+        /* --- Status bar at very bottom --- */
+        #status-bar {
+            position: absolute;
+            left: 0; bottom: 0; width: 800px; height: 16px;
+            font-family: monospace; font-size: 10px;
+            color: #0f0; background: rgba(0,0,0,0.6);
+            padding: 1px 8px;
+            z-index: 15;
+        }
+
+        /* --- Login overlay --- */
+        /* Covers the game frame like VB6's separate login form */
+        #login-overlay {
+            position: absolute; top: 0; left: 0;
+            width: 800px; height: 600px;
+            background: url('/ui/menu.jpg') no-repeat center center;
+            background-size: 800px 600px;
+            z-index: 50;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+        }
+        #login-overlay.hidden { display: none; }
+
+        #login-box {
+            background: rgba(0, 0, 0, 0.75);
+            border: 1px solid #555;
+            padding: 20px 30px;
+            text-align: center;
+        }
+        #login-box h2 {
+            font-family: 'Times New Roman', serif;
+            font-size: 20px; color: #ccc;
+            margin-bottom: 12px; letter-spacing: 2px;
+        }
+        #login-box input, #login-box select {
+            display: block; margin: 6px auto; padding: 5px 10px; width: 200px;
             font-family: Verdana, sans-serif; font-size: 12px;
             background: #1a1a2e; color: #eee; border: 1px solid #555;
         }
-        #login-screen button {
-            margin: 8px 4px; padding: 6px 16px; cursor: pointer;
+        #login-box .btn-row { margin-top: 10px; }
+        #login-box button {
+            margin: 4px; padding: 5px 14px; cursor: pointer;
             font-family: Verdana, sans-serif; font-size: 12px;
             background: #2a2a4e; color: #eee; border: 1px solid #666;
         }
-        #login-screen button:hover { background: #3a3a6e; }
-        #login-error { color: #f44; font-size: 11px; margin-top: 6px; min-height: 16px; }
-        #login-screen .toggle { color: #88f; font-size: 11px; cursor: pointer; text-decoration: underline; margin-top: 8px; }
+        #login-box button:hover { background: #3a3a6e; }
+        #login-error { color: #f44; font-size: 11px; margin-top: 8px; min-height: 16px; }
+        #login-box .toggle {
+            color: #88f; font-size: 11px; cursor: pointer;
+            text-decoration: underline; margin-top: 10px; display: inline-block;
+        }
+
+        /* Create character extras (hidden by default) */
+        .create-fields { display: none; }
+        .create-fields.active { display: block; }
     </style>
 </head>
 <body>
-    <div id="app">
-        <h1>ERA ONLINE</h1>
+    <div id="game-frame">
+        <!-- Game viewport (renders underneath the chrome) -->
+        <canvas id="game-viewport"></canvas>
 
-        <div id="login-screen">
-            <div id="login-form">
+        <!-- Interface chrome overlay -->
+        <div id="interface-bg"></div>
+        <div id="fps"></div>
+
+        <!-- Stat bars -->
+        <div id="hp-bar-container"><div id="hp-bar" class="stat-bar" style="height:100%"></div></div>
+        <div id="sta-bar-container"><div id="sta-bar" class="stat-bar" style="height:100%"></div></div>
+        <div id="man-bar-container"><div id="man-bar" class="stat-bar" style="height:100%"></div></div>
+        <div id="stat-labels">H  S  M</div>
+        <div id="gold-label">Gold:</div>
+        <div id="gold-value">0</div>
+
+        <!-- Map name -->
+        <div id="map-name"></div>
+
+        <!-- Bottom panel -->
+        <div id="bottom-panel"></div>
+        <div id="target-message"></div>
+        <input type="text" id="chat-input" maxlength="200" autocomplete="off" />
+        <div id="chat-log"></div>
+
+        <!-- Status bar -->
+        <div id="status-bar"></div>
+
+        <!-- Login overlay (covers everything until login) -->
+        <div id="login-overlay">
+            <div id="login-box">
+                <h2>Enter Menath</h2>
                 <input type="text" id="login-name" placeholder="Character name" maxlength="20" />
                 <input type="password" id="login-pass" placeholder="Password" />
-                <button id="btn-login">Enter Menath</button>
-                <div class="toggle" id="show-create">Create new character</div>
+                <div class="create-fields" id="create-fields">
+                    <select id="create-race">
+                        <option value="Human">Human</option>
+                        <option value="Haaki">Haaki</option>
+                        <option value="Wood Elf">Wood Elf</option>
+                        <option value="Dark Elf">Dark Elf</option>
+                    </select>
+                    <select id="create-gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="btn-row">
+                    <button id="btn-login">Log In</button>
+                    <button id="btn-create">Create</button>
+                </div>
+                <div id="login-error"></div>
+                <div class="toggle" id="toggle-create">New character? Show options</div>
             </div>
-            <div id="create-form" style="display:none;">
-                <input type="text" id="create-name" placeholder="Character name" maxlength="20" />
-                <input type="password" id="create-pass" placeholder="Password" />
-                <select id="create-race">
-                    <option value="Human">Human</option>
-                    <option value="Haaki">Haaki</option>
-                    <option value="Wood Elf">Wood Elf</option>
-                    <option value="Dark Elf">Dark Elf</option>
-                </select>
-                <select id="create-gender">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-                <button id="btn-create">Create Character</button>
-                <div class="toggle" id="show-login">Back to login</div>
-            </div>
-            <div id="login-error"></div>
-        </div>
-
-        <div id="game-screen">
-            <div style="position: relative; display: inline-block;">
-                <canvas id="game-viewport"></canvas>
-                <div id="fps"></div>
-            </div>
-            <div id="loading"></div>
         </div>
     </div>
 

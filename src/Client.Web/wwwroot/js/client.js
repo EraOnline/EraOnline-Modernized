@@ -1,38 +1,48 @@
 /**
  * Era Online Client
  *
- * Handles SignalR connection, login/character creation, and bridges
+ * Handles SignalR connection, login/character creation, chat, and bridges
  * server messages to the renderer.
- *
- * VB6: TCP.bas (client-side) handles the Winsock connection and message parsing.
- * We use SignalR hub methods instead of raw TCP message prefixes.
  */
 const EraClient = (() => {
     let connection = null;
     let myCharIndex = null;
 
     async function init() {
-        // Login form toggle
-        document.getElementById('show-create').addEventListener('click', () => {
-            document.getElementById('login-form').style.display = 'none';
-            document.getElementById('create-form').style.display = '';
-            document.getElementById('login-error').textContent = '';
-        });
-        document.getElementById('show-login').addEventListener('click', () => {
-            document.getElementById('create-form').style.display = 'none';
-            document.getElementById('login-form').style.display = '';
-            document.getElementById('login-error').textContent = '';
+        // Toggle create character fields
+        document.getElementById('toggle-create').addEventListener('click', () => {
+            const fields = document.getElementById('create-fields');
+            const toggle = document.getElementById('toggle-create');
+            const isActive = fields.classList.toggle('active');
+            toggle.textContent = isActive ? 'Hide character options' : 'New character? Show options';
         });
 
         // Login button
         document.getElementById('btn-login').addEventListener('click', doLogin);
-        document.getElementById('login-name').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
-        document.getElementById('login-pass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 
         // Create button
         document.getElementById('btn-create').addEventListener('click', doCreate);
-        document.getElementById('create-name').addEventListener('keydown', e => { if (e.key === 'Enter') doCreate(); });
-        document.getElementById('create-pass').addEventListener('keydown', e => { if (e.key === 'Enter') doCreate(); });
+
+        // Enter key on inputs
+        document.getElementById('login-name').addEventListener('keydown', e => {
+            if (e.key === 'Enter') doLogin();
+        });
+        document.getElementById('login-pass').addEventListener('keydown', e => {
+            if (e.key === 'Enter') {
+                const createActive = document.getElementById('create-fields').classList.contains('active');
+                if (createActive) doCreate(); else doLogin();
+            }
+        });
+
+        // Chat input
+        document.getElementById('chat-input').addEventListener('keydown', e => {
+            if (e.key === 'Enter') {
+                sendChat();
+                e.preventDefault();
+            }
+            // Stop arrow keys from moving player when typing
+            e.stopPropagation();
+        });
 
         // Build SignalR connection
         connection = new signalR.HubConnectionBuilder()
@@ -50,31 +60,40 @@ const EraClient = (() => {
         connection.on('Chat', onChat);
 
         connection.onreconnecting(() => {
-            document.getElementById('loading').textContent = 'Reconnecting...';
+            setStatusBar('Reconnecting...');
         });
-
         connection.onreconnected(() => {
-            document.getElementById('loading').textContent = 'Reconnected!';
+            setStatusBar('Reconnected');
         });
 
-        // Initialize renderer first (loads sprite definitions, GRH data, etc.)
-        // This must happen BEFORE connecting, because the server sends MapLoad
-        // and MakeChar messages during Login, and the renderer needs its sprite
-        // data loaded to handle them.
+        // Initialize renderer (loads sprite data while login screen shows)
         await EraRenderer.init('game-viewport', '/data');
         EraRenderer.setMoveCallback(onPlayerMove);
+        EraRenderer.setStatusCallback(setStatusBar);
+        EraRenderer.setMapNameCallback(setMapName);
 
-        // Connect
+        // Connect to server
         try {
             await connection.start();
             console.log('[EraClient] Connected to server');
         } catch (err) {
-            showError('Failed to connect to server: ' + err.message);
+            showError('Failed to connect: ' + err.message);
         }
+
+        // Focus the name input
+        document.getElementById('login-name').focus();
     }
 
     function showError(msg) {
         document.getElementById('login-error').textContent = msg;
+    }
+
+    function setStatusBar(msg) {
+        document.getElementById('status-bar').textContent = msg;
+    }
+
+    function setMapName(name) {
+        document.getElementById('map-name').textContent = name || '';
     }
 
     async function doLogin() {
@@ -96,8 +115,8 @@ const EraClient = (() => {
     }
 
     async function doCreate() {
-        const name = document.getElementById('create-name').value.trim();
-        const pass = document.getElementById('create-pass').value;
+        const name = document.getElementById('login-name').value.trim();
+        const pass = document.getElementById('login-pass').value;
         const race = document.getElementById('create-race').value;
         const gender = document.getElementById('create-gender').value;
         if (!name || !pass) { showError('Enter name and password.'); return; }
@@ -116,8 +135,30 @@ const EraClient = (() => {
     }
 
     function enterGame() {
-        document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('game-screen').style.display = '';
+        // Hide the login overlay to reveal the game underneath
+        document.getElementById('login-overlay').classList.add('hidden');
+    }
+
+    // --- Chat ---
+
+    function sendChat() {
+        const input = document.getElementById('chat-input');
+        const text = input.value.trim();
+        if (!text) return;
+        input.value = '';
+
+        // TODO: send to server when chat hub method is implemented
+        // For now, local echo
+        addChatMessage(`You say: ${text}`, 'chat-talk');
+    }
+
+    function addChatMessage(text, className) {
+        const log = document.getElementById('chat-log');
+        const line = document.createElement('div');
+        line.className = className || 'chat-info';
+        line.textContent = text;
+        log.appendChild(line);
+        log.scrollTop = log.scrollHeight;
     }
 
     // --- Server -> Client handlers ---
@@ -147,13 +188,19 @@ const EraClient = (() => {
     }
 
     function onSetPosition(msg) {
-        // Server correction of our position
         EraRenderer.setPlayerPosition(msg.x, msg.y);
     }
 
     function onChat(msg) {
-        console.log('[Chat]', msg.text);
-        // TODO: render in a chat UI
+        // Map FontType enum to CSS class
+        const fontClass = {
+            0: 'chat-talk',    // Talk
+            1: 'chat-fight',   // Fight
+            2: 'chat-warning', // Warning
+            3: 'chat-info',    // Info
+            4: 'chat-skill'    // SkillInfo
+        };
+        addChatMessage(msg.text, fontClass[msg.font] || 'chat-info');
     }
 
     // --- Client -> Server ---

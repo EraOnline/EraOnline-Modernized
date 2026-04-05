@@ -33,7 +33,6 @@ const EraRenderer = (() => {
     let weaponAnimDefs = {};
     let shieldAnimDefs = {};
     let dataLoaded = false;
-    let statusEl = null;
     let fpsEl = null;
 
     // Frame timing
@@ -57,12 +56,14 @@ const EraRenderer = (() => {
     // Characters indexed by charIndex
     let characters = {};  // charIndex -> character object
     let myCharIndex = null;
-    let moveCallback = null; // function(direction) called when player presses arrow keys
+    let moveCallback = null;   // function(direction)
+    let statusCallback = null; // function(msg)
+    let mapNameCallback = null; // function(name)
 
     let keysDown = {};
 
     function setStatus(msg) {
-        if (statusEl) statusEl.textContent = msg;
+        if (statusCallback) statusCallback(msg);
         console.log('[EraRenderer] ' + msg);
     }
 
@@ -70,7 +71,6 @@ const EraRenderer = (() => {
         canvas = document.getElementById(canvasId);
         ctx = canvas.getContext('2d');
         dataBasePath = basePath || '/data';
-        statusEl = document.getElementById('loading');
 
         canvas.width = VIEWPORT_W * TILE_SIZE;
         canvas.height = VIEWPORT_H * TILE_SIZE;
@@ -98,6 +98,8 @@ const EraRenderer = (() => {
     // --- Public API (called by client.js) ---
 
     function setMoveCallback(cb) { moveCallback = cb; }
+    function setStatusCallback(cb) { statusCallback = cb; }
+    function setMapNameCallback(cb) { mapNameCallback = cb; }
 
     function setMyCharIndex(idx) { myCharIndex = idx; }
 
@@ -108,6 +110,7 @@ const EraRenderer = (() => {
         mapData = await resp.json();
         tileAnimState = {};
         await preloadVisibleSheets();
+        if (mapNameCallback) mapNameCallback(mapData.name || `Map ${mapId}`);
         setStatus(`Map ${mapId} loaded`);
     }
 
@@ -626,6 +629,8 @@ const EraRenderer = (() => {
     return {
         init,
         setMoveCallback,
+        setStatusCallback,
+        setMapNameCallback,
         setMyCharIndex,
         loadMapFromServer,
         addCharacter,
