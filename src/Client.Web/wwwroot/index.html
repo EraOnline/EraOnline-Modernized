@@ -28,12 +28,14 @@
 
         /* --- Game viewport canvas --- */
         /* VB6: MainViewShp at 80,80 - 640x352 (20x11 tiles at 32px) */
+        /* Canvas renders above the interface chrome - it covers the black
+           viewport rectangle in interface.JPG exactly */
         #game-viewport {
             position: absolute;
             left: 80px; top: 80px;
             width: 640px; height: 352px;
             image-rendering: pixelated;
-            z-index: 5;
+            z-index: 12;
         }
 
         /* --- FPS counter --- */
