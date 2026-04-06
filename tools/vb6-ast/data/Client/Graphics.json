@@ -16,8 +16,10 @@
       "lineStart": 5,
       "lineEnd": 22,
       "annotations": {
-        "notes": [],
-        "status": "not-started",
+        "notes": [
+          "DirectDraw surface management, not needed with Canvas"
+        ],
+        "status": "skipped",
         "sends": [],
         "calls": [
           "Surface"
@@ -34,8 +36,10 @@
       "lineEnd": 74,
       "annotations": {
         "purpose": "Load a BMP file into a DirectDraw offscreen surface",
-        "notes": [],
-        "status": "not-started",
+        "notes": [
+          "DirectDraw surface creation, replaced by Image loading"
+        ],
+        "status": "skipped",
         "sends": [],
         "calls": [
           "DirectDraw",
@@ -54,7 +58,8 @@
       "annotations": {
         "purpose": "Draw a Grh sprite to a DirectDraw surface (opaque blit)",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:drawGrh (opaque blit)",
         "sends": [],
         "calls": [
           "Surface"
@@ -71,7 +76,8 @@
       "annotations": {
         "purpose": "Draw a Grh sprite with transparency (color key blit, black=transparent)",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:drawGrh (PNG alpha replaces color key)",
         "sends": [],
         "calls": [
           "Surface",
@@ -89,7 +95,8 @@
       "annotations": {
         "purpose": "Blit the back buffer to the primary surface (display flip)",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:render (canvas clipping replaces back buffer crop)",
         "sends": [],
         "calls": [
           "PrimarySurface"
@@ -104,8 +111,10 @@
       "lineStart": 251,
       "lineEnd": 267,
       "annotations": {
-        "notes": [],
-        "status": "not-started",
+        "notes": [
+          "BMP header parsing, not needed with PNG"
+        ],
+        "status": "skipped",
         "sends": [],
         "calls": [
           "Get"
@@ -120,8 +129,10 @@
       "lineStart": 269,
       "lineEnd": 279,
       "annotations": {
-        "notes": [],
-        "status": "not-started",
+        "notes": [
+          "Win32 desktop handle, not applicable to browser"
+        ],
+        "status": "skipped",
         "sends": [],
         "calls": []
       }
@@ -135,8 +146,10 @@
       "lineEnd": 334,
       "annotations": {
         "purpose": "Draw a Grh sprite to a device context for UI elements (inventory icons, etc.)",
-        "notes": [],
-        "status": "not-started",
+        "notes": [
+          "GDI HDC drawing for UI forms, replaced by HTML/CSS"
+        ],
+        "status": "skipped",
         "sends": [],
         "calls": [
           "SurfaceDB"
@@ -153,7 +166,8 @@
       "annotations": {
         "purpose": "Main render loop: draw all visible tiles, objects, and characters to the back buffer",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:render",
         "sends": [],
         "calls": [
           "DDrawGrhtoSurface",
@@ -171,7 +185,8 @@
       "lineEnd": 510,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:render (inline tile-to-pixel math)",
         "sends": [],
         "calls": []
       }
@@ -186,7 +201,8 @@
       "annotations": {
         "purpose": "Load all sprite sheet BMP files into DirectDraw surfaces",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:loadSpriteSheet",
         "sends": [],
         "calls": [
           "SurfaceDB"

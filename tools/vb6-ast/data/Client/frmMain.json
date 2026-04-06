@@ -892,7 +892,8 @@
       "lineEnd": 783,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:onKeyDown",
         "sends": [
           "BTL",
           "COO"
@@ -928,7 +929,8 @@
       "lineEnd": 807,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:onKeyUp",
         "sends": [
           "ATT"
         ],
@@ -946,7 +948,8 @@
       "lineEnd": 825,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/index.html \u002B client.js:connectToServer",
         "sends": [],
         "calls": []
       }
@@ -998,7 +1001,8 @@
       "lineEnd": 1014,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:renderLoop (FPS counter inline)",
         "sends": [],
         "calls": []
       }

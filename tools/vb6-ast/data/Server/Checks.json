@@ -64,7 +64,8 @@
       "lineEnd": 93,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/WorldState.cs:IsNameOnline",
         "sends": [],
         "calls": []
       }

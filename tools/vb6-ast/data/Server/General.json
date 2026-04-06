@@ -35,7 +35,8 @@
       "annotations": {
         "purpose": "Generate a random integer between Lo and Hi inclusive",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "System.Random (inline)",
         "sends": [],
         "calls": [
           "Randomize"
@@ -53,7 +54,8 @@
       "annotations": {
         "purpose": "Check if a file exists on disk",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "System.IO.File.Exists (inline)",
         "sends": [],
         "calls": []
       }
@@ -68,7 +70,8 @@
       "lineEnd": 72,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "tools/eo-data-converter (INI parsing)",
         "sends": [],
         "calls": []
       }

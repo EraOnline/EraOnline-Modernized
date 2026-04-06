@@ -363,7 +363,8 @@
       "lineEnd": 320,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/index.html (login overlay)",
         "sends": [],
         "calls": []
       }
@@ -377,7 +378,8 @@
       "lineEnd": 330,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/index.html:loginBtn (ENTER MENATH)",
         "sends": [],
         "calls": [
           "PlayWaveDS"
@@ -393,7 +395,8 @@
       "lineEnd": 364,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/client.js:connectToServer",
         "sends": [],
         "calls": [
           "PlayWaveDS"

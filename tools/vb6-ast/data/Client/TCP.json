@@ -17,7 +17,8 @@
       "lineEnd": 861,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "partial",
+        "target": "Client.Web/wwwroot/js/client.js (SignalR handlers)",
         "sends": [],
         "calls": [
           "AddtoRichTextBox",
@@ -31,7 +32,37 @@
           "PlayMidi",
           "PlayWaveDS",
           "BookForm"
-        ]
+        ],
+        "sections": {
+          "MAC": {
+            "status": "ported",
+            "target": "client.js:MakeChar handler -\u003E renderer.addCharacter"
+          },
+          "ERC": {
+            "status": "ported",
+            "target": "client.js:EraseChar handler -\u003E renderer.removeCharacter"
+          },
+          "MOC": {
+            "status": "ported",
+            "target": "client.js:MoveChar handler -\u003E renderer.moveCharacter"
+          },
+          "SUP": {
+            "status": "ported",
+            "target": "client.js:SetPosition handler -\u003E renderer.setPlayerPosition"
+          },
+          "PLM": {
+            "status": "ported",
+            "target": "client.js:MapLoad handler -\u003E renderer.loadMapFromServer"
+          },
+          "SUC": {
+            "status": "ported",
+            "target": "client.js:SetCharIndex handler -\u003E renderer.setMyCharIndex"
+          },
+          "@": {
+            "status": "ported",
+            "target": "client.js:Chat handler -\u003E addChatMessage"
+          }
+        }
       }
     },
     {
@@ -43,7 +74,8 @@
       "lineEnd": 879,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "SignalR hub invoke (automatic serialization)",
         "sends": [],
         "calls": []
       }
@@ -57,7 +89,8 @@
       "lineEnd": 905,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/client.js:connectToServer (login/create forms)",
         "sends": [
           "ERASE",
           "LOGIN"

@@ -64,8 +64,11 @@
       "lineStart": 48,
       "lineEnd": 53,
       "annotations": {
-        "notes": [],
-        "status": "not-started",
+        "notes": [
+          "Login with existing character"
+        ],
+        "status": "ported",
+        "target": "Client.Web/wwwroot/index.html:loginSection",
         "sends": [],
         "calls": [
           "PlayWaveDS"
@@ -94,8 +97,11 @@
       "lineStart": 61,
       "lineEnd": 66,
       "annotations": {
-        "notes": [],
-        "status": "not-started",
+        "notes": [
+          "Create new character"
+        ],
+        "status": "ported",
+        "target": "Client.Web/wwwroot/index.html:createSection",
         "sends": [],
         "calls": [
           "PlayWaveDS"

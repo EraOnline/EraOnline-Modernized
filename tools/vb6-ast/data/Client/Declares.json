@@ -760,7 +760,7 @@
       "annotations": {
         "notes": [],
         "status": "ported",
-        "target": "Shared/Constants/GameConstants.cs",
+        "target": "Shared/Constants/Direction.cs",
         "sends": [],
         "calls": []
       }
@@ -773,7 +773,7 @@
       "annotations": {
         "notes": [],
         "status": "ported",
-        "target": "Shared/Constants/GameConstants.cs",
+        "target": "Shared/Constants/Direction.cs",
         "sends": [],
         "calls": []
       }
@@ -786,7 +786,7 @@
       "annotations": {
         "notes": [],
         "status": "ported",
-        "target": "Shared/Constants/GameConstants.cs",
+        "target": "Shared/Constants/Direction.cs",
         "sends": [],
         "calls": []
       }
@@ -799,7 +799,7 @@
       "annotations": {
         "notes": [],
         "status": "ported",
-        "target": "Shared/Constants/GameConstants.cs",
+        "target": "Shared/Constants/Direction.cs",
         "sends": [],
         "calls": []
       }
@@ -1105,7 +1105,7 @@
     },
     {
       "name": "gstrNULL",
-      "value": "\u0022\u0022",
+      "value": "\"\"",
       "visibility": "Global",
       "line": 438,
       "annotations": {

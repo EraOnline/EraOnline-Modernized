@@ -33,9 +33,10 @@
       "lineStart": 48,
       "lineEnd": 68,
       "annotations": {
-        "purpose": "Update a user's visual appearance and broadcast to all nearby clients",
+        "purpose": "Update a user\u0027s visual appearance and broadcast to all nearby clients",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:PlacePlayerInWorld (MakeChar SignalR message)",
         "sends": [
           "CHC"
         ],
@@ -52,9 +53,10 @@
       "lineStart": 70,
       "lineEnd": 84,
       "annotations": {
-        "purpose": "Update an NPC's visual appearance and broadcast to nearby clients",
+        "purpose": "Update an NPC\u0027s visual appearance and broadcast to nearby clients",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:PlacePlayerInWorld (NPC MakeChar messages)",
         "sends": [
           "CHC"
         ],
@@ -301,7 +303,8 @@
       "annotations": {
         "purpose": "Find the nearest walkable tile to a given position (spiral search)",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:FindNearbyLegalPos",
         "sends": [],
         "calls": []
       }
@@ -315,7 +318,7 @@
       "lineStart": 1135,
       "lineEnd": 1162,
       "annotations": {
-        "purpose": "Look up a player's UserList index by name (case-insensitive prefix match)",
+        "purpose": "Look up a player\u0027s UserList index by name (case-insensitive prefix match)",
         "notes": [],
         "status": "not-started",
         "sends": [],
@@ -404,7 +407,7 @@
       "lineStart": 1531,
       "lineEnd": 1607,
       "annotations": {
-        "purpose": "Pick up an object from the ground into user's inventory",
+        "purpose": "Pick up an object from the ground into user\u0027s inventory",
         "notes": [],
         "status": "not-started",
         "sends": [],
@@ -424,7 +427,7 @@
       "lineStart": 1609,
       "lineEnd": 1640,
       "annotations": {
-        "purpose": "Add a spell scroll to the user's spell book",
+        "purpose": "Add a spell scroll to the user\u0027s spell book",
         "notes": [],
         "status": "not-started",
         "sends": [],
@@ -514,7 +517,7 @@
       "lineStart": 1754,
       "lineEnd": 1785,
       "annotations": {
-        "purpose": "Send the GM help queue to a GM's client",
+        "purpose": "Send the GM help queue to a GM\u0027s client",
         "notes": [],
         "status": "not-started",
         "sends": [
@@ -733,7 +736,7 @@
       "lineStart": 2412,
       "lineEnd": 2454,
       "annotations": {
-        "purpose": "Route an attack to the correct handler based on what's adjacent",
+        "purpose": "Route an attack to the correct handler based on what\u0027s adjacent",
         "notes": [],
         "status": "not-started",
         "sends": [
@@ -856,8 +859,8 @@
       "annotations": {
         "purpose": "Move a user one tile in a direction, broadcast to map",
         "notes": [],
-        "status": "not-started",
-        "target": null,
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:Move \u002B Server/Services/WorldState.cs:MovePlayer",
         "sends": [
           "SUP",
           "MOC"
@@ -897,9 +900,10 @@
       "lineStart": 2675,
       "lineEnd": 2695,
       "annotations": {
-        "purpose": "Create and broadcast a user's character to all users on the map",
+        "purpose": "Create and broadcast a user\u0027s character to all users on the map",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:PlacePlayerInWorld",
         "sends": [
           "MAC"
         ],
@@ -918,7 +922,8 @@
       "annotations": {
         "purpose": "Create and broadcast an NPC character to the map",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:PlacePlayerInWorld (NPC spawn loop)",
         "sends": [
           "MAC"
         ],
@@ -970,9 +975,10 @@
       "lineStart": 2775,
       "lineEnd": 2808,
       "annotations": {
-        "purpose": "Remove a user's character from the world and broadcast",
+        "purpose": "Remove a user\u0027s character from the world and broadcast",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:OnDisconnectedAsync (EraseChar SignalR message)",
         "sends": [
           "ERC"
         ],
@@ -989,7 +995,7 @@
       "lineStart": 2810,
       "lineEnd": 2839,
       "annotations": {
-        "purpose": "Remove an NPC's character from the world and broadcast",
+        "purpose": "Remove an NPC\u0027s character from the world and broadcast",
         "notes": [],
         "status": "not-started",
         "sends": [

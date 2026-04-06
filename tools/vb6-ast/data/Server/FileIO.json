@@ -162,8 +162,11 @@
       "lineEnd": 710,
       "annotations": {
         "purpose": "Save a character\u0027s complete state to .chr file",
-        "notes": [],
-        "status": "not-started",
+        "notes": [
+          "Currently saves position, name, password, race, gender, body, head. Full stats/inventory/skills deferred to Phase 4."
+        ],
+        "status": "partial",
+        "target": "Server/Services/WorldState.cs:SaveCharacter",
         "sends": [],
         "calls": [
           "WriteVar"

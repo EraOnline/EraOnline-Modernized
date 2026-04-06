@@ -1291,7 +1291,8 @@
       "annotations": {
         "purpose": "Create a new character: assign random head, set starting stats/inventory, save, connect",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:CreateCharacter",
         "sends": [],
         "calls": [
           "SendData",
@@ -1312,7 +1313,8 @@
       "annotations": {
         "purpose": "Disconnect a user: save data, clean up socket, remove from world",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:OnDisconnectedAsync (SignalR manages connection)",
         "sends": [],
         "calls": [
           "CloseUser"
@@ -1329,7 +1331,8 @@
       "annotations": {
         "purpose": "Route a message to recipients based on sndRoute constant (ToIndex/ToAll/ToMap/ToPCArea/etc.)",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "SignalR group broadcasting (Clients.Group/Caller/OthersInGroup)",
         "sends": [],
         "calls": []
       }
@@ -1343,7 +1346,8 @@
       "lineEnd": 639,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:PlacePlayerInWorld",
         "sends": [
           "WR2",
           "WR1",
@@ -1383,7 +1387,8 @@
       "lineEnd": 676,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:OnDisconnectedAsync",
         "sends": [
           "WR2",
           "WR1"
@@ -1404,7 +1409,8 @@
       "lineEnd": 766,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:OnDisconnectedAsync",
         "sends": [],
         "calls": [
           "SaveUser",
@@ -1423,7 +1429,7 @@
       "annotations": {
         "purpose": "Main command router: parse all client messages and dispatch to handlers (~900 lines)",
         "notes": [],
-        "status": "not-started",
+        "status": "partial",
         "sends": [
           "PL3",
           "SUP",
@@ -1504,7 +1510,21 @@
           "Restart",
           "WarpNPCChar",
           "WipeJunk"
-        ]
+        ],
+        "sections": {
+          "LOGIN": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:Login"
+          },
+          "NLOGIN": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:CreateCharacter"
+          },
+          "M": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:Move"
+          }
+        }
       }
     }
   ]

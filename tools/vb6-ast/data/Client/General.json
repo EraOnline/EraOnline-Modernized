@@ -18,7 +18,8 @@
       "lineEnd": 20,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/WorldState.cs:IsTileBlocked",
         "sends": [],
         "calls": []
       }
@@ -33,7 +34,8 @@
       "lineEnd": 36,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/WorldState.cs:IsTileBlocked (bounds check)",
         "sends": [],
         "calls": []
       }
@@ -47,7 +49,8 @@
       "lineEnd": 66,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/client.js:addChatMessage",
         "sends": [],
         "calls": []
       }
@@ -90,7 +93,8 @@
       "lineEnd": 174,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:moveCharacter",
         "sends": [],
         "calls": []
       }
@@ -197,7 +201,8 @@
       "annotations": {
         "purpose": "Create a character representation on the client from server CC message",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:addCharacter",
         "sends": [],
         "calls": []
       }
@@ -212,7 +217,8 @@
       "annotations": {
         "purpose": "Handle keyboard input for movement and special keys",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:processPlayerInput",
         "sends": [
           "M",
           "\u003C",
@@ -236,7 +242,8 @@
       "lineEnd": 612,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:removeCharacter",
         "sends": [],
         "calls": []
       }
@@ -250,7 +257,8 @@
       "lineEnd": 636,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:getTileAnimState \u002B initCharAnims",
         "sends": [],
         "calls": []
       }
@@ -265,7 +273,8 @@
       "annotations": {
         "purpose": "Start a character\u0027s movement animation in a heading direction",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:updateMovement",
         "sends": [
           "UHD",
           "UMS"
@@ -285,7 +294,8 @@
       "annotations": {
         "purpose": "Scroll the viewport to follow the player character",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:updateScreenScroll",
         "sends": [],
         "calls": []
       }
@@ -299,7 +309,8 @@
       "lineEnd": 765,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/WorldState.cs:AllocateCharIndex",
         "sends": [],
         "calls": []
       }
@@ -353,7 +364,8 @@
       "lineEnd": 947,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "tools/eo-data-converter (INI parsing)",
         "sends": [],
         "calls": []
       }
@@ -382,8 +394,11 @@
       "lineEnd": 1225,
       "annotations": {
         "purpose": "Client startup: init DirectDraw, load all data, show login screen",
-        "notes": [],
-        "status": "not-started",
+        "notes": [
+          "Init sequence and game loop ported. GM tools, sound init, patcher not yet."
+        ],
+        "status": "partial",
+        "target": "Client.Web/wwwroot/js/renderer.js:init \u002B client.js:connectToServer",
         "sends": [
           "RPU"
         ],
@@ -467,7 +482,8 @@
       "lineEnd": 1326,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:processPlayerInput \u002B Server/Services/WorldState.cs:IsTileBlocked",
         "sends": [],
         "calls": []
       }
@@ -500,7 +516,8 @@
       "annotations": {
         "purpose": "Load weapon animation data from wpanim.dat",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/GameDataService.cs:LoadAllAsync",
         "sends": [],
         "calls": [
           "InitGrh"
@@ -517,7 +534,8 @@
       "annotations": {
         "purpose": "Load shield animation data from shanim.dat",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/GameDataService.cs:LoadAllAsync",
         "sends": [],
         "calls": [
           "InitGrh"
@@ -552,7 +570,8 @@
       "lineEnd": 1447,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "System.Random (inline)",
         "sends": [],
         "calls": [
           "Randomize"

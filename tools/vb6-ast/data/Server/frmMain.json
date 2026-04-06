@@ -505,7 +505,8 @@
       "lineEnd": 478,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Program.cs \u002B Server/Services/GameDataService.cs:LoadAllAsync",
         "sends": [],
         "calls": [
           "LoadSini",
@@ -539,8 +540,11 @@
       "lineStart": 502,
       "lineEnd": 591,
       "annotations": {
-        "notes": [],
-        "status": "not-started",
+        "notes": [
+          "50ms tick rate matches original. NPC AI, idle detection not yet implemented."
+        ],
+        "status": "partial",
+        "target": "Server/Services/GameLoopService.cs",
         "sends": [],
         "calls": [
           "SendData",
@@ -607,7 +611,8 @@
       "lineEnd": 681,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "SignalR connection handling (automatic)",
         "sends": [],
         "calls": [
           "CloseSocket"
@@ -623,7 +628,8 @@
       "lineEnd": 690,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:OnDisconnectedAsync",
         "sends": [],
         "calls": []
       }
@@ -637,7 +643,8 @@
       "lineEnd": 745,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "SignalR message deserialization (automatic)",
         "sends": [],
         "calls": [
           "Socket2",

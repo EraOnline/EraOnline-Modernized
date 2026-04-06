@@ -28,7 +28,8 @@
       "lineEnd": 33,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/index.html:createSection",
         "sends": [],
         "calls": []
       }
@@ -42,7 +43,8 @@
       "lineEnd": 42,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/client.js:connectToServer (create character submit)",
         "sends": [],
         "calls": [
           "PlayWaveDS"
