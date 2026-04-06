@@ -29,7 +29,7 @@ tools/vb6-ast/bin/vb6-ast show Server/GameLogic:UserDie  # Look up a function
 tools/vb6-ast/bin/vb6-ast list controls --module Client/frmMain  # Timer controls
 tools/vb6-ast/bin/vb6-ast query --protocol               # Full protocol map
 tools/vb6-ast/bin/vb6-ast query --calls UserDie           # Who calls this?
-tools/vb6-ast/bin/vb6-ast annotate Server/GameLogic:Foo --status ported --csharp "Server/Combat.cs:Foo"
+tools/vb6-ast/bin/vb6-ast annotate Server/GameLogic:Foo --status ported --target "Server/Combat.cs:Foo"
 ```
 
 **eo-data-converter** - Converts all original VB6 game data files to JSON at `tools/eo-data-converter/`. Parses both INI-format files (OBJ.dat, NPC.dat, Spells.dat, Head.dat, Body.dat, etc.) and binary files (Grh.dat, map .map/.inf files). Output in `tools/eo-data-converter/data/`.

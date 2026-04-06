@@ -75,7 +75,7 @@ public static class JsonStore
 
     /// <summary>
     /// Merge a newly parsed module with existing data, preserving manual annotations.
-    /// Strategy: keep manual annotations (purpose, notes, status, csharpLocation) from existing,
+    /// Strategy: keep manual annotations (purpose, notes, status, target, sections) from existing,
     /// but prefer auto-detected sends/calls from the fresh parse when they're richer.
     /// </summary>
     public static Vb6Module MergeModules(Vb6Module parsed, Vb6Module existing)
@@ -120,7 +120,7 @@ public static class JsonStore
     }
 
     /// <summary>
-    /// Merge annotations: manual fields (purpose, notes, status, csharpLocation) always
+    /// Merge annotations: manual fields (purpose, notes, status, target) always
     /// come from existing. For sends/calls, prefer the richer source - auto-detected
     /// from a fresh parse is usually more complete than manual, but if someone manually
     /// set them we keep the manual version.
@@ -130,7 +130,7 @@ public static class JsonStore
         // Manual fields: always preserve from existing
         parsed.Purpose = existing.Purpose ?? parsed.Purpose;
         parsed.Status = existing.Status != "not-started" ? existing.Status : parsed.Status;
-        parsed.CsharpLocation = existing.CsharpLocation ?? parsed.CsharpLocation;
+        parsed.Target = existing.Target ?? parsed.Target;
 
         // Notes: merge both, deduplicated
         var allNotes = existing.Notes.Concat(parsed.Notes).Where(n => !string.IsNullOrEmpty(n)).Distinct().ToList();
@@ -145,6 +145,10 @@ public static class JsonStore
             parsed.Sends = existing.Sends;
         if (existing.Calls.Count > parsed.Calls.Count)
             parsed.Calls = existing.Calls;
+
+        // Sections: preserve from existing (always manually set)
+        if (existing.Sections is { Count: > 0 })
+            parsed.Sections = existing.Sections;
     }
 
     public static IEnumerable<Vb6Module> LoadAllModules(string dataDir)

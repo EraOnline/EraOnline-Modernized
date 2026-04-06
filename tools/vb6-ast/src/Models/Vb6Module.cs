@@ -182,14 +182,35 @@ public class Annotations
     public List<string> Notes { get; set; } = [];
 
     [JsonPropertyName("status")]
-    public string Status { get; set; } = "not-started"; // not-started, in-progress, ported, skipped
+    public string Status { get; set; } = "not-started"; // not-started, in-progress, ported, skipped, partial
 
-    [JsonPropertyName("csharpLocation")]
-    public string? CsharpLocation { get; set; }
+    [JsonPropertyName("target")]
+    public string? Target { get; set; }
 
     [JsonPropertyName("sends")]
     public List<string> Sends { get; set; } = [];
 
     [JsonPropertyName("calls")]
     public List<string> Calls { get; set; } = [];
+
+    /// <summary>
+    /// Named sections within a large function (e.g., protocol command branches in a message router).
+    /// Each section has its own porting status and target location.
+    /// </summary>
+    [JsonPropertyName("sections")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public Dictionary<string, SectionAnnotation>? Sections { get; set; }
+}
+
+public class SectionAnnotation
+{
+    [JsonPropertyName("status")]
+    public string Status { get; set; } = "not-started";
+
+    [JsonPropertyName("target")]
+    public string? Target { get; set; }
+
+    [JsonPropertyName("notes")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<string>? Notes { get; set; }
 }

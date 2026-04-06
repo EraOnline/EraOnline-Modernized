@@ -185,7 +185,7 @@ int RunList(string[] args)
                 {
                     var status = member.Annotations.Status switch
                     {
-                        "ported" => "x", "skipped" => "-", "in-progress" => "~", _ => " "
+                        "ported" => "x", "skipped" => "-", "in-progress" => "~", "partial" => "/", _ => " "
                     };
                     Console.WriteLine($"  [{status}] {member.Kind,-8} {member.Name,-35} L{member.LineStart}-{member.LineEnd}  {m.Address}:{member.Name}");
                 }
@@ -199,9 +199,9 @@ int RunList(string[] args)
                 Console.WriteLine($"\n=== {m.Address} ===");
                 foreach (var t in m.Types)
                 {
-                    var statusTag = t.Annotations.Status switch { "ported" => "[x]", "skipped" => "[-]", "in-progress" => "[~]", _ => "[ ]" };
-                    var csharpInfo = t.Annotations.CsharpLocation != null ? $"  -> {t.Annotations.CsharpLocation}" : "";
-                    Console.WriteLine($"  {statusTag} Type {t.Name} ({t.Fields.Count} fields) L{t.LineStart}-{t.LineEnd}{csharpInfo}");
+                    var statusTag = t.Annotations.Status switch { "ported" => "[x]", "skipped" => "[-]", "in-progress" => "[~]", "partial" => "[/]", _ => "[ ]" };
+                    var targetInfo = t.Annotations.Target != null ? $"  -> {t.Annotations.Target}" : "";
+                    Console.WriteLine($"  {statusTag} Type {t.Name} ({t.Fields.Count}) L{t.LineStart}-{t.LineEnd}{targetInfo}");
                     foreach (var f in t.Fields)
                     {
                         var arrayInfo = f.IsArray ? $"({f.ArrayBounds})" : "";
@@ -218,9 +218,9 @@ int RunList(string[] args)
                 Console.WriteLine($"\n=== {m.Address} ===");
                 foreach (var c in m.Constants)
                 {
-                    var statusTag = c.Annotations.Status switch { "ported" => "[x]", "skipped" => "[-]", "in-progress" => "[~]", _ => "[ ]" };
-                    var csharpInfo = c.Annotations.CsharpLocation != null ? $"  -> {c.Annotations.CsharpLocation}" : "";
-                    Console.WriteLine($"  {statusTag} {c.Visibility,-7} Const {c.Name,-35} = {c.Value}{csharpInfo}");
+                    var statusTag = c.Annotations.Status switch { "ported" => "[x]", "skipped" => "[-]", "in-progress" => "[~]", "partial" => "[/]", _ => "[ ]" };
+                    var targetInfo = c.Annotations.Target != null ? $"  -> {c.Annotations.Target}" : "";
+                    Console.WriteLine($"  {statusTag} {c.Visibility,-7} Const {c.Name,-35} = {c.Value}{targetInfo}");
                 }
             }
             break;
@@ -232,10 +232,10 @@ int RunList(string[] args)
                 Console.WriteLine($"\n=== {m.Address} ===");
                 foreach (var v in m.Variables)
                 {
-                    var statusTag = v.Annotations.Status switch { "ported" => "[x]", "skipped" => "[-]", "in-progress" => "[~]", _ => "[ ]" };
-                    var csharpInfo = v.Annotations.CsharpLocation != null ? $"  -> {v.Annotations.CsharpLocation}" : "";
+                    var statusTag = v.Annotations.Status switch { "ported" => "[x]", "skipped" => "[-]", "in-progress" => "[~]", "partial" => "[/]", _ => "[ ]" };
+                    var targetInfo = v.Annotations.Target != null ? $"  -> {v.Annotations.Target}" : "";
                     var arrayInfo = v.IsArray ? $"({v.ArrayBounds})" : "";
-                    Console.WriteLine($"  {statusTag} {v.Visibility,-7} {v.Name,-35} As {v.VariableType}{arrayInfo}{csharpInfo}");
+                    Console.WriteLine($"  {statusTag} {v.Visibility,-7} {v.Name,-35} As {v.VariableType}{arrayInfo}{targetInfo}");
                 }
             }
             break;
@@ -334,10 +334,22 @@ void PrintMember(Vb6Module module, Vb6Member member)
     Console.WriteLine($"Visibility: {member.Visibility}");
     Console.WriteLine($"Status: {member.Annotations.Status}");
     if (member.Annotations.Purpose != null) Console.WriteLine($"Purpose: {member.Annotations.Purpose}");
-    if (member.Annotations.CsharpLocation != null) Console.WriteLine($"C# Location: {member.Annotations.CsharpLocation}");
+    if (member.Annotations.Target != null) Console.WriteLine($"Target: {member.Annotations.Target}");
     if (member.Annotations.Sends.Count > 0) Console.WriteLine($"Sends: {string.Join(", ", member.Annotations.Sends)}");
     if (member.Annotations.Calls.Count > 0) Console.WriteLine($"Calls: {string.Join(", ", member.Annotations.Calls)}");
     foreach (var note in member.Annotations.Notes) Console.WriteLine($"Note: {note}");
+    if (member.Annotations.Sections is { Count: > 0 } sections)
+    {
+        var ported = sections.Count(s => s.Value.Status == "ported");
+        var total = sections.Count;
+        Console.WriteLine($"Sections: {ported}/{total} ported");
+        foreach (var (name, sec) in sections.OrderBy(s => s.Key))
+        {
+            var tag = sec.Status switch { "ported" => "[x]", "skipped" => "[-]", "in-progress" => "[~]", "partial" => "[/]", _ => "[ ]" };
+            var tgt = sec.Target != null ? $"  -> {sec.Target}" : "";
+            Console.WriteLine($"  {tag} {name}{tgt}");
+        }
+    }
 }
 
 void PrintType(Vb6Module module, Vb6TypeDef type)
@@ -348,7 +360,7 @@ void PrintType(Vb6Module module, Vb6TypeDef type)
     Console.WriteLine($"Lines: {type.LineStart}-{type.LineEnd}");
     Console.WriteLine($"Status: {type.Annotations.Status}");
     if (type.Annotations.Purpose != null) Console.WriteLine($"Purpose: {type.Annotations.Purpose}");
-    if (type.Annotations.CsharpLocation != null) Console.WriteLine($"C# Location: {type.Annotations.CsharpLocation}");
+    if (type.Annotations.Target != null) Console.WriteLine($"Target: {type.Annotations.Target}");
     Console.WriteLine($"Fields ({type.Fields.Count}):");
     foreach (var f in type.Fields)
     {
@@ -377,13 +389,15 @@ int RunAnnotate(string[] args)
         Options:
           --purpose TEXT    Set purpose description
           --note TEXT       Add a note (appends)
-          --status STATUS   Set status: not-started|in-progress|ported|skipped
-          --csharp LOC      Set C# implementation location
+          --status STATUS   Set status: not-started|in-progress|ported|skipped|partial
+          --target LOC      Set implementation location in the port
           --sends MSG,MSG   Set protocol messages sent
           --calls FN,FN     Set functions called
           --type            Target a type definition instead of a member
           --constant        Target a constant instead of a member
           --global          Target a global variable instead of a member
+          --section NAME    Target a named section within a member (creates if needed)
+          --rm-section NAME Remove a named section from a member
         """);
         return 1;
     }
@@ -411,10 +425,12 @@ int RunAnnotate(string[] args)
     bool isType = HasFlag(args, "--type");
     bool isConstant = HasFlag(args, "--constant");
     bool isGlobal = HasFlag(args, "--global");
+    var sectionName = GetFlag(args, "--section");
+    var rmSection = GetFlag(args, "--rm-section");
     var purpose = GetFlag(args, "--purpose");
     var note = GetFlag(args, "--note");
     var status = GetFlag(args, "--status");
-    var csharp = GetFlag(args, "--csharp");
+    var target = GetFlag(args, "--target");
     var sends = GetFlag(args, "--sends");
     var calls = GetFlag(args, "--calls");
 
@@ -424,7 +440,7 @@ int RunAnnotate(string[] args)
     {
         var type = module.Types.FirstOrDefault(t => t.Name.Equals(memberName, StringComparison.OrdinalIgnoreCase));
         if (type == null) { Console.Error.WriteLine($"Type '{memberName}' not found in {module.Address}"); return 1; }
-        ApplyAnnotation(type.Annotations, purpose, note, status, csharp, sends, calls);
+        ApplyAnnotation(type.Annotations, purpose, note, status, target, sends, calls);
         Console.WriteLine($"Updated type {memberName} in {module.Address}");
         changed = true;
     }
@@ -432,7 +448,7 @@ int RunAnnotate(string[] args)
     {
         var constant = module.Constants.FirstOrDefault(c => c.Name.Equals(memberName, StringComparison.OrdinalIgnoreCase));
         if (constant == null) { Console.Error.WriteLine($"Constant '{memberName}' not found in {module.Address}"); return 1; }
-        ApplyAnnotation(constant.Annotations, purpose, note, status, csharp, sends, calls);
+        ApplyAnnotation(constant.Annotations, purpose, note, status, target, sends, calls);
         Console.WriteLine($"Updated constant {memberName} in {module.Address}");
         changed = true;
     }
@@ -440,7 +456,7 @@ int RunAnnotate(string[] args)
     {
         var variable = module.Variables.FirstOrDefault(v => v.Name.Equals(memberName, StringComparison.OrdinalIgnoreCase));
         if (variable == null) { Console.Error.WriteLine($"Global '{memberName}' not found in {module.Address}"); return 1; }
-        ApplyAnnotation(variable.Annotations, purpose, note, status, csharp, sends, calls);
+        ApplyAnnotation(variable.Annotations, purpose, note, status, target, sends, calls);
         Console.WriteLine($"Updated global {memberName} in {module.Address}");
         changed = true;
     }
@@ -448,9 +464,47 @@ int RunAnnotate(string[] args)
     {
         var member = module.Members.FirstOrDefault(m => m.Name.Equals(memberName, StringComparison.OrdinalIgnoreCase));
         if (member == null) { Console.Error.WriteLine($"Member '{memberName}' not found in {module.Address}"); return 1; }
-        ApplyAnnotation(member.Annotations, purpose, note, status, csharp, sends, calls);
-        Console.WriteLine($"Updated {member.Kind} {memberName} in {module.Address}");
-        changed = true;
+
+        if (rmSection != "")
+        {
+            // Remove a section
+            if (member.Annotations.Sections != null && member.Annotations.Sections.Remove(rmSection))
+            {
+                if (member.Annotations.Sections.Count == 0) member.Annotations.Sections = null;
+                Console.WriteLine($"Removed section '{rmSection}' from {memberName} in {module.Address}");
+            }
+            else
+            {
+                Console.Error.WriteLine($"Section '{rmSection}' not found in {memberName}");
+                return 1;
+            }
+            changed = true;
+        }
+        else if (sectionName != "")
+        {
+            // Annotate a specific section within the member
+            member.Annotations.Sections ??= new Dictionary<string, SectionAnnotation>();
+            if (!member.Annotations.Sections.TryGetValue(sectionName, out var section))
+            {
+                section = new SectionAnnotation();
+                member.Annotations.Sections[sectionName] = section;
+            }
+            if (status != "") section.Status = status;
+            if (target != "") section.Target = target;
+            if (note != "")
+            {
+                section.Notes ??= [];
+                if (!section.Notes.Contains(note)) section.Notes.Add(note);
+            }
+            Console.WriteLine($"Updated section '{sectionName}' in {memberName} in {module.Address}");
+            changed = true;
+        }
+        else
+        {
+            ApplyAnnotation(member.Annotations, purpose, note, status, target, sends, calls);
+            Console.WriteLine($"Updated {member.Kind} {memberName} in {module.Address}");
+            changed = true;
+        }
     }
 
     if (changed)
@@ -459,12 +513,12 @@ int RunAnnotate(string[] args)
     return changed ? 0 : 1;
 }
 
-void ApplyAnnotation(Annotations ann, string purpose, string note, string status, string csharp, string sends, string calls)
+void ApplyAnnotation(Annotations ann, string purpose, string note, string status, string target, string sends, string calls)
 {
     if (purpose != "") ann.Purpose = purpose;
     if (note != "" && !ann.Notes.Contains(note)) ann.Notes.Add(note);
     if (status != "") ann.Status = status;
-    if (csharp != "") ann.CsharpLocation = csharp;
+    if (target != "") ann.Target = target;
     if (sends != "") ann.Sends = sends.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
     if (calls != "") ann.Calls = calls.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
 }
@@ -527,9 +581,9 @@ int RunQuery(string[] args)
 
     foreach (var (module, kind, name, ann) in items)
     {
-        var statusTag = ann.Status switch { "ported" => "[x]", "skipped" => "[-]", "in-progress" => "[~]", _ => "[ ]" };
-        var csharpInfo = ann.CsharpLocation != null ? $"  -> {ann.CsharpLocation}" : "";
-        Console.WriteLine($"  {statusTag} {module.Address}:{name,-35} {kind,-8}{csharpInfo}");
+        var statusTag = ann.Status switch { "ported" => "[x]", "skipped" => "[-]", "in-progress" => "[~]", "partial" => "[/]", _ => "[ ]" };
+        var targetInfo = ann.Target != null ? $"  -> {ann.Target}" : "";
+        Console.WriteLine($"  {statusTag} {module.Address}:{name,-35} {kind,-8}{targetInfo}");
     }
 
     Console.WriteLine($"\n{items.Count} results.");
@@ -550,11 +604,12 @@ int RunStats(string[] args)
         .ToList();
 
     // Collect all annotatable items across all modules
-    int totalMembers = 0, membersPorted = 0, membersSkipped = 0;
+    int totalMembers = 0, membersPorted = 0, membersSkipped = 0, membersPartial = 0;
     int totalTypes = 0, typesPorted = 0, typesSkipped = 0;
     int totalConsts = 0, constsPorted = 0, constsSkipped = 0;
     int totalGlobals = 0, globalsPorted = 0, globalsSkipped = 0;
     int totalControls = 0;
+    int totalSections = 0, sectionsPorted = 0, sectionsSkipped = 0;
 
     Console.WriteLine($"{"Address",-35} {"Func",5} {"Type",5} {"Const",6} {"Glob",5} {"Ported",7} {"Skip",5}");
     Console.WriteLine(new string('-', 75));
@@ -568,7 +623,7 @@ int RunStats(string[] args)
         int mTotal = mMembers + mTypes + mConsts + mGlobals;
         if (mTotal == 0 && !showAll) continue;
 
-        int mPorted = m.Members.Count(x => x.Annotations.Status == "ported")
+        int mPorted = m.Members.Count(x => x.Annotations.Status is "ported" or "partial")
             + m.Types.Count(x => x.Annotations.Status == "ported")
             + m.Constants.Count(x => x.Annotations.Status == "ported")
             + m.Variables.Count(x => x.Annotations.Status == "ported");
@@ -579,11 +634,25 @@ int RunStats(string[] args)
 
         Console.WriteLine($"{m.Address,-35} {mMembers,5} {mTypes,5} {mConsts,6} {mGlobals,5} {mPorted,7} {mSkipped,5}");
 
-        totalMembers += mMembers; membersPorted += m.Members.Count(x => x.Annotations.Status == "ported"); membersSkipped += m.Members.Count(x => x.Annotations.Status == "skipped");
+        totalMembers += mMembers;
+        membersPorted += m.Members.Count(x => x.Annotations.Status == "ported");
+        membersPartial += m.Members.Count(x => x.Annotations.Status == "partial");
+        membersSkipped += m.Members.Count(x => x.Annotations.Status == "skipped");
         totalTypes += mTypes; typesPorted += m.Types.Count(x => x.Annotations.Status == "ported"); typesSkipped += m.Types.Count(x => x.Annotations.Status == "skipped");
         totalConsts += mConsts; constsPorted += m.Constants.Count(x => x.Annotations.Status == "ported"); constsSkipped += m.Constants.Count(x => x.Annotations.Status == "skipped");
         totalGlobals += mGlobals; globalsPorted += m.Variables.Count(x => x.Annotations.Status == "ported"); globalsSkipped += m.Variables.Count(x => x.Annotations.Status == "skipped");
         totalControls += m.Controls.Count;
+
+        // Count sections
+        foreach (var member in m.Members)
+        {
+            if (member.Annotations.Sections is { Count: > 0 } sections)
+            {
+                totalSections += sections.Count;
+                sectionsPorted += sections.Count(s => s.Value.Status == "ported");
+                sectionsSkipped += sections.Count(s => s.Value.Status == "skipped");
+            }
+        }
     }
 
     int grandTotal = totalMembers + totalTypes + totalConsts + totalGlobals;
@@ -591,14 +660,18 @@ int RunStats(string[] args)
     int grandSkipped = membersSkipped + typesSkipped + constsSkipped + globalsSkipped;
 
     Console.WriteLine(new string('-', 75));
-    Console.WriteLine($"{"TOTAL",-35} {totalMembers,5} {totalTypes,5} {totalConsts,6} {totalGlobals,5} {grandPorted,7} {grandSkipped,5}");
+    Console.WriteLine($"{"TOTAL",-35} {totalMembers,5} {totalTypes,5} {totalConsts,6} {totalGlobals,5} {grandPorted + membersPartial,7} {grandSkipped,5}");
 
     Console.WriteLine();
     Console.WriteLine($"Porting progress:");
-    Console.WriteLine($"  Functions/Subs: {membersPorted}/{totalMembers} ported, {membersSkipped} skipped");
+    var memberLine = $"  Functions/Subs: {membersPorted}/{totalMembers} ported, {membersSkipped} skipped";
+    if (membersPartial > 0) memberLine += $", {membersPartial} partial";
+    Console.WriteLine(memberLine);
     Console.WriteLine($"  Types:          {typesPorted}/{totalTypes} ported, {typesSkipped} skipped");
     Console.WriteLine($"  Constants:      {constsPorted}/{totalConsts} ported, {constsSkipped} skipped");
     Console.WriteLine($"  Globals:        {globalsPorted}/{totalGlobals} ported, {globalsSkipped} skipped");
+    if (totalSections > 0)
+        Console.WriteLine($"  Sections:       {sectionsPorted}/{totalSections} ported, {sectionsSkipped} skipped");
     Console.WriteLine($"  ---");
     Console.WriteLine($"  Overall:        {grandPorted}/{grandTotal} ported ({(grandTotal > 0 ? grandPorted * 100 / grandTotal : 0)}%), {grandSkipped} skipped");
     Console.WriteLine($"\n  Controls: {totalControls}  Modules: {modules.Count}");
@@ -611,7 +684,7 @@ int RunStats(string[] args)
 int PrintUsage()
 {
     Console.WriteLine("""
-    vb6-ast - VB6 source code analyzer for Era Online
+    vb6-ast - VB6 source code analyzer and porting tracker
 
     Addresses use the format: Project/Module:MemberName
     Examples: Server/GameLogic:UserDie, Client/frmMain, Server/Declarations:User
@@ -623,10 +696,12 @@ int PrintUsage()
       vb6-ast annotate <addr:name> [OPTIONS]       Annotate a member, type, constant, or global
         --purpose TEXT    Set purpose description
         --note TEXT       Add a note (appends)
-        --status STATUS   Set status: not-started|in-progress|ported|skipped
-        --csharp LOC      Set C# implementation location
+        --status STATUS   Set status: not-started|in-progress|ported|skipped|partial
+        --target LOC      Set implementation location in the port
         --sends MSG,MSG   Set protocol messages sent
         --calls FN,FN     Set functions called
+        --section NAME    Target a named section within a member
+        --rm-section NAME Remove a named section from a member
         --type            Target a type definition
         --constant        Target a constant
         --global          Target a global variable
