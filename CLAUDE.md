@@ -18,6 +18,58 @@ Also explore the original VB6 source in `src_vb6/` and the original website/manu
 
 If the user hasn't told you today's date, ask for it - you'll need it for work logs and journal entries.
 
+## Status Report
+
+When Kyle asks for the status report (typically at session start), run `tools/vb6-ast/bin/vb6-ast stats` and render a visual dashboard. The format:
+
+```
+Era Online — Status Report
+══════════════════════════════════════════════════════
+Phase 3 of 7: Client-Server Connection
+
+Functions  ████░░░░░░░░░░░░░░░░░░░░░░░░░░  63/704   9%
+Types      ████████████████░░░░░░░░░░░░░░  16/53   30%
+Constants  ████████░░░░░░░░░░░░░░░░░░░░░░  157/548  29%
+Globals    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0/305   0%
+──────────────────────────────────────────────────────
+Overall    ████░░░░░░░░░░░░░░░░░░░░░░░░░░  236/1610 15%
+
+Partial: 5 fns (HandleData server+client, Main, GameTimer, SaveUser)
+Sections: 10 ported across 2 partial functions
+
+Server coverage:      28/101 fns   Client coverage:      35/448 fns
+Skipped: 103 (62 duplicate fns, 29 types, 7 consts, 5 DirectDraw fns)
+```
+
+How to build the chart:
+- **Denominators** = total minus skipped (the actionable remaining). Calculate from the stats output.
+- **Bar width** = 30 characters. Fill = `█`, empty = `░`. Chars filled = round(ported / denominator * 30).
+- **Phase** = read the first line of docs/PROGRESS.md "Current State" section.
+- **Partial** = list the function names with "partial" status (from `vb6-ast query --status partial`).
+- **Server/Client split** = count ported functions in Server/* vs Client/* modules.
+
+Also show a one-line summary of what was done last session (from the most recent log) and what's next (from PROGRESS.md).
+
+## Keeping Annotations Current
+
+After implementing VB6 functionality, update the vb6-ast annotations before committing:
+
+```bash
+# Mark a function as ported with its target location
+tools/vb6-ast/bin/vb6-ast annotate Server/GameLogic:UserDie --status ported --target "Server/Combat.cs:UserDie"
+
+# For large router functions, use sections to track individual branches
+tools/vb6-ast/bin/vb6-ast annotate Server/TCP:HandleData --section ";" --status ported --target "Server/Hubs/GameHub.cs:Say"
+
+# For functions that are partially done
+tools/vb6-ast/bin/vb6-ast annotate Server/frmMain:GameTimer_Timer --status partial --note "NPC AI not yet"
+
+# Target can point to any file: C#, JS, or tools
+tools/vb6-ast/bin/vb6-ast annotate Client/Graphics:RenderScreen --status ported --target "Client.Web/wwwroot/js/renderer.js:render"
+```
+
+Valid statuses: `not-started`, `in-progress`, `ported`, `partial`, `skipped`. Include annotation updates in the same commit as the implementation they track.
+
 ## Tools
 
 **vb6-ast** - VB6 source code analyzer at `tools/vb6-ast/`. Parses all 89 VB6 source files using ANTLR4, extracts declarations, auto-detects call graph and protocol messages. Use it to look up any VB6 function, type, constant, form control, or protocol message.
