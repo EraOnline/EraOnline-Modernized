@@ -1523,6 +1523,42 @@
           "M": {
             "status": "ported",
             "target": "Server/Hubs/GameHub.cs:Move"
+          },
+          ";": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:Say"
+          },
+          "-": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:Say"
+          },
+          ":": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:Say"
+          },
+          "\\": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:Say"
+          },
+          "/WHO": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleSlashCommand"
+          },
+          "/STATS": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleSlashCommand"
+          },
+          "/DESC": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleSlashCommand"
+          },
+          "/SAVE": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleSlashCommand"
+          },
+          "/QUIT": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleSlashCommand"
           }
         }
       }

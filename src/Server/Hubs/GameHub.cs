@@ -225,6 +225,178 @@ public class GameHub : Hub
         }
     }
 
+    /// <summary>
+    /// Handle all chat input from the client.
+    /// VB6: HandleData ";" (say), "-" (shout), ":" (emote), "\" (whisper), "/" (commands)
+    /// (TCP.bas:991-1100)
+    /// </summary>
+    public async Task Say(string message)
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null || string.IsNullOrEmpty(message)) return;
+
+        // Slash commands
+        if (message.StartsWith('/'))
+        {
+            await HandleSlashCommand(player, message);
+            return;
+        }
+
+        // Chat type determined by first character prefix
+        // VB6 client: SendTxt_KeyUp prepends prefix before sending
+        if (message.StartsWith('-'))
+        {
+            // Shout — broadcast to entire map
+            // VB6: SendData(ToMap, ..., "Name shouts: text")
+            var text = message[1..].TrimStart();
+            if (string.IsNullOrEmpty(text)) return;
+
+            var formatted = player.IsDead
+                ? $"{player.Character.Name} shouts: oooOOOOo OOOOOooo Ooooo"
+                : $"{player.Character.Name} shouts: {text}";
+
+            await Clients.Group(MapGroup(player.Map))
+                .SendAsync("Chat", new ChatMessage(formatted, FontType.Talk));
+        }
+        else if (message.StartsWith(':'))
+        {
+            // Emote — broadcast to map (VB6 uses ToPCArea, we use map for now)
+            // VB6: SendData(ToPCArea, ..., "Name emotetext")
+            var text = message[1..].TrimStart();
+            if (string.IsNullOrEmpty(text)) return;
+
+            var formatted = player.IsDead
+                ? $"{player.Character.Name} seems to try to express something. But noone can understand the ghostly movements."
+                : $"{player.Character.Name} {text}";
+
+            await Clients.Group(MapGroup(player.Map))
+                .SendAsync("Chat", new ChatMessage(formatted, FontType.Talk));
+        }
+        else if (message.StartsWith('\\'))
+        {
+            // Whisper/Tell — send to specific player
+            // VB6: HandleData "\" -> parse "name,message"
+            var text = message[1..].TrimStart();
+            var spaceIdx = text.IndexOf(' ');
+            if (spaceIdx <= 0)
+            {
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage("Usage: \\name message", FontType.Info));
+                return;
+            }
+
+            var targetName = text[..spaceIdx];
+            var whisperText = text[(spaceIdx + 1)..];
+            var target = _world.GetPlayerByName(targetName);
+
+            if (target == null)
+            {
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"{targetName} is not online.", FontType.Info));
+                return;
+            }
+
+            // Send to target
+            await Clients.Client(target.ConnectionId).SendAsync("Chat",
+                new ChatMessage($"{player.Character.Name} whispers: {whisperText}", FontType.Talk));
+            // Echo to sender
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"You whisper to {target.Character.Name}: {whisperText}", FontType.Talk));
+        }
+        else
+        {
+            // Say — broadcast to map (VB6 uses ToPCArea)
+            // VB6: SendData(ToPCArea, ..., "Name: text")
+            var text = message.StartsWith(';') ? message[1..].TrimStart() : message;
+            if (string.IsNullOrEmpty(text)) return;
+
+            var formatted = player.IsDead
+                ? $"{player.Character.Name}: oooOO OOoo oOO OOooo"
+                : $"{player.Character.Name}: {text}";
+
+            await Clients.Group(MapGroup(player.Map))
+                .SendAsync("Chat", new ChatMessage(formatted, FontType.Talk));
+        }
+    }
+
+    /// <summary>Handle slash commands. VB6: HandleData "/" prefix (TCP.bas:1100+)</summary>
+    private async Task HandleSlashCommand(PlayerState player, string command)
+    {
+        var parts = command.Split(' ', 2, StringSplitOptions.TrimEntries);
+        var cmd = parts[0].ToUpperInvariant();
+        var arg = parts.Length > 1 ? parts[1] : "";
+
+        switch (cmd)
+        {
+            case "/WHO":
+                // VB6: HandleData "/WHO" -> list all online player names
+                var names = _world.GetAllOnlinePlayers().Select(p => p.Character.Name);
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"Players online: {string.Join(", ", names)}", FontType.Info));
+                break;
+
+            case "/PLAYERS":
+                var count = _world.GetOnlineCount();
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"There are {count} player(s) online.", FontType.Info));
+                break;
+
+            case "/STATS":
+                // VB6: HandleData "/STATS" -> SendUserStatsTxt
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"{player.Character.Name} — {player.Character.Race} {player.Character.Gender} — Map {player.Map} ({player.X},{player.Y})", FontType.Info));
+                break;
+
+            case "/DESC":
+                // VB6: HandleData "/DESC" -> set character description
+                if (!string.IsNullOrWhiteSpace(arg))
+                {
+                    player.Character.Description = arg;
+                    await Clients.Caller.SendAsync("Chat",
+                        new ChatMessage($"Description set to: {arg}", FontType.Info));
+                }
+                else
+                {
+                    await Clients.Caller.SendAsync("Chat",
+                        new ChatMessage($"Your description: {player.Character.Description ?? "(none)"}", FontType.Info));
+                }
+                break;
+
+            case "/SAVE":
+                // VB6: HandleData "/SAVE" -> SaveUser
+                player.Character.LastMap = player.Map;
+                player.Character.LastX = player.X;
+                player.Character.LastY = player.Y;
+                await _world.SaveCharacter(player.Character);
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage("Character saved.", FontType.Info));
+                break;
+
+            case "/QUIT":
+                // VB6: HandleData "/QUIT" -> SaveUser + CloseSocket
+                player.Character.LastMap = player.Map;
+                player.Character.LastX = player.X;
+                player.Character.LastY = player.Y;
+                await _world.SaveCharacter(player.Character);
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage("Saving and disconnecting...", FontType.Info));
+                Context.Abort();
+                break;
+
+            case "/HELP":
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage("Commands: /WHO /PLAYERS /STATS /DESC /SAVE /QUIT /HELP", FontType.Info));
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage("Chat: just type to say, - to shout, : to emote, \\name to whisper", FontType.Info));
+                break;
+
+            default:
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"Unknown command: {cmd}", FontType.Info));
+                break;
+        }
+    }
+
     /// <summary>Simple ping to verify the connection works.</summary>
     public string Ping() => "Pong";
 

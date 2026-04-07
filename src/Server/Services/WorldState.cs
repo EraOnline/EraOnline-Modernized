@@ -153,6 +153,15 @@ public class WorldState
     public bool IsNameOnline(string name) =>
         _playersByConnection.Values.Any(p => p.Character.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
+    public PlayerState? GetPlayerByName(string name) =>
+        _playersByConnection.Values.FirstOrDefault(p => p.Character.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+
+    public IEnumerable<PlayerState> GetAllOnlinePlayers() =>
+        _playersByConnection.Values;
+
+    public int GetOnlineCount() =>
+        _playersByConnection.Count;
+
     // --- Tile Occupancy ---
 
     private ConcurrentDictionary<(int, int), int> GetMapOccupancy(int map) =>
@@ -231,6 +240,9 @@ public class PlayerState
     public int X { get; set; }
     public int Y { get; set; }
     public int Heading { get; set; }
+
+    /// <summary>VB6: Flags.status = 1 means dead/ghost</summary>
+    public bool IsDead { get; set; }
 }
 
 /// <summary>
@@ -245,6 +257,7 @@ public class CharacterData
     public string Gender { get; set; } = "Male";
     public int Body { get; set; } = 1;
     public int Head { get; set; } = 6;
+    public string? Description { get; set; }
     public int LastMap { get; set; }
     public int LastX { get; set; }
     public int LastY { get; set; }

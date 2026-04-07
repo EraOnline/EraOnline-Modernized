@@ -1304,7 +1304,8 @@
       "lineEnd": 1164,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/client.js:sendChat",
         "sends": [],
         "calls": []
       }
@@ -1318,7 +1319,8 @@
       "lineEnd": 1212,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/client.js:sendChat",
         "sends": [
           "\u0027",
           "-",

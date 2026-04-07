@@ -147,9 +147,11 @@ const EraClient = (() => {
         if (!text) return;
         input.value = '';
 
-        // TODO: send to server when chat hub method is implemented
-        // For now, local echo
-        addChatMessage(`You say: ${text}`, 'chat-talk');
+        if (connection && connection.state === signalR.HubConnectionState.Connected) {
+            connection.invoke('Say', text).catch(err => {
+                addChatMessage('Error sending message: ' + err.message, 'chat-warning');
+            });
+        }
     }
 
     function addChatMessage(text, className) {
