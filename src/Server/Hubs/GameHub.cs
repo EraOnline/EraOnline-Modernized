@@ -164,9 +164,10 @@ public class GameHub : Hub
         // Send existing characters on this map to the new player
         foreach (var other in _world.GetPlayersOnMap(map))
         {
+            var (ow, os) = GetEquipAnims(other.Character);
             await Clients.Caller.SendAsync("MakeChar", new MakeCharMessage(
                 other.CharIndex, other.Character.Name, other.Character.Body, other.Character.Head,
-                other.Heading, other.X, other.Y, 2, 2));
+                other.Heading, other.X, other.Y, ow, os));
         }
 
         // Send NPC spawn positions
@@ -193,10 +194,11 @@ public class GameHub : Hub
         await SendGroundItems(map);
 
         // Broadcast the new player to everyone else on the map
+        var (pw, ps) = GetEquipAnims(character);
         await Clients.OthersInGroup(MapGroup(map))
             .SendAsync("MakeChar", new MakeCharMessage(
                 charIndex, character.Name, character.Body, character.Head,
-                (int)Direction.South, x, y, 2, 2));
+                (int)Direction.South, x, y, pw, ps));
 
         // Welcome messages
         await Clients.Caller.SendAsync("Chat", new ChatMessage(
@@ -671,9 +673,10 @@ public class GameHub : Hub
         // Send all characters on the new map to this player
         foreach (var other in _world.GetPlayersOnMap(newMap))
         {
+            var (ow, os) = GetEquipAnims(other.Character);
             await Clients.Caller.SendAsync("MakeChar", new MakeCharMessage(
                 other.CharIndex, other.Character.Name, other.Character.Body, other.Character.Head,
-                other.Heading, other.X, other.Y, 2, 2));
+                other.Heading, other.X, other.Y, ow, os));
         }
 
         // Send NPC spawns on the new map
@@ -699,10 +702,11 @@ public class GameHub : Hub
         await SendGroundItems(newMap);
 
         // Announce this player to others on the new map
+        var (ww, ws) = GetEquipAnims(player.Character);
         await Clients.OthersInGroup(MapGroup(newMap))
             .SendAsync("MakeChar", new MakeCharMessage(
                 player.CharIndex, player.Character.Name, player.Character.Body, player.Character.Head,
-                player.Heading, newX, newY, 2, 2));
+                player.Heading, newX, newY, ww, ws));
 
         // Send position correction to the player
         await Clients.Caller.SendAsync("SetCharIndex", new SetCharIndexMessage(player.CharIndex));
@@ -904,6 +908,23 @@ public class GameHub : Hub
     // --- Helpers ---
 
     private static string MapGroup(int mapId) => $"map:{mapId}";
+
+    /// <summary>Resolve weapon/shield anim indices from a character's equipped items.</summary>
+    private (int weaponAnim, int shieldAnim) GetEquipAnims(CharacterData ch)
+    {
+        int weaponAnim = 2, shieldAnim = 2; // 2 = no visible weapon/shield
+        if (ch.WeaponEqpSlot >= 0 && ch.WeaponEqpSlot < 20)
+        {
+            var obj = _gameData.Objects.FirstOrDefault(o => o.Id == ch.Inventory[ch.WeaponEqpSlot].ObjIndex);
+            if (obj != null && obj.WeaponAnim > 0) weaponAnim = obj.WeaponAnim;
+        }
+        if (ch.ShieldEqpSlot >= 0 && ch.ShieldEqpSlot < 20)
+        {
+            var obj = _gameData.Objects.FirstOrDefault(o => o.Id == ch.Inventory[ch.ShieldEqpSlot].ObjIndex);
+            if (obj != null && obj.ShieldAnim > 0) shieldAnim = obj.ShieldAnim;
+        }
+        return (weaponAnim, shieldAnim);
+    }
 
     /// <summary>VB6: UpdateUserInv(True) — send all 20 inventory slots</summary>
     private async Task SendFullInventory(CharacterData ch)
