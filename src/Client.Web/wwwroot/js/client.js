@@ -389,6 +389,8 @@ const EraClient = (() => {
 
     // --- Character sheet UI ---
 
+    let selectedSlot = -1;
+
     function renderInventoryList() {
         const list = document.getElementById('inv-list');
         list.innerHTML = '';
@@ -396,21 +398,29 @@ const EraClient = (() => {
             const item = inventory[i];
             if (item.objIndex <= 0) continue;
             const div = document.createElement('div');
-            div.className = 'inv-item' + (item.equipped ? ' equipped' : '');
+            let cls = 'inv-item';
+            if (item.equipped) cls += ' equipped';
+            if (i === selectedSlot) cls += ' selected';
+            div.className = cls;
             let text = '';
             if (item.equipped) text += '(Eqp) ';
             if (item.amount > 1) text += `(${item.amount}) `;
             text += item.name;
             div.textContent = text;
             div.dataset.slot = i;
+            // VB6: Left-click selects item (ObjLst_Click shows sprite in ShowPic)
+            div.addEventListener('click', () => {
+                playClick();
+                selectedSlot = i;
+                renderInventoryList();
+            });
+            // VB6: Right-click opens popup menu (ObjLst_MouseDown Button=2)
             div.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
-                showContextMenu(e, i);
-            });
-            div.addEventListener('click', () => {
-                // Left-click: use/equip
-                if (connection) connection.invoke('UseItem', i).catch(() => {});
                 playClick();
+                selectedSlot = i;
+                renderInventoryList();
+                showContextMenu(e, i);
             });
             list.appendChild(div);
         }
