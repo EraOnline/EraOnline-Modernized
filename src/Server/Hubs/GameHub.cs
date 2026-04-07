@@ -224,6 +224,9 @@ public class GameHub : Hub
             await Clients.Group(MapGroup(player.Map))
                 .SendAsync("MoveChar", new MoveCharMessage(
                     player.CharIndex, player.X, player.Y, (int)heading));
+
+            // VB6: DoTileEvents — check for zone transitions
+            await DoTileEvents(player);
         }
         else
         {
@@ -231,6 +234,128 @@ public class GameHub : Hub
             // VB6: SendData(ToIndex, "SUP" & x & "," & y)
             await Clients.Caller.SendAsync("SetPosition",
                 new SetPositionMessage(player.X, player.Y));
+        }
+    }
+
+    /// <summary>
+    /// Check for zone transitions after a move.
+    /// VB6: DoTileEvents (GameLogic.bas:134-200)
+    /// </summary>
+    private async Task DoTileEvents(PlayerState player)
+    {
+        if (!_gameData.Maps.TryGetValue(player.Map, out var mapDef)) return;
+
+        int destMap = 0, destX = 0, destY = 0;
+
+        // Edge exits (VB6: Y<7 north, Y>94 south, X<9 west, X>92 east)
+        if (player.Y < 7 && mapDef.Exits.TryGetValue("north", out var north) && north > 1)
+        {
+            destMap = north; destX = player.X; destY = 94;
+        }
+        else if (player.Y > 94 && mapDef.Exits.TryGetValue("south", out var south) && south > 1)
+        {
+            destMap = south; destX = player.X; destY = 7;
+        }
+        else if (player.X < 9 && mapDef.Exits.TryGetValue("west", out var west) && west > 1)
+        {
+            destMap = west; destX = 91; destY = player.Y;
+        }
+        else if (player.X > 92 && mapDef.Exits.TryGetValue("east", out var east) && east > 1)
+        {
+            destMap = east; destX = 10; destY = player.Y;
+        }
+
+        // Tile exits (VB6: MapData(map, x, y).TileExit.map > 0)
+        if (destMap == 0)
+        {
+            foreach (var exit in mapDef.TileExits)
+            {
+                // exit = [x, y, destMap, destX, destY]
+                if (exit.Length >= 5 && exit[0] == player.X && exit[1] == player.Y)
+                {
+                    destMap = exit[2]; destX = exit[3]; destY = exit[4];
+                    break;
+                }
+            }
+        }
+
+        if (destMap > 0 && _gameData.Maps.ContainsKey(destMap))
+        {
+            // Check destination is valid
+            if (_world.IsTileBlocked(destMap, destX, destY))
+            {
+                // Find a nearby legal position
+                (destX, destY) = FindNearbyLegalPos(destMap, destX, destY);
+            }
+
+            await WarpPlayer(player, destMap, destX, destY);
+        }
+    }
+
+    /// <summary>
+    /// Warp a player to a new map. VB6: WarpUserChar (GameLogic.bas:2982-3100)
+    /// </summary>
+    private async Task WarpPlayer(PlayerState player, int newMap, int newX, int newY)
+    {
+        var oldMap = player.Map;
+        var oldMusic = _gameData.Maps.TryGetValue(oldMap, out var oldMapDef) ? oldMapDef.Music : "";
+
+        // Erase from old map (broadcast to old map's players)
+        await Clients.Group(MapGroup(oldMap))
+            .SendAsync("EraseChar", new EraseCharMessage(player.CharIndex));
+
+        // Update occupancy and position
+        _world.WarpPlayer(player, newMap, newX, newY);
+
+        // Switch SignalR groups
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, MapGroup(oldMap));
+        await Groups.AddToGroupAsync(Context.ConnectionId, MapGroup(newMap));
+
+        // Send new map to the warping player
+        await Clients.Caller.SendAsync("MapLoad", new MapLoadMessage(newMap));
+
+        // Send all characters on the new map to this player
+        foreach (var other in _world.GetPlayersOnMap(newMap))
+        {
+            await Clients.Caller.SendAsync("MakeChar", new MakeCharMessage(
+                other.CharIndex, other.Character.Name, other.Character.Body, other.Character.Head,
+                other.Heading, other.X, other.Y, 2, 2));
+        }
+
+        // Send NPC spawns on the new map
+        if (_gameData.Maps.TryGetValue(newMap, out var newMapDef))
+        {
+            foreach (var spawn in newMapDef.NpcSpawns)
+            {
+                var npcTemplate = _gameData.Npcs.FirstOrDefault(n => n.Id == spawn[2]);
+                if (npcTemplate != null)
+                {
+                    await Clients.Caller.SendAsync("MakeChar", new MakeCharMessage(
+                        -(spawn[2] * 1000 + spawn[0]),
+                        npcTemplate.Name,
+                        npcTemplate.Body > 0 ? npcTemplate.Body : 1,
+                        npcTemplate.Head > 0 ? npcTemplate.Head : 1,
+                        npcTemplate.Heading > 0 ? npcTemplate.Heading : (int)Direction.South,
+                        spawn[0], spawn[1], 2, 2));
+                }
+            }
+        }
+
+        // Announce this player to others on the new map
+        await Clients.OthersInGroup(MapGroup(newMap))
+            .SendAsync("MakeChar", new MakeCharMessage(
+                player.CharIndex, player.Character.Name, player.Character.Body, player.Character.Head,
+                player.Heading, newX, newY, 2, 2));
+
+        // Send position correction to the player
+        await Clients.Caller.SendAsync("SetCharIndex", new SetCharIndexMessage(player.CharIndex));
+        await Clients.Caller.SendAsync("SetPosition", new SetPositionMessage(newX, newY));
+
+        // Play new zone music if different from old zone
+        var newMusic = newMapDef?.Music ?? "";
+        if (newMusic != oldMusic)
+        {
+            await SendMapMusic(newMap);
         }
     }
 

@@ -96,7 +96,8 @@
       "annotations": {
         "purpose": "Handle zone transitions and campfire detection when a player moves to a tile",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:DoTileEvents",
         "sends": [
           "TEN"
         ],
@@ -1042,7 +1043,8 @@
       "annotations": {
         "purpose": "Teleport a user to a new map position, handling zone transitions",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:WarpPlayer",
         "sends": [
           "SCM",
           "SUC",

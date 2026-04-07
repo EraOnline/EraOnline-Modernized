@@ -199,6 +199,19 @@ public class WorldState
     }
 
     /// <summary>
+    /// Warp a player to a new map and position. Updates occupancy.
+    /// VB6: WarpUserChar (GameLogic.bas:2982)
+    /// </summary>
+    public void WarpPlayer(PlayerState player, int newMap, int newX, int newY)
+    {
+        ClearTileOccupant(player.Map, player.X, player.Y, player.CharIndex);
+        player.Map = newMap;
+        player.X = newX;
+        player.Y = newY;
+        SetTileOccupant(newMap, newX, newY, player.CharIndex);
+    }
+
+    /// <summary>
     /// Move a player to a new position. Returns true if the move was valid.
     /// VB6: MoveUserChar (GameLogic.bas:2607)
     /// </summary>

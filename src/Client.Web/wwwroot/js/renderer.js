@@ -105,6 +105,8 @@ const EraRenderer = (() => {
 
     async function loadMapFromServer(mapId) {
         setStatus('Loading map ' + mapId + '...');
+        // Clear old map's characters — new ones will arrive via MakeChar
+        characters = {};
         const padded = String(mapId).padStart(3, '0');
         const resp = await fetch(`${dataBasePath}/maps/map-${padded}.json`);
         mapData = await resp.json();
