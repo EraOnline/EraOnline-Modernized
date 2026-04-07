@@ -127,6 +127,42 @@ for (int m = 1; m <= numMaps; m++)
 
 Console.WriteLine($"  maps/: {mapsConverted} maps, {totalNpcSpawns} NPC spawns, {totalTileExits} tile exits");
 
+// --- Audio conversion ---
+Console.WriteLine();
+
+// MIDI -> MP3 conversion
+var musicDir = Path.Combine(clientPath, "Music");
+// Look for soundfont next to the source dir (tools/eo-data-converter/soundfont/) or via env var
+var soundFontPath = Environment.GetEnvironmentVariable("SOUNDFONT_PATH")
+    ?? Path.GetFullPath(Path.Combine(sourcePath, "..", "tools", "eo-data-converter", "soundfont", "GeneralUser_GS.sf2"));
+var musicOutputDir = Path.Combine(outputPath, "music");
+
+if (File.Exists(soundFontPath))
+{
+    Console.WriteLine("  Converting MIDI to MP3 (this may take a minute)...");
+    int midisConverted = AudioConverter.ConvertMidi(musicDir, soundFontPath, musicOutputDir);
+    Console.WriteLine($"  music/: {midisConverted} MIDI files rendered to MP3");
+    totalFiles += midisConverted;
+}
+else
+{
+    Console.WriteLine($"  WARNING: SoundFont not found at {soundFontPath} - skipping MIDI conversion");
+}
+
+// MP3 voiceovers + Undead.mp3
+var soundDir = Path.Combine(clientPath, "Sound");
+var voiceOutputDir = Path.Combine(outputPath, "voice");
+var undeadPath = Path.GetFullPath(Path.Combine(sourcePath, "..", "docs_vb6", "music", "Undead.mp3"));
+int voicesCopied = AudioConverter.CopyVoiceovers(soundDir, undeadPath, voiceOutputDir);
+Console.WriteLine($"  voice/: {voicesCopied} voiceover/music MP3s");
+totalFiles += voicesCopied;
+
+// WAV sound effects
+var sfxOutputDir = Path.Combine(outputPath, "sfx");
+int sfxCopied = AudioConverter.CopySoundEffects(soundDir, sfxOutputDir);
+Console.WriteLine($"  sfx/: {sfxCopied} sound effects");
+totalFiles += sfxCopied;
+
 // --- Cross-validation ---
 Console.WriteLine();
 Console.WriteLine("Cross-validation:");

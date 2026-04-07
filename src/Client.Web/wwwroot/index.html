@@ -162,19 +162,55 @@
             z-index: 15;
         }
 
-        /* --- Login overlay --- */
-        /* Covers the game frame like VB6's separate login form */
-        #login-overlay {
+        /* --- Pre-game overlays (intro, menu, select, login) --- */
+        /* All overlay phases cover the full 800x600 game frame */
+        .overlay {
             position: absolute; top: 0; left: 0;
             width: 800px; height: 600px;
-            background: url('/ui/menu.jpg') no-repeat center center;
-            background-size: 800px 600px;
             z-index: 50;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
+            cursor: pointer;
         }
-        #login-overlay.hidden { display: none; }
+        .overlay.hidden { display: none; }
 
+        /* Phase 1: Intro slideshow (VB6: intro.frm) */
+        #intro-overlay { background: #000; }
+        #intro-overlay img {
+            max-width: 800px; max-height: 600px;
+            object-fit: contain;
+        }
+
+        /* Phase 2: Main menu (VB6: Form2 - menu1.jpg) */
+        #menu-overlay {
+            background: url('/ui/menu.jpg') no-repeat center center;
+            background-size: 800px 600px;
+            cursor: default;
+        }
+        /* Invisible clickable hotspots over the text in menu.jpg */
+        .menu-btn {
+            position: absolute; cursor: pointer;
+            background: transparent; border: none; color: transparent;
+            font-size: 0;
+        }
+        #btn-enter-menath { right: 50px; top: 340px; width: 200px; height: 35px; }
+        #btn-credits { right: 75px; top: 392px; width: 150px; height: 30px; }
+        #btn-music-toggle { right: 55px; top: 432px; width: 185px; height: 30px; }
+        #btn-menu-quit { right: 95px; top: 472px; width: 100px; height: 30px; }
+
+        /* Phase 3: Select screen (VB6: frmSelect) */
+        #select-overlay {
+            background: #000;
+        }
+        #select-overlay img {
+            width: 200px; height: 62px;
+            cursor: pointer; display: block; margin: 8px 0;
+        }
+
+        /* Phase 4: Login/Create form */
+        #login-overlay {
+            background: rgba(0, 0, 0, 0.85);
+        }
         #login-box {
             background: rgba(0, 0, 0, 0.75);
             border: 1px solid #555;
@@ -199,10 +235,6 @@
         }
         #login-box button:hover { background: #3a3a6e; }
         #login-error { color: #f44; font-size: 11px; margin-top: 8px; min-height: 16px; }
-        #login-box .toggle {
-            color: #88f; font-size: 11px; cursor: pointer;
-            text-decoration: underline; margin-top: 10px; display: inline-block;
-        }
 
         /* Create character extras (hidden by default) */
         .create-fields { display: none; }
@@ -238,10 +270,31 @@
         <!-- Status bar -->
         <div id="status-bar"></div>
 
-        <!-- Login overlay (covers everything until login) -->
-        <div id="login-overlay">
+        <!-- Phase 1: Intro slideshow (VB6: intro.frm) -->
+        <div id="intro-overlay" class="overlay">
+            <img id="intro-img" src="/ui/intro/1.jpg" alt="" />
+        </div>
+
+        <!-- Phase 2: Main menu (VB6: Form2 - menu1.jpg with ENTER MENATH etc.) -->
+        <div id="menu-overlay" class="overlay hidden">
+            <button id="btn-enter-menath" class="menu-btn">Enter Menath</button>
+            <button id="btn-credits" class="menu-btn">Credits</button>
+            <button id="btn-music-toggle" class="menu-btn">Music On/Off</button>
+            <button id="btn-menu-quit" class="menu-btn">Quit</button>
+        </div>
+
+        <!-- Phase 3: Select screen (VB6: frmSelect) -->
+        <div id="select-overlay" class="overlay hidden">
+            <img id="btn-select-login" src="/ui/loginto.jpg" alt="Log into character"
+                 onmouseover="this.src='/ui/loginto2.jpg'" onmouseout="this.src='/ui/loginto.jpg'" />
+            <img id="btn-select-create" src="/ui/startnew.jpg" alt="Start new character"
+                 onmouseover="this.src='/ui/startnew2.jpg'" onmouseout="this.src='/ui/startnew.jpg'" />
+        </div>
+
+        <!-- Phase 4: Login / Create character form -->
+        <div id="login-overlay" class="overlay hidden">
             <div id="login-box">
-                <h2>Enter Menath</h2>
+                <h2 id="login-title">Log Into Character</h2>
                 <input type="text" id="login-name" placeholder="Character name" maxlength="20" />
                 <input type="password" id="login-pass" placeholder="Password" />
                 <div class="create-fields" id="create-fields">
@@ -257,11 +310,9 @@
                     </select>
                 </div>
                 <div class="btn-row">
-                    <button id="btn-login">Log In</button>
-                    <button id="btn-create">Create</button>
+                    <button id="btn-login">Enter Menath</button>
                 </div>
                 <div id="login-error"></div>
-                <div class="toggle" id="toggle-create">New character? Show options</div>
             </div>
         </div>
     </div>
