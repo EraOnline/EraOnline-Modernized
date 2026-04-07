@@ -198,6 +198,9 @@ public class GameHub : Hub
         await Clients.Caller.SendAsync("Chat", new ChatMessage(
             $"Welcome to Era Online, {character.Name}!", FontType.Info));
 
+        // VB6: SendData(ToIndex, "PLM" & MapInfo(map).Music) — play zone music
+        await SendMapMusic(map);
+
         // VB6: Open App.Path & "\Connect.log" For Append
         _chatLog.LogConnect(character.Name, $"logged in. Map:{map} ({x},{y})");
     }
@@ -414,6 +417,25 @@ public class GameHub : Hub
     // --- Helpers ---
 
     private static string MapGroup(int mapId) => $"map:{mapId}";
+
+    /// <summary>
+    /// Send zone music for a map. VB6: SendData(ToIndex, "PLM" & MapInfo(map).Music)
+    /// Music field is like "24-1" (music number 24, loop flag 1).
+    /// </summary>
+    private async Task SendMapMusic(int mapId)
+    {
+        if (!_gameData.Maps.TryGetValue(mapId, out var mapDef)) return;
+        var musicStr = mapDef.Music;
+        if (string.IsNullOrEmpty(musicStr)) return;
+
+        // Parse "24-1" format: number-loopflag (VB6: ReadField with delimiter "-")
+        var parts = musicStr.Split('-');
+        if (parts.Length >= 1 && int.TryParse(parts[0], out var musicNum) && musicNum > 0)
+        {
+            var loop = parts.Length < 2 || parts[1] != "0"; // default to loop
+            await Clients.Caller.SendAsync("PlayMusic", new PlayMusicMessage(musicNum, loop));
+        }
+    }
 
     private (int x, int y) FindNearbyLegalPos(int map, int x, int y)
     {

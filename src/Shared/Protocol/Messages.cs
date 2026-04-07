@@ -46,3 +46,12 @@ public record SetCharIndexMessage(int CharIndex);
 
 /// <summary>VB6: @ - Chat/info message with font type</summary>
 public record ChatMessage(string Text, FontType Font);
+
+/// <summary>VB6: PLM - Play zone music (music number + loop flag)</summary>
+public record PlayMusicMessage(int MusicNumber, bool Loop);
+
+/// <summary>VB6: PLW - Play sound effect</summary>
+public record PlaySoundMessage(int SoundId);
+
+/// <summary>VB6: PL3 - Play voiceover MP3</summary>
+public record PlayVoiceMessage(int Id);

@@ -293,6 +293,17 @@ const EraClient = (() => {
         playSound(`/data/voice/mp${msg.id}.mp3`);
     }
 
+    function onPlayMusic(msg) {
+        // VB6: PLM protocol message — play zone music
+        if (!musicEnabled) return;
+        playMusic(`/data/music/mus${msg.musicNumber}.mp3`, msg.loop);
+    }
+
+    function onPlaySound(msg) {
+        // VB6: PLW protocol message — play sound effect
+        playSound(`/data/sfx/snd${msg.soundId}.wav`);
+    }
+
     // --- Client -> Server ---
 
     function onPlayerMove(direction) {
@@ -348,6 +359,8 @@ const EraClient = (() => {
         connection.on('SetPosition', onSetPosition);
         connection.on('MapLoad', onMapLoad);
         connection.on('Chat', onChat);
+        connection.on('PlayMusic', onPlayMusic);
+        connection.on('PlaySound', onPlaySound);
         connection.on('PlayVoice', onPlayVoice);
 
         connection.onreconnecting(() => setStatusBar('Reconnecting...'));
