@@ -36,14 +36,26 @@ const EraClient = (() => {
 
     function playMusic(url, loop = true) {
         stopMusic();
+        console.log(`[Audio] playMusic: ${url} (loop=${loop})`);
         menuMusic = new Audio(url);
         menuMusic.loop = loop;
-        menuMusic.play().catch(() => {});
+        menuMusic.addEventListener('error', (e) => {
+            console.error(`[Audio] Music error for ${url}:`, menuMusic.error);
+        });
+        menuMusic.addEventListener('playing', () => {
+            console.log(`[Audio] Music playing: ${url}`);
+        });
+        menuMusic.play().then(() => {
+            console.log(`[Audio] Music play() resolved: ${url}`);
+        }).catch((err) => {
+            console.error(`[Audio] Music play() rejected for ${url}:`, err);
+        });
         return menuMusic;
     }
 
     function stopMusic() {
         if (menuMusic) {
+            console.log('[Audio] stopMusic');
             menuMusic.pause();
             menuMusic.currentTime = 0;
             menuMusic = null;
@@ -221,10 +233,11 @@ const EraClient = (() => {
     }
 
     function enterGame() {
+        console.log('[Audio] enterGame — hiding overlays and stopping menu music');
         // Hide all pre-game overlays
         document.querySelectorAll('.overlay').forEach(el => el.classList.add('hidden'));
 
-        // Stop menu music, game zone music will be handled later
+        // Stop menu music, zone music will arrive via PlayMusic message
         stopMusic();
     }
 
@@ -298,6 +311,7 @@ const EraClient = (() => {
 
     function onPlayMusic(msg) {
         // VB6: PLM protocol message — play zone music
+        console.log(`[Audio] onPlayMusic received: musicNumber=${msg.musicNumber}, loop=${msg.loop}, musicEnabled=${musicEnabled}`);
         if (!musicEnabled) return;
         playMusic(`/data/music/mus${msg.musicNumber}.mp3`, msg.loop);
     }
