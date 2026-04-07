@@ -429,9 +429,12 @@ const EraClient = (() => {
     function showContextMenu(e, slot) {
         contextSlot = slot;
         const menu = document.getElementById('inv-context-menu');
+        // Position relative to #game-frame (menu's offset parent)
+        const frame = document.getElementById('game-frame');
+        const frameRect = frame.getBoundingClientRect();
         menu.style.display = 'block';
-        menu.style.left = e.pageX + 'px';
-        menu.style.top = e.pageY + 'px';
+        menu.style.left = (e.clientX - frameRect.left) + 'px';
+        menu.style.top = (e.clientY - frameRect.top) + 'px';
         // Show/hide unequip based on equipped state
         document.getElementById('ctx-unequip').style.display =
             inventory[slot].equipped ? 'block' : 'none';
@@ -552,8 +555,8 @@ const EraClient = (() => {
             hideContextMenu();
         });
         // Hide context menu on click elsewhere
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('#inv-context-menu')) hideContextMenu();
+        document.addEventListener('mousedown', (e) => {
+            if (!e.target.closest('#inv-context-menu') && contextSlot >= 0) hideContextMenu();
         });
 
         // Pre-connect to server in the background (don't wait)
