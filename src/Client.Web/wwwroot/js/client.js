@@ -233,12 +233,9 @@ const EraClient = (() => {
     }
 
     function enterGame() {
-        console.log('[Audio] enterGame — hiding overlays and stopping menu music');
-        // Hide all pre-game overlays
+        // Hide all pre-game overlays — zone music is already playing
+        // (PlayMusic message arrives during Login before this runs)
         document.querySelectorAll('.overlay').forEach(el => el.classList.add('hidden'));
-
-        // Stop menu music, zone music will arrive via PlayMusic message
-        stopMusic();
     }
 
     // --- Chat ---
