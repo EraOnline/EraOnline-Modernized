@@ -113,6 +113,7 @@ public class GameHub : Hub
             Body = body,
             Head = head
         };
+        character.InitStartingInventory();
 
         // Save to disk
         await _world.SaveCharacter(character);
@@ -200,6 +201,9 @@ public class GameHub : Hub
 
         // VB6: SendUserStatsBox — send full stats on login
         await SendStats(character);
+
+        // VB6: UpdateUserInv(True) — send full inventory on login
+        await SendFullInventory(character);
 
         // VB6: SendData(ToIndex, "PLM" & MapInfo(map).Music) — play zone music
         await SendMapMusic(map);
@@ -316,6 +320,197 @@ public class GameHub : Hub
             }
         }
         return null;
+    }
+
+    // ===================== Inventory =====================
+
+    /// <summary>
+    /// Use/equip an inventory item. VB6: HandleData "USE" -> UseInvItem (GameLogic.bas:380)
+    /// </summary>
+    public async Task UseItem(int slot)
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null) return;
+        var ch = player.Character;
+        if (slot < 0 || slot >= 20) return;
+        var inv = ch.Inventory[slot];
+        if (inv.ObjIndex <= 0) return;
+
+        var objDef = _gameData.Objects.FirstOrDefault(o => o.Id == inv.ObjIndex);
+        if (objDef == null) return;
+
+        var objType = objDef.ObjType;
+
+        switch (objType)
+        {
+            case 1: // OBJTYPE_USEONCE — consumable
+                ch.CurrentHp = Math.Min(ch.CurrentHp + objDef.MaxHp, ch.MaxHp);
+                inv.Amount--;
+                if (inv.Amount <= 0) { inv.ObjIndex = 0; inv.Amount = 0; }
+                await SendInvSlot(ch, slot);
+                await SendStats(ch);
+                break;
+
+            case 2: // OBJTYPE_WEAPON
+                if (inv.Equipped) { await UnequipSlot(player, slot); break; }
+                if (ch.WeaponEqpSlot >= 0) await UnequipSlot(player, ch.WeaponEqpSlot);
+                inv.Equipped = true;
+                ch.WeaponEqpSlot = slot;
+                ch.MaxHit += objDef.MaxHit;
+                ch.MinHit += objDef.MinHit;
+                player.WeaponEqpSlot = slot;
+                await UpdateCharAppearance(player);
+                await SendInvSlot(ch, slot);
+                await SendStats(ch);
+                break;
+
+            case 3: // OBJTYPE_ARMOUR
+            case 15: // OBJTYPE_CLOTHING
+                if (inv.Equipped) { await UnequipSlot(player, slot); break; }
+                if (ch.ArmourEqpSlot >= 0) await UnequipSlot(player, ch.ArmourEqpSlot);
+                inv.Equipped = true;
+                ch.ArmourEqpSlot = slot;
+                ch.Def += objDef.Def;
+                ch.Body = objDef.ClothingType > 0 ? objDef.ClothingType : ch.Body;
+                player.ArmourEqpSlot = slot;
+                await UpdateCharAppearance(player);
+                await SendInvSlot(ch, slot);
+                await SendStats(ch);
+                break;
+
+            case 24: // OBJTYPE_SHIELD
+                if (inv.Equipped) { await UnequipSlot(player, slot); break; }
+                if (ch.ShieldEqpSlot >= 0) await UnequipSlot(player, ch.ShieldEqpSlot);
+                inv.Equipped = true;
+                ch.ShieldEqpSlot = slot;
+                ch.Def += objDef.Def;
+                player.ShieldEqpSlot = slot;
+                await UpdateCharAppearance(player);
+                await SendInvSlot(ch, slot);
+                await SendStats(ch);
+                break;
+
+            case 14: // OBJTYPE_HELMET
+                if (inv.Equipped) { await UnequipSlot(player, slot); break; }
+                if (ch.HeadEqpSlot >= 0) await UnequipSlot(player, ch.HeadEqpSlot);
+                inv.Equipped = true;
+                ch.HeadEqpSlot = slot;
+                player.HeadEqpSlot = slot;
+                await SendInvSlot(ch, slot);
+                break;
+
+            case 6: // OBJTYPE_FOOD
+                ch.Food = Math.Min(ch.Food + 1, 100);
+                inv.Amount--;
+                if (inv.Amount <= 0) { inv.ObjIndex = 0; inv.Amount = 0; }
+                await SendInvSlot(ch, slot);
+                await SendStats(ch);
+                await Clients.Caller.SendAsync("Chat", new ChatMessage("You eat some food.", FontType.Info));
+                break;
+
+            case 7: // OBJTYPE_DRINK
+                ch.Drink = Math.Min(ch.Drink + 1, 100);
+                inv.Amount--;
+                if (inv.Amount <= 0) { inv.ObjIndex = 0; inv.Amount = 0; }
+                await SendInvSlot(ch, slot);
+                await SendStats(ch);
+                await Clients.Caller.SendAsync("Chat", new ChatMessage("You take a drink.", FontType.Info));
+                break;
+
+            default:
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage("You can't use that.", FontType.Info));
+                break;
+        }
+    }
+
+    /// <summary>VB6: HandleData "DRP" -> DropObj (GameLogic.bas:1903)</summary>
+    public async Task DropItem(int slot, int amount)
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null) return;
+        var ch = player.Character;
+        if (slot < 0 || slot >= 20) return;
+        var inv = ch.Inventory[slot];
+        if (inv.ObjIndex <= 0) return;
+        if (amount < 1) amount = inv.Amount;
+        if (amount > inv.Amount) amount = inv.Amount;
+
+        if (inv.Equipped) await UnequipSlot(player, slot);
+
+        var itemName = _gameData.Objects.FirstOrDefault(o => o.Id == inv.ObjIndex)?.Name ?? "an item";
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage($"You drop {itemName}.", FontType.Info));
+
+        inv.Amount -= amount;
+        if (inv.Amount <= 0) { inv.ObjIndex = 0; inv.Amount = 0; }
+        await SendInvSlot(ch, slot);
+    }
+
+    /// <summary>VB6: HandleData "GET" -> GetObj (GameLogic.bas:1531)</summary>
+    public async Task GetItem()
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null) return;
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage("Nothing here.", FontType.Info));
+    }
+
+    private async Task UnequipSlot(PlayerState player, int slot)
+    {
+        var ch = player.Character;
+        if (slot < 0 || slot >= 20) return;
+        var inv = ch.Inventory[slot];
+        if (!inv.Equipped) return;
+
+        var objDef = _gameData.Objects.FirstOrDefault(o => o.Id == inv.ObjIndex);
+        inv.Equipped = false;
+
+        if (slot == ch.WeaponEqpSlot)
+        {
+            ch.WeaponEqpSlot = -1; player.WeaponEqpSlot = -1;
+            if (objDef != null) { ch.MaxHit -= objDef.MaxHit; ch.MinHit -= objDef.MinHit; }
+        }
+        else if (slot == ch.ArmourEqpSlot)
+        {
+            ch.ArmourEqpSlot = -1; player.ArmourEqpSlot = -1;
+            ch.Body = 1;
+            if (objDef != null) ch.Def -= objDef.Def;
+        }
+        else if (slot == ch.ShieldEqpSlot)
+        {
+            ch.ShieldEqpSlot = -1; player.ShieldEqpSlot = -1;
+            if (objDef != null) ch.Def -= objDef.Def;
+        }
+        else if (slot == ch.HeadEqpSlot)
+        {
+            ch.HeadEqpSlot = -1; player.HeadEqpSlot = -1;
+        }
+
+        await UpdateCharAppearance(player);
+        await SendInvSlot(ch, slot);
+        await SendStats(ch);
+    }
+
+    private async Task UpdateCharAppearance(PlayerState player)
+    {
+        var ch = player.Character;
+        int weaponAnim = 2, shieldAnim = 2;
+        if (ch.WeaponEqpSlot >= 0)
+        {
+            var wObj = _gameData.Objects.FirstOrDefault(o => o.Id == ch.Inventory[ch.WeaponEqpSlot].ObjIndex);
+            if (wObj != null && wObj.WeaponAnim > 0) weaponAnim = wObj.WeaponAnim;
+        }
+        if (ch.ShieldEqpSlot >= 0)
+        {
+            var sObj = _gameData.Objects.FirstOrDefault(o => o.Id == ch.Inventory[ch.ShieldEqpSlot].ObjIndex);
+            if (sObj != null && sObj.ShieldAnim > 0) shieldAnim = sObj.ShieldAnim;
+        }
+
+        await Clients.Group(MapGroup(player.Map))
+            .SendAsync("ChangeChar", new MakeCharMessage(
+                player.CharIndex, ch.Name, ch.Body, ch.Head,
+                player.Heading, player.X, player.Y, weaponAnim, shieldAnim));
     }
 
     /// <summary>
@@ -628,6 +823,31 @@ public class GameHub : Hub
     // --- Helpers ---
 
     private static string MapGroup(int mapId) => $"map:{mapId}";
+
+    /// <summary>VB6: UpdateUserInv(True) — send all 20 inventory slots</summary>
+    private async Task SendFullInventory(CharacterData ch)
+    {
+        for (int i = 0; i < 20; i++)
+            await SendInvSlot(ch, i);
+    }
+
+    /// <summary>VB6: ChangeUserInv — send one inventory slot update (SIS message)</summary>
+    private async Task SendInvSlot(CharacterData ch, int slot)
+    {
+        var inv = ch.Inventory[slot];
+        if (inv.ObjIndex > 0)
+        {
+            var obj = _gameData.Objects.FirstOrDefault(o => o.Id == inv.ObjIndex);
+            await Clients.Caller.SendAsync("InventorySlot", new InventorySlotMessage(
+                slot, inv.ObjIndex, obj?.Name ?? "(Unknown)", inv.Amount,
+                inv.Equipped, obj?.GrhIndex ?? 0, int.TryParse(obj?.Value, out var v) ? v : 0));
+        }
+        else
+        {
+            await Clients.Caller.SendAsync("InventorySlot", new InventorySlotMessage(
+                slot, 0, "(None)", 0, false, 0, 0));
+        }
+    }
 
     /// <summary>VB6: SendUserStatsBox (GameLogic.bas) — send SST with all stats</summary>
     private async Task SendStats(CharacterData c)

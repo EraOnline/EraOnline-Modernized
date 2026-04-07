@@ -1567,6 +1567,22 @@
           "LC": {
             "status": "ported",
             "target": "Server/Hubs/GameHub.cs:LeftClick"
+          },
+          "USE": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:UseItem"
+          },
+          "DRP": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:DropItem"
+          },
+          "GET": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:GetItem"
+          },
+          "UCS": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:SendFullInventory"
           }
         }
       }

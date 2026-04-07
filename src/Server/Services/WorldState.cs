@@ -51,7 +51,20 @@ public class WorldState
         var path = CharFilePath(name);
         if (!File.Exists(path)) return null;
         await using var stream = File.OpenRead(path);
-        return await JsonSerializer.DeserializeAsync<CharacterData>(stream);
+        var character = await JsonSerializer.DeserializeAsync<CharacterData>(stream);
+        if (character != null)
+        {
+            // Ensure inventory array is initialized (handles old save files)
+            if (character.Inventory == null || character.Inventory.Length < 20)
+            {
+                var old = character.Inventory ?? [];
+                character.Inventory = new InventorySlot[20];
+                Array.Copy(old, character.Inventory, Math.Min(old.Length, 20));
+            }
+            for (int i = 0; i < 20; i++)
+                character.Inventory[i] ??= new InventorySlot();
+        }
+        return character;
     }
 
     public async Task SaveCharacter(CharacterData character)
@@ -257,6 +270,12 @@ public class PlayerState
     /// <summary>VB6: Flags.status = 1 means dead/ghost</summary>
     public bool IsDead { get; set; }
 
+    // Equipment slot indices in inventory (-1 = nothing equipped)
+    public int WeaponEqpSlot { get; set; } = -1;
+    public int ArmourEqpSlot { get; set; } = -1;
+    public int ShieldEqpSlot { get; set; } = -1;
+    public int HeadEqpSlot { get; set; } = -1;
+
     /// <summary>VB6: UserList.NpcIndex / NPCtarget — currently targeted NPC index</summary>
     public int TargetNpcIndex { get; set; }
 
@@ -280,6 +299,15 @@ public class CharacterData
     public int LastX { get; set; }
     public int LastY { get; set; }
 
+    // VB6: [INVENTORY] section — 20 slots, 1-indexed in VB6, 0-indexed here
+    public InventorySlot[] Inventory { get; set; } = new InventorySlot[20];
+
+    // VB6: Equipment tracking — which inventory slot holds each equipped type
+    public int WeaponEqpSlot { get; set; } = -1;
+    public int ArmourEqpSlot { get; set; } = -1;
+    public int ShieldEqpSlot { get; set; } = -1;
+    public int HeadEqpSlot { get; set; } = -1;
+
     // VB6: [STATS] section
     public int MaxHp { get; set; } = 30;
     public int CurrentHp { get; set; } = 30;
@@ -297,4 +325,29 @@ public class CharacterData
     public int Food { get; set; } = 0;
     public int Drink { get; set; } = 0;
     public int TrainingPoints { get; set; } = 0;
+
+    /// <summary>Initialize default starting inventory for a new character. VB6: ConnectNewUser.</summary>
+    public void InitStartingInventory()
+    {
+        Inventory = new InventorySlot[20];
+        for (int i = 0; i < 20; i++) Inventory[i] = new InventorySlot();
+
+        // VB6: slot 2 = brown pants & green shirt (obj 145, equipped)
+        Inventory[1] = new InventorySlot { ObjIndex = 145, Amount = 1, Equipped = true };
+        ArmourEqpSlot = 1;
+        // VB6: slot 3 = rusty dagger (obj 33)
+        Inventory[2] = new InventorySlot { ObjIndex = 33, Amount = 1 };
+        // VB6: slot 4 = 5 water flasks (obj 22)
+        Inventory[3] = new InventorySlot { ObjIndex = 22, Amount = 5 };
+        // VB6: slot 5 = 5 breads (obj 95)
+        Inventory[4] = new InventorySlot { ObjIndex = 95, Amount = 5 };
+    }
+}
+
+/// <summary>VB6: UserOBJ type — one inventory slot.</summary>
+public class InventorySlot
+{
+    public int ObjIndex { get; set; }
+    public int Amount { get; set; }
+    public bool Equipped { get; set; }
 }

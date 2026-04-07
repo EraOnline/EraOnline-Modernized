@@ -15,6 +15,14 @@ const EraClient = (() => {
     let myCharIndex = null;
     let isCreatingNewChar = false;
     let musicEnabled = true;
+    let charName = '';
+    let charRace = '';
+
+    // Inventory state (20 slots)
+    const inventory = new Array(20).fill(null).map(() => ({
+        objIndex: 0, name: '(None)', amount: 0, equipped: false, grhIndex: 0, value: 0
+    }));
+    let contextSlot = -1;
 
     // Audio elements
     let introAudio = null;
@@ -212,11 +220,13 @@ const EraClient = (() => {
                 const race = document.getElementById('create-race').value;
                 const gender = document.getElementById('create-gender').value;
                 result = await connection.invoke('CreateCharacter', { name, password: pass, race, gender });
+                charRace = race;
             } else {
                 result = await connection.invoke('Login', { name, password: pass });
             }
 
             if (result.success) {
+                charName = name;
                 enterGame();
             } else {
                 showError(result.errorMessage || 'Failed.');
@@ -360,6 +370,78 @@ const EraClient = (() => {
         document.getElementById('target-message').textContent = msg.text || '';
     }
 
+    function onInventorySlot(msg) {
+        // VB6: SIS — update one inventory slot
+        const slot = msg.slot;
+        if (slot < 0 || slot >= 20) return;
+        inventory[slot] = {
+            objIndex: msg.objIndex, name: msg.name, amount: msg.amount,
+            equipped: msg.equipped, grhIndex: msg.grhIndex, value: msg.value
+        };
+        renderInventoryList();
+    }
+
+    function onChangeChar(msg) {
+        // VB6: CHC — character appearance changed (equip/unequip)
+        EraRenderer.addCharacter(msg.charIndex, msg.name, msg.body, msg.head,
+            msg.heading, msg.x, msg.y, msg.weaponAnim, msg.shieldAnim);
+    }
+
+    // --- Character sheet UI ---
+
+    function renderInventoryList() {
+        const list = document.getElementById('inv-list');
+        list.innerHTML = '';
+        for (let i = 0; i < 20; i++) {
+            const item = inventory[i];
+            if (item.objIndex <= 0) continue;
+            const div = document.createElement('div');
+            div.className = 'inv-item' + (item.equipped ? ' equipped' : '');
+            let text = '';
+            if (item.equipped) text += '(Eqp) ';
+            if (item.amount > 1) text += `(${item.amount}) `;
+            text += item.name;
+            div.textContent = text;
+            div.dataset.slot = i;
+            div.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                showContextMenu(e, i);
+            });
+            div.addEventListener('click', () => {
+                // Left-click: use/equip
+                if (connection) connection.invoke('UseItem', i).catch(() => {});
+                playClick();
+            });
+            list.appendChild(div);
+        }
+    }
+
+    function showContextMenu(e, slot) {
+        contextSlot = slot;
+        const menu = document.getElementById('inv-context-menu');
+        menu.style.display = 'block';
+        menu.style.left = e.pageX + 'px';
+        menu.style.top = e.pageY + 'px';
+        // Show/hide unequip based on equipped state
+        document.getElementById('ctx-unequip').style.display =
+            inventory[slot].equipped ? 'block' : 'none';
+    }
+
+    function hideContextMenu() {
+        document.getElementById('inv-context-menu').style.display = 'none';
+        contextSlot = -1;
+    }
+
+    function toggleCharSheet() {
+        const panel = document.getElementById('charsheet-panel');
+        panel.classList.toggle('visible');
+        if (panel.classList.contains('visible')) {
+            document.getElementById('charsheet-name').textContent = charName;
+            document.getElementById('charsheet-class').textContent = charRace;
+            renderInventoryList();
+        }
+    }
+
     function setStatusBar(msg) {
         document.getElementById('status-bar').textContent = msg;
     }
@@ -407,6 +489,8 @@ const EraClient = (() => {
         connection.on('Chat', onChat);
         connection.on('Stats', onStats);
         connection.on('Target', onTargetMessage);
+        connection.on('InventorySlot', onInventorySlot);
+        connection.on('ChangeChar', onChangeChar);
         connection.on('PlayMusic', onPlayMusic);
         connection.on('PlaySound', onPlaySound);
         connection.on('PlayVoice', onPlayVoice);
@@ -420,6 +504,47 @@ const EraClient = (() => {
         EraRenderer.setClickCallback(onPlayerClick);
         EraRenderer.setStatusCallback(setStatusBar);
         EraRenderer.setMapNameCallback(setMapName);
+
+        // Character sheet toggle — clicking on the "Character" area of the interface chrome
+        // VB6: Label6_Click opens inventory.frm
+        // The button is baked into interface.jpg at roughly right:7px top:84px
+        document.getElementById('interface-bg').style.pointerEvents = 'auto';
+        document.getElementById('interface-bg').addEventListener('click', (e) => {
+            const rect = e.target.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            // Character button area: approximately right side, 80-140px from top
+            if (x > 725 && y > 80 && y < 140) { playClick(); toggleCharSheet(); }
+            // Spells button area
+            else if (x > 725 && y > 140 && y < 200) { playClick(); /* TODO: spellbook */ }
+            // Skills button area
+            else if (x > 725 && y > 200 && y < 260) { playClick(); /* TODO: skills */ }
+        });
+
+        // Character sheet close button
+        document.getElementById('charsheet-close').addEventListener('click', () => {
+            playClick();
+            document.getElementById('charsheet-panel').classList.remove('visible');
+        });
+
+        // Context menu actions
+        document.getElementById('ctx-use').addEventListener('click', () => {
+            if (contextSlot >= 0 && connection) connection.invoke('UseItem', contextSlot).catch(() => {});
+            hideContextMenu();
+        });
+        document.getElementById('ctx-drop').addEventListener('click', () => {
+            if (contextSlot >= 0 && connection) connection.invoke('DropItem', contextSlot, 1).catch(() => {});
+            hideContextMenu();
+        });
+        document.getElementById('ctx-unequip').addEventListener('click', () => {
+            // Unequip = use again when equipped (VB6 toggle behavior)
+            if (contextSlot >= 0 && connection) connection.invoke('UseItem', contextSlot).catch(() => {});
+            hideContextMenu();
+        });
+        // Hide context menu on click elsewhere
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#inv-context-menu')) hideContextMenu();
+        });
 
         // Pre-connect to server in the background (don't wait)
         connection.start().catch(() => {});

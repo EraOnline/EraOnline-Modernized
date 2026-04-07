@@ -176,7 +176,8 @@
       "annotations": {
         "purpose": "Master item usage handler - equip weapons/armor/shields, consume food/drink, use tools, read spells",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:UseItem",
         "sends": [
           "PLW",
           "PC2",
@@ -410,7 +411,8 @@
       "annotations": {
         "purpose": "Pick up an object from the ground into user\u0027s inventory",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:GetItem",
         "sends": [],
         "calls": [
           "SendData",
@@ -448,7 +450,8 @@
       "annotations": {
         "purpose": "Sync one or all inventory slots to the client",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:SendFullInventory",
         "sends": [],
         "calls": [
           "ChangeUserInv"
@@ -482,7 +485,8 @@
       "annotations": {
         "purpose": "Send a single inventory slot update to the client",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:SendInvSlot",
         "sends": [
           "SIS"
         ],
@@ -629,7 +633,8 @@
       "annotations": {
         "purpose": "Drop an item from inventory onto the ground",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:DropItem",
         "sends": [],
         "calls": [
           "SendData",

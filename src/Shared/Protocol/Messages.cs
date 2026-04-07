@@ -65,6 +65,16 @@ public record StatsMessage(
 /// <summary>VB6: TGT - Set target name in the target bar</summary>
 public record TargetMessage(string Text);
 
+/// <summary>VB6: SIS - Set inventory slot (sent per-slot on login and on changes)</summary>
+public record InventorySlotMessage(
+    int Slot,
+    int ObjIndex,
+    string Name,
+    int Amount,
+    bool Equipped,
+    int GrhIndex,
+    int Value);
+
 /// <summary>VB6: PLM - Play zone music (music number + loop flag)</summary>
 public record PlayMusicMessage(int MusicNumber, bool Loop);
 

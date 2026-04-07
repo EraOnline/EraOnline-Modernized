@@ -239,6 +239,67 @@
         /* Create character extras (hidden by default) */
         .create-fields { display: none; }
         .create-fields.active { display: block; }
+
+        /* --- Character sheet panel (VB6: inventory.frm with charsht.JPG) --- */
+        #charsheet-panel {
+            position: absolute; top: 40px; left: 50px;
+            width: 700px; height: 400px;
+            background: url('/ui/charsht.jpg') no-repeat;
+            background-size: 700px 400px;
+            z-index: 40;
+            display: none;
+            image-rendering: auto;
+        }
+        #charsheet-panel.visible { display: block; }
+
+        /* Backpack item list overlaid on the leather bag area */
+        #inv-list {
+            position: absolute; right: 52px; top: 30px;
+            width: 210px; height: 285px;
+            overflow-y: auto; overflow-x: hidden;
+            font-family: 'MS Sans Serif', 'Segoe UI', sans-serif; font-size: 11px;
+            color: #fff; background: transparent;
+        }
+        #inv-list::-webkit-scrollbar { width: 8px; }
+        #inv-list::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+        #inv-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); }
+        .inv-item {
+            padding: 2px 4px; cursor: pointer; white-space: nowrap;
+            overflow: hidden; text-overflow: ellipsis;
+        }
+        .inv-item:hover { background: rgba(255,255,255,0.15); }
+        .inv-item.equipped { color: #ff0; }
+
+        /* Character name/class on the parchment area */
+        #charsheet-name {
+            position: absolute; left: 95px; top: 20px; width: 280px;
+            font-family: 'Times New Roman', serif; font-size: 14px;
+            color: #000; text-align: center;
+        }
+        #charsheet-class {
+            position: absolute; left: 95px; top: 42px; width: 280px;
+            font-family: 'Times New Roman', serif; font-size: 12px;
+            color: #333; text-align: center;
+        }
+
+        /* Close button area */
+        #charsheet-close {
+            position: absolute; right: 8px; bottom: 10px;
+            width: 70px; height: 25px; cursor: pointer;
+            background: transparent; border: none; color: transparent;
+        }
+
+        /* Right-click context menu for inventory items */
+        #inv-context-menu {
+            position: absolute; display: none; z-index: 45;
+            background: #2a2a2a; border: 1px solid #666;
+            font-family: 'MS Sans Serif', sans-serif; font-size: 11px;
+            color: #eee; min-width: 100px;
+        }
+        #inv-context-menu div {
+            padding: 4px 12px; cursor: pointer;
+        }
+        #inv-context-menu div:hover { background: #444; }
     </style>
 </head>
 <body>
@@ -272,6 +333,21 @@
 
         <!-- Status bar -->
         <div id="status-bar"></div>
+
+        <!-- Character sheet panel (VB6: inventory.frm) -->
+        <div id="charsheet-panel">
+            <div id="charsheet-name"></div>
+            <div id="charsheet-class"></div>
+            <div id="inv-list"></div>
+            <button id="charsheet-close">Close</button>
+        </div>
+
+        <!-- Right-click context menu for inventory items -->
+        <div id="inv-context-menu">
+            <div id="ctx-use">Use / Equip</div>
+            <div id="ctx-drop">Drop</div>
+            <div id="ctx-unequip">Unequip</div>
+        </div>
 
         <!-- Phase 1: Intro slideshow (VB6: intro.frm) -->
         <div id="intro-overlay" class="overlay">
