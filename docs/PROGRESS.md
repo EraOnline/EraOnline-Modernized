@@ -2,9 +2,9 @@
 
 ## Current State
 
-**Phase 3 in progress.** Multiplayer works with original UI chrome: login, character creation, server-authoritative movement, parchment/wood frame, stat bars, chat panel. Next: wire up chat, character/spells/skills panels, map transitions.
+**Phase 3 complete, Phase 4 in progress.** Full pre-game startup sequence with audio, chat system, map transitions, stats, inventory with character sheet, ground items with persistence. Next: combat, NPC AI, NPC trading.
 
-Most recent log: [2026-04-05](logs/2026-04-05.md)
+Most recent log: [2026-04-07](logs/2026-04-07.md)
 
 ---
 
@@ -53,12 +53,14 @@ Connect the client and server. Login, movement, seeing other players, chat.
 - [x] Client: receive and render other characters and NPCs from server data
 - [x] Movement: client sends direction -> server validates -> broadcast to all clients -> animate
 - [x] Client UI chrome: parchment/wood frame (interface.JPG), bottom panel (bottomface.JPG), stat bars, chat input/log, login overlay (menu.jpg)
-- [ ] Chat: say, shout, emote, whisper (server hub methods + broadcast)
-- [ ] Map transitions: walking off zone edge loads adjacent zone (N/S/E/W exits)
-- [ ] Map transitions: tile-based warps (doors, stairs, etc.)
-- [ ] Chat: say, shout, emote, whisper
-- [ ] Chat: ghost speech (dead players produce "oooOO OOoo" etc.)
-- [ ] Commands: /WHO, /SAVE, /STATS, /REFRESH, /QUIT, /HELP, /DESC
+- [x] Chat: say, shout, emote, whisper (server hub methods + broadcast)
+- [x] Map transitions: walking off zone edge loads adjacent zone (N/S/E/W exits)
+- [x] Map transitions: tile-based warps (doors, stairs, etc.)
+- [x] Chat: ghost speech (dead players produce "oooOO OOoo" etc.)
+- [x] Commands: /WHO, /SAVE, /STATS, /REFRESH, /QUIT, /HELP, /DESC
+- [x] Chat logging (zone files + connection log, matching VB6)
+- [x] Audio: MIDI-to-MP3 pipeline (31 tracks), 58 SFX, 14 voiceovers, zone music on map entry
+- [x] Pre-game startup sequence (intro slideshow, main menu, select screen, login form)
 
 **Milestone:** Two browser tabs connect, create characters, appear in Castlefall, walk around, cross zone boundaries, chat. Ghost speech works.
 
@@ -66,11 +68,14 @@ Connect the client and server. Login, movement, seeing other players, chat.
 
 Combat, items, NPCs, death. The game becomes playable.
 
-- [ ] Inventory: pickup, drop, use, equip/unequip, give
-- [ ] Equipment affects character appearance (body/weapon/shield sprites change)
-- [ ] Stat bars in UI (HP, Mana, Stamina, Food, Drink, Gold, EXP progress)
-- [ ] Character sheet UI (slots for head, body, weapon, shield + backpack)
-- [ ] Food and drink consumption (use from inventory, affects stats)
+- [x] Inventory: pickup, drop, use, equip/unequip
+- [x] Equipment affects character appearance (body/weapon/shield sprites change)
+- [x] Stat bars in UI (HP, Mana, Stamina, Food, Drink, Gold, EXP progress)
+- [x] Character sheet UI (charsht.JPG background, backpack list, right-click context menu)
+- [x] Food and drink consumption (use from inventory, affects stats)
+- [x] Left-click: inspect tile contents (items, NPCs, players - name, description)
+- [x] Ground items: drop to ground with sprite, pick up with G key, persist across restarts
+- [ ] Inventory: give item to another player
 - [ ] NPC AI: 8 movement patterns (1=stand, 2=random walk, 3=hostile chase 10 tiles, 4=guard chase criminals 10 tiles, 5=beggar follow non-givers, 6=tamed animal follow owner, 7=short-range hostile 3 tiles, 8=chaotic guard chase humans/wood elves)
 - [ ] NPC AI: 2 guard types (1=normal attack criminals, 2=chaotic attack humans+wood elves+criminals)
 - [ ] NPC AI: hostile detection range, level-gating (high-level NPCs don't chase low-level players)
@@ -84,7 +89,6 @@ Combat, items, NPCs, death. The game becomes playable.
 - [ ] Ghost state: ghost body/head, can't interact, speech is garbled
 - [ ] Resurrection: /RESSURECT at Priest of Life NPCs
 - [ ] Consider (TAB): view target's HP/hit
-- [ ] Left-click: inspect tile contents (items, NPCs, players - name, class, description, reputation)
 
 **Milestone:** Can fight a troll outside Castlefall, die, become a ghost, find a Priest of Life, resurrect, go back and kill the troll, pick up loot, equip dropped weapon.
 
