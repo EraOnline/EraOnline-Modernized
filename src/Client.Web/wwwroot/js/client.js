@@ -356,6 +356,16 @@ const EraClient = (() => {
         }
     }
 
+    function onGetItem() {
+        // VB6: Label7_Click / Image2_Click — pick up item at feet
+        if (connection && connection.state === signalR.HubConnectionState.Connected) {
+            playClick();
+            connection.invoke('GetItem').catch(err => {
+                console.error('[EraClient] GetItem failed:', err);
+            });
+        }
+    }
+
     function onPlayerClick(tileX, tileY) {
         // VB6: Form_MouseUp -> SendData("LC" & tX & "," & tY)
         if (connection && connection.state === signalR.HubConnectionState.Connected) {
@@ -385,6 +395,16 @@ const EraClient = (() => {
         // VB6: CHC — character appearance changed (equip/unequip)
         EraRenderer.addCharacter(msg.charIndex, msg.name, msg.body, msg.head,
             msg.heading, msg.x, msg.y, msg.weaponAnim, msg.shieldAnim);
+    }
+
+    function onMakeObj(msg) {
+        // VB6: MOB — place an item sprite on the ground
+        EraRenderer.makeGroundObj(msg.grhIndex, msg.x, msg.y);
+    }
+
+    function onEraseObj(msg) {
+        // VB6: EOB — remove an item from the ground
+        EraRenderer.eraseGroundObj(msg.x, msg.y);
     }
 
     // --- Character sheet UI ---
@@ -504,6 +524,8 @@ const EraClient = (() => {
         connection.on('Target', onTargetMessage);
         connection.on('InventorySlot', onInventorySlot);
         connection.on('ChangeChar', onChangeChar);
+        connection.on('MakeObj', onMakeObj);
+        connection.on('EraseObj', onEraseObj);
         connection.on('PlayMusic', onPlayMusic);
         connection.on('PlaySound', onPlaySound);
         connection.on('PlayVoice', onPlayVoice);
@@ -557,6 +579,15 @@ const EraClient = (() => {
         // Hide context menu on click elsewhere
         document.addEventListener('mousedown', (e) => {
             if (!e.target.closest('#inv-context-menu') && contextSlot >= 0) hideContextMenu();
+        });
+
+        // 'G' key to pick up items (VB6: Label7 "Get" button)
+        document.addEventListener('keydown', (e) => {
+            // Don't trigger when typing in inputs
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            if (e.key === 'g' || e.key === 'G') {
+                onGetItem();
+            }
         });
 
         // Pre-connect to server in the background (don't wait)

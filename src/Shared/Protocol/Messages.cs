@@ -75,6 +75,12 @@ public record InventorySlotMessage(
     int GrhIndex,
     int Value);
 
+/// <summary>VB6: MOB - Place/show an object on the ground at a tile</summary>
+public record MakeObjMessage(int GrhIndex, int X, int Y);
+
+/// <summary>VB6: EOB - Remove an object from the ground at a tile</summary>
+public record EraseObjMessage(int X, int Y);
+
 /// <summary>VB6: PLM - Play zone music (music number + loop flag)</summary>
 public record PlayMusicMessage(int MusicNumber, bool Loop);
 

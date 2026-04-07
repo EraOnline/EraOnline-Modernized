@@ -189,6 +189,9 @@ public class GameHub : Hub
             }
         }
 
+        // Send ground items on this map
+        await SendGroundItems(map);
+
         // Broadcast the new player to everyone else on the map
         await Clients.OthersInGroup(MapGroup(map))
             .SendAsync("MakeChar", new MakeCharMessage(
@@ -257,8 +260,15 @@ public class GameHub : Hub
 
         var foundSomething = false;
 
-        // Check for objects on the tile
-        // (deferred — no ground items yet, but the structure is ready)
+        // VB6: Check for object on the tile
+        var groundObj = _world.GetGroundItem(player.Map, x, y);
+        if (groundObj != null && groundObj.ObjIndex > 0)
+        {
+            var objName = _gameData.Objects.FirstOrDefault(o => o.Id == groundObj.ObjIndex)?.Name ?? "something";
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"You see a {objName}.", FontType.Talk));
+            foundSomething = true;
+        }
 
         // Check for characters — VB6 checks tile and tile+1 Y (characters render offset by 1)
         var foundPlayer = FindPlayerAt(player.Map, x, y) ?? FindPlayerAt(player.Map, x, y + 1);
@@ -425,6 +435,7 @@ public class GameHub : Hub
     }
 
     /// <summary>VB6: HandleData "DRP" -> DropObj (GameLogic.bas:1903)</summary>
+    /// <summary>VB6: HandleData "DRP" -> DropObj (GameLogic.bas:1903)</summary>
     public async Task DropItem(int slot, int amount)
     {
         var player = _world.GetPlayer(Context.ConnectionId);
@@ -436,14 +447,29 @@ public class GameHub : Hub
         if (amount < 1) amount = inv.Amount;
         if (amount > inv.Amount) amount = inv.Amount;
 
+        // VB6: Check if tile already has an item
+        if (_world.GetGroundItem(player.Map, player.X, player.Y) != null)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("No room on ground.", FontType.Info));
+            return;
+        }
+
         if (inv.Equipped) await UnequipSlot(player, slot);
 
-        var itemName = _gameData.Objects.FirstOrDefault(o => o.Id == inv.ObjIndex)?.Name ?? "an item";
-        await Clients.Caller.SendAsync("Chat",
-            new ChatMessage($"You drop {itemName}.", FontType.Info));
+        var objDef = _gameData.Objects.FirstOrDefault(o => o.Id == inv.ObjIndex);
 
+        // VB6: MakeObj — place on ground and broadcast to map
+        _world.PlaceGroundItem(player.Map, player.X, player.Y, inv.ObjIndex, amount);
+        await Clients.Group(MapGroup(player.Map))
+            .SendAsync("MakeObj", new MakeObjMessage(objDef?.GrhIndex ?? 0, player.X, player.Y));
+
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage($"You drop {objDef?.Name ?? "an item"}.", FontType.Info));
+
+        // Remove from inventory
         inv.Amount -= amount;
-        if (inv.Amount <= 0) { inv.ObjIndex = 0; inv.Amount = 0; }
+        if (inv.Amount <= 0) { inv.ObjIndex = 0; inv.Amount = 0; inv.Equipped = false; }
         await SendInvSlot(ch, slot);
     }
 
@@ -452,8 +478,60 @@ public class GameHub : Hub
     {
         var player = _world.GetPlayer(Context.ConnectionId);
         if (player == null) return;
-        await Clients.Caller.SendAsync("Chat",
-            new ChatMessage("Nothing here.", FontType.Info));
+        var ch = player.Character;
+
+        // VB6: Check for object on player's tile
+        var groundItem = _world.GetGroundItem(player.Map, player.X, player.Y);
+        if (groundItem == null || groundItem.ObjIndex <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Nothing here.", FontType.Info));
+            return;
+        }
+
+        var objDef = _gameData.Objects.FirstOrDefault(o => o.Id == groundItem.ObjIndex);
+
+        // VB6: Check if pickable
+        if (objDef != null && objDef.Pickable == 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You cannot pick this item up.", FontType.Info));
+            return;
+        }
+
+        // Find a matching slot (stack) or empty slot
+        int targetSlot = -1;
+        for (int i = 0; i < 20; i++)
+        {
+            if (ch.Inventory[i].ObjIndex == groundItem.ObjIndex)
+            { targetSlot = i; break; }
+        }
+        if (targetSlot < 0)
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                if (ch.Inventory[i].ObjIndex <= 0)
+                { targetSlot = i; break; }
+            }
+        }
+        if (targetSlot < 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You cannot hold any more items now!", FontType.Info));
+            return;
+        }
+
+        // Pick up: add to inventory, remove from ground
+        ch.Inventory[targetSlot].ObjIndex = groundItem.ObjIndex;
+        ch.Inventory[targetSlot].Amount += groundItem.Amount;
+
+        _world.PickupGroundItem(player.Map, player.X, player.Y);
+
+        // VB6: EraseObj — broadcast removal to map
+        await Clients.Group(MapGroup(player.Map))
+            .SendAsync("EraseObj", new EraseObjMessage(player.X, player.Y));
+
+        await SendInvSlot(ch, targetSlot);
     }
 
     private async Task UnequipSlot(PlayerState player, int slot)
@@ -616,6 +694,9 @@ public class GameHub : Hub
                 }
             }
         }
+
+        // Send ground items on the new map
+        await SendGroundItems(newMap);
 
         // Announce this player to others on the new map
         await Clients.OthersInGroup(MapGroup(newMap))
@@ -846,6 +927,17 @@ public class GameHub : Hub
         {
             await Clients.Caller.SendAsync("InventorySlot", new InventorySlotMessage(
                 slot, 0, "(None)", 0, false, 0, 0));
+        }
+    }
+
+    /// <summary>Send all ground items on a map to the caller.</summary>
+    private async Task SendGroundItems(int map)
+    {
+        foreach (var (x, y, item) in _world.GetAllGroundItems(map))
+        {
+            var objDef = _gameData.Objects.FirstOrDefault(o => o.Id == item.ObjIndex);
+            if (objDef != null)
+                await Clients.Caller.SendAsync("MakeObj", new MakeObjMessage(objDef.GrhIndex, x, y));
         }
     }
 

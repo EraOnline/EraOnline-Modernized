@@ -35,6 +35,9 @@ const EraRenderer = (() => {
     let dataLoaded = false;
     let fpsEl = null;
 
+    // Dynamic ground objects: { "x,y": grhIndex } — set by MakeObj, cleared by EraseObj
+    let groundObjects = {};
+
     // Frame timing
     let lastFrameTime = 0;
     let frameCount = 0;
@@ -108,8 +111,9 @@ const EraRenderer = (() => {
 
     async function loadMapFromServer(mapId) {
         setStatus('Loading map ' + mapId + '...');
-        // Clear old map's characters — new ones will arrive via MakeChar
+        // Clear old map's characters and ground objects — new ones will arrive via MakeChar/MakeObj
         characters = {};
+        groundObjects = {};
         const padded = String(mapId).padStart(3, '0');
         const resp = await fetch(`${dataBasePath}/maps/map-${padded}.json`);
         mapData = await resp.json();
@@ -147,6 +151,18 @@ const EraRenderer = (() => {
 
     function removeCharacter(charIndex) {
         delete characters[charIndex];
+    }
+
+    // VB6: MOB — place an object sprite on a tile
+    function makeGroundObj(grhIndex, x, y) {
+        if (grhIndex > 0) {
+            groundObjects[`${x},${y}`] = grhIndex;
+        }
+    }
+
+    // VB6: EOB — remove an object sprite from a tile
+    function eraseGroundObj(x, y) {
+        delete groundObjects[`${x},${y}`];
     }
 
     function moveCharacter(charIndex, newX, newY, heading) {
@@ -586,6 +602,12 @@ const EraRenderer = (() => {
                     }
                 }
 
+                // VB6: Object layer — dynamic ground items between fringe and characters
+                const objGrh = groundObjects[`${x},${y}`];
+                if (objGrh > 0) {
+                    drawGrh(objGrh, px, py, true, null);
+                }
+
                 // Characters at this tile
                 for (const ch of Object.values(characters)) {
                     if (ch.x === x && ch.y === y) {
@@ -659,6 +681,8 @@ const EraRenderer = (() => {
         addCharacter,
         removeCharacter,
         moveCharacter,
-        setPlayerPosition
+        setPlayerPosition,
+        makeGroundObj,
+        eraseGroundObj
     };
 })();

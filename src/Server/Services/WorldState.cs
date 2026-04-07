@@ -30,6 +30,9 @@ public class WorldState
     // VB6: MapData(map, x, y).userindex
     private readonly ConcurrentDictionary<int, ConcurrentDictionary<(int x, int y), int>> _mapOccupancy = new();
 
+    // VB6: MapData(map, x, y).ObjInfo — ground items, one item per tile
+    private readonly ConcurrentDictionary<int, ConcurrentDictionary<(int x, int y), GroundItem>> _groundItems = new();
+
     public WorldState(GameDataService gameData, IConfiguration config, ILogger<WorldState> logger)
     {
         _gameData = gameData;
@@ -211,6 +214,42 @@ public class WorldState
         return false;
     }
 
+    // --- Ground Items (VB6: MapData(map,x,y).ObjInfo) ---
+
+    private ConcurrentDictionary<(int, int), GroundItem> GetMapGroundItems(int map) =>
+        _groundItems.GetOrAdd(map, _ => new());
+
+    /// <summary>Place an item on the ground. Returns false if tile already has an item.</summary>
+    public bool PlaceGroundItem(int map, int x, int y, int objIndex, int amount)
+    {
+        var items = GetMapGroundItems(map);
+        return items.TryAdd((x, y), new GroundItem { ObjIndex = objIndex, Amount = amount });
+    }
+
+    /// <summary>Pick up the item on a tile. Returns null if nothing there.</summary>
+    public GroundItem? PickupGroundItem(int map, int x, int y)
+    {
+        var items = GetMapGroundItems(map);
+        items.TryRemove((x, y), out var item);
+        return item;
+    }
+
+    /// <summary>Get the item on a tile without removing it (for inspection).</summary>
+    public GroundItem? GetGroundItem(int map, int x, int y)
+    {
+        var items = GetMapGroundItems(map);
+        items.TryGetValue((x, y), out var item);
+        return item;
+    }
+
+    /// <summary>Get all ground items on a map (for sending to newly arrived players).</summary>
+    public IEnumerable<(int x, int y, GroundItem item)> GetAllGroundItems(int map)
+    {
+        var items = GetMapGroundItems(map);
+        foreach (var kvp in items)
+            yield return (kvp.Key.Item1, kvp.Key.Item2, kvp.Value);
+    }
+
     /// <summary>
     /// Warp a player to a new map and position. Updates occupancy.
     /// VB6: WarpUserChar (GameLogic.bas:2982)
@@ -350,4 +389,11 @@ public class InventorySlot
     public int ObjIndex { get; set; }
     public int Amount { get; set; }
     public bool Equipped { get; set; }
+}
+
+/// <summary>VB6: MapData(map, x, y).ObjInfo — an item on the ground.</summary>
+public class GroundItem
+{
+    public int ObjIndex { get; set; }
+    public int Amount { get; set; }
 }

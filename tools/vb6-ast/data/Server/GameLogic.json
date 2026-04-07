@@ -373,7 +373,8 @@
       "annotations": {
         "purpose": "Remove an object from a map tile and broadcast removal to clients",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:GetItem",
         "sends": [
           "EOB"
         ],
@@ -392,7 +393,8 @@
       "annotations": {
         "purpose": "Place an object on a map tile and broadcast to clients",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:DropItem",
         "sends": [
           "MOB"
         ],
