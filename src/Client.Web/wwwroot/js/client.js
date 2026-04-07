@@ -306,6 +306,24 @@ const EraClient = (() => {
         playSound(`/data/voice/mp${msg.id}.mp3`);
     }
 
+    function onStats(msg) {
+        // VB6: SST — update stat bars and gold display
+        // Bars are 150px tall, fill from bottom as percentage of max
+        const hpPct = msg.maxHp > 0 ? (msg.hp / msg.maxHp) * 100 : 0;
+        const staPct = msg.maxSta > 0 ? (msg.sta / msg.maxSta) * 100 : 0;
+        const manPct = msg.maxMan > 0 ? (msg.man / msg.maxMan) * 100 : 0;
+
+        document.getElementById('hp-bar').style.height = hpPct + '%';
+        document.getElementById('sta-bar').style.height = staPct + '%';
+        document.getElementById('man-bar').style.height = manPct + '%';
+        document.getElementById('gold-value').textContent = msg.gold;
+
+        // EXP progress — show in status bar area
+        const expPct = msg.elu > 0 ? Math.floor((msg.exp / msg.elu) * 100) : 0;
+        const expEl = document.getElementById('exp-label');
+        if (expEl) expEl.textContent = `EXP: ${expPct}%`;
+    }
+
     function onPlayMusic(msg) {
         // VB6: PLM protocol message — play zone music
         console.log(`[Audio] onPlayMusic received: musicNumber=${msg.musicNumber}, loop=${msg.loop}, musicEnabled=${musicEnabled}`);
@@ -373,6 +391,7 @@ const EraClient = (() => {
         connection.on('SetPosition', onSetPosition);
         connection.on('MapLoad', onMapLoad);
         connection.on('Chat', onChat);
+        connection.on('Stats', onStats);
         connection.on('PlayMusic', onPlayMusic);
         connection.on('PlaySound', onPlaySound);
         connection.on('PlayVoice', onPlayVoice);

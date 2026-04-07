@@ -1559,6 +1559,10 @@
           "/QUIT": {
             "status": "ported",
             "target": "Server/Hubs/GameHub.cs:HandleSlashCommand"
+          },
+          "SST": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:SendStats"
           }
         }
       }

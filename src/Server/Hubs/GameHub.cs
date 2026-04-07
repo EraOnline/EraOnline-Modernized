@@ -198,6 +198,9 @@ public class GameHub : Hub
         await Clients.Caller.SendAsync("Chat", new ChatMessage(
             $"Welcome to Era Online, {character.Name}!", FontType.Info));
 
+        // VB6: SendUserStatsBox — send full stats on login
+        await SendStats(character);
+
         // VB6: SendData(ToIndex, "PLM" & MapInfo(map).Music) — play zone music
         await SendMapMusic(map);
 
@@ -482,8 +485,13 @@ public class GameHub : Hub
 
             case "/STATS":
                 // VB6: HandleData "/STATS" -> SendUserStatsTxt
+                var c = player.Character;
                 await Clients.Caller.SendAsync("Chat",
-                    new ChatMessage($"{player.Character.Name} — {player.Character.Race} {player.Character.Gender} — Map {player.Map} ({player.X},{player.Y})", FontType.Info));
+                    new ChatMessage($"{c.Name} — {c.Race} {c.Gender} — Map {player.Map} ({player.X},{player.Y})", FontType.Info));
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"HP:{c.CurrentHp}/{c.MaxHp} STA:{c.CurrentSta}/{c.MaxSta} MAN:{c.CurrentMan}/{c.MaxMan} Gold:{c.Gold}", FontType.Info));
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"HIT:{c.MinHit}-{c.MaxHit} DEF:{c.Def} EXP:{c.Exp}/{c.Elu} Food:{c.Food} Drink:{c.Drink}", FontType.Info));
                 break;
 
             case "/DESC":
@@ -542,6 +550,21 @@ public class GameHub : Hub
     // --- Helpers ---
 
     private static string MapGroup(int mapId) => $"map:{mapId}";
+
+    /// <summary>VB6: SendUserStatsBox (GameLogic.bas) — send SST with all stats</summary>
+    private async Task SendStats(CharacterData c)
+    {
+        await Clients.Caller.SendAsync("Stats", new StatsMessage(
+            c.CurrentHp, c.MaxHp,
+            c.CurrentMan, c.MaxMan,
+            c.CurrentSta, c.MaxSta,
+            c.Gold,
+            c.Exp, c.Elu,
+            c.Food, c.Drink,
+            c.MinHit, c.MaxHit,
+            c.Def,
+            c.TrainingPoints));
+    }
 
     /// <summary>
     /// Send zone music for a map. VB6: SendData(ToIndex, "PLM" & MapInfo(map).Music)

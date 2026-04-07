@@ -47,6 +47,21 @@ public record SetCharIndexMessage(int CharIndex);
 /// <summary>VB6: @ - Chat/info message with font type</summary>
 public record ChatMessage(string Text, FontType Font);
 
+/// <summary>
+/// VB6: SST - Full stats update. Sent on login and whenever stats change.
+/// VB6 format: "SST" & HP,MaxHP,MAN,MaxMAN,STA,MaxSTA,GLD,EXP,ELU,Food,Drink,MinHIT,MaxHIT,DEF,PracticePoints
+/// </summary>
+public record StatsMessage(
+    int Hp, int MaxHp,
+    int Man, int MaxMan,
+    int Sta, int MaxSta,
+    int Gold,
+    int Exp, int Elu,
+    int Food, int Drink,
+    int MinHit, int MaxHit,
+    int Def,
+    int TrainingPoints);
+
 /// <summary>VB6: PLM - Play zone music (music number + loop flag)</summary>
 public record PlayMusicMessage(int MusicNumber, bool Loop);
 

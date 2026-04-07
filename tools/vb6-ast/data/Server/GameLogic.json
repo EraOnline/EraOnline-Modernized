@@ -1088,7 +1088,8 @@
       "annotations": {
         "purpose": "Send current stats (HP/STA/MAN/HIT/DEF/EXP/GLD/etc.) to client",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:SendStats",
         "sends": [
           "SST"
         ],

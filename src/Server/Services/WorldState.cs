@@ -259,8 +259,7 @@ public class PlayerState
 }
 
 /// <summary>
-/// Persisted character data. VB6: .chr file contents.
-/// Simplified for Phase 3 - stats/inventory/skills added in Phase 4.
+/// Persisted character data. VB6: .chr file contents ([INIT], [STATS], [FLAGS] sections).
 /// </summary>
 public class CharacterData
 {
@@ -274,4 +273,22 @@ public class CharacterData
     public int LastMap { get; set; }
     public int LastX { get; set; }
     public int LastY { get; set; }
+
+    // VB6: [STATS] section
+    public int MaxHp { get; set; } = 30;
+    public int CurrentHp { get; set; } = 30;
+    public int MaxSta { get; set; } = 5;
+    public int CurrentSta { get; set; } = 5;
+    public int MaxMan { get; set; } = 0;
+    public int CurrentMan { get; set; } = 0;
+    public int Gold { get; set; } = 0;
+    public int Exp { get; set; } = 0;
+    public int Elu { get; set; } = 300;       // experience to level up
+    public int Level { get; set; } = 1;        // hidden from player
+    public int MinHit { get; set; } = 2;
+    public int MaxHit { get; set; } = 4;
+    public int Def { get; set; } = 0;
+    public int Food { get; set; } = 0;
+    public int Drink { get; set; } = 0;
+    public int TrainingPoints { get; set; } = 0;
 }
