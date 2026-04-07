@@ -13,12 +13,14 @@ public class GameHub : Hub
 {
     private readonly GameDataService _gameData;
     private readonly WorldState _world;
+    private readonly ChatLogger _chatLog;
     private readonly ILogger<GameHub> _logger;
 
-    public GameHub(GameDataService gameData, WorldState world, ILogger<GameHub> logger)
+    public GameHub(GameDataService gameData, WorldState world, ChatLogger chatLog, ILogger<GameHub> logger)
     {
         _gameData = gameData;
         _world = world;
+        _chatLog = chatLog;
         _logger = logger;
     }
 
@@ -37,6 +39,7 @@ public class GameHub : Hub
             await Clients.Group(MapGroup(player.Map))
                 .SendAsync("EraseChar", new EraseCharMessage(player.CharIndex));
 
+            _chatLog.LogConnect(player.Character.Name, "logged off");
             _logger.LogInformation("Player {Name} disconnected, saved at map {Map} ({X},{Y})",
                 player.Character.Name, player.Map, player.X, player.Y);
         }
@@ -194,6 +197,9 @@ public class GameHub : Hub
         // Welcome messages
         await Clients.Caller.SendAsync("Chat", new ChatMessage(
             $"Welcome to Era Online, {character.Name}!", FontType.Info));
+
+        // VB6: Open App.Path & "\Connect.log" For Append
+        _chatLog.LogConnect(character.Name, $"logged in. Map:{map} ({x},{y})");
     }
 
     /// <summary>
@@ -257,6 +263,7 @@ public class GameHub : Hub
 
             await Clients.Group(MapGroup(player.Map))
                 .SendAsync("Chat", new ChatMessage(formatted, FontType.Talk));
+            if (!player.IsDead) _chatLog.LogChat(player.Map, player.Character.Name, text);
         }
         else if (message.StartsWith(':'))
         {
@@ -271,6 +278,7 @@ public class GameHub : Hub
 
             await Clients.Group(MapGroup(player.Map))
                 .SendAsync("Chat", new ChatMessage(formatted, FontType.Talk));
+            if (!player.IsDead) _chatLog.LogChat(player.Map, player.Character.Name, $" {text}");
         }
         else if (message.StartsWith('\\'))
         {
@@ -302,6 +310,8 @@ public class GameHub : Hub
             // Echo to sender
             await Clients.Caller.SendAsync("Chat",
                 new ChatMessage($"You whisper to {target.Character.Name}: {whisperText}", FontType.Talk));
+            // VB6 logs whispers to the sender's zone file
+            _chatLog.LogChat(player.Map, player.Character.Name, whisperText);
         }
         else
         {
@@ -316,6 +326,7 @@ public class GameHub : Hub
 
             await Clients.Group(MapGroup(player.Map))
                 .SendAsync("Chat", new ChatMessage(formatted, FontType.Talk));
+            if (!player.IsDead) _chatLog.LogChat(player.Map, player.Character.Name, text);
         }
     }
 
