@@ -55,6 +55,8 @@ const EraClient = (() => {
     let introSlide = 1;
     let introTimer = null;
 
+    let introEnded = false;
+
     function startIntro() {
         const overlay = document.getElementById('intro-overlay');
         const img = document.getElementById('intro-img');
@@ -74,16 +76,17 @@ const EraClient = (() => {
         }, 2200);
 
         // Click or key skips intro (VB6: Image1_Click / Form_KeyDown ESC)
-        overlay.addEventListener('click', endIntro, { once: true });
-        document.addEventListener('keydown', function introKey(e) {
-            document.removeEventListener('keydown', introKey);
-            endIntro();
-        }, { once: true });
+        overlay.addEventListener('click', endIntro);
+        document.addEventListener('keydown', endIntro);
     }
 
     function endIntro() {
+        if (introEnded) return;
+        introEnded = true;
         if (introTimer) { clearInterval(introTimer); introTimer = null; }
         if (introAudio) { introAudio.pause(); introAudio = null; }
+        document.getElementById('intro-overlay').removeEventListener('click', endIntro);
+        document.removeEventListener('keydown', endIntro);
         document.getElementById('intro-overlay').classList.add('hidden');
         startMainMenu();
     }
