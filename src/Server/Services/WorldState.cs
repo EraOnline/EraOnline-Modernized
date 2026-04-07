@@ -33,12 +33,17 @@ public class WorldState
     // VB6: MapData(map, x, y).ObjInfo — ground items, one item per tile
     private readonly ConcurrentDictionary<int, ConcurrentDictionary<(int x, int y), GroundItem>> _groundItems = new();
 
+    private readonly string _groundItemPath;
+
     public WorldState(GameDataService gameData, IConfiguration config, ILogger<WorldState> logger)
     {
         _gameData = gameData;
         _logger = logger;
         _charPath = config.GetValue<string>("CharacterPath") ?? Path.Combine(Directory.GetCurrentDirectory(), "characters");
+        _groundItemPath = config.GetValue<string>("GroundItemPath") ?? Path.Combine(Directory.GetCurrentDirectory(), "grounditems");
         Directory.CreateDirectory(_charPath);
+        Directory.CreateDirectory(_groundItemPath);
+        LoadAllGroundItems();
     }
 
     // --- Character Persistence ---
@@ -215,6 +220,7 @@ public class WorldState
     }
 
     // --- Ground Items (VB6: MapData(map,x,y).ObjInfo) ---
+    // Write-through persistence: saved to grounditems/map-NNN.json on every change.
 
     private ConcurrentDictionary<(int, int), GroundItem> GetMapGroundItems(int map) =>
         _groundItems.GetOrAdd(map, _ => new());
@@ -223,14 +229,19 @@ public class WorldState
     public bool PlaceGroundItem(int map, int x, int y, int objIndex, int amount)
     {
         var items = GetMapGroundItems(map);
-        return items.TryAdd((x, y), new GroundItem { ObjIndex = objIndex, Amount = amount });
+        if (!items.TryAdd((x, y), new GroundItem { ObjIndex = objIndex, Amount = amount }))
+            return false;
+        SaveMapGroundItems(map);
+        return true;
     }
 
     /// <summary>Pick up the item on a tile. Returns null if nothing there.</summary>
     public GroundItem? PickupGroundItem(int map, int x, int y)
     {
         var items = GetMapGroundItems(map);
-        items.TryRemove((x, y), out var item);
+        if (!items.TryRemove((x, y), out var item))
+            return null;
+        SaveMapGroundItems(map);
         return item;
     }
 
@@ -248,6 +259,66 @@ public class WorldState
         var items = GetMapGroundItems(map);
         foreach (var kvp in items)
             yield return (kvp.Key.Item1, kvp.Key.Item2, kvp.Value);
+    }
+
+    private string GroundItemFilePath(int map) =>
+        Path.Combine(_groundItemPath, $"map-{map:D3}.json");
+
+    /// <summary>Write-through: save all ground items for one map to disk.</summary>
+    private void SaveMapGroundItems(int map)
+    {
+        var items = GetMapGroundItems(map);
+        var path = GroundItemFilePath(map);
+
+        if (items.IsEmpty)
+        {
+            // No items left — delete the file
+            if (File.Exists(path)) File.Delete(path);
+            return;
+        }
+
+        // Sparse format: array of [x, y, objIndex, amount]
+        var entries = items.Select(kvp => new[] { kvp.Key.Item1, kvp.Key.Item2, kvp.Value.ObjIndex, kvp.Value.Amount }).ToList();
+        File.WriteAllText(path, JsonSerializer.Serialize(entries));
+    }
+
+    /// <summary>Load all ground item files on startup.</summary>
+    private void LoadAllGroundItems()
+    {
+        if (!Directory.Exists(_groundItemPath)) return;
+
+        var files = Directory.GetFiles(_groundItemPath, "map-*.json");
+        int totalItems = 0;
+
+        foreach (var file in files)
+        {
+            var name = Path.GetFileNameWithoutExtension(file); // "map-081"
+            if (!int.TryParse(name.AsSpan(4), out var mapId)) continue;
+
+            try
+            {
+                var json = File.ReadAllText(file);
+                var entries = JsonSerializer.Deserialize<List<int[]>>(json);
+                if (entries == null) continue;
+
+                var items = GetMapGroundItems(mapId);
+                foreach (var entry in entries)
+                {
+                    if (entry.Length >= 4)
+                    {
+                        items[(entry[0], entry[1])] = new GroundItem { ObjIndex = entry[2], Amount = entry[3] };
+                        totalItems++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning("Failed to load ground items from {File}: {Error}", file, ex.Message);
+            }
+        }
+
+        if (totalItems > 0)
+            _logger.LogInformation("Loaded {Count} ground items from {Files} map files", totalItems, files.Length);
     }
 
     /// <summary>
