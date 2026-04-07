@@ -963,7 +963,8 @@
       "lineEnd": 994,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/renderer.js:onCanvasClick",
         "sends": [
           "LC",
           "RC",

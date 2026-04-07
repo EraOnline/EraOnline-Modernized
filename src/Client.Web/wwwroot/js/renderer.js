@@ -91,6 +91,7 @@ const EraRenderer = (() => {
 
         document.addEventListener('keydown', onKeyDown);
         document.addEventListener('keyup', onKeyUp);
+        canvas.addEventListener('click', onCanvasClick);
 
         requestAnimationFrame(renderLoop);
     }
@@ -100,6 +101,8 @@ const EraRenderer = (() => {
     function setMoveCallback(cb) { moveCallback = cb; }
     function setStatusCallback(cb) { statusCallback = cb; }
     function setMapNameCallback(cb) { mapNameCallback = cb; }
+    let clickCallback = null;
+    function setClickCallback(cb) { clickCallback = cb; }
 
     function setMyCharIndex(idx) { myCharIndex = idx; }
 
@@ -236,6 +239,23 @@ const EraRenderer = (() => {
 
     function onKeyUp(e) {
         delete keysDown[e.key];
+    }
+
+    function onCanvasClick(e) {
+        // VB6: ConvertCPtoTP — convert canvas pixel coords to map tile coords
+        if (!mapData || !myCharIndex) return;
+        const rect = canvas.getBoundingClientRect();
+        const px = e.clientX - rect.left;
+        const py = e.clientY - rect.top;
+
+        const halfW = Math.floor(VIEWPORT_W / 2);
+        const halfH = Math.floor(VIEWPORT_H / 2);
+        const tileX = Math.floor((px - screenOffsetX) / TILE_SIZE) + (camTileX - halfW);
+        const tileY = Math.floor((py - screenOffsetY) / TILE_SIZE) + (camTileY - halfH);
+
+        if (tileX >= 1 && tileX <= 100 && tileY >= 1 && tileY <= 100) {
+            if (clickCallback) clickCallback(tileX, tileY);
+        }
     }
 
     function processPlayerInput() {
@@ -633,6 +653,7 @@ const EraRenderer = (() => {
         setMoveCallback,
         setStatusCallback,
         setMapNameCallback,
+        setClickCallback,
         setMyCharIndex,
         loadMapFromServer,
         addCharacter,

@@ -62,6 +62,9 @@ public record StatsMessage(
     int Def,
     int TrainingPoints);
 
+/// <summary>VB6: TGT - Set target name in the target bar</summary>
+public record TargetMessage(string Text);
+
 /// <summary>VB6: PLM - Play zone music (music number + loop flag)</summary>
 public record PlayMusicMessage(int MusicNumber, bool Loop);
 

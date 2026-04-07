@@ -256,6 +256,12 @@ public class PlayerState
 
     /// <summary>VB6: Flags.status = 1 means dead/ghost</summary>
     public bool IsDead { get; set; }
+
+    /// <summary>VB6: UserList.NpcIndex / NPCtarget — currently targeted NPC index</summary>
+    public int TargetNpcIndex { get; set; }
+
+    /// <summary>VB6: UserList.UserTargetIndex — currently targeted player char index</summary>
+    public int TargetPlayerCharIndex { get; set; }
 }
 
 /// <summary>

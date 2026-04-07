@@ -1017,7 +1017,8 @@
       "annotations": {
         "purpose": "Handle left-click inspection of a tile: show info about players, NPCs, objects, signs",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:LeftClick",
         "sends": [
           "SII",
           "SGN",

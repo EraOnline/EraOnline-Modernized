@@ -1563,6 +1563,10 @@
           "SST": {
             "status": "ported",
             "target": "Server/Hubs/GameHub.cs:SendStats"
+          },
+          "LC": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:LeftClick"
           }
         }
       }

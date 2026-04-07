@@ -346,6 +346,20 @@ const EraClient = (() => {
         }
     }
 
+    function onPlayerClick(tileX, tileY) {
+        // VB6: Form_MouseUp -> SendData("LC" & tX & "," & tY)
+        if (connection && connection.state === signalR.HubConnectionState.Connected) {
+            connection.invoke('LeftClick', tileX, tileY).catch(err => {
+                console.error('[EraClient] LeftClick failed:', err);
+            });
+        }
+    }
+
+    function onTargetMessage(msg) {
+        // VB6: TGT — set the target name bar above the chat panel
+        document.getElementById('target-message').textContent = msg.text || '';
+    }
+
     function setStatusBar(msg) {
         document.getElementById('status-bar').textContent = msg;
     }
@@ -392,6 +406,7 @@ const EraClient = (() => {
         connection.on('MapLoad', onMapLoad);
         connection.on('Chat', onChat);
         connection.on('Stats', onStats);
+        connection.on('Target', onTargetMessage);
         connection.on('PlayMusic', onPlayMusic);
         connection.on('PlaySound', onPlaySound);
         connection.on('PlayVoice', onPlayVoice);
@@ -402,6 +417,7 @@ const EraClient = (() => {
         // Initialize renderer (loads sprite data while pre-game screens show)
         await EraRenderer.init('game-viewport', '/data');
         EraRenderer.setMoveCallback(onPlayerMove);
+        EraRenderer.setClickCallback(onPlayerClick);
         EraRenderer.setStatusCallback(setStatusBar);
         EraRenderer.setMapNameCallback(setMapName);
 

@@ -241,6 +241,84 @@ public class GameHub : Hub
     }
 
     /// <summary>
+    /// Handle left-click on a tile. VB6: HandleData "LC" -> LookatTile (GameLogic.bas:2841)
+    /// Inspects tile for players, NPCs, objects. Sets targeting.
+    /// </summary>
+    public async Task LeftClick(int x, int y)
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null) return;
+
+        if (x < 1 || x > GameConstants.MapWidth || y < 1 || y > GameConstants.MapHeight) return;
+
+        var foundSomething = false;
+
+        // Check for objects on the tile
+        // (deferred — no ground items yet, but the structure is ready)
+
+        // Check for characters — VB6 checks tile and tile+1 Y (characters render offset by 1)
+        var foundPlayer = FindPlayerAt(player.Map, x, y) ?? FindPlayerAt(player.Map, x, y + 1);
+        var foundNpc = FindNpcAt(player.Map, x, y) ?? FindNpcAt(player.Map, x, y + 1);
+
+        // React to NPC (VB6: FoundChar = 2)
+        if (foundNpc != null)
+        {
+            await Clients.Caller.SendAsync("Target", new TargetMessage(foundNpc.Value.name));
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"You target {foundNpc.Value.name}.", FontType.Talk));
+            player.TargetNpcIndex = foundNpc.Value.npcTemplateId;
+            player.TargetPlayerCharIndex = 0;
+            foundSomething = true;
+        }
+        // React to player (VB6: FoundChar = 1)
+        else if (foundPlayer != null && foundPlayer.CharIndex != player.CharIndex)
+        {
+            var other = foundPlayer;
+            await Clients.Caller.SendAsync("Target", new TargetMessage(other.Character.Name));
+
+            var desc = !string.IsNullOrEmpty(other.Character.Description)
+                ? $" - {other.Character.Description}"
+                : "";
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"You see {other.Character.Name}{desc}", FontType.Talk));
+
+            player.TargetPlayerCharIndex = other.CharIndex;
+            player.TargetNpcIndex = 0;
+            foundSomething = true;
+        }
+
+        if (!foundSomething)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You see nothing of interest.", FontType.Talk));
+        }
+    }
+
+    /// <summary>Find a player at a specific tile position on a map.</summary>
+    private PlayerState? FindPlayerAt(int map, int x, int y)
+    {
+        return _world.GetPlayersOnMap(map).FirstOrDefault(p => p.X == x && p.Y == y);
+    }
+
+    /// <summary>Find an NPC at a specific tile position on a map (from spawn data).</summary>
+    private (string name, int npcTemplateId)? FindNpcAt(int map, int x, int y)
+    {
+        if (!_gameData.Maps.TryGetValue(map, out var mapDef)) return null;
+
+        foreach (var spawn in mapDef.NpcSpawns)
+        {
+            // spawn = [x, y, npcTemplateId]
+            if (spawn[0] == x && spawn[1] == y)
+            {
+                var npc = _gameData.Npcs.FirstOrDefault(n => n.Id == spawn[2]);
+                if (npc != null)
+                    return (npc.Name, npc.Id);
+            }
+        }
+        return null;
+    }
+
+    /// <summary>
     /// Check for zone transitions after a move.
     /// VB6: DoTileEvents (GameLogic.bas:134-200)
     /// </summary>
