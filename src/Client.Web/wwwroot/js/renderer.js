@@ -102,6 +102,8 @@ const EraRenderer = (() => {
     // --- Public API (called by client.js) ---
 
     function setMoveCallback(cb) { moveCallback = cb; }
+    let rotateCallback = null;
+    function setRotateCallback(cb) { rotateCallback = cb; }
     function setStatusCallback(cb) { statusCallback = cb; }
     function setMapNameCallback(cb) { mapNameCallback = cb; }
     let clickCallback = null;
@@ -278,6 +280,14 @@ const EraRenderer = (() => {
         if (!myCharIndex || userMoving) return;
         const me = characters[myCharIndex];
         if (!me || me.moving) return;
+
+        // VB6: Shift+Left/Right = rotate in place (SendData "<" / ">")
+        // Only left and right have rotate — up/down always move (matching VB6)
+        if (keysDown['Shift']) {
+            if (keysDown['ArrowRight'] && rotateCallback) { rotateCallback(true); keysDown['ArrowRight'] = false; }
+            else if (keysDown['ArrowLeft'] && rotateCallback) { rotateCallback(false); keysDown['ArrowLeft'] = false; }
+            return;
+        }
 
         let direction = 0;
         if (keysDown['ArrowUp']) direction = NORTH;
@@ -673,6 +683,7 @@ const EraRenderer = (() => {
     return {
         init,
         setMoveCallback,
+        setRotateCallback,
         setStatusCallback,
         setMapNameCallback,
         setClickCallback,

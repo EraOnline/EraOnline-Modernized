@@ -535,6 +535,15 @@ const EraClient = (() => {
         }
     }
 
+    function onPlayerRotate(clockwise) {
+        // VB6: Shift+Right sends ">", Shift+Left sends "<"
+        if (connection && connection.state === signalR.HubConnectionState.Connected) {
+            connection.invoke('Rotate', clockwise).catch(err => {
+                console.error('[EraClient] Rotate failed:', err);
+            });
+        }
+    }
+
     function onGetItem() {
         // VB6: Label7_Click / Image2_Click — pick up item at feet
         if (connection && connection.state === signalR.HubConnectionState.Connected) {
@@ -716,6 +725,7 @@ const EraClient = (() => {
         // Initialize renderer (loads sprite data while pre-game screens show)
         await EraRenderer.init('game-viewport', '/data');
         EraRenderer.setMoveCallback(onPlayerMove);
+        EraRenderer.setRotateCallback(onPlayerRotate);
         EraRenderer.setClickCallback(onPlayerClick);
         EraRenderer.setStatusCallback(setStatusBar);
         EraRenderer.setMapNameCallback(setMapName);

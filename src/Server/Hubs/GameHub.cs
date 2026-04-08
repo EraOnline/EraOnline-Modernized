@@ -931,6 +931,38 @@ public class GameHub : Hub
     /// <summary>Simple ping to verify the connection works.</summary>
     public string Ping() => "Pong";
 
+    // ===================== Rotation (Turn in Place) =====================
+
+    /// <summary>
+    /// Rotate player heading without moving. VB6: HandleData ">" and "&lt;".
+    /// Shift+Right = rotate clockwise, Shift+Left = rotate counter-clockwise.
+    /// </summary>
+    public async Task Rotate(bool clockwise)
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null) return;
+
+        if (clockwise)
+        {
+            // VB6: Heading + 1, wrap WEST -> NORTH
+            player.Heading++;
+            if (player.Heading > (int)Direction.West) player.Heading = (int)Direction.North;
+        }
+        else
+        {
+            // VB6: Heading - 1, wrap NORTH -> WEST
+            player.Heading--;
+            if (player.Heading < (int)Direction.North) player.Heading = (int)Direction.West;
+        }
+
+        // Broadcast facing change to all players on map (VB6: ChangeUserChar ToMap)
+        var (pw, ps) = GetEquipAnims(player.Character);
+        await Clients.Group(MapGroup(player.Map))
+            .SendAsync("MakeChar", new MakeCharMessage(
+                player.CharIndex, player.Character.Name, player.Character.Body, player.Character.Head,
+                player.Heading, player.X, player.Y, pw, ps));
+    }
+
     // ===================== Combat =====================
 
     /// <summary>
