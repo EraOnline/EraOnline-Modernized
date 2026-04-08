@@ -512,6 +512,19 @@ const EraClient = (() => {
         playSound(`/data/sfx/snd${msg.soundId}.wav`);
     }
 
+    function onDeath(isDead) {
+        // VB6: DEA message — player has died, become a ghost
+        if (isDead) {
+            battleMode = false;
+            const status = document.getElementById('status-bar');
+            if (status) status.textContent = 'You are dead... Find a Priest of Life and type /RESSURECT';
+        } else {
+            // Resurrection
+            const status = document.getElementById('status-bar');
+            if (status) status.textContent = '';
+        }
+    }
+
     // --- Client -> Server ---
 
     function onPlayerMove(direction) {
@@ -695,6 +708,7 @@ const EraClient = (() => {
         connection.on('PlayMusic', onPlayMusic);
         connection.on('PlaySound', onPlaySound);
         connection.on('PlayVoice', onPlayVoice);
+        connection.on('Death', onDeath);
 
         connection.onreconnecting(() => setStatusBar('Reconnecting...'));
         connection.onreconnected(() => setStatusBar('Reconnected'));

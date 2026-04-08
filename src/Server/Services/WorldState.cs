@@ -638,6 +638,12 @@ public class PlayerState
 
     /// <summary>VB6: Flags.Strike — 0 on first encounter, set to 1 after first attack (for backstab)</summary>
     public bool HasStruck { get; set; }
+
+    /// <summary>VB6: Flags.StartHead — original head for resurrection</summary>
+    public int OriginalHead { get; set; }
+
+    /// <summary>VB6: Original body from clothing for resurrection</summary>
+    public int OriginalBody { get; set; }
 }
 
 /// <summary>

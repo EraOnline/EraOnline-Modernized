@@ -196,6 +196,10 @@ public class GameHub : Hub
         var charIndex = _world.AllocateCharIndex();
         var player = _world.AddPlayer(Context.ConnectionId, character, charIndex, map, x, y);
 
+        // Store original appearance for resurrection (VB6: Flags.StartHead)
+        player.OriginalHead = character.Head;
+        player.OriginalBody = character.Body;
+
         // Join the map's SignalR group for broadcasts
         await Groups.AddToGroupAsync(Context.ConnectionId, MapGroup(map));
 
@@ -905,9 +909,14 @@ public class GameHub : Hub
                 Context.Abort();
                 break;
 
+            case "/RESSURECT":
+            case "/RESURRECT":
+                await HandleResurrect(player);
+                break;
+
             case "/HELP":
                 await Clients.Caller.SendAsync("Chat",
-                    new ChatMessage("Commands: /WHO /PLAYERS /STATS /DESC /SAVE /QUIT /HELP", FontType.Info));
+                    new ChatMessage("Commands: /WHO /PLAYERS /STATS /DESC /SAVE /QUIT /RESSURECT /HELP", FontType.Info));
                 await Clients.Caller.SendAsync("Chat",
                     new ChatMessage("Chat: just type to say, - to shout, : to emote, \\name to whisper", FontType.Info));
                 break;
@@ -1325,6 +1334,75 @@ public class GameHub : Hub
         await Clients.Caller.SendAsync("PlayVoice", new PlayVoiceMessage(11));
 
         await SendStats(ch);
+    }
+
+    /// <summary>
+    /// Handle /RESSURECT command. VB6: NpcRessurect (GameLogic.bas:3279).
+    /// Player must be dead and have targeted a Priest of Life (npcType 61) or Healer (npcType 5).
+    /// </summary>
+    private async Task HandleResurrect(PlayerState player)
+    {
+        if (!player.IsDead)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("ARE DOUST PLAYING TRICKS ON ME ? YOU ARE NOT DEAD !", FontType.Talk));
+            return;
+        }
+
+        // Check if player has targeted a Priest of Life or Healer
+        // VB6: Checks NPCtarget (npcType) against Case 61 (Priest of Life) or Case 5 (Healer)
+        var targetTemplate = _gameData.Npcs.FirstOrDefault(n => n.Id == player.TargetNpcIndex);
+        if (targetTemplate == null || (targetTemplate.NpcType != 61 && targetTemplate.NpcType != 5))
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You need to target a Priest of Life first (left-click on one, then type /RESSURECT).", FontType.Info));
+            return;
+        }
+
+        // Check that the targeted NPC is actually nearby (within 2 tiles)
+        bool npcNearby = false;
+        foreach (var npc in _world.GetNpcsOnMap(player.Map))
+        {
+            if (npc.TemplateId == player.TargetNpcIndex &&
+                Math.Abs(npc.X - player.X) <= 2 && Math.Abs(npc.Y - player.Y) <= 2)
+            {
+                npcNearby = true;
+                break;
+            }
+        }
+        if (!npcNearby)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You need to be near a Priest of Life.", FontType.Info));
+            return;
+        }
+
+        // Resurrect!
+        var ch = player.Character;
+        player.IsDead = false;
+
+        // Restore original appearance
+        ch.Body = player.OriginalBody;
+        ch.Head = player.OriginalHead;
+
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage("The priest of life says, You are ressurected. Welcome to the side of the living.", FontType.Talk));
+
+        // Play chorus sound
+        await Clients.Group(MapGroup(player.Map))
+            .SendAsync("PlaySound", new PlaySoundMessage(SoundId.Chorus));
+
+        // Tell client death is over
+        await Clients.Caller.SendAsync("Death", false);
+
+        // Broadcast restored appearance
+        var (pw, ps) = GetEquipAnims(ch);
+        await Clients.Group(MapGroup(player.Map)).SendAsync("MakeChar",
+            new MakeCharMessage(player.CharIndex, ch.Name, ch.Body, ch.Head,
+                player.Heading, player.X, player.Y, pw, ps));
+
+        await SendStats(ch);
+        await SendFullInventory(ch);
     }
 
     // --- Helpers ---

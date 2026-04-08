@@ -225,19 +225,14 @@ public class GameLoopService : BackgroundService
         foreach (var dir in new[] { Direction.North, Direction.East, Direction.South, Direction.West })
         {
             var (dx, dy) = DirectionOffset(dir);
-            int tx = npc.X + dx, ty = npc.Y + dy;
-
-            var player = GetPlayerAt(npc.Map, tx, ty);
+            var player = GetPlayerAt(npc.Map, npc.X + dx, npc.Y + dy);
             if (player == null) continue;
             if (player.IsDead) continue;
 
-            // Face the target
             npc.Heading = (int)dir;
             npc.Target = player.CharIndex;
             await BroadcastNpcFacing(npc);
-
-            // Attack will be handled by combat system (Steps 4-8)
-            // For now, just face and stop moving
+            await NpcAttackUser(npc, player);
             return true;
         }
         return false;
@@ -252,11 +247,12 @@ public class GameLoopService : BackgroundService
             var player = GetPlayerAt(npc.Map, npc.X + dx, npc.Y + dy);
             if (player == null) continue;
             if (player.IsDead) continue;
-            if (player.Character.Criminal != 2) continue; // only attack criminals
+            if (player.Character.Criminal != 2) continue;
 
             npc.Heading = (int)dir;
             npc.Target = player.CharIndex;
             await BroadcastNpcFacing(npc);
+            await NpcAttackUser(npc, player);
             return true;
         }
         return false;
@@ -273,13 +269,13 @@ public class GameLoopService : BackgroundService
             if (player.IsDead) continue;
 
             var race = player.Character.Race;
-            var isCriminal = player.Character.Criminal == 2;
-            if (race != "Human" && race != "Wood Elf" && !isCriminal)
+            if (race != "Human" && race != "Wood Elf" && player.Character.Criminal != 2)
                 continue;
 
             npc.Heading = (int)dir;
             npc.Target = player.CharIndex;
             await BroadcastNpcFacing(npc);
+            await NpcAttackUser(npc, player);
             return true;
         }
         return false;
@@ -393,6 +389,236 @@ public class GameLoopService : BackgroundService
             return player.CharIndex == npc.AttackedBy;
         }
         return true;
+    }
+
+    // === NPC Combat ===
+
+    /// <summary>
+    /// NPC attacks a player. VB6: NPCAttackUser (GameLogic.bas:2160).
+    /// Gated by CanAttack (4000ms timer) and tactics dodge chance.
+    /// </summary>
+    private async Task NpcAttackUser(NpcState npc, PlayerState player)
+    {
+        var ch = player.Character;
+        var callerId = player.ConnectionId;
+
+        // VB6: Guard type 1 won't attack non-criminals
+        if (npc.Guard == (int)GuardType.Normal && ch.Criminal != 2)
+            return;
+
+        // VB6: Chaotic guard (type 2) won't attack dark elves or haakis
+        if (npc.Guard == (int)GuardType.Chaotic)
+        {
+            if (ch.Race == "Dark Elf" || ch.Race == "Haaki")
+                return;
+        }
+
+        // Don't attack dead players
+        if (player.IsDead) return;
+
+        // VB6: CanAttack gate (reset every 4000ms by NpcAttack_Timer)
+        if (!npc.CanAttack) return;
+
+        // VB6: Tactics (Skill6) dodge chance
+        int tacticsSkill = ch.Skills[6];
+        int dodgeChance; // 1 = hit lands, anything else = dodged
+        if (tacticsSkill <= 20)
+        {
+            dodgeChance = 1; // VB6: Luck2=1, RandomNumber(1,1) always = 1, never dodge
+        }
+        else if (tacticsSkill <= 50)
+        {
+            dodgeChance = Random.Shared.Next(1, 3); // 1/2 chance to dodge (VB6: Luck2=2)
+        }
+        else
+        {
+            dodgeChance = Random.Shared.Next(1, 3); // VB6: Luck2=2 for >50 too
+        }
+
+        // Set CanAttack to false regardless of hit/dodge (NPC swung)
+        npc.CanAttack = false;
+
+        // Dodge check
+        if (dodgeChance != 1)
+        {
+            await _hubContext.Clients.Client(callerId).SendAsync("Chat",
+                new ChatMessage($"You evaded {npc.Name}'s attack !", FontType.Info));
+            return;
+        }
+
+        // Calculate damage
+        int hit = Random.Shared.Next(npc.MinHit, npc.MaxHit + 1);
+        hit -= ch.Def / 2;
+        if (hit < 1) hit = 1;
+
+        // Play hurt sound based on gender
+        if (ch.Gender == "Male")
+            await _hubContext.Clients.Group(MapGroup(player.Map))
+                .SendAsync("PlaySound", new PlaySoundMessage(SoundId.MaleHurt));
+        else
+            await _hubContext.Clients.Group(MapGroup(player.Map))
+                .SendAsync("PlaySound", new PlaySoundMessage(SoundId.FemaleScream));
+
+        // NPC attack sound
+        if (npc.Sound > 0)
+            await _hubContext.Clients.Group(MapGroup(player.Map))
+                .SendAsync("PlaySound", new PlaySoundMessage(npc.Sound));
+
+        // Apply damage
+        await _hubContext.Clients.Client(callerId).SendAsync("Chat",
+            new ChatMessage($"{npc.Name} strikes you for {hit} !", FontType.Fight));
+        ch.CurrentHp -= hit;
+
+        // Send updated stats
+        await SendStatsToPlayer(player);
+
+        // Check player death
+        if (ch.CurrentHp <= 0)
+        {
+            await _hubContext.Clients.Group(MapGroup(player.Map))
+                .SendAsync("PlaySound", new PlaySoundMessage(SoundId.MaleHurt));
+            npc.Target = 0;
+
+            await _hubContext.Clients.Client(callerId).SendAsync("Chat",
+                new ChatMessage($"The {npc.Name} has slain you!", FontType.Fight));
+            await _hubContext.Clients.Group(MapGroup(player.Map)).SendAsync("Chat",
+                new ChatMessage($"{ch.Name} has been slain by {npc.Name} !", FontType.Info));
+
+            await UserDie(player);
+        }
+    }
+
+    /// <summary>
+    /// Player death. VB6: UserDie (GameLogic.bas:299).
+    /// Ghost state, drop random item, lose EXP/gold.
+    /// </summary>
+    private async Task UserDie(PlayerState player)
+    {
+        var ch = player.Character;
+        var callerId = player.ConnectionId;
+
+        // Set ghost state
+        player.IsDead = true;
+        ch.Food = 0;
+        ch.Drink = 0;
+
+        // Send death signal to client
+        await _hubContext.Clients.Client(callerId).SendAsync("Death", true);
+
+        // Restore HP/STA/MAN to max (VB6: ghost gets full health)
+        ch.CurrentHp = ch.MaxHp;
+        ch.CurrentMan = ch.MaxMan;
+        ch.CurrentSta = ch.MaxSta;
+
+        await _hubContext.Clients.Client(callerId).SendAsync("Chat",
+            new ChatMessage("You have lost all food and drink", FontType.Fight));
+
+        // Clear criminal status on death
+        if (ch.Criminal == 2)
+        {
+            await _hubContext.Clients.Client(callerId).SendAsync("Chat",
+                new ChatMessage("You are no longer a criminal.", FontType.Info));
+            ch.Criminal = 0;
+            ch.CriminalCount = 0;
+        }
+
+        // Lose EXP (1/6, if level > 3)
+        if (ch.Level > 3)
+        {
+            int loseExp = ch.Exp / 6;
+            ch.Exp -= loseExp;
+            if (ch.Exp < 0) ch.Exp = 0;
+            await _hubContext.Clients.Client(callerId).SendAsync("Chat",
+                new ChatMessage($"You have lost {loseExp} experience !", FontType.Fight));
+        }
+
+        // Lose gold (1/5, if level > 5 and gold > 299)
+        if (ch.Level > 5 && ch.Gold > 299)
+        {
+            int loseGold = ch.Gold / 5;
+            ch.Gold -= loseGold;
+            await _hubContext.Clients.Client(callerId).SendAsync("Chat",
+                new ChatMessage($"You have lost {loseGold} gold !", FontType.Fight));
+        }
+
+        await _hubContext.Clients.Client(callerId).SendAsync("Chat",
+            new ChatMessage("You are dead...", FontType.Fight));
+
+        // Drop a random unequipped item from slots 0-4
+        int dropSlot = Random.Shared.Next(0, 5);
+        var inv = ch.Inventory[dropSlot];
+        if (inv.ObjIndex > 0 && !inv.Equipped)
+        {
+            // Place on ground
+            if (_world.PlaceGroundItem(player.Map, player.X, player.Y, inv.ObjIndex, inv.Amount))
+            {
+                var objDef = _gameData.Objects.FirstOrDefault(o => o.Id == inv.ObjIndex);
+                if (objDef != null)
+                {
+                    await _hubContext.Clients.Group(MapGroup(player.Map)).SendAsync("MakeObj",
+                        new MakeObjMessage(objDef.GrhIndex, player.X, player.Y));
+                }
+            }
+            await _hubContext.Clients.Client(callerId).SendAsync("Chat",
+                new ChatMessage($"You have lost {_gameData.Objects.FirstOrDefault(o => o.Id == inv.ObjIndex)?.Name ?? "an item"} !", FontType.Fight));
+
+            // Remove from inventory
+            inv.ObjIndex = 0;
+            inv.Amount = 0;
+            inv.Equipped = false;
+
+            // Send inventory update
+            await _hubContext.Clients.Client(callerId).SendAsync("InventorySlot",
+                new InventorySlotMessage(dropSlot, 0, "(None)", 0, false, 0, 0));
+        }
+
+        // Change appearance to ghost (body=16, head=5)
+        ch.Body = 16;
+        ch.Head = 5;
+
+        // Exit battle mode
+        player.BattleMode = false;
+
+        // Broadcast ghost appearance to map
+        await _hubContext.Clients.Group(MapGroup(player.Map)).SendAsync("MoveChar",
+            new MoveCharMessage(player.CharIndex, player.X, player.Y, player.Heading));
+        // Send full character change (ghost body/head)
+        await _hubContext.Clients.Group(MapGroup(player.Map)).SendAsync("MakeChar",
+            new MakeCharMessage(player.CharIndex, ch.Name, ch.Body, ch.Head,
+                player.Heading, player.X, player.Y, 2, 2));
+
+        // Restore zone music (exit battle mode music)
+        await SendMapMusicToPlayer(player);
+
+        // Update stats
+        await SendStatsToPlayer(player);
+    }
+
+    /// <summary>Send stats to a specific player (from outside the hub context).</summary>
+    private async Task SendStatsToPlayer(PlayerState player)
+    {
+        var ch = player.Character;
+        await _hubContext.Clients.Client(player.ConnectionId).SendAsync("Stats",
+            new StatsMessage(
+                ch.CurrentHp, ch.MaxHp, ch.CurrentMan, ch.MaxMan,
+                ch.CurrentSta, ch.MaxSta, ch.Gold, ch.Exp, ch.Elu,
+                ch.Food, ch.Drink, ch.MinHit, ch.MaxHit, ch.Def,
+                ch.TrainingPoints, ch.Class, ch.RepRank, ch.Skills));
+    }
+
+    /// <summary>Send zone music to a specific player (for restoring after battle mode on death).</summary>
+    private async Task SendMapMusicToPlayer(PlayerState player)
+    {
+        if (!_gameData.Maps.TryGetValue(player.Map, out var mapDef)) return;
+        var musicStr = mapDef.Music;
+        if (string.IsNullOrEmpty(musicStr)) return;
+        var parts = musicStr.Split('-');
+        if (parts.Length >= 1 && int.TryParse(parts[0], out var musicNum) && musicNum > 0)
+        {
+            var loop = parts.Length < 2 || parts[1] != "0";
+            await _hubContext.Clients.Client(player.ConnectionId)
+                .SendAsync("PlayMusic", new PlayMusicMessage(musicNum, loop));
+        }
     }
 
     /// <summary>Move an NPC and broadcast the movement to all players on the map.</summary>
