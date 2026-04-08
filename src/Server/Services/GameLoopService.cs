@@ -436,5 +436,5 @@ public class GameLoopService : BackgroundService
     };
 
     /// <summary>SignalR group name for a map. Must match GameHub.</summary>
-    private static string MapGroup(int map) => $"map-{map}";
+    private static string MapGroup(int map) => $"map:{map}";
 }
