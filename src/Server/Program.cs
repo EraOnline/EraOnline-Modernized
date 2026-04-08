@@ -26,6 +26,10 @@ var app = builder.Build();
 var gameData = app.Services.GetRequiredService<GameDataService>();
 await gameData.LoadAllAsync();
 
+// Spawn all live NPC instances from map data
+var world = app.Services.GetRequiredService<WorldState>();
+world.SpawnAllNpcs();
+
 app.Logger.LogInformation("WebRootPath: {Path} (exists: {Exists})", app.Environment.WebRootPath, Directory.Exists(app.Environment.WebRootPath));
 
 // Serve all static files from Client.Web/wwwroot

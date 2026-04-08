@@ -30,6 +30,19 @@ public class WorldState
     // VB6: MapData(map, x, y).userindex
     private readonly ConcurrentDictionary<int, ConcurrentDictionary<(int x, int y), int>> _mapOccupancy = new();
 
+    // NPC tile occupancy: map -> (x,y) -> npcIndex. Separate from player occupancy.
+    // VB6: MapData(map, x, y).NpcIndex
+    private readonly ConcurrentDictionary<int, ConcurrentDictionary<(int x, int y), int>> _npcOccupancy = new();
+
+    // All live NPC instances indexed by npcIndex (1-based)
+    private readonly ConcurrentDictionary<int, NpcState> _npcs = new();
+
+    // Per-map NPC lists for efficient iteration during AI tick
+    private readonly ConcurrentDictionary<int, List<NpcState>> _npcsByMap = new();
+
+    // Next NPC index counter
+    private int _nextNpcIndex = 1;
+
     // VB6: MapData(map, x, y).ObjInfo — ground items, one item per tile
     private readonly ConcurrentDictionary<int, ConcurrentDictionary<(int x, int y), GroundItem>> _groundItems = new();
 
@@ -216,6 +229,10 @@ public class WorldState
         if (occ.ContainsKey((x, y)))
             return true;
 
+        // Check NPC occupancy
+        if (IsNpcOnTile(map, x, y))
+            return true;
+
         return false;
     }
 
@@ -319,6 +336,227 @@ public class WorldState
 
         if (totalItems > 0)
             _logger.LogInformation("Loaded {Count} ground items from {Files} map files", totalItems, files.Length);
+    }
+
+    // --- NPC System (VB6: NPCList, OpenNPC, NPCAI, MoveNPCChar) ---
+
+    /// <summary>Spawn all NPCs from map data. Called once at server startup.</summary>
+    public void SpawnAllNpcs()
+    {
+        int totalSpawned = 0;
+        foreach (var (mapId, mapDef) in _gameData.Maps)
+        {
+            foreach (var spawn in mapDef.NpcSpawns)
+            {
+                int x = spawn[0], y = spawn[1], templateId = spawn[2];
+                var template = _gameData.Npcs.FirstOrDefault(n => n.Id == templateId);
+                if (template == null) continue;
+
+                var npc = SpawnNpc(template, mapId, x, y);
+                if (npc != null) totalSpawned++;
+            }
+        }
+        _logger.LogInformation("Spawned {Count} live NPCs across {Maps} maps", totalSpawned, _npcsByMap.Count);
+    }
+
+    /// <summary>Create a live NPC instance from a template. VB6: OpenNPC.</summary>
+    private NpcState? SpawnNpc(NpcDef template, int map, int x, int y)
+    {
+        var npcIndex = Interlocked.Increment(ref _nextNpcIndex);
+        var charIndex = AllocateCharIndex();
+
+        var npc = new NpcState
+        {
+            NpcIndex = npcIndex,
+            CharIndex = charIndex,
+            TemplateId = template.Id,
+            Name = template.Name,
+            Map = map,
+            X = x,
+            Y = y,
+            SpawnMap = map,
+            Heading = template.Heading > 0 ? template.Heading : (int)Direction.South,
+            Body = template.Body > 0 ? template.Body : 1,
+            Head = template.Head > 0 ? template.Head : 0,
+            WeaponAnim = 2, // VB6: default invisible
+            ShieldAnim = 2,
+            CurrentHp = template.MaxHp,
+            MaxHp = template.MaxHp,
+            MinHit = template.MinHit,
+            MaxHit = template.MaxHit,
+            Def = template.Def,
+            Movement = template.Movement,
+            OriginalMovement = template.Movement,
+            Hostile = template.Hostile == 1,
+            OriginalHostile = template.Hostile == 1,
+            Guard = template.Guard,
+            Sound = template.Sound,
+            GiveExp = template.GiveExp,
+            GiveGold = template.GiveGold,
+            DeathObj = template.DeathObj,
+            LootChance = template.LootChance > 0 ? template.LootChance : 1,
+            Level = template.Level,
+            Inventory = template.Inventory ?? [],
+        };
+
+        _npcs[npcIndex] = npc;
+
+        // Add to per-map list
+        var mapList = _npcsByMap.GetOrAdd(map, _ => new List<NpcState>());
+        lock (mapList) { mapList.Add(npc); }
+
+        // Occupy tile
+        SetNpcTileOccupant(map, x, y, npcIndex);
+
+        return npc;
+    }
+
+    // --- NPC Tile Occupancy ---
+
+    private ConcurrentDictionary<(int, int), int> GetNpcMapOccupancy(int map) =>
+        _npcOccupancy.GetOrAdd(map, _ => new());
+
+    private void SetNpcTileOccupant(int map, int x, int y, int npcIndex) =>
+        GetNpcMapOccupancy(map)[(x, y)] = npcIndex;
+
+    private void ClearNpcTileOccupant(int map, int x, int y, int expectedNpcIndex)
+    {
+        var occ = GetNpcMapOccupancy(map);
+        occ.TryRemove(new KeyValuePair<(int, int), int>((x, y), expectedNpcIndex));
+    }
+
+    public bool IsNpcOnTile(int map, int x, int y) =>
+        GetNpcMapOccupancy(map).ContainsKey((x, y));
+
+    public NpcState? GetNpcOnTile(int map, int x, int y)
+    {
+        if (GetNpcMapOccupancy(map).TryGetValue((x, y), out var npcIndex))
+            return _npcs.GetValueOrDefault(npcIndex);
+        return null;
+    }
+
+    public NpcState? GetNpcByIndex(int npcIndex) =>
+        _npcs.GetValueOrDefault(npcIndex);
+
+    public NpcState? GetNpcByCharIndex(int charIndex) =>
+        _npcs.Values.FirstOrDefault(n => n.CharIndex == charIndex);
+
+    /// <summary>Get all live NPCs on a map (for sending to players entering the map).</summary>
+    public IReadOnlyList<NpcState> GetNpcsOnMap(int map)
+    {
+        if (_npcsByMap.TryGetValue(map, out var list))
+            lock (list) { return list.ToList(); }
+        return [];
+    }
+
+    /// <summary>Count players on a map. VB6: MapInfo(map).NumUsers</summary>
+    public int GetPlayerCountOnMap(int map) =>
+        _playersByConnection.Values.Count(p => p.Map == map);
+
+    // --- NPC Movement (VB6: MoveNPCChar) ---
+
+    /// <summary>
+    /// Move an NPC one tile in a direction. Returns true if the move was valid.
+    /// VB6: MoveNPCChar (GameLogic.bas:2651)
+    /// </summary>
+    public bool MoveNpc(NpcState npc, Direction heading)
+    {
+        var (dx, dy) = heading switch
+        {
+            Direction.North => (0, -1),
+            Direction.East => (1, 0),
+            Direction.South => (0, 1),
+            Direction.West => (-1, 0),
+            _ => (0, 0)
+        };
+
+        int newX = npc.X + dx;
+        int newY = npc.Y + dy;
+
+        // VB6: LegalPos check — bounds, blocked tiles, player occupancy, NPC occupancy
+        if (!IsNpcLegalPos(npc.Map, newX, newY, npc.NpcIndex))
+            return false;
+
+        // Update occupancy
+        ClearNpcTileOccupant(npc.Map, npc.X, npc.Y, npc.NpcIndex);
+        npc.X = newX;
+        npc.Y = newY;
+        npc.Heading = (int)heading;
+        SetNpcTileOccupant(npc.Map, newX, newY, npc.NpcIndex);
+
+        return true;
+    }
+
+    /// <summary>
+    /// Check if a position is legal for an NPC to move to.
+    /// VB6: LegalPos (GameLogic.bas:2719) — checks bounds, blocked, player+NPC occupancy.
+    /// </summary>
+    public bool IsNpcLegalPos(int map, int x, int y, int excludeNpcIndex = 0)
+    {
+        if (x < 1 || x > GameConstants.MapWidth || y < 1 || y > GameConstants.MapHeight)
+            return false;
+
+        // Check blocked tiles
+        if (_gameData.Maps.TryGetValue(map, out var mapDef))
+        {
+            var idx = MapDef.TileIndex(x, y);
+            if (idx >= 0 && idx < mapDef.Tiles.Blocked.Length && mapDef.Tiles.Blocked[idx] == 1)
+                return false;
+        }
+
+        // Check player occupancy
+        if (GetMapOccupancy(map).ContainsKey((x, y)))
+            return false;
+
+        // Check NPC occupancy (excluding self)
+        var npcOcc = GetNpcMapOccupancy(map);
+        if (npcOcc.TryGetValue((x, y), out var occupant) && occupant != excludeNpcIndex)
+            return false;
+
+        return true;
+    }
+
+    /// <summary>
+    /// Warp an NPC to a new position (used for death respawn).
+    /// VB6: WarpNPCChar (GameLogic.bas:3101)
+    /// </summary>
+    public void WarpNpc(NpcState npc, int map, int x, int y)
+    {
+        ClearNpcTileOccupant(npc.Map, npc.X, npc.Y, npc.NpcIndex);
+        npc.Map = map;
+        npc.X = x;
+        npc.Y = y;
+        SetNpcTileOccupant(map, x, y, npc.NpcIndex);
+    }
+
+    /// <summary>
+    /// Find direction from source to target position.
+    /// VB6: FindDirection (GameLogic.bas:4140) — faithful port including diagonal bias.
+    /// </summary>
+    public static Direction FindDirection(int srcX, int srcY, int tgtX, int tgtY)
+    {
+        int dx = srcX - tgtX;  // positive = target is west
+        int dy = srcY - tgtY;  // positive = target is north
+        int sx = Math.Sign(dx);
+        int sy = Math.Sign(dy);
+
+        // VB6's exact diagonal resolution:
+        // NE (sx=-1, sy=1) → NORTH
+        // NW (sx=1, sy=1) → WEST
+        // SW (sx=1, sy=-1) → WEST
+        // SE (sx=-1, sy=-1) → SOUTH
+        if (sx == -1 && sy == 1) return Direction.North;
+        if (sx == 1 && sy == 1) return Direction.West;
+        if (sx == 1 && sy == -1) return Direction.West;
+        if (sx == -1 && sy == -1) return Direction.South;
+
+        // Cardinals
+        if (sx == 0 && sy == -1) return Direction.South;
+        if (sx == 0 && sy == 1) return Direction.North;
+        if (sx == 1 && sy == 0) return Direction.West;
+        if (sx == -1 && sy == 0) return Direction.East;
+
+        return Direction.South; // same spot fallback
     }
 
     /// <summary>
@@ -533,4 +771,54 @@ public class GroundItem
 {
     public int ObjIndex { get; set; }
     public int Amount { get; set; }
+}
+
+/// <summary>
+/// Live NPC instance in the world. VB6: NPCList(npcindex).
+/// Each map NPC spawn becomes one NpcState at server startup.
+/// </summary>
+public class NpcState
+{
+    public int NpcIndex { get; init; }         // unique runtime index (1-based like VB6)
+    public int CharIndex { get; init; }        // unique char index for MakeChar (positive, allocated)
+    public int TemplateId { get; init; }       // NPC.dat ID (for looking up static data)
+    public string Name { get; set; } = "";
+    public int Map { get; set; }
+    public int X { get; set; }
+    public int Y { get; set; }
+    public int SpawnMap { get; init; }         // original spawn map (for respawn)
+    public int Heading { get; set; } = (int)Direction.South;
+
+    // Appearance
+    public int Body { get; set; }
+    public int Head { get; set; }
+    public int WeaponAnim { get; set; } = 2;   // 2 = invisible/none
+    public int ShieldAnim { get; set; } = 2;
+
+    // Stats (runtime — reset on death)
+    public int CurrentHp { get; set; }
+    public int MaxHp { get; set; }
+    public int MinHit { get; set; }
+    public int MaxHit { get; set; }
+    public int Def { get; set; }
+
+    // Flags
+    public int Movement { get; set; }          // VB6: NPCList.Movement (1-8)
+    public int OriginalMovement { get; set; }  // restore after combat if was standing/random
+    public bool Hostile { get; set; }          // VB6: NPCList.Hostile
+    public bool OriginalHostile { get; set; }  // restore after combat
+    public int Guard { get; set; }             // VB6: NPCList.Guard (0=none, 1=normal, 2=chaotic)
+    public bool Active { get; set; } = true;   // VB6: Flags.NPCActive
+    public bool CanAttack { get; set; } = true; // reset by 4000ms timer
+    public int Target { get; set; }            // userindex of target player (0=none)
+    public int AttackedBy { get; set; }        // userindex of player who attacked first (0=none)
+    public int Sound { get; set; }             // death/attack sound
+
+    // NPC data for loot/rewards
+    public int GiveExp { get; set; }
+    public long GiveGold { get; set; }
+    public int DeathObj { get; set; }
+    public int LootChance { get; set; }
+    public int Level { get; set; }
+    public NpcInvSlot[] Inventory { get; set; } = [];
 }

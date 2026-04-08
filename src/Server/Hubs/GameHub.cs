@@ -215,24 +215,13 @@ public class GameHub : Hub
                 other.Heading, other.X, other.Y, ow, os));
         }
 
-        // Send NPC spawn positions
-        if (_gameData.Maps.TryGetValue(map, out var mapDef))
+        // Send live NPC positions (not static spawns — NPCs may have moved)
+        foreach (var npc in _world.GetNpcsOnMap(map))
         {
-            foreach (var spawn in mapDef.NpcSpawns)
-            {
-                var npcTemplate = _gameData.Npcs.FirstOrDefault(n => n.Id == spawn[2]);
-                if (npcTemplate != null)
-                {
-                    // Use negative char indices for NPCs to distinguish from players
-                    await Clients.Caller.SendAsync("MakeChar", new MakeCharMessage(
-                        -(spawn[2] * 1000 + spawn[0]), // unique NPC char index
-                        npcTemplate.Name,
-                        npcTemplate.Body > 0 ? npcTemplate.Body : 1,
-                        npcTemplate.Head > 0 ? npcTemplate.Head : 1,
-                        npcTemplate.Heading > 0 ? npcTemplate.Heading : (int)Direction.South,
-                        spawn[0], spawn[1], 2, 2));
-                }
-            }
+            await Clients.Caller.SendAsync("MakeChar", new MakeCharMessage(
+                npc.CharIndex, npc.Name,
+                npc.Body, npc.Head, npc.Heading,
+                npc.X, npc.Y, npc.WeaponAnim, npc.ShieldAnim));
         }
 
         // Send ground items on this map
@@ -364,18 +353,10 @@ public class GameHub : Hub
     /// <summary>Find an NPC at a specific tile position on a map (from spawn data).</summary>
     private (string name, int npcTemplateId)? FindNpcAt(int map, int x, int y)
     {
-        if (!_gameData.Maps.TryGetValue(map, out var mapDef)) return null;
-
-        foreach (var spawn in mapDef.NpcSpawns)
-        {
-            // spawn = [x, y, npcTemplateId]
-            if (spawn[0] == x && spawn[1] == y)
-            {
-                var npc = _gameData.Npcs.FirstOrDefault(n => n.Id == spawn[2]);
-                if (npc != null)
-                    return (npc.Name, npc.Id);
-            }
-        }
+        // Check live NPC instances at this tile
+        var npc = _world.GetNpcOnTile(map, x, y);
+        if (npc != null)
+            return (npc.Name, npc.TemplateId);
         return null;
     }
 
@@ -724,23 +705,13 @@ public class GameHub : Hub
                 other.Heading, other.X, other.Y, ow, os));
         }
 
-        // Send NPC spawns on the new map
-        if (_gameData.Maps.TryGetValue(newMap, out var newMapDef))
+        // Send live NPC positions on the new map
+        foreach (var npc in _world.GetNpcsOnMap(newMap))
         {
-            foreach (var spawn in newMapDef.NpcSpawns)
-            {
-                var npcTemplate = _gameData.Npcs.FirstOrDefault(n => n.Id == spawn[2]);
-                if (npcTemplate != null)
-                {
-                    await Clients.Caller.SendAsync("MakeChar", new MakeCharMessage(
-                        -(spawn[2] * 1000 + spawn[0]),
-                        npcTemplate.Name,
-                        npcTemplate.Body > 0 ? npcTemplate.Body : 1,
-                        npcTemplate.Head > 0 ? npcTemplate.Head : 1,
-                        npcTemplate.Heading > 0 ? npcTemplate.Heading : (int)Direction.South,
-                        spawn[0], spawn[1], 2, 2));
-                }
-            }
+            await Clients.Caller.SendAsync("MakeChar", new MakeCharMessage(
+                npc.CharIndex, npc.Name,
+                npc.Body, npc.Head, npc.Heading,
+                npc.X, npc.Y, npc.WeaponAnim, npc.ShieldAnim));
         }
 
         // Send ground items on the new map
@@ -758,6 +729,7 @@ public class GameHub : Hub
         await Clients.Caller.SendAsync("SetPosition", new SetPositionMessage(newX, newY));
 
         // Play new zone music if different from old zone
+        _gameData.Maps.TryGetValue(newMap, out var newMapDef);
         var newMusic = newMapDef?.Music ?? "";
         if (newMusic != oldMusic)
         {
