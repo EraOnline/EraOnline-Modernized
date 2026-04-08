@@ -1,0 +1,10 @@
+[INIT]
+NumHELPs=1
+
+[HELP1]
+Helpmsg=
+Userindex=
+Time=
+Date=
+Name=
+

@@ -1,0 +1,706 @@
+***********************************************************************
+****9th April, 2000****
+
+Hello once again ! Im Erling Ellingsen, and I have now worked my
+sorry behind too much, to get the BETA PHASE 2 done by now. It took
+time and some delays, but I got there, and I hope you are all grateful.
+Here is a list over the fixes and additions I have done to Era Online
+since last patch. Alot have changed, such as the ownership of Era Online.
+I have sold the ownership so I no longer own it, but i still have the
+same position, which is developing the game. My company, which the game
+is made under, has changed name and it's now called "Fantasia Studios".
+
+WARNING: We have caught alot of bug exploiters. Know that the game is 
+         totally logged. If you find a bug that will help you proccess,
+         others proccess or alike, report it and leave it. Exploit the 
+         bug, and you will be PERMANENTLY BANNED from Era Online.
+
+
+  REMEMBER, REPORT A BUG BY TYPING /BUG 'bug description' !
+
+
+
+* THE BLACK SCREEN BUG IS FIXED ! If you get a black screen
+  when entering the game, type /GFX to fix it ! This command
+  didn't work earlier, it does now. The reason for this isn't
+  really a bug, but a lag problem. The code that draws the map
+  to the client, isn't getting to the client, but by typinh /GFX
+  the code is re-sent to the client.
+
+* New feature ! You can now erase your character(s) by selecting
+  to do so, after clicking ENTER MENATH in the main menu. After
+  erasing the character, you can start a new character with that
+  name if you wish to.
+
+* Sometimes, when you equip weaopons, they won't show inhand on
+  character, unless you equip it twice. If this becomes too common
+  for you, please report it.
+
+* When dying, you loose your criminal status. 
+
+* NPC's should fight back better now.
+
+* Various patching problems should be fixed.
+
+* The body bugs have been fixed.
+
+* You no longer get experience when trading.
+
+* Password bugs fixed.
+
+* When you die, you will or will not lose a random unequipped
+  item.
+
+* Weapons and shields are not unequipped when you die.
+
+* You will no longer get experience when failing in pickpocketing.
+
+* You can longer re-hide to get experience.
+
+* Each race has only one starting city. This is to make players
+  more "packed" and not so spread around the world. Much more fun
+  for a newbie to start some place where other players are.
+
+* You can no longer EARN moiney by trading. Even if your over
+  70 in merchant skill, you will still get a lower price than
+  you bought the item for. We had to do this, because it was
+  getting abused.
+
+* Prices on several items has gone down for various reasons.
+  Many clothing items, are now much cheaper. I suggest a visit
+  to the tailor ! 
+
+* Prices on raw materials (cloth, ore, wood) has gone up for
+  various reasons. If you are going to make items now, the best
+  way to get raw materials would be to GET THEM YOURSELVES instead
+  of buying them in store.
+
+* Raw materials to make certain items, has gone UP.
+
+
+Friendly,
+Erling Ellingsen
+www.eraonline.net
+www.fantasiastudios.com
+
+
+***5th FEBRUARY, 2000***
+
+* LEVEL SYSTEM IS GONE. You still get experience from killing
+  things, but you wont gain levels. The new system is simple 
+  and should discourage power gaming. Once you get so and so 
+  much experience, you get 5 training points and your stats go up.
+  Stats: Hit power, health, stamina, mana etc. So you still got 
+  to gain experience to get better.
+
+* There is a caption on the main view that shows how much
+  experience you have, and how much left before you get upgraded.
+  That is raise stats, given training points etc.
+
+* Game Master abilities have improven GREATLY. Game Masters can
+  for example, now alter NPC`s hailing messages and names. They
+  can also morph into other creatures etc. Game Masters can now
+  create much more, and more entertaining quests !
+
+* Monsters will no longer attack players which is too experienced
+  for them. This is to prevent the common scenario of 5 spiderlings
+  running after a powerful warrior. 
+
+* Experience can now be gained in other ways than killing !
+  You will gain experience from making things (tailoring,
+  carpenting, cooking etc.) and using all other skills as
+  well. We hope this will REALLY discouraging power gaming
+  and players dont have to fight to get good anymore, so 
+  that will make the game less hack n` slash.
+
+* Some races can no longer be certain classes/occupations. This is
+  to create greater balance between the races people play. For 
+  example, Dark Elves cannot play clerics or animal tamers, and
+  Haakis cannot play pirates or fishermen. Humans are the most
+  flexible race to play. Also, CastleFall is the most popular
+  startup city, and you should select this city to start in if
+  you are of the human race. There is always people there to meet.
+
+* You won't always get loot from creatures you killed. The more
+  difficult the monster is, the less chance of finding loot.
+
+* When you are being attacked or others are being attacked, you
+  hear a screaming male or female voice depending on your
+  character gender.
+
+* SCHOOLS OF MAGIC ! The classes which can cast magic is now:
+	-Druids		(NATURE)
+	-Wizards	(DESTRUCTION)
+	-Enchanters	(ENCHANTING)
+	-Paladins	(ENCHANTING)
+	-Clerics	(NATURE)
+	-Healers	(NATURE)
+ 
+ Spells are catagorized in these schools of magic. Your class
+ must be a member of the school of magic the spell is a member
+ of to cast it.
+
+* Added some new spells:
+	-The Ghosty Pain Wind
+	-Necromantic Ressurection
+	-Summon Tiny Pain
+	-Hellfire
+
+* Severe change to skill system. When creating a character, you
+  must select three specialized skills. Only these can go over
+  50 skill points ! Also, lets say your tailoring skill is the
+  highest skill you have, your class will change to tailor, and
+  if lumberjacking is the highest skill you have, your class 
+  will change to woodworker. This goes for almost ALL the skills.
+  You will just ahve to figure out yourself what skill will make
+  you what. This system make players able to change their class
+  in the game (they can pursue careers by working on skills).
+  This is very good, since equipment is class oriented too now !
+
+* The game will not tell you directly how much experience you
+  gain when killing/performing a skill but you will see the
+  caption on your main view change so you know how much experience
+  you gained.
+
+* BIG HOUSE OWNERSHIP UPDATE ! You can now lock your houses ! 
+  To buy a house, locate an architect and buy a house deed of your
+  choice. Read the deed by USING it. It will tell you to mail us
+  so we can place the house for you and stuff like that. Now, when
+  the house is placed, you will get one lock so you can lock your
+  house. Stand in the door and type /LOCK to lock it. Now you are
+  the only person that can move on this position. Type /UNLOCK to
+  unlock the position again. This update was really needed. Now 
+  players can furniture their homes, store goods there, keep animals
+  there and so on, without having to worry about people going inside
+  and stealing !
+
+* SIGNS IMPLENTED. You can now buy signs at any wood worker. When you
+  drop a sign, you cannot pick it up again, so be sure where you want
+  the sign to be, before dropping it. Once dropped, click on it to
+  change its text. The sign will stay there forever, and everyone who
+  click on the sign will see what you typed. This is great for guild
+  signs, and signs outside your home etc.
+
+* Big animal taming update ! Animals you have tamed will now reappear
+  with you when you log in again. You will be greeted by this message:
+  "Your tamed animal looks happy to see you !". In closed beta, you
+  would loose your animal when logging off, this is no longer the 
+  case ! We will also soon make a feature, so your animals can attack
+  the targets you want it to attack. For now, animals cannot help you
+  fight.
+
+* Hiding skill fixed. The skill will make you TOTALLY invisible. There
+  was a problem in closed beta, which made the user`s body visible but
+  not the head.
+
+* You can now hail NPC`s. By targeting any NPC and typing /HAIL the
+  npc will greet you back. If the NPC turns out to be just another
+  common NPC, the NPC will greet you with nothing special. However,
+  if the NPC turns out to have a quest or any other form special
+  tips or information, the NPC will tell you so. Always use the
+  /HAIL command when encountering a new NPC. You won`t belive what
+  you may find. Gamemasters are able to change the hailing messages
+  for NPC`s, so if you have greeted one NPC before, greet the NPC 
+  again, cause the NPC may suddenly have something you really want !
+
+* There is a timer on your criminal flag now. Whenever you break
+  the law (pickpocket and get cought, attacking players etc.) 
+  some minutes will be added to the timer. Like attacking a player
+  will add 45 minutes to the timer, and it will take 45 minutes
+  before you are being unflagged as a criminal. If you commit
+  another crime before the time runs out, the new time will be
+  added to the current time. If you log out, and log back in,
+  the timer will be reset and you will have to "serve" the time
+  from the start again. We need to punish those who brake laws!
+  
+* How much experience you get from using skills and making
+  stuff is still to be tested. We can tweak it until everyone
+  is satisfied with it. You will earn more experience by doing
+  some things, and less doing some other things.
+
+* No more tombstones when dying ! The new system works like this:
+  When a player die, a random item from the players backpack is
+  selected and dropped to the ground where the player died instead
+  of a tombstone. So now the player will have to find the item 
+  again before anyone else finds it.
+
+* No more level restrictions on equipment. BUT there is Health (strength)
+  restrictions. Some weapons, shields and armor need a certain amount of
+  Health to wear ! However, all clothing is free for everyone to use.
+
+* When praying to priests, the gods and goddesses still grant a steady
+  amount of stuff. However, after you reach a certain rate in experience,
+  gold and health they will not grant you anymore.
+
+* Major Merchant Skill/Trading update ! If you have over 70 in merchant
+  skill (remember, only three specialized skills can go over 50 !), you
+  will start EARNING money when selling stuff to NPC`s. That means, you
+  will get more money that the item is worth. Also, you will get items
+  cheaper than what its worth when buying items. This encourage players
+  to be merchants. Buy low and sell high !
+
+* Two new special objects added ! Small Merchant Booth and Grand Merchant
+  Booth. These can be seen in Castlefall centre, and now you can buy one
+  yourself. There is nothing special with these items, but they look cool
+  if you are a merchant. You can drop it, stand behind it and act like a 
+  real merchant ! These two new objects can be found at a woodworker.
+
+* Im working on getting the economy system much better. I want to create
+  a demand and supply system as soon as possible so there is a points in
+  travelling around selling stuff for merchant players.
+
+* All equipment are now class oriented ! That means that some equipment
+  can not be used by some classes. The system is pretty self explanatory.
+  Clerics cannot use heavy armor, warriors can not wear paladin suits,
+  paladins cannot wear drity clothing, mages cannot use heavy swords,
+  thieves cannot use heavy shields etc.
+
+* Titles and names has been abit re-arranged. When clicking on another
+  player the name, title and class will appear like this for example:
+  "Jack The Fameous Woodworker".
+
+* Snow is now implented. There is still a little silly thing, it actually
+  rain and snow in the desert, but lets just say that Menath is a very
+  unstable world ! It will rain in the summer, and snow in the winther.
+
+* Attacking guards will make you a criminal instantly.
+
+* BAN SYSTEM. We needed it badly really. Players can now be banned by
+  GameMasters. When you are banned, you cannot enter the game with 
+  an old character or a new character when banned. GameMasters will 
+  only ban players directly breaking the code of conduct. If you wish
+  to complain on a ban, mail support@eraonline.net
+
+* New credits screen implented. Now much more better looking.
+  Take a look, maybe you are under SPECIAL THANKS TO :)
+
+* Dropping 0 gold coins no longer works.
+
+* Grape Juice, Cyclop Blood Ale and Snake Wine now works.
+
+* Creatures will now give MUCH MUCH more experience. For instance,
+  a grown up cyclop will give you 1200 experience points !
+
+* You will not know how much experience you gain for killing
+  and doing stuff. You will just have to hope that you get
+  much experience from killing so and so. Ask around to find 
+  out what you should kill. Sooner or later, your stats will
+  go up.
+
+* Defence bugs are fixed. Equipping shields, armor etc. and
+  unequipping them now works totally fine.
+
+* Dead players logging back on will have ghost head as well
+  as ghost body. There was a bug that made players have their
+  original heads and ghost body when logging in.
+
+* Dead players will not loose health or stamina in rain.
+
+* Players under level 5 cannot cast destructive spells on
+  players over level 5 and vice versa.
+
+* Hit power of warrior sword has been turned severely down.
+
+* Rusty Paladin Sword, Paladin Sword and Fancy Paladin Sword
+  has now proper hit points.
+
+* Meditation speed should be improved.
+
+* Weapons, shields and clothing displays properly in
+  the character sheet. Even when logging back in.
+
+* The /WHO command is back due to demand. Type /WHO to see
+  names of all players online.
+
+* When clicking on a criminal player, their name will appear
+  in red.
+
+* Skills will not naturally raise themselves until they are 
+  10 or over. This is to make players work more and invest
+  skill points in what they want to really work with.
+
+* Guards are now called Guards instead of Militas.
+
+* Guards will no longer kill non-criminals. This was a big
+  bug, but it is totally fixed now.
+
+* Dark Elf guards are chaotic. They will attack Humans and Wood
+  Elves. Dark Elves guards will also kill criminals of all 
+  races just as the human, wood elf and haaki guards.
+
+* Swordmanship and Tactics are now very valuable. The better 
+  swordmanship skill you have, better is the chance you will
+  hit your foe (no matter what kind of weapon you use). And
+  the better Tactics skill you have, the lesser chance your
+  foe has to hit you.
+
+* Bandages implented. They can be bought from healers. By
+  targeting someone, yourself you want to, and then USING
+  the bandage, you will heal the target abit. The better
+  healing skill you have, the faster laying the bandages goes.
+
+* Evaluating weapons, shields and armor will also tell you 
+  how much hit/defence the item gives you.
+
+* You can now roast fish just as meat.
+
+
+
+*12 NOVEMBER, 1999*
+
+HUGE client side and server side fixes performed !
+Here are the fixes:
+
+* Welcome to the new patch server ! This one is much more 
+  stable and much more faster. 
+
+* Finally guards should be properly fix ! They will no longer
+  attack innocents !
+
+* This will probably make alot of people happy. Now when you are
+  trading with a NPC, the level needed to use the item you have
+  selected is shown in trading window. So now when you buy items,
+  you know which level needed to use it before buying it.
+
+* Food and drink gives you different amounts of it. Drinking
+  water flask add 1 to your drink. Drinking Snake Wine gives
+  you 7 drink. Eating bread gives you 2 food and eating 
+  roasted meat gives you 5 food and so on. 
+
+* You will now regain stamina as well as health when sitting
+  by a camp fire.
+
+* Stamina now heals properly and at a very fast rate actually
+  when drinking, eating or sitting by camp fire.
+
+* Players attacking another player unrightfully (it was not a 
+  duel or the victim wasn`t criminal) will be marked as a 
+  criminal instantly, not when victim dies. This enables the
+  victim to fight back and kill his attacker without being
+  marked as a criminal first.
+
+* Level requierments on some equipment has gone down.
+
+* A new object has been added and its called "Crusade Shield".
+  You must be level 15 to use it and its value is about 
+  11 000 gold.
+
+* There are now animations (you will see it in hand on character)
+  for Devil Sword, Ebony Sword and Staff as well now. 
+  There is also animations for the new Crusade Shield !
+
+* Three new drinks added. Snake Wine which gives you 7 drink,
+  Cyclop Blood Ale which gives you 4 drink and Grape Juice which 
+  gives you 2 drink. The more drink it gives, the higher the
+  price. These new drinks can be found at any barkeeper. 
+
+* New criminal system ! You will not be un-flagged as a criminal
+  when dying anymore ! You will continue to be a criminal when
+  dying if you have killed anyone or in any other way been marked
+  as a criminal. However, your criminal status will be removed
+  half an hour after you become a criminal. You will need to be
+  logged on for 30 minutes to be un-flagged as a criminal, or 
+  else the 30 minutes will start counting over again when logging
+  in again. This is the best way and most other games also uses
+  this system. 
+
+* Added a new option to the menu on client. When you press ESC
+  you can now also choose if you want music on or off !
+
+* No more EXIT signs around the world.
+
+* GHOST BODY ! Players are no longer invisible when dead, they
+  are ghosts.
+
+* There should be no more blackness around certian images.
+
+* The red line in the head slot in character sheet is gone.
+
+* No more experience caps on creatures. You get experience from
+  creatures no matter what level you are.
+
+* Players should die when dropping bellow 0 in health in 
+  player vs player battles.
+
+* Ok loosing skill was nonsence. You do no longer loose skill
+  points when dying no matter what level you are.
+
+* When evaluating items, it will not say how much a shopkeeper
+  would give for it since it will say so in trading window.
+
+* No more negative defence, health and hit values !
+
+* No more max stats ! Players can now gain as much health,
+  hit and defence as they can !
+
+* Game should not crash when not typing in anything in the
+  boxes when depositing or withdrawing gold.
+
+* When logging in to an existing character, the weapon
+  and shield you used when logging off will appear on 
+  character. Also in the slots in your character sheet.
+
+* Images will no longer overlap eachother in trade window
+  and character sheet.
+
+* When dying, your mana, health and stamina is fully restored.
+
+* When going to a healer and type /HEAL, the amount the healer
+  will charge is based on your level:
+
+  Level 1 = 50 gold
+  Level 2 = 60 gold
+  Level 3 = 70 gold
+  Level 4 = 80 gold
+  
+  All the way until level 30. From 30 and up the price is steady
+  at 350 gold for full heal.
+
+* No more meditation auras lying around. You cannot quit the game
+  without exiting the meditation first.
+
+* Harder reputation punishment when killing players.
+
+* Furniture players have put on ground can no longer be picked
+  up. So for players furnituring their home, be sure to place 
+  the furniture where you want it, because your cannot pick it
+  up again !
+
+* Militas (guards) now have weapons and shields equipped.
+
+* Praying to priests or priestesses (not priest of life) will
+  maybe get you some miracles granted by its god depending on
+  your religion skill. It will say "You start to pray..." if
+  you target a priest or priestess, but if it dosnt say that
+  you have ben granted a miracle, you were not successful.
+
+Friendly,
+Erling Ellingsen
+Spotlight Studios Administrator
+Era Online Project Leader
+
+
+***********************************************************************
+*5 NOVEMBER, 1999*
+
+Here are the leatest fixes and additions !
+
+* NPC attacking system changed. They should now properly
+  fight back. Again, time will tell.
+
+* Some problems with the rain fixed. Sometimes it said
+  "The Rain Stop..." without it raining.
+
+* When leveling up, you gain 15 mana points raise.
+
+* Lets say you have 5 meat equipped and cook it, it will
+  make 5 roasted meat instead of just one and the other
+  ones deleted.
+
+* Monsters and animals loot won`t be placed where players
+  cant get them (upon walls, water etc.).
+
+* The "you hit x on the legs,head,chest,arms" has been removed
+  because it looked stupid when it said "You hit a snake on the legs."
+
+* You only loose 1/6 of your experience when dying.
+
+Please keep reporting bugs on the board. They are ALL read. And
+almost every single bug thats reported there, has been fixed now.
+Remember, YOU make a difference. Report bugs !
+
+Friendly,
+Erling Ellingsen
+Era Online Development Team
+
+
+***********************************************************************
+*3 NOVEMBER, 1999*
+
+Server fixes and additions made today ! Here is a list
+over all the noticeable changes:
+
+* IF YOU CANNOT SEEM TO HIT YOUR FOE DO THIS:
+  Hold in SHIFT and press right or left, you will then turn
+  a direction. Now turn back and face the foe and you should hit it.
+
+* Less raining.
+
+* When training in MAGERY SKILL, you will get 3 mana points for
+  every skill point you gain in magery. This ONLY works when
+  training at a professional trainer. Mana still also raises
+  when leveling up.
+
+* When leveling up, these attribute changes take effect:
+
+  -You get 7 more mana points
+  -You get 2 more hit points
+  -You get 2 more health points
+  -You get 2 more stamina points
+
+  Ofcourse the attribute caps are still there and are:
+
+  MAX LEVEL    = 50
+  MAX HEALTH   = 200
+  MAX STAMINA  = 200
+  MAX MANA     = 2000
+  MAX HIT      = 50
+  MAX DEFENCE  = 20
+
+* NPC`s should now properly fight back.
+
+* NPC`s arnt that fast to follow players anymore.
+
+* Players over level 5 can now be attacked by other players
+  over level 5 ! It used to be level 10 but we thought it was
+  to high. For now this is just a test, if it dosn`t work we
+  put it back to level 5.
+
+* There were a bug which let people under level 5 attack 
+  players over level 5, but not the other way around. It 
+  is now fixed. Players under cannot attack players over 
+  level 5.
+
+* Guards may still attack innocent players. We dont know why
+  so far. But follow our advice for now, dont go near them. 
+  Walk around them and not right beside them. 
+
+* Bandits no longer drop exit signs.
+
+* A new spell has been added ! The "Ressurection Spell".
+  It can be bought at all wizards and mages. 300 mana 
+  requiered to cast the spell.
+
+* Spell scrolls no longer have spider leg graphics. There 
+  is now a spell scroll graphic.
+
+* Consider (targeting something and pressing TAB) now works.
+
+* Spell descriptions in spell book, now also tells you how
+  much mana needed to cast it.
+
+* You cannot cast destructive spells when dead. This is to 
+  avoid players killing creatures or players as ghosts.
+
+I know there are some map problems on the elven continent, and 
+they will all be corrected by the end of the week.
+
+Friendly,
+Erling Ellingsen
+Era Online Development Team
+
+***********************************************************************
+*31 OCTOBER, 1999*
+
+* Dropping gold now WORKS. When dropping any amount of gold, 
+  it will be the amount the other one pickup.
+
+* Removed the STEEL SKIN spell cause everyone was abusing it.
+  I met a level 2 player with 200 health !
+
+* Mana drain spell is fixed. It will now DRAIN 20 mana instead
+  of GIVING 20 mana.
+
+* NPC`s can and will now die of spells casted on them. Casting
+  spells on guards, will make you a criminal and they will hunt
+  you down and kill you. 
+
+* Shopkeepers will sell to anyone, regardless their reputation.
+
+* Guards won`t follow players will low reputation. This became
+  too frustrating.
+
+* Dying is less painful. You will now only loose 1/5 of the
+  experience you have when dying.
+
+* Only players over level 6 will loose skill points when
+  dying.
+
+* Fixed the bug where some spells didn`t substract mana.
+
+* Destructive spells cannot be casted on players under level 10. 
+
+* Clerics begin with a healing spell now.
+
+* Leveling up is a bit easier.
+
+* House prices have gone severely down.
+
+* Level requierments for some items has gone down.
+
+* All classes start with 5 breads, 5 water flasks, a piece of
+  clothing, a rusty dagger and a priest of life letter. But some
+  classes will get some extra items too. Like blacksmiths will 
+  start with some ore, drawings, and a hammer.
+
+* All classes start with 100 gold.
+
+* Bugs in some heads should be fixed.
+
+* Value on some loot has gone up.
+
+* The chance of the rain starting to fall in the game now, is
+  1 to 200 every minute. Rain should be less frequent.
+
+***********************************************************************
+*October 28th, 1999*
+
+* The WIZARD class is added ! Nothing special about it, but it has
+  some war skills and is a good spell caster. The one that
+  starts with most mana.
+
+* NPC`s stats are properly reset when they die.
+
+* NPC`s arnt broke anymore. That was a complicated bug but I
+  managed to fix it. However, NPC`s only have limited amount
+  of money (they start with about 10 000) and they will gain money
+  when they sell and lose money when the buy. So they can still
+  get broke, but if people keep selling to them, they will start
+  getting money again. Good economy system :)
+
+* NPC`s will say what they will give or take for the item when
+  you are trading with them (no need to use evaluate to find out).
+
+* Paladins will start with two spells in their spell book.
+
+* Depositing and withdrawing gold from banks is easier now. You
+  now longer have to click the + button 100 times to deposit 100
+  gold for instance. Its now just a field where you can type in
+  how much gold you want to deposit or withdraw. This also goes
+  for dropping gold and donating.
+
+* Dropping gold should be fixed.
+
+* Empty spell book bug is fixed.
+
+* Some spell fixes has been done.
+
+* Players will still loose 1 skill point on each skill when they
+  die, but only for players over level 5.
+
+* We went back to the old player positioning in the world system,
+  and players will NOT appear exactly where the quitted when they
+  log in, they will just a appear on the same map. So please check
+  if it is the same map you logged out on before reporting any
+  warping bugs :) To check type /STATS
+
+* Reputation is more balanced. It will take alot of more work to 
+  achive any of the different reputation ranks, either positive or
+  negative.
+
+* NPC`s will not trade with you, if your reputation is too low.
+
+* The "The Unknown" reputation rank dosn`t exist anymore. I took it
+  away because it looked stupid. Players that dosn`t have either 
+  positive or negative reputation alignment will not have "The Unknown"
+  infront of their names anymore.
+
+* When you have a target, and pressing TAB, the game will tell
+  you how much health the target has left, and also its hit points.
+
+* Some minor trade skill fixes.
+
+* Pickpocketing works better now. Victims get a "you have been
+  stolen from" message when someone steals from them. Also, 
+  equipped items cannot be pickpocketed.
+

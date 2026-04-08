@@ -1,0 +1,21 @@
+[INIT]
+Name=Government Of Menath
+ClanNum=1
+Members=1
+Allies=0
+Enemies=0
+Monarch=Emperor
+Experience=100
+Gold=100
+
+
+[MEMBERS]
+Member1=Emperor
+MemberRank1=Monarch
+
+[ALLIES]
+Ally1=None
+
+[ENEMIES]
+Enemy1=None
+

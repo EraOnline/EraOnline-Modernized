@@ -1,0 +1,34 @@
+Commands:
+---------
+
+/JOIN				
+
+MONARCH:
+********
+
+/MAKECLAN 'clanname'		X
+/DISBANDCLAN			X
+/WITHDRAWGOLD 'amount'		X
+/DEPOSITGOLD 'amount'		X
+/STARTWAR 'clanname'
+/ENDWAR 'clanname'
+/STARTALLY 'clanname'
+/ENDALLY 'clanname'
+/CLANDESC 'description'
+
+NOBLE:
+******
+
+/INVITE 'playername'		X
+/EJECT 'playername'
+/CLANINFO			X
+/ADDRANK 'playername'		X
+
+
+Ranks:
+
+5=Monarch
+4=Noble
+3=Knight
+2=Journeyman
+1=Peasant

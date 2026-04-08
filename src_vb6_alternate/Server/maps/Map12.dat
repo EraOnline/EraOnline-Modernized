@@ -1,0 +1,9 @@
+[Map12]
+Name=
+MusicNum=3
+Guarded=1
+StartPos=12-10-10
+NorthExit=48
+SouthExit=119
+WestExit=11
+EastExit=13

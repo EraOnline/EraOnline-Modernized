@@ -1,0 +1,18 @@
+This is the file accessed by the '?' button in XME.
+Edit Grh1.txt to store whatever notes or information 
+you need to quickly access while map editting. My file 
+stores an index of my Grh's as can be seen below:
+
+* Graphics 
+-Grass/NarrowRoads 10-23 
+-Grass/Water Edges 20+
+-Trees/Plants/Etc 100+ 
+-Water 300+ 
+-Houses 1000+ 
+-Characters 2000+ 
+-Heads 2900+ 
+* Animations
+-Character 1 3000+ 
+-Water 3500+ 
+* Special
+-Exit 1 

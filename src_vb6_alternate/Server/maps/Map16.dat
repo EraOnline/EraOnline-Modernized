@@ -1,0 +1,9 @@
+[Map16]
+Name=
+MusicNum=4-1
+Guarded=1
+StartPos=16-10-10
+NorthExit=140
+SouthExit=15
+WestExit=0
+EastExit=110

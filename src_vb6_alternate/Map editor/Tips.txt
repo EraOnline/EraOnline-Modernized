@@ -1,0 +1,69 @@
+[INIT]
+NumTIPs=21
+
+[TIP1]
+Tip=Right click on the view to display the toolbox.
+
+[TIP2]
+Tip=Erase a layer by typing the layer number in the layer box and then select ERASE LAYER.
+
+[TIP3]
+Tip=Layer 3 does not exist anymore. It is used for rain animations. To view rain on your map, select VIEW RAIN.
+
+[TIP4]
+Tip=You can walk around seeing a character, by clicking WALK MODE.
+
+[TIP5]
+Tip=To place a GRH randomly around the map, open the toolbox and find the GRH of your choice. Then type in how many of th grh to place and then press PLACE GRH RANDOMLY. As many as you wanted of the GRH will be placed randomly around the map.
+
+[TIP6]
+Tip=Place a NPC randomly around somewhere on the map, by opening toolbox and selecting a NPC, then click PLACE RANDOMLY.
+
+[TIP7]
+Tip=To block all GRH of a certain type on the map, open the toolbox and look at the bottom of it. Type in what GRH to block and then press PROCEED. All GRH`s of this type will be decleared as blocked.
+
+[TIP8]
+Tip=Blocked means that no-one (NPC or PLAYERS) can walk on that tile.
+
+[TIP9]
+Tip=Only use layer 2 when placing graphics that is big and has black stuff around it. Players will not be able to walk on these tiles, cause their character will appear under it. Used for trees, houses and so on.
+
+[TIP10]
+Tip=To make a new map, simply clear a already made map with a GRH and begin making the map. When done, select SAVE AS NEW MAP on the menu and the map will be saved as a new one, not overwriting the last.
+
+[TIP11]
+Tip=To clear a map or a border with a GRH, select in the toolbox what GRH to clear with and then select Clear Map or clear any of the borders from the OPTIONS menu.
+
+[TIP12]
+Tip=There is no undo yet in the game, so be careful ! Save often !
+
+[TIP13]
+Tip=To show what tiles that are blocked, click SHOW BLOCKED TILES and all blocked tiles will appear with a red dot over them.
+
+[TIP14]
+Tip=To make tile placing easier, select DRAW GRID to see a grid.
+
+[TIP15]
+Tip=You can use different scrolls speed ! Just select the speed you want, but please note that this will look bad when in walk mode.
+
+[TIP16]
+Tip=You can draw in two different sizes. Small and big. Small will cover only one tile, while big will cover some more. For some reason, the program may sometimes crash when using BIG.
+
+[TIP17]
+Tip=Wondering what the box bellow the view is ? Thats for future expansions !
+
+[TIP18]
+Tip=Dont place too many NPC`S ! This may cause lag in the game. Keep the number of NPC`S down to a minimum.
+
+[TIP19]
+Tip=Use your imagination ! Great wonders can be built out of simple tiles ! This works quite alot like LEGO !
+
+[TIP20]
+Tip=Save often ! Crashes may happen when you least know it !
+
+[TIP21]
+Tip=Avoid placing too many large graphics on one area cause that may cause the game to slow down in that area. Examples: Big trees and houses.
+
+
+
+

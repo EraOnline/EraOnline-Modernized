@@ -1,0 +1,5 @@
+[INIT]
+NumCLANs=1
+
+[CLAN1]
+Name=Government Of Menath

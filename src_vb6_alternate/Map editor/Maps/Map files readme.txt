@@ -1,0 +1,1 @@
+Get the mapfiles from Server\Maps

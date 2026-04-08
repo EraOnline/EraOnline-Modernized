@@ -1,0 +1,8 @@
+ÿóSend emegency message to all players: /EMSG 'message'
+Send system message to all players:     /SMSG 'message'
+Receive server time:                               /TIME
+Get position of a player:                         /WHEREIS 'name'
+Approach player:                                    /APPROACH 'name'
+Summon a player to you:                       /SUMMON 'name'
+Kick a player out of the game:               /BOOT 'name'
+Summon NPC to you:                             /SUMMONNPC 'npc index'

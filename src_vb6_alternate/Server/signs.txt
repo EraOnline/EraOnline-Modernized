@@ -1,0 +1,5 @@
+[INIT]
+NumSIGNs=1
+
+[SIGN1]
+Content=This is a test

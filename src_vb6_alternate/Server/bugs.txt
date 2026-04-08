@@ -1,0 +1,7 @@
+[INIT]
+NumBUGs=1
+
+[BUG1]
+Description=Cleared
+Posted By=Test
+

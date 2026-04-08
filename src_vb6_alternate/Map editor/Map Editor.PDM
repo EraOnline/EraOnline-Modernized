@@ -1,0 +1,71 @@
+[Root]
+Most Recent Package=Dep File 1
+
+
+[Package|Dep File 1|Root]
+SubWizProgID=PDWizard.DepPkgSubWiz
+BuildFolder=C:\Erling\prosjekt\My Programs\Directx version\Map Editor
+
+[Package|Dep File 1|Configure DAO ISAMs]
+Applicable=No
+
+[Package|Dep File 1|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|Dep File 1|Files Found]
+
+[Package|Dep File 1|Files Released]
+
+[Package|Dep File 1|Missing Dependency Information]
+C:\WINDOWS\SYSTEM\win32.tlb=
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=
+
+[Package|Dep File 1|Out-of-Date Dependency Information]
+
+[Package|Dep File 1|Files Added]
+
+[Package|Dep File 1|Files Removed]
+
+[Package|Dep File 1|Files In Project]
+C:\Erling\prosjekt\My Programs\Directx version\Map Editor\Map Editor.exe=Yes
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=Yes
+C:\WINDOWS\SYSTEM\OLEAUT32.DLL=Yes
+C:\WINDOWS\SYSTEM\OlePro32.dll=Yes
+C:\WINDOWS\SYSTEM\AsycFilt.dll=Yes
+C:\WINDOWS\SYSTEM\STDOLE2.TLB=Yes
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=Yes
+C:\WINDOWS\SYSTEM\win32.tlb=Yes
+
+[Package|Dep File 1|Configure Registry Files]
+Applicable=
+
+[Package|Dep File 1|Configure Remote Servers]
+Applicable=
+
+[Package|Dep File 1|Install Locations]
+C:\Erling\prosjekt\My Programs\Directx version\Map Editor\Map Editor.exe=$(AppPath)
+C:\WINDOWS\SYSTEM\MSVBVM60.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\OLEAUT32.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\OlePro32.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\AsycFilt.dll=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\STDOLE2.TLB=$(WinSysPathSysFile)
+C:\Erling\programmer\vb6files\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM\DIRECTX6.TLB=$(WinSysPath)
+C:\WINDOWS\SYSTEM\win32.tlb=$(WinSysPath)
+
+[Package|Dep File 1|Configure Shared Files]
+Applicable=
+
+[Package|Dep File 1|DepFile]
+DepCabFile=Map Editor.CAB
+DepCabRun=Map Editor.INF
+
+[Package|Dep File 1|Package]
+PackageFolder=C:\Erling\prosjekt\My Programs\Directx version\Map Editor
+ProjectFolder=C:\Erling\prosjekt\My Programs\Directx version\Map Editor
+ServerSideCab=
+File1=C:\Erling\prosjekt\My Programs\Directx version\Map Editor\Map Editor.DEP
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz

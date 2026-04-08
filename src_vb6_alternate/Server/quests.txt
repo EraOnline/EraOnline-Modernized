@@ -1,0 +1,18 @@
+[INIT]
+NumQUESTs=1
+
+'Quest Types:
+'1=Deliver
+'2=Kill creature
+'3=Get
+
+[QUEST1]
+Type=1
+Item=5
+Sender=Vladir Voormood
+Reciver=Medijosa Savejr
+RewardItem=0
+RewardExp=0
+RewardGold=200
+SenderMsg=
+ReciverMsg=

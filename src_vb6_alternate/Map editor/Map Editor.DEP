@@ -1,0 +1,30 @@
+[Version]
+Version=1.0.0.0
+
+[Map Editor.exe <0009>]
+Dest=$(AppPath)
+Date=27.09.99
+Time=18:22
+Version=1.0.0.0
+CABFilename=Map Editor.CAB
+CABINFFile=Map Editor.INF
+Uses1=MSVBVM60.DLL
+Uses2=OLEAUT32.DLL
+Uses3=OlePro32.dll
+Uses4=AsycFilt.dll
+Uses5=STDOLE2.TLB
+Uses6=COMCAT.DLL
+Uses7=DIRECTX6.TLB
+Uses8=win32.tlb
+
+[DIRECTX6.TLB <0009>]
+Dest=$(WinSysPath)
+Date=30.12.98
+Time=18:01
+Version=0.0.0.0
+
+[win32.tlb <0009>]
+Dest=$(WinSysPath)
+Date=12.09.98
+Time=10:32
+Version=0.0.0.0

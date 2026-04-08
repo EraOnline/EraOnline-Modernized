@@ -1,0 +1,58 @@
+[INIT]
+NumShieldAnims=8
+
+'Round Iron Shield
+[ShieldAnim1]
+ShieldWalk1=7005
+ShieldWalk2=7007
+ShieldWalk3=7004
+ShieldWalk4=7006
+
+'No shield
+[ShieldAnim2]
+ShieldWalk1=7009
+ShieldWalk2=7011
+ShieldWalk3=7008
+ShieldWalk4=7010
+
+'Round Wooden Shield
+[ShieldAnim3]
+ShieldWalk1=7017
+ShieldWalk2=7019
+ShieldWalk3=7016
+ShieldWalk4=7018
+
+'Crown Shield Without Inscription
+[ShieldAnim4]
+ShieldWalk1=7025
+ShieldWalk2=7027
+ShieldWalk3=7024
+ShieldWalk4=7026
+
+'Crown Shield With Inscription
+[ShieldAnim5]
+ShieldWalk1=7029
+ShieldWalk2=7031
+ShieldWalk3=7028
+ShieldWalk4=7030
+
+'Ebony Sword
+[ShieldAnim6]
+ShieldWalk1=7069
+ShieldWalk2=7071
+ShieldWalk3=7068
+ShieldWalk4=7070
+
+'Royal Shield
+[ShieldAnim7]
+ShieldWalk1=7073
+ShieldWalk2=7075
+ShieldWalk3=7072
+ShieldWalk4=7074
+
+'Devil Shield
+[ShieldAnim8]
+ShieldWalk1=7077
+ShieldWalk2=7079
+ShieldWalk3=7076
+ShieldWalk4=7078

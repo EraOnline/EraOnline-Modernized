@@ -1,0 +1,8 @@
+[Map200]
+Name=
+MusicNum=14-1
+StartPos=200-10-10
+SouthExit=201
+NorthExit=199
+WestExit=196
+EastExit=205
