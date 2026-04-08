@@ -2,9 +2,9 @@
 
 ## Current State
 
-**Phase 4 nearly complete.** Live NPC AI with 8 movement patterns, full combat system (player attacks NPC, NPC attacks player), death/ghost state, resurrection at Priest of Life, level-up system. Next: NPC trading, Consider (TAB), give item to player.
+**Phase 4 complete.** Live NPC AI with 8 movement patterns, full combat system (player attacks NPC, NPC attacks player), death/ghost state, resurrection at Priest of Life, level-up system, Consider (TAB). Next: Phase 5 — NPC trading, training, crafting, banking.
 
-Most recent log: [2026-04-07](logs/2026-04-07.md)
+Most recent log: [2026-04-08](logs/2026-04-08.md)
 
 ---
 
@@ -75,7 +75,6 @@ Combat, items, NPCs, death. The game becomes playable.
 - [x] Food and drink consumption (use from inventory, affects stats)
 - [x] Left-click: inspect tile contents (items, NPCs, players - name, description)
 - [x] Ground items: drop to ground with sprite, pick up with G key, persist across restarts
-- [ ] Inventory: give item to another player
 - [x] NPC AI: 2754 live NPC instances spawned at startup, 8 movement patterns (stand, random walk, hostile chase 10 tiles, guard chase criminals, beggar follow, tamed follow, short-range hostile 3 tiles, chaotic guard patrol)
 - [x] NPC AI: 2 guard types (1=normal attack criminals, 2=chaotic attack humans+wood elves+criminals)
 - [x] NPC AI: hostile detection range, level-gating (CheckIfAttack: player level > NPC level + 4 = don't chase)
@@ -95,7 +94,7 @@ Combat, items, NPCs, death. The game becomes playable.
 - [x] Ghost state: ghost body/head, ghost speech (from Phase 3), status bar guidance
 - [x] Resurrection: /RESSURECT (and /RESURRECT) at Priest of Life (npcType 61) or Healer (npcType 5), within 2 tiles, restores original appearance, chorus sound
 - [x] Level-up: CheckUserLevel on kill (EXP >= ELU triggers +1 level, +5 training points, stat boosts, ELU scaling 2.0x-1.4x by bracket, spell effect sound + voice)
-- [ ] Consider (TAB): view target's HP/hit
+- [x] Consider (TAB): view target's HP/hit power for NPCs and players
 
 **Milestone:** Can fight a troll outside Castlefall, die, become a ghost, find a Priest of Life, resurrect, go back and kill the troll, pick up loot, equip dropped weapon.
 

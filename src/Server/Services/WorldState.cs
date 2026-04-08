@@ -624,7 +624,7 @@ public class PlayerState
     public int ShieldEqpSlot { get; set; } = -1;
     public int HeadEqpSlot { get; set; } = -1;
 
-    /// <summary>VB6: UserList.NpcIndex / NPCtarget — currently targeted NPC index</summary>
+    /// <summary>VB6: UserList.Npcindex — live NPC instance index of currently targeted NPC</summary>
     public int TargetNpcIndex { get; set; }
 
     /// <summary>VB6: UserList.UserTargetIndex — currently targeted player char index</summary>

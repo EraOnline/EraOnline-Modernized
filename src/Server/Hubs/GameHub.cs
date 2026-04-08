@@ -320,7 +320,7 @@ public class GameHub : Hub
             await Clients.Caller.SendAsync("Target", new TargetMessage(foundNpc.Value.name));
             await Clients.Caller.SendAsync("Chat",
                 new ChatMessage($"You target {foundNpc.Value.name}.", FontType.Talk));
-            player.TargetNpcIndex = foundNpc.Value.npcTemplateId;
+            player.TargetNpcIndex = foundNpc.Value.npcIndex;
             player.TargetPlayerCharIndex = 0;
             foundSomething = true;
         }
@@ -354,13 +354,13 @@ public class GameHub : Hub
         return _world.GetPlayersOnMap(map).FirstOrDefault(p => p.X == x && p.Y == y);
     }
 
-    /// <summary>Find an NPC at a specific tile position on a map (from spawn data).</summary>
-    private (string name, int npcTemplateId)? FindNpcAt(int map, int x, int y)
+    /// <summary>Find a live NPC instance at a specific tile position on a map.</summary>
+    private (string name, int npcIndex)? FindNpcAt(int map, int x, int y)
     {
         // Check live NPC instances at this tile
         var npc = _world.GetNpcOnTile(map, x, y);
         if (npc != null)
-            return (npc.Name, npc.TemplateId);
+            return (npc.Name, npc.NpcIndex);
         return null;
     }
 
@@ -996,6 +996,49 @@ public class GameHub : Hub
     }
 
     /// <summary>
+    /// Consider target. VB6: HandleData "COO" -> Consider (GameLogic.bas:6784).
+    /// Shows target's HP and hit power via chat messages.
+    /// </summary>
+    public async Task Consider()
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null || player.IsDead) return;
+
+        // Consider NPC
+        if (player.TargetNpcIndex > 0)
+        {
+            var npc = _world.GetNpcByIndex(player.TargetNpcIndex);
+            if (npc != null)
+            {
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"You look at {npc.Name}...", FontType.Info));
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"You assume the health of your target is {npc.CurrentHp}/{npc.MaxHp}", FontType.Info));
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"You assume its hit power would be about {npc.MaxHit} points...", FontType.Info));
+                return;
+            }
+        }
+
+        // Consider player
+        if (player.TargetPlayerCharIndex > 0)
+        {
+            var other = _world.GetPlayerByCharIndex(player.TargetPlayerCharIndex);
+            if (other != null)
+            {
+                var ch = other.Character;
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"You look at {ch.Name}...", FontType.Info));
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"You assume the health of your target is {ch.CurrentHp}/{ch.MaxHp}", FontType.Info));
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"You assume its hit power would be about {ch.MaxHit} points.", FontType.Info));
+                return;
+            }
+        }
+    }
+
+    /// <summary>
     /// Player attack. VB6: HandleData "ATT" -> UserAttack.
     /// Server-authoritative: checks battle mode, cooldown, finds target from facing direction.
     /// </summary>
@@ -1383,7 +1426,10 @@ public class GameHub : Hub
 
         // Check if player has targeted a Priest of Life or Healer
         // VB6: Checks NPCtarget (npcType) against Case 61 (Priest of Life) or Case 5 (Healer)
-        var targetTemplate = _gameData.Npcs.FirstOrDefault(n => n.Id == player.TargetNpcIndex);
+        var targetNpc = _world.GetNpcByIndex(player.TargetNpcIndex);
+        var targetTemplate = targetNpc != null
+            ? _gameData.Npcs.FirstOrDefault(n => n.Id == targetNpc.TemplateId)
+            : null;
         if (targetTemplate == null || (targetTemplate.NpcType != 61 && targetTemplate.NpcType != 5))
         {
             await Clients.Caller.SendAsync("Chat",
@@ -1392,17 +1438,8 @@ public class GameHub : Hub
         }
 
         // Check that the targeted NPC is actually nearby (within 2 tiles)
-        bool npcNearby = false;
-        foreach (var npc in _world.GetNpcsOnMap(player.Map))
-        {
-            if (npc.TemplateId == player.TargetNpcIndex &&
-                Math.Abs(npc.X - player.X) <= 2 && Math.Abs(npc.Y - player.Y) <= 2)
-            {
-                npcNearby = true;
-                break;
-            }
-        }
-        if (!npcNearby)
+        if (targetNpc!.Map != player.Map ||
+            Math.Abs(targetNpc.X - player.X) > 2 || Math.Abs(targetNpc.Y - player.Y) > 2)
         {
             await Clients.Caller.SendAsync("Chat",
                 new ChatMessage("You need to be near a Priest of Life.", FontType.Info));

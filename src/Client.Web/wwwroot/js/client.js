@@ -797,6 +797,11 @@ const EraClient = (() => {
                 e.preventDefault();
                 connection.invoke('Attack').catch(() => {});
             }
+            // TAB = consider target (VB6: KeyCode = vbKeyTab → SendData "COO")
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                connection.invoke('Consider').catch(() => {});
+            }
         });
 
         // Pre-connect to server in the background (don't wait)
