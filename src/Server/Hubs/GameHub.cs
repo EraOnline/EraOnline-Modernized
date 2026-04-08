@@ -922,6 +922,411 @@ public class GameHub : Hub
     /// <summary>Simple ping to verify the connection works.</summary>
     public string Ping() => "Pong";
 
+    // ===================== Combat =====================
+
+    /// <summary>
+    /// Toggle battle mode. VB6: HandleData "BTL" -> OpenBattlemode/EndBattlemode.
+    /// Plays battle music (Mus5) on enter, restores zone music on exit.
+    /// </summary>
+    public async Task ToggleBattleMode()
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null || player.IsDead) return;
+
+        player.BattleMode = !player.BattleMode;
+
+        if (player.BattleMode)
+        {
+            // VB6: OpenBattlemode
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You prepear for attack !", FontType.Info));
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("If you seem to be unable to hit your opponent, hold in ALT and press any cursor then opposite cursor afterwards to turn back to the opponent.", FontType.Info));
+            // Play battle music (Mus5)
+            await Clients.Caller.SendAsync("PlayMusic", new PlayMusicMessage(5, true));
+        }
+        else
+        {
+            // VB6: EndBattlemode — restore zone music
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You have left battlemode.", FontType.Info));
+            await SendMapMusic(player.Map);
+        }
+    }
+
+    /// <summary>
+    /// Player attack. VB6: HandleData "ATT" -> UserAttack.
+    /// Server-authoritative: checks battle mode, cooldown, finds target from facing direction.
+    /// </summary>
+    public async Task Attack()
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null || player.IsDead) return;
+
+        if (!player.BattleMode)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Go into battle mode first !", FontType.Talk));
+            return;
+        }
+
+        // Server-authoritative cooldown (4000ms)
+        var now = DateTime.UtcNow;
+        if ((now - player.LastAttackTime).TotalMilliseconds < GameConstants.PlayerAttackInterval)
+            return;
+        player.LastAttackTime = now;
+
+        // VB6: UserAttack — get the tile we're facing
+        var (dx, dy) = ((Direction)player.Heading) switch
+        {
+            Direction.North => (0, -1),
+            Direction.East => (1, 0),
+            Direction.South => (0, 1),
+            Direction.West => (-1, 0),
+            _ => (0, 0)
+        };
+        int attackX = player.X + dx;
+        int attackY = player.Y + dy;
+
+        // Play swing sound to area (VB6: PLW SOUND_SWING)
+        await Clients.Group(MapGroup(player.Map))
+            .SendAsync("PlaySound", new PlaySoundMessage(SoundId.Swing));
+
+        // Bounds check
+        if (attackX < 1 || attackX > GameConstants.MapWidth || attackY < 1 || attackY > GameConstants.MapHeight)
+            return;
+
+        // VB6: Look for player first, then NPC
+        // Player vs Player: defer to later
+        // For now, look for NPC
+        var npc = _world.GetNpcOnTile(player.Map, attackX, attackY);
+        if (npc != null)
+        {
+            if (npc.Active)
+            {
+                var template = _gameData.Npcs.FirstOrDefault(n => n.Id == npc.TemplateId);
+                if (template != null && template.Attackable == 1)
+                {
+                    await UserAttackNpc(player, npc);
+                }
+                else
+                {
+                    await Clients.Caller.SendAsync("Chat",
+                        new ChatMessage("A mysterious force prevents you from attacking...", FontType.Fight));
+                }
+            }
+            return;
+        }
+    }
+
+    /// <summary>
+    /// Player attacks NPC. VB6: UserAttackNPC (GameLogic.bas:1992).
+    /// Faithful port of hit chance, damage, backstab, skill improvement, and NPC death.
+    /// </summary>
+    private async Task UserAttackNpc(PlayerState player, NpcState npc)
+    {
+        var ch = player.Character;
+
+        // VB6: Swordmanship (Skill16) hit chance
+        int swordSkill = ch.Skills[16];
+        int hitChance; // 1 = hit, anything else = miss
+        if (swordSkill > 50)
+        {
+            hitChance = 1; // always hit
+        }
+        else if (swordSkill <= 30)
+        {
+            hitChance = Random.Shared.Next(1, 4); // 1/3 chance (VB6: Luck2=3)
+        }
+        else
+        {
+            hitChance = Random.Shared.Next(1, 3); // 1/2 chance (VB6: Luck2=2)
+        }
+
+        // Track attacker and make NPC hostile
+        npc.AttackedBy = player.CharIndex;
+
+        bool wasNotHostile = !npc.Hostile;
+        if (!npc.Hostile)
+            npc.Hostile = true;
+
+        bool wasNotChasing = npc.Movement == (int)NpcMovement.Stand || npc.Movement == (int)NpcMovement.RandomWalk;
+        if (wasNotChasing)
+            npc.Movement = (int)NpcMovement.HostileChase;
+
+        // VB6: Make player criminal if attacking guards
+        if (npc.Guard > 0 && ch.Criminal == 0)
+        {
+            ch.Criminal = 2;
+            ch.CriminalCount += 60;
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Attacking guards art we !? Doust art now a criminal !", FontType.Info));
+        }
+
+        // Calculate damage
+        int hit = Random.Shared.Next(ch.MinHit, ch.MaxHit + 1);
+        hit -= npc.Def / 2;
+        if (hit < 1) hit = 1;
+
+        // Hit or miss
+        if (hitChance != 1)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You miss !", FontType.Fight));
+            return; // VB6 exits sub on miss, no skill improvement
+        }
+
+        // Backstab on first strike (VB6: Flags.Strike == 0)
+        if (!player.HasStruck)
+        {
+            int backstabSkill = ch.Skills[22]; // Backstabbing
+            int backstabChance = backstabSkill switch
+            {
+                <= 10 => 30,
+                <= 20 => 25,
+                <= 30 => 22,
+                <= 40 => 20,
+                <= 50 => 17,
+                <= 60 => 15,
+                <= 70 => 12,
+                <= 80 => 10,
+                <= 90 => 6,
+                _ => 3
+            };
+            if (Random.Shared.Next(1, backstabChance + 1) == backstabChance)
+            {
+                npc.CurrentHp -= 8;
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"You backstab {npc.Name} for 8 points of damage !", FontType.Info));
+            }
+            else
+            {
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"You fail in backstabbing {npc.Name}", FontType.Info));
+            }
+            // Backstab skill improvement: 1/7 chance
+            if (Random.Shared.Next(1, 8) == 5 && ch.Skills[22] > 9 &&
+                ch.Level <= GameConstants.MaxLevel && SkillInfo.LevelCap[Math.Min(ch.Level, 50)] > ch.Skills[22])
+            {
+                ch.Skills[22]++;
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage($"Your backstabbing skill has improved ({ch.Skills[22]}) !", FontType.SkillInfo));
+            }
+            player.HasStruck = true;
+        }
+
+        // Apply damage
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage($"You strike the {npc.Name} for {hit} !", FontType.Fight));
+        await Clients.Group(MapGroup(player.Map))
+            .SendAsync("PlaySound", new PlaySoundMessage(SoundId.SwordHit2));
+        npc.CurrentHp -= hit;
+
+        // Check NPC death
+        if (npc.CurrentHp <= 0)
+        {
+            await NpcDie(player, npc, wasNotHostile, wasNotChasing);
+        }
+
+        // Skill improvement: 1/40 chance each (VB6: Raise = RandomNumber(1,40), if Raise == 6)
+        await TryImproveSkill(ch, 6, "tactics");          // Skill6 = Tactics
+        await TryImproveSkill(ch, 16, "swordmanship");    // Skill16 = Swordmanship
+        if (ch.ShieldEqpSlot >= 0) // only if shield equipped
+            await TryImproveSkill(ch, 17, "parrying");    // Skill17 = Parrying
+
+        // Check level up and send updated stats
+        await CheckUserLevel(player);
+        await SendStats(ch);
+    }
+
+    /// <summary>
+    /// VB6: 1/40 chance to raise a combat skill per swing. Checks skill >= 10 and level cap.
+    /// </summary>
+    private async Task TryImproveSkill(CharacterData ch, int skillIndex, string skillName)
+    {
+        if (Random.Shared.Next(1, 41) != 6) return;
+        if (ch.Skills[skillIndex] <= 9) return;
+        if (ch.Level > GameConstants.MaxLevel) return;
+        int cap = SkillInfo.LevelCap[Math.Min(ch.Level, 50)];
+        if (ch.Skills[skillIndex] >= cap) return;
+
+        ch.Skills[skillIndex]++;
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage($"Your {skillName} skill has improved ({ch.Skills[skillIndex]}) !", FontType.SkillInfo));
+    }
+
+    /// <summary>
+    /// NPC death. VB6: NPCDie (GameLogic.bas:217).
+    /// Places corpse + loot, gives rewards, respawns NPC at random position.
+    /// </summary>
+    private async Task NpcDie(PlayerState killer, NpcState npc, bool wasNotHostile, bool wasNotChasing)
+    {
+        var ch = killer.Character;
+        int map = npc.Map;
+
+        // Announce kill
+        await Clients.Group(MapGroup(map)).SendAsync("Chat",
+            new ChatMessage($"{ch.Name} has slain {npc.Name} !", FontType.Info));
+
+        // Play death sound
+        if (npc.Sound > 0)
+            await Clients.Group(MapGroup(map)).SendAsync("PlaySound", new PlaySoundMessage(npc.Sound));
+
+        // Reset player combat state
+        killer.HasStruck = false;
+        killer.TargetNpcIndex = 0;
+
+        // Give EXP
+        ch.Exp += npc.GiveExp;
+
+        // Give gold
+        ch.Gold += (int)npc.GiveGold;
+        if (npc.GiveGold > 0)
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"You found {npc.GiveGold} gold on the corpse !", FontType.Info));
+
+        // Reputation (VB6: guard kill vs monster kill)
+        if (npc.Guard > 0)
+        {
+            ch.Criminal = 2;
+            ch.CriminalCount += 30;
+            ch.NobleRep -= 5;
+            // ch.BendarrRep += 2; // TODO: per-deity rep not yet on CharacterData
+            ch.OverallRep -= 5;
+            ch.UnderRep += 3;
+            ch.CommonRep -= 3;
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Killing a guard ?! You are now a criminal !", FontType.Info));
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You lose some reputation with the Nobles and the common people. You gain reputation with Bendarr and the underworld !", FontType.Info));
+        }
+        else
+        {
+            ch.CommonRep++;
+            ch.NobleRep++;
+            ch.OverallRep++;
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You gain reputation with the Nobles and the common people !", FontType.Info));
+        }
+
+        // Place corpse at NPC's death position
+        if (npc.DeathObj > 0)
+        {
+            var corpseObj = _gameData.Objects.FirstOrDefault(o => o.Id == npc.DeathObj);
+            if (corpseObj != null && _world.PlaceGroundItem(map, npc.X, npc.Y, npc.DeathObj, 1))
+            {
+                await Clients.Group(MapGroup(map)).SendAsync("MakeObj",
+                    new MakeObjMessage(corpseObj.GrhIndex, npc.X, npc.Y));
+            }
+        }
+
+        // Loot roll (VB6: LOOT = RandomNumber(1, LootChance), if LOOT > 1 → no loot)
+        int lootRoll = Random.Shared.Next(1, npc.LootChance + 1);
+        if (lootRoll == 1 && npc.Inventory.Length > 0)
+        {
+            // Place up to 4 inventory items in adjacent tiles
+            var offsets = new (int dx, int dy)[] { (-1, 0), (1, 0), (0, 1), (0, -1) };
+            for (int i = 0; i < Math.Min(npc.Inventory.Length, 4); i++)
+            {
+                var inv = npc.Inventory[i];
+                if (inv.ObjIndex <= 0) continue;
+                int lx = npc.X + offsets[i].dx;
+                int ly = npc.Y + offsets[i].dy;
+                if (!_world.IsNpcLegalPos(map, lx, ly))
+                    continue;
+                var lootObj = _gameData.Objects.FirstOrDefault(o => o.Id == inv.ObjIndex);
+                if (lootObj != null && _world.PlaceGroundItem(map, lx, ly, inv.ObjIndex, 1))
+                {
+                    await Clients.Group(MapGroup(map)).SendAsync("MakeObj",
+                        new MakeObjMessage(lootObj.GrhIndex, lx, ly));
+                }
+            }
+        }
+        else if (lootRoll > 1)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You recover no loot from the corpse.", FontType.Info));
+        }
+
+        // Erase NPC from old position
+        await Clients.Group(MapGroup(map)).SendAsync("EraseChar", new EraseCharMessage(npc.CharIndex));
+
+        // Reset NPC stats for respawn
+        npc.CurrentHp = npc.MaxHp;
+        npc.Target = 0;
+        npc.AttackedBy = 0;
+        if (wasNotHostile) npc.Hostile = npc.OriginalHostile;
+        if (wasNotChasing) npc.Movement = npc.OriginalMovement;
+
+        // Respawn at random legal position on same map (VB6: Looper goto)
+        int newX, newY;
+        int attempts = 0;
+        do
+        {
+            newX = Random.Shared.Next(1, GameConstants.MapWidth + 1);
+            newY = Random.Shared.Next(1, GameConstants.MapHeight + 1);
+            attempts++;
+        } while (!_world.IsNpcLegalPos(map, newX, newY) && attempts < 500);
+
+        _world.WarpNpc(npc, map, newX, newY);
+
+        // Broadcast new NPC position to all players on map
+        await Clients.Group(MapGroup(map)).SendAsync("MakeChar", new MakeCharMessage(
+            npc.CharIndex, npc.Name, npc.Body, npc.Head, npc.Heading,
+            newX, newY, npc.WeaponAnim, npc.ShieldAnim));
+    }
+
+    /// <summary>
+    /// Check if player leveled up. VB6: CheckUserLevel (GameLogic.bas:86).
+    /// </summary>
+    private async Task CheckUserLevel(PlayerState player)
+    {
+        var ch = player.Character;
+
+        if (ch.Level >= GameConstants.MaxLevel)
+        {
+            ch.Exp = 0;
+            ch.Elu = 0;
+            return;
+        }
+
+        if (ch.Exp < ch.Elu) return;
+
+        // Level up!
+        ch.Level++;
+        ch.Exp = 0;
+
+        // VB6: ELU scaling by level bracket
+        double multiplier = ch.Level switch
+        {
+            < 5 => 2.0,
+            < 10 => 1.9,
+            < 15 => 1.8,
+            < 20 => 1.7,
+            < 25 => 1.6,
+            < 30 => 1.5,
+            _ => 1.4
+        };
+        ch.Elu = (int)(ch.Elu * multiplier);
+
+        // Stat boosts
+        ch.MaxHp++;
+        ch.MaxSta += 2;
+        ch.MaxMan += 15;
+        ch.MaxHit++;
+        ch.MinHit++;
+
+        // Training points
+        ch.TrainingPoints += 5;
+
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage("You gained 5 training points, and your attributes has gone up !", FontType.Info));
+        await Clients.Caller.SendAsync("PlaySound", new PlaySoundMessage(SoundId.SpellEffect1));
+        await Clients.Caller.SendAsync("PlayVoice", new PlayVoiceMessage(11));
+
+        await SendStats(ch);
+    }
+
     // --- Helpers ---
 
     private static string MapGroup(int mapId) => $"map:{mapId}";

@@ -629,6 +629,15 @@ public class PlayerState
 
     /// <summary>VB6: UserList.UserTargetIndex — currently targeted player char index</summary>
     public int TargetPlayerCharIndex { get; set; }
+
+    /// <summary>VB6: Flags.Battlemode</summary>
+    public bool BattleMode { get; set; }
+
+    /// <summary>Server-authoritative attack cooldown (replaces VB6's client-side 4000ms Attack timer)</summary>
+    public DateTime LastAttackTime { get; set; } = DateTime.MinValue;
+
+    /// <summary>VB6: Flags.Strike — 0 on first encounter, set to 1 after first attack (for backstab)</summary>
+    public bool HasStruck { get; set; }
 }
 
 /// <summary>

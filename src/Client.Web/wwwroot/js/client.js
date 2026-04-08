@@ -756,6 +756,25 @@ const EraClient = (() => {
             }
         });
 
+        // CTRL = toggle battle mode (VB6: KeyCode = vbKeyControl → SendData "BTL")
+        // ALT = attack (VB6: KeyCode = 18 → SendData "ATT")
+        let battleMode = false;
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            if (e.key === 'Control') {
+                e.preventDefault();
+                connection.invoke('ToggleBattleMode').catch(() => {});
+                battleMode = !battleMode;
+                // Update status display
+                const status = document.getElementById('status-bar');
+                if (status) status.textContent = battleMode ? '⚔ Battle Mode' : '';
+            }
+            if (e.key === 'Alt') {
+                e.preventDefault();
+                connection.invoke('Attack').catch(() => {});
+            }
+        });
+
         // Pre-connect to server in the background (don't wait)
         connection.start().catch(() => {});
 
