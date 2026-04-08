@@ -218,7 +218,7 @@
         "purpose": "Handle keyboard input for movement and special keys",
         "notes": [],
         "status": "ported",
-        "target": "Client.Web/wwwroot/js/renderer.js:processPlayerInput",
+        "target": "renderer.js:processPlayerInput (arrows\u002Bshift\u002Brotate) \u002B client.js:onPlayerMove/onPlayerRotate",
         "sends": [
           "M",
           "\u003C",

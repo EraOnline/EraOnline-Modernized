@@ -75,7 +75,8 @@
       "annotations": {
         "purpose": "Check if user has enough EXP to level up, apply stat bonuses and training points",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:CheckUserLevel",
         "sends": [
           "PLW",
           "PL3"
@@ -118,7 +119,8 @@
       "annotations": {
         "purpose": "Check if tile position is within map boundaries",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Inlined in WorldState.cs boundary checks",
         "sends": [],
         "calls": []
       }
@@ -133,7 +135,8 @@
       "annotations": {
         "purpose": "Kill an NPC: place corpse, drop loot, respawn at random position",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:NpcDie",
         "sends": [],
         "calls": [
           "SendData",
@@ -152,7 +155,8 @@
       "annotations": {
         "purpose": "Kill a user and turn them into a ghost",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/GameLoopService.cs:UserDie",
         "sends": [
           "DEA"
         ],
@@ -290,7 +294,8 @@
       "annotations": {
         "purpose": "Find the next available slot in the NPCList array",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/WorldState.cs:SpawnNpc (Interlocked.Increment)",
         "sends": [],
         "calls": []
       }
@@ -337,7 +342,8 @@
       "annotations": {
         "purpose": "Main NPC AI tick - handles movement, hostile detection, guard behavior, and pursuit",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/GameLoopService.cs:RunNpcAI",
         "sends": [],
         "calls": [
           "HeadtoPos",
@@ -358,7 +364,8 @@
       "annotations": {
         "purpose": "Load an NPC from NPC.dat/NPC2.dat and place it in the world",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/WorldState.cs:SpawnNpc",
         "sends": [],
         "calls": []
       }
@@ -673,7 +680,8 @@
       "annotations": {
         "purpose": "Player attacks NPC: hit calculation, damage, skill improvement, reputation, NPC death",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:UserAttackNpc",
         "sends": [
           "PLW",
           "@"
@@ -698,7 +706,8 @@
       "annotations": {
         "purpose": "NPC attacks player: hit calculation, damage, death check",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/GameLoopService.cs:NpcAttackUser",
         "sends": [
           "@",
           "PLW",
@@ -746,7 +755,8 @@
       "annotations": {
         "purpose": "Route an attack to the correct handler based on what\u0027s adjacent",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:Attack",
         "sends": [
           "PLW"
         ],
@@ -816,7 +826,8 @@
       "annotations": {
         "purpose": "Offset a WorldPos by one tile in a given heading direction",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Inlined as direction offset calculations in WorldState \u002B GameLoopService",
         "sends": [],
         "calls": []
       }
@@ -831,7 +842,8 @@
       "annotations": {
         "purpose": "Send a text summary of user stats via chat",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleSlashCommand /STATS",
         "sends": [],
         "calls": [
           "SendData"
@@ -890,7 +902,8 @@
       "annotations": {
         "purpose": "Move an NPC one tile in a direction, broadcast to map",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/WorldState.cs:MoveNpc",
         "sends": [
           "MOC"
         ],
@@ -951,7 +964,8 @@
       "annotations": {
         "purpose": "Check if a tile position is walkable (not blocked, not occupied, in bounds)",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/WorldState.cs:IsNpcLegalPos \u002B IsTileBlocked",
         "sends": [],
         "calls": []
       }
@@ -1005,7 +1019,8 @@
       "annotations": {
         "purpose": "Remove an NPC\u0027s character from the world and broadcast",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "SignalR EraseChar in GameHub.cs:NpcDie",
         "sends": [
           "ERC"
         ],
@@ -1078,7 +1093,8 @@
       "annotations": {
         "purpose": "Teleport an NPC to a new position (used for respawn)",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/WorldState.cs:WarpNpc",
         "sends": [],
         "calls": [
           "EraseNPCChar",

@@ -1583,6 +1583,26 @@
           "UCS": {
             "status": "ported",
             "target": "Server/Hubs/GameHub.cs:SendFullInventory"
+          },
+          "BTL": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:ToggleBattleMode"
+          },
+          "ATT": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:Attack"
+          },
+          "\u003E": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:Rotate"
+          },
+          "\u003C": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:Rotate"
+          },
+          "/RESSURECT": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleResurrect"
           }
         }
       }

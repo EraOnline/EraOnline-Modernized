@@ -541,7 +541,8 @@
       "lineEnd": 591,
       "annotations": {
         "notes": [
-          "50ms tick rate matches original. NPC AI, idle detection not yet implemented."
+          "50ms tick rate matches original. NPC AI, idle detection not yet implemented.",
+          "NPC AI loop ported (GameLoopService.cs:TickNpcAI). Idle detection not yet implemented."
         ],
         "status": "partial",
         "target": "Server/Services/GameLoopService.cs",
@@ -563,7 +564,8 @@
       "lineEnd": 601,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/GameLoopService.cs:ResetNpcAttackFlags",
         "sends": [],
         "calls": []
       }

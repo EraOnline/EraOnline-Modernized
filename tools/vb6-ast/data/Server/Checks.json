@@ -34,7 +34,8 @@
       "annotations": {
         "purpose": "Check if a hostile NPC should attack a specific player (level gating)",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/GameLoopService.cs:CheckIfAttack",
         "sends": [],
         "calls": []
       }

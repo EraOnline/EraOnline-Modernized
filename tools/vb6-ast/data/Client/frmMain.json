@@ -713,7 +713,8 @@
       "lineEnd": 596,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server-side: GameHub.cs:Attack (4000ms cooldown via PlayerState.LastAttackTime)",
         "sends": [],
         "calls": []
       }
@@ -893,7 +894,7 @@
       "annotations": {
         "notes": [],
         "status": "ported",
-        "target": "Client.Web/wwwroot/js/renderer.js:onKeyDown",
+        "target": "client.js:keydown handlers (CTRL-\u003EToggleBattleMode, ESC-\u003Emenu) \u002B renderer.js:onKeyDown",
         "sends": [
           "BTL",
           "COO"
@@ -930,7 +931,7 @@
       "annotations": {
         "notes": [],
         "status": "ported",
-        "target": "Client.Web/wwwroot/js/renderer.js:onKeyUp",
+        "target": "client.js:keydown ALT-\u003EAttack \u002B renderer.js:onKeyUp",
         "sends": [
           "ATT"
         ],
@@ -1245,7 +1246,8 @@
       "lineEnd": 1125,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server-side: GameLoopService.cs:ResetNpcAttackFlags (4000ms CanAttack reset)",
         "sends": [
           "AT4"
         ],

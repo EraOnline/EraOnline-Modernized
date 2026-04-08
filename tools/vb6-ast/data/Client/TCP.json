@@ -61,6 +61,38 @@
           "@": {
             "status": "ported",
             "target": "client.js:Chat handler -\u003E addChatMessage"
+          },
+          "PLW": {
+            "status": "ported",
+            "target": "client.js:PlaySound handler -\u003E playSound"
+          },
+          "DEA": {
+            "status": "ported",
+            "target": "client.js:Death handler -\u003E onDeath"
+          },
+          "SST": {
+            "status": "ported",
+            "target": "client.js:Stats handler -\u003E onStats"
+          },
+          "SIS": {
+            "status": "ported",
+            "target": "client.js:InventorySlot handler -\u003E onInventorySlot"
+          },
+          "MOB": {
+            "status": "ported",
+            "target": "client.js:MakeObj handler -\u003E renderer.makeGroundObj"
+          },
+          "EOB": {
+            "status": "ported",
+            "target": "client.js:EraseObj handler -\u003E renderer.eraseGroundObj"
+          },
+          "CHC": {
+            "status": "ported",
+            "target": "client.js:MakeChar handler (reused for appearance changes)"
+          },
+          "DEN": {
+            "status": "ported",
+            "target": "client.js:Death(false) handler -\u003E resurrection"
           }
         }
       }
