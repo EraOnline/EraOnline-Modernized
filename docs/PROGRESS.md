@@ -2,7 +2,7 @@
 
 ## Current State
 
-**Phase 3 complete, Phase 4 in progress.** Full pre-game startup sequence with audio, chat system, map transitions, stats, inventory with character sheet, ground items with persistence. Next: combat, NPC AI, NPC trading.
+**Phase 4 nearly complete.** Live NPC AI with 8 movement patterns, full combat system (player attacks NPC, NPC attacks player), death/ghost state, resurrection at Priest of Life, level-up system. Next: NPC trading, Consider (TAB), give item to player.
 
 Most recent log: [2026-04-07](logs/2026-04-07.md)
 
@@ -76,18 +76,25 @@ Combat, items, NPCs, death. The game becomes playable.
 - [x] Left-click: inspect tile contents (items, NPCs, players - name, description)
 - [x] Ground items: drop to ground with sprite, pick up with G key, persist across restarts
 - [ ] Inventory: give item to another player
-- [ ] NPC AI: 8 movement patterns (1=stand, 2=random walk, 3=hostile chase 10 tiles, 4=guard chase criminals 10 tiles, 5=beggar follow non-givers, 6=tamed animal follow owner, 7=short-range hostile 3 tiles, 8=chaotic guard chase humans/wood elves)
-- [ ] NPC AI: 2 guard types (1=normal attack criminals, 2=chaotic attack humans+wood elves+criminals)
-- [ ] NPC AI: hostile detection range, level-gating (high-level NPCs don't chase low-level players)
-- [ ] Combat: CTRL toggles battle mode, ALT attacks, 4000ms attack cooldown timer
-- [ ] Combat: hit chance (swordmanship: <=30=1/3, <=50=1/2, >50=always), dodge chance (tactics: <=20=never, <=50=1/2-1/3), damage = random(MinHIT,MaxHIT) - DEF/2 min 1
-- [ ] Combat: skill improvement on swing (1/40 chance each for tactics, swordmanship, parrying)
-- [ ] Combat: sound effects (sword swing, hit, male/female hurt per gender)
-- [ ] Combat: reputation changes (killing guard: -5 noble, +2 bendarr, +3 underworld; killing monster: +1 noble/common)
-- [ ] NPC death: corpse + loot placement, respawn at random position on same map
-- [ ] Player death: become ghost, drop random item, lose EXP/gold
-- [ ] Ghost state: ghost body/head, can't interact, speech is garbled
-- [ ] Resurrection: /RESSURECT at Priest of Life NPCs
+- [x] NPC AI: 2754 live NPC instances spawned at startup, 8 movement patterns (stand, random walk, hostile chase 10 tiles, guard chase criminals, beggar follow, tamed follow, short-range hostile 3 tiles, chaotic guard patrol)
+- [x] NPC AI: 2 guard types (1=normal attack criminals, 2=chaotic attack humans+wood elves+criminals)
+- [x] NPC AI: hostile detection range, level-gating (CheckIfAttack: player level > NPC level + 4 = don't chase)
+- [x] NPC AI: tick rate tuned to 300ms effective (NpcAiTickDivisor=6) to simulate original hardware speed
+- [x] NPC AI: NPCs only tick on maps with players present (VB6 optimization preserved)
+- [x] Combat: CTRL toggles battle mode with battle music (Mus5), ALT attacks, 4000ms server-authoritative cooldown
+- [x] Combat: Shift+Left/Right turn in place (VB6: rotate heading without moving)
+- [x] Combat: hit chance (swordmanship: <=30=1/3, <=50=1/2, >50=always), dodge chance (tactics: <=20=never, <=50=1/2), damage = random(MinHIT,MaxHIT) - DEF/2 min 1
+- [x] Combat: backstab on first strike (Skill22-based chance for 8 bonus damage)
+- [x] Combat: skill improvement on swing (1/40 chance each for tactics, swordmanship, parrying)
+- [x] Combat: sound effects (sword swing on attempt, sword hit on connect, male hurt/female scream per gender, NPC death sound)
+- [x] Combat: reputation changes (killing guard: -5 noble, +3 underworld; killing monster: +1 noble/common)
+- [x] Combat: attacked NPCs become hostile and switch to chase mode
+- [x] NPC death: corpse (DeathObj) + loot placement (1/LootChance, up to 4 adjacent tiles), EXP+gold rewards, respawn at random legal position on same map
+- [x] NPC attack: 4000ms CanAttack timer, tactics dodge, damage with sound effects, guard type validation
+- [x] Player death: become ghost (body=16, head=5), drop random unequipped item, lose EXP/6 and gold/5, clear criminal status, exit battle mode, restore zone music
+- [x] Ghost state: ghost body/head, ghost speech (from Phase 3), status bar guidance
+- [x] Resurrection: /RESSURECT (and /RESURRECT) at Priest of Life (npcType 61) or Healer (npcType 5), within 2 tiles, restores original appearance, chorus sound
+- [x] Level-up: CheckUserLevel on kill (EXP >= ELU triggers +1 level, +5 training points, stat boosts, ELU scaling 2.0x-1.4x by bracket, spell effect sound + voice)
 - [ ] Consider (TAB): view target's HP/hit
 
 **Milestone:** Can fight a troll outside Castlefall, die, become a ghost, find a Priest of Life, resurrect, go back and kill the troll, pick up loot, equip dropped weapon.
