@@ -155,19 +155,19 @@ const EraClient = (() => {
         const overlay = document.getElementById('select-overlay');
         overlay.classList.remove('hidden');
 
-        document.getElementById('btn-select-login').addEventListener('click', () => {
+        document.getElementById('btn-select-login').onclick = () => {
             playClick();
             isCreatingNewChar = false;
             overlay.classList.add('hidden');
             startLoginForm();
-        });
+        };
 
-        document.getElementById('btn-select-create').addEventListener('click', () => {
+        document.getElementById('btn-select-create').onclick = () => {
             playClick();
             isCreatingNewChar = true;
             overlay.classList.add('hidden');
             startLoginForm();
-        });
+        };
     }
 
     // --- Phase 4: Login / Create form ---
@@ -221,54 +221,48 @@ const EraClient = (() => {
         'Dark Elf': "Dark Elf's hails from the mountains in the north in Menath. They are good fighters but specialize most in the art of the thief.",
     };
 
-    let createStep = 0; // 0=race, 1=class+skills, 2=gender
+    let createStep = 0; // 0=name+race, 1=class+skills, 2=gender
 
     function startLoginForm() {
+        if (isCreatingNewChar) {
+            startCreateForm();
+            return;
+        }
         const overlay = document.getElementById('login-overlay');
         overlay.classList.remove('hidden');
-
-        const title = document.getElementById('login-title');
-        const createFields = document.getElementById('create-fields');
-        const btn = document.getElementById('btn-login');
-        const backBtn = document.getElementById('btn-create-back');
-
-        if (isCreatingNewChar) {
-            title.textContent = '-Character Creation';
-            createFields.classList.add('active');
-            createStep = 0;
-            showCreateStep(0);
-            btn.textContent = 'Continue';
-            backBtn.classList.remove('hidden');
-            backBtn.onclick = handleCreateBack;
-            // Populate spec skill dropdowns
-            const specSelects = ['create-spec1', 'create-spec2', 'create-spec3'];
-            specSelects.forEach(id => {
-                const sel = document.getElementById(id);
-                sel.innerHTML = '<option value="">-- Select --</option>';
-                skillNames.forEach(s => {
-                    const opt = document.createElement('option');
-                    opt.value = s; opt.textContent = s;
-                    sel.appendChild(opt);
-                });
-            });
-            // Wire race change handler
-            document.getElementById('create-race').onchange = onRaceChange;
-            document.getElementById('create-class').onchange = onClassChange;
-            onRaceChange();
-        } else {
-            title.textContent = 'Log Into Character';
-            createFields.classList.remove('active');
-            btn.textContent = 'Enter Menath';
-            backBtn.classList.add('hidden');
-        }
-
         document.getElementById('login-name').focus();
+    }
+
+    // --- Character creation: fullscreen menu2.jpg overlay (VB6: Form3/Form5/Form4) ---
+
+    function startCreateForm() {
+        const overlay = document.getElementById('create-overlay');
+        overlay.classList.remove('hidden');
+        createStep = 0;
+        showCreateStep(0);
+
+        // Populate spec skill dropdowns
+        ['create-spec1', 'create-spec2', 'create-spec3'].forEach(id => {
+            const sel = document.getElementById(id);
+            sel.innerHTML = '<option value="">-- Select --</option>';
+            skillNames.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s; opt.textContent = s;
+                sel.appendChild(opt);
+            });
+        });
+
+        document.getElementById('create-race').onchange = onRaceChange;
+        document.getElementById('create-class').onchange = onClassChange;
+        document.getElementById('btn-create-next').onclick = handleCreateNext;
+        document.getElementById('btn-create-back').onclick = handleCreateBack;
+        onRaceChange();
+        document.getElementById('create-name').focus();
     }
 
     function onRaceChange() {
         const race = document.getElementById('create-race').value;
         document.getElementById('race-desc').textContent = raceDescs[race] || '';
-        // Populate class dropdown for this race
         const classSel = document.getElementById('create-class');
         classSel.innerHTML = '<option value="">-- Select Class --</option>';
         (classesByRace[race] || []).forEach(c => {
@@ -286,17 +280,84 @@ const EraClient = (() => {
 
     function showCreateStep(step) {
         createStep = step;
+        document.getElementById('create-step-name').classList.toggle('hidden', step !== 0);
         document.getElementById('create-step-race').classList.toggle('hidden', step !== 0);
         document.getElementById('create-step-class').classList.toggle('hidden', step !== 1);
         document.getElementById('create-step-gender').classList.toggle('hidden', step !== 2);
         document.getElementById('btn-create-back').classList.toggle('hidden', step === 0);
-        const btn = document.getElementById('btn-login');
-        btn.textContent = step === 2 ? 'Create & Enter Menath' : 'Continue';
+        document.getElementById('btn-create-next').textContent = step === 2 ? 'Create & Enter Menath' : 'Continue';
+    }
+
+    function showCreateError(msg) {
+        document.getElementById('create-error').textContent = msg;
+    }
+
+    async function handleCreateNext() {
+        playClick();
+        showCreateError('');
+
+        if (createStep === 0) {
+            const name = document.getElementById('create-name').value.trim();
+            const pass = document.getElementById('create-pass').value;
+            const race = document.getElementById('create-race').value;
+            if (!name || !pass) { showCreateError('Enter name and password.'); return; }
+            if (!race) { showCreateError('Select a race.'); return; }
+            showCreateStep(1);
+        } else if (createStep === 1) {
+            const cls = document.getElementById('create-class').value;
+            if (!cls) { showCreateError('Select a class.'); return; }
+            showCreateStep(2);
+        } else if (createStep === 2) {
+            await doCreateCharacter();
+        }
     }
 
     function handleCreateBack() {
         playClick();
-        if (createStep > 0) showCreateStep(createStep - 1);
+        showCreateError('');
+        if (createStep > 0) {
+            showCreateStep(createStep - 1);
+        } else {
+            // Back to select screen
+            document.getElementById('create-overlay').classList.add('hidden');
+            isCreatingNewChar = false;
+            startSelectScreen();
+        }
+    }
+
+    async function doCreateCharacter() {
+        const name = document.getElementById('create-name').value.trim();
+        const pass = document.getElementById('create-pass').value;
+        const race = document.getElementById('create-race').value;
+        const gender = document.getElementById('create-gender').value;
+        const cls = document.getElementById('create-class').value;
+        const specSkill1 = document.getElementById('create-spec1').value;
+        const specSkill2 = document.getElementById('create-spec2').value;
+        const specSkill3 = document.getElementById('create-spec3').value;
+
+        if (!connection || connection.state !== signalR.HubConnectionState.Connected) {
+            showCreateError('Connecting to server...');
+            try { await connection.start(); } catch (err) {
+                showCreateError('Failed to connect: ' + err.message); return;
+            }
+        }
+
+        try {
+            const result = await connection.invoke('CreateCharacter', {
+                name, password: pass, race, gender,
+                class: cls, specSkill1, specSkill2, specSkill3
+            });
+            if (result.success) {
+                charName = name;
+                charRace = race;
+                document.getElementById('create-overlay').classList.add('hidden');
+                enterGame();
+            } else {
+                showCreateError(result.errorMessage || 'Failed.');
+            }
+        } catch (err) {
+            showCreateError('Error: ' + err.message);
+        }
     }
 
     function showError(msg) {
@@ -307,21 +368,6 @@ const EraClient = (() => {
         const name = document.getElementById('login-name').value.trim();
         const pass = document.getElementById('login-pass').value;
         if (!name || !pass) { showError('Enter name and password.'); return; }
-
-        // Multi-step validation for character creation
-        if (isCreatingNewChar && createStep < 2) {
-            if (createStep === 0) {
-                const race = document.getElementById('create-race').value;
-                if (!race) { showError('Select a race.'); return; }
-            } else if (createStep === 1) {
-                const cls = document.getElementById('create-class').value;
-                if (!cls) { showError('Select a class.'); return; }
-            }
-            playClick();
-            showError('');
-            showCreateStep(createStep + 1);
-            return;
-        }
         showError('');
 
         // Ensure SignalR is connected
@@ -336,19 +382,7 @@ const EraClient = (() => {
         }
 
         try {
-            let result;
-            if (isCreatingNewChar) {
-                const race = document.getElementById('create-race').value;
-                const gender = document.getElementById('create-gender').value;
-                const cls = document.getElementById('create-class').value;
-                const specSkill1 = document.getElementById('create-spec1').value;
-                const specSkill2 = document.getElementById('create-spec2').value;
-                const specSkill3 = document.getElementById('create-spec3').value;
-                result = await connection.invoke('CreateCharacter', { name, password: pass, race, gender, class: cls, specSkill1, specSkill2, specSkill3 });
-                charRace = race;
-            } else {
-                result = await connection.invoke('Login', { name, password: pass });
-            }
+            const result = await connection.invoke('Login', { name, password: pass });
 
             if (result.success) {
                 charName = name;

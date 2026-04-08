@@ -207,7 +207,7 @@
             cursor: pointer; display: block; margin: 8px 0;
         }
 
-        /* Phase 4: Login/Create form */
+        /* Phase 4: Login form — small dialog over menu background (VB6: frmConnect over Form2) */
         #login-overlay {
             background: rgba(0, 0, 0, 0.85);
         }
@@ -236,11 +236,49 @@
         #login-box button:hover { background: #3a3a6e; }
         #login-error { color: #f44; font-size: 11px; margin-top: 8px; min-height: 16px; }
 
-        /* Create character extras (hidden by default) */
+        /* Character creation — fullscreen menu2.jpg background (VB6: Form3/Form5/Form4 maximized) */
+        #create-overlay {
+            background: #000 url('/ui/menu2.jpg') center top / contain no-repeat;
+        }
+        #create-panel {
+            position: absolute;
+            /* Positioned over the parchment panel area in menu2.jpg */
+            top: 32%; left: 50%; transform: translateX(-50%);
+            width: 440px;
+            text-align: center;
+            padding: 10px 20px;
+        }
+        #create-panel h2 {
+            font-family: 'Times New Roman', serif;
+            font-size: 18px; font-weight: bold; color: #1a1a1a;
+            margin-bottom: 8px; letter-spacing: 1px;
+        }
+        #create-panel label {
+            display: block; color: #222; font-family: Verdana, sans-serif;
+            font-size: 11px; margin-top: 6px; text-align: left;
+            width: 230px; margin-left: auto; margin-right: auto;
+        }
+        #create-panel select, #create-panel input {
+            display: block; margin: 4px auto; padding: 4px 8px; width: 230px;
+            font-family: Verdana, sans-serif; font-size: 11px;
+            background: #808080; color: #000; border: 1px solid #555;
+        }
+        .create-desc {
+            color: #333; font-family: Verdana, sans-serif; font-size: 10px;
+            margin: 4px auto; width: 340px; text-align: left; min-height: 28px;
+        }
+        #create-panel .btn-row { margin-top: 12px; }
+        #create-panel button {
+            margin: 4px; padding: 4px 18px; cursor: pointer;
+            font-family: Verdana, sans-serif; font-size: 11px;
+            background: #ccc; color: #000; border: 1px solid #888;
+        }
+        #create-panel button:hover { background: #ddd; }
+        #create-error { color: #f00; font-size: 11px; margin-top: 6px; min-height: 14px; }
+
+        /* Create character extras (hidden by default for login flow) */
         .create-fields { display: none; }
         .create-fields.active { display: block; }
-        .create-fields label { display: block; color: #aab; font-size: 11px; margin-top: 6px; text-align: left; width: 200px; margin-left: auto; margin-right: auto; }
-        .create-desc { color: #8a8a9e; font-size: 10px; margin: 4px auto; width: 200px; text-align: left; min-height: 14px; }
         .hidden { display: none !important; }
 
         /* --- Character sheet panel (VB6: inventory.frm 798x425 with charsht.JPG) --- */
@@ -403,54 +441,68 @@
                  onmouseover="this.src='/ui/startnew2.jpg'" onmouseout="this.src='/ui/startnew.jpg'" />
         </div>
 
-        <!-- Phase 4: Login / Create character form -->
+        <!-- Login form — small dialog over menu (VB6: frmConnect over Form2) -->
         <div id="login-overlay" class="overlay hidden">
             <div id="login-box">
                 <h2 id="login-title">Log Into Character</h2>
                 <input type="text" id="login-name" placeholder="Character name" maxlength="20" />
                 <input type="password" id="login-pass" placeholder="Password" />
-                <div class="create-fields" id="create-fields">
-                    <!-- Step 1: Race (VB6: Form3) -->
-                    <div id="create-step-race">
-                        <label>Race:</label>
-                        <select id="create-race">
-                            <option value="">-- Select Race --</option>
-                            <option value="Human">Human</option>
-                            <option value="Haaki">Haaki</option>
-                            <option value="Wood Elf">Wood Elf</option>
-                            <option value="Dark Elf">Dark Elf</option>
-                        </select>
-                        <div id="race-desc" class="create-desc"></div>
-                    </div>
-                    <!-- Step 2: Class + Specialized Skills (VB6: Form5) -->
-                    <div id="create-step-class" class="hidden">
-                        <label>Class:</label>
-                        <select id="create-class">
-                            <option value="">-- Select Class --</option>
-                        </select>
-                        <div id="class-desc" class="create-desc"></div>
-                        <label>Specialized Skill 1:</label>
-                        <select id="create-spec1" class="spec-skill-select"></select>
-                        <label>Specialized Skill 2:</label>
-                        <select id="create-spec2" class="spec-skill-select"></select>
-                        <label>Specialized Skill 3:</label>
-                        <select id="create-spec3" class="spec-skill-select"></select>
-                        <div class="create-desc">Only specialized skills may surpass 50 points. You can have three.</div>
-                    </div>
-                    <!-- Step 3: Gender (VB6: Form4) -->
-                    <div id="create-step-gender" class="hidden">
-                        <label>Gender:</label>
-                        <select id="create-gender">
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
-                    </div>
-                </div>
                 <div class="btn-row">
-                    <button id="btn-create-back" class="hidden">Back</button>
                     <button id="btn-login">Enter Menath</button>
                 </div>
                 <div id="login-error"></div>
+            </div>
+        </div>
+
+        <!-- Character creation — fullscreen with menu2.jpg (VB6: Form3/Form5/Form4) -->
+        <div id="create-overlay" class="overlay hidden">
+            <div id="create-panel">
+                <h2>-Character Creation</h2>
+                <!-- Step 0: Name + Password -->
+                <div id="create-step-name">
+                    <input type="text" id="create-name" placeholder="Character name" maxlength="20" />
+                    <input type="password" id="create-pass" placeholder="Password" />
+                </div>
+                <!-- Step 1: Race (VB6: Form3) -->
+                <div id="create-step-race">
+                    <label>Race:</label>
+                    <select id="create-race">
+                        <option value="">-- Select Race --</option>
+                        <option value="Human">Human</option>
+                        <option value="Haaki">Haaki</option>
+                        <option value="Wood Elf">Wood Elf</option>
+                        <option value="Dark Elf">Dark Elf</option>
+                    </select>
+                    <div id="race-desc" class="create-desc"></div>
+                </div>
+                <!-- Step 2: Class + Specialized Skills (VB6: Form5) -->
+                <div id="create-step-class" class="hidden">
+                    <label>Class:</label>
+                    <select id="create-class">
+                        <option value="">-- Select Class --</option>
+                    </select>
+                    <div id="class-desc" class="create-desc"></div>
+                    <label>Specialized Skill 1:</label>
+                    <select id="create-spec1"></select>
+                    <label>Specialized Skill 2:</label>
+                    <select id="create-spec2"></select>
+                    <label>Specialized Skill 3:</label>
+                    <select id="create-spec3"></select>
+                    <div class="create-desc">Only specialized skills may surpass 50 points. You can have three.</div>
+                </div>
+                <!-- Step 3: Gender (VB6: Form4) -->
+                <div id="create-step-gender" class="hidden">
+                    <label>Gender:</label>
+                    <select id="create-gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="btn-row">
+                    <button id="btn-create-back" class="hidden">Back</button>
+                    <button id="btn-create-next">Continue</button>
+                </div>
+                <div id="create-error"></div>
             </div>
         </div>
     </div>
