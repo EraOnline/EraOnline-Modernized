@@ -28,7 +28,7 @@ public static class GameConstants
 
     // Timing (milliseconds)
     public const int GameTickInterval = 50;      // Server main loop
-    public const int NpcAiTickDivisor = 8;       // Run NPC AI every Nth game tick (8 × 50ms = 400ms effective rate)
+    public const int NpcAiTickDivisor = 6;       // Run NPC AI every Nth game tick (6 × 50ms = 300ms effective rate)
     public const int NpcAttackInterval = 4000;    // NPC attack cadence
     public const int PlayerAttackInterval = 4000; // Player attack cadence
     public const int CriminalTickInterval = 60000;
