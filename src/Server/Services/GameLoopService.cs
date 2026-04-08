@@ -48,8 +48,11 @@ public class GameLoopService : BackgroundService
 
             try
             {
-                // NPC AI tick (VB6: GameTimer_Timer NPC loop)
-                await TickNpcAI();
+                // NPC AI tick — run every Nth tick to simulate VB6's effective processing speed
+                // on original ~700MHz hardware. VB6's 50ms timer was aspirational; real tick rate
+                // was much slower due to interpreted execution and cooperative multitasking.
+                if (_tickCount % GameConstants.NpcAiTickDivisor == 0)
+                    await TickNpcAI();
 
                 // NPC attack reset timer (VB6: NpcAttack_Timer every 4000ms)
                 if (_tickCount % NpcAttackResetTicks == 0)
