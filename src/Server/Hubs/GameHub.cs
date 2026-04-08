@@ -100,9 +100,28 @@ public class GameHub : Hub
 
         var gender = request.Gender?.Equals("Female", StringComparison.OrdinalIgnoreCase) == true ? "Female" : "Male";
 
-        // Create character data (VB6: ConnectNewUser initial values)
+        // Validate class for race (VB6: Form5.frx per-race class lists)
+        var className = request.Class ?? "Warrior";
+        if (!ClassTemplates.ClassesByRace.TryGetValue(race, out var validClasses) ||
+            !validClasses.Contains(className, StringComparer.OrdinalIgnoreCase))
+        {
+            className = "Warrior"; // fallback
+        }
+        // Normalize casing to match template key
+        className = ClassTemplates.Get(className) != null ? className
+            : validClasses?.FirstOrDefault(c => c.Equals(className, StringComparison.OrdinalIgnoreCase)) ?? "Warrior";
+
+        var template = ClassTemplates.Get(className);
+        if (template == null)
+            return new LoginResponse(false, "Invalid class selection.");
+
+        // Validate specialized skills (3 skill names from the 28 available)
+        var specSkill1 = ValidateSpecSkill(request.SpecSkill1);
+        var specSkill2 = ValidateSpecSkill(request.SpecSkill2);
+        var specSkill3 = ValidateSpecSkill(request.SpecSkill3);
+
+        // Create character data (VB6: ConnectNewUser + GiveSkills)
         var head = WorldState.RandomHead(race, gender);
-        var body = 1; // default body
 
         var character = new CharacterData
         {
@@ -110,15 +129,41 @@ public class GameHub : Hub
             PasswordHash = WorldState.HashPassword(request.Password),
             Race = race,
             Gender = gender,
-            Body = body,
-            Head = head
+            Body = 1,
+            Head = head,
+            Class = className,
+            MagicSchool = template.MagicSchool,
+            SpecSkill1 = specSkill1,
+            SpecSkill2 = specSkill2,
+            SpecSkill3 = specSkill3,
+            MaxHp = template.MaxHp,
+            CurrentHp = template.MaxHp,
+            MaxMan = template.MaxMan,
+            CurrentMan = template.MaxMan,
+            MinHit = template.MinHit,
+            MaxHit = template.MaxHit,
+            Skills = (int[])template.Skills.Clone(),
         };
         character.InitStartingInventory();
+
+        // Add class-specific extra items (VB6: GiveSkills adds tools for crafters)
+        if (template.ExtraItems != null)
+        {
+            int slot = 5; // first free slot after default items (slots 0-4 used by InitStartingInventory)
+            foreach (var (objIndex, amount) in template.ExtraItems)
+            {
+                if (slot < 20)
+                {
+                    character.Inventory[slot] = new InventorySlot { ObjIndex = objIndex, Amount = amount };
+                    slot++;
+                }
+            }
+        }
 
         // Save to disk
         await _world.SaveCharacter(character);
 
-        _logger.LogInformation("New character created: {Name} ({Race} {Gender})", name, race, gender);
+        _logger.LogInformation("New character created: {Name} ({Race} {Gender} {Class})", name, race, gender, className);
 
         // Place in world
         await PlacePlayerInWorld(character);
@@ -974,7 +1019,10 @@ public class GameHub : Hub
             c.Food, c.Drink,
             c.MinHit, c.MaxHit,
             c.Def,
-            c.TrainingPoints));
+            c.TrainingPoints,
+            c.Class,
+            c.RepRank,
+            c.Skills));
     }
 
     /// <summary>
@@ -1017,5 +1065,17 @@ public class GameHub : Hub
         }
 
         return (x, y); // give up, use the original position
+    }
+
+    /// <summary>Validate a specialized skill name against the canonical list.</summary>
+    private static string ValidateSpecSkill(string? skillName)
+    {
+        if (string.IsNullOrWhiteSpace(skillName)) return "";
+        for (int i = 1; i <= SkillInfo.SkillCount; i++)
+        {
+            if (string.Equals(SkillInfo.Names[i], skillName, StringComparison.OrdinalIgnoreCase))
+                return SkillInfo.Names[i]; // return canonical spelling
+        }
+        return "";
     }
 }

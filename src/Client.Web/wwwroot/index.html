@@ -239,6 +239,9 @@
         /* Create character extras (hidden by default) */
         .create-fields { display: none; }
         .create-fields.active { display: block; }
+        .create-fields label { display: block; color: #aab; font-size: 11px; margin-top: 6px; text-align: left; width: 200px; margin-left: auto; margin-right: auto; }
+        .create-desc { color: #8a8a9e; font-size: 10px; margin: 4px auto; width: 200px; text-align: left; min-height: 14px; }
+        .hidden { display: none !important; }
 
         /* --- Character sheet panel (VB6: inventory.frm 798x425 with charsht.JPG) --- */
         #charsheet-panel {
@@ -407,18 +410,44 @@
                 <input type="text" id="login-name" placeholder="Character name" maxlength="20" />
                 <input type="password" id="login-pass" placeholder="Password" />
                 <div class="create-fields" id="create-fields">
-                    <select id="create-race">
-                        <option value="Human">Human</option>
-                        <option value="Haaki">Haaki</option>
-                        <option value="Wood Elf">Wood Elf</option>
-                        <option value="Dark Elf">Dark Elf</option>
-                    </select>
-                    <select id="create-gender">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
+                    <!-- Step 1: Race (VB6: Form3) -->
+                    <div id="create-step-race">
+                        <label>Race:</label>
+                        <select id="create-race">
+                            <option value="">-- Select Race --</option>
+                            <option value="Human">Human</option>
+                            <option value="Haaki">Haaki</option>
+                            <option value="Wood Elf">Wood Elf</option>
+                            <option value="Dark Elf">Dark Elf</option>
+                        </select>
+                        <div id="race-desc" class="create-desc"></div>
+                    </div>
+                    <!-- Step 2: Class + Specialized Skills (VB6: Form5) -->
+                    <div id="create-step-class" class="hidden">
+                        <label>Class:</label>
+                        <select id="create-class">
+                            <option value="">-- Select Class --</option>
+                        </select>
+                        <div id="class-desc" class="create-desc"></div>
+                        <label>Specialized Skill 1:</label>
+                        <select id="create-spec1" class="spec-skill-select"></select>
+                        <label>Specialized Skill 2:</label>
+                        <select id="create-spec2" class="spec-skill-select"></select>
+                        <label>Specialized Skill 3:</label>
+                        <select id="create-spec3" class="spec-skill-select"></select>
+                        <div class="create-desc">Only specialized skills may surpass 50 points. You can have three.</div>
+                    </div>
+                    <!-- Step 3: Gender (VB6: Form4) -->
+                    <div id="create-step-gender" class="hidden">
+                        <label>Gender:</label>
+                        <select id="create-gender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="btn-row">
+                    <button id="btn-create-back" class="hidden">Back</button>
                     <button id="btn-login">Enter Menath</button>
                 </div>
                 <div id="login-error"></div>

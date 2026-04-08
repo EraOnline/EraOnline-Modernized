@@ -172,6 +172,57 @@ const EraClient = (() => {
 
     // --- Phase 4: Login / Create form ---
 
+    // VB6 class lists per race (from Form5.frx)
+    const classesByRace = {
+        'Human': ['Warrior','Healer','Thief','Paladin','Bandit','Woodworker','BlackSmith','Tailor','Fisher','Animal Tamer','Merchant','Bard','Pirate','Miner','Cook','Cleric','Wizard','Druid','Enchanter'],
+        'Haaki': ['Warrior','Thief','Bandit','BlackSmith','Tailor','Animal Tamer','Merchant','Bard','Miner','Cook','Cleric','Wizard','Druid'],
+        'Wood Elf': ['Warrior','Healer','Thief','Paladin','Bandit','Woodworker','BlackSmith','Tailor','Fisher','Animal Tamer','Merchant','Bard','Miner','Cook','Cleric','Druid','Enchanter'],
+        'Dark Elf': ['Warrior','Thief','Bandit','Woodworker','BlackSmith','Tailor','Merchant','Miner','Cook','Assasin','Wizard','Enchanter'],
+    };
+
+    // VB6 skill names (from Form5.frx — all 28 skills)
+    const skillNames = [
+        'Cooking','Musicanship','Tailoring','Carpenting','Lumberjacking','Tactics',
+        'Disguise','Merchant','Blacksmithing','Hiding','Magery','Lockpicking',
+        'Pickpocket','Stealth','Poisoning','Swordmanship','Parrying','Animal Taming',
+        'Religion Lore','Fishing','Mining','Backstabbing','Healing','Surviving',
+        'Etiquette','Streetwise','Meditating','Archery'
+    ];
+
+    // VB6 class descriptions (from Form5.frm Combo1_Change)
+    const classDescs = {
+        'Warrior': 'Warriors specialize in the art of battle. They are fighters by proffession and always carry their sword and lance ready to fight for gold and for glory.',
+        'Druid': 'Druids dedicate their life to the study of magic of the nature. These are general do gooders and only uses destructive magic when provoked. Druids are a member of the nature school of magic.',
+        'Healer': 'Healers are mainly against fighting and know how to make a nice pile of gold by healing less successful adventurers coming from home from advenures. Healers are a member of the nature school of magic.',
+        'Cleric': 'Clerics are also against fighting and are very much alike the healers in any ways. But clerics also has a very high religion lore and can easily communicate with the gods. Clerics are a member of the nature school of magic.',
+        'Thief': 'Thieves dedicate their life to the roaming the streets and pickpocket any person they think may carry a nice gold pile.',
+        'Paladin': 'Knights are the noble fighters. Their good manners and figthing skills are a good mix. Paladins are a member of the enchanting school of magic.',
+        'Bandit': 'Bandits are the pirates on land. They often attacks people on the roads and take everything they got and dissapear.',
+        'Woodworker': 'This is the classic lumberjacker and carpenter professions in one. They cut woods and make nice wooden items of it like furniture and so on.',
+        'BlackSmith': 'Blacksmiths process ore and make nice weapons out of it. Quite simple. Quite profitable.',
+        'Tailor': 'Tailors take hides, clothes or fur and make nice clothing out of it to nobles or peasants or whoever.',
+        'Fisher': 'Fishers do exactly what your thinking. They fish and sell their fish.',
+        'Animal Tamer': 'Animal Tamers dedicate their life to the wildlife. As an animal tamer you are specialized in taming animals of all kinds!',
+        'Merchant': 'Merchants can be very charming and dangerous in the way that they can fool you to buy anything from them.',
+        'Bard': 'The musicians and entertainers of Menath. These people can play any instrument and make any dark place bright happy.',
+        'Miner': 'Miners spend most of their lives in the mountains mining out ore to sell to the blacksmiths.',
+        'Pirate': 'Pirates are also sailors but they use their sailing skills for the evil. They sail the seas and plunder and lives a drunk mans life.',
+        'Cook': 'Hard to live without cooks. With a little food resources they can cook any kind of food ready to be served!',
+        'Assasin': 'Assasin is very much alike the merchants only that their commodity is death. A assasin can have quite a long and lucrative career.',
+        'Wizard': 'Wizards focus sorely on hate and destruction magic. They can be a horrible foe when all comes to all. Wizards are a member of the destruction school of magic.',
+        'Enchanter': 'Enchanters uses magic like summonings and creating items. Enchanters are a member of the enchanting school of magic.',
+    };
+
+    // VB6 race descriptions (from Form3.frm)
+    const raceDescs = {
+        'Human': 'Humans hails from whole Menath. They are the superior race and very flexible in all skills. However they are not that specialized in any skills but they are very charismatic and excellent diplomats and bards.',
+        'Haaki': 'Haakis hails from the deserts in the south in Menath. They are very primitive but are excellent hunters and their culture is richer than you can imagine. Haakis are excellent warriors.',
+        'Wood Elf': "Wood Elf's hails from the woods of Menath. Their skills in surviving in wilderness is perfect and they are therefor specialized in hunting, fishing and other skills of nature survival.",
+        'Dark Elf': "Dark Elf's hails from the mountains in the north in Menath. They are good fighters but specialize most in the art of the thief.",
+    };
+
+    let createStep = 0; // 0=race, 1=class+skills, 2=gender
+
     function startLoginForm() {
         const overlay = document.getElementById('login-overlay');
         overlay.classList.remove('hidden');
@@ -179,18 +230,73 @@ const EraClient = (() => {
         const title = document.getElementById('login-title');
         const createFields = document.getElementById('create-fields');
         const btn = document.getElementById('btn-login');
+        const backBtn = document.getElementById('btn-create-back');
 
         if (isCreatingNewChar) {
-            title.textContent = 'Start New Character';
+            title.textContent = '-Character Creation';
             createFields.classList.add('active');
-            btn.textContent = 'Create & Enter Menath';
+            createStep = 0;
+            showCreateStep(0);
+            btn.textContent = 'Continue';
+            backBtn.classList.remove('hidden');
+            backBtn.onclick = handleCreateBack;
+            // Populate spec skill dropdowns
+            const specSelects = ['create-spec1', 'create-spec2', 'create-spec3'];
+            specSelects.forEach(id => {
+                const sel = document.getElementById(id);
+                sel.innerHTML = '<option value="">-- Select --</option>';
+                skillNames.forEach(s => {
+                    const opt = document.createElement('option');
+                    opt.value = s; opt.textContent = s;
+                    sel.appendChild(opt);
+                });
+            });
+            // Wire race change handler
+            document.getElementById('create-race').onchange = onRaceChange;
+            document.getElementById('create-class').onchange = onClassChange;
+            onRaceChange();
         } else {
             title.textContent = 'Log Into Character';
             createFields.classList.remove('active');
             btn.textContent = 'Enter Menath';
+            backBtn.classList.add('hidden');
         }
 
         document.getElementById('login-name').focus();
+    }
+
+    function onRaceChange() {
+        const race = document.getElementById('create-race').value;
+        document.getElementById('race-desc').textContent = raceDescs[race] || '';
+        // Populate class dropdown for this race
+        const classSel = document.getElementById('create-class');
+        classSel.innerHTML = '<option value="">-- Select Class --</option>';
+        (classesByRace[race] || []).forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c; opt.textContent = c;
+            classSel.appendChild(opt);
+        });
+        document.getElementById('class-desc').textContent = '';
+    }
+
+    function onClassChange() {
+        const cls = document.getElementById('create-class').value;
+        document.getElementById('class-desc').textContent = classDescs[cls] || '';
+    }
+
+    function showCreateStep(step) {
+        createStep = step;
+        document.getElementById('create-step-race').classList.toggle('hidden', step !== 0);
+        document.getElementById('create-step-class').classList.toggle('hidden', step !== 1);
+        document.getElementById('create-step-gender').classList.toggle('hidden', step !== 2);
+        document.getElementById('btn-create-back').classList.toggle('hidden', step === 0);
+        const btn = document.getElementById('btn-login');
+        btn.textContent = step === 2 ? 'Create & Enter Menath' : 'Continue';
+    }
+
+    function handleCreateBack() {
+        playClick();
+        if (createStep > 0) showCreateStep(createStep - 1);
     }
 
     function showError(msg) {
@@ -201,6 +307,21 @@ const EraClient = (() => {
         const name = document.getElementById('login-name').value.trim();
         const pass = document.getElementById('login-pass').value;
         if (!name || !pass) { showError('Enter name and password.'); return; }
+
+        // Multi-step validation for character creation
+        if (isCreatingNewChar && createStep < 2) {
+            if (createStep === 0) {
+                const race = document.getElementById('create-race').value;
+                if (!race) { showError('Select a race.'); return; }
+            } else if (createStep === 1) {
+                const cls = document.getElementById('create-class').value;
+                if (!cls) { showError('Select a class.'); return; }
+            }
+            playClick();
+            showError('');
+            showCreateStep(createStep + 1);
+            return;
+        }
         showError('');
 
         // Ensure SignalR is connected
@@ -219,7 +340,11 @@ const EraClient = (() => {
             if (isCreatingNewChar) {
                 const race = document.getElementById('create-race').value;
                 const gender = document.getElementById('create-gender').value;
-                result = await connection.invoke('CreateCharacter', { name, password: pass, race, gender });
+                const cls = document.getElementById('create-class').value;
+                const specSkill1 = document.getElementById('create-spec1').value;
+                const specSkill2 = document.getElementById('create-spec2').value;
+                const specSkill3 = document.getElementById('create-spec3').value;
+                result = await connection.invoke('CreateCharacter', { name, password: pass, race, gender, class: cls, specSkill1, specSkill2, specSkill3 });
                 charRace = race;
             } else {
                 result = await connection.invoke('Login', { name, password: pass });
@@ -332,6 +457,13 @@ const EraClient = (() => {
         const expPct = msg.elu > 0 ? Math.floor((msg.exp / msg.elu) * 100) : 0;
         const expEl = document.getElementById('exp-label');
         if (expEl) expEl.textContent = `EXP: ${expPct}%`;
+
+        // VB6: class/rep display in character sheet
+        const classEl = document.getElementById('charsheet-class');
+        if (classEl && msg.class) {
+            const repStr = msg.repRank && msg.repRank !== 'Unknown' ? ` ${msg.repRank}` : '';
+            classEl.textContent = `${msg.class}${repStr}`;
+        }
     }
 
     function onPlayMusic(msg) {

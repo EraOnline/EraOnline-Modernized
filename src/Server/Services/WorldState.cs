@@ -436,6 +436,72 @@ public class CharacterData
     public int Drink { get; set; } = 0;
     public int TrainingPoints { get; set; } = 0;
 
+    // VB6: [INIT] section — class, magic school
+    public string Class { get; set; } = "Warrior";
+    public string MagicSchool { get; set; } = "";
+
+    // VB6: [FLAGS] section — 3 specialized skill names (can exceed 50)
+    public string SpecSkill1 { get; set; } = "";
+    public string SpecSkill2 { get; set; } = "";
+    public string SpecSkill3 { get; set; } = "";
+
+    // VB6: [SKILLS] section — 28 skills, 1-indexed (index 0 unused)
+    public int[] Skills { get; set; } = new int[SkillInfo.SkillCount + 1];
+
+    // VB6: [Community] section
+    public int BankGold { get; set; } = 0;
+    public int NobleRep { get; set; } = 0;
+    public int UnderRep { get; set; } = 0;
+    public int CommonRep { get; set; } = 0;
+    public int OverallRep { get; set; } = 500;
+    public string RepRank { get; set; } = "Unknown";
+    public int Criminal { get; set; } = 0;
+    public long CriminalCount { get; set; } = 0;
+
+    /// <summary>Check if a skill name is one of this character's 3 specialized skills.</summary>
+    public bool IsSpecializedSkill(string skillName) =>
+        string.Equals(SpecSkill1, skillName, StringComparison.OrdinalIgnoreCase) ||
+        string.Equals(SpecSkill2, skillName, StringComparison.OrdinalIgnoreCase) ||
+        string.Equals(SpecSkill3, skillName, StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>Check if a skill index is one of this character's 3 specialized skills.</summary>
+    public bool IsSpecializedSkill(int skillIndex)
+    {
+        if (skillIndex < 1 || skillIndex > SkillInfo.SkillCount) return false;
+        return IsSpecializedSkill(SkillInfo.Names[skillIndex]);
+    }
+
+    /// <summary>
+    /// Find the highest skill and update class accordingly. VB6: CheckClass in Checks.bas.
+    /// </summary>
+    public void CheckClass()
+    {
+        int highestIndex = -1;
+        int highestValue = 0;
+        bool tied = false;
+
+        for (int i = 1; i <= SkillInfo.SkillCount; i++)
+        {
+            if (Skills[i] > highestValue)
+            {
+                highestValue = Skills[i];
+                highestIndex = i;
+                tied = false;
+            }
+            else if (Skills[i] == highestValue && highestValue > 0)
+            {
+                tied = true;
+            }
+        }
+
+        // VB6 uses strict "greater than ALL others" — ties don't trigger a change
+        if (tied || highestIndex < 0) return;
+        if (!SkillInfo.SkillToClass.TryGetValue(highestIndex, out var newClass)) return;
+        if (Class == newClass) return;
+
+        Class = newClass;
+    }
+
     /// <summary>Initialize default starting inventory for a new character. VB6: ConnectNewUser.</summary>
     public void InitStartingInventory()
     {

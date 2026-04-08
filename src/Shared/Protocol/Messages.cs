@@ -11,7 +11,9 @@ namespace EraOnline.Shared.Protocol;
 
 public record LoginRequest(string Name, string Password);
 
-public record CreateCharacterRequest(string Name, string Password, string Race, string Gender);
+public record CreateCharacterRequest(
+    string Name, string Password, string Race, string Gender,
+    string? Class = null, string? SpecSkill1 = null, string? SpecSkill2 = null, string? SpecSkill3 = null);
 
 // --- Server -> Client ---
 
@@ -60,7 +62,10 @@ public record StatsMessage(
     int Food, int Drink,
     int MinHit, int MaxHit,
     int Def,
-    int TrainingPoints);
+    int TrainingPoints,
+    string Class = "",
+    string RepRank = "",
+    int[]? Skills = null);
 
 /// <summary>VB6: TGT - Set target name in the target bar</summary>
 public record TargetMessage(string Text);
