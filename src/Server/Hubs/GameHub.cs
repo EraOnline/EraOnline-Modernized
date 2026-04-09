@@ -917,6 +917,10 @@ public class GameHub : Hub
                 await HandleTrain(player);
                 break;
 
+            case "/HEAL":
+                await HandleHeal(player);
+                break;
+
             case "/RESSURECT":
             case "/RESURRECT":
                 await HandleResurrect(player);
@@ -1329,6 +1333,59 @@ public class GameHub : Hub
             await Clients.Caller.SendAsync("Chat",
                 new ChatMessage($"Your {skillName} skill has improved ({ch.Skills[skillIndex]}) !", FontType.SkillInfo));
         }
+    }
+
+    // ===================== NPC Healing =====================
+
+    /// <summary>
+    /// NPC healer heals the player for gold. VB6: HandleData "/HEAL" -> NpcHeal (GameLogic.bas:3225).
+    /// Charge = level * 10 gold, capped at 200 for level 20+. npcType 5 = Healer.
+    /// </summary>
+    private async Task HandleHeal(PlayerState player)
+    {
+        if (player.IsDead)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You are dead and must be ressurected. No healer can heal your fatal wounds.", FontType.Talk));
+            return;
+        }
+
+        var npc = _world.GetNpcByIndex(player.TargetNpcIndex);
+        if (npc == null)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Heal from who ?", FontType.Info));
+            return;
+        }
+
+        var template = _gameData.Npcs.FirstOrDefault(n => n.Id == npc.TemplateId);
+        if (template == null || template.NpcType != 5)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("This NPC is not a healer.", FontType.Info));
+            return;
+        }
+
+        var ch = player.Character;
+
+        // VB6: charge = level * 10, capped at 200
+        int charge = Math.Min(ch.Level * 10, 200);
+        if (charge < 10) charge = 10;
+
+        if (ch.Gold < charge)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"Sorry, you do not have enough gold ! Healing for you costs {charge} gold !", FontType.Info));
+            return;
+        }
+
+        ch.CurrentHp = ch.MaxHp;
+        ch.Gold -= charge;
+
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage($"That`ll be {charge} gold, now you are fully healed !", FontType.Info));
+
+        await SendStats(ch);
     }
 
     // ===================== Training =====================
