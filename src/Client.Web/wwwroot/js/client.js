@@ -631,6 +631,64 @@ const EraClient = (() => {
         document.getElementById('game-frame').appendChild(overlay);
     }
 
+    // --- Training Window ---
+
+    const skillNames = [
+        '', 'Cooking', 'Musicanship', 'Tailoring', 'Carpenting', 'Lumberjacking',
+        'Tactics', 'Disguise', 'Merchant', 'Blacksmithing', 'Hiding',
+        'Magery', 'Lockpicking', 'Pickpocket', 'Stealth', 'Poisoning',
+        'Swordmanship', 'Parrying', 'Animal Taming', 'Religion Lore', 'Fishing',
+        'Mining', 'Backstabbing', 'Healing', 'Surviving', 'Etiquette',
+        'Streetwise', 'Meditating', 'Archery'
+    ];
+
+    function onTrainOpen(skills) {
+        let existing = document.getElementById('train-overlay');
+        if (existing) existing.remove();
+
+        const overlay = document.createElement('div');
+        overlay.id = 'train-overlay';
+        overlay.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);' +
+            'width:350px;max-height:500px;background:#2a2a3a;border:2px solid #665544;color:#fff;' +
+            'font-family:Verdana,Arial,sans-serif;font-size:11px;padding:10px;z-index:50;overflow-y:auto;';
+
+        const title = document.createElement('div');
+        title.style.cssText = 'text-align:center;font-weight:bold;margin-bottom:8px;font-size:13px;';
+        title.textContent = 'Training';
+        overlay.appendChild(title);
+
+        for (let i = 1; i <= 28; i++) {
+            const row = document.createElement('div');
+            row.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:2px 4px;';
+
+            const label = document.createElement('span');
+            label.textContent = `${skillNames[i] || 'Skill'+i}: ${skills[i] || 0}`;
+            row.appendChild(label);
+
+            const btn = document.createElement('button');
+            btn.textContent = '+';
+            btn.style.cssText = 'width:24px;height:20px;cursor:pointer;font-size:12px;';
+            const skillIdx = i;
+            btn.addEventListener('click', () => {
+                connection.invoke('TrainSkill', skillIdx).catch(() => {});
+                // Update display optimistically
+                skills[skillIdx] = (skills[skillIdx] || 0) + 1;
+                label.textContent = `${skillNames[skillIdx] || 'Skill'+skillIdx}: ${skills[skillIdx]}`;
+            });
+            row.appendChild(btn);
+
+            overlay.appendChild(row);
+        }
+
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = 'Close';
+        closeBtn.style.cssText = 'margin-top:8px;width:100%;padding:4px;cursor:pointer;';
+        closeBtn.addEventListener('click', () => overlay.remove());
+        overlay.appendChild(closeBtn);
+
+        document.getElementById('game-frame').appendChild(overlay);
+    }
+
     // --- Client -> Server ---
 
     function onPlayerMove(direction) {
@@ -825,6 +883,7 @@ const EraClient = (() => {
         connection.on('PlayVoice', onPlayVoice);
         connection.on('Death', onDeath);
         connection.on('TradeOpen', onTradeOpen);
+        connection.on('TrainOpen', onTrainOpen);
 
         connection.onreconnecting(() => setStatusBar('Reconnecting...'));
         connection.onreconnected(() => setStatusBar('Reconnected'));

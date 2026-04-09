@@ -913,6 +913,10 @@ public class GameHub : Hub
                 await HandleTrade(player);
                 break;
 
+            case "/TRAIN":
+                await HandleTrain(player);
+                break;
+
             case "/RESSURECT":
             case "/RESURRECT":
                 await HandleResurrect(player);
@@ -1325,6 +1329,68 @@ public class GameHub : Hub
             await Clients.Caller.SendAsync("Chat",
                 new ChatMessage($"Your {skillName} skill has improved ({ch.Skills[skillIndex]}) !", FontType.SkillInfo));
         }
+    }
+
+    // ===================== Training =====================
+
+    /// <summary>
+    /// Open training with targeted NPC. VB6: HandleData "/TRAIN" -> NpcTrain (GameLogic.bas:3389).
+    /// Trainer NPCs are npcType 62.
+    /// </summary>
+    private async Task HandleTrain(PlayerState player)
+    {
+        if (player.IsDead)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You are dead and cannot do that.", FontType.Info));
+            return;
+        }
+
+        var npc = _world.GetNpcByIndex(player.TargetNpcIndex);
+        if (npc == null)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Train with who ?", FontType.Info));
+            return;
+        }
+
+        var template = _gameData.Npcs.FirstOrDefault(n => n.Id == npc.TemplateId);
+        if (template == null || template.NpcType != 62)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("This NPC is not a trainer.", FontType.Info));
+            return;
+        }
+
+        if (player.Character.TrainingPoints <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Come back when you have some training points.", FontType.Talk));
+            return;
+        }
+
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage("Sure. I guess i can teach ya a few tricks of the trade.", FontType.Talk));
+        await SendStats(player.Character);
+        await Clients.Caller.SendAsync("TrainOpen", player.Character.Skills);
+    }
+
+    /// <summary>
+    /// Spend a training point to raise a skill. VB6: HandleData "T01"-"T28".
+    /// </summary>
+    public async Task TrainSkill(int skillIndex)
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null) return;
+
+        var ch = player.Character;
+        if (skillIndex < 1 || skillIndex > 28) return;
+        if (ch.TrainingPoints <= 0) return;
+
+        ch.Skills[skillIndex]++;
+        ch.TrainingPoints--;
+
+        await SendStats(ch);
     }
 
     /// <summary>
