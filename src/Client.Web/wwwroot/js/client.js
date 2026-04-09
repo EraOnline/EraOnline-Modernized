@@ -703,6 +703,83 @@ const EraClient = (() => {
         if (campfireTimer) { clearInterval(campfireTimer); campfireTimer = null; }
     }
 
+    // --- Spell Book ---
+
+    const spellBook = []; // Array of {spellIndex, name, desc, needsMana} for each slot
+
+    function onSpellSlot(msg) {
+        spellBook[msg.slot] = { spellIndex: msg.spellIndex, name: msg.name, desc: msg.desc, needsMana: msg.needsMana };
+        // If spell book panel is open, refresh it
+        const panel = document.getElementById('spellbook-overlay');
+        if (panel) refreshSpellBookUI();
+    }
+
+    function onMeditate(msg) {
+        if (msg.meditating) {
+            setStatusBar('Meditating... type /MEDITATE to stop');
+        } else {
+            setStatusBar('');
+        }
+    }
+
+    function toggleSpellBook() {
+        let panel = document.getElementById('spellbook-overlay');
+        if (panel) { panel.remove(); return; }
+
+        panel = document.createElement('div');
+        panel.id = 'spellbook-overlay';
+        panel.style.cssText = 'position:absolute; left:84px; top:84px; width:620px; height:340px; background:rgba(30,25,20,0.95); border:2px solid #8B7355; color:#ddd; font:12px Verdana; display:flex; z-index:200; padding:8px;';
+
+        // Left: spell list
+        const listDiv = document.createElement('div');
+        listDiv.style.cssText = 'width:260px; overflow-y:auto; border-right:1px solid #666; padding-right:8px;';
+        listDiv.innerHTML = '<div style="color:#c8a86e; font-weight:bold; margin-bottom:6px;">Spell Book</div>';
+
+        // Right: spell detail
+        const detailDiv = document.createElement('div');
+        detailDiv.id = 'spell-detail';
+        detailDiv.style.cssText = 'flex:1; padding-left:12px;';
+        detailDiv.innerHTML = '<div style="color:#888;">Select a spell to see details.</div>';
+
+        for (let i = 0; i < spellBook.length; i++) {
+            const s = spellBook[i];
+            if (!s) continue;
+            const row = document.createElement('div');
+            row.style.cssText = 'padding:3px 4px; cursor:pointer; border-bottom:1px solid #444;';
+            row.textContent = s.name;
+            if (s.spellIndex <= 0) row.style.color = '#666';
+            const idx = i;
+            row.addEventListener('click', () => {
+                const detail = document.getElementById('spell-detail');
+                if (!detail || s.spellIndex <= 0) return;
+                detail.innerHTML = `<div style="color:#c8a86e; font-size:14px; font-weight:bold; margin-bottom:8px;">${s.name}</div>
+                    <div style="margin-bottom:12px;">${s.desc}</div>
+                    <div style="color:#88ccff;">Mana cost: ${s.needsMana}</div>
+                    <button id="btn-cast-spell" style="margin-top:12px; padding:6px 16px; cursor:pointer;">Cast Spell</button>`;
+                document.getElementById('btn-cast-spell').addEventListener('click', () => {
+                    connection.invoke('CastSpell', idx).catch(e => console.error('CastSpell error:', e));
+                });
+            });
+            listDiv.appendChild(row);
+        }
+
+        // Close button
+        const closeBtn = document.createElement('div');
+        closeBtn.textContent = 'Close';
+        closeBtn.style.cssText = 'position:absolute; bottom:8px; right:12px; cursor:pointer; color:#c8a86e;';
+        closeBtn.addEventListener('click', () => panel.remove());
+
+        panel.appendChild(listDiv);
+        panel.appendChild(detailDiv);
+        panel.appendChild(closeBtn);
+        document.getElementById('game-screen').appendChild(panel);
+    }
+
+    function refreshSpellBookUI() {
+        const panel = document.getElementById('spellbook-overlay');
+        if (panel) { panel.remove(); toggleSpellBook(); }
+    }
+
     // --- Crafting Progress Bar ---
 
     function onCraftStart(msg) {
@@ -947,6 +1024,8 @@ const EraClient = (() => {
         connection.on('TrainOpen', onTrainOpen);
         connection.on('CraftStart', onCraftStart);
         connection.on('CampfireNearby', onCampfireNearby);
+        connection.on('SpellSlot', onSpellSlot);
+        connection.on('Meditate', onMeditate);
 
         connection.onreconnecting(() => setStatusBar('Reconnecting...'));
         connection.onreconnected(() => setStatusBar('Reconnected'));
@@ -970,7 +1049,7 @@ const EraClient = (() => {
             // Character button area: approximately right side, 80-140px from top
             if (x > 725 && y > 80 && y < 140) { playClick(); toggleCharSheet(); }
             // Spells button area
-            else if (x > 725 && y > 140 && y < 200) { playClick(); /* TODO: spellbook */ }
+            else if (x > 725 && y > 140 && y < 200) { playClick(); toggleSpellBook(); }
             // Skills button area
             else if (x > 725 && y > 200 && y < 260) { playClick(); /* TODO: skills */ }
         });

@@ -111,5 +111,11 @@ public record NpcInvSlotMessage(
 /// <summary>Sent to client to open the trade window with the NPC's name</summary>
 public record TradeOpenMessage(string NpcName, NpcInvSlotMessage[] NpcInventory);
 
+/// <summary>VB6: SPL — spell book slot update (sent per-slot on login and on inscribe)</summary>
+public record SpellSlotMessage(int Slot, int SpellIndex, string Name, string Desc, int NeedsMana);
+
+/// <summary>VB6: ME1/ME2 — meditation state change</summary>
+public record MeditateMessage(bool Meditating);
+
 /// <summary>VB6: DOS — start crafting progress bar</summary>
 public record CraftStartMessage(int JobType, int DurationMs);

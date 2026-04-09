@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.SignalR;
 using EraOnline.Server.Services;
 using EraOnline.Shared.Constants;
+using EraOnline.Shared.Models;
 using EraOnline.Shared.Protocol;
 
 namespace EraOnline.Server.Hubs;
@@ -250,6 +251,9 @@ public class GameHub : Hub
         // VB6: UpdateUserInv(True) — send full inventory on login
         await SendFullInventory(character);
 
+        // VB6: UpdateUserSpell(True) — send full spell book on login
+        await SendFullSpellBook(character);
+
         // VB6: SendData(ToIndex, "PLM" & MapInfo(map).Music) — play zone music
         await SendMapMusic(map);
 
@@ -269,6 +273,16 @@ public class GameHub : Hub
 
         if (direction < 1 || direction > 4) return;
         var heading = (Direction)direction;
+
+        // Cancel meditation on movement (VB6: movement code clears Meditate flag)
+        if (player.Meditating)
+        {
+            player.Meditating = false;
+            _world.PickupGroundItem(player.Map, player.X, player.Y);
+            await Clients.Group(MapGroup(player.Map)).SendAsync("EraseObj",
+                new EraseObjMessage(player.X, player.Y));
+            await Clients.Caller.SendAsync("Meditate", new MeditateMessage(false));
+        }
 
         if (_world.MovePlayer(player, heading))
         {
@@ -436,6 +450,10 @@ public class GameHub : Hub
                 await UpdateCharAppearance(player);
                 await SendInvSlot(ch, slot);
                 await SendStats(ch);
+                break;
+
+            case 23: // OBJTYPE_SPELL — inscribe spell scroll to spell book
+                await InscribeSpell(player, slot);
                 break;
 
             case 24: // OBJTYPE_SHIELD
@@ -1046,6 +1064,10 @@ public class GameHub : Hub
                 await HandleDuel(player);
                 break;
 
+            case "/MEDITATE":
+                await HandleMeditate(player);
+                break;
+
             case "/DROPGOLD":
                 await HandleDropGold(player, arg);
                 break;
@@ -1481,6 +1503,385 @@ public class GameHub : Hub
             string skillName = ((SkillType)skillIndex).ToString();
             await Clients.Caller.SendAsync("Chat",
                 new ChatMessage($"Your {skillName} skill has improved ({ch.Skills[skillIndex]}) !", FontType.SkillInfo));
+        }
+    }
+
+    // ===================== Spells & Meditation =====================
+
+    /// <summary>
+    /// Inscribe a spell scroll into the spell book. VB6: InscribeSpell (GameLogic.bas:1609).
+    /// Called from UseItem when item type is OBJTYPE_SPELL (23).
+    /// </summary>
+    private async Task InscribeSpell(PlayerState player, int slot)
+    {
+        var ch = player.Character;
+        var inv = ch.Inventory[slot];
+        var objDef = _gameData.Objects.FirstOrDefault(o => o.Id == inv.ObjIndex);
+        if (objDef == null || objDef.SpellType <= 0) return;
+
+        // Find an empty spell book slot
+        int emptySlot = -1;
+        for (int i = 0; i < ch.SpellBook.Length; i++)
+        {
+            if (ch.SpellBook[i] == 0) { emptySlot = i; break; }
+        }
+        if (emptySlot < 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Your spell book is full !", FontType.Info));
+            return;
+        }
+
+        ch.SpellBook[emptySlot] = objDef.SpellType;
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage("You have inscribed the spell into your spell book.", FontType.Info));
+
+        // Remove the scroll from inventory (consumed)
+        inv.ObjIndex = 0; inv.Amount = 0; inv.Equipped = false;
+        await SendInvSlot(ch, slot);
+
+        // Send the new spell slot to client
+        await SendSpellSlot(ch, emptySlot);
+    }
+
+    /// <summary>
+    /// Cast a spell from the spell book. VB6: HandleData "CST" -> CastSpellAtPC / CastSpellAtNPC.
+    /// Unified function that dispatches to NPC or player target based on current targeting state.
+    /// </summary>
+    public async Task CastSpell(int spellSlot)
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null) return;
+        var ch = player.Character;
+
+        if (spellSlot < 0 || spellSlot >= ch.SpellBook.Length) return;
+        int spellId = ch.SpellBook[spellSlot];
+        if (spellId <= 0) return;
+
+        var spell = _gameData.Spells.FirstOrDefault(s => s.Id == spellId);
+        if (spell == null) return;
+
+        // VB6: Check magic school — player's MagicSchool must be in the spell's Schools array
+        if (!string.IsNullOrEmpty(ch.MagicSchool) && spell.Schools.Length > 0)
+        {
+            bool canCast = spell.Schools.Any(s =>
+                string.Equals(s, ch.MagicSchool, StringComparison.OrdinalIgnoreCase));
+            if (!canCast)
+            {
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage("You cannot cast this spell because it's not in your school of magic !", FontType.Info));
+                return;
+            }
+        }
+
+        // VB6: Check mana
+        if (spell.NeedsMana > ch.CurrentMan)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You dont have enough mana to cast the spell.", FontType.Info));
+            return;
+        }
+
+        // Determine target: NPC or player
+        if (player.TargetNpcIndex > 0)
+            await CastSpellAtNpc(player, spell);
+        else if (player.TargetPlayerCharIndex > 0)
+            await CastSpellAtPlayer(player, spell);
+        else
+        {
+            // Self-cast if no target (for utility spells)
+            await CastSpellAtPlayer(player, spell, selfCast: true);
+        }
+    }
+
+    /// <summary>
+    /// Cast a spell at an NPC target. VB6: CastSpellAtNPC (GameLogic.bas:4848).
+    /// </summary>
+    private async Task CastSpellAtNpc(PlayerState player, SpellDef spell)
+    {
+        var ch = player.Character;
+        var npc = _world.GetNpcByIndex(player.TargetNpcIndex);
+        if (npc == null || !npc.Active)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You have no target !", FontType.Info));
+            return;
+        }
+
+        var template = _gameData.Npcs.FirstOrDefault(n => n.Id == npc.TemplateId);
+
+        // VB6: Can't cast destruction on non-attackable NPCs
+        if (spell.Destruction == 1 && (template == null || template.Attackable != 1))
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"A mysterious force prevents you from casting a spell at {npc.Name} !", FontType.Info));
+            return;
+        }
+
+        // VB6: Can't cast destruction when dead
+        if (spell.Destruction == 1 && player.IsDead)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You cannot cast destruction spells when dead.", FontType.Info));
+            return;
+        }
+
+        // Deduct mana
+        ch.CurrentMan -= spell.NeedsMana;
+
+        // Make NPC hostile (VB6: NPCList.Hostile = 1)
+        if (spell.Destruction == 1)
+        {
+            npc.Hostile = true;
+            if (template?.Guard == 1)
+            {
+                ch.Criminal = 2;
+                ch.CriminalCount += 60;
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage("You are now a criminal !", FontType.Info));
+            }
+        }
+
+        // Play spell sound
+        if (spell.Sound > 0)
+            await Clients.Group(MapGroup(player.Map))
+                .SendAsync("PlaySound", new PlaySoundMessage(spell.Sound));
+
+        // Apply NPC effects (only damage and healing apply to NPCs)
+        if (spell.GiveHp > 0) npc.MaxHp += spell.GiveHp;
+        if (spell.HealHp > 0) npc.CurrentHp = npc.MaxHp;
+        if (spell.DamageHp > 0) npc.CurrentHp -= spell.DamageHp;
+
+        // Caster message
+        if (!string.IsNullOrEmpty(spell.CasterMessage))
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage(spell.CasterMessage, FontType.Info));
+
+        // NPC death check
+        if (npc.CurrentHp <= 0)
+        {
+            bool wasGuard = template?.Guard == 1;
+            bool wasNotHostile = !npc.Hostile;
+            bool wasNotChasing = npc.Movement != (int)NpcMovement.HostileChase;
+            await NpcDie(player, npc, wasNotHostile, wasNotChasing);
+        }
+
+        // +2 EXP per cast
+        ch.Exp += 2;
+        await CheckUserLevel(player);
+        await SendStats(ch);
+        await SendFullSpellBook(ch);
+    }
+
+    /// <summary>
+    /// Cast a spell at a player target (or self). VB6: CastSpellAtPC (GameLogic.bas:4622).
+    /// </summary>
+    private async Task CastSpellAtPlayer(PlayerState caster, SpellDef spell, bool selfCast = false)
+    {
+        var casterCh = caster.Character;
+        PlayerState target;
+
+        if (selfCast)
+        {
+            target = caster;
+        }
+        else
+        {
+            target = _world.GetPlayerByCharIndex(caster.TargetPlayerCharIndex);
+            if (target == null)
+            {
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage("You have no target !", FontType.Info));
+                return;
+            }
+        }
+
+        var targetCh = target.Character;
+
+        // VB6: Destruction spell PK checks
+        if (spell.Destruction == 1 && !selfCast)
+        {
+            if (target.IsDead)
+            {
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage("You cannot attack the dead !", FontType.Info));
+                return;
+            }
+
+            var map = _gameData.Maps.GetValueOrDefault(caster.Map);
+            if (map?.PkFreeZone == true && (!caster.Duel || !target.Duel))
+            {
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage("This is a Player Killing free area. Both players must be in duel mode (/DUEL) to fight here !", FontType.Info));
+                return;
+            }
+        }
+
+        // Deduct mana
+        casterCh.CurrentMan -= spell.NeedsMana;
+
+        // Play spell sound
+        if (spell.Sound > 0)
+            await Clients.Group(MapGroup(caster.Map))
+                .SendAsync("PlaySound", new PlaySoundMessage(spell.Sound));
+
+        // Apply all spell effects to target
+        if (spell.GiveHp > 0) targetCh.MaxHp += spell.GiveHp;
+        if (spell.GiveMana > 0) targetCh.MaxMan += spell.GiveMana;
+        if (spell.GiveStamina > 0) targetCh.MaxSta += spell.GiveStamina;
+        if (spell.GiveMoney > 0) targetCh.Gold += spell.GiveMoney;
+        if (spell.GiveFood > 0) targetCh.Food += spell.GiveFood;
+        if (spell.GiveDrink > 0) targetCh.Drink += spell.GiveDrink;
+        if (spell.GiveExp > 0) targetCh.Exp += spell.GiveExp;
+        if (spell.HealHp > 0) targetCh.CurrentHp = targetCh.MaxHp;
+        if (spell.HealMana > 0) targetCh.CurrentMan = targetCh.MaxMan;
+        if (spell.HealStamina > 0) targetCh.CurrentSta = targetCh.MaxSta;
+        if (spell.DamageHp > 0) targetCh.CurrentHp -= spell.DamageHp;
+        if (spell.DamageMana > 0) targetCh.CurrentMan -= spell.DamageMana;
+        if (spell.DamageStamina > 0) targetCh.CurrentSta -= spell.DamageStamina;
+
+        // VB6: Teleport/Anchor
+        if (spell.Teleport == 1)
+        {
+            if (!targetCh.TeleportAnchorSet)
+            {
+                targetCh.TeleportAnchorMap = target.Map;
+                targetCh.TeleportAnchorX = target.X;
+                targetCh.TeleportAnchorY = target.Y;
+                targetCh.TeleportAnchorSet = true;
+                await Clients.Client(target.ConnectionId).SendAsync("Chat",
+                    new ChatMessage("You are anchored here. To teleport back to here, recast the teleport spell.", FontType.Info));
+            }
+            else
+            {
+                await Clients.Client(target.ConnectionId).SendAsync("Chat",
+                    new ChatMessage("You teleport back to the anchored position.", FontType.Info));
+                await WarpPlayer(target, targetCh.TeleportAnchorMap, targetCh.TeleportAnchorX, targetCh.TeleportAnchorY);
+                targetCh.TeleportAnchorSet = false;
+            }
+        }
+
+        // VB6: Resurrection via spell
+        if (spell.Resurrection == 1 && target.IsDead)
+        {
+            target.IsDead = false;
+            targetCh.Body = target.OriginalBody;
+            targetCh.Head = target.OriginalHead;
+            var (pw, ps) = GetEquipAnims(targetCh);
+            await Clients.Group(MapGroup(target.Map)).SendAsync("ChangeChar",
+                new MakeCharMessage(target.CharIndex, targetCh.Name, targetCh.Body, targetCh.Head,
+                    target.Heading, target.X, target.Y, pw, ps, targetCh.Criminal > 0));
+            await Clients.Group(MapGroup(target.Map))
+                .SendAsync("PlaySound", new PlaySoundMessage(SoundId.Chorus));
+            await Clients.Client(target.ConnectionId).SendAsync("Death", false);
+        }
+
+        // Messages
+        if (!string.IsNullOrEmpty(spell.CasterMessage))
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage(spell.CasterMessage, FontType.Info));
+        if (!string.IsNullOrEmpty(spell.TargetMessage) && !selfCast)
+            await Clients.Client(target.ConnectionId).SendAsync("Chat",
+                new ChatMessage(spell.TargetMessage, FontType.Info));
+
+        // VB6: Player death from destruction spell
+        if (!selfCast && spell.Destruction == 1 && targetCh.CurrentHp <= 0)
+        {
+            // Criminal/rep effects (same as melee PvP kill)
+            if (targetCh.Criminal == 0 && !target.Duel)
+            {
+                casterCh.CriminalCount += 75;
+                casterCh.Criminal = 2;
+                casterCh.CommonRep -= 5;
+                casterCh.NobleRep -= 5;
+                casterCh.OverallRep -= 20;
+                casterCh.UnderRep += 3;
+                casterCh.BendarrRep += 3;
+            }
+            else
+            {
+                casterCh.OverallRep += 2;
+                casterCh.CommonRep += 2;
+            }
+
+            int expGain = targetCh.Level * 20;
+            casterCh.Exp += expGain;
+            await Clients.Group(MapGroup(caster.Map)).SendAsync("Chat",
+                new ChatMessage($"{targetCh.Name} has been slain by {casterCh.Name} !", FontType.Talk));
+            await _gameLoopService.UserDieFromHub(target);
+        }
+
+        // +2 EXP per cast
+        casterCh.Exp += 2;
+        await CheckUserLevel(caster);
+        await SendStats(casterCh);
+        if (!selfCast && target.ConnectionId != caster.ConnectionId)
+        {
+            await Clients.Client(target.ConnectionId).SendAsync("Stats", new StatsMessage(
+                targetCh.CurrentHp, targetCh.MaxHp, targetCh.CurrentMan, targetCh.MaxMan,
+                targetCh.CurrentSta, targetCh.MaxSta, targetCh.Gold, targetCh.Exp, targetCh.Elu,
+                targetCh.Food, targetCh.Drink, targetCh.MinHit, targetCh.MaxHit, targetCh.Def,
+                targetCh.TrainingPoints, targetCh.Class, targetCh.RepRank, targetCh.Skills,
+                targetCh.Criminal, targetCh.CriminalCount));
+        }
+    }
+
+    /// <summary>
+    /// Toggle meditation. VB6: HandleData "/MEDITATE" -> Meditate (GameLogic.bas:5370).
+    /// Places/removes a meditation aura (obj 231). Mana regen ticks in game loop.
+    /// </summary>
+    private async Task HandleMeditate(PlayerState player)
+    {
+        if (player.Meditating)
+        {
+            // Stop meditating: remove aura, clear flag
+            player.Meditating = false;
+            _world.PickupGroundItem(player.Map, player.X, player.Y);
+            await Clients.Group(MapGroup(player.Map)).SendAsync("EraseObj",
+                new EraseObjMessage(player.X, player.Y));
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You snap out of the meditation trance.", FontType.Info));
+            await Clients.Caller.SendAsync("Meditate", new MeditateMessage(false));
+        }
+        else
+        {
+            // Start meditating: place aura, set flag
+            player.Meditating = true;
+            // VB6: Object 231 = meditation aura
+            var auraDef = _gameData.Objects.FirstOrDefault(o => o.Id == 231);
+            if (auraDef != null)
+            {
+                _world.PlaceGroundItem(player.Map, player.X, player.Y, 231, 1);
+                await Clients.Group(MapGroup(player.Map)).SendAsync("MakeObj",
+                    new MakeObjMessage(auraDef.GrhIndex, player.X, player.Y));
+            }
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You are surrounded by a meditation aura and you start to meditate...", FontType.Info));
+            await Clients.Caller.SendAsync("Meditate", new MeditateMessage(true));
+        }
+    }
+
+    /// <summary>Send full spell book to client (VB6: UpdateUserSpell with updateall=True).</summary>
+    private async Task SendFullSpellBook(CharacterData ch)
+    {
+        for (int i = 0; i < ch.SpellBook.Length; i++)
+            await SendSpellSlot(ch, i);
+    }
+
+    /// <summary>Send a single spell book slot to client (VB6: ChangeUserSpells -> "SPL" message).</summary>
+    private async Task SendSpellSlot(CharacterData ch, int slot)
+    {
+        int spellId = ch.SpellBook[slot];
+        if (spellId > 0)
+        {
+            var spell = _gameData.Spells.FirstOrDefault(s => s.Id == spellId);
+            await Clients.Caller.SendAsync("SpellSlot",
+                new SpellSlotMessage(slot, spellId, spell?.Name ?? "Unknown", spell?.Desc ?? "", spell?.NeedsMana ?? 0));
+        }
+        else
+        {
+            await Clients.Caller.SendAsync("SpellSlot",
+                new SpellSlotMessage(slot, 0, "(Empty)", "", 0));
         }
     }
 

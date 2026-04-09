@@ -114,7 +114,8 @@
       "lineEnd": 106,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:toggleSpellBook \u002B onSpellSlot",
         "sends": [],
         "calls": []
       }
@@ -128,7 +129,8 @@
       "lineEnd": 113,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:toggleSpellBook \u002B onSpellSlot",
         "sends": [],
         "calls": [
           "PlayWaveDS"
@@ -144,7 +146,8 @@
       "lineEnd": 116,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:toggleSpellBook \u002B onSpellSlot",
         "sends": [],
         "calls": []
       }
@@ -158,7 +161,8 @@
       "lineEnd": 125,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:toggleSpellBook \u002B onSpellSlot",
         "sends": [
           "CST"
         ],
@@ -176,7 +180,8 @@
       "lineEnd": 140,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:toggleSpellBook \u002B onSpellSlot",
         "sends": [],
         "calls": []
       }
@@ -190,7 +195,8 @@
       "lineEnd": 147,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:toggleSpellBook \u002B onSpellSlot",
         "sends": [],
         "calls": [
           "PopupMenu"

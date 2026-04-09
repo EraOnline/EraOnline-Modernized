@@ -656,6 +656,9 @@ public class PlayerState
     /// <summary>VB6: Flags.Duel — consensual PvP mode (/DUEL toggle)</summary>
     public bool Duel { get; set; }
 
+    /// <summary>VB6: Flags.Meditate — currently meditating (/MEDITATE toggle)</summary>
+    public bool Meditating { get; set; }
+
     /// <summary>VB6: Flags.StartHead — original head for resurrection</summary>
     public int OriginalHead { get; set; }
 
@@ -717,6 +720,15 @@ public class CharacterData
 
     // VB6: [SKILLS] section — 28 skills, 1-indexed (index 0 unused)
     public int[] Skills { get; set; } = new int[SkillInfo.SkillCount + 1];
+
+    // VB6: SpellObj(1 To MAX_SPELL_SLOTS) — 50 spell book slots, each holds a spell ID (0 = empty)
+    public int[] SpellBook { get; set; } = new int[50];
+
+    // VB6: Teleport/Anchor state
+    public int TeleportAnchorMap { get; set; }
+    public int TeleportAnchorX { get; set; }
+    public int TeleportAnchorY { get; set; }
+    public bool TeleportAnchorSet { get; set; }
 
     // VB6: [Community] section
     public int BankGold { get; set; } = 0;

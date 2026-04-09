@@ -446,7 +446,8 @@
       "annotations": {
         "purpose": "Add a spell scroll to the user\u0027s spell book",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:InscribeSpell",
         "sends": [],
         "calls": [
           "SendData",
@@ -482,7 +483,8 @@
       "annotations": {
         "purpose": "Sync one or all spell book slots to the client",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:SendFullSpellBook",
         "sends": [],
         "calls": [
           "ChangeUserSpells"
@@ -558,7 +560,8 @@
       "annotations": {
         "purpose": "Send a single spell book slot update to the client",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:SendSpellSlot",
         "sends": [
           "SPL"
         ],
@@ -1728,7 +1731,8 @@
       "lineEnd": 4847,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:CastSpellAtPlayer",
         "sends": [
           "PLW",
           "@"
@@ -1754,7 +1758,8 @@
       "lineEnd": 4988,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:CastSpellAtNpc",
         "sends": [
           "PLW",
           "@"
@@ -1881,7 +1886,8 @@
       "lineEnd": 5407,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleMeditate",
         "sends": [
           "ME2",
           "ME1"
@@ -1902,7 +1908,8 @@
       "lineEnd": 5454,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/GameLoopService.cs:TickMeditation",
         "sends": [],
         "calls": [
           "Randomize",

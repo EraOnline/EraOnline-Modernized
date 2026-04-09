@@ -1659,6 +1659,18 @@
           "DRG": {
             "status": "ported",
             "target": "Server/Hubs/GameHub.cs:HandleDropGold"
+          },
+          "CST": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:CastSpell"
+          },
+          "REG": {
+            "status": "ported",
+            "target": "Server/Services/GameLoopService.cs:TickMeditation (server-authoritative)"
+          },
+          "/MEDITATE": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleMeditate"
           }
         }
       }

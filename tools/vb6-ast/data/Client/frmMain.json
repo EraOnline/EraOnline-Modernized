@@ -1219,7 +1219,8 @@
       "lineEnd": 1104,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/GameLoopService.cs:TickMeditation (server-authoritative, no client timer)",
         "sends": [
           "REG"
         ],

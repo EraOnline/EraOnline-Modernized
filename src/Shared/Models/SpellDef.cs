@@ -36,6 +36,7 @@ public class SpellDef
     [JsonPropertyName("createObj")] public int CreateObj { get; set; }
     [JsonPropertyName("summonCreature")] public int SummonCreature { get; set; }
     [JsonPropertyName("paralyze")] public int Paralyze { get; set; }
+    [JsonPropertyName("teleport")] public int Teleport { get; set; }
     [JsonPropertyName("destruction")] public int Destruction { get; set; }
     [JsonPropertyName("resurrection")] public int Resurrection { get; set; }
 }

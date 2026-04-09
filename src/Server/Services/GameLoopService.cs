@@ -66,6 +66,13 @@ public class GameLoopService : BackgroundService
                 {
                     await TickCriminalTimers();
                 }
+
+                // Meditation mana regen (VB6: Meditate_Timer every 10000ms, client-side)
+                // Server-authoritative: tick every 10s (200 ticks at 50ms)
+                if (_tickCount % 200 == 0)
+                {
+                    await TickMeditation();
+                }
             }
             catch (Exception ex)
             {
@@ -120,6 +127,56 @@ public class GameLoopService : BackgroundService
                         player.Heading, player.X, player.Y, 2, 2, false));
                 await SendStatsToPlayer(player);
             }
+        }
+    }
+
+    /// <summary>
+    /// Mana regen for all meditating players. VB6: Meditate_Timer (client, 10s) -> REG -> RegainMana.
+    /// Server-authoritative: tick every 10s.
+    /// </summary>
+    private async Task TickMeditation()
+    {
+        foreach (var player in _world.GetAllOnlinePlayers())
+        {
+            if (!player.Meditating) continue;
+            var ch = player.Character;
+
+            if (ch.CurrentMan >= ch.MaxMan)
+            {
+                await _hubContext.Clients.Client(player.ConnectionId).SendAsync("Chat",
+                    new ChatMessage("Your mana is fully regained and you cannot regain more.", FontType.Info));
+                player.Meditating = false;
+                await _hubContext.Clients.Client(player.ConnectionId).SendAsync("Meditate",
+                    new MeditateMessage(false));
+                // Remove meditation aura
+                _world.PickupGroundItem(player.Map, player.X, player.Y);
+                await _hubContext.Clients.Group(MapGroup(player.Map)).SendAsync("EraseObj",
+                    new EraseObjMessage(player.X, player.Y));
+                continue;
+            }
+
+            // VB6: Meditating skill (Skill27) determines regen divisor
+            int medSkill = ch.Skills[(int)SkillType.Meditating];
+            int divisor = medSkill switch
+            {
+                <= 10 => 30, <= 20 => 26, <= 30 => 24, <= 40 => 20, <= 50 => 17,
+                <= 60 => 15, <= 70 => 13, <= 80 => 10, <= 90 => 7, _ => 5
+            };
+
+            // VB6: Low mana special case
+            if (ch.MaxMan < 61 && ch.CurrentMan < ch.MaxMan)
+                ch.CurrentMan = Math.Min(ch.CurrentMan + ch.MaxMan + 5, ch.MaxMan);
+            else
+            {
+                int regen = Math.Max(1, ch.MaxMan / divisor);
+                ch.CurrentMan = Math.Min(ch.CurrentMan + regen, ch.MaxMan);
+            }
+
+            ch.Exp += 1;
+
+            await _hubContext.Clients.Client(player.ConnectionId).SendAsync("Chat",
+                new ChatMessage("You regain a little mana, and continue to meditate...", FontType.Info));
+            await SendStatsToPlayer(player);
         }
     }
 
