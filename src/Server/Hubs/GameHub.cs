@@ -542,6 +542,11 @@ public class GameHub : Hub
                     "You begin smelting to make steel.");
                 break;
 
+            case 20: // OBJTYPE_LOG — drop log to set up campfire
+                await StartCraft(player, slot, 13, (int)SkillType.Surviving, 1,
+                    "You begin setting the camp...");
+                break;
+
             default:
                 await Clients.Caller.SendAsync("Chat",
                     new ChatMessage("You can't use that.", FontType.Info));
@@ -758,6 +763,20 @@ public class GameHub : Hub
             }
 
             await WarpPlayer(player, destMap, destX, destY);
+            return;
+        }
+
+        // VB6: Check for adjacent campfire (object 155) — sends "TEN" to enable campfire healing timer
+        int[] cdx = { -1, 1, 0, 0 };
+        int[] cdy = { 0, 0, -1, 1 };
+        for (int i = 0; i < 4; i++)
+        {
+            var item = _world.GetGroundItem(player.Map, player.X + cdx[i], player.Y + cdy[i]);
+            if (item != null && item.ObjIndex == 155)
+            {
+                await Clients.Caller.SendAsync("CampfireNearby", true);
+                return;
+            }
         }
     }
 
@@ -1565,6 +1584,12 @@ public class GameHub : Hub
                 skillChance = 4; successMessage = "And you manage to create it!";
                 break;
 
+            case 13: // SetCamp (log → campfire)
+                consumeAmount = 1; resultObjIndex = 155; // campfire
+                soundId = SoundId.Burn; skillIndex = (int)SkillType.Surviving;
+                skillChance = 30; successMessage = "And it ignite !";
+                break;
+
             default: return;
         }
 
@@ -1616,6 +1641,62 @@ public class GameHub : Hub
             player.CraftNeedFoldedCloth = 0;
             player.CraftSkillRequired = 0;
         }
+    }
+
+    // ===================== Campfire Healing =====================
+
+    /// <summary>
+    /// Heal from adjacent campfire. VB6: HandleData "CMP" -> CampHeal (GameLogic.bas:4058).
+    /// Client calls this every 10 seconds while near a campfire.
+    /// Restores HP by maxHP/5 and STA by maxSTA/5.
+    /// </summary>
+    public async Task CampHeal()
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null || player.IsDead) return;
+
+        var ch = player.Character;
+
+        // Check for adjacent campfire (object 155) on any of the 4 adjacent tiles
+        bool nearCampfire = false;
+        int[] dx = { -1, 1, 0, 0 };
+        int[] dy = { 0, 0, -1, 1 };
+        for (int i = 0; i < 4; i++)
+        {
+            var item = _world.GetGroundItem(player.Map, player.X + dx[i], player.Y + dy[i]);
+            if (item != null && item.ObjIndex == 155)
+            { nearCampfire = true; break; }
+        }
+        // Also check the tile we're standing on
+        var standingItem = _world.GetGroundItem(player.Map, player.X, player.Y);
+        if (standingItem != null && standingItem.ObjIndex == 155) nearCampfire = true;
+
+        if (!nearCampfire) return;
+
+        bool healed = false;
+        if (ch.CurrentHp < ch.MaxHp)
+        {
+            ch.CurrentHp = Math.Min(ch.CurrentHp + ch.MaxHp / 5, ch.MaxHp);
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You regain some health by sitting with the camp fire !", FontType.Info));
+            healed = true;
+        }
+
+        if (ch.CurrentSta < ch.MaxSta)
+        {
+            ch.CurrentSta = Math.Min(ch.CurrentSta + ch.MaxSta / 5, ch.MaxSta);
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You regain some stamina by sitting with the camp fire !", FontType.Info));
+            healed = true;
+        }
+
+        if (!healed)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You sit by the campfire, but cannot seem to heal.", FontType.Info));
+        }
+
+        await SendStats(ch);
     }
 
     // ===================== NPC Healing =====================

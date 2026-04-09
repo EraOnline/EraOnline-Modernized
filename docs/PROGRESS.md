@@ -2,7 +2,7 @@
 
 ## Current State
 
-**Phase 4 complete.** Live NPC AI with 8 movement patterns, full combat system (player attacks NPC, NPC attacks player), death/ghost state, resurrection at Priest of Life, level-up system, Consider (TAB). Next: Phase 5 — NPC trading, training, crafting, banking.
+**Phase 5 complete.** Full economy: NPC trading with merchant skill pricing, training at trainers, three crafting pipelines (woodworking/tailoring/blacksmithing), banking, NPC healing, campfire healing. Next: Phase 6 — Criminal system, reputation, weather, spells, housing, fishing/mining.
 
 Most recent log: [2026-04-08](logs/2026-04-08.md)
 
@@ -102,21 +102,21 @@ Combat, items, NPCs, death. The game becomes playable.
 
 Trading, leveling, skills, crafting.
 
-- [ ] NPC trading: /TRADE, buy/sell interface, merchant skill affects prices
-- [ ] Experience from kills and skill use
-- [ ] Level-up system (hidden levels, ELU scaling, +5 training points, stat bumps)
-- [ ] Training: /TRAIN at trainers, spend practice points on skills
-- [ ] Skill use-based improvement (skills >= 10 auto-raise, < 10 require training points)
-- [ ] Specialized skills (3 per character, can exceed 50)
-- [ ] Class changes based on highest skill
-- [ ] Equipment class restrictions (ClassForbid system)
-- [ ] Crafting: woodworking (chop tree -> saw logs -> make item from drawing)
-- [ ] Crafting: tailoring (sewing kit + cloth -> folded cloth -> make clothing from drawing)
-- [ ] Crafting: blacksmithing (hammer + ore -> steel -> make weapon from drawing)
-- [ ] Crafting: progress bars based on skill level
-- [ ] Banking: /DEPOSIT, /WITHDRAW at banks
-- [ ] NPC healing: /HEAL at healers (gold cost based on level)
-- [ ] Campfire healing: drop log, click to light, sit nearby to regen
+- [x] NPC trading: /TRADE, buy/sell interface, merchant skill affects prices (Skill8 multiplier table)
+- [x] Experience from kills and skill use (implemented in Phase 4 combat + crafting EXP)
+- [x] Level-up system (implemented in Phase 4: CheckUserLevel, ELU scaling, +5 training points, stat bumps)
+- [x] Training: /TRAIN at Trainer NPCs (npcType 62), spend training points on any of 28 skills
+- [x] Skill use-based improvement (1/40 combat, 1/30 merchant buy, 1/150 merchant sell, 1/15 crafting, level-capped)
+- [ ] Specialized skills (3 per character, can exceed 50) — data exists, enforcement deferred
+- [x] Class changes based on highest skill (CheckClass called on all skill changes)
+- [x] Equipment class restrictions (ClassForbid array checked in UseItem) + Level/HP check
+- [x] Crafting: woodworking (saw + 2 logs → 4 planks, carpentry drawing + planks → item)
+- [x] Crafting: tailoring (sewing kit + 2 cloth → 4 folded cloth, tailor drawing + folded cloth → clothing)
+- [x] Crafting: blacksmithing (hammer + 2 ore → 4 steel, blacksmithing drawing + steel → weapon)
+- [x] Crafting: server-authoritative progress bars based on skill level (duration = (100 - skill) * 50ms)
+- [x] Banking: /DEPOSIT amount, /WITHDRAW amount, /BALANCE at Banker NPCs (npcType 48)
+- [x] NPC healing: /HEAL at Healer NPCs (npcType 5), charge = level * 10 gold (cap 200)
+- [x] Campfire healing: use log item → SetCamp craft → campfire on ground, adjacent = heal HP/5 + STA/5 every 10s
 
 **Milestone:** Full economic loop. Chop trees, craft items, sell to NPCs, buy better equipment, fight monsters, level up, train skills.
 

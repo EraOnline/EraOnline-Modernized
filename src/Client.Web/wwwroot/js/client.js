@@ -689,6 +689,27 @@ const EraClient = (() => {
         document.getElementById('game-frame').appendChild(overlay);
     }
 
+    // --- Campfire Healing Timer ---
+    // VB6: Campfire timer (10000ms) sends "CMP" while near a campfire
+    let campfireTimer = null;
+
+    function onCampfireNearby(isNearby) {
+        if (isNearby && !campfireTimer) {
+            // Start healing every 10 seconds
+            campfireTimer = setInterval(() => {
+                connection.invoke('CampHeal').catch(() => {});
+            }, 10000);
+            // Also heal immediately on first contact
+            connection.invoke('CampHeal').catch(() => {});
+        }
+    }
+
+    // Clear campfire timer on map change (movement away from campfire
+    // won't trigger CampfireNearby again, and map load clears context)
+    function clearCampfireTimer() {
+        if (campfireTimer) { clearInterval(campfireTimer); campfireTimer = null; }
+    }
+
     // --- Crafting Progress Bar ---
 
     function onCraftStart(msg) {
@@ -739,6 +760,7 @@ const EraClient = (() => {
 
     function onPlayerMove(direction) {
         if (connection && connection.state === signalR.HubConnectionState.Connected) {
+            clearCampfireTimer(); // clear campfire timer on any movement
             connection.invoke('Move', direction).catch(err => {
                 console.error('[EraClient] Move failed:', err);
             });
@@ -931,6 +953,7 @@ const EraClient = (() => {
         connection.on('TradeOpen', onTradeOpen);
         connection.on('TrainOpen', onTrainOpen);
         connection.on('CraftStart', onCraftStart);
+        connection.on('CampfireNearby', onCampfireNearby);
 
         connection.onreconnecting(() => setStatusBar('Reconnecting...'));
         connection.onreconnected(() => setStatusBar('Reconnected'));
