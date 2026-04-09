@@ -772,7 +772,7 @@ const EraClient = (() => {
         panel.appendChild(listDiv);
         panel.appendChild(detailDiv);
         panel.appendChild(closeBtn);
-        document.getElementById('game-screen').appendChild(panel);
+        document.getElementById('game-frame').appendChild(panel);
     }
 
     function refreshSpellBookUI() {
