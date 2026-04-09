@@ -381,6 +381,22 @@ public class GameHub : Hub
         var objDef = _gameData.Objects.FirstOrDefault(o => o.Id == inv.ObjIndex);
         if (objDef == null) return;
 
+        // VB6: Level check — "You don't have enough health to equip this"
+        if (objDef.Level > 0 && ch.MaxHp < objDef.Level)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"You don`t have enough health to equip this. You need {objDef.Level} health to equip this.", FontType.Info));
+            return;
+        }
+
+        // VB6: ClassForbid check — class restrictions on items
+        if (objDef.ClassForbid.Length > 0 && objDef.ClassForbid.Any(c => c == ch.Class))
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Your class forbid you in using this !", FontType.Info));
+            return;
+        }
+
         var objType = objDef.ObjType;
 
         switch (objType)
@@ -1325,6 +1341,30 @@ public class GameHub : Hub
     }
 
     /// <summary>
+    /// Check if player's class should change based on highest skill.
+    /// VB6: CheckClass in Checks.bas. Called after skill changes.
+    /// </summary>
+    private void CheckClass(CharacterData ch)
+    {
+        int highestSkill = 0;
+        int highestValue = 0;
+        for (int i = 1; i <= 28; i++)
+        {
+            if (ch.Skills[i] > highestValue)
+            {
+                highestValue = ch.Skills[i];
+                highestSkill = i;
+            }
+        }
+
+        if (highestSkill > 0 && SkillInfo.SkillToClass.TryGetValue(highestSkill, out var newClass))
+        {
+            if (ch.Class != newClass)
+                ch.Class = newClass;
+        }
+    }
+
+    /// <summary>
     /// Try to improve a skill. VB6 pattern: RandomNumber(1, chance) == target, skill >= 10, below level cap.
     /// </summary>
     private async Task TryImproveSkill(PlayerState player, int skillIndex, int chance)
@@ -1341,6 +1381,7 @@ public class GameHub : Hub
         if (Random.Shared.Next(1, chance + 1) == 5)
         {
             ch.Skills[skillIndex]++;
+            CheckClass(ch);
             string skillName = ((SkillType)skillIndex).ToString();
             await Clients.Caller.SendAsync("Chat",
                 new ChatMessage($"Your {skillName} skill has improved ({ch.Skills[skillIndex]}) !", FontType.SkillInfo));
@@ -1545,6 +1586,7 @@ public class GameHub : Hub
 
         ch.Skills[skillIndex]++;
         ch.TrainingPoints--;
+        CheckClass(ch);
 
         await SendStats(ch);
     }
@@ -1704,6 +1746,7 @@ public class GameHub : Hub
                 ch.Level <= GameConstants.MaxLevel && SkillInfo.LevelCap[Math.Min(ch.Level, 50)] > ch.Skills[22])
             {
                 ch.Skills[22]++;
+                CheckClass(ch);
                 await Clients.Caller.SendAsync("Chat",
                     new ChatMessage($"Your backstabbing skill has improved ({ch.Skills[22]}) !", FontType.SkillInfo));
             }
@@ -1746,6 +1789,7 @@ public class GameHub : Hub
         if (ch.Skills[skillIndex] >= cap) return;
 
         ch.Skills[skillIndex]++;
+        CheckClass(ch);
         await Clients.Caller.SendAsync("Chat",
             new ChatMessage($"Your {skillName} skill has improved ({ch.Skills[skillIndex]}) !", FontType.SkillInfo));
     }
