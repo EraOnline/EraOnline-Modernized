@@ -15,7 +15,8 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 builder.Services.AddSingleton<GameDataService>();
 builder.Services.AddSingleton<WorldState>();
 builder.Services.AddSingleton<ChatLogger>();
-builder.Services.AddHostedService<GameLoopService>();
+builder.Services.AddSingleton<GameLoopService>();
+builder.Services.AddHostedService(sp => sp.GetRequiredService<GameLoopService>());
 
 // SignalR
 builder.Services.AddSignalR();
