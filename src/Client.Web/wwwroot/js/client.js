@@ -633,15 +633,6 @@ const EraClient = (() => {
 
     // --- Training Window ---
 
-    const skillNames = [
-        '', 'Cooking', 'Musicanship', 'Tailoring', 'Carpenting', 'Lumberjacking',
-        'Tactics', 'Disguise', 'Merchant', 'Blacksmithing', 'Hiding',
-        'Magery', 'Lockpicking', 'Pickpocket', 'Stealth', 'Poisoning',
-        'Swordmanship', 'Parrying', 'Animal Taming', 'Religion Lore', 'Fishing',
-        'Mining', 'Backstabbing', 'Healing', 'Surviving', 'Etiquette',
-        'Streetwise', 'Meditating', 'Archery'
-    ];
-
     function onTrainOpen(skills) {
         let existing = document.getElementById('train-overlay');
         if (existing) existing.remove();
