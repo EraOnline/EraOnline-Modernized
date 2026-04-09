@@ -1647,6 +1647,18 @@
           "/WITHDRAWGOLD": {
             "status": "ported",
             "target": "Server/Hubs/GameHub.cs:HandleBankWithdraw"
+          },
+          "CRM": {
+            "status": "ported",
+            "target": "Server/Services/GameLoopService.cs:TickCriminalTimers (server-authoritative)"
+          },
+          "/DUEL": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleDuel"
+          },
+          "DRG": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleDropGold"
           }
         }
       }

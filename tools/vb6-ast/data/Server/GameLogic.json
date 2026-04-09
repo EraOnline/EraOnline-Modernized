@@ -737,7 +737,8 @@
       "annotations": {
         "purpose": "PvP combat: hit calculation, damage, criminal flagging, death",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:UserAttackUser",
         "sends": [
           "@",
           "PLW"
@@ -1283,7 +1284,8 @@
       "lineEnd": 3631,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleDuel",
         "sends": [
           "@"
         ],
@@ -1823,7 +1825,8 @@
       "lineEnd": 5258,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleDropGold",
         "sends": [],
         "calls": [
           "MakeObj",
@@ -1840,7 +1843,8 @@
       "lineEnd": 5314,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:BackstabPC",
         "sends": [],
         "calls": [
           "Randomize",
@@ -1916,7 +1920,8 @@
       "lineEnd": 5516,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:CheckRep (static method)",
         "sends": [],
         "calls": [
           "SendUserStatsBox"

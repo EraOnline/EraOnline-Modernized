@@ -81,7 +81,8 @@
       "annotations": {
         "purpose": "Evaluate reputation and assign rank title based on OverallRep",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:CheckRep (static method)",
         "sends": [],
         "calls": [
           "SendUserStatsBox"

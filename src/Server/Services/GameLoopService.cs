@@ -59,6 +59,13 @@ public class GameLoopService : BackgroundService
                 {
                     ResetNpcAttackFlags();
                 }
+
+                // Criminal timer countdown (VB6: Criminal_Timer every 60000ms, client-side)
+                // Server-authoritative: decrement every 60s (1200 ticks at 50ms)
+                if (_tickCount % 1200 == 0)
+                {
+                    await TickCriminalTimers();
+                }
             }
             catch (Exception ex)
             {
@@ -85,6 +92,33 @@ public class GameLoopService : BackgroundService
             foreach (var npc in _world.GetNpcsOnMap(mapEntry))
             {
                 npc.CanAttack = true;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Decrement criminal timers for all online criminals. VB6: Criminal_Timer (client, 60s).
+    /// When CriminalCount reaches 0, clear criminal flag and notify.
+    /// </summary>
+    private async Task TickCriminalTimers()
+    {
+        foreach (var player in _world.GetAllOnlinePlayers())
+        {
+            var ch = player.Character;
+            if (ch.Criminal == 0 || ch.CriminalCount <= 0) continue;
+
+            ch.CriminalCount--;
+            if (ch.CriminalCount <= 0)
+            {
+                ch.Criminal = 0;
+                ch.CriminalCount = 0;
+                await _hubContext.Clients.Client(player.ConnectionId).SendAsync("Chat",
+                    new ChatMessage("The knowledge of your criminal deeds fades out with the people and you are no longer marked as a criminal.", FontType.Info));
+                // Broadcast appearance change (no longer red name)
+                await _hubContext.Clients.Group(MapGroup(player.Map)).SendAsync("ChangeChar",
+                    new MakeCharMessage(player.CharIndex, ch.Name, ch.Body, ch.Head,
+                        player.Heading, player.X, player.Y, 2, 2, false));
+                await SendStatsToPlayer(player);
             }
         }
     }
@@ -492,6 +526,12 @@ public class GameLoopService : BackgroundService
     /// Player death. VB6: UserDie (GameLogic.bas:299).
     /// Ghost state, drop random item, lose EXP/gold.
     /// </summary>
+    /// <summary>
+    /// Kill a player. Called from NpcAttackUser (game loop) and UserAttackUser (hub).
+    /// Public so GameHub can call it for PvP deaths.
+    /// </summary>
+    public async Task UserDieFromHub(PlayerState player) => await UserDie(player);
+
     private async Task UserDie(PlayerState player)
     {
         var ch = player.Character;
@@ -603,7 +643,8 @@ public class GameLoopService : BackgroundService
                 ch.CurrentHp, ch.MaxHp, ch.CurrentMan, ch.MaxMan,
                 ch.CurrentSta, ch.MaxSta, ch.Gold, ch.Exp, ch.Elu,
                 ch.Food, ch.Drink, ch.MinHit, ch.MaxHit, ch.Def,
-                ch.TrainingPoints, ch.Class, ch.RepRank, ch.Skills));
+                ch.TrainingPoints, ch.Class, ch.RepRank, ch.Skills,
+                ch.Criminal, ch.CriminalCount));
     }
 
     /// <summary>Send zone music to a specific player (for restoring after battle mode on death).</summary>

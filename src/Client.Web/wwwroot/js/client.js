@@ -444,7 +444,7 @@ const EraClient = (() => {
 
     function onMakeChar(msg) {
         EraRenderer.addCharacter(msg.charIndex, msg.name, msg.body, msg.head,
-            msg.heading, msg.x, msg.y, msg.weaponAnim, msg.shieldAnim);
+            msg.heading, msg.x, msg.y, msg.weaponAnim, msg.shieldAnim, msg.isCriminal);
     }
 
     function onEraseChar(msg) {
@@ -496,7 +496,9 @@ const EraClient = (() => {
         const classEl = document.getElementById('charsheet-class');
         if (classEl && msg.class) {
             const repStr = msg.repRank && msg.repRank !== 'Unknown' ? ` ${msg.repRank}` : '';
-            classEl.textContent = `${msg.class}${repStr}`;
+            const crimStr = msg.criminal > 0 ? ' [CRIMINAL]' : '';
+            classEl.textContent = `${msg.class}${repStr}${crimStr}`;
+            classEl.style.color = msg.criminal > 0 ? '#ff4444' : '';
         }
     }
 
@@ -803,9 +805,9 @@ const EraClient = (() => {
     }
 
     function onChangeChar(msg) {
-        // VB6: CHC — character appearance changed (equip/unequip)
+        // VB6: CHC — character appearance changed (equip/unequip, criminal status change)
         EraRenderer.addCharacter(msg.charIndex, msg.name, msg.body, msg.head,
-            msg.heading, msg.x, msg.y, msg.weaponAnim, msg.shieldAnim);
+            msg.heading, msg.x, msg.y, msg.weaponAnim, msg.shieldAnim, msg.isCriminal);
     }
 
     function onMakeObj(msg) {

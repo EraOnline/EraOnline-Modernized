@@ -29,7 +29,8 @@ public record MakeCharMessage(
     int X,
     int Y,
     int WeaponAnim,
-    int ShieldAnim);
+    int ShieldAnim,
+    bool IsCriminal = false);
 
 /// <summary>VB6: ERC - Erase a character from the client</summary>
 public record EraseCharMessage(int CharIndex);
@@ -65,7 +66,9 @@ public record StatsMessage(
     int TrainingPoints,
     string Class = "",
     string RepRank = "",
-    int[]? Skills = null);
+    int[]? Skills = null,
+    int Criminal = 0,
+    long CriminalCount = 0);
 
 /// <summary>VB6: TGT - Set target name in the target bar</summary>
 public record TargetMessage(string Text);

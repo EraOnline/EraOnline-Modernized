@@ -14,13 +14,15 @@ public class GameHub : Hub
     private readonly GameDataService _gameData;
     private readonly WorldState _world;
     private readonly ChatLogger _chatLog;
+    private readonly GameLoopService _gameLoopService;
     private readonly ILogger<GameHub> _logger;
 
-    public GameHub(GameDataService gameData, WorldState world, ChatLogger chatLog, ILogger<GameHub> logger)
+    public GameHub(GameDataService gameData, WorldState world, ChatLogger chatLog, GameLoopService gameLoopService, ILogger<GameHub> logger)
     {
         _gameData = gameData;
         _world = world;
         _chatLog = chatLog;
+        _gameLoopService = gameLoopService;
         _logger = logger;
     }
 
@@ -216,7 +218,7 @@ public class GameHub : Hub
             var (ow, os) = GetEquipAnims(other.Character);
             await Clients.Caller.SendAsync("MakeChar", new MakeCharMessage(
                 other.CharIndex, other.Character.Name, other.Character.Body, other.Character.Head,
-                other.Heading, other.X, other.Y, ow, os));
+                other.Heading, other.X, other.Y, ow, os, other.Character.Criminal > 0));
         }
 
         // Send live NPC positions (not static spawns — NPCs may have moved)
@@ -236,7 +238,7 @@ public class GameHub : Hub
         await Clients.OthersInGroup(MapGroup(map))
             .SendAsync("MakeChar", new MakeCharMessage(
                 charIndex, character.Name, character.Body, character.Head,
-                (int)Direction.South, x, y, pw, ps));
+                (int)Direction.South, x, y, pw, ps, character.Criminal > 0));
 
         // Welcome messages
         await Clients.Caller.SendAsync("Chat", new ChatMessage(
@@ -708,7 +710,7 @@ public class GameHub : Hub
         await Clients.Group(MapGroup(player.Map))
             .SendAsync("ChangeChar", new MakeCharMessage(
                 player.CharIndex, ch.Name, ch.Body, ch.Head,
-                player.Heading, player.X, player.Y, weaponAnim, shieldAnim));
+                player.Heading, player.X, player.Y, weaponAnim, shieldAnim, ch.Criminal > 0));
     }
 
     /// <summary>
@@ -808,7 +810,7 @@ public class GameHub : Hub
             var (ow, os) = GetEquipAnims(other.Character);
             await Clients.Caller.SendAsync("MakeChar", new MakeCharMessage(
                 other.CharIndex, other.Character.Name, other.Character.Body, other.Character.Head,
-                other.Heading, other.X, other.Y, ow, os));
+                other.Heading, other.X, other.Y, ow, os, other.Character.Criminal > 0));
         }
 
         // Send live NPC positions on the new map
@@ -828,7 +830,7 @@ public class GameHub : Hub
         await Clients.OthersInGroup(MapGroup(newMap))
             .SendAsync("MakeChar", new MakeCharMessage(
                 player.CharIndex, player.Character.Name, player.Character.Body, player.Character.Head,
-                player.Heading, newX, newY, ww, ws));
+                player.Heading, newX, newY, ww, ws, player.Character.Criminal > 0));
 
         // Send position correction to the player
         await Clients.Caller.SendAsync("SetCharIndex", new SetCharIndexMessage(player.CharIndex));
@@ -1040,9 +1042,17 @@ public class GameHub : Hub
                 await HandleResurrect(player);
                 break;
 
+            case "/DUEL":
+                await HandleDuel(player);
+                break;
+
+            case "/DROPGOLD":
+                await HandleDropGold(player, arg);
+                break;
+
             case "/HELP":
                 await Clients.Caller.SendAsync("Chat",
-                    new ChatMessage("Commands: /WHO /PLAYERS /STATS /DESC /SAVE /QUIT /TRADE /RESSURECT /HELP", FontType.Info));
+                    new ChatMessage("Commands: /WHO /PLAYERS /STATS /DESC /SAVE /QUIT /TRADE /DUEL /RESSURECT /HELP", FontType.Info));
                 await Clients.Caller.SendAsync("Chat",
                     new ChatMessage("Chat: just type to say, - to shout, : to emote, \\name to whisper", FontType.Info));
                 break;
@@ -1086,7 +1096,7 @@ public class GameHub : Hub
         await Clients.Group(MapGroup(player.Map))
             .SendAsync("MakeChar", new MakeCharMessage(
                 player.CharIndex, player.Character.Name, player.Character.Body, player.Character.Head,
-                player.Heading, player.X, player.Y, pw, ps));
+                player.Heading, player.X, player.Y, pw, ps, player.Character.Criminal > 0));
     }
 
     // ===================== Combat =====================
@@ -1944,9 +1954,14 @@ public class GameHub : Hub
         if (attackX < 1 || attackX > GameConstants.MapWidth || attackY < 1 || attackY > GameConstants.MapHeight)
             return;
 
-        // VB6: Look for player first, then NPC
-        // Player vs Player: defer to later
-        // For now, look for NPC
+        // VB6: Look for player first, then NPC (UserAttack checks userindex before Npcindex)
+        var targetPlayer = FindPlayerAt(player.Map, attackX, attackY);
+        if (targetPlayer != null && targetPlayer.CharIndex != player.CharIndex)
+        {
+            await UserAttackUser(player, targetPlayer);
+            return;
+        }
+
         var npc = _world.GetNpcOnTile(player.Map, attackX, attackY);
         if (npc != null)
         {
@@ -2085,6 +2100,278 @@ public class GameHub : Hub
 
         // Check level up and send updated stats
         await CheckUserLevel(player);
+        await SendStats(ch);
+    }
+
+    /// <summary>
+    /// Player attacks player. VB6: UserAttackUser (GameLogic.bas:2252).
+    /// Faithful port of PvP combat: criminal flagging, duel mode, PK-free zones, hit/damage, death.
+    /// </summary>
+    private async Task UserAttackUser(PlayerState attacker, PlayerState victim)
+    {
+        var aCh = attacker.Character;
+        var vCh = victim.Character;
+        var attackerClient = Clients.Client(attacker.ConnectionId);
+        var victimClient = Clients.Client(victim.ConnectionId);
+
+        // VB6: Can't attack the dead
+        if (victim.IsDead)
+        {
+            await attackerClient.SendAsync("Chat",
+                new ChatMessage("You cannot attack the dead !", FontType.Info));
+            return;
+        }
+
+        // VB6: PK-free zone check
+        var map = _gameData.Maps.GetValueOrDefault(attacker.Map);
+        if (map?.PkFreeZone == true)
+        {
+            if (!attacker.Duel || !victim.Duel)
+            {
+                await attackerClient.SendAsync("Chat",
+                    new ChatMessage("This is a Player Killing free area. Both players must be in duel mode (/DUEL) to fight here !", FontType.Info));
+                return;
+            }
+        }
+
+        // VB6: Swordmanship (Skill16) hit chance — same brackets as NPC combat
+        int swordSkill = aCh.Skills[(int)SkillType.Swordmanship];
+        int hitChance;
+        if (swordSkill <= 30)
+            hitChance = Random.Shared.Next(1, 4); // 1/3 chance
+        else if (swordSkill <= 50)
+            hitChance = Random.Shared.Next(1, 3); // 1/2 chance
+        else
+            hitChance = 1; // always hit
+
+        if (hitChance != 1)
+        {
+            await attackerClient.SendAsync("Chat",
+                new ChatMessage("You miss !", FontType.Info));
+            return;
+        }
+
+        // VB6: Attacking an innocent makes you a criminal
+        if (vCh.Criminal == 0 && !victim.Duel && aCh.Criminal == 0)
+        {
+            await attackerClient.SendAsync("Chat",
+                new ChatMessage("You are attacking a innocent ! You criminal !", FontType.Info));
+            await victimClient.SendAsync("Chat",
+                new ChatMessage("Someone attacked you ! Your attacker is now a criminal !", FontType.Info));
+            aCh.Criminal = 2;
+            aCh.CriminalCount += 45;
+            // Broadcast updated appearance (red name)
+            var (cw, cs) = GetEquipAnims(aCh);
+            await Clients.Group(MapGroup(attacker.Map))
+                .SendAsync("ChangeChar", new MakeCharMessage(
+                    attacker.CharIndex, aCh.Name, aCh.Body, aCh.Head,
+                    attacker.Heading, attacker.X, attacker.Y, cw, cs, true));
+        }
+
+        // VB6: Hit = random(MinHIT, MaxHIT) - DEF/2, min 1
+        int hit = Random.Shared.Next(aCh.MinHit, aCh.MaxHit + 1) - (vCh.Def / 2);
+        if (hit < 1) hit = 1;
+
+        attacker.Character.CurrentSta -= 1;
+
+        // VB6: Random body part (flavor text only)
+        string spotString = Random.Shared.Next(1, 5) switch
+        {
+            1 => " in the head !",
+            2 => " on the legs !",
+            3 => " on the hands !",
+            _ => " on the chest !"
+        };
+
+        await attackerClient.SendAsync("Chat",
+            new ChatMessage($"You strike {vCh.Name} for {hit}{spotString}", FontType.Fight));
+        await victimClient.SendAsync("Chat",
+            new ChatMessage($"{aCh.Name} hits you for {hit}{spotString}", FontType.Fight));
+
+        vCh.CurrentHp -= hit;
+
+        // VB6: Sound effects
+        await Clients.Group(MapGroup(attacker.Map))
+            .SendAsync("PlaySound", new PlaySoundMessage(SoundId.SwordHit2));
+        int hurtSound = vCh.Gender == "Female" ? SoundId.FemaleScream : SoundId.MaleHurt;
+        await Clients.Group(MapGroup(victim.Map))
+            .SendAsync("PlaySound", new PlaySoundMessage(hurtSound));
+
+        // VB6: Backstab on first strike
+        if (!attacker.HasStruck)
+        {
+            await BackstabPC(attacker, victim);
+            attacker.HasStruck = true;
+        }
+
+        // VB6: Player death
+        if (vCh.CurrentHp <= 0)
+        {
+            attacker.TargetNpcIndex = 0;
+            attacker.TargetPlayerCharIndex = 0;
+
+            await Clients.Group(MapGroup(attacker.Map))
+                .SendAsync("PlaySound", new PlaySoundMessage(SoundId.MaleHurt2));
+
+            // VB6: EXP = victim level * 20
+            int expGain = vCh.Level * 20;
+            aCh.Exp += expGain;
+            await attackerClient.SendAsync("Chat",
+                new ChatMessage($"You have gained {expGain} experience !", FontType.Info));
+            await Clients.Group(MapGroup(attacker.Map)).SendAsync("Chat",
+                new ChatMessage($"{vCh.Name} has been slain by {aCh.Name} !", FontType.Talk));
+
+            attacker.HasStruck = false;
+
+            // VB6: Reputation effects of PvP kill
+            if (vCh.Criminal == 0 && !victim.Duel)
+            {
+                // Murdered an innocent
+                aCh.CriminalCount += 30;
+                aCh.CommonRep -= 5;
+                aCh.NobleRep -= 5;
+                aCh.OverallRep -= 20;
+                aCh.UnderRep += 3;
+                aCh.BendarrRep += 3;
+                aCh.Criminal = 2;
+                await attackerClient.SendAsync("Chat",
+                    new ChatMessage("You gain reputation with Bendarr and the underworld ! You also lose some reputation with the Nobles and the common people.", FontType.Info));
+            }
+            else
+            {
+                // Killed a criminal or duel opponent
+                aCh.OverallRep += 2;
+                aCh.CommonRep += 2;
+                await attackerClient.SendAsync("Chat",
+                    new ChatMessage("You gain some reputation with common people !", FontType.Info));
+            }
+
+            // Kill the victim (VB6: UserDie)
+            await _gameLoopService.UserDieFromHub(victim);
+        }
+
+        // VB6: Skill improvement 1/40 chance
+        await TryImproveSkill(aCh, (int)SkillType.Tactics, "tactics");
+        await TryImproveSkill(aCh, (int)SkillType.Swordmanship, "swordmanship");
+        if (aCh.Skills[(int)SkillType.Parrying] > 0)
+            await TryImproveSkill(aCh, (int)SkillType.Parrying, "parrying");
+
+        await CheckUserLevel(attacker);
+        await SendStats(aCh);
+        await CheckUserLevel(victim);
+        await Clients.Client(victim.ConnectionId).SendAsync("Stats", new StatsMessage(
+            vCh.CurrentHp, vCh.MaxHp, vCh.CurrentMan, vCh.MaxMan,
+            vCh.CurrentSta, vCh.MaxSta, vCh.Gold, vCh.Exp, vCh.Elu,
+            vCh.Food, vCh.Drink, vCh.MinHit, vCh.MaxHit, vCh.Def,
+            vCh.TrainingPoints, vCh.Class, vCh.RepRank, vCh.Skills,
+            vCh.Criminal, vCh.CriminalCount));
+        CheckRep(aCh);
+    }
+
+    /// <summary>
+    /// Backstab on first PvP strike. VB6: BackstabPC (GameLogic.bas:5260).
+    /// Skill22 (backstabbing) determines chance. Flat 5 bonus damage on success.
+    /// </summary>
+    private async Task BackstabPC(PlayerState attacker, PlayerState victim)
+    {
+        int skill = attacker.Character.Skills[(int)SkillType.Backstabbing];
+        int luck2 = skill switch
+        {
+            <= 10 => 50, <= 20 => 45, <= 30 => 40, <= 40 => 35, <= 50 => 30,
+            <= 60 => 25, <= 70 => 20, <= 80 => 15, <= 90 => 10, _ => 3
+        };
+
+        if (Random.Shared.Next(1, luck2 + 1) == luck2)
+        {
+            await Clients.Client(attacker.ConnectionId).SendAsync("Chat",
+                new ChatMessage("You successfully backstabbed your victim !", FontType.Fight));
+            await Clients.Client(victim.ConnectionId).SendAsync("Chat",
+                new ChatMessage("You were backstabbed !", FontType.Fight));
+            victim.Character.CurrentHp -= 5;
+        }
+
+        // VB6: 1/15 chance to raise backstabbing skill
+        var ch = attacker.Character;
+        int bsCap = ch.Level >= 1 && ch.Level <= 50 ? SkillInfo.LevelCap[ch.Level] : 100;
+        if (Random.Shared.Next(1, 16) == 5 && ch.Skills[(int)SkillType.Backstabbing] > 9 &&
+            bsCap > ch.Skills[(int)SkillType.Backstabbing])
+        {
+            ch.Skills[(int)SkillType.Backstabbing]++;
+            await Clients.Client(attacker.ConnectionId).SendAsync("Chat",
+                new ChatMessage($"Your backstabbing skill has improved ({ch.Skills[(int)SkillType.Backstabbing]}) !", FontType.SkillInfo));
+            CheckClass(ch);
+        }
+    }
+
+    /// <summary>
+    /// Calculate reputation rank title from overall rep. VB6: CheckRep (GameLogic.bas:5456).
+    /// </summary>
+    private static void CheckRep(CharacterData ch)
+    {
+        ch.RepRank = ch.OverallRep switch
+        {
+            > 1500 => ch.Gender == "Female" ? "The High Madam" : "The High Sir",
+            > 1000 => ch.Gender == "Female" ? "The Great Lady" : "The Great Lord",
+            > 900  => ch.Gender == "Female" ? "The Lady" : "The Lord",
+            > 800  => "The Fameous",
+            > 700  => "The Honorable",
+            > 600  => "The Respectable",
+            > 499  => "",
+            < 0    => ch.Gender == "Female" ? "The Dreaded Lady" : "The Dreaded Lord",
+            < 100  => ch.Gender == "Female" ? "The Dark Lady" : "The Dark Lord",
+            < 200  => "The Hated",
+            < 300  => "The Scum",
+            < 400  => "The Disrespected",
+            _      => ch.RepRank
+        };
+    }
+
+    /// <summary>
+    /// Toggle duel mode. VB6: Duel (GameLogic.bas:3617). /DUEL command.
+    /// </summary>
+    private async Task HandleDuel(PlayerState player)
+    {
+        player.Duel = !player.Duel;
+        if (player.Duel)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You go into duelling mode. Any player over level 5 can kill you now and vice versa.", FontType.Info));
+            await Clients.Group(MapGroup(player.Map)).SendAsync("Chat",
+                new ChatMessage($"{player.Character.Name} goes into duel !", FontType.Info));
+        }
+        else
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You have left duel mode.", FontType.Info));
+            await Clients.Group(MapGroup(player.Map)).SendAsync("Chat",
+                new ChatMessage($"{player.Character.Name} has ended duel.", FontType.Info));
+        }
+    }
+
+    /// <summary>
+    /// Drop gold on the ground. VB6: DropGold (GameLogic.bas:5244). Object 193 = gold pile.
+    /// </summary>
+    private async Task HandleDropGold(PlayerState player, string amountStr)
+    {
+        if (!long.TryParse(amountStr, out var amount) || amount <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Usage: /DROPGOLD amount", FontType.Info));
+            return;
+        }
+        var ch = player.Character;
+        if (amount > ch.Gold) amount = ch.Gold;
+        if (amount <= 0) return;
+
+        ch.Gold -= (int)amount;
+        // VB6: object 193 = gold pile
+        var goldObj = _gameData.Objects.FirstOrDefault(o => o.Id == 193);
+        if (goldObj != null)
+        {
+            _world.PlaceGroundItem(player.Map, player.X, player.Y, 193, (int)amount);
+            await Clients.Group(MapGroup(player.Map)).SendAsync("MakeObj",
+                new MakeObjMessage(goldObj.GrhIndex, player.X, player.Y));
+        }
         await SendStats(ch);
     }
 
@@ -2334,7 +2621,7 @@ public class GameHub : Hub
         var (pw, ps) = GetEquipAnims(ch);
         await Clients.Group(MapGroup(player.Map)).SendAsync("MakeChar",
             new MakeCharMessage(player.CharIndex, ch.Name, ch.Body, ch.Head,
-                player.Heading, player.X, player.Y, pw, ps));
+                player.Heading, player.X, player.Y, pw, ps, ch.Criminal > 0));
 
         await SendStats(ch);
         await SendFullInventory(ch);
@@ -2412,7 +2699,9 @@ public class GameHub : Hub
             c.TrainingPoints,
             c.Class,
             c.RepRank,
-            c.Skills));
+            c.Skills,
+            c.Criminal,
+            c.CriminalCount));
     }
 
     /// <summary>

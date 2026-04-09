@@ -653,6 +653,9 @@ public class PlayerState
     /// <summary>VB6: Flags.Strike — 0 on first encounter, set to 1 after first attack (for backstab)</summary>
     public bool HasStruck { get; set; }
 
+    /// <summary>VB6: Flags.Duel — consensual PvP mode (/DUEL toggle)</summary>
+    public bool Duel { get; set; }
+
     /// <summary>VB6: Flags.StartHead — original head for resurrection</summary>
     public int OriginalHead { get; set; }
 
@@ -720,6 +723,11 @@ public class CharacterData
     public int NobleRep { get; set; } = 0;
     public int UnderRep { get; set; } = 0;
     public int CommonRep { get; set; } = 0;
+    public int BendarrRep { get; set; } = 0;
+    public int VeegaRep { get; set; } = 0;
+    public int ZeendicRep { get; set; } = 0;
+    public int GriigoRep { get; set; } = 0;
+    public int HyliiosRep { get; set; } = 0;
     public int OverallRep { get; set; } = 500;
     public string RepRank { get; set; } = "Unknown";
     public int Criminal { get; set; } = 0;

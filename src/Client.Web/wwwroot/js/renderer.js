@@ -125,10 +125,11 @@ const EraRenderer = (() => {
         setStatus(`Map ${mapId} loaded`);
     }
 
-    function addCharacter(charIndex, name, bodyId, headId, heading, x, y, weaponAnim, shieldAnim) {
+    function addCharacter(charIndex, name, bodyId, headId, heading, x, y, weaponAnim, shieldAnim, isCriminal) {
         const ch = makeCharacter(x, y, bodyId, headId, heading, weaponAnim, shieldAnim);
         ch.charIndex = charIndex;
         ch.name = name;
+        ch.isCriminal = !!isCriminal;
         characters[charIndex] = ch;
 
         // If this is us, center camera
