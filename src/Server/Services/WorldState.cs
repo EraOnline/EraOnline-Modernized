@@ -636,6 +636,17 @@ public class PlayerState
     /// <summary>VB6: Flags.Battlemode</summary>
     public bool BattleMode { get; set; }
 
+    // Crafting state (VB6: UserThrow + Flags.Working/whatjob/SkillFinished)
+    public bool Working { get; set; }
+    public int WhatJob { get; set; }
+    public int CraftMakeItem { get; set; }
+    public int CraftNeedPlanks { get; set; }
+    public int CraftNeedSteel { get; set; }
+    public int CraftNeedFoldedCloth { get; set; }
+    public int CraftSkillRequired { get; set; }
+    public int CraftSlot { get; set; }
+    public DateTime CraftStartTime { get; set; }
+
     /// <summary>Server-authoritative attack cooldown (replaces VB6's client-side 4000ms Attack timer)</summary>
     public DateTime LastAttackTime { get; set; } = DateTime.MinValue;
 

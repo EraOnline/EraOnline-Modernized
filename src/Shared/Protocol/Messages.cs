@@ -107,3 +107,6 @@ public record NpcInvSlotMessage(
 
 /// <summary>Sent to client to open the trade window with the NPC's name</summary>
 public record TradeOpenMessage(string NpcName, NpcInvSlotMessage[] NpcInventory);
+
+/// <summary>VB6: DOS — start crafting progress bar</summary>
+public record CraftStartMessage(int JobType, int DurationMs);

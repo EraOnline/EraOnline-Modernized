@@ -689,6 +689,52 @@ const EraClient = (() => {
         document.getElementById('game-frame').appendChild(overlay);
     }
 
+    // --- Crafting Progress Bar ---
+
+    function onCraftStart(msg) {
+        let existing = document.getElementById('craft-overlay');
+        if (existing) existing.remove();
+
+        const overlay = document.createElement('div');
+        overlay.id = 'craft-overlay';
+        overlay.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);' +
+            'width:300px;background:#2a2a3a;border:2px solid #665544;color:#fff;' +
+            'font-family:Verdana,Arial,sans-serif;font-size:11px;padding:10px;z-index:50;text-align:center;';
+
+        const label = document.createElement('div');
+        label.textContent = 'Working...';
+        label.style.marginBottom = '8px';
+        overlay.appendChild(label);
+
+        const barBg = document.createElement('div');
+        barBg.style.cssText = 'width:100%;height:16px;background:#111;border:1px solid #555;';
+        const barFill = document.createElement('div');
+        barFill.style.cssText = 'width:0%;height:100%;background:#4488ff;transition:width 0.1s linear;';
+        barBg.appendChild(barFill);
+        overlay.appendChild(barBg);
+
+        document.getElementById('game-frame').appendChild(overlay);
+
+        // Animate progress bar
+        const duration = msg.durationMs;
+        const startTime = Date.now();
+        const jobType = msg.jobType;
+
+        function tick() {
+            const elapsed = Date.now() - startTime;
+            const pct = Math.min(100, (elapsed / duration) * 100);
+            barFill.style.width = pct + '%';
+
+            if (pct >= 100) {
+                overlay.remove();
+                connection.invoke('CompleteCraft', jobType).catch(() => {});
+            } else {
+                requestAnimationFrame(tick);
+            }
+        }
+        requestAnimationFrame(tick);
+    }
+
     // --- Client -> Server ---
 
     function onPlayerMove(direction) {
@@ -884,6 +930,7 @@ const EraClient = (() => {
         connection.on('Death', onDeath);
         connection.on('TradeOpen', onTradeOpen);
         connection.on('TrainOpen', onTrainOpen);
+        connection.on('CraftStart', onCraftStart);
 
         connection.onreconnecting(() => setStatusBar('Reconnecting...'));
         connection.onreconnected(() => setStatusBar('Reconnected'));

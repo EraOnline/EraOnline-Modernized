@@ -475,6 +475,73 @@ public class GameHub : Hub
                 await Clients.Caller.SendAsync("Chat", new ChatMessage("You take a drink.", FontType.Info));
                 break;
 
+            // --- Crafting: Drawings (set recipe, don't consume) ---
+
+            case 25: // OBJTYPE_CARPENTRYDRAWING
+                player.CraftMakeItem = objDef.MakeItem;
+                player.CraftNeedPlanks = objDef.NeedPlanks;
+                player.CraftSkillRequired = objDef.Skill;
+                await Clients.Caller.SendAsync("PlaySound", new PlaySoundMessage(SoundId.Paper));
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage("You look at the drawing and you are ready to make it ! Just find the planks now !", FontType.Info));
+                break;
+
+            case 26: // OBJTYPE_BLACKSMITHINGDRAWING
+                player.CraftMakeItem = objDef.MakeItem;
+                player.CraftNeedSteel = objDef.NeedSteel;
+                player.CraftSkillRequired = objDef.Skill;
+                await Clients.Caller.SendAsync("PlaySound", new PlaySoundMessage(SoundId.Paper));
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage("You look at the drawing and you are ready to make it ! Just find the steel now !", FontType.Info));
+                break;
+
+            case 27: // OBJTYPE_TAILORDRAWING
+                player.CraftMakeItem = objDef.MakeItem;
+                player.CraftNeedFoldedCloth = objDef.NeedFoldedCloth;
+                player.CraftSkillRequired = objDef.Skill;
+                await Clients.Caller.SendAsync("PlaySound", new PlaySoundMessage(SoundId.Paper));
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage("You look at the drawing and you are ready to make it ! Just find the folded cloth now !", FontType.Info));
+                break;
+
+            // --- Crafting: Material processing ---
+
+            case 35: // OBJTYPE_PLANKS — use planks to make item from carpentry drawing
+                if (player.CraftMakeItem <= 0 || player.CraftNeedPlanks <= 0)
+                { await Clients.Caller.SendAsync("Chat", new ChatMessage("You need to read a carpentry drawing first.", FontType.Info)); break; }
+                await StartCraft(player, slot, 9, (int)SkillType.Carpentry, player.CraftNeedPlanks,
+                    "You begin making the object.");
+                break;
+
+            case 31: // OBJTYPE_STEEL — use steel to make item from blacksmithing drawing
+                if (player.CraftMakeItem <= 0 || player.CraftNeedSteel <= 0)
+                { await Clients.Caller.SendAsync("Chat", new ChatMessage("You need to read a blacksmithing drawing first.", FontType.Info)); break; }
+                await StartCraft(player, slot, 8, (int)SkillType.Blacksmithing, player.CraftNeedSteel,
+                    "You begin making the object.");
+                break;
+
+            case 30: // OBJTYPE_FOLDEDCLOTH — use folded cloth to make item from tailoring drawing
+                if (player.CraftMakeItem <= 0 || player.CraftNeedFoldedCloth <= 0)
+                { await Clients.Caller.SendAsync("Chat", new ChatMessage("You need to read a tailoring drawing first.", FontType.Info)); break; }
+                await StartCraft(player, slot, 10, (int)SkillType.Tailoring, player.CraftNeedFoldedCloth,
+                    "You begin making the object.");
+                break;
+
+            case 22: // OBJTYPE_SAW — use saw to turn logs into planks (need 2+ logs)
+                await StartCraft(player, slot, 4, (int)SkillType.Carpentry, 2,
+                    "You begin sawing to make planks.");
+                break;
+
+            case 28: // OBJTYPE_SEWINGKIT — use sewing kit to turn cloth into folded cloth (need 2+)
+                await StartCraft(player, slot, 3, (int)SkillType.Tailoring, 2,
+                    "You begin creating folded cloth.");
+                break;
+
+            case 33: // OBJTYPE_HAMMER — use hammer to turn ore into steel (need 2+)
+                await StartCraft(player, slot, 5, (int)SkillType.Blacksmithing, 2,
+                    "You begin smelting to make steel.");
+                break;
+
             default:
                 await Clients.Caller.SendAsync("Chat",
                     new ChatMessage("You can't use that.", FontType.Info));
@@ -1385,6 +1452,169 @@ public class GameHub : Hub
             string skillName = ((SkillType)skillIndex).ToString();
             await Clients.Caller.SendAsync("Chat",
                 new ChatMessage($"Your {skillName} skill has improved ({ch.Skills[skillIndex]}) !", FontType.SkillInfo));
+        }
+    }
+
+    // ===================== Crafting =====================
+
+    /// <summary>
+    /// Start a crafting job. Validates material amount and skill, sets working state,
+    /// sends progress bar to client.
+    /// VB6: DOS message with skill level for progress bar speed.
+    /// </summary>
+    private async Task StartCraft(PlayerState player, int slot, int jobType, int skillIndex,
+        int requiredAmount, string startMessage)
+    {
+        var ch = player.Character;
+
+        // Check material amount
+        if (ch.Inventory[slot].Amount < requiredAmount)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You do not have enough materials to make this.", FontType.Info));
+            return;
+        }
+
+        // For drawing-based crafts, check skill requirement
+        if (jobType >= 8 && jobType <= 10 && player.CraftSkillRequired > ch.Skills[skillIndex])
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"You do not have enough skill to make this item. You need atleast {player.CraftSkillRequired} skill points.", FontType.Info));
+            return;
+        }
+
+        // Start crafting
+        player.Working = true;
+        player.WhatJob = jobType;
+        player.CraftSlot = slot;
+        player.CraftStartTime = DateTime.UtcNow;
+
+        // Progress duration based on skill: higher skill = faster (100 - skill) * 50ms, min 2s
+        int skillLevel = ch.Skills[skillIndex];
+        int durationMs = Math.Max(2000, (100 - skillLevel) * 50);
+
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage(startMessage + " The blue bar represents how much time left.", FontType.Info));
+        await Clients.Caller.SendAsync("CraftStart", new CraftStartMessage(jobType, durationMs));
+    }
+
+    /// <summary>
+    /// Client reports crafting progress bar is complete. Server validates and produces output.
+    /// VB6: HandleData "XBX" -> calls the appropriate craft function with SkillFinished=1.
+    /// </summary>
+    public async Task CompleteCraft(int jobType)
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null || !player.Working || player.WhatJob != jobType) return;
+
+        var ch = player.Character;
+        var slot = player.CraftSlot;
+        if (slot < 0 || slot >= 20) return;
+
+        // Minimum time check (prevent speed hacking)
+        var elapsed = (DateTime.UtcNow - player.CraftStartTime).TotalMilliseconds;
+        if (elapsed < 1500) return; // must wait at least 1.5s
+
+        // Reset working state
+        player.Working = false;
+        player.WhatJob = 0;
+
+        int soundId = SoundId.Coins;
+        int resultObjIndex = 0;
+        int resultAmount = 1;
+        int consumeAmount = 0;
+        int skillIndex = 0;
+        int skillChance = 15;
+        string successMessage = "Success!";
+
+        switch (jobType)
+        {
+            case 3: // CreateFoldedCloth (sewing kit + 2 cloth → 4 folded cloth)
+                consumeAmount = 2; resultObjIndex = 151; resultAmount = 4;
+                soundId = SoundId.FoldClothing; skillIndex = (int)SkillType.Tailoring;
+                successMessage = "And you manage to create some folded cloth !";
+                break;
+
+            case 4: // CreatePlanks (saw + 2 logs → 4 planks)
+                consumeAmount = 2; resultObjIndex = 148; resultAmount = 4;
+                soundId = SoundId.Saw; skillIndex = (int)SkillType.Carpentry;
+                successMessage = "And you manage to create planks !";
+                break;
+
+            case 5: // CreateSteel (hammer + 2 ore → 4 steel)
+                consumeAmount = 2; resultObjIndex = 149; resultAmount = 4;
+                soundId = SoundId.Smithing; skillIndex = (int)SkillType.Blacksmithing;
+                successMessage = "And you manage to create steel !";
+                break;
+
+            case 8: // MakeBlacksmithingObj (steel → weapon from drawing)
+                consumeAmount = player.CraftNeedSteel; resultObjIndex = player.CraftMakeItem;
+                soundId = SoundId.Smithing; skillIndex = (int)SkillType.Blacksmithing;
+                skillChance = 4; successMessage = "And you manage to create it!";
+                break;
+
+            case 9: // MakeCarpentryObj (planks → item from drawing)
+                consumeAmount = player.CraftNeedPlanks; resultObjIndex = player.CraftMakeItem;
+                soundId = SoundId.Saw; skillIndex = (int)SkillType.Carpentry;
+                skillChance = 4; successMessage = "And you manage to create it!";
+                break;
+
+            case 10: // MakeTailoringObj (folded cloth → clothing from drawing)
+                consumeAmount = player.CraftNeedFoldedCloth; resultObjIndex = player.CraftMakeItem;
+                soundId = SoundId.FoldClothing; skillIndex = (int)SkillType.Tailoring;
+                skillChance = 4; successMessage = "And you manage to create it!";
+                break;
+
+            default: return;
+        }
+
+        if (resultObjIndex <= 0) return;
+
+        // Validate materials still exist
+        if (ch.Inventory[slot].Amount < consumeAmount)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You no longer have enough materials.", FontType.Info));
+            return;
+        }
+
+        // Consume materials
+        ch.Inventory[slot].Amount -= consumeAmount;
+        if (ch.Inventory[slot].Amount <= 0)
+        { ch.Inventory[slot].ObjIndex = 0; ch.Inventory[slot].Amount = 0; }
+
+        // Play sound
+        await Clients.Group(MapGroup(player.Map))
+            .SendAsync("PlaySound", new PlaySoundMessage(soundId));
+
+        // Create result item on ground at player position
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage(successMessage, FontType.Info));
+        _world.PlaceGroundItem(player.Map, player.X, player.Y, resultObjIndex, resultAmount);
+        var resultObj = _gameData.Objects.FirstOrDefault(o => o.Id == resultObjIndex);
+        if (resultObj != null)
+        {
+            await Clients.Group(MapGroup(player.Map))
+                .SendAsync("MakeObj", new MakeObjMessage(resultObj.GrhIndex, player.X, player.Y));
+        }
+
+        // Skill improvement
+        await TryImproveSkill(player, skillIndex, skillChance);
+
+        // EXP reward
+        ch.Exp += 3;
+        await CheckUserLevel(player);
+        await SendInvSlot(ch, slot);
+        await SendStats(ch);
+
+        // Clear craft recipe data after drawing-based crafts
+        if (jobType >= 8 && jobType <= 10)
+        {
+            player.CraftMakeItem = 0;
+            player.CraftNeedPlanks = 0;
+            player.CraftNeedSteel = 0;
+            player.CraftNeedFoldedCloth = 0;
+            player.CraftSkillRequired = 0;
         }
     }
 
