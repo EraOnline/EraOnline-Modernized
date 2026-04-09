@@ -3195,8 +3195,8 @@ On Error Resume Next
 '****************************************************************************
 'Try to give the object you clicked on last to a NPC *Mostly used for quests*
 '****************************************************************************
+Dim Chance ' Moved from under Select Case as part of 2026 C# port project
 Select Case UserList(userindex).NPCtarget
-Dim Chance
 
 
 Case 2 'Beggar

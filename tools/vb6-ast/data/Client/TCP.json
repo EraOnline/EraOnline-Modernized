@@ -93,6 +93,22 @@
           "DEN": {
             "status": "ported",
             "target": "client.js:Death(false) handler -\u003E resurrection"
+          },
+          "TRD": {
+            "status": "ported",
+            "target": "client.js:TradeOpen handler"
+          },
+          "TRN": {
+            "status": "ported",
+            "target": "client.js:TrainOpen handler"
+          },
+          "DOS": {
+            "status": "ported",
+            "target": "client.js:CraftStart handler (progress bar)"
+          },
+          "TEN": {
+            "status": "ported",
+            "target": "client.js:CampfireNearby handler"
           }
         }
       }

@@ -681,7 +681,8 @@
       "lineEnd": 577,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:character sheet Drop context menu",
         "sends": [
           "DRP"
         ],
@@ -742,7 +743,8 @@
       "lineEnd": 620,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:campfire interval calling CampHeal \u002B Server/Hubs/GameHub.cs:CampHeal",
         "sends": [
           "CMP"
         ],
@@ -824,7 +826,8 @@
       "lineEnd": 677,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:character sheet toggle via click on Character button area",
         "sends": [],
         "calls": []
       }
@@ -856,7 +859,8 @@
       "lineEnd": 744,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:StartCraft \u002B CompleteCraft (server-authoritative)",
         "sends": [
           "XBX"
         ],
@@ -1018,7 +1022,8 @@
       "lineEnd": 1026,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js \u002B renderer.js:onCanvasClick",
         "sends": [],
         "calls": []
       }
@@ -1032,7 +1037,8 @@
       "lineEnd": 1037,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:G key handler (GetItem SignalR invoke)",
         "sends": [
           "GET"
         ],
@@ -1345,7 +1351,8 @@
       "lineEnd": 1221,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:SignalR connection.start()",
         "sends": [],
         "calls": [
           "Login",
@@ -1362,7 +1369,8 @@
       "lineEnd": 1230,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:SignalR onclose/onreconnecting handlers",
         "sends": [],
         "calls": []
       }
@@ -1392,7 +1400,8 @@
       "lineEnd": 1313,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:SignalR connection.on() message handlers",
         "sends": [],
         "calls": [
           "Socket1",
@@ -1409,7 +1418,8 @@
       "lineEnd": 1324,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:character sheet Use button",
         "sends": [
           "USE"
         ],

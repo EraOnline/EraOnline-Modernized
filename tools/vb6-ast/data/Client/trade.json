@@ -240,7 +240,8 @@
       "lineEnd": 209,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:BuyFromNpc SignalR invoke",
         "sends": [
           "BUY"
         ],
@@ -259,7 +260,8 @@
       "lineEnd": 215,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:onTradeOpen handler",
         "sends": [],
         "calls": []
       }
@@ -273,7 +275,8 @@
       "lineEnd": 221,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:trade overlay close button",
         "sends": [],
         "calls": [
           "PlayWaveDS",
@@ -290,7 +293,8 @@
       "lineEnd": 235,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:SellToNpc SignalR invoke",
         "sends": [
           "SLL"
         ],
@@ -309,7 +313,8 @@
       "lineEnd": 303,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:trade overlay shop item selection",
         "sends": [],
         "calls": [
           "InitGrh",
@@ -327,7 +332,8 @@
       "lineEnd": 365,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:trade overlay player item selection",
         "sends": [],
         "calls": [
           "InitGrh",

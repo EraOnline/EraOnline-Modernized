@@ -1603,6 +1603,50 @@
           "/RESSURECT": {
             "status": "ported",
             "target": "Server/Hubs/GameHub.cs:HandleResurrect"
+          },
+          "COO": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:Consider"
+          },
+          "BUY": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:BuyFromNpc"
+          },
+          "SLL": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:SellToNpc"
+          },
+          "T01-T28": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:TrainSkill"
+          },
+          "XBX": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:CompleteCraft"
+          },
+          "CMP": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:CampHeal"
+          },
+          "/TRADE": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleTrade"
+          },
+          "/TRAIN": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleTrain"
+          },
+          "/HEAL": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleHeal"
+          },
+          "/DEPOSITGOLD": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleBankDeposit"
+          },
+          "/WITHDRAWGOLD": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleBankWithdraw"
           }
         }
       }

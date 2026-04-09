@@ -220,7 +220,8 @@
       "annotations": {
         "purpose": "Add a value to a variable with a maximum cap",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Inlined as Math.Min clamping in various stat-modifying code",
         "sends": [],
         "calls": []
       }
@@ -235,7 +236,8 @@
       "annotations": {
         "purpose": "Unequip an inventory item, reversing its stat effects",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:UseItem (inline removal for consumables)",
         "sends": [
           "UWP",
           "UCL",
@@ -262,7 +264,8 @@
       "annotations": {
         "purpose": "Find the next available slot in the CharList array",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/WorldState.cs:AllocateCharIndex",
         "sends": [],
         "calls": []
       }
@@ -278,7 +281,8 @@
       "annotations": {
         "purpose": "Find the next available slot in the UserList array",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/WorldState.cs:AddPlayer (ConcurrentDictionary, no index pool)",
         "sends": [],
         "calls": []
       }
@@ -327,7 +331,8 @@
       "annotations": {
         "purpose": "Look up a player\u0027s UserList index by name (case-insensitive prefix match)",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/WorldState.cs:FindPlayerByName (ConcurrentDictionary lookup)",
         "sends": [],
         "calls": []
       }
@@ -514,7 +519,8 @@
       "annotations": {
         "purpose": "Send a single NPC inventory slot update to the client (for trading)",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleTrade (NPC inventory sent inline)",
         "sends": [
           "NIS"
         ],
@@ -665,7 +671,8 @@
       "annotations": {
         "purpose": "Remove an NPC from the world completely",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/WorldState.cs:NpcDie (respawn replaces close/reopen)",
         "sends": [],
         "calls": []
       }
@@ -779,7 +786,8 @@
       "annotations": {
         "purpose": "Look up a user index by connection ID",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "SignalR Context.ConnectionId replaces socket-to-user mapping",
         "sends": [],
         "calls": []
       }
@@ -811,7 +819,8 @@
       "annotations": {
         "purpose": "Check if another user with the same name is already logged in",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/WorldState.cs:IsNameOnline",
         "sends": [],
         "calls": []
       }
@@ -860,7 +869,8 @@
       "annotations": {
         "purpose": "Send all NPCs and objects on a map to a newly arrived user",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:PlacePlayerInWorld (sends all chars on map entry)",
         "sends": [],
         "calls": [
           "MakeUserChar",
@@ -1132,7 +1142,8 @@
       "annotations": {
         "purpose": "Handle NPC trading: send NPC inventory to client for buy/sell",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleTrade",
         "sends": [],
         "calls": [
           "ChangeNPCInv"
@@ -1145,13 +1156,1013 @@
       "visibility": "Public",
       "params": "(userindex As Integer, slot As Byte)",
       "lineStart": 3193,
-      "lineEnd": 3198,
+      "lineEnd": 3224,
       "annotations": {
         "purpose": "Give an item to an NPC",
+        "notes": [
+          "Only handles beggar NPC type 2 (reputation for giving items). Phase 6\u002B"
+        ],
+        "status": "not-started",
+        "sends": [],
+        "calls": [
+          "SendData",
+          "Randomize",
+          "SendUserStatsBox",
+          "UpdateUserInv",
+          "CheckRep"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "NpcHeal",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 3225,
+      "lineEnd": 3278,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleHeal",
+        "sends": [],
+        "calls": [
+          "SendData",
+          "SendUserStatsBox",
+          "UpdateUserInv"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "NpcRessurect",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 3279,
+      "lineEnd": 3325,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleResurrect",
+        "sends": [
+          "PLW",
+          "DEN"
+        ],
+        "calls": [
+          "SendData",
+          "ChangeUserChar",
+          "SendUserStatsBox",
+          "UpdateUserInv"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Donate",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 3326,
+      "lineEnd": 3388,
+      "annotations": {
         "notes": [],
         "status": "not-started",
         "sends": [],
+        "calls": [
+          "SendData",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "NpcTrain",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 3389,
+      "lineEnd": 3422,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleTrain \u002B TrainSkill",
+        "sends": [
+          "TRA"
+        ],
+        "calls": [
+          "SendData",
+          "SendUserStatsBox",
+          "UpdateUserInv"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Pray",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 3423,
+      "lineEnd": 3616,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "PLW"
+        ],
+        "calls": [
+          "SendData",
+          "Randomize",
+          "SendUserStatsBox",
+          "UpdateUserInv"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Duel",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 3617,
+      "lineEnd": 3631,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "@"
+        ],
+        "calls": [
+          "SendData"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Fish",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 3632,
+      "lineEnd": 3691,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "DOS",
+          "PLW"
+        ],
+        "calls": [
+          "SendData",
+          "MakeObj",
+          "CheckUserLevel",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Mine",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 3692,
+      "lineEnd": 3747,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "DOS",
+          "PLW"
+        ],
+        "calls": [
+          "SendData",
+          "MakeObj",
+          "CheckUserLevel",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Pickpocket",
+      "visibility": "Public",
+      "params": "(userindex As Integer, UserTargetIndex As Integer)",
+      "lineStart": 3748,
+      "lineEnd": 3873,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "PIC"
+        ],
+        "calls": [
+          "SendData",
+          "Randomize",
+          "MakeObj",
+          "SendUserStatsBox",
+          "UpdateUserInv",
+          "CheckRep",
+          "CheckUserLevel"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "RoastMeat",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 3874,
+      "lineEnd": 3925,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "DOS",
+          "UWP"
+        ],
+        "calls": [
+          "SendData",
+          "MakeObj",
+          "CheckUserLevel",
+          "SendUserStatsBox",
+          "UpdateUserInv"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Evaluate",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 3927,
+      "lineEnd": 3975,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": [
+          "SendData",
+          "SendUserStatsBox",
+          "UpdateUserInv"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "OpenBattlemode",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 3976,
+      "lineEnd": 3989,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:ToggleBattleMode",
+        "sends": [
+          "PLM"
+        ],
+        "calls": [
+          "SendData"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "EndBattlemode",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 3990,
+      "lineEnd": 4005,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:ToggleBattleMode",
+        "sends": [
+          "PLM"
+        ],
+        "calls": [
+          "SendData"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "SetCamp",
+      "visibility": "Public",
+      "params": "(userindex As Integer, map As Integer, X As Integer, Y As Integer)",
+      "lineStart": 4007,
+      "lineEnd": 4057,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:StartCraft (job 13, surviving skill)",
+        "sends": [
+          "DOS",
+          "TEN"
+        ],
+        "calls": [
+          "SendData",
+          "MakeObj",
+          "SendUserStatsBox",
+          "CheckUserLevel"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CampHeal",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 4058,
+      "lineEnd": 4087,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:CampHeal",
+        "sends": [],
+        "calls": [
+          "SendData",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Chop",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 4088,
+      "lineEnd": 4139,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "DOS",
+          "PLW"
+        ],
+        "calls": [
+          "SendData",
+          "MakeObj",
+          "CheckUserLevel",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "function",
+      "name": "FindDirection",
+      "visibility": "Public",
+      "params": "(Pos As WorldPos, Target As WorldPos)",
+      "returnType": "Byte",
+      "lineStart": 4140,
+      "lineEnd": 4205,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Services/GameLoopService.cs:RunNpcAI (inline direction calculation)",
+        "sends": [],
         "calls": []
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "BankWithdraw",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 4207,
+      "lineEnd": 4223,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleBankWithdraw",
+        "sends": [
+          "BN2"
+        ],
+        "calls": [
+          "SendData"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "BankDeposit",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 4225,
+      "lineEnd": 4240,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleBankDeposit",
+        "sends": [
+          "BN1"
+        ],
+        "calls": [
+          "SendData"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "BankBalance",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 4241,
+      "lineEnd": 4249,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleBankBalance",
+        "sends": [],
+        "calls": [
+          "SendData"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CreatePlanks",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 4250,
+      "lineEnd": 4306,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:StartCraft (job 4, carpentry material)",
+        "sends": [
+          "DOS",
+          "PLW"
+        ],
+        "calls": [
+          "SendData",
+          "MakeObj",
+          "CheckUserLevel",
+          "SendUserStatsBox",
+          "UpdateUserInv"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CreateFoldedCloth",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 4308,
+      "lineEnd": 4367,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:StartCraft (job 3, tailoring material)",
+        "sends": [
+          "DOS",
+          "PLW"
+        ],
+        "calls": [
+          "SendData",
+          "MakeObj",
+          "CheckUserLevel",
+          "SendUserStatsBox",
+          "UpdateUserInv"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CreateSteel",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 4369,
+      "lineEnd": 4424,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:StartCraft (job 5, blacksmithing material)",
+        "sends": [
+          "DOS",
+          "PLW"
+        ],
+        "calls": [
+          "SendData",
+          "MakeObj",
+          "CheckUserLevel",
+          "SendUserStatsBox",
+          "UpdateUserInv"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MakeCarpentryObj",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 4426,
+      "lineEnd": 4489,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:CompleteCraft (job 9)",
+        "sends": [
+          "DOS",
+          "PLW"
+        ],
+        "calls": [
+          "SendData",
+          "MakeObj",
+          "CheckUserLevel",
+          "SendUserStatsBox",
+          "UpdateUserInv"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MakeTailoringObj",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 4491,
+      "lineEnd": 4553,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:CompleteCraft (job 10)",
+        "sends": [
+          "DOS",
+          "PLW"
+        ],
+        "calls": [
+          "SendData",
+          "MakeObj",
+          "CheckUserLevel",
+          "SendUserStatsBox",
+          "UpdateUserInv"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MakeBlacksmithingObj",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 4555,
+      "lineEnd": 4620,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:CompleteCraft (job 8)",
+        "sends": [
+          "DOS",
+          "PLW"
+        ],
+        "calls": [
+          "SendData",
+          "MakeObj",
+          "CheckUserLevel",
+          "SendUserStatsBox",
+          "UpdateUserInv"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CastSpellAtPC",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 4622,
+      "lineEnd": 4847,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "PLW",
+          "@"
+        ],
+        "calls": [
+          "UpdateUserSpell",
+          "SendData",
+          "MakeObj",
+          "WarpUserChar",
+          "ChangeUserChar",
+          "UserDie",
+          "CheckUserLevel",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CastSpellAtNPC",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 4848,
+      "lineEnd": 4988,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "PLW",
+          "@"
+        ],
+        "calls": [
+          "UpdateUserSpell",
+          "SendData",
+          "CheckRep",
+          "NPCDie",
+          "CheckUserLevel",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "NPCSellItem",
+      "visibility": "Public",
+      "params": "(userindex As Integer, Npcindex As Integer, slot As Byte)",
+      "lineStart": 4991,
+      "lineEnd": 5102,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:BuyFromNpc",
+        "sends": [
+          "@",
+          "PLW"
+        ],
+        "calls": [
+          "SendData",
+          "CheckUserLevel",
+          "UpdateUserInv",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "NPCBuyItem",
+      "visibility": "Public",
+      "params": "(userindex As Integer, Npcindex As Integer, slot As Byte)",
+      "lineStart": 5104,
+      "lineEnd": 5243,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:SellToNpc",
+        "sends": [
+          "@",
+          "PLW"
+        ],
+        "calls": [
+          "SendData",
+          "Randomize",
+          "CheckUserLevel",
+          "UpdateUserInv",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "DropGold",
+      "visibility": "Public",
+      "params": "(userindex As Integer, Gold As Long)",
+      "lineStart": 5244,
+      "lineEnd": 5258,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": [
+          "MakeObj",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "BackstabPC",
+      "visibility": "Public",
+      "params": "(attackerindex As Integer, victimindex As Integer)",
+      "lineStart": 5260,
+      "lineEnd": 5314,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": [
+          "Randomize",
+          "SendData",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "BackstabNPC",
+      "visibility": "Public",
+      "params": "(userindex As Integer, Npcindex As Integer)",
+      "lineStart": 5316,
+      "lineEnd": 5368,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:UserAttackNpc (inline backstab logic)",
+        "sends": [],
+        "calls": [
+          "Randomize",
+          "SendData",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Meditate",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 5370,
+      "lineEnd": 5407,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "ME2",
+          "ME1"
+        ],
+        "calls": [
+          "SendData",
+          "EraseObj",
+          "MakeObj"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "RegainMana",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 5409,
+      "lineEnd": 5454,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": [
+          "Randomize",
+          "SendData",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CheckRep",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 5456,
+      "lineEnd": 5516,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": [
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Hide",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 5518,
+      "lineEnd": 5570,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "DOS",
+          "HID"
+        ],
+        "calls": [
+          "SendData",
+          "Unhide",
+          "ChangeUserChar",
+          "SendUserStatsBox",
+          "CheckUserLevel"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Unhide",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 5572,
+      "lineEnd": 5590,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "UNH"
+        ],
+        "calls": [
+          "ChangeUserChar",
+          "SendData"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "TameAnimal",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 5592,
+      "lineEnd": 5689,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "DOS"
+        ],
+        "calls": [
+          "SendData",
+          "CheckUserLevel",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Gossip",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 5691,
+      "lineEnd": 5773,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "@"
+        ],
+        "calls": [
+          "SendData",
+          "SendUserStatsBox",
+          "CheckUserLevel"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Disguise",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 5775,
+      "lineEnd": 5816,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "DOS",
+          "DIS"
+        ],
+        "calls": [
+          "SendData",
+          "CheckUserLevel",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Transfer",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 5817,
+      "lineEnd": 5843,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": [
+          "SendData"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "DiscardAnimal",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 5845,
+      "lineEnd": 5871,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": [
+          "SendData"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "GiveSkills",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 5873,
+      "lineEnd": 6780,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:CreateCharacter (class templates inline)",
+        "sends": [],
+        "calls": [
+          "UpdateUserInv",
+          "SaveUser"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Consider",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 6784,
+      "lineEnd": 6810,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:Consider",
+        "sends": [],
+        "calls": [
+          "SendData"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "ReportBug",
+      "visibility": "Public",
+      "params": "(message As String, sender As Integer)",
+      "lineStart": 6812,
+      "lineEnd": 6828,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": [
+          "WriteVar"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "CheckTitle",
+      "visibility": "Public",
+      "params": "(userindex As Integer)",
+      "lineStart": 6830,
+      "lineEnd": 6980,
+      "annotations": {
+        "notes": [],
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:CheckClass",
+        "sends": [],
+        "calls": [
+          "SendData",
+          "SendUserStatsBox"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "Bandage",
+      "visibility": "Public",
+      "params": "(userindex As Integer, slot As Byte)",
+      "lineStart": 6982,
+      "lineEnd": 7041,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [
+          "DOS",
+          "PLW"
+        ],
+        "calls": [
+          "SendData",
+          "CheckUserLevel",
+          "SendUserStatsBox",
+          "UpdateUserInv"
+        ]
+      }
+    },
+    {
+      "kind": "sub",
+      "name": "MakeClan",
+      "visibility": "Public",
+      "params": "(userindex As Integer, ClanName As String)",
+      "lineStart": 7043,
+      "lineEnd": 7080,
+      "annotations": {
+        "notes": [],
+        "status": "not-started",
+        "sends": [],
+        "calls": [
+          "WriteVar"
+        ]
       }
     }
   ]

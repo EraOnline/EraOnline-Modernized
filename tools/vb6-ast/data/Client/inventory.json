@@ -478,7 +478,8 @@
       "lineEnd": 393,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:character sheet UI",
         "sends": [
           "DRP"
         ],
@@ -511,7 +512,8 @@
       "lineEnd": 419,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:character sheet UI",
         "sends": [],
         "calls": []
       }
@@ -525,7 +527,8 @@
       "lineEnd": 424,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:character sheet UI",
         "sends": [],
         "calls": []
       }
@@ -662,7 +665,8 @@
       "lineEnd": 494,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:inventory context menu (use/drop)",
         "sends": [
           "USE"
         ],
@@ -700,7 +704,8 @@
       "lineEnd": 520,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:inventory context menu (use/drop)",
         "sends": [
           "DRP"
         ],
@@ -719,7 +724,8 @@
       "lineEnd": 558,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:character sheet UI",
         "sends": [],
         "calls": [
           "PlayWaveDS",
@@ -737,7 +743,8 @@
       "lineEnd": 585,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:character sheet UI",
         "sends": [],
         "calls": [
           "ShowPic",
@@ -755,7 +762,8 @@
       "lineEnd": 595,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:character sheet UI",
         "sends": [],
         "calls": [
           "PlayWaveDS",
@@ -772,7 +780,8 @@
       "lineEnd": 607,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:character sheet UI",
         "sends": [
           "USE"
         ],
@@ -791,7 +800,8 @@
       "lineEnd": 619,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:inventory context menu (use/drop)",
         "sends": [
           "GIV"
         ],

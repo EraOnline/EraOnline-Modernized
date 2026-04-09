@@ -135,7 +135,8 @@
       "lineEnd": 71,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:playSound (HTML5 Audio, no DirectSound buffer needed)",
         "sends": [],
         "calls": []
       }
@@ -149,7 +150,8 @@
       "lineEnd": 101,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:playSound (HTML5 Audio)",
         "sends": [],
         "calls": [
           "DSBuffer",
@@ -166,7 +168,8 @@
       "lineEnd": 118,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:playMusic (MIDI rendered to MP3 via eo-data-converter)",
         "sends": [],
         "calls": []
       }
@@ -180,7 +183,8 @@
       "lineEnd": 130,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:playSound (HTML5 Audio replaces Win32 API)",
         "sends": [],
         "calls": []
       }

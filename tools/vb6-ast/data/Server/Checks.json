@@ -97,7 +97,8 @@
       "lineEnd": 307,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:CheckClass",
         "sends": [],
         "calls": [
           "SendData",
@@ -114,7 +115,8 @@
       "lineEnd": 355,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:CheckUserLevel (ported from GameLogic.bas version)",
         "sends": [
           "PLW",
           "PL3"

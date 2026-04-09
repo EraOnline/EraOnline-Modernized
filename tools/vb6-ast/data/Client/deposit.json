@@ -92,7 +92,8 @@
       "lineEnd": 81,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:/DEPOSIT slash command (no separate form)",
         "sends": [],
         "calls": []
       }
@@ -106,7 +107,8 @@
       "lineEnd": 90,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:/DEPOSIT slash command (no separate form)",
         "sends": [],
         "calls": [
           "PlayWaveDS"
@@ -122,7 +124,8 @@
       "lineEnd": 98,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:/DEPOSIT slash command (no separate form)",
         "sends": [],
         "calls": [
           "PlayWaveDS"
@@ -138,7 +141,8 @@
       "lineEnd": 114,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:/DEPOSIT slash command (no separate form)",
         "sends": [
           "DPT"
         ],

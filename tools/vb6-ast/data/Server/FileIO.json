@@ -50,7 +50,8 @@
       "annotations": {
         "purpose": "Load a character\u0027s stats/skills/flags/community from .chr file",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:Login (JSON deserialization, stats in same file)",
         "sends": [],
         "calls": []
       }
@@ -65,7 +66,8 @@
       "annotations": {
         "purpose": "Load character identity data (name, password, race, class, etc.) from .chr file",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:Login (JSON deserialization)",
         "sends": [],
         "calls": []
       }
@@ -97,7 +99,8 @@
       "annotations": {
         "purpose": "Read a value from an INI-format file using Windows API",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "System.Text.Json deserialization replaces INI read/write",
         "sends": [],
         "calls": []
       }
@@ -148,7 +151,8 @@
       "annotations": {
         "purpose": "Write a value to an INI-format file using Windows API",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "System.Text.Json serialization replaces INI read/write",
         "sends": [],
         "calls": []
       }
@@ -165,8 +169,8 @@
         "notes": [
           "Currently saves position, name, password, race, gender, body, head. Full stats/inventory/skills deferred to Phase 4."
         ],
-        "status": "partial",
-        "target": "Server/Services/WorldState.cs:SaveCharacter",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:SaveCharacter (JSON file persistence)",
         "sends": [],
         "calls": [
           "WriteVar"

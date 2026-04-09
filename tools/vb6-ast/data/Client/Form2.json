@@ -135,7 +135,8 @@
       "lineEnd": 152,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:startMainMenu (fountain menu with clickable hotspots)",
         "sends": [],
         "calls": [
           "PlayMidi",
@@ -152,7 +153,8 @@
       "lineEnd": 162,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:startMainMenu (fountain menu with clickable hotspots)",
         "sends": [],
         "calls": [
           "PlayWaveDS"
@@ -168,7 +170,8 @@
       "lineEnd": 169,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:startMainMenu (fountain menu with clickable hotspots)",
         "sends": [],
         "calls": [
           "PlayWaveDS"
@@ -184,7 +187,8 @@
       "lineEnd": 176,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:startMainMenu (fountain menu with clickable hotspots)",
         "sends": [],
         "calls": [
           "PlayWaveDS"
@@ -200,7 +204,8 @@
       "lineEnd": 185,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "client.js:startMainMenu (fountain menu with clickable hotspots)",
         "sends": [],
         "calls": [
           "PlayWaveDS",
