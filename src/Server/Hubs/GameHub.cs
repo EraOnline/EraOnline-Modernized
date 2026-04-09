@@ -921,6 +921,18 @@ public class GameHub : Hub
                 await HandleHeal(player);
                 break;
 
+            case "/DEPOSIT":
+                await HandleBankDeposit(player, arg);
+                break;
+
+            case "/WITHDRAW":
+                await HandleBankWithdraw(player, arg);
+                break;
+
+            case "/BALANCE":
+                await HandleBankBalance(player);
+                break;
+
             case "/RESSURECT":
             case "/RESURRECT":
                 await HandleResurrect(player);
@@ -1386,6 +1398,93 @@ public class GameHub : Hub
             new ChatMessage($"That`ll be {charge} gold, now you are fully healed !", FontType.Info));
 
         await SendStats(ch);
+    }
+
+    // ===================== Banking =====================
+
+    /// <summary>Check if player has targeted a Banker NPC (npcType 48).</summary>
+    private async Task<bool> CheckBanker(PlayerState player)
+    {
+        var npc = _world.GetNpcByIndex(player.TargetNpcIndex);
+        if (npc == null)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You need to target a banker first.", FontType.Info));
+            return false;
+        }
+        var template = _gameData.Npcs.FirstOrDefault(n => n.Id == npc.TemplateId);
+        if (template == null || template.NpcType != 48)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("This NPC is not a banker.", FontType.Info));
+            return false;
+        }
+        return true;
+    }
+
+    /// <summary>VB6: HandleData "/DEPOSIT" -> BankDeposit, "DPT" amount</summary>
+    private async Task HandleBankDeposit(PlayerState player, string amountStr)
+    {
+        if (!await CheckBanker(player)) return;
+
+        if (!int.TryParse(amountStr, out int amount) || amount <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Usage: /DEPOSIT amount", FontType.Info));
+            return;
+        }
+
+        var ch = player.Character;
+        if (ch.Gold < amount)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You do not have that much gold.", FontType.Info));
+            return;
+        }
+
+        ch.Gold -= amount;
+        ch.BankGold += amount;
+
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage($"The banker responds, Ok. Here ye go. Deposited {amount} gold.", FontType.Talk));
+        await SendStats(ch);
+    }
+
+    /// <summary>VB6: HandleData "/WITHDRAW" -> BankWithdraw, "WTH" amount</summary>
+    private async Task HandleBankWithdraw(PlayerState player, string amountStr)
+    {
+        if (!await CheckBanker(player)) return;
+
+        if (!int.TryParse(amountStr, out int amount) || amount <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Usage: /WITHDRAW amount", FontType.Info));
+            return;
+        }
+
+        var ch = player.Character;
+        if (ch.BankGold < amount)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You do not have that much gold in the bank.", FontType.Info));
+            return;
+        }
+
+        ch.Gold += amount;
+        ch.BankGold -= amount;
+
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage($"The banker responds, Ok. Here ye go. Withdrew {amount} gold.", FontType.Talk));
+        await SendStats(ch);
+    }
+
+    /// <summary>VB6: HandleData "/BALANCE" -> BankBalance</summary>
+    private async Task HandleBankBalance(PlayerState player)
+    {
+        if (!await CheckBanker(player)) return;
+
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage($"The banker responds, Thee have {player.Character.BankGold} gold in the bank !", FontType.Talk));
     }
 
     // ===================== Training =====================
