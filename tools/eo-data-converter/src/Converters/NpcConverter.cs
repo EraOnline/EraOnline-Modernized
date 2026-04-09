@@ -25,9 +25,14 @@ public static class NpcConverter
             var inventory = new List<NpcInvSlot>();
             for (int s = 1; s <= 40; s++)
             {
-                int objIdx = ini.GetInt(sec, $"Obj{s}");
+                // VB6 format: Obj1=ObjIndex-Amount-Equipped (e.g. "6-1-0")
+                var objStr = ini.GetVar(sec, $"Obj{s}");
+                if (string.IsNullOrEmpty(objStr)) continue;
+                var parts = objStr.Split('-');
+                int objIdx = parts.Length > 0 && int.TryParse(parts[0], out var idx) ? idx : 0;
+                int amount = parts.Length > 1 && int.TryParse(parts[1], out var amt) ? amt : 1;
                 if (objIdx > 0)
-                    inventory.Add(new NpcInvSlot { ObjIndex = objIdx, Amount = ini.GetInt(sec, $"ObjCnt{s}", 1) });
+                    inventory.Add(new NpcInvSlot { ObjIndex = objIdx, Amount = amount });
             }
 
             result.Add(new NpcRecord
@@ -50,6 +55,7 @@ public static class NpcConverter
                 DeathObj = ini.GetInt(sec, "DeathObj"),
                 Tameable = ini.GetInt(sec, "Tameable"),
                 Tradeable = ini.GetInt(sec, "Tradeable"),
+                Gold = ini.GetLong(sec, "Gold"),
                 SkillNeeded = ini.GetVar(sec, "SkillNeeded"),
                 Sound = ini.GetInt(sec, "Sound"),
                 MaxHp = ini.GetInt(sec, "MaxHP"),

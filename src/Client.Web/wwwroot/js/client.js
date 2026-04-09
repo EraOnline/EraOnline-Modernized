@@ -525,6 +525,112 @@ const EraClient = (() => {
         }
     }
 
+    // --- Trade Window ---
+
+    function onTradeOpen(msg) {
+        // Remove existing trade window if any
+        let existing = document.getElementById('trade-overlay');
+        if (existing) existing.remove();
+
+        const overlay = document.createElement('div');
+        overlay.id = 'trade-overlay';
+        overlay.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);' +
+            'width:500px;background:#2a2a3a;border:2px solid #665544;color:#fff;font-family:Verdana,Arial,sans-serif;' +
+            'font-size:11px;padding:10px;z-index:50;';
+
+        const title = document.createElement('div');
+        title.style.cssText = 'text-align:center;font-weight:bold;margin-bottom:8px;font-size:13px;';
+        title.textContent = `Trading with ${msg.npcName}`;
+        overlay.appendChild(title);
+
+        const cols = document.createElement('div');
+        cols.style.cssText = 'display:flex;gap:10px;';
+
+        // NPC inventory (left)
+        const npcCol = document.createElement('div');
+        npcCol.style.cssText = 'flex:1;';
+        const npcTitle = document.createElement('div');
+        npcTitle.style.cssText = 'text-align:center;margin-bottom:4px;color:#aaa;';
+        npcTitle.textContent = 'NPC Inventory';
+        npcCol.appendChild(npcTitle);
+
+        const npcList = document.createElement('div');
+        npcList.style.cssText = 'background:#1a1a2a;border:1px solid #555;height:200px;overflow-y:auto;padding:2px;';
+        (msg.npcInventory || []).forEach(item => {
+            const row = document.createElement('div');
+            row.style.cssText = 'padding:2px 4px;cursor:pointer;';
+            row.textContent = item.name + (item.value > 0 ? ` (${item.value}g)` : '');
+            row.dataset.slot = item.slot;
+            row.addEventListener('click', () => {
+                npcList.querySelectorAll('div').forEach(r => r.style.background = '');
+                row.style.background = '#444';
+                npcList.dataset.selectedSlot = item.slot;
+            });
+            npcList.appendChild(row);
+        });
+        npcCol.appendChild(npcList);
+
+        const buyBtn = document.createElement('button');
+        buyBtn.textContent = 'Buy';
+        buyBtn.style.cssText = 'margin-top:4px;width:100%;padding:4px;cursor:pointer;';
+        buyBtn.addEventListener('click', () => {
+            const sel = npcList.dataset.selectedSlot;
+            if (sel !== undefined) connection.invoke('BuyFromNpc', parseInt(sel)).catch(() => {});
+        });
+        npcCol.appendChild(buyBtn);
+
+        // Player inventory (right)
+        const plrCol = document.createElement('div');
+        plrCol.style.cssText = 'flex:1;';
+        const plrTitle = document.createElement('div');
+        plrTitle.style.cssText = 'text-align:center;margin-bottom:4px;color:#aaa;';
+        plrTitle.textContent = 'Your Inventory';
+        plrCol.appendChild(plrTitle);
+
+        const plrList = document.createElement('div');
+        plrList.id = 'trade-player-inv';
+        plrList.style.cssText = 'background:#1a1a2a;border:1px solid #555;height:200px;overflow-y:auto;padding:2px;';
+        // Populate from current inventory state
+        for (let i = 0; i < 20; i++) {
+            const inv = inventory[i];
+            if (inv && inv.objIndex > 0 && !inv.equipped) {
+                const row = document.createElement('div');
+                row.style.cssText = 'padding:2px 4px;cursor:pointer;';
+                row.textContent = inv.name + (inv.amount > 1 ? ` x${inv.amount}` : '');
+                row.dataset.slot = i;
+                row.addEventListener('click', () => {
+                    plrList.querySelectorAll('div').forEach(r => r.style.background = '');
+                    row.style.background = '#444';
+                    plrList.dataset.selectedSlot = i;
+                });
+                plrList.appendChild(row);
+            }
+        }
+        plrCol.appendChild(plrList);
+
+        const sellBtn = document.createElement('button');
+        sellBtn.textContent = 'Sell';
+        sellBtn.style.cssText = 'margin-top:4px;width:100%;padding:4px;cursor:pointer;';
+        sellBtn.addEventListener('click', () => {
+            const sel = plrList.dataset.selectedSlot;
+            if (sel !== undefined) connection.invoke('SellToNpc', parseInt(sel)).catch(() => {});
+        });
+        plrCol.appendChild(sellBtn);
+
+        cols.appendChild(npcCol);
+        cols.appendChild(plrCol);
+        overlay.appendChild(cols);
+
+        // Close button
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = 'Close';
+        closeBtn.style.cssText = 'margin-top:8px;width:100%;padding:4px;cursor:pointer;';
+        closeBtn.addEventListener('click', () => overlay.remove());
+        overlay.appendChild(closeBtn);
+
+        document.getElementById('game-frame').appendChild(overlay);
+    }
+
     // --- Client -> Server ---
 
     function onPlayerMove(direction) {
@@ -718,6 +824,7 @@ const EraClient = (() => {
         connection.on('PlaySound', onPlaySound);
         connection.on('PlayVoice', onPlayVoice);
         connection.on('Death', onDeath);
+        connection.on('TradeOpen', onTradeOpen);
 
         connection.onreconnecting(() => setStatusBar('Reconnecting...'));
         connection.onreconnected(() => setStatusBar('Reconnected'));

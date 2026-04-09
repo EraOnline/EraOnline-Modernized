@@ -397,6 +397,9 @@ public class WorldState
             LootChance = template.LootChance > 0 ? template.LootChance : 1,
             Level = template.Level,
             Inventory = template.Inventory ?? [],
+            Gold = template.Gold,
+            Tradeable = template.Tradeable,
+            Categories = template.Categories ?? [],
         };
 
         _npcs[npcIndex] = npc;
@@ -836,4 +839,9 @@ public class NpcState
     public int LootChance { get; set; }
     public int Level { get; set; }
     public NpcInvSlot[] Inventory { get; set; } = [];
+
+    // Trading
+    public long Gold { get; set; }               // VB6: NPCList.Gold — NPC's gold pile for trading
+    public int Tradeable { get; set; }           // VB6: NPCList.Tradeable (1=cannot trade)
+    public string[] Categories { get; set; } = []; // VB6: NPCList.Flags.Category1-5 — item types NPC will buy
 }

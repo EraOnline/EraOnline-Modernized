@@ -26,6 +26,7 @@ public class NpcDef
     [JsonPropertyName("deathObj")] public int DeathObj { get; set; }
     [JsonPropertyName("tameable")] public int Tameable { get; set; }
     [JsonPropertyName("tradeable")] public int Tradeable { get; set; }
+    [JsonPropertyName("gold")] public long Gold { get; set; }
     [JsonPropertyName("skillNeeded")] public string SkillNeeded { get; set; } = "";
     [JsonPropertyName("sound")] public int Sound { get; set; }
     [JsonPropertyName("maxHp")] public int MaxHp { get; set; }

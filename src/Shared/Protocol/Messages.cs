@@ -94,3 +94,16 @@ public record PlaySoundMessage(int SoundId);
 
 /// <summary>VB6: PL3 - Play voiceover MP3</summary>
 public record PlayVoiceMessage(int Id);
+
+/// <summary>VB6: NIS - NPC inventory slot for trade window</summary>
+public record NpcInvSlotMessage(
+    int Slot,
+    int ObjIndex,
+    string Name,
+    int Amount,
+    int GrhIndex,
+    int Value,
+    long Level);
+
+/// <summary>Sent to client to open the trade window with the NPC's name</summary>
+public record TradeOpenMessage(string NpcName, NpcInvSlotMessage[] NpcInventory);

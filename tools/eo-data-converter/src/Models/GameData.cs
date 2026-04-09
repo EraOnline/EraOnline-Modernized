@@ -56,6 +56,7 @@ public record NpcRecord
     public int MinHit { get; init; }
     public int MaxHit { get; init; }
     public int Def { get; init; }
+    public long Gold { get; init; }
     public string[] Categories { get; init; } = [];
     public NpcInvSlot[] Inventory { get; init; } = [];
 }

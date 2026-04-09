@@ -909,6 +909,10 @@ public class GameHub : Hub
                 Context.Abort();
                 break;
 
+            case "/TRADE":
+                await HandleTrade(player);
+                break;
+
             case "/RESSURECT":
             case "/RESURRECT":
                 await HandleResurrect(player);
@@ -916,7 +920,7 @@ public class GameHub : Hub
 
             case "/HELP":
                 await Clients.Caller.SendAsync("Chat",
-                    new ChatMessage("Commands: /WHO /PLAYERS /STATS /DESC /SAVE /QUIT /RESSURECT /HELP", FontType.Info));
+                    new ChatMessage("Commands: /WHO /PLAYERS /STATS /DESC /SAVE /QUIT /TRADE /RESSURECT /HELP", FontType.Info));
                 await Clients.Caller.SendAsync("Chat",
                     new ChatMessage("Chat: just type to say, - to shout, : to emote, \\name to whisper", FontType.Info));
                 break;
@@ -1035,6 +1039,291 @@ public class GameHub : Hub
                     new ChatMessage($"You assume its hit power would be about {ch.MaxHit} points.", FontType.Info));
                 return;
             }
+        }
+    }
+
+    // ===================== Trading =====================
+
+    /// <summary>
+    /// Open trade with targeted NPC. VB6: HandleData "/TRADE" -> NpcTrade (GameLogic.bas:3138).
+    /// Sends NPC inventory to client to display trade window.
+    /// </summary>
+    private async Task HandleTrade(PlayerState player)
+    {
+        if (player.IsDead)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You are dead and cannot do that.", FontType.Info));
+            return;
+        }
+
+        if (player.TargetNpcIndex <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Trade with who ?", FontType.Info));
+            return;
+        }
+
+        var npc = _world.GetNpcByIndex(player.TargetNpcIndex);
+        if (npc == null)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Trade with who ?", FontType.Info));
+            return;
+        }
+
+        // VB6: Tradeable = 1 means CANNOT trade (confusing naming)
+        if (npc.Tradeable == 1)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You cannot trade with this NPC.", FontType.Info));
+            return;
+        }
+
+        // Build NPC inventory slots for the client
+        var slots = new List<NpcInvSlotMessage>();
+        for (int s = 0; s < npc.Inventory.Length; s++)
+        {
+            var inv = npc.Inventory[s];
+            if (inv.ObjIndex > 0)
+            {
+                var objDef = _gameData.Objects.FirstOrDefault(o => o.Id == inv.ObjIndex);
+                if (objDef != null)
+                {
+                    long value = 0;
+                    long.TryParse(objDef.Value, out value);
+                    slots.Add(new NpcInvSlotMessage(
+                        s, inv.ObjIndex, objDef.Name, inv.Amount,
+                        objDef.GrhIndex, (int)value, objDef.Level));
+                }
+            }
+        }
+
+        await Clients.Caller.SendAsync("TradeOpen",
+            new TradeOpenMessage(npc.Name, slots.ToArray()));
+    }
+
+    /// <summary>
+    /// Merchant skill price multiplier. VB6: NPCSellItem/NPCBuyItem Luck2 table.
+    /// Higher merchant skill (Skill8) = lower multiplier = cheaper prices.
+    /// </summary>
+    private static double GetMerchantMultiplier(int merchantSkill) => merchantSkill switch
+    {
+        >= 99 => 1.0,
+        >= 79 => 1.5,
+        >= 69 => 2.0,
+        >= 59 => 2.5,
+        >= 49 => 3.0,
+        >= 39 => 3.5,
+        >= 29 => 4.0,
+        >= 19 => 4.5,
+        _ => 5.0
+    };
+
+    /// <summary>
+    /// Player buys an item from the NPC. VB6: HandleData "BUY" -> NPCSellItem (GameLogic.bas:4991).
+    /// </summary>
+    public async Task BuyFromNpc(int slot)
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null || player.IsDead) return;
+
+        var npc = _world.GetNpcByIndex(player.TargetNpcIndex);
+        if (npc == null) return;
+
+        if (slot < 0 || slot >= npc.Inventory.Length) return;
+        var npcInv = npc.Inventory[slot];
+        if (npcInv.ObjIndex <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"{npc.Name} says, Err...what do you want to buy again ?", FontType.Talk));
+            return;
+        }
+
+        var objDef = _gameData.Objects.FirstOrDefault(o => o.Id == npcInv.ObjIndex);
+        if (objDef == null) return;
+
+        long.TryParse(objDef.Value, out long baseValue);
+        double mult = GetMerchantMultiplier(player.Character.Skills[8]);
+        long price = baseValue > 20 ? (long)(baseValue * mult) : baseValue;
+
+        var ch = player.Character;
+        if (ch.Gold < price)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"{npc.Name} says, You do not have enough gold !", FontType.Talk));
+            return;
+        }
+
+        // Find inventory slot — first matching item to stack, else first empty
+        int targetSlot = -1;
+        for (int i = 0; i < 20; i++)
+        {
+            if (ch.Inventory[i].ObjIndex == npcInv.ObjIndex) { targetSlot = i; break; }
+        }
+        if (targetSlot < 0)
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                if (ch.Inventory[i].ObjIndex == 0) { targetSlot = i; break; }
+            }
+        }
+        if (targetSlot < 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You cannot hold any more items now !", FontType.Info));
+            return;
+        }
+
+        // Complete the purchase
+        ch.Gold -= (int)price;
+        ch.Inventory[targetSlot].ObjIndex = npcInv.ObjIndex;
+        ch.Inventory[targetSlot].Amount += 1;
+        npc.Gold += price;
+
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage($"{npc.Name} says, you want this fine item ! Deal !", FontType.Talk));
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage($"You pay {price} gold.", FontType.Info));
+        await Clients.Caller.SendAsync("PlaySound", new PlaySoundMessage(SoundId.Coins));
+
+        // Merchant skill improvement: 1/30 chance (VB6: RandomNumber(1,30) = 5)
+        await TryImproveSkill(player, 8, 30);
+
+        await SendInvSlot(ch, targetSlot);
+        await SendStats(ch);
+    }
+
+    /// <summary>
+    /// Player sells an item to the NPC. VB6: HandleData "SLL" -> NPCBuyItem (GameLogic.bas:5104).
+    /// </summary>
+    public async Task SellToNpc(int slot)
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null || player.IsDead) return;
+        if (slot < 0 || slot >= 20) return;
+
+        var npc = _world.GetNpcByIndex(player.TargetNpcIndex);
+        if (npc == null) return;
+
+        var ch = player.Character;
+        var invSlot = ch.Inventory[slot];
+        if (invSlot.ObjIndex <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"{npc.Name} says, Buy what ?!", FontType.Talk));
+            return;
+        }
+
+        // Can't sell equipped items (VB6 client check)
+        if (invSlot.Equipped)
+        {
+            return;
+        }
+
+        var objDef = _gameData.Objects.FirstOrDefault(o => o.Id == invSlot.ObjIndex);
+        if (objDef == null) return;
+
+        // VB6: Sellable = 1 means NOT sellable (confusing naming)
+        if (objDef.Sellable == 1)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"{npc.Name} says, i have no interest in this item.", FontType.Talk));
+            return;
+        }
+
+        long.TryParse(objDef.Value, out long baseValue);
+        if (baseValue == 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"{npc.Name} says, I have no need for this item.", FontType.Talk));
+            return;
+        }
+
+        // Check NPC categories — does this NPC buy this type of item?
+        bool willBuy = false;
+        if (npc.Categories.Length > 0 && npc.Categories[0] == "All")
+            willBuy = true;
+        else if (npc.Categories.Length > 0 && npc.Categories[0] == "Nothing")
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"{npc.Name} says, Im not interested in any trading.", FontType.Talk));
+            return;
+        }
+        else
+        {
+            foreach (var cat in npc.Categories)
+            {
+                if (!string.IsNullOrEmpty(cat) && cat == objDef.Category)
+                { willBuy = true; break; }
+            }
+        }
+
+        if (!willBuy)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"{npc.Name} says, I have no interest in an item of such type.", FontType.Talk));
+            return;
+        }
+
+        // Price — divide by merchant multiplier (higher skill = more gold)
+        double mult = GetMerchantMultiplier(ch.Skills[8]);
+        long sellPrice = baseValue > 20 ? (long)(baseValue / mult) : baseValue;
+        if (sellPrice < 1) sellPrice = 1;
+
+        // Check if NPC has enough gold
+        if (npc.Gold < sellPrice)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("I cannot afford this im afraid !", FontType.Info));
+            return;
+        }
+
+        // Complete the sale
+        if (invSlot.Amount > 1)
+        {
+            invSlot.Amount -= 1;
+        }
+        else
+        {
+            invSlot.ObjIndex = 0;
+            invSlot.Amount = 0;
+        }
+        invSlot.Equipped = false;
+        ch.Gold += (int)sellPrice;
+        npc.Gold -= sellPrice;
+
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage($"{npc.Name} gives you {sellPrice} gold for the {objDef.Name}", FontType.Talk));
+        await Clients.Caller.SendAsync("PlaySound", new PlaySoundMessage(SoundId.Coins));
+
+        // Merchant skill improvement: 1/150 chance (VB6: RandomNumber(1,150) = 5)
+        await TryImproveSkill(player, 8, 150);
+
+        await SendInvSlot(ch, slot);
+        await SendStats(ch);
+    }
+
+    /// <summary>
+    /// Try to improve a skill. VB6 pattern: RandomNumber(1, chance) == target, skill >= 10, below level cap.
+    /// </summary>
+    private async Task TryImproveSkill(PlayerState player, int skillIndex, int chance)
+    {
+        var ch = player.Character;
+        if (ch.Skills[skillIndex] < 10) return;
+
+        // VB6: LevelSkill(ELV).LevelValue > current skill
+        int level = ch.Level;
+        int levelCap = level >= 1 && level < SkillInfo.LevelCap.Length
+            ? SkillInfo.LevelCap[level] : 100;
+        if (ch.Skills[skillIndex] >= levelCap) return;
+
+        if (Random.Shared.Next(1, chance + 1) == 5)
+        {
+            ch.Skills[skillIndex]++;
+            string skillName = ((SkillType)skillIndex).ToString();
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"Your {skillName} skill has improved ({ch.Skills[skillIndex]}) !", FontType.SkillInfo));
         }
     }
 
