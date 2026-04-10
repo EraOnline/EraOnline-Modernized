@@ -970,7 +970,7 @@ const EraClient = (() => {
     }
 
     function setMapName(name) {
-        document.getElementById('map-name').textContent = name || '';
+        // Map name shown in status bar via renderer callback, no separate element needed
     }
 
     // --- Initialization ---
