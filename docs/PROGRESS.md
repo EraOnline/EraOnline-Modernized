@@ -2,9 +2,9 @@
 
 ## Current State
 
-**Phase 5 complete.** Full economy: NPC trading with merchant skill pricing, training at trainers, three crafting pipelines (woodworking/tailoring/blacksmithing), banking, NPC healing, campfire healing. Next: Phase 6 — Criminal system, reputation, weather, spells, housing, fishing/mining.
+**Phase 6 in progress.** Criminal system, PvP combat, and spell system complete. Next: gathering skills (fish/mine/chop), world flavor, animal taming, weather, housing/signs.
 
-Most recent log: [2026-04-08](logs/2026-04-08.md)
+Most recent log: [2026-04-09](logs/2026-04-09.md)
 
 ---
 
@@ -124,13 +124,14 @@ Trading, leveling, skills, crafting.
 
 The systems that make Menath feel alive.
 
-- [ ] Criminal system: timer-based flagging, red names, /DUEL for consensual PvP
-- [ ] Guard AI: chase and attack criminals, Dark Elf guards attack humans/wood elves
-- [ ] Reputation system: noble/under/common rep, deity rep, overall rank titles
+- [x] Criminal system: timer-based flagging, red names, /DUEL for consensual PvP
+- [x] PvP combat: UserAttackUser with full damage/backstab/rep/criminal/death chain
+- [x] Guard AI: chase and attack criminals, Dark Elf guards attack humans/wood elves (Phase 4)
+- [x] Reputation system: noble/under/common rep, deity rep (Bendarr/Veega/Zeendic/Griigo/Hyliios), rank titles (CheckRep)
 - [ ] Weather: rain and snow (visual effects, stamina/health drain without warm clothing)
-- [ ] Spell system: spell scrolls -> inscribe to spell book, cast on target, mana cost
-- [ ] Magic schools: Nature, Destruction, Enchanting (class-restricted)
-- [ ] /MEDITATE for mana regeneration (skill-based speed)
+- [x] Spell system: spell scrolls -> inscribe to 50-slot spell book, cast on NPC/player targets, mana cost, all 16 spell effects
+- [x] Magic schools: Nature, Destruction, Enchanting (class-restricted, validated on cast)
+- [x] /MEDITATE for mana regeneration (server-authoritative 10s tick, skill-based speed)
 - [ ] Animal taming: /TAME, skill-gated by animal type, animals persist across sessions
 - [ ] NPC hailing: /HAIL for dialogue, quest hints
 - [ ] NPC gossip system (randomized gossip from gossip.txt)
