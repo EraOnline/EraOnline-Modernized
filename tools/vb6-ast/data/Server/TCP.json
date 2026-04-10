@@ -1671,6 +1671,18 @@
           "/MEDITATE": {
             "status": "ported",
             "target": "Server/Hubs/GameHub.cs:HandleMeditate"
+          },
+          "FSH": {
+            "status": "ported",
+            "target": "Client.Web/wwwroot/js/client.js:GatherResource"
+          },
+          "MIN": {
+            "status": "ported",
+            "target": "Client.Web/wwwroot/js/client.js:GatherResource"
+          },
+          "CHP": {
+            "status": "ported",
+            "target": "Client.Web/wwwroot/js/client.js:GatherResource"
           }
         }
       }

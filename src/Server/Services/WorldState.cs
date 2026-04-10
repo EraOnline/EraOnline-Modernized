@@ -636,6 +636,9 @@ public class PlayerState
     /// <summary>VB6: Flags.Battlemode</summary>
     public bool BattleMode { get; set; }
 
+    /// <summary>VB6: OBJtarget — ObjType of equipped tool (16=FishingRod, 17=LumberjackAxe, 48=Pickaxe)</summary>
+    public int EquippedToolObjType { get; set; }
+
     // Crafting state (VB6: UserThrow + Flags.Working/whatjob/SkillFinished)
     public bool Working { get; set; }
     public int WhatJob { get; set; }

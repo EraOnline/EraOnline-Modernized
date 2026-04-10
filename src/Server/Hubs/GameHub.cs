@@ -433,6 +433,22 @@ public class GameHub : Hub
                 ch.MaxHit += objDef.MaxHit;
                 ch.MinHit += objDef.MinHit;
                 player.WeaponEqpSlot = slot;
+                player.EquippedToolObjType = 0; // Regular weapon, not a tool
+                await UpdateCharAppearance(player);
+                await SendInvSlot(ch, slot);
+                await SendStats(ch);
+                break;
+
+            case 16: // OBJTYPE_FISHINGROD — equips as weapon, sets tool type
+            case 17: // OBJTYPE_LUMBERJACKAXE
+            case 48: // OBJTYPE_PICKAXE
+                if (inv.Equipped) { await UnequipSlot(player, slot); break; }
+                if (ch.WeaponEqpSlot >= 0) await UnequipSlot(player, ch.WeaponEqpSlot);
+                inv.Equipped = true;
+                ch.WeaponEqpSlot = slot;
+                player.WeaponEqpSlot = slot;
+                player.EquippedToolObjType = objType; // VB6: OBJtarget = 16/17/48
+                await Clients.Caller.SendAsync("PlaySound", new PlaySoundMessage(SoundId.SwordSwing));
                 await UpdateCharAppearance(player);
                 await SendInvSlot(ch, slot);
                 await SendStats(ch);
@@ -687,6 +703,7 @@ public class GameHub : Hub
         if (slot == ch.WeaponEqpSlot)
         {
             ch.WeaponEqpSlot = -1; player.WeaponEqpSlot = -1;
+            player.EquippedToolObjType = 0; // VB6: OBJtarget = 0
             if (objDef != null) { ch.MaxHit -= objDef.MaxHit; ch.MinHit -= objDef.MinHit; }
         }
         else if (slot == ch.ArmourEqpSlot)
@@ -2001,23 +2018,45 @@ public class GameHub : Hub
                 skillChance = 30; successMessage = "And it ignite !";
                 break;
 
+            // --- Gathering skills (no material consumed, produce resource at feet) ---
+
+            case 2: // Chop — lumberjacking produces 1 log
+                consumeAmount = 0; resultObjIndex = 114; resultAmount = 1;
+                soundId = SoundId.Chopping; skillIndex = (int)SkillType.Lumberjacking;
+                successMessage = "And you manage to chop of a log !";
+                break;
+
+            case 7: // Fish — fishing produces 1 fish
+                consumeAmount = 0; resultObjIndex = 135; resultAmount = 1; // VB6: random 308-317 (don't exist), use 135 (1kg fish)
+                soundId = SoundId.FishingPole; skillIndex = (int)SkillType.Fishing;
+                successMessage = "You pull up a nice fish !";
+                break;
+
+            case 15: // Mine — mining produces 4 ore
+                consumeAmount = 0; resultObjIndex = 154; resultAmount = 4;
+                soundId = SoundId.FishingPole; skillIndex = (int)SkillType.Mining;
+                successMessage = "You manage to mine some fine ore !";
+                break;
+
             default: return;
         }
 
         if (resultObjIndex <= 0) return;
 
-        // Validate materials still exist
-        if (ch.Inventory[slot].Amount < consumeAmount)
+        // Consume materials (gathering jobs have consumeAmount=0, skip)
+        if (consumeAmount > 0)
         {
-            await Clients.Caller.SendAsync("Chat",
-                new ChatMessage("You no longer have enough materials.", FontType.Info));
-            return;
+            if (slot < 0 || slot >= 20) return;
+            if (ch.Inventory[slot].Amount < consumeAmount)
+            {
+                await Clients.Caller.SendAsync("Chat",
+                    new ChatMessage("You no longer have enough materials.", FontType.Info));
+                return;
+            }
+            ch.Inventory[slot].Amount -= consumeAmount;
+            if (ch.Inventory[slot].Amount <= 0)
+            { ch.Inventory[slot].ObjIndex = 0; ch.Inventory[slot].Amount = 0; }
         }
-
-        // Consume materials
-        ch.Inventory[slot].Amount -= consumeAmount;
-        if (ch.Inventory[slot].Amount <= 0)
-        { ch.Inventory[slot].ObjIndex = 0; ch.Inventory[slot].Amount = 0; }
 
         // Play sound
         await Clients.Group(MapGroup(player.Map))
@@ -2040,7 +2079,8 @@ public class GameHub : Hub
         // EXP reward
         ch.Exp += 3;
         await CheckUserLevel(player);
-        await SendInvSlot(ch, slot);
+        if (consumeAmount > 0 && slot >= 0 && slot < 20)
+            await SendInvSlot(ch, slot);
         await SendStats(ch);
 
         // Clear craft recipe data after drawing-based crafts
@@ -2052,6 +2092,97 @@ public class GameHub : Hub
             player.CraftNeedFoldedCloth = 0;
             player.CraftSkillRequired = 0;
         }
+    }
+
+    // ===================== Gathering Skills =====================
+
+    /// <summary>
+    /// Gather a resource by clicking on a tile in battle mode.
+    /// VB6: HandleData "CHP" -> Chop, "FSH" -> Fish, "MIN" -> Mine (GameLogic.bas).
+    /// Client detects the tile type (tree/water/rock) and sends the gather type.
+    /// The server validates the equipped tool and starts a progress bar.
+    /// </summary>
+    public async Task GatherResource(string gatherType)
+    {
+        var player = _world.GetPlayer(Context.ConnectionId);
+        if (player == null) return;
+
+        // VB6: Must be alive
+        if (player.IsDead)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You are dead and cannot do that.", FontType.Talk));
+            return;
+        }
+
+        // VB6: Must not already be working
+        if (player.Working)
+        {
+            return;
+        }
+
+        int jobType;
+        int skillIndex;
+        string startMessage;
+
+        switch (gatherType)
+        {
+            case "chop":
+                // VB6: OBJtarget must be 17 (LumberjackAxe)
+                if (player.EquippedToolObjType != 17)
+                {
+                    await Clients.Caller.SendAsync("Chat",
+                        new ChatMessage("You need to equip a lumberjack axe first.", FontType.Info));
+                    return;
+                }
+                jobType = 2;
+                skillIndex = (int)SkillType.Lumberjacking;
+                startMessage = "You begin chopping on the tree.";
+                break;
+
+            case "fish":
+                // VB6: OBJtarget must be 16 (FishingRod)
+                if (player.EquippedToolObjType != 16)
+                {
+                    await Clients.Caller.SendAsync("Chat",
+                        new ChatMessage("You need to equip a fishing rod first.", FontType.Info));
+                    return;
+                }
+                jobType = 7;
+                skillIndex = (int)SkillType.Fishing;
+                startMessage = "You throw the line into the water and wait...";
+                break;
+
+            case "mine":
+                // VB6: OBJtarget must be 48 (Pickaxe)
+                if (player.EquippedToolObjType != 48)
+                {
+                    await Clients.Caller.SendAsync("Chat",
+                        new ChatMessage("You need to equip a pickaxe first.", FontType.Info));
+                    return;
+                }
+                jobType = 15;
+                skillIndex = (int)SkillType.Mining;
+                startMessage = "You begin mining after ore...";
+                break;
+
+            default: return;
+        }
+
+        // Start the gathering progress bar (reuses crafting infrastructure)
+        // VB6: DOS message with skill level and job type
+        var ch = player.Character;
+        player.Working = true;
+        player.WhatJob = jobType;
+        player.CraftSlot = -1; // No inventory slot for gathering
+        player.CraftStartTime = DateTime.UtcNow;
+
+        int skillLevel = ch.Skills[skillIndex];
+        int durationMs = Math.Max(2000, (100 - skillLevel) * 50);
+
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage(startMessage + " The blue bar represents how much time left.", FontType.Info));
+        await Clients.Caller.SendAsync("CraftStart", new CraftStartMessage(jobType, durationMs));
     }
 
     // ===================== Campfire Healing =====================

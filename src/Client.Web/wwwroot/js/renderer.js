@@ -695,6 +695,14 @@ const EraRenderer = (() => {
         moveCharacter,
         setPlayerPosition,
         makeGroundObj,
-        eraseGroundObj
+        eraseGroundObj,
+        /** Get GRH index for a tile at (x,y) on the given layer (1 or 2). */
+        getTileGrh(x, y, layer) {
+            if (!mapData || x < 1 || x > 100 || y < 1 || y > 100) return 0;
+            const idx = (y - 1) * 100 + (x - 1);
+            if (layer === 1) return mapData.tiles.layer1[idx] || 0;
+            if (layer === 2) return mapData.tiles.layer2[idx] || 0;
+            return 0;
+        }
     };
 })();

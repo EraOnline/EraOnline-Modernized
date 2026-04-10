@@ -17,6 +17,7 @@ const EraClient = (() => {
     let musicEnabled = true;
     let charName = '';
     let charRace = '';
+    let battleMode = false;
 
     // Inventory state (20 slots)
     const inventory = new Array(20).fill(null).map(() => ({
@@ -856,13 +857,46 @@ const EraClient = (() => {
         }
     }
 
+    // VB6 GRH indices that trigger gathering when clicked in battle mode
+    const TREE_GRHS = new Set([17, 78, 79, 80, 81, 82, 83, 84, 85, 86, 124, 125, 193, 196, 197]);
+    const WATER_GRHS = new Set([3500]);
+    const ROCK_GRHS = new Set([19, 115]);
+
     function onPlayerClick(tileX, tileY) {
-        // VB6: Form_MouseUp -> SendData("LC" & tX & "," & tY)
-        if (connection && connection.state === signalR.HubConnectionState.Connected) {
-            connection.invoke('LeftClick', tileX, tileY).catch(err => {
-                console.error('[EraClient] LeftClick failed:', err);
-            });
+        if (!connection || connection.state !== signalR.HubConnectionState.Connected) return;
+
+        // VB6: In battle mode, check if clicked tile is a gatherable resource
+        if (battleMode) {
+            const grh1 = EraRenderer.getTileGrh(tileX, tileY, 1);
+            const grh2 = EraRenderer.getTileGrh(tileX, tileY, 2);
+
+            // Water — fishing (check layer 1 and 2, matching VB6)
+            if (WATER_GRHS.has(grh1) || WATER_GRHS.has(grh2)) {
+                connection.invoke('GatherResource', 'fish').catch(err => {
+                    console.error('[EraClient] GatherResource fish failed:', err);
+                });
+                return;
+            }
+            // Rock/cliff — mining (check layer 1 and 2)
+            if (ROCK_GRHS.has(grh2) || ROCK_GRHS.has(grh1)) {
+                connection.invoke('GatherResource', 'mine').catch(err => {
+                    console.error('[EraClient] GatherResource mine failed:', err);
+                });
+                return;
+            }
+            // Trees — chopping (layer 2 only, matching VB6)
+            if (TREE_GRHS.has(grh2)) {
+                connection.invoke('GatherResource', 'chop').catch(err => {
+                    console.error('[EraClient] GatherResource chop failed:', err);
+                });
+                return;
+            }
         }
+
+        // VB6: Form_MouseUp -> SendData("LC" & tX & "," & tY) — normal left-click inspect
+        connection.invoke('LeftClick', tileX, tileY).catch(err => {
+            console.error('[EraClient] LeftClick failed:', err);
+        });
     }
 
     function onTargetMessage(msg) {
@@ -1090,7 +1124,7 @@ const EraClient = (() => {
 
         // CTRL = toggle battle mode (VB6: KeyCode = vbKeyControl → SendData "BTL")
         // ALT = attack (VB6: KeyCode = 18 → SendData "ATT")
-        let battleMode = false;
+        battleMode = false;
         document.addEventListener('keydown', (e) => {
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
             if (e.key === 'Control') {

@@ -1306,7 +1306,8 @@
       "lineEnd": 3691,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:GatherResource\u002BCompleteCraft",
         "sends": [
           "DOS",
           "PLW"
@@ -1328,7 +1329,8 @@
       "lineEnd": 3747,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:GatherResource\u002BCompleteCraft",
         "sends": [
           "DOS",
           "PLW"
@@ -1494,7 +1496,8 @@
       "lineEnd": 4139,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:GatherResource\u002BCompleteCraft",
         "sends": [
           "DOS",
           "PLW"
