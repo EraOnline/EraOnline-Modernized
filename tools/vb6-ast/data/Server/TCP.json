@@ -1691,6 +1691,18 @@
           "/GOSSIP": {
             "status": "ported",
             "target": "Server/Hubs/GameHub.cs:HandleGossip"
+          },
+          "STA": {
+            "status": "ported",
+            "target": "Server/Services/GameLoopService.cs:TickRainDamage"
+          },
+          "RAI": {
+            "status": "ported",
+            "target": "Server/Services/GameLoopService.cs:TickWeather"
+          },
+          "SAI": {
+            "status": "ported",
+            "target": "Server/Services/GameLoopService.cs:TickWeather"
           }
         }
       }

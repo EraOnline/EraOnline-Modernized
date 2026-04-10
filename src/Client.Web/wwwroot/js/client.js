@@ -723,6 +723,28 @@ const EraClient = (() => {
         }
     }
 
+    // ===================== Weather =====================
+    let thunderTimer = null;
+
+    function onWeather(raining) {
+        // VB6: RAI sets Raining=1, SAI sets Raining=0
+        EraRenderer.setRaining(raining);
+
+        if (raining) {
+            // VB6: Thunder_Timer fires every 20000ms while raining (SndId 43)
+            if (!thunderTimer) {
+                thunderTimer = setInterval(() => {
+                    playSound('/data/sfx/snd43.wav');
+                }, 20000);
+            }
+        } else {
+            if (thunderTimer) {
+                clearInterval(thunderTimer);
+                thunderTimer = null;
+            }
+        }
+    }
+
     function toggleSpellBook() {
         let panel = document.getElementById('spellbook-overlay');
         if (panel) { panel.remove(); return; }
@@ -1060,6 +1082,7 @@ const EraClient = (() => {
         connection.on('CampfireNearby', onCampfireNearby);
         connection.on('SpellSlot', onSpellSlot);
         connection.on('Meditate', onMeditate);
+        connection.on('Weather', onWeather);
 
         connection.onreconnecting(() => setStatusBar('Reconnecting...'));
         connection.onreconnected(() => setStatusBar('Reconnected'));

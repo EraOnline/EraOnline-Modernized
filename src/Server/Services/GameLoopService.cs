@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.SignalR;
 using EraOnline.Server.Hubs;
 using EraOnline.Shared.Constants;
+using EraOnline.Shared.Models;
 using EraOnline.Shared.Protocol;
 
 namespace EraOnline.Server.Services;
@@ -21,6 +22,13 @@ public class GameLoopService : BackgroundService
 
     // NPC attack reset timer: every 4000ms (80 ticks at 50ms)
     private const int NpcAttackResetTicks = GameConstants.NpcAttackInterval / GameConstants.GameTickInterval;
+
+    // Weather system (VB6: rain_Timer every 10000ms = 200 ticks)
+    private const int WeatherTickInterval = 200; // 10 seconds
+    private const int RainDamageTickInterval = 1300; // ~65 seconds (VB6: CheckRain.Interval = 65000)
+    private int _willRainCounter;
+    private int _willStopRainCounter;
+    public bool Raining { get; private set; }
 
     public long TickCount => _tickCount;
 
@@ -72,6 +80,19 @@ public class GameLoopService : BackgroundService
                 if (_tickCount % 200 == 0)
                 {
                     await TickMeditation();
+                }
+
+                // Weather system (VB6: rain_Timer every 10000ms)
+                if (_tickCount % WeatherTickInterval == 0)
+                {
+                    await TickWeather();
+                }
+
+                // Rain damage (VB6: CheckRain_Timer every 65000ms, client-side → STA → server)
+                // Server-authoritative: check every ~65s
+                if (_tickCount % RainDamageTickInterval == 0)
+                {
+                    await TickRainDamage();
                 }
             }
             catch (Exception ex)
@@ -761,6 +782,128 @@ public class GameLoopService : BackgroundService
         Direction.West => (-1, 0),
         _ => (0, 0)
     };
+
+    // ===================== Weather =====================
+
+    /// <summary>
+    /// Weather tick. VB6: rain_Timer (frmMain.frm:603).
+    /// WillRain counter increments every 10s. At 30 (5 min), 1/7 chance to start rain.
+    /// WillStopRain counter increments every 10s. At 15 (2.5 min), 1/4 chance to stop.
+    /// </summary>
+    private async Task TickWeather()
+    {
+        var rng = Random.Shared;
+
+        if (!Raining)
+        {
+            _willRainCounter++;
+            if (_willRainCounter >= 30)
+            {
+                _willRainCounter = 0;
+                // VB6: 1/7 chance to start rain
+                if (rng.Next(1, 8) == 2)
+                {
+                    Raining = true;
+                    _willStopRainCounter = 0;
+                    await _hubContext.Clients.All.SendAsync("Weather", true);
+                    await _hubContext.Clients.All.SendAsync("Chat",
+                        new ChatMessage("It begins to snow...", FontType.Info));
+                    await _hubContext.Clients.All.SendAsync("PlaySound",
+                        new PlaySoundMessage(SoundId.Thunder));
+                    _logger.LogInformation("Weather: rain started");
+                }
+            }
+        }
+        else
+        {
+            _willStopRainCounter++;
+            if (_willStopRainCounter >= 15)
+            {
+                _willStopRainCounter = 0;
+                // VB6: 1/4 chance to stop rain
+                if (rng.Next(1, 5) == 2)
+                {
+                    Raining = false;
+                    _willRainCounter = 0;
+                    await _hubContext.Clients.All.SendAsync("Weather", false);
+                    await _hubContext.Clients.All.SendAsync("Chat",
+                        new ChatMessage("It stops snowing...", FontType.Info));
+                    await _hubContext.Clients.All.SendAsync("PlaySound",
+                        new PlaySoundMessage(SoundId.Birds));
+                    _logger.LogInformation("Weather: rain stopped");
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Rain damage tick. VB6: HandleData "STA" (TCP.bas:1117).
+    /// Drains 1 stamina per tick if raining and player doesn't have warm clothing.
+    /// If stamina < 2 and HP > 2, drains 1 HP too.
+    /// Protected by: being indoors (floor GRH 5, 47, 75) or warm clothing (HandleRain=1).
+    /// Indoor check is done server-side using map layer1 data.
+    /// </summary>
+    private async Task TickRainDamage()
+    {
+        if (!Raining) return;
+
+        foreach (var player in _world.GetAllOnlinePlayers())
+        {
+            if (player.IsDead) continue;
+
+            var ch = player.Character;
+
+            // Check if player is indoors (VB6: floor GRH 5, 75, 47 on layer1)
+            var mapDef = _gameData.Maps.GetValueOrDefault(player.Map);
+            if (mapDef != null)
+            {
+                int tileIdx = (player.Y - 1) * 100 + (player.X - 1);
+                if (tileIdx >= 0 && tileIdx < mapDef.Tiles.Layer1.Length)
+                {
+                    int floorGrh = mapDef.Tiles.Layer1[tileIdx];
+                    if (floorGrh == 5 || floorGrh == 47 || floorGrh == 75)
+                        continue; // indoors, safe
+                }
+            }
+
+            // Check warm clothing (VB6: obj1.HandleRain = 1 on equipped armour/clothing)
+            if (ch.ArmourEqpSlot >= 0 && ch.ArmourEqpSlot < 20)
+            {
+                var eqpInv = ch.Inventory[ch.ArmourEqpSlot];
+                if (eqpInv.ObjIndex > 0)
+                {
+                    var armourDef = _gameData.Objects.FirstOrDefault(o => o.Id == eqpInv.ObjIndex);
+                    if (armourDef?.HandleRain == 1)
+                        continue; // warm clothing, safe
+                }
+            }
+
+            // Drain stamina
+            if (ch.CurrentSta > 0)
+            {
+                ch.CurrentSta--;
+                await _hubContext.Clients.Client(player.ConnectionId).SendAsync("Chat",
+                    new ChatMessage("You feel cold and lose some stamina ! Try finding shelter in a house or get yourself some warm clothing !", FontType.Info));
+            }
+
+            // Drain health if stamina depleted
+            if (ch.CurrentSta < 2 && ch.CurrentHp > 2)
+            {
+                ch.CurrentHp--;
+                await _hubContext.Clients.Client(player.ConnectionId).SendAsync("Chat",
+                    new ChatMessage("You feel cold and exhausted ! You are loosing health ! Try finding shelter in a house or get yourself some warm clothing !", FontType.Info));
+            }
+
+            // Send updated stats
+            await _hubContext.Clients.Client(player.ConnectionId).SendAsync("Stats",
+                new StatsMessage(
+                    ch.CurrentHp, ch.MaxHp, ch.CurrentMan, ch.MaxMan,
+                    ch.CurrentSta, ch.MaxSta, ch.Gold, ch.Exp, ch.Elu,
+                    ch.Food, ch.Drink, ch.MinHit, ch.MaxHit, ch.Def,
+                    ch.TrainingPoints, ch.Class, ch.RepRank, ch.Skills,
+                    ch.Criminal, ch.CriminalCount));
+        }
+    }
 
     /// <summary>SignalR group name for a map. Must match GameHub.</summary>
     private static string MapGroup(int map) => $"map:{map}";

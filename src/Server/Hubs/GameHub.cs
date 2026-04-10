@@ -266,6 +266,12 @@ public class GameHub : Hub
         // VB6: SendData(ToIndex, "PLM" & MapInfo(map).Music) — play zone music
         await SendMapMusic(map);
 
+        // Send current weather state (VB6: RAI/SAI sent on login if raining)
+        if (_gameLoopService.Raining)
+        {
+            await Clients.Caller.SendAsync("Weather", true);
+        }
+
         // VB6: Open App.Path & "\Connect.log" For Append
         _chatLog.LogConnect(character.Name, $"logged in. Map:{map} ({x},{y})");
     }

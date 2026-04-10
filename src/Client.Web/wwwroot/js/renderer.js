@@ -27,6 +27,7 @@ const EraRenderer = (() => {
     let spriteSheets = {};
     let loadingSheets = new Set();
     let mapData = null;
+    let raining = false;
     let npcDefs = [];
     let bodyDefs = {};
     let headDefs = {};
@@ -613,6 +614,18 @@ const EraRenderer = (() => {
                     }
                 }
 
+                // VB6: Layer 3 — weather effects (only drawn when raining)
+                if (raining && mapData.tiles.layer3) {
+                    const grh3 = mapData.tiles.layer3[idx];
+                    if (grh3 > 0) {
+                        drawGrh(grh3, px, py, true, null);
+                        if (!tickedAnims.has(grh3)) {
+                            tickTileAnim(grh3);
+                            tickedAnims.add(grh3);
+                        }
+                    }
+                }
+
                 // VB6: Object layer — dynamic ground items between fringe and characters
                 const objGrh = groundObjects[`${x},${y}`];
                 if (objGrh > 0) {
@@ -696,6 +709,7 @@ const EraRenderer = (() => {
         setPlayerPosition,
         makeGroundObj,
         eraseGroundObj,
+        setRaining(val) { raining = val; },
         /** Get GRH index for a tile at (x,y) on the given layer (1 or 2). */
         getTileGrh(x, y, layer) {
             if (!mapData || x < 1 || x > 100 || y < 1 || y > 100) return 0;
