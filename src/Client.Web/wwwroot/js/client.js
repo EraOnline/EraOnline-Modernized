@@ -860,7 +860,7 @@ const EraClient = (() => {
     // VB6 GRH indices that trigger gathering when clicked in battle mode
     const TREE_GRHS = new Set([17, 78, 79, 80, 81, 82, 83, 84, 85, 86, 124, 125, 193, 196, 197]);
     const WATER_GRHS = new Set([3500]);
-    const ROCK_GRHS = new Set([19, 115]);
+    const ROCK_GRHS = new Set([24, 115]); // VB6 had 19 but that's a sign sprite; 24 is the actual stone boulder
 
     function onPlayerClick(tileX, tileY) {
         if (!connection || connection.state !== signalR.HubConnectionState.Connected) return;
