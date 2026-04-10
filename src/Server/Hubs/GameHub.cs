@@ -163,6 +163,15 @@ public class GameHub : Hub
             }
         }
 
+        // Add starting spells for magic classes (VB6: GiveSkills sets SpellObj slots)
+        if (template.StartingSpells != null)
+        {
+            for (int i = 0; i < template.StartingSpells.Length && i < character.SpellBook.Length; i++)
+            {
+                character.SpellBook[i] = template.StartingSpells[i];
+            }
+        }
+
         // Save to disk
         await _world.SaveCharacter(character);
 
