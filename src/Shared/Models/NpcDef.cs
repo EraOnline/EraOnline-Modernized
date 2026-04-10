@@ -33,6 +33,7 @@ public class NpcDef
     [JsonPropertyName("minHit")] public int MinHit { get; set; }
     [JsonPropertyName("maxHit")] public int MaxHit { get; set; }
     [JsonPropertyName("def")] public int Def { get; set; }
+    [JsonPropertyName("hail")] public string Hail { get; set; } = "";
     [JsonPropertyName("categories")] public string[] Categories { get; set; } = [];
     [JsonPropertyName("inventory")] public NpcInvSlot[] Inventory { get; set; } = [];
 }

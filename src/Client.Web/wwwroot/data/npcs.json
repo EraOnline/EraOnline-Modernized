@@ -25,6 +25,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -61,6 +62,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -92,6 +94,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -136,6 +139,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Magic"
     ],
@@ -236,6 +240,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food",
       "Diverse"
@@ -273,6 +278,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Magic",
       "Food"
@@ -310,6 +316,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "All"
     ],
@@ -346,6 +353,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -382,6 +390,7 @@
     "maxHit": 13,
     "def": 5,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "All"
     ],
@@ -422,6 +431,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Carpenting"
     ],
@@ -558,6 +568,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Blacksmithing",
       "Weapon"
@@ -751,6 +762,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Tailoring",
       "Clothing"
@@ -920,6 +932,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -960,6 +973,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -996,6 +1010,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "All"
     ],
@@ -1108,6 +1123,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Instrument",
       "Book"
@@ -1177,6 +1193,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -1213,6 +1230,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -1277,6 +1295,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -1365,6 +1384,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -1405,6 +1425,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -1441,6 +1462,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "House"
     ],
@@ -1537,6 +1559,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -1573,6 +1596,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Jewlery",
       "Artifact"
@@ -1610,6 +1634,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -1646,6 +1671,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -1682,6 +1708,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -1718,6 +1745,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Diverse"
     ],
@@ -1754,6 +1782,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food",
       "Diverse"
@@ -1811,6 +1840,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -1847,6 +1877,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -1883,6 +1914,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -1919,6 +1951,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -1955,6 +1988,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -1991,6 +2025,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -2027,6 +2062,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -2063,6 +2099,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -2099,6 +2136,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -2135,6 +2173,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -2171,6 +2210,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -2207,6 +2247,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -2243,6 +2284,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Jewlery"
     ],
@@ -2307,6 +2349,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -2343,6 +2386,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Archery"
     ],
@@ -2423,6 +2467,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -2459,6 +2504,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Artifact"
     ],
@@ -2515,6 +2561,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Magic",
       "Artifact"
@@ -2600,6 +2647,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "All"
     ],
@@ -2684,6 +2732,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Armor"
     ],
@@ -2812,6 +2861,7 @@
     "maxHit": 70,
     "def": 1,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Magic"
     ],
@@ -2843,6 +2893,7 @@
     "maxHit": 100,
     "def": 20,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -2879,6 +2930,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Book",
       "Artifact"
@@ -2916,6 +2968,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Book"
     ],
@@ -2952,6 +3005,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -2988,6 +3042,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -3024,6 +3079,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -3055,6 +3111,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -3091,6 +3148,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -3127,6 +3185,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -3163,6 +3222,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -3199,6 +3259,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -3235,6 +3296,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -3266,6 +3328,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -3310,6 +3373,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Magic"
     ],
@@ -3410,6 +3474,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Diverse"
     ],
@@ -3446,6 +3511,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Magic",
       "Food"
@@ -3483,6 +3549,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "All"
     ],
@@ -3519,6 +3586,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -3555,6 +3623,7 @@
     "maxHit": 13,
     "def": 5,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "All"
     ],
@@ -3595,6 +3664,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Carpenting"
     ],
@@ -3731,6 +3801,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Blacksmithing",
       "Weapon"
@@ -3924,6 +3995,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Tailoring",
       "Clothing"
@@ -4093,6 +4165,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -4133,6 +4206,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -4169,6 +4243,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "All"
     ],
@@ -4281,6 +4356,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Instrument",
       "Book"
@@ -4350,6 +4426,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -4386,6 +4463,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -4450,6 +4528,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -4538,6 +4617,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -4578,6 +4658,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -4614,6 +4695,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "House"
     ],
@@ -4710,6 +4792,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -4746,6 +4829,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Jewlery",
       "Artifact"
@@ -4783,6 +4867,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -4819,6 +4904,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -4855,6 +4941,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -4891,6 +4978,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food",
       "Diverse"
@@ -4928,6 +5016,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food",
       "Diverse"
@@ -4985,6 +5074,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -5021,6 +5111,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -5057,6 +5148,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -5093,6 +5185,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -5129,6 +5222,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -5165,6 +5259,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -5201,6 +5296,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -5237,6 +5333,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -5273,6 +5370,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -5309,6 +5407,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -5340,6 +5439,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -5371,6 +5471,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -5402,6 +5503,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Jewlery"
     ],
@@ -5433,6 +5535,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -5464,6 +5567,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Archery"
     ],
@@ -5544,6 +5648,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -5580,6 +5685,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Artifact",
       "Magic"
@@ -5637,6 +5743,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Artifact",
       "Magic"
@@ -5722,6 +5829,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "All"
     ],
@@ -5806,6 +5914,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Armor"
     ],
@@ -5934,6 +6043,7 @@
     "maxHit": 70,
     "def": 1,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -5970,6 +6080,7 @@
     "maxHit": 100,
     "def": 20,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -6006,6 +6117,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Book",
       "Artifact"
@@ -6043,6 +6155,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Book"
     ],
@@ -6079,6 +6192,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -6115,6 +6229,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -6146,6 +6261,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -6177,6 +6293,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -6213,6 +6330,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -6249,6 +6367,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -6280,6 +6399,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -6316,6 +6436,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -6352,6 +6473,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -6383,6 +6505,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -6427,6 +6550,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Magic"
     ],
@@ -6527,6 +6651,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food",
       "Diverse"
@@ -6559,6 +6684,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Magic",
       "Food"
@@ -6591,6 +6717,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -6627,6 +6754,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -6663,6 +6791,7 @@
     "maxHit": 13,
     "def": 5,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "All"
     ],
@@ -6703,6 +6832,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Carpenting"
     ],
@@ -6839,6 +6969,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Weapon",
       "Blacksmithing"
@@ -7032,6 +7163,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Clothing",
       "Tailoring"
@@ -7201,6 +7333,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -7241,6 +7374,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food",
       "Weapon"
@@ -7278,6 +7412,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "All"
     ],
@@ -7390,6 +7525,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Book",
       "Instrument"
@@ -7459,6 +7595,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -7495,6 +7632,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -7559,6 +7697,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -7647,6 +7786,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -7687,6 +7827,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -7723,6 +7864,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "House"
     ],
@@ -7819,6 +7961,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -7855,6 +7998,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Artifact",
       "Diverse"
@@ -7892,6 +8036,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -7928,6 +8073,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -7964,6 +8110,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -8000,6 +8147,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Diverse",
       "Food"
@@ -8037,6 +8185,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Diverse",
       "Food"
@@ -8094,6 +8243,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -8130,6 +8280,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -8166,6 +8317,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -8202,6 +8354,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -8238,6 +8391,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -8274,6 +8428,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -8310,6 +8465,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -8346,6 +8502,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -8382,6 +8539,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -8418,6 +8576,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -8454,6 +8613,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -8490,6 +8650,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -8526,6 +8687,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Jewlery"
     ],
@@ -8590,6 +8752,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -8626,6 +8789,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Archery"
     ],
@@ -8706,6 +8870,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -8742,6 +8907,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Artifact",
       "Magic"
@@ -8799,6 +8965,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Artifact",
       "Magic"
@@ -8884,6 +9051,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "All"
     ],
@@ -8968,6 +9136,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Armor"
     ],
@@ -9096,6 +9265,7 @@
     "maxHit": 70,
     "def": 1,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -9132,6 +9302,7 @@
     "maxHit": 100,
     "def": 20,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -9168,6 +9339,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Book",
       "Artifact"
@@ -9205,6 +9377,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Book"
     ],
@@ -9241,6 +9414,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -9277,6 +9451,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -9313,6 +9488,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -9349,6 +9525,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -9385,6 +9562,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -9421,6 +9599,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -9457,6 +9636,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -9493,6 +9673,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -9529,6 +9710,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -9560,6 +9742,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -9604,6 +9787,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Magic"
     ],
@@ -9704,6 +9888,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Diverse",
       "Food"
@@ -9736,6 +9921,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food",
       "Magic"
@@ -9768,6 +9954,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "All"
     ],
@@ -9804,6 +9991,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -9840,6 +10028,7 @@
     "maxHit": 13,
     "def": 5,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "All"
     ],
@@ -9880,6 +10069,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Carpenting"
     ],
@@ -10016,6 +10206,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Blacksmithing",
       "Weapon"
@@ -10209,6 +10400,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Tailoring",
       "Clothing"
@@ -10378,6 +10570,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -10418,6 +10611,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Weapon",
       "Food"
@@ -10455,6 +10649,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "All"
     ],
@@ -10567,6 +10762,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Book",
       "Instrument"
@@ -10636,6 +10832,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -10672,6 +10869,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -10736,6 +10934,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -10824,6 +11023,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -10864,6 +11064,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -10900,6 +11101,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "House"
     ],
@@ -10996,6 +11198,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -11032,6 +11235,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Artifact"
     ],
@@ -11068,6 +11272,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11104,6 +11309,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food"
     ],
@@ -11140,6 +11346,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11176,6 +11383,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Diverse",
       "Food"
@@ -11213,6 +11421,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Food",
       "Diverse"
@@ -11270,6 +11479,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11306,6 +11516,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11342,6 +11553,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11378,6 +11590,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11414,6 +11627,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11450,6 +11664,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11486,6 +11701,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11522,6 +11738,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11558,6 +11775,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11594,6 +11812,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11630,6 +11849,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11666,6 +11886,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11702,6 +11923,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Jewlery"
     ],
@@ -11766,6 +11988,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11802,6 +12025,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Archery"
     ],
@@ -11882,6 +12106,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -11918,6 +12143,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Artifact",
       "Magic"
@@ -11975,6 +12201,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Artifact",
       "Magic"
@@ -12060,6 +12287,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "All"
     ],
@@ -12144,6 +12372,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Armorer"
     ],
@@ -12272,6 +12501,7 @@
     "maxHit": 70,
     "def": 1,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -12308,6 +12538,7 @@
     "maxHit": 100,
     "def": 20,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -12344,6 +12575,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Artifact",
       "Book"
@@ -12381,6 +12613,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Book"
     ],
@@ -12417,6 +12650,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -12453,6 +12687,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -12489,6 +12724,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -12525,6 +12761,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -12561,6 +12798,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -12597,6 +12835,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -12633,6 +12872,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "",
     "categories": [
       "Nothing"
     ],
@@ -12669,6 +12909,7 @@
     "maxHit": 0,
     "def": 0,
     "gold": 10000,
+    "hail": "Hail to thee my child. I am Wodyr The Wise. I have only one thing to say; the dark elves are going to take over, unless someone stops them. Go tell the emperor ! GO TELL GENERAL KRUMINS ! We are all going under if not !",
     "categories": [
       "All"
     ],
@@ -12705,6 +12946,7 @@
     "maxHit": 100,
     "def": 20,
     "gold": 10000,
+    "hail": "Can\u0027t you see im busy? I have better things to do, like fighting off criminals to save your behind !",
     "categories": [
       "Nothing"
     ],
@@ -12741,6 +12983,7 @@
     "maxHit": 20,
     "def": 5,
     "gold": 10000,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -12779,6 +13022,7 @@
     "maxHit": 15,
     "def": 6,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -12817,6 +13061,7 @@
     "maxHit": 9,
     "def": 3,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -12855,6 +13100,7 @@
     "maxHit": 22,
     "def": 7,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -12893,6 +13139,7 @@
     "maxHit": 30,
     "def": 10,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -12931,6 +13178,7 @@
     "maxHit": 80,
     "def": 20,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -12969,6 +13217,7 @@
     "maxHit": 15,
     "def": 5,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13007,6 +13256,7 @@
     "maxHit": 45,
     "def": 10,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13045,6 +13295,7 @@
     "maxHit": 4,
     "def": 3,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13083,6 +13334,7 @@
     "maxHit": 3,
     "def": 2,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13121,6 +13373,7 @@
     "maxHit": 4,
     "def": 5,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13159,6 +13412,7 @@
     "maxHit": 24,
     "def": 5,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13197,6 +13451,7 @@
     "maxHit": 10,
     "def": 2,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13235,6 +13490,7 @@
     "maxHit": 8,
     "def": 0,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13273,6 +13529,7 @@
     "maxHit": 7,
     "def": 0,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13311,6 +13568,7 @@
     "maxHit": 6,
     "def": 0,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13357,6 +13615,7 @@
     "maxHit": 2,
     "def": 0,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13395,6 +13654,7 @@
     "maxHit": 9,
     "def": 2,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13433,6 +13693,7 @@
     "maxHit": 10,
     "def": 3,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13471,6 +13732,7 @@
     "maxHit": 23,
     "def": 8,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13509,6 +13771,7 @@
     "maxHit": 20,
     "def": 8,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13547,6 +13810,7 @@
     "maxHit": 10,
     "def": 3,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13585,6 +13849,7 @@
     "maxHit": 95,
     "def": 10,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13623,6 +13888,7 @@
     "maxHit": 10,
     "def": 5,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13661,6 +13927,7 @@
     "maxHit": 50,
     "def": 10,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13699,6 +13966,7 @@
     "maxHit": 30,
     "def": 4,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13737,6 +14005,7 @@
     "maxHit": 15,
     "def": 5,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13775,6 +14044,7 @@
     "maxHit": 25,
     "def": 7,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13813,6 +14083,7 @@
     "maxHit": 6,
     "def": 3,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13851,6 +14122,7 @@
     "maxHit": 40,
     "def": 5,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": []
   },
@@ -13880,6 +14152,7 @@
     "maxHit": 100,
     "def": 20,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": []
   },
@@ -13909,6 +14182,7 @@
     "maxHit": 20,
     "def": 5,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13947,6 +14221,7 @@
     "maxHit": 25,
     "def": 6,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": [
       {
@@ -13985,6 +14260,7 @@
     "maxHit": 40,
     "def": 12,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": []
   },
@@ -14014,6 +14290,7 @@
     "maxHit": 150,
     "def": 20,
     "gold": 0,
+    "hail": "",
     "categories": [],
     "inventory": []
   },
@@ -14043,6 +14320,7 @@
     "maxHit": 200,
     "def": 20,
     "gold": 0,
+    "hail": "Whahahaha ! You think you can challange me? Smaug The Mighty Dragon!? Stab my eyes out, tear my heart out ! Let me fry you ! I will protect my gold !",
     "categories": [],
     "inventory": []
   }

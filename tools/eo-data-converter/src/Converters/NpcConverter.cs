@@ -40,6 +40,7 @@ public static class NpcConverter
                 Id = i,
                 Name = name,
                 Desc = ini.GetVar(sec, "Desc"),
+                Hail = ini.GetVar(sec, "Hail"),
                 Movement = ini.GetInt(sec, "Movement"),
                 Body = ini.GetInt(sec, "Body"),
                 Head = ini.GetInt(sec, "Head"),

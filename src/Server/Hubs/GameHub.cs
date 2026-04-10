@@ -1098,9 +1098,18 @@ public class GameHub : Hub
                 await HandleDropGold(player, arg);
                 break;
 
+            case "/HAIL":
+                await HandleHail(player);
+                break;
+
+            case "/GOSSIP":
+            case "/NEWS":
+                await HandleGossip(player);
+                break;
+
             case "/HELP":
                 await Clients.Caller.SendAsync("Chat",
-                    new ChatMessage("Commands: /WHO /PLAYERS /STATS /DESC /SAVE /QUIT /TRADE /DUEL /RESSURECT /HELP", FontType.Info));
+                    new ChatMessage("Commands: /WHO /STATS /DESC /TRADE /TRAIN /HEAL /HAIL /GOSSIP /DUEL /MEDITATE /RESSURECT /SAVE /QUIT /HELP", FontType.Info));
                 await Clients.Caller.SendAsync("Chat",
                     new ChatMessage("Chat: just type to say, - to shout, : to emote, \\name to whisper", FontType.Info));
                 break;
@@ -3168,6 +3177,121 @@ public class GameHub : Hub
 
         await SendStats(ch);
         await SendFullInventory(ch);
+    }
+
+    // ===================== NPC Hailing & Gossip =====================
+
+    /// <summary>
+    /// Hail a targeted NPC to hear their dialogue.
+    /// VB6: HandleData "/HAIL" (TCP.bas:1883). Reads NPCList(NPC).Hail.
+    /// </summary>
+    private async Task HandleHail(PlayerState player)
+    {
+        // VB6: Must have an NPC targeted
+        if (player.TargetNpcIndex <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You need to target an NPC first.", FontType.Info));
+            return;
+        }
+
+        var npcInstance = _world.GetNpcByIndex(player.TargetNpcIndex);
+        if (npcInstance == null) return;
+
+        var npcDef = _gameData.Npcs.FirstOrDefault(n => n.Id == npcInstance.TemplateId);
+        if (npcDef == null) return;
+
+        // VB6: Tameable NPCs can't talk
+        if (npcDef.Tameable == 1)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("I dont think your target would be very talkative.", FontType.Info));
+            return;
+        }
+
+        // VB6: Send hail text (may be empty for most NPCs)
+        var hail = npcDef.Hail;
+        if (string.IsNullOrEmpty(hail))
+            hail = " I have nothing to say to you.";
+
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage($"{npcDef.Name} says,{hail}", FontType.Talk));
+    }
+
+    /// <summary>
+    /// Ask a targeted NPC for gossip. Streetwise skill (Skill26) determines success chance.
+    /// VB6: HandleData "/GOSSIP" and "/NEWS" -> Gossip (GameLogic.bas:5691).
+    /// </summary>
+    private async Task HandleGossip(PlayerState player)
+    {
+        var ch = player.Character;
+
+        // VB6: Must have an NPC targeted
+        if (player.TargetNpcIndex <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You must target a NPC before asking for gossip !", FontType.Talk));
+            return;
+        }
+
+        var npcInstance = _world.GetNpcByIndex(player.TargetNpcIndex);
+        if (npcInstance == null) return;
+
+        var npcDef = _gameData.Npcs.FirstOrDefault(n => n.Id == npcInstance.TemplateId);
+        if (npcDef == null) return;
+
+        // VB6: Tameable NPCs don't gossip
+        if (npcDef.Tameable == 1)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("I do not think your creature is very much into the gossip of Menath.", FontType.Talk));
+            return;
+        }
+
+        // VB6: Tradeable=1 means NPC can't trade (inverted naming), and also can't gossip
+        if (npcDef.Tradeable == 1)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("I doubt the there is gossip to get here.", FontType.Talk));
+            return;
+        }
+
+        // VB6: Streetwise skill determines gossip chance
+        // Higher skill = better odds (luck2 decreases = random(1, luck2) more likely to match)
+        int streetwise = ch.Skills[(int)SkillType.Streetwise];
+        int luck2;
+        if (streetwise >= 90) luck2 = 1;
+        else if (streetwise >= 80) luck2 = 2;
+        else if (streetwise >= 70) luck2 = 5;
+        else if (streetwise >= 60) luck2 = 6;
+        else if (streetwise >= 50) luck2 = 7;
+        else if (streetwise >= 40) luck2 = 10;
+        else if (streetwise >= 30) luck2 = 15;
+        else if (streetwise >= 20) luck2 = 25;
+        else if (streetwise >= 10) luck2 = 30;
+        else luck2 = 999999; // effectively impossible at very low skill
+
+        var rng = Random.Shared;
+        int roll = rng.Next(1, luck2 + 1);
+
+        if (roll == luck2 && _gameData.Gossip.Count > 0)
+        {
+            // Tell gossip
+            var gossip = _gameData.Gossip[rng.Next(_gameData.Gossip.Count)];
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"{npcDef.Name} tells you, {gossip.Text}", FontType.Info));
+        }
+        else
+        {
+            // Refuse
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"{npcDef.Name} says, I try not to spread any rumors.", FontType.Info));
+        }
+
+        // VB6: 1/10 chance to raise Streetwise skill
+        await TryImproveSkill(player, (int)SkillType.Streetwise, 10);
+        await CheckUserLevel(player);
+        await SendStats(ch);
     }
 
     // --- Helpers ---

@@ -2009,7 +2009,8 @@
       "lineEnd": 5773,
       "annotations": {
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleGossip",
         "sends": [
           "@"
         ],
