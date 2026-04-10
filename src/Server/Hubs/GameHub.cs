@@ -1965,7 +1965,9 @@ public class GameHub : Hub
 
         var ch = player.Character;
         var slot = player.CraftSlot;
-        if (slot < 0 || slot >= 20) return;
+        // Gathering jobs use slot=-1 (no inventory material); crafting jobs need a valid slot
+        bool isGathering = (jobType == 2 || jobType == 7 || jobType == 15);
+        if (!isGathering && (slot < 0 || slot >= 20)) return;
 
         // Minimum time check (prevent speed hacking)
         var elapsed = (DateTime.UtcNow - player.CraftStartTime).TotalMilliseconds;
