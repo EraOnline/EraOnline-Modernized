@@ -16,8 +16,8 @@ namespace EraOnline.Client.CLI.Rendering;
 public class HeadlessRenderer : IDisposable
 {
     private const int TileSize = 32;
-    private const int ViewportW = 20;
-    private const int ViewportH = 11;
+    private const int ViewportW = 40;
+    private const int ViewportH = 22;
     private const int ScreenBuffer = 2;
     private const float RevealRadiusPx = 3.2f * TileSize;
     private const float RevealAlpha = 0.6f;

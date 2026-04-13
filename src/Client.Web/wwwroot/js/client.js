@@ -1095,6 +1095,15 @@ const EraClient = (() => {
         EraRenderer.setStatusCallback(setStatusBar);
         EraRenderer.setMapNameCallback(setMapName);
 
+        // Zoom slider
+        const zoomSlider = document.getElementById('zoom-slider');
+        if (zoomSlider) {
+            zoomSlider.addEventListener('input', (e) => {
+                const level = parseInt(e.target.value) / 100;
+                EraRenderer.setZoom(level);
+            });
+        }
+
         // Character sheet toggle — clicking on the "Character" area of the interface chrome
         // VB6: Label6_Click opens inventory.frm
         // The button is baked into interface.jpg at roughly right:7px top:84px

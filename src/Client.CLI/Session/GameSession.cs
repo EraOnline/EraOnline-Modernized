@@ -831,7 +831,7 @@ public class GameSession : IAsyncDisposable
         // ASCII map: 20 wide, 11 tall centered on player, with coordinate headers
         sb.AppendLine();
         var mk = _knowledge?.GetMap(_state.Map);
-        int halfW = 10, halfH = 5;
+        int halfW = 20, halfH = 11;
 
         // X-axis header (two rows: tens digit, ones digit)
         var xTens = new System.Text.StringBuilder("     ");
@@ -839,10 +839,18 @@ public class GameSession : IAsyncDisposable
         for (int dx = -halfW; dx < halfW; dx++)
         {
             int tx = _state.X + dx;
-            xTens.Append(tx / 10 % 10);
-            xTens.Append(' ');
-            xOnes.Append(tx % 10);
-            xOnes.Append(' ');
+            if (tx < 1 || tx > 100)
+            {
+                xTens.Append("  ");
+                xOnes.Append("  ");
+            }
+            else
+            {
+                xTens.Append(tx / 10 % 10);
+                xTens.Append(' ');
+                xOnes.Append(tx % 10);
+                xOnes.Append(' ');
+            }
         }
         sb.AppendLine(xTens.ToString());
         sb.AppendLine(xOnes.ToString());

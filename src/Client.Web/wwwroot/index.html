@@ -377,6 +377,16 @@
             font-family:'Times New Roman',serif; font-size:11px; color:#c0c0c0;
             z-index:15; pointer-events:none; text-align:center;">EXP: 0%</div>
 
+        <!-- Zoom slider (bottom-right of interface chrome, out of the way) -->
+        <div id="zoom-control" style="position:absolute; right:88px; top:440px;
+            z-index:15; display:flex; align-items:center; gap:4px;
+            font-family:monospace; font-size:10px; color:#888;">
+            <span>-</span>
+            <input type="range" id="zoom-slider" min="100" max="200" value="100"
+                style="width:60px; height:12px; cursor:pointer; accent-color:#666;" />
+            <span>+</span>
+        </div>
+
         <!-- Map name -->
 
         <!-- Bottom panel -->

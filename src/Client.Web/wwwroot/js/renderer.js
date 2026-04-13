@@ -11,8 +11,12 @@
 const EraRenderer = (() => {
     // Constants matching VB6 Declarations.bas
     const TILE_SIZE = 32;
-    const VIEWPORT_W = 20;
-    const VIEWPORT_H = 11;
+    const DEFAULT_VIEWPORT_W = 20;
+    const DEFAULT_VIEWPORT_H = 11;
+    const MAX_VIEWPORT_W = 40;
+    const MAX_VIEWPORT_H = 22;
+    let VIEWPORT_W = DEFAULT_VIEWPORT_W;
+    let VIEWPORT_H = DEFAULT_VIEWPORT_H;
     const MOVE_SPEED = 8;
     const TARGET_FPS = 30;
     const FRAME_TIME = 1000 / TARGET_FPS;
@@ -116,6 +120,38 @@ const EraRenderer = (() => {
         canvas.addEventListener('click', onCanvasClick);
 
         requestAnimationFrame(renderLoop);
+    }
+
+    // --- Zoom control ---
+
+    /// <summary>
+    /// Set zoom level. 1.0 = default (20x11), 2.0 = max zoom out (40x22).
+    /// Canvas internal resolution changes; CSS size stays fixed (640x352).
+    /// </summary>
+    function setZoom(level) {
+        level = Math.max(1.0, Math.min(2.0, level));
+        VIEWPORT_W = Math.round(DEFAULT_VIEWPORT_W * level);
+        VIEWPORT_H = Math.round(DEFAULT_VIEWPORT_H * level);
+        // Ensure odd-ish values for centering
+        if (VIEWPORT_W % 2 !== 0) VIEWPORT_W++;
+
+        const w = VIEWPORT_W * TILE_SIZE;
+        const h = VIEWPORT_H * TILE_SIZE;
+        canvas.width = w;
+        canvas.height = h;
+        ctx.imageSmoothingEnabled = false;
+
+        fringeCanvas.width = w;
+        fringeCanvas.height = h;
+        fringeCtx.imageSmoothingEnabled = false;
+
+        charCanvas.width = w;
+        charCanvas.height = h;
+        charCtx.imageSmoothingEnabled = false;
+    }
+
+    function getZoom() {
+        return VIEWPORT_W / DEFAULT_VIEWPORT_W;
     }
 
     // --- Public API (called by client.js) ---
@@ -283,8 +319,11 @@ const EraRenderer = (() => {
         // VB6: ConvertCPtoTP — convert canvas pixel coords to map tile coords
         if (!mapData || !myCharIndex) return;
         const rect = canvas.getBoundingClientRect();
-        const px = e.clientX - rect.left;
-        const py = e.clientY - rect.top;
+        // Scale CSS coordinates to canvas internal coordinates (accounts for zoom)
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const px = (e.clientX - rect.left) * scaleX;
+        const py = (e.clientY - rect.top) * scaleY;
 
         const halfW = Math.floor(VIEWPORT_W / 2);
         const halfH = Math.floor(VIEWPORT_H / 2);
@@ -753,6 +792,8 @@ const EraRenderer = (() => {
 
     return {
         init,
+        setZoom,
+        getZoom,
         setMoveCallback,
         setRotateCallback,
         setStatusCallback,
