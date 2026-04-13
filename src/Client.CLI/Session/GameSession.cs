@@ -2,6 +2,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.SignalR.Client;
 using EraOnline.Shared.Constants;
 using EraOnline.Shared.Protocol;
+using EraOnline.Client.CLI.Rendering;
 
 namespace EraOnline.Client.CLI.Session;
 
@@ -21,6 +22,11 @@ public class GameSession : IAsyncDisposable
     // Map name lookup (loaded from map data files)
     private readonly Dictionary<int, string> _mapNames = new();
 
+    // Headless renderer for screenshots
+    private SpriteLoader? _spriteLoader;
+    private HeadlessRenderer? _renderer;
+    private string? _screenshotDir;
+
     public GameState State => _state;
     public bool IsConnected => _connection?.State == HubConnectionState.Connected;
 
@@ -36,6 +42,19 @@ public class GameSession : IAsyncDisposable
 
         // Load map names from data files if available
         LoadMapNames(dataPath);
+
+        // Init renderer if data path available
+        if (dataPath != null)
+        {
+            _spriteLoader = new SpriteLoader(dataPath);
+            _spriteLoader.LoadAll();
+            _renderer = new HeadlessRenderer(_spriteLoader, dataPath);
+
+            // Screenshot directory: ~/.local/share/eraonline/characters/<name>/screenshots/
+            var dataHome = Environment.GetEnvironmentVariable("XDG_DATA_HOME")
+                ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".local", "share");
+            _screenshotDir = Path.Combine(dataHome, "eraonline", "characters", characterName, "screenshots");
+        }
     }
 
     private void LoadMapNames(string? dataPath)
@@ -415,6 +434,18 @@ public class GameSession : IAsyncDisposable
                     // Return formatted stats — no server call
                     break;
 
+                case "screenshot":
+                    if (_renderer != null && _screenshotDir != null)
+                    {
+                        var path = _renderer.RenderScreenshot(_state, _screenshotDir);
+                        _state.AddEvent($"Screenshot saved: {path}");
+                    }
+                    else
+                    {
+                        _state.AddEvent("Screenshot not available: game data not loaded.");
+                    }
+                    break;
+
                 case "events":
                     // Just return events — no server call
                     break;
@@ -447,6 +478,7 @@ public class GameSession : IAsyncDisposable
             "inventory" or "inv" => FormatInventory(),
             "spells" => FormatSpells(),
             "stats" or "status" => FormatStats(),
+            "screenshot" => FormatResponse(null),
             "help" => FormatHelp(),
             _ => FormatResponse(null),
         };
@@ -599,6 +631,8 @@ public class GameSession : IAsyncDisposable
 
     public async ValueTask DisposeAsync()
     {
+        _renderer?.Dispose();
+        _spriteLoader?.Dispose();
         if (_connection != null)
         {
             try { await _connection.StopAsync(); }
