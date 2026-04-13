@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.0-preview.3.25172.1" />
     <ProjectReference Include="..\Shared\EraOnline.Shared.csproj" />
   </ItemGroup>
 
