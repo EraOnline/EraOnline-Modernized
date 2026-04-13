@@ -2,9 +2,9 @@
 
 ## Current State
 
-**Phase 6 in progress.** Criminal system, PvP combat, and spell system complete. Next: gathering skills (fish/mine/chop), world flavor, animal taming, weather, housing/signs.
+**Phase 6 in progress.** Gathering skills, NPC dialogue, and weather now complete. Next: animal taming, housing/signs, ambient sounds.
 
-Most recent log: [2026-04-09](logs/2026-04-09.md)
+Most recent log: [2026-04-12](logs/2026-04-12.md)
 
 ---
 
@@ -128,17 +128,18 @@ The systems that make Menath feel alive.
 - [x] PvP combat: UserAttackUser with full damage/backstab/rep/criminal/death chain
 - [x] Guard AI: chase and attack criminals, Dark Elf guards attack humans/wood elves (Phase 4)
 - [x] Reputation system: noble/under/common rep, deity rep (Bendarr/Veega/Zeendic/Griigo/Hyliios), rank titles (CheckRep)
-- [ ] Weather: rain and snow (visual effects, stamina/health drain without warm clothing)
+- [x] Weather: rain and snow (visual effects, stamina/health drain without warm clothing)
 - [x] Spell system: spell scrolls -> inscribe to 50-slot spell book, cast on NPC/player targets, mana cost, all 16 spell effects
 - [x] Magic schools: Nature, Destruction, Enchanting (class-restricted, validated on cast)
 - [x] /MEDITATE for mana regeneration (server-authoritative 10s tick, skill-based speed)
 - [ ] Animal taming: /TAME, skill-gated by animal type, animals persist across sessions
-- [ ] NPC hailing: /HAIL for dialogue, quest hints
-- [ ] NPC gossip system (randomized gossip from gossip.txt)
+- [x] NPC hailing: /HAIL for dialogue, quest hints
+- [x] NPC gossip system (randomized gossip from gossip.txt)
 - [ ] Housing: house deeds, /LOCK and /UNLOCK tiles
 - [ ] Signs: drop sign, write text, readable by all players
-- [ ] Fishing: equip pole, click water, skill-based progress
-- [ ] Mining: equip pickaxe, click stone/cliff, skill-based progress
+- [x] Fishing: equip pole, click water, skill-based progress
+- [x] Mining: equip pickaxe, click stone/cliff, skill-based progress
+- [x] Lumberjacking: equip axe, click tree, skill-based progress
 - [ ] Map-specific music (MIDI/audio per zone)
 - [ ] Ambient sound effects (forest loops, shore, birds, etc.)
 
