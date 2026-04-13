@@ -2,6 +2,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.SignalR.Client;
 using EraOnline.Shared.Constants;
 using EraOnline.Shared.Protocol;
+using EraOnline.Client.CLI.Navigation;
 using EraOnline.Client.CLI.Rendering;
 
 namespace EraOnline.Client.CLI.Session;
@@ -27,6 +28,11 @@ public class GameSession : IAsyncDisposable
     private HeadlessRenderer? _renderer;
     private string? _screenshotDir;
 
+    // World knowledge (per-character, persisted)
+    private WorldKnowledge? _knowledge;
+    private string? _dataPath;
+    private bool _mapKnowledgeUpdated;
+
     public GameState State => _state;
     public bool IsConnected => _connection?.State == HubConnectionState.Connected;
 
@@ -43,17 +49,19 @@ public class GameSession : IAsyncDisposable
         // Load map names from data files if available
         LoadMapNames(dataPath);
 
-        // Init renderer if data path available
+        // Init renderer and world knowledge if data path available
         if (dataPath != null)
         {
+            _dataPath = dataPath;
             _spriteLoader = new SpriteLoader(dataPath);
             _spriteLoader.LoadAll();
             _renderer = new HeadlessRenderer(_spriteLoader, dataPath);
 
-            // Screenshot directory: ~/.local/share/eraonline/characters/<name>/screenshots/
             var dataHome = Environment.GetEnvironmentVariable("XDG_DATA_HOME")
                 ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".local", "share");
-            _screenshotDir = Path.Combine(dataHome, "eraonline", "characters", characterName, "screenshots");
+            var charDir = Path.Combine(dataHome, "eraonline", "characters", characterName);
+            _screenshotDir = Path.Combine(charDir, "screenshots");
+            _knowledge = new WorldKnowledge(charDir);
         }
     }
 
@@ -150,8 +158,11 @@ public class GameSession : IAsyncDisposable
 
         _connection.On<MapLoadMessage>("MapLoad", msg =>
         {
-            var mapName = _mapNames.GetValueOrDefault(msg.MapId, $"Map {msg.MapId}");
+            // Use world knowledge name if available, fall back to known names, then generic
+            var mapName = _knowledge?.GetMap(msg.MapId).DisplayName
+                ?? _mapNames.GetValueOrDefault(msg.MapId, $"Map {msg.MapId}");
             _state.OnMapLoad(msg.MapId, mapName);
+            _mapKnowledgeUpdated = false; // Mark for update on next command
         });
 
         _connection.On<MakeCharMessage>("MakeChar", msg =>
@@ -277,10 +288,24 @@ public class GameSession : IAsyncDisposable
 
     // --- Command execution (called by IPC handler) ---
 
+    private void EnsureMapKnowledge()
+    {
+        if (_mapKnowledgeUpdated || _knowledge == null || _state.Map <= 0) return;
+        _knowledge.OnMapEnter(_state.Map, _state, _dataPath);
+        // Update map name from knowledge
+        var mk = _knowledge.GetMap(_state.Map);
+        if (!string.IsNullOrEmpty(mk.Name))
+            _state.MapName = mk.DisplayName;
+        _mapKnowledgeUpdated = true;
+    }
+
     public async Task<string> ExecuteCommand(string command)
     {
         if (_connection == null || _connection.State != HubConnectionState.Connected)
             return "Not connected to server.";
+
+        // Ensure map knowledge is updated (deferred from MapLoad since NPCs arrive after)
+        EnsureMapKnowledge();
 
         var parts = command.Split(' ', 2, StringSplitOptions.TrimEntries);
         var cmd = parts[0].ToLowerInvariant();
@@ -298,6 +323,34 @@ public class GameSession : IAsyncDisposable
                 case "turn":
                     var clockwise = arg.StartsWith("r", StringComparison.OrdinalIgnoreCase);
                     await _connection.InvokeAsync("Rotate", clockwise);
+                    break;
+
+                case "move":
+                    if (!string.IsNullOrEmpty(arg))
+                    {
+                        await ExecutePathfind(arg);
+                    }
+                    break;
+
+                case "spaces":
+                    // Handled in formatting below
+                    if (arg.StartsWith("define ", StringComparison.OrdinalIgnoreCase) && _knowledge != null)
+                    {
+                        var defParts = arg[7..].Trim().Split(' ');
+                        if (defParts.Length >= 3 && int.TryParse(defParts[^2], out var sx) && int.TryParse(defParts[^1], out var sy))
+                        {
+                            var spaceName = string.Join(' ', defParts[..^2]);
+                            var mk = _knowledge.GetMap(_state.Map);
+                            mk.AddSpaceIfNew(spaceName, sx, sy, "manual", false);
+                            _knowledge.Save();
+                            _state.AddEvent($"Defined space '{spaceName}' at ({sx},{sy}).");
+                        }
+                    }
+                    break;
+
+                case "map":
+                case "overworld":
+                    // Handled in formatting below
                     break;
 
                 case "say":
@@ -479,9 +532,102 @@ public class GameSession : IAsyncDisposable
             "spells" => FormatSpells(),
             "stats" or "status" => FormatStats(),
             "screenshot" => FormatResponse(null),
+            "spaces" when !arg.StartsWith("define") => FormatSpaces(),
+            "map" => FormatMap(),
+            "overworld" => FormatOverworld(),
             "help" => FormatHelp(),
             _ => FormatResponse(null),
         };
+    }
+
+    // --- Pathfinding ---
+
+    private async Task ExecutePathfind(string target)
+    {
+        if (_knowledge == null)
+        {
+            _state.AddEvent("Pathfinding not available: no world knowledge.");
+            return;
+        }
+
+        var mk = _knowledge.GetMap(_state.Map);
+
+        // Try to parse "to X Y" for coordinate targets
+        int goalX, goalY;
+        if (target.StartsWith("to ", StringComparison.OrdinalIgnoreCase))
+        {
+            var coords = target[3..].Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (coords.Length >= 2 && int.TryParse(coords[0], out goalX) && int.TryParse(coords[1], out goalY))
+            {
+                // Coordinate target
+            }
+            else
+            {
+                _state.AddEvent($"Invalid coordinates: {target[3..]}");
+                return;
+            }
+        }
+        else
+        {
+            // Look up space by name
+            var space = mk.Spaces.FirstOrDefault(s =>
+                s.Name.Contains(target, StringComparison.OrdinalIgnoreCase));
+            if (space == null)
+            {
+                _state.AddEvent($"Unknown space '{target}'. Use 'spaces list' to see known locations.");
+                return;
+            }
+            goalX = space.X;
+            goalY = space.Y;
+            _state.AddEvent($"Pathfinding to {space.Name} ({goalX},{goalY})...");
+        }
+
+        if (mk.BlockedTiles == null)
+        {
+            _state.AddEvent("No tile data for pathfinding on this map.");
+            return;
+        }
+
+        var path = Pathfinder.FindPath(mk, _state.X, _state.Y, goalX, goalY);
+        if (path == null || path.Count == 0)
+        {
+            _state.AddEvent(path == null ? "No path found!" : "Already there.");
+            return;
+        }
+
+        var directions = Pathfinder.PathToDirections(path, _state.X, _state.Y);
+        _state.AddEvent($"Walking {directions.Count} tiles...");
+
+        // Execute the path step by step
+        int steps = 0;
+        foreach (var dir in directions)
+        {
+            await _connection!.InvokeAsync("Move", dir);
+            await Task.Delay(350); // Match visual movement speed
+            steps++;
+
+            // Check for interruptions: damage taken or chat received
+            var newEvents = _state.GetNewEvents();
+            bool interrupted = false;
+            foreach (var evt in newEvents)
+            {
+                // Re-add events so they show in the final output
+                _state.AddEvent(evt.Text);
+                if (evt.Text.Contains("strikes you") || evt.Text.Contains("has slain you") ||
+                    evt.Text.Contains("tells,") || evt.Text.Contains("whispers:"))
+                {
+                    interrupted = true;
+                }
+            }
+
+            if (interrupted)
+            {
+                _state.AddEvent($"Movement interrupted after {steps} steps at ({_state.X},{_state.Y}).");
+                return;
+            }
+        }
+
+        _state.AddEvent($"Arrived at ({_state.X},{_state.Y}).");
     }
 
     // --- Response formatting ---
@@ -537,6 +683,27 @@ public class GameSession : IAsyncDisposable
 
         if (_state.TargetName != null)
             sb.AppendLine($"\nTarget: {_state.TargetName}");
+
+        // Show nearest spaces from world knowledge
+        if (_knowledge != null)
+        {
+            var mk = _knowledge.GetMap(_state.Map);
+            var nearSpaces = mk.Spaces
+                .Select(s => (s, dist: Math.Abs(s.X - _state.X) + Math.Abs(s.Y - _state.Y)))
+                .OrderBy(x => x.dist)
+                .Take(5)
+                .ToList();
+            if (nearSpaces.Count > 0)
+            {
+                sb.AppendLine();
+                sb.AppendLine("Nearby spaces:");
+                foreach (var (space, dist) in nearSpaces)
+                {
+                    var dir = GameState.GetRelativeDir(space.X - _state.X, space.Y - _state.Y);
+                    sb.AppendLine($"  {space.Name} — {dist} tiles {dir}");
+                }
+            }
+        }
 
         sb.AppendLine("──");
         sb.AppendLine($"[{DateTime.Now:HH:mm:ss}] {_state.StatusLine()}");
@@ -604,6 +771,117 @@ public class GameSession : IAsyncDisposable
         sb.AppendLine($"Food: {_state.Food} | Drink: {_state.Drink}");
         sb.AppendLine($"Training Points: {_state.TrainingPoints}");
         if (_state.Criminal > 0) sb.AppendLine($"Criminal: YES (count: {_state.Criminal})");
+
+        sb.AppendLine("──");
+        sb.AppendLine($"[{DateTime.Now:HH:mm:ss}] {_state.StatusLine()}");
+        return sb.ToString();
+    }
+
+    private string FormatSpaces()
+    {
+        var sb = new System.Text.StringBuilder();
+        var events = _state.GetNewEvents();
+        foreach (var evt in events)
+            sb.AppendLine($"[{evt.Timestamp:HH:mm:ss.fff}] {evt.Text}");
+
+        if (_knowledge == null)
+        {
+            sb.AppendLine("No world knowledge available.");
+        }
+        else
+        {
+            var mk = _knowledge.GetMap(_state.Map);
+            sb.AppendLine($"Known spaces on {mk.DisplayName} (Map {mk.MapId}):");
+            if (mk.Spaces.Count == 0)
+            {
+                sb.AppendLine("  (none discovered yet)");
+            }
+            else
+            {
+                foreach (var space in mk.Spaces.OrderBy(s => Math.Abs(s.X - _state.X) + Math.Abs(s.Y - _state.Y)))
+                {
+                    var dist = Math.Abs(space.X - _state.X) + Math.Abs(space.Y - _state.Y);
+                    var dir = GameState.GetRelativeDir(space.X - _state.X, space.Y - _state.Y);
+                    var auto = space.Auto ? " [auto]" : "";
+                    sb.AppendLine($"  {space.Name} ({space.X},{space.Y}) — {dist} tiles {dir}{auto}");
+                }
+            }
+        }
+
+        sb.AppendLine("──");
+        sb.AppendLine($"[{DateTime.Now:HH:mm:ss}] {_state.StatusLine()}");
+        return sb.ToString();
+    }
+
+    private string FormatMap()
+    {
+        var sb = new System.Text.StringBuilder();
+        var events = _state.GetNewEvents();
+        foreach (var evt in events)
+            sb.AppendLine($"[{evt.Timestamp:HH:mm:ss.fff}] {evt.Text}");
+
+        if (_knowledge == null)
+        {
+            sb.AppendLine("No world knowledge available.");
+        }
+        else
+        {
+            var mk = _knowledge.GetMap(_state.Map);
+            sb.AppendLine($"═══ {mk.DisplayName} (Map {mk.MapId}) ═══");
+            sb.AppendLine($"You are at ({_state.X},{_state.Y}). Visited {mk.VisitCount} times.");
+
+            if (mk.Spaces.Count > 0)
+            {
+                sb.AppendLine();
+                sb.AppendLine("Known spaces:");
+                foreach (var space in mk.Spaces.OrderBy(s => Math.Abs(s.X - _state.X) + Math.Abs(s.Y - _state.Y)))
+                {
+                    var dist = Math.Abs(space.X - _state.X) + Math.Abs(space.Y - _state.Y);
+                    var dir = GameState.GetRelativeDir(space.X - _state.X, space.Y - _state.Y);
+                    sb.AppendLine($"  {space.Name,-30} {dist,3} tiles {dir}");
+                }
+            }
+
+            if (mk.Exits.Count > 0)
+            {
+                sb.AppendLine();
+                sb.AppendLine("Exits:");
+                foreach (var (direction, destId) in mk.Exits)
+                {
+                    var destName = _knowledge.GetMap(destId).DisplayName;
+                    sb.AppendLine($"  {direction,-6} → {destName} (Map {destId})");
+                }
+            }
+        }
+
+        sb.AppendLine("──");
+        sb.AppendLine($"[{DateTime.Now:HH:mm:ss}] {_state.StatusLine()}");
+        return sb.ToString();
+    }
+
+    private string FormatOverworld()
+    {
+        var sb = new System.Text.StringBuilder();
+        var events = _state.GetNewEvents();
+        foreach (var evt in events)
+            sb.AppendLine($"[{evt.Timestamp:HH:mm:ss.fff}] {evt.Text}");
+
+        if (_knowledge == null)
+        {
+            sb.AppendLine("No world knowledge available.");
+        }
+        else
+        {
+            sb.AppendLine("═══ Known World ═══");
+            foreach (var (mapId, mk) in _knowledge.Maps.OrderBy(kv => kv.Key))
+            {
+                var current = mapId == _state.Map ? " ← you are here" : "";
+                var exitList = mk.Exits.Count > 0
+                    ? " → " + string.Join(", ", mk.Exits.Select(e => $"{e.Key}:{_knowledge.GetMap(e.Value).DisplayName}"))
+                    : "";
+                sb.AppendLine($"  {mk.DisplayName,-20} (Map {mapId,3}) visits:{mk.VisitCount}{exitList}{current}");
+            }
+        }
 
         sb.AppendLine("──");
         sb.AppendLine($"[{DateTime.Now:HH:mm:ss}] {_state.StatusLine()}");

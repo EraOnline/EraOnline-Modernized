@@ -294,6 +294,8 @@ public class GameState
         return result.OrderBy(r => r.Item2).ToList();
     }
 
+    public static string GetRelativeDir(int dx, int dy) => GetRelativeDirection(dx, dy);
+
     private static string GetRelativeDirection(int dx, int dy)
     {
         if (dx == 0 && dy == 0) return "here";
