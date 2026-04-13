@@ -19,6 +19,7 @@ public class HeadlessRenderer : IDisposable
     private const int ViewportW = 40;
     private const int ViewportH = 22;
     private const int ScreenBuffer = 2;
+    private const int FringeOverscan = 8; // extra tiles for large multi-tile sprites
     private const float RevealRadiusPx = 3.2f * TileSize;
     private const float RevealAlpha = 0.6f;
 
@@ -118,9 +119,15 @@ public class HeadlessRenderer : IDisposable
         }
 
         // Pass 2b: Fringe layer (layer2 + layer3 weather) onto fringe canvas
-        for (int y = minY; y <= maxY; y++)
+        // Use wider scan range to catch large multi-tile sprites (buildings, trees)
+        int fMinX = camX - halfW - FringeOverscan;
+        int fMaxX = camX + halfW + FringeOverscan;
+        int fMinY = camY - halfH - FringeOverscan;
+        int fMaxY = camY + halfH + FringeOverscan;
+
+        for (int y = fMinY; y <= fMaxY; y++)
         {
-            for (int x = minX; x <= maxX; x++)
+            for (int x = fMinX; x <= fMaxX; x++)
             {
                 if (x < 1 || x > 100 || y < 1 || y > 100) continue;
                 int idx = (y - 1) * 100 + (x - 1);

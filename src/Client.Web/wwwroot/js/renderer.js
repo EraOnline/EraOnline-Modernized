@@ -21,6 +21,7 @@ const EraRenderer = (() => {
     const TARGET_FPS = 30;
     const FRAME_TIME = 1000 / TARGET_FPS;
     const SCREEN_BUFFER = 2;
+    const FRINGE_OVERSCAN = 8; // extra tiles to scan for large multi-tile sprites (buildings)
 
     const NORTH = 1, EAST = 2, SOUTH = 3, WEST = 4;
 
@@ -679,11 +680,18 @@ const EraRenderer = (() => {
         }
 
         // Pass 2b: Draw fringe (layer2 + layer3) to fringe offscreen canvas
+        // Use wider scan range to catch large multi-tile sprites (buildings, trees)
+        // whose anchor tile is outside the viewport but whose sprite extends into view
         fringeCtx.clearRect(0, 0, fringeCanvas.width, fringeCanvas.height);
         ctx = fringeCtx;
 
-        for (let y = minY; y <= maxY; y++) {
-            for (let x = minX; x <= maxX; x++) {
+        const fMinX = tileX - halfW - FRINGE_OVERSCAN;
+        const fMaxX = tileX + halfW + FRINGE_OVERSCAN;
+        const fMinY = tileY - halfH - FRINGE_OVERSCAN;
+        const fMaxY = tileY + halfH + FRINGE_OVERSCAN;
+
+        for (let y = fMinY; y <= fMaxY; y++) {
+            for (let x = fMinX; x <= fMaxX; x++) {
                 if (x < 1 || x > 100 || y < 1 || y > 100) continue;
                 const idx = (y - 1) * 100 + (x - 1);
                 const sx = x - (tileX - halfW);
