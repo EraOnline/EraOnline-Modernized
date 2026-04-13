@@ -503,6 +503,11 @@ public class GameSession : IAsyncDisposable
                     // Just return events — no server call
                     break;
 
+                case "await":
+                case "wait":
+                    await ExecuteAwait(arg);
+                    break;
+
                 default:
                     // Pass through slash commands
                     if (command.StartsWith('/'))
@@ -628,6 +633,59 @@ public class GameSession : IAsyncDisposable
         }
 
         _state.AddEvent($"Arrived at ({_state.X},{_state.Y}).");
+    }
+
+    // --- Await mode ---
+
+    private async Task ExecuteAwait(string arg)
+    {
+        // Parse: <seconds> [--until <trigger>]
+        var parts = arg.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        double seconds = 5;
+        string? trigger = null;
+
+        if (parts.Length >= 1 && double.TryParse(parts[0], out var s))
+            seconds = s;
+        for (int i = 1; i < parts.Length - 1; i++)
+        {
+            if (parts[i] == "--until")
+                trigger = parts[i + 1].ToLowerInvariant();
+        }
+
+        var deadline = DateTime.Now.AddSeconds(seconds);
+        var startEventCount = _state.RecentEvents.Count;
+
+        while (DateTime.Now < deadline)
+        {
+            await Task.Delay(100);
+
+            if (trigger == null) continue;
+
+            // Check if a matching trigger event arrived
+            var newEvents = _state.RecentEvents.Skip(startEventCount).ToList();
+            foreach (var evt in newEvents)
+            {
+                var text = evt.Text;
+                bool triggered = trigger switch
+                {
+                    "chat" => text.Contains(": ") || text.Contains("tells,") || text.Contains("whispers:") || text.Contains("shouts:"),
+                    "combat" => text.Contains("strikes you") || text.Contains("has slain") || text.Contains("You are dead") || text.Contains("hit the") || text.Contains("for") && text.Contains("damage"),
+                    "player" => text.Contains("left the area") || (_state.Characters.Values.Any(c => !c.IsMyChar && c.Name != null && text.Contains(c.Name))),
+                    "any" => true,
+                    "craft" => text.Contains("Crafting") || text.Contains("crafting"),
+                    _ => false,
+                };
+
+                if (triggered)
+                {
+                    _state.AddEvent($"── await triggered ({trigger}) after {(DateTime.Now - deadline.AddSeconds(-seconds)).TotalSeconds:F1}s ──");
+                    return;
+                }
+            }
+            startEventCount = _state.RecentEvents.Count;
+        }
+
+        _state.AddEvent($"── await timeout ({seconds:F1}s) ──");
     }
 
     // --- Response formatting ---
