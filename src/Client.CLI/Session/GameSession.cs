@@ -193,6 +193,7 @@ public class GameSession : IAsyncDisposable
         _connection.On<ChatMessage>("Chat", msg =>
         {
             _state.OnChat(msg);
+            Console.Error.WriteLine($"[CHAT] {msg.Text}");
         });
 
         _connection.On<StatsMessage>("Stats", msg =>
