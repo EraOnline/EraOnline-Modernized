@@ -22,7 +22,11 @@ const EraRenderer = (() => {
 
     // State
     let canvas, ctx;
+    // Offscreen canvas for fringe layer alpha reveal effect
+    let fringeCanvas, fringeCtx;
     let dataBasePath = '/data';
+    const REVEAL_RADIUS_PX = 3.2 * TILE_SIZE; // ~3 tiles radius
+    const REVEAL_ALPHA = 0.6; // how much opacity to remove at center
     let grhEntries = {};
     let spriteSheets = {};
     let loadingSheets = new Set();
@@ -79,6 +83,13 @@ const EraRenderer = (() => {
         canvas.width = VIEWPORT_W * TILE_SIZE;
         canvas.height = VIEWPORT_H * TILE_SIZE;
         ctx.imageSmoothingEnabled = false;
+
+        // Create offscreen canvas for fringe alpha reveal
+        fringeCanvas = document.createElement('canvas');
+        fringeCanvas.width = canvas.width;
+        fringeCanvas.height = canvas.height;
+        fringeCtx = fringeCanvas.getContext('2d');
+        fringeCtx.imageSmoothingEnabled = false;
         fpsEl = document.getElementById('fps');
 
         setStatus('Loading sprite definitions...');
@@ -595,7 +606,11 @@ const EraRenderer = (() => {
             }
         }
 
-        // Pass 2: Fringe + characters
+        // Pass 2a: Draw fringe (layer2 + layer3) to offscreen canvas
+        fringeCtx.clearRect(0, 0, fringeCanvas.width, fringeCanvas.height);
+        const savedCtx = ctx;
+        ctx = fringeCtx; // drawGrh uses module-level ctx
+
         for (let y = minY; y <= maxY; y++) {
             for (let x = minX; x <= maxX; x++) {
                 if (x < 1 || x > 100 || y < 1 || y > 100) continue;
@@ -625,8 +640,42 @@ const EraRenderer = (() => {
                         }
                     }
                 }
+            }
+        }
 
-                // VB6: Object layer — dynamic ground items between fringe and characters
+        // Pass 2b: Punch soft circular alpha hole around player on fringe canvas
+        const me = myCharIndex ? characters[myCharIndex] : null;
+        if (me) {
+            const meSx = me.x - (tileX - halfW);
+            const meSy = me.y - (tileY - halfH);
+            const mePx = meSx * TILE_SIZE + pixOffX + me.moveOffsetX + TILE_SIZE / 2;
+            const mePy = meSy * TILE_SIZE + pixOffY + me.moveOffsetY + TILE_SIZE / 2;
+
+            fringeCtx.save();
+            fringeCtx.globalCompositeOperation = 'destination-out';
+            const grad = fringeCtx.createRadialGradient(mePx, mePy, 0, mePx, mePy, REVEAL_RADIUS_PX);
+            grad.addColorStop(0, `rgba(0,0,0,${REVEAL_ALPHA})`);
+            grad.addColorStop(1, 'rgba(0,0,0,0)');
+            fringeCtx.fillStyle = grad;
+            fringeCtx.fillRect(mePx - REVEAL_RADIUS_PX, mePy - REVEAL_RADIUS_PX,
+                REVEAL_RADIUS_PX * 2, REVEAL_RADIUS_PX * 2);
+            fringeCtx.restore();
+        }
+
+        // Composite fringe onto main canvas
+        ctx = savedCtx;
+        ctx.drawImage(fringeCanvas, 0, 0);
+
+        // Pass 2c: Draw ground objects and characters on main canvas (full opacity, Y-sorted)
+        for (let y = minY; y <= maxY; y++) {
+            for (let x = minX; x <= maxX; x++) {
+                if (x < 1 || x > 100 || y < 1 || y > 100) continue;
+                const sx = x - (tileX - halfW);
+                const sy = y - (tileY - halfH);
+                const px = sx * TILE_SIZE + pixOffX;
+                const py = sy * TILE_SIZE + pixOffY;
+
+                // VB6: Object layer — dynamic ground items
                 const objGrh = groundObjects[`${x},${y}`];
                 if (objGrh > 0) {
                     drawGrh(objGrh, px, py, true, null);
