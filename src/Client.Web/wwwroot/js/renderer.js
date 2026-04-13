@@ -22,8 +22,9 @@ const EraRenderer = (() => {
 
     // State
     let canvas, ctx;
-    // Offscreen canvas for fringe layer alpha reveal effect
+    // Offscreen canvases for alpha reveal effect
     let fringeCanvas, fringeCtx;
+    let charCanvas, charCtx;
     let dataBasePath = '/data';
     const REVEAL_RADIUS_PX = 3.2 * TILE_SIZE; // ~3 tiles radius
     const REVEAL_ALPHA = 0.6; // how much opacity to remove at center
@@ -84,12 +85,18 @@ const EraRenderer = (() => {
         canvas.height = VIEWPORT_H * TILE_SIZE;
         ctx.imageSmoothingEnabled = false;
 
-        // Create offscreen canvas for fringe alpha reveal
+        // Create offscreen canvases for alpha reveal effect
         fringeCanvas = document.createElement('canvas');
         fringeCanvas.width = canvas.width;
         fringeCanvas.height = canvas.height;
         fringeCtx = fringeCanvas.getContext('2d');
         fringeCtx.imageSmoothingEnabled = false;
+
+        charCanvas = document.createElement('canvas');
+        charCanvas.width = canvas.width;
+        charCanvas.height = canvas.height;
+        charCtx = charCanvas.getContext('2d');
+        charCtx.imageSmoothingEnabled = false;
         fpsEl = document.getElementById('fps');
 
         setStatus('Loading sprite definitions...');
@@ -606,10 +613,35 @@ const EraRenderer = (() => {
             }
         }
 
-        // Pass 2a: Draw fringe (layer2 + layer3) to offscreen canvas
-        fringeCtx.clearRect(0, 0, fringeCanvas.width, fringeCanvas.height);
+        // Pass 2a: Draw characters + ground objects to char offscreen canvas
+        charCtx.clearRect(0, 0, charCanvas.width, charCanvas.height);
         const savedCtx = ctx;
-        ctx = fringeCtx; // drawGrh uses module-level ctx
+        ctx = charCtx;
+
+        for (let y = minY; y <= maxY; y++) {
+            for (let x = minX; x <= maxX; x++) {
+                if (x < 1 || x > 100 || y < 1 || y > 100) continue;
+                const sx = x - (tileX - halfW);
+                const sy = y - (tileY - halfH);
+                const px = sx * TILE_SIZE + pixOffX;
+                const py = sy * TILE_SIZE + pixOffY;
+
+                const objGrh = groundObjects[`${x},${y}`];
+                if (objGrh > 0) {
+                    drawGrh(objGrh, px, py, true, null);
+                }
+
+                for (const ch of Object.values(characters)) {
+                    if (ch.x === x && ch.y === y) {
+                        drawCharacter(ch, px + ch.moveOffsetX, py + ch.moveOffsetY);
+                    }
+                }
+            }
+        }
+
+        // Pass 2b: Draw fringe (layer2 + layer3) to fringe offscreen canvas
+        fringeCtx.clearRect(0, 0, fringeCanvas.width, fringeCanvas.height);
+        ctx = fringeCtx;
 
         for (let y = minY; y <= maxY; y++) {
             for (let x = minX; x <= maxX; x++) {
@@ -629,7 +661,6 @@ const EraRenderer = (() => {
                     }
                 }
 
-                // VB6: Layer 3 — weather effects (only drawn when raining)
                 if (raining && mapData.tiles.layer3) {
                     const grh3 = mapData.tiles.layer3[idx];
                     if (grh3 > 0) {
@@ -643,7 +674,7 @@ const EraRenderer = (() => {
             }
         }
 
-        // Pass 2b: Punch soft circular alpha hole around player on fringe canvas
+        // Pass 2c: Punch soft circular alpha hole in fringe around player
         const me = myCharIndex ? characters[myCharIndex] : null;
         if (me) {
             const meSx = me.x - (tileX - halfW);
@@ -662,33 +693,10 @@ const EraRenderer = (() => {
             fringeCtx.restore();
         }
 
-        // Composite fringe onto main canvas
+        // Pass 2d: Composite layers onto main canvas — characters first, then fringe on top
         ctx = savedCtx;
-        ctx.drawImage(fringeCanvas, 0, 0);
-
-        // Pass 2c: Draw ground objects and characters on main canvas (full opacity, Y-sorted)
-        for (let y = minY; y <= maxY; y++) {
-            for (let x = minX; x <= maxX; x++) {
-                if (x < 1 || x > 100 || y < 1 || y > 100) continue;
-                const sx = x - (tileX - halfW);
-                const sy = y - (tileY - halfH);
-                const px = sx * TILE_SIZE + pixOffX;
-                const py = sy * TILE_SIZE + pixOffY;
-
-                // VB6: Object layer — dynamic ground items
-                const objGrh = groundObjects[`${x},${y}`];
-                if (objGrh > 0) {
-                    drawGrh(objGrh, px, py, true, null);
-                }
-
-                // Characters at this tile
-                for (const ch of Object.values(characters)) {
-                    if (ch.x === x && ch.y === y) {
-                        drawCharacter(ch, px + ch.moveOffsetX, py + ch.moveOffsetY);
-                    }
-                }
-            }
-        }
+        ctx.drawImage(charCanvas, 0, 0);  // characters behind
+        ctx.drawImage(fringeCanvas, 0, 0); // fringe on top (with alpha hole revealing chars)
 
         ctx.restore();
     }
