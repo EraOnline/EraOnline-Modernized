@@ -41,13 +41,14 @@ public class HeadlessRenderer : IDisposable
     /// Render the current viewport to a PNG file.
     /// Returns the file path of the saved screenshot.
     /// </summary>
-    public string RenderScreenshot(GameState state, string outputDir)
+    public string RenderScreenshot(GameState state, string outputDir, float scale = 1.5f)
     {
         // Ensure map data is loaded
         LoadMapIfNeeded(state.Map);
 
         if (_layer1 == null) return "(no map data)";
 
+        // Render at native resolution, then scale up the output
         int canvasW = ViewportW * TileSize;
         int canvasH = ViewportH * TileSize;
 
@@ -174,12 +175,19 @@ public class HeadlessRenderer : IDisposable
         // Let me just save what we have — the buffer tiles extend beyond canvas bounds
         // and get clipped naturally by the canvas dimensions.
 
-        // Save to file
+        // Scale up for better visibility
         Directory.CreateDirectory(outputDir);
         var filename = $"{DateTime.Now:yyyyMMdd-HHmmss}.png";
         var filePath = Path.Combine(outputDir, filename);
 
-        using var image = SKImage.FromBitmap(mainBitmap);
+        int scaledW = (int)(canvasW * scale);
+        int scaledH = (int)(canvasH * scale);
+        using var scaledBitmap = new SKBitmap(scaledW, scaledH);
+        using var scaledCanvas = new SKCanvas(scaledBitmap);
+        scaledCanvas.Scale(scale);
+        scaledCanvas.DrawBitmap(mainBitmap, 0, 0);
+
+        using var image = SKImage.FromBitmap(scaledBitmap);
         using var data = image.Encode(SKEncodedImageFormat.Png, 100);
         using var stream = File.OpenWrite(filePath);
         data.SaveTo(stream);
@@ -198,10 +206,13 @@ public class HeadlessRenderer : IDisposable
         int dx = px, dy = py;
         if (center)
         {
-            int tw = sprite.W / TileSize;
-            int th = sprite.H / TileSize;
-            if (tw != 1) dx -= (tw * 16) - 16;
-            if (th != 1) dy -= (th * 32) - 32;
+            // VB6 uses float division: TileWidth = pixelWidth / TileSizeX
+            // JS also uses float: sprite.w / TILE_SIZE
+            // Must use float here too — integer division truncates sub-tile sprites to 0
+            float tw = (float)sprite.W / TileSize;
+            float th = (float)sprite.H / TileSize;
+            if (Math.Abs(tw - 1f) > 0.001f) dx -= (int)(tw * 16) - 16;
+            if (Math.Abs(th - 1f) > 0.001f) dy -= (int)(th * 32) - 32;
         }
 
         var srcRect = new SKRect(sprite.X, sprite.Y, sprite.X + sprite.W, sprite.Y + sprite.H);
