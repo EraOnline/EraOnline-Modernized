@@ -1,0 +1,106 @@
+{
+  "port": 7777,
+  "maxUsers": 1000,
+  "clientVersion": "11",
+  "idleLimit": 6000,
+  "season": "Winter",
+  "era": 3,
+  "year": 1,
+  "startingCities": [
+    {
+      "name": "Bernvillage",
+      "map": 1,
+      "x": 12,
+      "y": 12
+    },
+    {
+      "name": "Castlefall",
+      "map": 81,
+      "x": 59,
+      "y": 41
+    },
+    {
+      "name": "Angelmoor",
+      "map": 18,
+      "x": 30,
+      "y": 30
+    },
+    {
+      "name": "Gorth",
+      "map": 140,
+      "x": 35,
+      "y": 42
+    },
+    {
+      "name": "Jemhoo",
+      "map": 115,
+      "x": 10,
+      "y": 10
+    },
+    {
+      "name": "Denc",
+      "map": 22,
+      "x": 13,
+      "y": 13
+    },
+    {
+      "name": "Valen",
+      "map": 155,
+      "x": 12,
+      "y": 12
+    },
+    {
+      "name": "Valentfall",
+      "map": 169,
+      "x": 12,
+      "y": 12
+    },
+    {
+      "name": "Molg",
+      "map": 206,
+      "x": 12,
+      "y": 12
+    },
+    {
+      "name": "Ug",
+      "map": 189,
+      "x": 12,
+      "y": 12
+    }
+  ],
+  "gms": [
+    "Emperor",
+    "Zigamus",
+    "Sivako",
+    "Thestanan",
+    "Slash",
+    "Ayer",
+    "Locke",
+    "Raiker",
+    "Kronz",
+    "Deyn",
+    "Naizelar",
+    "Menion",
+    "Lilman",
+    "Quazon",
+    "Sir Waters II",
+    "Matrik",
+    "Galen",
+    "Riverend",
+    "Atlus",
+    "Turrach",
+    "Justice",
+    "Ensarv Eriksson",
+    "Lezrak",
+    "Trestal",
+    "Surpressor",
+    "Mirando",
+    "Senate",
+    "Cammo Jenning",
+    "Jence Everglade",
+    "Diablo",
+    "Fediban",
+    "Squall",
+    "Draekan"
+  ]
+}

@@ -33,6 +33,7 @@ async Task<int> RunDaemon(string[] args)
     string? password = null;
     string server = DefaultServer;
     int port = DefaultPort;
+    bool skipSsl = false;
 
     // Parse args
     for (int i = 1; i < args.Length; i++)
@@ -50,6 +51,9 @@ async Task<int> RunDaemon(string[] args)
                 break;
             case "--port" when i + 1 < args.Length:
                 port = int.Parse(args[++i]);
+                break;
+            case "--no-ssl-verify":
+                skipSsl = true;
                 break;
         }
     }
@@ -82,7 +86,7 @@ async Task<int> RunDaemon(string[] args)
 
     Console.WriteLine($"Era Online CLI — Connecting to {server} as {name}...");
 
-    await using var session = new GameSession(server, name, password, dataPath);
+    await using var session = new GameSession(server, name, password, dataPath, skipSsl);
 
     if (!await session.ConnectAndLogin())
     {

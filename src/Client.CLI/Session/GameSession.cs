@@ -24,11 +24,14 @@ public class GameSession : IAsyncDisposable
     public GameState State => _state;
     public bool IsConnected => _connection?.State == HubConnectionState.Connected;
 
-    public GameSession(string serverUrl, string characterName, string password, string? dataPath = null)
+    private readonly bool _skipSslVerify;
+
+    public GameSession(string serverUrl, string characterName, string password, string? dataPath = null, bool skipSslVerify = false)
     {
         _serverUrl = serverUrl.TrimEnd('/');
         _characterName = characterName;
         _password = password;
+        _skipSslVerify = skipSslVerify;
         _state.CharacterName = characterName;
 
         // Load map names from data files if available
@@ -65,7 +68,18 @@ public class GameSession : IAsyncDisposable
         var hubUrl = $"{_serverUrl}/gamehub";
 
         _connection = new HubConnectionBuilder()
-            .WithUrl(hubUrl)
+            .WithUrl(hubUrl, options =>
+            {
+                if (_skipSslVerify)
+                {
+                    options.HttpMessageHandlerFactory = handler =>
+                    {
+                        if (handler is HttpClientHandler clientHandler)
+                            clientHandler.ServerCertificateCustomValidationCallback = (_, _, _, _) => true;
+                        return handler;
+                    };
+                }
+            })
             .WithAutomaticReconnect()
             .Build();
 
