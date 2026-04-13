@@ -652,8 +652,11 @@ public class GameSession : IAsyncDisposable
                 trigger = parts[i + 1].ToLowerInvariant();
         }
 
-        var deadline = DateTime.Now.AddSeconds(seconds);
-        var startEventCount = _state.RecentEvents.Count;
+        var startTime = DateTime.Now;
+        var deadline = startTime.AddSeconds(seconds);
+        // Snapshot the event count BEFORE we start waiting
+        int lastSeenCount;
+        lock (_state.RecentEvents) { lastSeenCount = _state.RecentEvents.Count; }
 
         while (DateTime.Now < deadline)
         {
@@ -661,16 +664,25 @@ public class GameSession : IAsyncDisposable
 
             if (trigger == null) continue;
 
-            // Check if a matching trigger event arrived
-            var newEvents = _state.RecentEvents.Skip(startEventCount).ToList();
+            // Check for new events since we last looked
+            List<TimestampedEvent> newEvents;
+            lock (_state.RecentEvents)
+            {
+                if (_state.RecentEvents.Count <= lastSeenCount) continue;
+                newEvents = _state.RecentEvents.Skip(lastSeenCount).ToList();
+                lastSeenCount = _state.RecentEvents.Count;
+            }
+
             foreach (var evt in newEvents)
             {
                 var text = evt.Text;
                 bool triggered = trigger switch
                 {
-                    "chat" => text.Contains(": ") || text.Contains("tells,") || text.Contains("whispers:") || text.Contains("shouts:"),
-                    "combat" => text.Contains("strikes you") || text.Contains("has slain") || text.Contains("You are dead") || text.Contains("hit the") || text.Contains("for") && text.Contains("damage"),
-                    "player" => text.Contains("left the area") || (_state.Characters.Values.Any(c => !c.IsMyChar && c.Name != null && text.Contains(c.Name))),
+                    "chat" => text.Contains(": ") || text.Contains("tells,") ||
+                              text.Contains("whispers:") || text.Contains("shouts:"),
+                    "combat" => text.Contains("strikes you") || text.Contains("has slain") ||
+                                text.Contains("You are dead") || text.Contains("damage"),
+                    "player" => text.Contains("left the area") || text.Contains("Welcome to Era"),
                     "any" => true,
                     "craft" => text.Contains("Crafting") || text.Contains("crafting"),
                     _ => false,
@@ -678,14 +690,30 @@ public class GameSession : IAsyncDisposable
 
                 if (triggered)
                 {
-                    _state.AddEvent($"── await triggered ({trigger}) after {(DateTime.Now - deadline.AddSeconds(-seconds)).TotalSeconds:F1}s ──");
+                    var elapsed = (DateTime.Now - startTime).TotalSeconds;
+                    _state.AddEvent($"── await triggered ({trigger}) after {elapsed:F1}s ──");
                     return;
                 }
             }
-            startEventCount = _state.RecentEvents.Count;
         }
 
         _state.AddEvent($"── await timeout ({seconds:F1}s) ──");
+    }
+
+    // --- Helpers ---
+
+    /// <summary>Heuristic: NPC names start with "a " or "an " (lowercase) or contain common NPC words.</summary>
+    private static bool IsNpcName(string name)
+    {
+        if (string.IsNullOrEmpty(name)) return true;
+        if (name.StartsWith("a ", StringComparison.Ordinal)) return true;
+        if (name.StartsWith("an ", StringComparison.Ordinal)) return true;
+        // Named NPCs tend to have titles
+        var lower = name.ToLowerInvariant();
+        if (lower.Contains("guard") || lower.Contains("merchant") || lower.Contains("priest") ||
+            lower.Contains("trainer") || lower.Contains("banker") || lower.Contains("captain"))
+            return true;
+        return false;
     }
 
     // --- Response formatting ---
@@ -721,32 +749,100 @@ public class GameSession : IAsyncDisposable
         sb.AppendLine($"[{DateTime.Now:HH:mm:ss}] ═══ {_state.MapName} ({_state.X},{_state.Y}) facing {_state.DirectionName(_state.Heading)} ═══");
         sb.AppendLine($"HP {_state.Hp}/{_state.MaxHp} | STA {_state.Sta}/{_state.MaxSta} | MAN {_state.Man}/{_state.MaxMan} | Gold {_state.Gold} | Weather: {(_state.IsRaining ? "Rain" : "Clear")}");
 
-        var nearby = _state.GetNearbyCharacters(10);
-        if (nearby.Count > 0)
+        // Build numbered legend: players first (alphabetical), then NPCs (by distance)
+        var nearby = _state.GetNearbyCharacters(15);
+        var players = nearby.Where(n => !IsNpcName(n.Item1.Name)).OrderBy(n => n.Item1.Name).ToList();
+        var npcs = nearby.Where(n => IsNpcName(n.Item1.Name)).OrderBy(n => n.Item2).ToList();
+        var ordered = players.Concat(npcs).ToList();
+
+        // Assign numbers 1-9 to entities
+        var entityMap = new Dictionary<(int x, int y), char>();
+        var legend = new List<string>();
+        int num = 1;
+        foreach (var (ch, dist, dir) in ordered)
         {
-            sb.AppendLine();
-            sb.AppendLine("Nearby:");
-            foreach (var (ch, dist, dir) in nearby)
-            {
-                var desc = ch.IsCriminal ? " [criminal]" : "";
-                sb.AppendLine($"  {ch.Name}{desc} — {dist} tile{(dist != 1 ? "s" : "")} {dir}");
-            }
+            if (num > 9) break;
+            var c = (char)('0' + num);
+            entityMap[(ch.X, ch.Y)] = c;
+            var criminal = ch.IsCriminal ? " [criminal]" : "";
+            legend.Add($"  {c} {ch.Name}{criminal} ({ch.X},{ch.Y})");
+            num++;
         }
 
-        if (_state.GroundObjects.Count > 0)
+        // ASCII map: 20 wide, 11 tall centered on player, with coordinate headers
+        sb.AppendLine();
+        var mk = _knowledge?.GetMap(_state.Map);
+        int halfW = 10, halfH = 5;
+
+        // X-axis header (two rows: tens digit, ones digit)
+        var xTens = new System.Text.StringBuilder("     ");
+        var xOnes = new System.Text.StringBuilder("     ");
+        for (int dx = -halfW; dx < halfW; dx++)
         {
-            sb.AppendLine();
-            sb.AppendLine("Ground items visible on map.");
+            int tx = _state.X + dx;
+            xTens.Append(tx / 10 % 10);
+            xTens.Append(' ');
+            xOnes.Append(tx % 10);
+            xOnes.Append(' ');
         }
+        sb.AppendLine(xTens.ToString());
+        sb.AppendLine(xOnes.ToString());
+
+        for (int dy = -halfH; dy <= halfH; dy++)
+        {
+            int ty = _state.Y + dy;
+            var row = new System.Text.StringBuilder($" {ty,3} ");
+            for (int dx = -halfW; dx < halfW; dx++)
+            {
+                int tx = _state.X + dx;
+
+                if (tx < 1 || tx > 100 || ty < 1 || ty > 100)
+                {
+                    row.Append("# ");
+                    continue;
+                }
+
+                if (dx == 0 && dy == 0)
+                {
+                    row.Append("@ ");
+                }
+                else if (entityMap.TryGetValue((tx, ty), out var ec))
+                {
+                    row.Append(ec);
+                    row.Append(' ');
+                }
+                else if (_state.GroundObjects.ContainsKey($"{tx},{ty}"))
+                {
+                    row.Append("* ");
+                }
+                else if (mk?.BlockedTiles != null)
+                {
+                    int idx = (ty - 1) * 100 + (tx - 1);
+                    row.Append(mk.BlockedTiles[idx] != 0 ? "# " : ". ");
+                }
+                else
+                {
+                    row.Append(". ");
+                }
+            }
+            sb.AppendLine(row.ToString());
+        }
+
+        // Legend
+        sb.AppendLine();
+        sb.AppendLine($"  @ You ({_state.X},{_state.Y})");
+        foreach (var entry in legend)
+            sb.AppendLine(entry);
+        if (_state.GroundObjects.Count > 0)
+            sb.AppendLine("  * ground item");
 
         if (_state.TargetName != null)
             sb.AppendLine($"\nTarget: {_state.TargetName}");
 
-        // Show nearest spaces from world knowledge
+        // Show nearest spaces with absolute positions
         if (_knowledge != null)
         {
-            var mk = _knowledge.GetMap(_state.Map);
-            var nearSpaces = mk.Spaces
+            var nearSpaces = mk!.Spaces
                 .Select(s => (s, dist: Math.Abs(s.X - _state.X) + Math.Abs(s.Y - _state.Y)))
                 .OrderBy(x => x.dist)
                 .Take(5)
@@ -754,12 +850,9 @@ public class GameSession : IAsyncDisposable
             if (nearSpaces.Count > 0)
             {
                 sb.AppendLine();
-                sb.AppendLine("Nearby spaces:");
+                sb.AppendLine("Spaces:");
                 foreach (var (space, dist) in nearSpaces)
-                {
-                    var dir = GameState.GetRelativeDir(space.X - _state.X, space.Y - _state.Y);
-                    sb.AppendLine($"  {space.Name} — {dist} tiles {dir}");
-                }
+                    sb.AppendLine($"  {space.Name} ({space.X},{space.Y}) — {dist} tiles");
             }
         }
 
