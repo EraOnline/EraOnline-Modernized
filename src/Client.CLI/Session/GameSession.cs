@@ -333,6 +333,13 @@ public class GameSession : IAsyncDisposable
                     }
                     break;
 
+                case "face":
+                    if (!string.IsNullOrEmpty(arg))
+                    {
+                        await ExecuteFace(arg);
+                    }
+                    break;
+
                 case "spaces":
                     // Handled in formatting below
                     if (arg.StartsWith("define ", StringComparison.OrdinalIgnoreCase) && _knowledge != null)
@@ -634,6 +641,57 @@ public class GameSession : IAsyncDisposable
         }
 
         _state.AddEvent($"Arrived at ({_state.X},{_state.Y}).");
+    }
+
+    // --- Face toward target ---
+
+    private async Task ExecuteFace(string targetName)
+    {
+        // Find the character by name
+        var nearby = _state.GetNearbyCharacters(15);
+        var match = nearby.FirstOrDefault(n =>
+            n.Item1.Name.Contains(targetName, StringComparison.OrdinalIgnoreCase));
+
+        if (match.Item1 == null)
+        {
+            _state.AddEvent($"No one named '{targetName}' nearby to face.");
+            return;
+        }
+
+        var target = match.Item1;
+        int dx = target.X - _state.X;
+        int dy = target.Y - _state.Y;
+
+        // Determine the best cardinal direction to face
+        // Prioritize the axis with the larger delta
+        int desiredHeading;
+        if (Math.Abs(dx) >= Math.Abs(dy))
+            desiredHeading = dx > 0 ? (int)Direction.East : (int)Direction.West;
+        else
+            desiredHeading = dy > 0 ? (int)Direction.South : (int)Direction.North;
+
+        // Rotate to face that direction (headings: 1=N, 2=E, 3=S, 4=W)
+        // Each Rotate(clockwise) increments heading by 1 (wrapping), counter-clockwise decrements
+        int current = _state.Heading;
+        if (current == desiredHeading)
+        {
+            _state.AddEvent($"Already facing {_state.DirectionName(desiredHeading)} toward {target.Name} ({target.X},{target.Y}).");
+            return;
+        }
+
+        // Calculate shortest rotation: clockwise vs counter-clockwise
+        int cwSteps = (desiredHeading - current + 4) % 4;
+        int ccwSteps = (current - desiredHeading + 4) % 4;
+        bool clockwise = cwSteps <= ccwSteps;
+        int steps = Math.Min(cwSteps, ccwSteps);
+
+        for (int i = 0; i < steps; i++)
+        {
+            await _connection!.InvokeAsync("Rotate", clockwise);
+            await Task.Delay(100);
+        }
+
+        _state.AddEvent($"Facing {_state.DirectionName(desiredHeading)} toward {target.Name} ({target.X},{target.Y}).");
     }
 
     // --- Await mode ---
