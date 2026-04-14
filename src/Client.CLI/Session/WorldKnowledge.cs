@@ -95,29 +95,12 @@ public class WorldKnowledge
             }
         }
 
-        // Auto-detect spaces from visible NPCs
-        DetectSpacesFromNpcs(mk, state);
-
         Save();
     }
 
-    private void DetectSpacesFromNpcs(MapKnowledge mk, GameState state)
-    {
-        // Load NPC definitions to get NPC types
-        foreach (var ch in state.Characters.Values)
-        {
-            if (ch.IsMyChar) continue;
-            // Use character name as space name (NPCs have descriptive names)
-            var name = ch.Name;
-            if (string.IsNullOrEmpty(name) || name.StartsWith("a ", StringComparison.OrdinalIgnoreCase))
-            {
-                // Skip generic hostile NPCs like "a snake", "a bat"
-                // But keep named NPCs and service NPCs
-                continue;
-            }
-            mk.AddSpaceIfNew(name, ch.X, ch.Y, "npc", true);
-        }
-    }
+    // No auto-detection of NPC positions as spaces.
+    // Spaces are defined manually by the player after visually inspecting the map.
+    // Only tile exits are auto-recorded (they're static and essential for routing).
 
     public void Save()
     {

@@ -202,6 +202,192 @@ public class HeadlessRenderer : IDisposable
         return filePath;
     }
 
+    /// <summary>
+    /// Render the entire 100x100 map to a PNG at 1x scale (3200x3200 pixels).
+    /// Used for bird's-eye spatial planning when first visiting a map.
+    /// </summary>
+    public string RenderFullMap(int mapId, GameState state, string outputDir)
+    {
+        LoadMapIfNeeded(mapId);
+        if (_layer1 == null) return "(no map data)";
+
+        int mapW = 100 * TileSize; // 3200
+        int mapH = 100 * TileSize; // 3200
+
+        using var mainBitmap = new SKBitmap(mapW, mapH);
+        using var mainCanvas = new SKCanvas(mainBitmap);
+        using var charBitmap = new SKBitmap(mapW, mapH);
+        using var charCanvas = new SKCanvas(charBitmap);
+        using var fringeBitmap = new SKBitmap(mapW, mapH);
+        using var fringeCanvas = new SKCanvas(fringeBitmap);
+
+        mainCanvas.Clear(SKColors.Black);
+        charCanvas.Clear(SKColors.Transparent);
+        fringeCanvas.Clear(SKColors.Transparent);
+
+        // Pass 1: Ground
+        for (int y = 1; y <= 100; y++)
+            for (int x = 1; x <= 100; x++)
+            {
+                int idx = (y - 1) * 100 + (x - 1);
+                int grhIndex = _layer1[idx];
+                if (grhIndex > 0)
+                    DrawGrh(mainCanvas, grhIndex, (x - 1) * TileSize, (y - 1) * TileSize, false);
+            }
+
+        // Pass 2a: Characters + ground objects
+        foreach (var ch in state.Characters.Values)
+        {
+            int px = (ch.X - 1) * TileSize;
+            int py = (ch.Y - 1) * TileSize;
+            DrawCharacter(charCanvas, ch, px, py);
+        }
+        foreach (var (key, grhIdx) in state.GroundObjects)
+        {
+            var parts = key.Split(',');
+            if (parts.Length == 2 && int.TryParse(parts[0], out int ox) && int.TryParse(parts[1], out int oy))
+                DrawGrh(charCanvas, grhIdx, (ox - 1) * TileSize, (oy - 1) * TileSize, true);
+        }
+
+        // Pass 2b: Fringe
+        for (int y = 1; y <= 100; y++)
+            for (int x = 1; x <= 100; x++)
+            {
+                int idx = (y - 1) * 100 + (x - 1);
+                if (_layer2 != null)
+                {
+                    int grh2 = _layer2[idx];
+                    if (grh2 > 0)
+                        DrawGrh(fringeCanvas, grh2, (x - 1) * TileSize, (y - 1) * TileSize, true);
+                }
+            }
+
+        // Composite
+        mainCanvas.DrawBitmap(charBitmap, 0, 0);
+        mainCanvas.DrawBitmap(fringeBitmap, 0, 0);
+
+        // Mark player position with a red circle
+        using var markerPaint = new SKPaint { Color = SKColors.Red, Style = SKPaintStyle.Stroke, StrokeWidth = 3 };
+        mainCanvas.DrawCircle((state.X - 1) * TileSize + TileSize / 2, (state.Y - 1) * TileSize + TileSize / 2, TileSize, markerPaint);
+
+        // Save
+        Directory.CreateDirectory(outputDir);
+        var filename = $"map-{mapId:D3}-full.png";
+        var filePath = Path.Combine(outputDir, filename);
+
+        using var image = SKImage.FromBitmap(mainBitmap);
+        using var data = image.Encode(SKEncodedImageFormat.Png, 90);
+        using var stream = File.OpenWrite(filePath);
+        data.SaveTo(stream);
+
+        return filePath;
+    }
+
+    /// <summary>
+    /// Render a viewport-sized area centered on arbitrary coordinates with a red marker.
+    /// Used for probing/inspecting specific areas of the map.
+    /// </summary>
+    public string RenderProbe(int mapId, int centerX, int centerY, GameState state, string outputDir, float scale = 1.5f)
+    {
+        LoadMapIfNeeded(mapId);
+        if (_layer1 == null) return "(no map data)";
+
+        int canvasW = ViewportW * TileSize;
+        int canvasH = ViewportH * TileSize;
+
+        using var mainBitmap = new SKBitmap(canvasW, canvasH);
+        using var mainCanvas = new SKCanvas(mainBitmap);
+        using var charBitmap = new SKBitmap(canvasW, canvasH);
+        using var charCanvas = new SKCanvas(charBitmap);
+        using var fringeBitmap = new SKBitmap(canvasW, canvasH);
+        using var fringeCanvas = new SKCanvas(fringeBitmap);
+
+        mainCanvas.Clear(SKColors.Black);
+        charCanvas.Clear(SKColors.Transparent);
+        fringeCanvas.Clear(SKColors.Transparent);
+
+        int halfW = ViewportW / 2;
+        int halfH = ViewportH / 2;
+
+        // Ground
+        for (int y = centerY - halfH - ScreenBuffer; y <= centerY + halfH + ScreenBuffer; y++)
+            for (int x = centerX - halfW - ScreenBuffer; x <= centerX + halfW + ScreenBuffer; x++)
+            {
+                if (x < 1 || x > 100 || y < 1 || y > 100) continue;
+                int idx = (y - 1) * 100 + (x - 1);
+                int grhIndex = _layer1[idx];
+                if (grhIndex > 0)
+                {
+                    int sx = x - (centerX - halfW);
+                    int sy = y - (centerY - halfH);
+                    DrawGrh(mainCanvas, grhIndex, sx * TileSize, sy * TileSize, false);
+                }
+            }
+
+        // Characters + ground objects in view
+        for (int y = centerY - halfH - ScreenBuffer; y <= centerY + halfH + ScreenBuffer; y++)
+            for (int x = centerX - halfW - ScreenBuffer; x <= centerX + halfW + ScreenBuffer; x++)
+            {
+                if (x < 1 || x > 100 || y < 1 || y > 100) continue;
+                int sx = x - (centerX - halfW);
+                int sy = y - (centerY - halfH);
+                int px = sx * TileSize;
+                int py = sy * TileSize;
+
+                if (state.GroundObjects.TryGetValue($"{x},{y}", out int objGrh) && objGrh > 0)
+                    DrawGrh(charCanvas, objGrh, px, py, true);
+                foreach (var ch in state.Characters.Values)
+                    if (ch.X == x && ch.Y == y)
+                        DrawCharacter(charCanvas, ch, px, py);
+            }
+
+        // Fringe with overscan
+        for (int y = centerY - halfH - FringeOverscan; y <= centerY + halfH + FringeOverscan; y++)
+            for (int x = centerX - halfW - FringeOverscan; x <= centerX + halfW + FringeOverscan; x++)
+            {
+                if (x < 1 || x > 100 || y < 1 || y > 100) continue;
+                int idx = (y - 1) * 100 + (x - 1);
+                int sx = x - (centerX - halfW);
+                int sy = y - (centerY - halfH);
+                if (_layer2 != null)
+                {
+                    int grh2 = _layer2[idx];
+                    if (grh2 > 0) DrawGrh(fringeCanvas, grh2, sx * TileSize, sy * TileSize, true);
+                }
+            }
+
+        // Composite
+        mainCanvas.DrawBitmap(charBitmap, 0, 0);
+        mainCanvas.DrawBitmap(fringeBitmap, 0, 0);
+
+        // Red dot at the probe center
+        using var markerPaint = new SKPaint { Color = SKColors.Red, Style = SKPaintStyle.Fill };
+        int dotX = halfW * TileSize + TileSize / 2;
+        int dotY = halfH * TileSize + TileSize / 2;
+        mainCanvas.DrawCircle(dotX, dotY, 6, markerPaint);
+        using var outlinePaint = new SKPaint { Color = SKColors.White, Style = SKPaintStyle.Stroke, StrokeWidth = 2 };
+        mainCanvas.DrawCircle(dotX, dotY, 6, outlinePaint);
+
+        // Scale and save
+        Directory.CreateDirectory(outputDir);
+        var filename = $"probe-{centerX}-{centerY}.png";
+        var filePath = Path.Combine(outputDir, filename);
+
+        int scaledW = (int)(canvasW * scale);
+        int scaledH = (int)(canvasH * scale);
+        using var scaledBitmap = new SKBitmap(scaledW, scaledH);
+        using var scaledCanvas = new SKCanvas(scaledBitmap);
+        scaledCanvas.Scale(scale);
+        scaledCanvas.DrawBitmap(mainBitmap, 0, 0);
+
+        using var image = SKImage.FromBitmap(scaledBitmap);
+        using var data = image.Encode(SKEncodedImageFormat.Png, 100);
+        using var stream = File.OpenWrite(filePath);
+        data.SaveTo(stream);
+
+        return filePath;
+    }
+
     private void DrawGrh(SKCanvas canvas, int grhIndex, int px, int py, bool center)
     {
         var sprite = _sprites.ResolveGrh(grhIndex);

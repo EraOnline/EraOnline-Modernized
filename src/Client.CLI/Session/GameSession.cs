@@ -30,6 +30,7 @@ public class GameSession : IAsyncDisposable
 
     // World knowledge (per-character, persisted)
     private WorldKnowledge? _knowledge;
+    private Journal? _journal;
     private string? _dataPath;
     private bool _mapKnowledgeUpdated;
 
@@ -62,6 +63,7 @@ public class GameSession : IAsyncDisposable
             var charDir = Path.Combine(dataHome, "eraonline", "characters", characterName);
             _screenshotDir = Path.Combine(charDir, "screenshots");
             _knowledge = new WorldKnowledge(charDir);
+            _journal = new Journal(charDir);
         }
     }
 
@@ -193,7 +195,6 @@ public class GameSession : IAsyncDisposable
         _connection.On<ChatMessage>("Chat", msg =>
         {
             _state.OnChat(msg);
-            Console.Error.WriteLine($"[CHAT] {msg.Text}");
         });
 
         _connection.On<StatsMessage>("Stats", msg =>
@@ -357,8 +358,29 @@ public class GameSession : IAsyncDisposable
                     break;
 
                 case "map":
+                    if (arg == "render" && _renderer != null && _screenshotDir != null)
+                    {
+                        var path = _renderer.RenderFullMap(_state.Map, _state, _screenshotDir);
+                        _state.AddEvent($"Full map rendered: {path}");
+                    }
+                    else if (arg.StartsWith("probe ", StringComparison.OrdinalIgnoreCase) && _renderer != null && _screenshotDir != null)
+                    {
+                        var coords = arg[6..].Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                        if (coords.Length >= 2 && int.TryParse(coords[0], out var px) && int.TryParse(coords[1], out var py))
+                        {
+                            var path = _renderer.RenderProbe(_state.Map, px, py, _state, _screenshotDir);
+                            _state.AddEvent($"Probe at ({px},{py}): {path}");
+                        }
+                    }
+                    // else: handled in formatting below (shows map overview)
+                    break;
+
                 case "overworld":
                     // Handled in formatting below
+                    break;
+
+                case "npcs":
+                    // Handled in formatting below — lists all visible NPCs with positions
                     break;
 
                 case "say":
@@ -516,6 +538,23 @@ public class GameSession : IAsyncDisposable
                     await ExecuteAwait(arg);
                     break;
 
+                case "journal":
+                    if (_journal == null)
+                    {
+                        _state.AddEvent("Journal not available.");
+                    }
+                    else if (arg.StartsWith("write ", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var entry = arg[6..].Trim().Trim('"');
+                        _journal.Write(entry);
+                        _state.AddEvent("Journal entry saved.");
+                    }
+                    else if (arg == "read" || string.IsNullOrEmpty(arg))
+                    {
+                        return _journal.Read() + "\n──\n" + $"[{DateTime.Now:HH:mm:ss}] {_state.StatusLine()}\n";
+                    }
+                    break;
+
                 default:
                     // Pass through slash commands
                     if (command.StartsWith('/'))
@@ -546,7 +585,9 @@ public class GameSession : IAsyncDisposable
             "stats" or "status" => FormatStats(),
             "screenshot" => FormatResponse(null),
             "spaces" when !arg.StartsWith("define") => FormatSpaces(),
-            "map" => FormatMap(),
+            "map" when string.IsNullOrEmpty(arg) => FormatMap(),
+            "map" when arg == "render" || arg.StartsWith("probe") => FormatResponse(null),
+            "npcs" => FormatNpcs(),
             "overworld" => FormatOverworld(),
             "help" => FormatHelp(),
             _ => FormatResponse(null),
@@ -759,22 +800,6 @@ public class GameSession : IAsyncDisposable
         _state.AddEvent($"── await timeout ({seconds:F1}s) ──");
     }
 
-    // --- Helpers ---
-
-    /// <summary>Heuristic: NPC names start with "a " or "an " (lowercase) or contain common NPC words.</summary>
-    private static bool IsNpcName(string name)
-    {
-        if (string.IsNullOrEmpty(name)) return true;
-        if (name.StartsWith("a ", StringComparison.Ordinal)) return true;
-        if (name.StartsWith("an ", StringComparison.Ordinal)) return true;
-        // Named NPCs tend to have titles
-        var lower = name.ToLowerInvariant();
-        if (lower.Contains("guard") || lower.Contains("merchant") || lower.Contains("priest") ||
-            lower.Contains("trainer") || lower.Contains("banker") || lower.Contains("captain"))
-            return true;
-        return false;
-    }
-
     // --- Response formatting ---
 
     private string FormatResponse(string? extraMessage)
@@ -808,11 +833,9 @@ public class GameSession : IAsyncDisposable
         sb.AppendLine($"[{DateTime.Now:HH:mm:ss}] ═══ {_state.MapName} ({_state.X},{_state.Y}) facing {_state.DirectionName(_state.Heading)} ═══");
         sb.AppendLine($"HP {_state.Hp}/{_state.MaxHp} | STA {_state.Sta}/{_state.MaxSta} | MAN {_state.Man}/{_state.MaxMan} | Gold {_state.Gold} | Weather: {(_state.IsRaining ? "Rain" : "Clear")}");
 
-        // Build numbered legend: players first (alphabetical), then NPCs (by distance)
+        // Build numbered legend: all characters sorted by distance
         var nearby = _state.GetNearbyCharacters(15);
-        var players = nearby.Where(n => !IsNpcName(n.Item1.Name)).OrderBy(n => n.Item1.Name).ToList();
-        var npcs = nearby.Where(n => IsNpcName(n.Item1.Name)).OrderBy(n => n.Item2).ToList();
-        var ordered = players.Concat(npcs).ToList();
+        var ordered = nearby.OrderBy(n => n.Item2).ToList();
 
         // Assign numbers 1-9 to entities
         var entityMap = new Dictionary<(int x, int y), char>();
@@ -1070,6 +1093,30 @@ public class GameSession : IAsyncDisposable
                     sb.AppendLine($"  {direction,-6} → {destName} (Map {destId})");
                 }
             }
+        }
+
+        sb.AppendLine("──");
+        sb.AppendLine($"[{DateTime.Now:HH:mm:ss}] {_state.StatusLine()}");
+        return sb.ToString();
+    }
+
+    private string FormatNpcs()
+    {
+        var sb = new System.Text.StringBuilder();
+        var events = _state.GetNewEvents();
+        foreach (var evt in events)
+            sb.AppendLine($"[{evt.Timestamp:HH:mm:ss.fff}] {evt.Text}");
+
+        var allChars = _state.Characters.Values
+            .Where(c => !c.IsMyChar)
+            .OrderBy(c => c.Name)
+            .ToList();
+
+        sb.AppendLine($"Characters on {_state.MapName} (Map {_state.Map}): {allChars.Count}");
+        foreach (var ch in allChars)
+        {
+            var dist = Math.Abs(ch.X - _state.X) + Math.Abs(ch.Y - _state.Y);
+            sb.AppendLine($"  {ch.Name,-35} ({ch.X,3},{ch.Y,3})  {dist,3} tiles");
         }
 
         sb.AppendLine("──");
