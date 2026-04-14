@@ -667,8 +667,11 @@ public class GameSession : IAsyncDisposable
             {
                 // Re-add events so they show in the final output
                 _state.AddEvent(evt.Text);
+                // Interrupt on any combat or any chat from another character
                 if (evt.Text.Contains("strikes you") || evt.Text.Contains("has slain you") ||
-                    evt.Text.Contains("tells,") || evt.Text.Contains("whispers:"))
+                    evt.Text.Contains("tells,") || evt.Text.Contains("whispers:") ||
+                    evt.Text.Contains("shouts:") ||
+                    (evt.Text.Contains(": ") && !evt.Text.StartsWith(_state.CharacterName)))
                 {
                     interrupted = true;
                 }
