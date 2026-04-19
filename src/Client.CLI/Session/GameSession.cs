@@ -34,6 +34,10 @@ public class GameSession : IAsyncDisposable
     private string? _dataPath;
     private bool _mapKnowledgeUpdated;
 
+    // Append-only event log (per-character, persisted)
+    private EventLog? _eventLog;
+    private string? _activeFilePath;
+
     public GameState State => _state;
     public bool IsConnected => _connection?.State == HubConnectionState.Connected;
 
@@ -64,6 +68,15 @@ public class GameSession : IAsyncDisposable
             _screenshotDir = Path.Combine(charDir, "screenshots");
             _knowledge = new WorldKnowledge(charDir);
             _journal = new Journal(charDir);
+
+            // Append-only events log; tail/stream commands read this. Always set, since the log
+            // is the source of truth that survives the in-memory ring buffer trim.
+            _eventLog = new EventLog(charDir);
+            _state.EventLog = _eventLog;
+
+            // Drop a marker so tail/stream can find the active character without --name.
+            _activeFilePath = Path.Combine(dataHome, "eraonline", "active.txt");
+            try { File.WriteAllText(_activeFilePath, characterName); } catch { /* best effort */ }
         }
     }
 
@@ -250,40 +263,40 @@ public class GameSession : IAsyncDisposable
         // Trade/Train — log opening
         _connection.On<TradeOpenMessage>("TradeOpen", msg =>
         {
-            _state.AddEvent($"Trade window opened with {msg.NpcName}.");
+            _state.AddEvent($"Trade window opened with {msg.NpcName}.", "system");
         });
 
         _connection.On<int[]>("TrainOpen", skills =>
         {
-            _state.AddEvent("Training window opened.");
+            _state.AddEvent("Training window opened.", "system");
         });
 
         _connection.On<CraftStartMessage>("CraftStart", msg =>
         {
-            _state.AddEvent($"Crafting started ({msg.DurationMs}ms).");
+            _state.AddEvent($"Crafting started ({msg.DurationMs}ms).", "craft");
         });
 
         _connection.On<bool>("CampfireNearby", nearby =>
         {
-            if (nearby) _state.AddEvent("You feel the warmth of a campfire.");
+            if (nearby) _state.AddEvent("You feel the warmth of a campfire.", "system");
         });
 
         // Reconnection handling
         _connection.Reconnecting += error =>
         {
-            _state.AddEvent("Connection lost, reconnecting...");
+            _state.AddEvent("Connection lost, reconnecting...", "system");
             return Task.CompletedTask;
         };
 
         _connection.Reconnected += connectionId =>
         {
-            _state.AddEvent("Reconnected to server.");
+            _state.AddEvent("Reconnected to server.", "system");
             return Task.CompletedTask;
         };
 
         _connection.Closed += error =>
         {
-            _state.AddEvent("Disconnected from server.");
+            _state.AddEvent("Disconnected from server.", "system");
             return Task.CompletedTask;
         };
     }
@@ -352,7 +365,7 @@ public class GameSession : IAsyncDisposable
                             var mk = _knowledge.GetMap(_state.Map);
                             mk.AddSpaceIfNew(spaceName, sx, sy, "manual", false);
                             _knowledge.Save();
-                            _state.AddEvent($"Defined space '{spaceName}' at ({sx},{sy}).");
+                            _state.AddEvent($"Defined space '{spaceName}' at ({sx},{sy}).", "system");
                         }
                     }
                     break;
@@ -361,7 +374,7 @@ public class GameSession : IAsyncDisposable
                     if (arg == "render" && _renderer != null && _screenshotDir != null)
                     {
                         var path = _renderer.RenderFullMap(_state.Map, _state, _screenshotDir);
-                        _state.AddEvent($"Full map rendered: {path}");
+                        _state.AddEvent($"Full map rendered: {path}", "render");
                     }
                     else if (arg.StartsWith("probe ", StringComparison.OrdinalIgnoreCase) && _renderer != null && _screenshotDir != null)
                     {
@@ -369,7 +382,7 @@ public class GameSession : IAsyncDisposable
                         if (coords.Length >= 2 && int.TryParse(coords[0], out var px) && int.TryParse(coords[1], out var py))
                         {
                             var path = _renderer.RenderProbe(_state.Map, px, py, _state, _screenshotDir);
-                            _state.AddEvent($"Probe at ({px},{py}): {path}");
+                            _state.AddEvent($"Probe at ({px},{py}): {path}", "render");
                         }
                     }
                     // else: handled in formatting below (shows map overview)
@@ -417,7 +430,7 @@ public class GameSession : IAsyncDisposable
                         }
                         else
                         {
-                            _state.AddEvent($"No one named '{targetName}' nearby.");
+                            _state.AddEvent($"No one named '{targetName}' nearby.", "system");
                         }
                     }
                     // For plain 'look', just return state (handled below)
@@ -448,7 +461,7 @@ public class GameSession : IAsyncDisposable
                         }
                         else
                         {
-                            _state.AddEvent($"No one named '{arg}' nearby.");
+                            _state.AddEvent($"No one named '{arg}' nearby.", "system");
                         }
                     }
                     break;
@@ -521,11 +534,11 @@ public class GameSession : IAsyncDisposable
                     if (_renderer != null && _screenshotDir != null)
                     {
                         var path = _renderer.RenderScreenshot(_state, _screenshotDir);
-                        _state.AddEvent($"Screenshot saved: {path}");
+                        _state.AddEvent($"Screenshot saved: {path}", "render");
                     }
                     else
                     {
-                        _state.AddEvent("Screenshot not available: game data not loaded.");
+                        _state.AddEvent("Screenshot not available: game data not loaded.", "system");
                     }
                     break;
 
@@ -541,13 +554,13 @@ public class GameSession : IAsyncDisposable
                 case "journal":
                     if (_journal == null)
                     {
-                        _state.AddEvent("Journal not available.");
+                        _state.AddEvent("Journal not available.", "system");
                     }
                     else if (arg.StartsWith("write ", StringComparison.OrdinalIgnoreCase))
                     {
                         var entry = arg[6..].Trim().Trim('"');
                         _journal.Write(entry);
-                        _state.AddEvent("Journal entry saved.");
+                        _state.AddEvent("Journal entry saved.", "system");
                     }
                     else if (arg == "read" || string.IsNullOrEmpty(arg))
                     {
@@ -573,8 +586,11 @@ public class GameSession : IAsyncDisposable
             return FormatResponse($"Error: {ex.Message}");
         }
 
-        // Wait briefly for server events to arrive
-        await Task.Delay(250);
+        // Wait for server-side follow-up messages (combat strike text, chat echoes, etc.) to land.
+        // 250ms was too short — server's `Clients.Caller.SendAsync(...)` after the hub method
+        // returns frequently arrived later than that, and the events showed up in the next command
+        // instead of this one. 600ms is generous but still imperceptible at human/LLM pacing.
+        await Task.Delay(600);
 
         // Format response based on command type
         return cmd switch
@@ -600,7 +616,7 @@ public class GameSession : IAsyncDisposable
     {
         if (_knowledge == null)
         {
-            _state.AddEvent("Pathfinding not available: no world knowledge.");
+            _state.AddEvent("Pathfinding not available: no world knowledge.", "navigation");
             return;
         }
 
@@ -617,7 +633,7 @@ public class GameSession : IAsyncDisposable
             }
             else
             {
-                _state.AddEvent($"Invalid coordinates: {target[3..]}");
+                _state.AddEvent($"Invalid coordinates: {target[3..]}", "navigation");
                 return;
             }
         }
@@ -628,31 +644,33 @@ public class GameSession : IAsyncDisposable
                 s.Name.Contains(target, StringComparison.OrdinalIgnoreCase));
             if (space == null)
             {
-                _state.AddEvent($"Unknown space '{target}'. Use 'spaces list' to see known locations.");
+                _state.AddEvent($"Unknown space '{target}'. Use 'spaces list' to see known locations.", "navigation");
                 return;
             }
             goalX = space.X;
             goalY = space.Y;
-            _state.AddEvent($"Pathfinding to {space.Name} ({goalX},{goalY})...");
+            _state.AddEvent($"Pathfinding to {space.Name} ({goalX},{goalY})...", "navigation");
         }
 
         if (mk.BlockedTiles == null)
         {
-            _state.AddEvent("No tile data for pathfinding on this map.");
+            _state.AddEvent("No tile data for pathfinding on this map.", "navigation");
             return;
         }
 
         var path = Pathfinder.FindPath(mk, _state.X, _state.Y, goalX, goalY);
         if (path == null || path.Count == 0)
         {
-            _state.AddEvent(path == null ? "No path found!" : "Already there.");
+            _state.AddEvent(path == null ? "No path found!" : "Already there.", "navigation");
             return;
         }
 
         var directions = Pathfinder.PathToDirections(path, _state.X, _state.Y);
-        _state.AddEvent($"Walking {directions.Count} tiles...");
+        _state.AddEvent($"Walking {directions.Count} tiles...", "navigation");
 
-        // Execute the path step by step
+        // Local cursor for interrupt detection — uses Peek so events stay in the buffer
+        // and are still surfaced by the next FormatResponse / GetNewEvents call.
+        long cursor = _state.CurrentEventId;
         int steps = 0;
         foreach (var dir in directions)
         {
@@ -660,13 +678,12 @@ public class GameSession : IAsyncDisposable
             await Task.Delay(350); // Match visual movement speed
             steps++;
 
-            // Check for interruptions: damage taken or chat received
-            var newEvents = _state.GetNewEvents();
+            var newEvents = _state.PeekEventsSince(cursor);
+            if (newEvents.Count > 0) cursor = newEvents[^1].Id;
+
             bool interrupted = false;
             foreach (var evt in newEvents)
             {
-                // Re-add events so they show in the final output
-                _state.AddEvent(evt.Text);
                 // Interrupt on any combat or any chat from another character
                 if (evt.Text.Contains("strikes you") || evt.Text.Contains("has slain you") ||
                     evt.Text.Contains("tells,") || evt.Text.Contains("whispers:") ||
@@ -674,17 +691,18 @@ public class GameSession : IAsyncDisposable
                     (evt.Text.Contains(": ") && !evt.Text.StartsWith(_state.CharacterName)))
                 {
                     interrupted = true;
+                    break;
                 }
             }
 
             if (interrupted)
             {
-                _state.AddEvent($"Movement interrupted after {steps} steps at ({_state.X},{_state.Y}).");
+                _state.AddEvent($"Movement interrupted after {steps} steps at ({_state.X},{_state.Y}).", "navigation");
                 return;
             }
         }
 
-        _state.AddEvent($"Arrived at ({_state.X},{_state.Y}).");
+        _state.AddEvent($"Arrived at ({_state.X},{_state.Y}).", "navigation");
     }
 
     // --- Face toward target ---
@@ -698,7 +716,7 @@ public class GameSession : IAsyncDisposable
 
         if (match.Item1 == null)
         {
-            _state.AddEvent($"No one named '{targetName}' nearby to face.");
+            _state.AddEvent($"No one named '{targetName}' nearby to face.", "navigation");
             return;
         }
 
@@ -719,7 +737,7 @@ public class GameSession : IAsyncDisposable
         int current = _state.Heading;
         if (current == desiredHeading)
         {
-            _state.AddEvent($"Already facing {_state.DirectionName(desiredHeading)} toward {target.Name} ({target.X},{target.Y}).");
+            _state.AddEvent($"Already facing {_state.DirectionName(desiredHeading)} toward {target.Name} ({target.X},{target.Y}).", "navigation");
             return;
         }
 
@@ -735,7 +753,7 @@ public class GameSession : IAsyncDisposable
             await Task.Delay(100);
         }
 
-        _state.AddEvent($"Facing {_state.DirectionName(desiredHeading)} toward {target.Name} ({target.X},{target.Y}).");
+        _state.AddEvent($"Facing {_state.DirectionName(desiredHeading)} toward {target.Name} ({target.X},{target.Y}).", "navigation");
     }
 
     // --- Await mode ---
@@ -757,9 +775,8 @@ public class GameSession : IAsyncDisposable
 
         var startTime = DateTime.Now;
         var deadline = startTime.AddSeconds(seconds);
-        // Snapshot the event count BEFORE we start waiting
-        int lastSeenCount;
-        lock (_state.RecentEvents) { lastSeenCount = _state.RecentEvents.Count; }
+        // Local cursor — Peek so non-matching events stay in the buffer for FormatResponse to display.
+        long cursor = _state.CurrentEventId;
 
         while (DateTime.Now < deadline)
         {
@@ -767,14 +784,9 @@ public class GameSession : IAsyncDisposable
 
             if (trigger == null) continue;
 
-            // Check for new events since we last looked
-            List<TimestampedEvent> newEvents;
-            lock (_state.RecentEvents)
-            {
-                if (_state.RecentEvents.Count <= lastSeenCount) continue;
-                newEvents = _state.RecentEvents.Skip(lastSeenCount).ToList();
-                lastSeenCount = _state.RecentEvents.Count;
-            }
+            var newEvents = _state.PeekEventsSince(cursor);
+            if (newEvents.Count == 0) continue;
+            cursor = newEvents[^1].Id;
 
             foreach (var evt in newEvents)
             {
@@ -794,13 +806,13 @@ public class GameSession : IAsyncDisposable
                 if (triggered)
                 {
                     var elapsed = (DateTime.Now - startTime).TotalSeconds;
-                    _state.AddEvent($"── await triggered ({trigger}) after {elapsed:F1}s ──");
+                    _state.AddEvent($"── await triggered ({trigger}) after {elapsed:F1}s ──", "system");
                     return;
                 }
             }
         }
 
-        _state.AddEvent($"── await timeout ({seconds:F1}s) ──");
+        _state.AddEvent($"── await timeout ({seconds:F1}s) ──", "system");
     }
 
     // --- Response formatting ---
@@ -1179,6 +1191,11 @@ public class GameSession : IAsyncDisposable
     {
         _renderer?.Dispose();
         _spriteLoader?.Dispose();
+        _eventLog?.Dispose();
+        if (_activeFilePath != null)
+        {
+            try { File.Delete(_activeFilePath); } catch { /* best effort */ }
+        }
         if (_connection != null)
         {
             try { await _connection.StopAsync(); }

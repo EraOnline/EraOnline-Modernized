@@ -60,9 +60,14 @@ public class GameState
     // Spell book (50 slots)
     public SpellSlotInfo[] SpellBook { get; } = new SpellSlotInfo[50];
 
-    // Recent chat/events (ring buffer)
+    // Recent chat/events. Cache for in-process polling — events.log on disk is the source of truth.
+    // Each event has a monotonic Id; cursor is by Id, not list index, so trimming is safe.
     public List<TimestampedEvent> RecentEvents { get; } = new();
-    private int _lastReportedEventIndex;
+    private long _nextEventId = 1;
+    private long _lastReportedEventId;
+
+    /// <summary>Optional event log. When set, every AddEvent also writes a line to disk.</summary>
+    public EventLog? EventLog { get; set; }
 
     public GameState()
     {
@@ -72,25 +77,48 @@ public class GameState
 
     // --- Event recording ---
 
-    public void AddEvent(string text)
+    public void AddEvent(string text, string category = "info")
     {
+        long id;
         lock (RecentEvents)
         {
-            RecentEvents.Add(new TimestampedEvent(DateTime.Now, text));
-            // Keep last 200 events
+            id = _nextEventId++;
+            RecentEvents.Add(new TimestampedEvent(id, DateTime.Now, text));
+            // Keep last 200 in memory; safe to trim because cursor is by Id, not index.
             if (RecentEvents.Count > 200)
                 RecentEvents.RemoveRange(0, RecentEvents.Count - 200);
         }
+        EventLog?.Write(category, text);
     }
 
-    /// <summary>Get events since last call to this method.</summary>
+    /// <summary>Get events since last call to this method. Advances the read cursor.</summary>
     public List<TimestampedEvent> GetNewEvents()
     {
         lock (RecentEvents)
         {
-            var newEvents = RecentEvents.Skip(_lastReportedEventIndex).ToList();
-            _lastReportedEventIndex = RecentEvents.Count;
+            var newEvents = RecentEvents.Where(e => e.Id > _lastReportedEventId).ToList();
+            if (newEvents.Count > 0)
+                _lastReportedEventId = newEvents[^1].Id;
             return newEvents;
+        }
+    }
+
+    /// <summary>The highest event ID currently assigned. Useful as a cursor for PeekEventsSince.</summary>
+    public long CurrentEventId
+    {
+        get { lock (RecentEvents) return _nextEventId - 1; }
+    }
+
+    /// <summary>
+    /// Get events with Id strictly greater than sinceId, without touching the read cursor.
+    /// Used by pathfinding and await loops that need to inspect events for interruption triggers
+    /// without preventing FormatResponse from displaying them later.
+    /// </summary>
+    public List<TimestampedEvent> PeekEventsSince(long sinceId)
+    {
+        lock (RecentEvents)
+        {
+            return RecentEvents.Where(e => e.Id > sinceId).ToList();
         }
     }
 
@@ -113,7 +141,7 @@ public class GameState
         MapName = mapName;
         Characters.Clear();
         GroundObjects.Clear();
-        AddEvent($"Entered {mapName} (Map {mapId}).");
+        AddEvent($"Entered {mapName} (Map {mapId}).", "map");
     }
 
     public void OnMakeChar(MakeCharMessage msg)
@@ -147,7 +175,7 @@ public class GameState
         if (Characters.TryGetValue(charIndex, out var ch))
         {
             if (!ch.IsMyChar)
-                AddEvent($"{ch.Name} left the area.");
+                AddEvent($"{ch.Name} left the area.", "character");
             Characters.Remove(charIndex);
         }
     }
@@ -194,7 +222,27 @@ public class GameState
 
     public void OnChat(ChatMessage msg)
     {
-        AddEvent(msg.Text);
+        AddEvent(msg.Text, CategorizeChat(msg.Text, msg.Font));
+    }
+
+    /// <summary>
+    /// Pick a category for a Chat event so downstream filters can target what they care about.
+    /// Inspects text patterns first (whisper/shout/say/emote markers from server formatting), falls
+    /// back to FontType for combat/skill/info/warning.
+    /// </summary>
+    private static string CategorizeChat(string text, FontType font)
+    {
+        if (text.Contains(" whispers:") || text.StartsWith("You whisper to ")) return "whisper";
+        if (text.Contains(" shouts:")) return "shout";
+        return font switch
+        {
+            FontType.Fight => "combat",
+            FontType.SkillInfo => "skill",
+            FontType.Warning => "warning",
+            FontType.Info => "info",
+            FontType.Talk => text.Contains(": ") ? "chat" : "emote",
+            _ => "info"
+        };
     }
 
     public void OnTarget(string text)
@@ -245,14 +293,14 @@ public class GameState
     public void OnDeath(bool isDead)
     {
         IsDead = isDead;
-        if (isDead) AddEvent("You have died and become a ghost.");
-        else AddEvent("You have been resurrected!");
+        if (isDead) AddEvent("You have died and become a ghost.", "combat");
+        else AddEvent("You have been resurrected!", "combat");
     }
 
     public void OnWeather(bool raining)
     {
         IsRaining = raining;
-        AddEvent(raining ? "It begins to rain." : "The rain has stopped.");
+        AddEvent(raining ? "It begins to rain." : "The rain has stopped.", "weather");
     }
 
     public void OnMeditate(bool meditating)
@@ -341,4 +389,4 @@ public class SpellSlotInfo
     public int NeedsMana { get; set; }
 }
 
-public record TimestampedEvent(DateTime Timestamp, string Text);
+public record TimestampedEvent(long Id, DateTime Timestamp, string Text);

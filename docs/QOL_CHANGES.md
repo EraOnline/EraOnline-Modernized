@@ -14,3 +14,6 @@ In the original, dropping an equipped item unequips it even if you have multiple
 
 ### Arrow key movement while chat input is focused
 In the original VB6 client, keyboard input went to the form-level KeyDown handler regardless of focus. In our web client, focusing the chat input box captures arrow keys. Arrow keys should always control movement, even when the chat box is focused (typing text still works — only arrow keys are intercepted).
+
+### Auto-follow mode for CLI players
+LLM pacing (~2s/command + 350ms/tile pathfind) makes it impractical to keep up with a real-time player who is leading. A `follow <name>` command that tracks a target player's position each tick and pathfinds toward them, ending one tile adjacent. Interrupts on the same conditions as regular pathfinding (combat damage, chat from another character, blocked path). Lets a leader walk naturally while the CLI player tags along.
