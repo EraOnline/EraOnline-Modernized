@@ -314,7 +314,7 @@ public class GameLoopService : BackgroundService
                 break;
 
             case (int)NpcMovement.TamedFollow:
-                // Tamed animals follow their owner (not yet implemented — needs Owner tracking)
+                await FollowOwner(npc);
                 break;
 
             case (int)NpcMovement.ShortRangeHostile:
@@ -431,6 +431,26 @@ public class GameLoopService : BackgroundService
             var dir = WorldState.FindDirection(npc.X, npc.Y, target.X, target.Y);
             await MoveNpcAndBroadcast(npc, dir);
         }
+    }
+
+    /// <summary>
+    /// VB6: NPCAI Case 6 — tamed animals follow their owner within 10 tiles.
+    /// Owner is looked up by CharIndex; if the owner is offline or on another map, pet idles.
+    /// </summary>
+    private async Task FollowOwner(NpcState npc)
+    {
+        if (npc.OwnerCharIndex <= 0) return;
+        var owner = _world.GetPlayerByCharIndex(npc.OwnerCharIndex);
+        if (owner == null || owner.Map != npc.Map) return;
+
+        // VB6 loops a 21×21 area looking for the owner's tile; if found, move one step toward them.
+        int dx = owner.X - npc.X;
+        int dy = owner.Y - npc.Y;
+        if (Math.Abs(dx) > 10 || Math.Abs(dy) > 10) return;
+        if (dx == 0 && dy == 0) return; // already on the owner's tile
+
+        var dir = WorldState.FindDirection(npc.X, npc.Y, owner.X, owner.Y);
+        await MoveNpcAndBroadcast(npc, dir);
     }
 
     /// <summary>VB6: NPCAI Case 5 — beggars follow players who haven't been giving.</summary>

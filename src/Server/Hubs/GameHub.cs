@@ -32,6 +32,9 @@ public class GameHub : Hub
         var player = _world.RemovePlayer(Context.ConnectionId);
         if (player != null)
         {
+            // Release tamed pet back to wild (taming is session-scoped).
+            ReleasePet(player);
+
             // Save character position
             player.Character.LastMap = player.Map;
             player.Character.LastX = player.X;
@@ -1113,9 +1116,38 @@ public class GameHub : Hub
                 await HandleGossip(player);
                 break;
 
+            case "/TAME":
+                await HandleTame(player);
+                break;
+
+            case "/DISCARD":
+                await HandleDiscardAnimal(player);
+                break;
+
+            case "/TRANSFER":
+                await HandleTransferAnimal(player);
+                break;
+
+            case "/STOP":
+                await HandlePetMovement(player, (int)NpcMovement.Stand);
+                break;
+
+            case "/FOLLOW":
+                await HandlePetMovement(player, (int)NpcMovement.TamedFollow);
+                break;
+
+            case "/NAME":
+                await HandleNameAnimal(player, arg);
+                break;
+
+            // TODO(post-port): /ATTACK — direct your pet to attack your current target.
+            //   VB6 TCP.bas:2146-2169 is commented-out scaffolding. Era Online's vision
+            //   includes pet combat; wire up once the port is feature-complete.
+            // TODO(post-port): /SETTLE — tell your pet to stop attacking (VB6 TCP.bas:2171-2182).
+
             case "/HELP":
                 await Clients.Caller.SendAsync("Chat",
-                    new ChatMessage("Commands: /WHO /STATS /DESC /TRADE /TRAIN /HEAL /HAIL /GOSSIP /DUEL /MEDITATE /RESSURECT /SAVE /QUIT /HELP", FontType.Info));
+                    new ChatMessage("Commands: /WHO /STATS /DESC /TRADE /TRAIN /HEAL /HAIL /GOSSIP /DUEL /MEDITATE /RESSURECT /TAME /DISCARD /TRANSFER /STOP /FOLLOW /NAME /SAVE /QUIT /HELP", FontType.Info));
                 await Clients.Caller.SendAsync("Chat",
                     new ChatMessage("Chat: just type to say, - to shout, : to emote, \\name to whisper", FontType.Info));
                 break;
@@ -1651,8 +1683,8 @@ public class GameHub : Hub
 
         var template = _gameData.Npcs.FirstOrDefault(n => n.Id == npc.TemplateId);
 
-        // VB6: Can't cast destruction on non-attackable NPCs
-        if (spell.Destruction == 1 && (template == null || template.Attackable != 1))
+        // VB6: Can't cast destruction on non-attackable NPCs (template flag or tamed override)
+        if (spell.Destruction == 1 && !npc.Attackable)
         {
             await Clients.Caller.SendAsync("Chat",
                 new ChatMessage($"A mysterious force prevents you from casting a spell at {npc.Name} !", FontType.Info));
@@ -1980,9 +2012,9 @@ public class GameHub : Hub
 
         var ch = player.Character;
         var slot = player.CraftSlot;
-        // Gathering jobs use slot=-1 (no inventory material); crafting jobs need a valid slot
-        bool isGathering = (jobType == 2 || jobType == 7 || jobType == 15);
-        if (!isGathering && (slot < 0 || slot >= 20)) return;
+        // Gathering and taming jobs have no inventory material (slot=-1); crafting jobs need a valid slot
+        bool isNoMaterial = (jobType == 2 || jobType == 7 || jobType == 14 || jobType == 15);
+        if (!isNoMaterial && (slot < 0 || slot >= 20)) return;
 
         // Minimum time check (prevent speed hacking)
         var elapsed = (DateTime.UtcNow - player.CraftStartTime).TotalMilliseconds;
@@ -1991,6 +2023,14 @@ public class GameHub : Hub
         // Reset working state
         player.Working = false;
         player.WhatJob = 0;
+
+        // Animal taming has its own state-transition path — no consumed material, no spawned item.
+        // VB6: TameAnimal (GameLogic.bas:5592) second pass.
+        if (jobType == 14)
+        {
+            await FinishTame(player);
+            return;
+        }
 
         int soundId = SoundId.Coins;
         int resultObjIndex = 0;
@@ -2525,10 +2565,15 @@ public class GameHub : Hub
         {
             if (npc.Active)
             {
-                var template = _gameData.Npcs.FirstOrDefault(n => n.Id == npc.TemplateId);
-                if (template != null && template.Attackable == 1)
+                if (npc.Attackable)
                 {
                     await UserAttackNpc(player, npc);
+                }
+                else if (npc.Tamed)
+                {
+                    // Session-scoped tame: attacking someone else's pet is refused outright.
+                    await Clients.Caller.SendAsync("Chat",
+                        new ChatMessage($"{npc.Name} is tamed and cannot be attacked.", FontType.Fight));
                 }
                 else
                 {
@@ -3298,6 +3343,305 @@ public class GameHub : Hub
         await TryImproveSkill(player, (int)SkillType.Streetwise, 10);
         await CheckUserLevel(player);
         await SendStats(ch);
+    }
+
+    // ===================== Animal Taming =====================
+
+    /// <summary>
+    /// VB6: HandleData "/TAME" -> TameAnimal (GameLogic.bas:5592).
+    /// Starts a skill-gated progress bar (jobType=14) on a targeted tameable NPC.
+    /// Completion in CompleteCraft case 14 applies ownership.
+    /// Session-scoped: pet is released back to wild on owner disconnect or server restart.
+    /// </summary>
+    private async Task HandleTame(PlayerState player)
+    {
+        if (player.IsDead)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("The animal cannot see your ghostly movements!", FontType.Info));
+            return;
+        }
+
+        if (player.TargetNpcIndex <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("First target an animal!", FontType.Info));
+            return;
+        }
+
+        var npc = _world.GetNpcByIndex(player.TargetNpcIndex);
+        if (npc == null || !npc.Active)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Your target is gone.", FontType.Info));
+            return;
+        }
+
+        var template = _gameData.Npcs.FirstOrDefault(n => n.Id == npc.TemplateId);
+        if (template == null || template.Tameable != 1)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("This cannot be tamed.", FontType.Info));
+            return;
+        }
+
+        int skillNeeded = 0;
+        int.TryParse(template.SkillNeeded, out skillNeeded);
+        int skillLevel = player.Character.Skills[(int)SkillType.AnimalTaming];
+        if (skillLevel < skillNeeded)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"You do not have enough taming skill to tame this creature! You need {skillNeeded}.", FontType.Info));
+            return;
+        }
+
+        if (npc.Tamed || npc.OwnerCharIndex > 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("The animal is already tamed.", FontType.Info));
+            return;
+        }
+
+        if (player.OwnedNpcIndex > 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You already own an animal. Discard the other first!", FontType.Info));
+            return;
+        }
+
+        if (player.Working) return;
+
+        player.Working = true;
+        player.WhatJob = 14;
+        player.CraftSlot = -1;
+        player.PendingTameNpcIndex = npc.NpcIndex;
+        player.CraftStartTime = DateTime.UtcNow;
+
+        int durationMs = Math.Max(2000, (100 - skillLevel) * 50);
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage("You begin taming the creature... The blue bar represents how much time left.", FontType.Info));
+        await Clients.Caller.SendAsync("CraftStart", new CraftStartMessage(14, durationMs));
+    }
+
+    /// <summary>
+    /// VB6: HandleData "/DISCARD" -> DiscardAnimal (GameLogic.bas:5845).
+    /// Release your pet back to the wild. Restores the template's wild behavior.
+    /// </summary>
+    private async Task HandleDiscardAnimal(PlayerState player)
+    {
+        if (player.OwnedNpcIndex <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You don't have an animal to discard!", FontType.Info));
+            return;
+        }
+
+        ReleasePet(player);
+
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage("You are no longer the owner of the animal.", FontType.Info));
+    }
+
+    /// <summary>
+    /// VB6: HandleData "/TRANSFER" -> Transfer (GameLogic.bas:5817).
+    /// Give ownership of your pet to the targeted player. Target must be a player, not an NPC.
+    /// </summary>
+    private async Task HandleTransferAnimal(PlayerState player)
+    {
+        if (player.OwnedNpcIndex <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You don't have an animal to transfer!", FontType.Info));
+            return;
+        }
+
+        // VB6 refused transfer if TargetPlayer index equals the NPC target index (i.e. you didn't target a player)
+        if (player.TargetPlayerCharIndex <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You cannot transfer ownership of animals to NPCs.", FontType.Info));
+            return;
+        }
+
+        var newOwner = _world.GetPlayerByCharIndex(player.TargetPlayerCharIndex);
+        if (newOwner == null)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Your target is no longer here.", FontType.Info));
+            return;
+        }
+
+        if (newOwner.OwnedNpcIndex > 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage($"{newOwner.Character.Name} already owns an animal.", FontType.Info));
+            return;
+        }
+
+        var npc = _world.GetNpcByIndex(player.OwnedNpcIndex);
+        if (npc == null || !npc.Active)
+        {
+            // Pet gone — just clear state
+            player.OwnedNpcIndex = 0;
+            return;
+        }
+
+        npc.OwnerCharIndex = newOwner.CharIndex;
+        newOwner.OwnedNpcIndex = npc.NpcIndex;
+        player.OwnedNpcIndex = 0;
+
+        if (npc.Sound > 0)
+        {
+            await Clients.Group(MapGroup(player.Map))
+                .SendAsync("PlaySound", new PlaySoundMessage(npc.Sound));
+        }
+        await Clients.Client(newOwner.ConnectionId).SendAsync("Chat",
+            new ChatMessage("The ownership of an animal has just been transferred to you.", FontType.Info));
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage($"You transferred ownership of {npc.Name} to {newOwner.Character.Name}.", FontType.Info));
+    }
+
+    /// <summary>
+    /// VB6: HandleData "/STOP" and "/FOLLOW" inline handlers (TCP.bas:2185, 2203).
+    /// Switch the owned animal's movement pattern.
+    /// </summary>
+    private async Task HandlePetMovement(PlayerState player, int newMovement)
+    {
+        if (player.OwnedNpcIndex <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You don't own an animal!", FontType.Info));
+            return;
+        }
+
+        var npc = _world.GetNpcByIndex(player.OwnedNpcIndex);
+        if (npc == null || !npc.Active) { player.OwnedNpcIndex = 0; return; }
+
+        npc.Movement = newMovement;
+        if (npc.Sound > 0)
+        {
+            await Clients.Group(MapGroup(npc.Map))
+                .SendAsync("PlaySound", new PlaySoundMessage(npc.Sound));
+        }
+    }
+
+    /// <summary>
+    /// VB6: HandleData "/NAME &lt;name&gt;" inline (TCP.bas:2127).
+    /// Rename your owned animal; broadcast the new name via ChangeChar.
+    /// </summary>
+    private async Task HandleNameAnimal(PlayerState player, string newName)
+    {
+        if (player.OwnedNpcIndex <= 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You don't own an animal so you cannot rename it!", FontType.Info));
+            return;
+        }
+
+        newName = (newName ?? "").Trim();
+        if (string.IsNullOrEmpty(newName))
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Usage: /NAME <new name>", FontType.Info));
+            return;
+        }
+        if (newName.Length > 30) newName = newName[..30];
+
+        var npc = _world.GetNpcByIndex(player.OwnedNpcIndex);
+        if (npc == null || !npc.Active) { player.OwnedNpcIndex = 0; return; }
+
+        npc.Name = newName;
+        await Clients.Group(MapGroup(npc.Map)).SendAsync("ChangeChar",
+            new MakeCharMessage(npc.CharIndex, npc.Name, npc.Body, npc.Head,
+                npc.Heading, npc.X, npc.Y, npc.WeaponAnim, npc.ShieldAnim));
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage($"You have renamed the animal to {newName}.", FontType.Info));
+        if (npc.Sound > 0)
+        {
+            await Clients.Group(MapGroup(npc.Map))
+                .SendAsync("PlaySound", new PlaySoundMessage(npc.Sound));
+        }
+    }
+
+    /// <summary>
+    /// Second half of VB6 TameAnimal — applies ownership after the progress bar completes.
+    /// Revalidates everything (target still alive, still not owned, player still has no pet)
+    /// because state may have changed during the progress window.
+    /// </summary>
+    private async Task FinishTame(PlayerState player)
+    {
+        int npcIndex = player.PendingTameNpcIndex;
+        player.PendingTameNpcIndex = 0;
+        if (npcIndex <= 0) return;
+
+        var npc = _world.GetNpcByIndex(npcIndex);
+        if (npc == null || !npc.Active)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("Your target is gone.", FontType.Info));
+            return;
+        }
+
+        if (npc.Tamed || npc.OwnerCharIndex > 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("The animal is already tamed.", FontType.Info));
+            return;
+        }
+
+        if (player.OwnedNpcIndex > 0)
+        {
+            await Clients.Caller.SendAsync("Chat",
+                new ChatMessage("You already own an animal.", FontType.Info));
+            return;
+        }
+
+        npc.Tamed = true;
+        npc.OwnerCharIndex = player.CharIndex;
+        npc.Movement = (int)NpcMovement.TamedFollow;
+        npc.Hostile = false;
+        npc.Attackable = false;
+        player.OwnedNpcIndex = npc.NpcIndex;
+
+        await Clients.Caller.SendAsync("Chat",
+            new ChatMessage("The animal accepts you as its master!", FontType.Info));
+
+        if (npc.Sound > 0)
+        {
+            await Clients.Group(MapGroup(player.Map))
+                .SendAsync("PlaySound", new PlaySoundMessage(npc.Sound));
+        }
+
+        // VB6: 1/25 chance to raise Animal Taming skill
+        await TryImproveSkill(player, (int)SkillType.AnimalTaming, 25);
+
+        // VB6: +30 EXP
+        player.Character.Exp += 30;
+        await CheckUserLevel(player);
+        await SendStats(player.Character);
+    }
+
+    /// <summary>
+    /// Shared cleanup: restore the NPC to wild behavior and clear the player's OwnedNpcIndex.
+    /// Called by /DISCARD and by OnDisconnectedAsync.
+    /// </summary>
+    private void ReleasePet(PlayerState player)
+    {
+        var npcIndex = player.OwnedNpcIndex;
+        player.OwnedNpcIndex = 0;
+        if (npcIndex <= 0) return;
+
+        var npc = _world.GetNpcByIndex(npcIndex);
+        if (npc == null) return;
+
+        var template = _gameData.Npcs.FirstOrDefault(n => n.Id == npc.TemplateId);
+        npc.Tamed = false;
+        npc.OwnerCharIndex = 0;
+        // VB6 DiscardAnimal hardcodes Movement=2 (RandomWalk) and Attackable=1.
+        // Tamed templates are generally roaming creatures, so RandomWalk matches VB6 intent.
+        npc.Movement = (int)NpcMovement.RandomWalk;
+        npc.Attackable = template?.Attackable == 1 || template == null;
+        npc.Hostile = template?.Hostile == 1;
     }
 
     // --- Helpers ---

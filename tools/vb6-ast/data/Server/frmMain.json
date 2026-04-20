@@ -578,8 +578,10 @@
       "lineStart": 603,
       "lineEnd": 649,
       "annotations": {
+        "purpose": "Weather cycle: probabilistic rain start/stop, broadcasts RAI/SAI",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Services/GameLoopService.cs:TickWeather",
         "sends": [
           "RAI",
           "PLW",
@@ -598,8 +600,10 @@
       "lineStart": 651,
       "lineEnd": 654,
       "annotations": {
-        "notes": [],
-        "status": "not-started",
+        "notes": [
+          "Empty stub in VB6 (no body). Weather handled by rain_Timer -\u003E GameLoopService.TickWeather."
+        ],
+        "status": "skipped",
         "sends": [],
         "calls": []
       }

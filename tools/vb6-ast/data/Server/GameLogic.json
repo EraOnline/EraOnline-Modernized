@@ -346,7 +346,9 @@
       "lineEnd": 1408,
       "annotations": {
         "purpose": "Main NPC AI tick - handles movement, hostile detection, guard behavior, and pursuit",
-        "notes": [],
+        "notes": [
+          "TamedFollow (Case 6) now implemented in GameLoopService.FollowOwner (owner looked up by CharIndex; 21x21 scan; idle if owner offline or on another map)"
+        ],
         "status": "ported",
         "target": "Server/Services/GameLoopService.cs:RunNpcAI",
         "sends": [],
@@ -1988,8 +1990,10 @@
       "lineStart": 5592,
       "lineEnd": 5689,
       "annotations": {
+        "purpose": "Skill-gated two-pass taming: validate then progress-bar, then apply Owner/Tamed/Movement on completion",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleTame \u002B FinishTame",
         "sends": [
           "DOS"
         ],
@@ -2050,8 +2054,10 @@
       "lineStart": 5817,
       "lineEnd": 5843,
       "annotations": {
+        "purpose": "Give ownership of your pet to a targeted player",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleTransferAnimal",
         "sends": [],
         "calls": [
           "SendData"
@@ -2066,8 +2072,10 @@
       "lineStart": 5845,
       "lineEnd": 5871,
       "annotations": {
+        "purpose": "Release pet back to wild (also invoked on owner disconnect)",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Server/Hubs/GameHub.cs:HandleDiscardAnimal \u002B ReleasePet",
         "sends": [],
         "calls": [
           "SendData"

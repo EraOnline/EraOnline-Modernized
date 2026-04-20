@@ -807,8 +807,11 @@
       "lineStart": 649,
       "lineEnd": 673,
       "annotations": {
-        "notes": [],
-        "status": "not-started",
+        "notes": [
+          "Moved server-side for authority (client formerly sent STA every 65s; server now ticks rain damage directly)"
+        ],
+        "status": "ported",
+        "target": "Server/Services/GameLoopService.cs:TickRainDamage",
         "sends": [
           "STA"
         ],
@@ -1438,8 +1441,10 @@
       "lineStart": 1327,
       "lineEnd": 1335,
       "annotations": {
+        "purpose": "Play thunder sound every 20s while raining (client sets up setInterval in onWeather)",
         "notes": [],
-        "status": "not-started",
+        "status": "ported",
+        "target": "Client.Web/wwwroot/js/client.js:onWeather",
         "sends": [],
         "calls": [
           "PlayWaveDS"

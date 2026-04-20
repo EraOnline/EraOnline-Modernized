@@ -389,6 +389,7 @@ public class WorldState
             OriginalMovement = template.Movement,
             Hostile = template.Hostile == 1,
             OriginalHostile = template.Hostile == 1,
+            Attackable = template.Attackable == 1,
             Guard = template.Guard,
             Sound = template.Sound,
             GiveExp = template.GiveExp,
@@ -662,6 +663,12 @@ public class PlayerState
     /// <summary>VB6: Flags.Meditate — currently meditating (/MEDITATE toggle)</summary>
     public bool Meditating { get; set; }
 
+    /// <summary>VB6: Stats.OwnAnimal / Stats.AnimalIndex — session-scoped NpcIndex of tamed animal (0 = none)</summary>
+    public int OwnedNpcIndex { get; set; }
+
+    /// <summary>NpcIndex stashed while /TAME progress bar is running; validated on CompleteCraft case 14</summary>
+    public int PendingTameNpcIndex { get; set; }
+
     /// <summary>VB6: Flags.StartHead — original head for resurrection</summary>
     public int OriginalHead { get; set; }
 
@@ -859,12 +866,17 @@ public class NpcState
     public int OriginalMovement { get; set; }  // restore after combat if was standing/random
     public bool Hostile { get; set; }          // VB6: NPCList.Hostile
     public bool OriginalHostile { get; set; }  // restore after combat
+    public bool Attackable { get; set; } = true; // VB6: NPCList.Attackable — runtime override of template
     public int Guard { get; set; }             // VB6: NPCList.Guard (0=none, 1=normal, 2=chaotic)
     public bool Active { get; set; } = true;   // VB6: Flags.NPCActive
     public bool CanAttack { get; set; } = true; // reset by 4000ms timer
     public int Target { get; set; }            // userindex of target player (0=none)
     public int AttackedBy { get; set; }        // userindex of player who attacked first (0=none)
     public int Sound { get; set; }             // death/attack sound
+
+    // Taming (VB6: NPCList.Tamed + NPCList.Owner). Session-scoped: reset on owner disconnect or server restart.
+    public bool Tamed { get; set; }            // VB6: NPCList.Tamed
+    public int OwnerCharIndex { get; set; }    // VB6: NPCList.Owner — owner's userindex (0 = wild)
 
     // NPC data for loot/rewards
     public int GiveExp { get; set; }

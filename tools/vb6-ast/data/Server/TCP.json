@@ -1703,6 +1703,30 @@
           "SAI": {
             "status": "ported",
             "target": "Server/Services/GameLoopService.cs:TickWeather"
+          },
+          "/TAME": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleTame"
+          },
+          "/DISCARD": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleDiscardAnimal"
+          },
+          "/TRANSFER": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleTransferAnimal"
+          },
+          "/STOP": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandlePetMovement(Stand)"
+          },
+          "/FOLLOW": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandlePetMovement(TamedFollow)"
+          },
+          "/NAME": {
+            "status": "ported",
+            "target": "Server/Hubs/GameHub.cs:HandleNameAnimal"
           }
         }
       }
