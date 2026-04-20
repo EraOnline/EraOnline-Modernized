@@ -2,9 +2,9 @@
 
 ## Current State
 
-**Phase 6 in progress.** Gathering skills, NPC dialogue, and weather now complete. Next: animal taming, housing/signs, ambient sounds.
+**Phase 6 in progress.** Animal taming complete (session-scoped, matching VB6 behavior). Next: housing/signs, ambient sounds.
 
-Most recent log: [2026-04-12](logs/2026-04-12.md)
+Most recent log: [2026-04-20](logs/2026-04-20.md)
 
 ---
 
@@ -132,7 +132,7 @@ The systems that make Menath feel alive.
 - [x] Spell system: spell scrolls -> inscribe to 50-slot spell book, cast on NPC/player targets, mana cost, all 16 spell effects
 - [x] Magic schools: Nature, Destruction, Enchanting (class-restricted, validated on cast)
 - [x] /MEDITATE for mana regeneration (server-authoritative 10s tick, skill-based speed)
-- [ ] Animal taming: /TAME, skill-gated by animal type, animals persist across sessions
+- [x] Animal taming: /TAME (skill-gated by animal type), /DISCARD, /TRANSFER, /STOP, /FOLLOW, /NAME; TamedFollow AI follows owner within 10 tiles; session-scoped (released on owner disconnect, matching VB6 NPC lifetime). Pet combat (/ATTACK, /SETTLE) deferred per VB6 — TODOs in HandleSlashCommand.
 - [x] NPC hailing: /HAIL for dialogue, quest hints
 - [x] NPC gossip system (randomized gossip from gossip.txt)
 - [ ] Housing: house deeds, /LOCK and /UNLOCK tiles
