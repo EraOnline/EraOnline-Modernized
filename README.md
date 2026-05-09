@@ -4,6 +4,8 @@ A C# rewrite of **Era Online**, a 1999 2D MMORPG built in Visual Basic 6 by Erli
 
 This repo is a public snapshot of the port through 2026-04-20. Presented at *Code with Claude: Extended* in San Francisco on May 7, 2026.
 
+Visit the official project website at https://www.era-online-forever.com, which contains an interactive world map, and a hosted version of the game that's been extended beyond what's in this repo.
+
 ## About the original
 
 Era Online ran from 1999 to ~2001 with an active community of 30-40 players and an IRC channel on Undernet. Erling later released the source, art, and music as freeware. The world of Menath, the artwork, the gossip, the spell names, the lore — all of that is his.
